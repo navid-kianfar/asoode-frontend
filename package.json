@@ -7,7 +7,11 @@
     "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "format": "npm run format_ts && npm run format_html && npm run format_scss",
+    "format_ts": "prettier --write \"src/**/*.ts\"",
+    "format_html": "prettier --write \"src/**/*.html\"",
+    "format_scss": "prettier --write \"src/**/*.scss\""
   },
   "private": true,
   "dependencies": {

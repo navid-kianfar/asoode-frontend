@@ -1,15 +1,19 @@
-import {Injectable} from '@angular/core';
-import {IFormElement, IFormElementCaptcha, IFormElementInput, IFormGroup} from '../../components/core/form/contracts';
-import {FormElementType} from '../../library/core/enums';
+import { Injectable } from '@angular/core';
+import {
+  IFormElement,
+  IFormElementCaptcha,
+  IFormElementInput,
+  IFormGroup,
+} from '../../components/core/form/contracts';
+import { FormElementType } from '../../library/core/enums';
 
 const CAPTCHA_LENGTH = 5;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FormService {
-
-  constructor() { }
+  constructor() {}
 
   createInput(options: IFormElementInput): IFormElementInput {
     options.type = FormElementType.Input;
@@ -21,11 +25,11 @@ export class FormService {
     return {
       validation: {
         required: { value: true, message: 'CAPTCHA_REQUIRED' },
-        length: { value: CAPTCHA_LENGTH, message: 'CAPTCHA_LENGTH' }
+        length: { value: CAPTCHA_LENGTH, message: 'CAPTCHA_LENGTH' },
       },
       config: { field: 'captcha', label: 'GENERAL_CAPTCHA' },
       params: { model: { code: '', expire: '', token: '' } },
-      type: FormElementType.Captcha
+      type: FormElementType.Captcha,
     } as IFormElementCaptcha;
   }
 
@@ -33,13 +37,17 @@ export class FormService {
     this.clearErrors(form);
     const model = this.getModel(form);
     const isValid = this.validateModel(form, model);
-    if (!isValid) { return null; }
+    if (!isValid) {
+      return null;
+    }
     return model;
   }
   clearErrors(form: IFormGroup[]) {
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (!element.validation) { return; }
+        if (!element.validation) {
+          return;
+        }
         element.validation.errors = [];
       });
     });
@@ -47,7 +55,9 @@ export class FormService {
   setErrors(form: IFormGroup[], field: string, errors: string[]) {
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (!element.validation || element.config.field !== field) { return; }
+        if (!element.validation || element.config.field !== field) {
+          return;
+        }
         element.validation.errors = errors;
       });
     });
@@ -65,9 +75,13 @@ export class FormService {
     let isValid = true;
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (!element.validation) { return; }
+        if (!element.validation) {
+          return;
+        }
         const validated = this.validateField(element, model);
-        if (validated) { return; }
+        if (validated) {
+          return;
+        }
         isValid = false;
       });
     });
@@ -102,18 +116,18 @@ export class FormService {
   private validateDefined(element: IFormElement): boolean {
     const isValid = element.params.model !== undefined;
     if (!isValid) {
-      element.validation.errors = [ element.validation.required.message ];
+      element.validation.errors = [element.validation.required.message];
     }
     return isValid;
   }
   private validateCaptcha(element: IFormElement): boolean {
     const code = (element.params.model as any).code;
     if (!code) {
-      element.validation.errors = [ element.validation.required.message ];
+      element.validation.errors = [element.validation.required.message];
       return false;
     }
     if (code.length !== CAPTCHA_LENGTH) {
-      element.validation.errors = [ element.validation.length.message ];
+      element.validation.errors = [element.validation.length.message];
       return false;
     }
     return true;
@@ -132,13 +146,19 @@ export class FormService {
       }
     }
     if (element.validation.length && element.validation.length.value) {
-      if (!element.params.model || element.params.model.length !== element.validation.length.value) {
+      if (
+        !element.params.model ||
+        element.params.model.length !== element.validation.length.value
+      ) {
         element.validation.errors = [element.validation.length.message];
         return false;
       }
     }
     if (element.validation.minLength && element.validation.minLength.value) {
-      if (!element.params.model || element.params.model.length < element.validation.minLength.value) {
+      if (
+        !element.params.model ||
+        element.params.model.length < element.validation.minLength.value
+      ) {
         element.validation.errors = [element.validation.minLength.message];
         return false;
       }

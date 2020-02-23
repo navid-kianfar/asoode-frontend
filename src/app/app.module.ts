@@ -1,15 +1,18 @@
-import {APP_INITIALIZER, NgModule} from '@angular/core';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { Socket } from 'ngx-socket-io';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import {CookieService} from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
-import {HttpInterceptor} from './services/http.interceptor';
-import {PanelSocketProvider} from './services/socket.provider';
-import {AppInitializerFactory, AppInitializerProvider} from './services/app.initializer';
+import { HttpInterceptor } from './services/http.interceptor';
+import { PanelSocketProvider } from './services/socket.provider';
+import {
+  AppInitializerFactory,
+  AppInitializerProvider,
+} from './services/app.initializer';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { DashboardComponent } from './pages/reports/dashboard/dashboard.component';
@@ -39,11 +42,11 @@ import { LocationPickerComponent } from './components/core/location-picker/locat
 import { ScheduleComponent } from './components/core/schedule/schedule.component';
 import { ProgressComponent } from './components/core/progress/progress.component';
 import { GridComponent } from './components/core/grid/grid.component';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from './pipes/core/translate.pipe';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgotComponent } from './pages/auth/forgot/forgot.component';
-import {IconComponent} from "./components/core/icon/icon.component";
+import { IconComponent } from './components/core/icon/icon.component';
 import { ValidationComponent } from './components/core/validation/validation.component';
 import { OnlyNumberDirective } from './directives/core/only-number.directive';
 
@@ -91,7 +94,7 @@ import { OnlyNumberDirective } from './directives/core/only-number.directive';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   providers: [
     // {
@@ -116,6 +119,6 @@ import { OnlyNumberDirective } from './directives/core/only-number.directive';
     },
     AppInitializerProvider,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

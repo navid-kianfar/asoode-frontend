@@ -3,7 +3,7 @@ import { CultureService } from './culture.service';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TranslateService {
   private readonly repository: any = null;

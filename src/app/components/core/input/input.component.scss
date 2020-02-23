@@ -1,16 +1,23 @@
 .af-textbox {
-    input, textarea {
-        border: 1px solid #dedede;
-        border-radius: 5px;
-        padding: 5px;
-        display: block;
-        width: 220px;
-        max-width: 100%;
-    }
+  input,
+  textarea {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 5px;
+    display: block;
+    width: 220px;
+    max-width: 100%;
+  }
 
-    &.focus {
-        input {
-            border: 1px solid #80bdff;
-        }
+  &.focus {
+    input {
+      border: 1px solid #80bdff;
     }
+  }
+  &.ltr {
+    input {
+      text-align: left !important;
+      direction: ltr !important;
+    }
+  }
 }

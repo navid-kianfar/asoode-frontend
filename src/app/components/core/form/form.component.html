@@ -1,4 +1,8 @@
-<div class="af-form-elements af-component {{ cssClass }} {{ inline ? 'inline' : ''}} container-fluid">
+<div
+  class="af-form-elements af-component {{ cssClass }} {{
+    inline ? 'inline' : ''
+  }} container-fluid"
+>
   <form class="generated-form-element row">
     <ng-container *ngFor="let group of elements">
       <div *ngIf="group.visible !== false" class="{{ columnSize(group) }}">
@@ -11,7 +15,9 @@
           <div class="row panel-body">
             <ng-container *ngFor="let element of group.elements">
               <div
-                class="form-element-item form-group col-12 {{ element.params.cssClass }} {{
+                class="form-element-item form-group col-12 {{
+                  element.params.cssClass
+                }} {{
                   element.validation &&
                   element.validation.errors &&
                   element.validation.errors.length
@@ -22,14 +28,15 @@
                 [ngSwitch]="element.type"
               >
                 <label *ngIf="element.config.hideLabel !== true">
-                  {{ element.config.label | translate: true}}
+                  {{ element.config.label | translate: true }}
                 </label>
 
                 <ng-container *ngIf="element.type === FormElementType.Captcha">
                   <app-captcha
                     [cssClass]="element.config.cssClass"
                     [disabled]="checkDisabled(group, element)"
-                    [(model)]="element.params.model"></app-captcha>
+                    [(model)]="element.params.model"
+                  ></app-captcha>
                 </ng-container>
                 <ng-container *ngIf="element.type === FormElementType.Input">
                   <app-input
@@ -46,7 +53,8 @@
                     [readonly]="element.params.readonly"
                     [password]="element.params.password"
                     [disabled]="checkDisabled(group, element)"
-                    [(model)]="element.params.model"></app-input>
+                    [(model)]="element.params.model"
+                  ></app-input>
                 </ng-container>
 
                 <app-validation
@@ -61,21 +69,25 @@
   </form>
 
   <div class="actions">
-    <button [disabled]="actionWaiting || cancelWaiting"
-            *ngIf="actionLabel"
-            (click)="action.emit()"
-            mat-flat-button color="primary">
+    <button
+      [disabled]="actionWaiting || cancelWaiting"
+      *ngIf="actionLabel"
+      (click)="action.emit()"
+      mat-flat-button
+      color="primary"
+    >
       <i *ngIf="actionWaiting" class="fa fa-spinner fa-spin"></i>
       {{ actionLabel | translate }}
     </button>
     &nbsp;
-    <button [disabled]="actionWaiting || cancelWaiting"
-            *ngIf="cancelLabel"
-            (click)="cancel.emit()"
-            mat-stroked-button>
+    <button
+      [disabled]="actionWaiting || cancelWaiting"
+      *ngIf="cancelLabel"
+      (click)="cancel.emit()"
+      mat-stroked-button
+    >
       <i *ngIf="cancelWaiting" class="fa fa-spinner fa-spin"></i>
       {{ cancelLabel | translate }}
     </button>
   </div>
-
 </div>

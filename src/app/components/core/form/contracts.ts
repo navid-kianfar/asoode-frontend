@@ -1,4 +1,4 @@
-import {FormElementType} from "../../../library/core/enums";
+import { FormElementType } from '../../../library/core/enums';
 
 export interface IFormGroup {
   disabled?: boolean;
@@ -47,15 +47,15 @@ export interface IFormElementConfiguration {
   field: string;
 }
 export interface IFormElementValidation {
-  required: { value: boolean, message?: string };
+  required: { value: boolean; message?: string };
   errors?: string[];
 }
 
 export interface IFormElementStringValidation extends IFormElementValidation {
-  length?: { value: number, message: string };
-  minLength?: { value: number, message: string };
-  maxLength?: { value: number, message: string };
-  match?: { toField: string, message: string };
+  length?: { value: number; message: string };
+  minLength?: { value: number; message: string };
+  maxLength?: { value: number; message: string };
+  match?: { toField: string; message: string };
 }
 
 export interface IFormElementCaptchaModel {

@@ -7,7 +7,7 @@ import { NotificationService } from './notification.service';
 import { GridFilter, GridResult } from '../../view-models/core/grid-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HttpService {
   constructor(

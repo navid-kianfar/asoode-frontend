@@ -1,12 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss']
+  styleUrls: ['./input.component.scss'],
 })
 export class InputComponent implements OnInit {
-
   @Input() disabled: boolean;
   @Input() cssClass: string;
   @Input() readonly: boolean;
@@ -29,8 +28,7 @@ export class InputComponent implements OnInit {
 
   focusState: string;
 
-  constructor() { }
-
+  constructor() {}
 
   ngOnInit() {
     this.focusState = 'no-focus';

@@ -8,25 +8,25 @@
   margin-bottom: 15px !important;
 }
 ::ng-deep .af-textbox.form-group,
-::ng-deep .form-element-item{
+::ng-deep .form-element-item {
   margin-bottom: 0 !important;
 }
 
-::ng-deep .has-error .af-textbox{
-  input, textarea {
+::ng-deep .has-error .af-textbox {
+  input,
+  textarea {
     border-color: #ff3547 !important;
   }
 }
-::ng-deep .af-captcha{
+::ng-deep .af-captcha {
   width: auto !important;
   input {
     width: calc(100% - 80px) !important;
   }
 }
-::ng-deep .has-error .af-captcha{
+::ng-deep .has-error .af-captcha {
   border-color: #ff3547 !important;
 }
-
 
 .actions {
   padding-top: 30px;

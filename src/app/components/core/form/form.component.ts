@@ -1,14 +1,13 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IFormGroup} from './contracts';
-import {FormElementType} from "../../../library/core/enums";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IFormGroup } from './contracts';
+import { FormElementType } from '../../../library/core/enums';
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-
   @Input() elements: IFormGroup[];
   @Input() cssClass: string;
   @Input() disabled: boolean;
@@ -22,9 +21,9 @@ export class FormComponent implements OnInit {
   @Output() cancel = new EventEmitter();
 
   FormElementType = FormElementType;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   checkDisabled(group: IFormGroup, element: any) {
     return (
@@ -67,5 +66,4 @@ export class FormComponent implements OnInit {
     }
     return group.size;
   }
-
 }

@@ -4,7 +4,7 @@ import { WeekDay } from '../../library/core/enums';
 import { ICulture } from '../../view-models/core/date-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CultureService {
   public cultures: StringDictionary<ICulture>;

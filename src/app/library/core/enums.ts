@@ -36,5 +36,5 @@ export enum FormElementType {
   Radio = 13,
   Switch = 14,
   Tag = 15,
-  ZonePicker = 16
+  ZonePicker = 16,
 }

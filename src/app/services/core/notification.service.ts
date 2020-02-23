@@ -5,12 +5,11 @@ import { TranslateService } from './translate.service';
 // import { ToastrService } from './toastr.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
   constructor(
-    readonly translate: TranslateService,
-    // readonly toastr: ToastrService,
+    readonly translate: TranslateService, // readonly toastr: ToastrService,
   ) {}
 
   handleRequest(op: OperationResultStatus) {

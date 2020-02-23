@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {IdentityService} from './auth/identity.service';
+import { IdentityService } from './auth/identity.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ import {IdentityService} from './auth/identity.service';
 export class HttpInterceptor implements HttpInterceptor {
   constructor(
     private readonly router: Router,
-    private readonly identityService: IdentityService
+    private readonly identityService: IdentityService,
   ) {}
 
   intercept(

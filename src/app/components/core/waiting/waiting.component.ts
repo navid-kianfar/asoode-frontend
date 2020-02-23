@@ -4,7 +4,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
   selector: 'app-waiting',
   templateUrl: './waiting.component.html',
   styleUrls: ['./waiting.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class WaitingComponent {
   @Input() cssClass: string;

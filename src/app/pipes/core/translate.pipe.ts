@@ -1,13 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {TranslateService} from '../../services/core/translate.service';
+import { TranslateService } from '../../services/core/translate.service';
 
 @Pipe({
-  name: 'translate'
+  name: 'translate',
 })
 export class TranslatePipe implements PipeTransform {
-
-  constructor(private readonly translateService: TranslateService) {
-  }
+  constructor(private readonly translateService: TranslateService) {}
 
   transform(
     value: string,
@@ -16,5 +14,4 @@ export class TranslatePipe implements PipeTransform {
   ): string {
     return this.translateService.fromKey(value, skipLog, fallback);
   }
-
 }

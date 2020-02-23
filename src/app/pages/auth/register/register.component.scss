@@ -6,19 +6,20 @@
   margin: 0;
   padding: 0;
   height: 100%;
-  background: url("/assets/images/pages/auth/authentication-page.svg") left bottom no-repeat;
+  background: url("/assets/images/pages/auth/authentication-page.svg") left
+    bottom no-repeat;
   background-size: cover;
   > .row {
     height: 100%;
   }
- }
+}
 .form-column {
   height: 100%;
   background-color: #fff;
   min-width: 450px;
   padding-right: 0;
   padding-left: 0;
- }
+}
 .auth-form {
   padding-top: 50px;
   padding-bottom: 50px;
@@ -66,31 +67,33 @@ hr {
     color: #982cf5;
   }
 }
-app-form ::ng-deep .af-form-elements{
+app-form ::ng-deep .af-form-elements {
   width: 350px;
   text-align: start;
   margin: 50px auto 20px;
 
   .af-textbox {
-      input, textarea {
-          width: 350px;
-      }
+    input,
+    textarea {
+      width: 350px;
+    }
   }
 }
 
-@media(min-width: 1250px) {
+@media (min-width: 1250px) {
   .background-column {
     background-size: cover;
-   }
- }
- @media(max-width: 1250px) {
+  }
+}
+@media (max-width: 1250px) {
   .background-column {
-    background: url("/assets/images/pages/auth/authentication-page.svg") left bottom no-repeat;
+    background: url("/assets/images/pages/auth/authentication-page.svg") left
+      bottom no-repeat;
     background-size: cover;
-   }
- }
- @media(min-width: 1250px) {
-   .background-column {
+  }
+}
+@media (min-width: 1250px) {
+  .background-column {
     background-size: 80% auto;
-   }
- }
+  }
+}

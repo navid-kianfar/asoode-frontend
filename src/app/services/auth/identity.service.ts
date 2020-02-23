@@ -1,12 +1,15 @@
-import {Injectable} from '@angular/core';
-import {IdentityObject} from '../../view-models/auth/identity-types';
-import {HttpService} from '../core/http.service';
-import {OperationResult} from "../../library/core/operation-result";
-import {OperationResultStatus} from "../../library/core/enums";
-import {LoginResultViewModel, RegisterResultViewModel} from "../../view-models/auth/identity-view-models";
+import { Injectable } from '@angular/core';
+import { IdentityObject } from '../../view-models/auth/identity-types';
+import { HttpService } from '../core/http.service';
+import { OperationResult } from '../../library/core/operation-result';
+import { OperationResultStatus } from '../../library/core/enums';
+import {
+  LoginResultViewModel,
+  RegisterResultViewModel,
+} from '../../view-models/auth/identity-view-models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IdentityService {
   private readonly STORAGE_KEY = 'ASOODE_IDENTITY';
@@ -46,8 +49,10 @@ export class IdentityService {
   }
 
   async login(model: any): Promise<OperationResult<LoginResultViewModel>> {
-    const op = await this.httpService
-      .post<LoginResultViewModel>('/account/login', model);
+    const op = await this.httpService.post<LoginResultViewModel>(
+      '/account/login',
+      model,
+    );
     if (op.status === OperationResultStatus.Success) {
       this.setIdentityInfo({
         userId: op.data.userId,
@@ -58,8 +63,12 @@ export class IdentityService {
     return op;
   }
 
-  async register(model: any): Promise<OperationResult<RegisterResultViewModel>> {
-    return await this.httpService
-      .post<RegisterResultViewModel>('/account/register', model);
+  async register(
+    model: any,
+  ): Promise<OperationResult<RegisterResultViewModel>> {
+    return await this.httpService.post<RegisterResultViewModel>(
+      '/account/register',
+      model,
+    );
   }
 }

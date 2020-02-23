@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import {CultureService} from './core/culture.service';
-import {TranslateService} from './core/translate.service';
+import { CultureService } from './core/culture.service';
+import { TranslateService } from './core/translate.service';
 
 @Injectable()
 export class AppInitializerProvider {
