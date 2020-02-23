@@ -1,12 +1,12 @@
 <div
   class="af-textbox af-component {{ ltr ? 'ltr' : '' }} {{
     disabled ? 'disabled' : ''
-  }} {{ readonly ? 'readonly' : '' }} form-group {{ cssClass }}"
+  }} {{ readonly ? 'readonly' : '' }} {{ focusState }} form-group {{ cssClass }}"
 >
   <label *ngIf="label">{{ label | translate: true }}</label>
   <ng-container *ngIf="!textArea">
     <div
-      class="input-container {{ focusState }} {{
+      class="input-container {{
         prependIcon ? 'prepend-icon' : ''
       }} {{ appendIcon ? 'append-icon' : '' }}"
     >

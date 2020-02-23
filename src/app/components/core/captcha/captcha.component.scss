@@ -1,10 +1,9 @@
 .af-captcha {
   width: 220px;
   height: 40px;
-  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #dedede;
+  border-radius: 5px;
   background-color: #fff;
-  border-radius: 2px;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
@@ -36,7 +35,7 @@
     }
   }
   img {
-    margin: 0.2rem 0;
+    margin: 1px 0;
     left: 3.8rem;
     width: 80px;
     flex-shrink: 0;

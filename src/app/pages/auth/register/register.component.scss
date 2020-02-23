@@ -36,8 +36,12 @@
   display: block;
   text-align: center;
   color: #666;
+  font-size: 0.9rem;
 }
-
+h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
 hr {
   height: 1px;
   background-color: #efefef;
@@ -52,6 +56,7 @@ hr {
   }
 }
 .more {
+  font-size: 0.9rem;
   a {
     color: #982cf5;
   }
@@ -60,6 +65,12 @@ app-form ::ng-deep .af-form-elements{
   width: 350px;
   text-align: start;
   margin: 50px auto 20px;
+
+  .af-textbox {
+      input, textarea {
+          width: 350px;
+      }
+  }
 }
 
 @media(min-width: 1250px) {

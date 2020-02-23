@@ -2,7 +2,10 @@
   & > label {
     font-size: 13px;
   }
-  margin-bottom: 5px !important;
+
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 15px !important;
 }
 ::ng-deep .af-textbox.form-group,
 ::ng-deep .form-element-item{
@@ -11,4 +14,7 @@
 .actions {
   padding-top: 30px;
   text-align: center;
+}
+.actions button[color="primary"] {
+  color: #fff;
 }
