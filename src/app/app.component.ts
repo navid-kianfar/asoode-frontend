@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'asoode-panel';
+  loaded: boolean;
+
+  constructor() {
+    this.removeWaitingFrame();
+  }
+
+  private removeWaitingFrame() {
+    const loader = document.getElementById('app-loading-container');
+    document.body.removeChild(loader);
+    this.loaded = true;
+  }
 }

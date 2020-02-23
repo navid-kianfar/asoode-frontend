@@ -1,0 +1,81 @@
+<div class="af-form-elements af-component {{ cssClass }} {{ inline ? 'inline' : ''}} ">
+  <form class="generated-form-element row">
+    <ng-container *ngFor="let group of elements">
+      <div *ngIf="group.visible !== false" class="{{ columnSize(group) }}">
+        <div class="panel panel-white">
+          <div *ngIf="group.title" class="panel-heading">
+            <h3 class="panel-title">
+              {{ group.title | translate: true }}&nbsp;
+            </h3>
+          </div>
+          <div class="row panel-body">
+            <ng-container *ngFor="let element of group.elements">
+              <div
+                class="form-element-item form-group col-12 {{ element.params.cssClass }} {{
+                  element.validation &&
+                  element.validation.errors &&
+                  element.validation.errors.length
+                    ? 'has-error'
+                    : ''
+                }}"
+                *ngIf="element.config.visible !== false"
+                [ngSwitch]="element.type"
+              >
+                <label *ngIf="element.config.hideLabel !== true">
+                  {{ element.config.label | translate: true}}
+                </label>
+
+                <ng-container *ngIf="element.type === FormElementType.Captcha">
+                  <app-captcha
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"></app-captcha>
+                </ng-container>
+                <ng-container *ngIf="element.type === FormElementType.Input">
+                  <app-input
+                    [growable]="element.params.growable"
+                    [appendIcon]="element.params.appendIcon"
+                    [prependIcon]="element.params.prependIcon"
+                    [label]="element.params.label"
+                    [ltr]="element.params.ltr"
+                    [autofocus]="element.params.autofocus"
+                    [placeHolder]="element.params.placeHolder"
+                    [rows]="element.params.rows"
+                    [cssClass]="element.config.cssClass"
+                    [textArea]="element.params.textArea"
+                    [readonly]="element.params.readonly"
+                    [password]="element.params.password"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"></app-input>
+                </ng-container>
+
+                <app-validation
+                  [model]="element.validation.errors"
+                ></app-validation>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </form>
+
+  <div class="actions">
+    <button [disabled]="actionWaiting || cancelWaiting"
+            *ngIf="actionLabel"
+            (click)="action.emit()"
+            mat-flat-button color="primary">
+      <i *ngIf="actionWaiting" class="fa fa-spinner fa-spin"></i>
+      {{ actionLabel | translate }}
+    </button>
+    &nbsp;
+    <button [disabled]="actionWaiting || cancelWaiting"
+            *ngIf="cancelLabel"
+            (click)="cancel.emit()"
+            mat-stroked-button>
+      <i *ngIf="cancelWaiting" class="fa fa-spinner fa-spin"></i>
+      {{ cancelLabel | translate }}
+    </button>
+  </div>
+
+</div>

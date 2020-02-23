@@ -1,1 +1,4 @@
-<h1>Asoode app panel</h1>
+<div class="asoode-application">
+  <app-waiting [cssClass]="'h-100'" *ngIf="!loaded"></app-waiting>
+  <router-outlet *ngIf="loaded"></router-outlet>
+</div>

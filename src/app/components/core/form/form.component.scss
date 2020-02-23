@@ -1,0 +1,14 @@
+.form-group {
+  & > label {
+    font-size: 13px;
+  }
+  margin-bottom: 5px !important;
+}
+::ng-deep .af-textbox.form-group,
+::ng-deep .form-element-item{
+  margin-bottom: 0 !important;
+}
+.actions {
+  padding-top: 30px;
+  text-align: center;
+}

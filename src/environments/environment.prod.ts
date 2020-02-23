@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  socket_endpoint: '',
+  api_endpoint: ''
 };

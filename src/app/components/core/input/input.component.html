@@ -1,0 +1,48 @@
+<div
+  class="af-textbox af-component {{ ltr ? 'ltr' : '' }} {{
+    disabled ? 'disabled' : ''
+  }} {{ readonly ? 'readonly' : '' }} form-group {{ cssClass }}"
+>
+  <label *ngIf="label">{{ label | translate: true }}</label>
+  <ng-container *ngIf="!textArea">
+    <div
+      class="input-container {{ focusState }} {{
+        prependIcon ? 'prepend-icon' : ''
+      }} {{ appendIcon ? 'append-icon' : '' }}"
+    >
+      <i *ngIf="prependIcon" [class]="prependIcon"></i>
+      <input
+        [autofocus]="autofocus"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        [ngModel]="model"
+        (ngModelChange)="onModelChange($event)"
+        [disabled]="disabled"
+        (keydown.enter)="onEnter()"
+        [placeholder]="placeHolder | translate: true"
+        [readonly]="readonly"
+        [type]="password ? 'password' : 'text'"
+        autocomplete="off"
+        class="form-control input-lg"
+      />
+      <i *ngIf="appendIcon" [class]="appendIcon"></i>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="textArea">
+    <div *ngIf="growable" class="growable-content">{{ model }}</div>
+    <textarea
+      [autofocus]="autofocus"
+      (keydown.enter)="onEnter()"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      [ngModel]="model"
+      (ngModelChange)="onModelChange($event)"
+      [rows]="rows || 3"
+      [disabled]="disabled"
+      [placeholder]="placeHolder | translate: true"
+      [readonly]="readonly"
+      autocomplete="off"
+      class="form-control input-lg no-resize"
+    ></textarea>
+  </ng-container>
+</div>
