@@ -42,5 +42,9 @@
   "ACCOUNT_LOCKED_OUT": "حساب کاربری شما غیر فعال شده",
   "ACCOUNT_SMS_FAILED": "خطا در ارسال پیامک تائید",
   "CAPTCHA_REQUIRED": "لطفا عبارت امنیتی را وارد کنید",
-  "CAPTCHA_LENGTH": "عبارت امنیتی صحیح نیست"
+  "CAPTCHA_LENGTH": "عبارت امنیتی صحیح نیست",
+  "CREATE": "+ ایجاد",
+  "SEARCH_ANYWHERE": "جستجو...",
+  "FILES": "فایل\u200Cها",
+  "QUICK_ACCESS": "دسترسی سریع"
 }

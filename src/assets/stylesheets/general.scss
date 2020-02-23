@@ -127,6 +127,17 @@ html[lang="en"] {
   }
 }
 
+html[dir="rtl"] {
+  body {
+    direction: rtl; text-align: right;
+  }
+}
+html[dir="ltr"] {
+  body {
+    direction: ltr; text-align: left;
+  }
+}
+
 .mat-button-base {
   border-radius: 30px !important;
   padding: 0 30px !important;

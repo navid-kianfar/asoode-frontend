@@ -49,6 +49,10 @@ import { ForgotComponent } from './pages/auth/forgot/forgot.component';
 import { IconComponent } from './components/core/icon/icon.component';
 import { ValidationComponent } from './components/core/validation/validation.component';
 import { OnlyNumberDirective } from './directives/core/only-number.directive';
+import { HeaderComponent } from './components/app/header/header.component';
+import {MatToolbarModule} from '@angular/material';
+import { ProfileComponent } from './pages/account/profile/profile.component';
+import { FilesComponent } from './pages/storage/files/files.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +91,9 @@ import { OnlyNumberDirective } from './directives/core/only-number.directive';
     IconComponent,
     ValidationComponent,
     OnlyNumberDirective,
+    HeaderComponent,
+    ProfileComponent,
+    FilesComponent,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +102,7 @@ import { OnlyNumberDirective } from './directives/core/only-number.directive';
     FormsModule,
     HttpClientModule,
     MatButtonModule,
+    MatToolbarModule,
   ],
   providers: [
     // {

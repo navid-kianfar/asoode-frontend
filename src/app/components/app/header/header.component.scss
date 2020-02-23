@@ -1,0 +1,79 @@
+nav {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 3px 16px 3px;
+  border-bottom: 2px solid #cccccc;
+}
+
+h1 {
+  a {
+    text-decoration: none !important;
+    display: block;
+    margin-top: 10px;
+    img {
+      width: 90px;
+    }
+  }
+}
+.create-spacer { width: 40px }
+.menu-spacer { width: 10px }
+.create-button {
+  color: #fff;
+  background: #6b3d8d;
+  border-radius: 30px;
+  padding: 5px 10px;
+  text-decoration: none !important;
+  font-size: 0.7rem;
+}
+.quick-access {
+  color: #6b3d8d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 0 50px;
+}
+.files {
+  color: #6b3d8d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+.search-container {
+  border: 1px solid #6b3d8d;
+  margin: 0 50px;
+  border-radius: 25px;
+  ::ng-deep input {
+    border: 1px solid transparent !important;
+    width: auto;
+    font-size: 0.8rem;
+    margin: 0 10px;
+  }
+}
+.account-info {
+  color: #6b3d8d;
+  border: 1px solid #6b3d8d;
+  background: #ded4e4;
+  display: flex;
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.action-container {display: flex}
+.flex-spacer {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+}
