@@ -1,7 +1,6 @@
 <div class="af-validation-messages af-component">
   <ul *ngIf="model?.length">
     <li *ngFor="let error of model">
-      <i class="fas fa-info-circle"></i>
       <span>{{ error | translate: true }}</span>
     </li>
   </ul>
