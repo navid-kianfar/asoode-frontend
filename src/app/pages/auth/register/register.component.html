@@ -13,6 +13,7 @@
 
             <app-form
               [elements]="form"
+              [actionWaiting]="waiting"
               (action)="register()"
               [actionLabel]="'REGISTER'"
             ></app-form>
@@ -23,8 +24,7 @@
               <span>&nbsp;{{ 'LOGIN_WITH_GOOGLE' | translate }}</span>
             </a>
           </ng-container>
-
-          <ng-container *ngIf="mode !== ViewMode.Register">
+          <ng-container *ngIf="mode === ViewMode.Confirm">
             <app-confirm-account [username]="username"></app-confirm-account>
           </ng-container>
         </div>

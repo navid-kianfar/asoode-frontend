@@ -89,12 +89,12 @@ export class LoginComponent implements OnInit {
       }
       if (op.data.emailNotConfirmed) {
         this.username = model.username;
-        this.mode = ViewMode.ConfirmEmail;
+        this.mode = ViewMode.Confirm;
         return;
       }
       if (op.data.phoneNotConfirmed) {
         this.username = model.username;
-        this.mode = ViewMode.ConfirmPhone;
+        this.mode = ViewMode.Confirm;
       }
       return;
     }
@@ -106,6 +106,5 @@ export class LoginComponent implements OnInit {
 }
 export enum ViewMode {
   Login = 1,
-  ConfirmEmail = 2,
-  ConfirmPhone = 3,
+  Confirm = 2,
 }

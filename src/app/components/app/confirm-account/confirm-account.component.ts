@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { ValidationService } from '../../../services/core/validation.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';
@@ -11,6 +11,7 @@ import { AppInitializerProvider } from '../../../services/app.initializer';
   styleUrls: ['./confirm-account.component.scss'],
 })
 export class ConfirmAccountComponent implements OnInit {
+  @Output() goBack = new EventEmitter();
   @Input() username: string;
   disabled: boolean;
   isEmail: boolean;

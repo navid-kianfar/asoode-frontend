@@ -100,14 +100,15 @@ export class RegisterComponent implements OnInit {
     const op = await this.identityService.register(model);
     this.waiting = false;
     if (op.status === OperationResultStatus.Success) {
+      op.data = op.data || {} as any;
       if (op.data.emailNotConfirmed) {
         this.username = model.username;
-        this.mode = ViewMode.ConfirmEmail;
+        this.mode = ViewMode.Confirm;
         return;
       }
       if (op.data.phoneNotConfirmed) {
         this.username = model.username;
-        this.mode = ViewMode.ConfirmPhone;
+        this.mode = ViewMode.Confirm;
         return;
       }
       if (op.data.duplicate) {
@@ -126,12 +127,12 @@ export class RegisterComponent implements OnInit {
         ]);
         return;
       }
-      return;
+      this.username = model.username;
+      this.mode = ViewMode.Confirm;
     }
   }
 }
 export enum ViewMode {
   Register = 1,
-  ConfirmEmail = 2,
-  ConfirmPhone = 3,
+  Confirm = 2,
 }

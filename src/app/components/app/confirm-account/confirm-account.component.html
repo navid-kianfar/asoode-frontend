@@ -8,9 +8,9 @@
       {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat: username }}
     </div>
 
-    <a class="back-to-login" routerLink="login" mat-flat-button color="primary">
+    <button (click)="goBack.emit()" class="back-to-login" mat-flat-button color="primary">
       {{ 'BACK_TO_LOGIN' | translate }}
-    </a>
+    </button>
   </ng-container>
 
   <ng-container *ngIf="!isEmail">

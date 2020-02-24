@@ -27,9 +27,8 @@
               <span>&nbsp;{{ 'LOGIN_WITH_GOOGLE' | translate }}</span>
             </a>
           </ng-container>
-
-          <ng-container *ngIf="mode !== ViewMode.Login">
-            <app-confirm-account [username]="username"></app-confirm-account>
+          <ng-container *ngIf="mode === ViewMode.Confirm">
+            <app-confirm-account (goBack)="mode = ViewMode.Login" [username]="username"></app-confirm-account>
           </ng-container>
         </div>
       </div>
