@@ -1,1 +1,8 @@
-<p>phone-verification works!</p>
+<div class="phone-verification has-error">
+  <input [disabled]="disabled" appOnlyNumber (keyup)="onKeyUp($event, 1)" type="text" maxlength="1">
+  <input [disabled]="disabled" appOnlyNumber (keyup)="onKeyUp($event, 2)" type="text" maxlength="1">
+  <input [disabled]="disabled" appOnlyNumber (keyup)="onKeyUp($event, 3)" type="text" maxlength="1">
+  <input [disabled]="disabled" appOnlyNumber (keyup)="onKeyUp($event, 4)" type="text" maxlength="1">
+  <input [disabled]="disabled" appOnlyNumber (keyup)="onKeyUp($event, 5)" type="text" maxlength="1">
+  <input [disabled]="disabled" appOnlyNumber (keyup)="onKeyUp($event, 6)" type="text" maxlength="1">
+</div>

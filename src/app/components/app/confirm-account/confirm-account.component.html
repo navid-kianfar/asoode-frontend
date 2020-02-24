@@ -4,9 +4,13 @@
 
     <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="">
 
-    <p class="more">
+    <div class="more">
       {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat:username }}
-    </p>
+    </div>
+
+    <a class="back-to-login" routerLink="login" mat-flat-button color="primary">
+      {{ 'BACK_TO_LOGIN' | translate }}
+    </a>
 
   </ng-container>
 
@@ -15,9 +19,9 @@
 
     <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="">
 
-    <p class="more">
+    <div class="more">
       {{ 'CONFIRM_PHONE_DESCRIPTION' | translate | stringFormat:username }}
-    </p>
+    </div>
 
     <div class="count-down">00:21</div>
 

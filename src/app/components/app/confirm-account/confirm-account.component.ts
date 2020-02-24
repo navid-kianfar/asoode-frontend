@@ -12,10 +12,10 @@ export class ConfirmAccountComponent implements OnInit {
   isEmail: boolean;
 
   constructor() {
-    this.isEmail = ValidationService.isEmail(this.username);
   }
 
   ngOnInit() {
+    this.isEmail = ValidationService.isEmail(this.username);
   }
 
 }

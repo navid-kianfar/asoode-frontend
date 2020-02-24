@@ -65,5 +65,6 @@
   "CONFIRM_EMAIL_TITLE": "تائید ایمیل",
   "CONFIRM_EMAIL_DESCRIPTION": "ایمیل فعال سازی به آدرس {0} فرستاده شد، لطفا بر روی لینک تایید کلیک کنید",
   "SEND_AGAIN": "ارسال مجدد",
-  "VERIFY": "برسی صحت"
+  "VERIFY": "برسی صحت",
+  "BACK_TO_LOGIN": "بازگشت به صفحه ورود"
 }
