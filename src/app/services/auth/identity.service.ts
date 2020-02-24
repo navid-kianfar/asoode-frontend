@@ -33,12 +33,14 @@ export class IdentityService {
     }
     return { token: null, username: null, userId: null };
   }
+
   private setIdentityInfo(identity: IdentityObject) {
     if (localStorage) {
       this.identityObject = identity;
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(identity));
     }
   }
+
   private removeIdentityInfo() {
     if (localStorage) {
       localStorage.removeItem(this.STORAGE_KEY);
@@ -82,6 +84,21 @@ export class IdentityService {
     const op = await this.httpService.post<any>('/account/profile');
     if (op.status === OperationResultStatus.Success) {
       this.profileObject = op.data;
+    }
+    return op;
+  }
+
+  async verifyPhone(params): Promise<OperationResult<LoginResultViewModel>> {
+    const op = await this.httpService.post<LoginResultViewModel>(
+      '/account/phone/confirm',
+      params,
+    );
+    if (op.status === OperationResultStatus.Success) {
+      this.setIdentityInfo({
+        userId: op.data.userId,
+        token: op.data.token,
+        username: op.data.username,
+      });
     }
     return op;
   }

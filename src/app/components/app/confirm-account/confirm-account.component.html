@@ -2,38 +2,48 @@
   <ng-container *ngIf="isEmail">
     <h2 class="title">{{ 'CONFIRM_EMAIL_TITLE' | translate }}</h2>
 
-    <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="">
+    <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="" />
 
     <div class="more">
-      {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat:username }}
+      {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat: username }}
     </div>
 
     <a class="back-to-login" routerLink="login" mat-flat-button color="primary">
       {{ 'BACK_TO_LOGIN' | translate }}
     </a>
-
   </ng-container>
 
   <ng-container *ngIf="!isEmail">
     <h2 class="title">{{ 'CONFIRM_PHONE_TITLE' | translate }}</h2>
 
-    <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="">
+    <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="" />
 
     <div class="more">
-      {{ 'CONFIRM_PHONE_DESCRIPTION' | translate | stringFormat:username }}
+      {{ 'CONFIRM_PHONE_DESCRIPTION' | translate | stringFormat: username }}
     </div>
 
-    <div class="count-down">00:21</div>
+    <div class="count-down">
+      {{ remaining * 1000 | date: 'mm:ss':'UTC' }}
+    </div>
 
     <div class="send-again">
-      <button mat-button>{{ 'SEND_AGAIN' | translate}}</button>
+      <button (click)="sendAgain()" [disabled]="remaining > 0" mat-button>
+        {{ 'SEND_AGAIN' | translate }}
+      </button>
     </div>
 
-    <app-phone-verification></app-phone-verification>
+    <app-phone-verification
+      [disabled]="disabled"
+      [hasError]="hasError"
+      [(model)]="verificationCode"
+    ></app-phone-verification>
 
-    <button mat-flat-button color="primary">
-      {{ 'VERIFY' | translate}}
+    <div *ngIf="errorMessage" class="error-container">
+      {{ errorMessage | translate }}
+    </div>
+
+    <button (click)="verify()" mat-flat-button color="primary">
+      {{ 'VERIFY' | translate }}
     </button>
-
   </ng-container>
 </div>

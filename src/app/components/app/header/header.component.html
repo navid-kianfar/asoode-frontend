@@ -15,24 +15,29 @@
   <div class="flex-spacer"></div>
 
   <div class="action-container">
-    <a class="quick-access" href="javascript:void(0)"
+    <a
+      class="quick-access"
+      href="javascript:void(0)"
       [popper]="popperQuickAccess"
       [popperTrigger]="'click'"
       [popperHideOnClickOutside]="true"
       [popperHideOnScroll]="true"
-      [popperPlacement]="'bottom'">
+      [popperPlacement]="'bottom'"
+    >
       {{ 'QUICK_ACCESS' | translate }}&nbsp;
       <i class="icon-arrow-down2"></i>
     </a>
     <a class="files" routerLink="files"> {{ 'FILES' | translate }} </a>
     <div class="search-container">
       <app-input placeHolder="SEARCH_ANYWHERE"></app-input>
-      <div class="holder"
-           [popper]="popperSearch"
-           [popperTrigger]="'click'"
-           [popperHideOnClickOutside]="true"
-           [popperHideOnScroll]="true"
-           [popperPlacement]="'bottom-start'">
+      <div
+        class="holder"
+        [popper]="popperSearch"
+        [popperTrigger]="'click'"
+        [popperHideOnClickOutside]="true"
+        [popperHideOnScroll]="true"
+        [popperPlacement]="'bottom-start'"
+      >
         <i class="icon-search primary-color"></i>
       </div>
     </div>
@@ -55,5 +60,4 @@
       <app-search-result></app-search-result>
     </div>
   </popper-content>
-
 </nav>

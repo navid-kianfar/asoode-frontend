@@ -202,7 +202,8 @@ input:focus {
     }
   }
 }
-.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
   background-color: #b977f7;
 }
 .mat-table {
@@ -212,11 +213,12 @@ input:focus {
     font-weight: 500;
   }
 }
-[class^="icon-"], [class*=" icon-"] {
+[class^='icon-'],
+[class*=' icon-'] {
   cursor: pointer;
 }
 
-[role="popper"] {
+[role='popper'] {
   border-color: #f2f2f2 !important;
   padding: 0 !important;
   z-index: 20;

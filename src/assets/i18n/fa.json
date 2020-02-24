@@ -66,5 +66,6 @@
   "CONFIRM_EMAIL_DESCRIPTION": "ایمیل فعال سازی به آدرس {0} فرستاده شد، لطفا بر روی لینک تایید کلیک کنید",
   "SEND_AGAIN": "ارسال مجدد",
   "VERIFY": "برسی صحت",
-  "BACK_TO_LOGIN": "بازگشت به صفحه ورود"
+  "BACK_TO_LOGIN": "بازگشت به صفحه ورود",
+  "VERIFICATION_CODE_INVALID": "کد اعتبار سنجی صحیح نیست"
 }

@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.username = '09122399413';
-    this.mode = ViewMode.ConfirmPhone;
+    this.username = '';
+    this.mode = ViewMode.Login;
     this.form = [
       {
         elements: [
