@@ -46,5 +46,12 @@
   "CREATE": "+ ایجاد",
   "SEARCH_ANYWHERE": "جستجو...",
   "FILES": "فایل\u200Cها",
-  "QUICK_ACCESS": "دسترسی سریع"
+  "QUICK_ACCESS": "دسترسی سریع",
+  "TRANSACTIONS": "ترکنش\u200Cهای مالی",
+  "PREMIUM_PLAN": "پلان\u200Cهای پرداختی",
+  "TITLE": "عنوان",
+  "AMOUNT": "مبلغ",
+  "CREATED_AT": "تاریخ ایجاد",
+  "DUE_AT": "تاریخ سررسید",
+  "PREVIOUS_DEBT": "بدهی گذشته"
 }

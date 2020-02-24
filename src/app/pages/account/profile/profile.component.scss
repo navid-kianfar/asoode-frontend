@@ -6,5 +6,16 @@
   .body{
     min-height: 500px;
     background: #f2f2f2;
+    position: relative;
+
+    .fake-header {
+      position: absolute;
+      width: 100%;
+      height: 48px;
+      background-color: #fff;
+      top: 0;
+      left: 0;
+    }
+
   }
 }

@@ -50,9 +50,14 @@ import { IconComponent } from './components/core/icon/icon.component';
 import { ValidationComponent } from './components/core/validation/validation.component';
 import { OnlyNumberDirective } from './directives/core/only-number.directive';
 import { HeaderComponent } from './components/app/header/header.component';
-import {MatToolbarModule} from '@angular/material';
+import {MatPaginatorModule, MatTableModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import { ProfileComponent } from './pages/account/profile/profile.component';
 import { FilesComponent } from './pages/storage/files/files.component';
+import { TransactionsComponent } from './components/app/account/transactions/transactions.component';
+import { PremiumPlansComponent } from './components/app/account/premium-plans/premium-plans.component';
+import { CulturedDatePipe } from './pipes/core/cultured-date.pipe';
+import { CulturedDateTimePipe } from './pipes/core/cultured-date-time.pipe';
+import { MomentAgoPipe } from './pipes/core/moment-ago.pipe';
 
 @NgModule({
   declarations: [
@@ -94,6 +99,11 @@ import { FilesComponent } from './pages/storage/files/files.component';
     HeaderComponent,
     ProfileComponent,
     FilesComponent,
+    TransactionsComponent,
+    PremiumPlansComponent,
+    CulturedDatePipe,
+    CulturedDateTimePipe,
+    MomentAgoPipe,
   ],
   imports: [
     BrowserModule,
@@ -103,6 +113,9 @@ import { FilesComponent } from './pages/storage/files/files.component';
     HttpClientModule,
     MatButtonModule,
     MatToolbarModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatTableModule,
   ],
   providers: [
     // {
