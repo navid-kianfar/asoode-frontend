@@ -172,11 +172,9 @@ input:focus {
   }
 
   .mat-tab-label {
-    border-bottom: 2px solid transparent;
     min-width: auto !important;
   }
   .mat-tab-label-active {
-    border-bottom-color: #982cf5;
     opacity: 1;
     .mat-tab-label-content {
       opacity: 1;
@@ -185,20 +183,14 @@ input:focus {
     }
   }
 }
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #b977f7;
+}
 .mat-table {
   width: 100%;
   th.mat-header-cell {
     font-size: 0.8rem;
     font-weight: 500;
-    border-bottom-color: transparent;
-  }
-
-  .mat-cell {
-    border-bottom-color: #e6e6e6;
-  }
-
-  .mat-row {
-    background: #fff;
   }
 }
 

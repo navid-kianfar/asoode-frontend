@@ -5,3 +5,9 @@
 .mat-column-title {
   min-width: 200px;
 }
+.mat-table {
+  th.mat-header-cell {
+    background-color: #f2f2f2 !important;
+    color: #666666 !important;
+  }
+}
