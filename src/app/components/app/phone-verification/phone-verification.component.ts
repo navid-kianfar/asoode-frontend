@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class PhoneVerificationComponent implements OnInit {
   @Input() hasError: boolean;
   @Input() disabled: boolean;
+  @Input() cssClass: string;
   @Input() model: string;
   @Output() modelChange = new EventEmitter<string>();
 
@@ -17,9 +18,9 @@ export class PhoneVerificationComponent implements OnInit {
 
   onKeyUp($event: KeyboardEvent, index: number) {
     const num = !isNaN(+$event.key);
-    const currentNode = $event.target;
-    const allElements = document.querySelectorAll('input');
-    if (num) {
+    const currentNode = $event.target as any;
+    const allElements = document.querySelectorAll('input') as any;
+    if (num && allElements && allElements.length) {
       // @ts-ignore
       const currentIndex = [...allElements].findIndex(el =>
         currentNode.isEqualNode(el),
@@ -29,7 +30,7 @@ export class PhoneVerificationComponent implements OnInit {
       allElements[targetIndex].focus();
     }
     let model = '';
-    allElements.forEach(e => {
+    (allElements || []).forEach(e => {
       model += e.value;
     });
     this.model = model;

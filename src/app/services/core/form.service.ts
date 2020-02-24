@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {
   IFormElement,
   IFormElementCaptcha,
-  IFormElementInput,
+  IFormElementInput, IFormElementVerification,
   IFormGroup,
 } from '../../components/core/form/contracts';
 import { FormElementType } from '../../library/core/enums';
 
 const CAPTCHA_LENGTH = 5;
+const VERIFICATION_LENGTH = 6;
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,15 @@ export class FormService {
   createInput(options: IFormElementInput): IFormElementInput {
     options.type = FormElementType.Input;
     options.validation = options.validation || { required: { value: false } };
+    return options;
+  }
+
+  createVerification(options: IFormElementVerification): IFormElementVerification {
+    options.type = FormElementType.Verification;
+    options.validation = options.validation || {
+      required: { value: true, message: 'VERIFICATION_REQUIRED' },
+      length: { value: VERIFICATION_LENGTH, message: 'VERIFICATION_CODE_INVALID' }
+    };
     return options;
   }
 
@@ -90,6 +100,7 @@ export class FormService {
   private validateField(element: IFormElement, model: any): boolean {
     switch (element.type) {
       case FormElementType.Input:
+      case FormElementType.Verification:
       case FormElementType.AutoComplete:
         return this.validateString(element, model);
       case FormElementType.Captcha:
@@ -183,4 +194,6 @@ export class FormService {
   private validateFile(element: IFormElement): boolean {
     return false;
   }
+
+
 }

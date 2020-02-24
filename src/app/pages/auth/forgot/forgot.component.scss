@@ -11,7 +11,7 @@
   padding: 0;
   height: 100%;
   background: url('/assets/images/pages/auth/authentication-page.svg') left
-    bottom no-repeat;
+  bottom no-repeat;
   background-size: cover;
   > .row {
     height: 100%;
@@ -36,7 +36,10 @@
   background: url('/assets/images/asoode-logo.svg') center center no-repeat;
   height: 70px;
 }
-
+.image {
+  width: 100px;
+  margin: 30px auto;
+}
 .forgot {
   display: block;
   text-align: center;
@@ -57,8 +60,13 @@ hr {
 }
 .google {
   text-decoration: none !important;
+  color: #e6e6e6;
   img {
     width: 20px;
+  }
+  span {
+    color: #666666;
+    font-size: 0.8rem;
   }
 }
 .more {
@@ -68,9 +76,15 @@ hr {
   }
 }
 app-form ::ng-deep .af-form-elements {
-  width: 300px;
+  width: 350px;
   text-align: start;
   margin: 50px auto 20px;
+  .af-textbox {
+    input,
+    textarea {
+      width: 350px;
+    }
+  }
 }
 
 @media (min-width: 1250px) {
@@ -81,7 +95,7 @@ app-form ::ng-deep .af-form-elements {
 @media (max-width: 1250px) {
   .background-column {
     background: url('/assets/images/pages/auth/authentication-page.svg') left
-      bottom no-repeat;
+    bottom no-repeat;
     background-size: cover;
   }
 }

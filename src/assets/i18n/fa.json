@@ -67,5 +67,13 @@
   "SEND_AGAIN": "ارسال مجدد",
   "VERIFY": "برسی صحت",
   "BACK_TO_LOGIN": "بازگشت به صفحه ورود",
-  "VERIFICATION_CODE_INVALID": "کد اعتبار سنجی صحیح نیست"
+  "VERIFICATION_CODE_INVALID": "کد اعتبار سنجی صحیح نیست",
+  "IF_YOU_REMEMBER_PASSWORD": "اگر کلمه عبور خود را به یاد دارید",
+  "FORGOT_PASSWORD": "فراموشی کلمه عبور",
+  "RECOVER": "بازیابی",
+  "PASSWORD_RECOVERY": "بازیابی کلمه عبور",
+  "RECOVERY_CHECK_EMAIL_PHONE": "لطفا از کد اعتبار سنجی ارسالی به {0} را در ادامه وارد کنید",
+  "RESET_PASSWORD": "تغییر کلمه عبور",
+  "VERIFICATION_CODE": "کد اعتبار سنجی",
+  "VERIFICATION_REQUIRED": "لطفا کد اعتبار سنجی را وارد کنید"
 }

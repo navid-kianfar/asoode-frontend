@@ -31,6 +31,16 @@
                   {{ element.config.label | translate: true }}
                 </label>
 
+                <!-- Verification -->
+                <ng-container *ngIf="element.type === FormElementType.Verification">
+                  <app-phone-verification
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-phone-verification>
+                </ng-container>
+
+                <!-- Captcha -->
                 <ng-container *ngIf="element.type === FormElementType.Captcha">
                   <app-captcha
                     [cssClass]="element.config.cssClass"
@@ -38,6 +48,8 @@
                     [(model)]="element.params.model"
                   ></app-captcha>
                 </ng-container>
+
+                <!-- Input -->
                 <ng-container *ngIf="element.type === FormElementType.Input">
                   <app-input
                     [growable]="element.params.growable"

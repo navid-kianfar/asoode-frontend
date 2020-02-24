@@ -31,7 +31,13 @@ export interface IFormElementInput extends IFormElement {
     rows?: number;
   };
 }
-
+export interface IFormElementVerification extends IFormElement {
+  params: {
+    cssClass?: string;
+    model: string;
+    disabled?: boolean;
+  };
+}
 export interface IFormElement {
   type?: FormElementType;
   config: IFormElementConfiguration;

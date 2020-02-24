@@ -102,4 +102,18 @@ export class IdentityService {
     }
     return op;
   }
+
+  async forgot(params: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/account/password/forget',
+      params,
+    );
+  }
+
+  async resetPassword(params: any): Promise<OperationResult<string>> {
+    return await this.httpService.post<string>(
+      '/account/password/recover',
+      params,
+    );
+  }
 }

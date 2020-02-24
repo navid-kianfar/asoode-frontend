@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.username = '';
     this.mode = ViewMode.Login;
+    this.username = '';
     this.form = [
       {
         elements: [

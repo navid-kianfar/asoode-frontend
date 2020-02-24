@@ -37,4 +37,5 @@ export enum FormElementType {
   Switch = 14,
   Tag = 15,
   ZonePicker = 16,
+  Verification = 17,
 }

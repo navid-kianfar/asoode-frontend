@@ -4,11 +4,38 @@
       <div class="col-md-4 col-sm-6 form-column">
         <div class="auth-form">
           <div class="logo"></div>
-          <h2 class="title">{{ 'LOGIN_TO_YOUR_ACCOUNT' | translate }}</h2>
-          <p class="more">
-            {{ 'IF_YOU_HAVE_ACCOUNT' | translate }},
-            <a routerLink="/login">{{ 'LOGIN_HERE' | translate }}</a>
-          </p>
+
+          <ng-container *ngIf="mode === ViewMode.Forgot">
+            <h2 class="title">{{ 'FORGOT_PASSWORD' | translate }}</h2>
+            <p class="more">
+              {{ 'IF_YOU_REMEMBER_PASSWORD' | translate }},
+              <a routerLink="/login">{{ 'LOGIN_HERE' | translate }}</a>
+            </p>
+
+            <app-form
+              [elements]="form"
+              [actionWaiting]="waiting"
+              (action)="forgot()"
+              [actionLabel]="'RECOVER'"
+            ></app-form>
+          </ng-container>
+
+          <ng-container *ngIf="mode === ViewMode.Confirm">
+            <h2 class="title">{{ 'PASSWORD_RECOVERY' | translate }}</h2>
+
+            <img class="image" src="/assets/images/pages/auth/password-reset.svg" alt="">
+
+            <p class="more">
+              {{ 'RECOVERY_CHECK_EMAIL_PHONE' | translate }}
+            </p>
+
+            <app-form
+              [elements]="resetForm"
+              [actionWaiting]="waiting"
+              (action)="reset()"
+              [actionLabel]="'RESET_PASSWORD'"
+            ></app-form>
+          </ng-container>
         </div>
       </div>
       <div class="col-md-8 empty-column"></div>
