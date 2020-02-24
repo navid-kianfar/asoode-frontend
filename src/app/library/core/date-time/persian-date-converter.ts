@@ -42,7 +42,10 @@ export default class PersianDateConverter implements IDateConverter {
       .replace(/D/g, converted.Day.toString())
       .replace(
         /hh/g,
-        NumberHelpers.pad(converted.Hours > 12 ? converted.Hours - 12 : converted.Hours, 2),
+        NumberHelpers.pad(
+          converted.Hours > 12 ? converted.Hours - 12 : converted.Hours,
+          2,
+        ),
       )
       .replace(/HH/g, NumberHelpers.pad(converted.Hours, 2))
       .replace(/mm/g, NumberHelpers.pad(converted.Minutes, 2))

@@ -1,6 +1,6 @@
 {
   "name": "asoode-panel",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -33,6 +33,7 @@
     "ngx-cookie-service": "^2.3.0",
     "ngx-moment": "^3.5.0",
     "ngx-openlayers": "^0.8.22",
+    "ngx-simple-modal": "^1.4.11",
     "ngx-socket-io": "^3.0.1",
     "persian-date": "^1.1.0",
     "rxjs": "~6.4.0",

@@ -1,0 +1,18 @@
+<div class="modal-content confirm-modal {{ cssClass }}">
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ title | translate: true }}
+    </h4>
+  </div>
+  <div class="modal-body">
+    <p [innerHTML]="message | translate: true | enterToBr"></p>
+  </div>
+  <div class="modal-footer">
+    <button (click)="onAction($event)" mat-flat-button color="warn">
+      {{ actionLabel | translate: true }}</button
+    >&nbsp;
+    <button (click)="onCancel($event)" mat-button>
+      {{ cancelLabel | translate: true }}
+    </button>
+  </div>
+</div>

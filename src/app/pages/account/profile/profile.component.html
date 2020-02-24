@@ -1,5 +1,23 @@
 <div class="account-profile">
-  <div class="header"></div>
+  <div class="header">
+    <div class="inner-content">
+      <div class="avatar-container"></div>
+      <div class="info">
+        <div class="full-name h2">{{ identityService.profile.fullName }}</div>
+        <div class="bio h3">{{ identityService.profile.bio }}</div>
+        <div class="email h3">{{ identityService.profile.email }}</div>
+        <div class="phone h3">{{ identityService.profile.phone }}</div>
+      </div>
+      <div class="actions">
+        <button class="edit" (click)="edit()" mat-stroked-button>
+          {{ 'EDIT' | translate }}</button
+        >&nbsp;
+        <button class="logout" (click)="logout()" mat-stroked-button>
+          {{ 'LOGOUT' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
   <div class="body">
     <div class="fake-header"></div>
     <div class="container">

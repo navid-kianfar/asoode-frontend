@@ -42,7 +42,6 @@ import { LocationPickerComponent } from './components/core/location-picker/locat
 import { ScheduleComponent } from './components/core/schedule/schedule.component';
 import { ProgressComponent } from './components/core/progress/progress.component';
 import { GridComponent } from './components/core/grid/grid.component';
-import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from './pipes/core/translate.pipe';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgotComponent } from './pages/auth/forgot/forgot.component';
@@ -50,7 +49,13 @@ import { IconComponent } from './components/core/icon/icon.component';
 import { ValidationComponent } from './components/core/validation/validation.component';
 import { OnlyNumberDirective } from './directives/core/only-number.directive';
 import { HeaderComponent } from './components/app/header/header.component';
-import {MatPaginatorModule, MatTableModule, MatTabsModule, MatToolbarModule} from '@angular/material';
+import {
+  MatPaginatorModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatButtonModule,
+} from '@angular/material';
 import { ProfileComponent } from './pages/account/profile/profile.component';
 import { FilesComponent } from './pages/storage/files/files.component';
 import { TransactionsComponent } from './components/app/account/transactions/transactions.component';
@@ -58,6 +63,9 @@ import { PremiumPlansComponent } from './components/app/account/premium-plans/pr
 import { CulturedDatePipe } from './pipes/core/cultured-date.pipe';
 import { CulturedDateTimePipe } from './pipes/core/cultured-date-time.pipe';
 import { MomentAgoPipe } from './pipes/core/moment-ago.pipe';
+import { ConfirmComponent } from './modals/confirm/confirm.component';
+import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
+import { EnterToBrPipe } from './pipes/core/enter-to-br.pipe';
 
 @NgModule({
   declarations: [
@@ -104,7 +112,10 @@ import { MomentAgoPipe } from './pipes/core/moment-ago.pipe';
     CulturedDatePipe,
     CulturedDateTimePipe,
     MomentAgoPipe,
+    ConfirmComponent,
+    EnterToBrPipe,
   ],
+  entryComponents: [ConfirmComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -116,6 +127,14 @@ import { MomentAgoPipe } from './pipes/core/moment-ago.pipe';
     MatTabsModule,
     MatPaginatorModule,
     MatTableModule,
+    SimpleModalModule.forRoot(
+      { container: 'modal-container' },
+      {
+        ...defaultSimpleModalOptions,
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+      },
+    ),
   ],
   providers: [
     // {

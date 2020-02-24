@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(public readonly identityService: IdentityService) { }
-  ngOnInit() {
-  }
+  constructor(public readonly identityService: IdentityService) {}
+  ngOnInit() {}
 }

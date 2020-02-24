@@ -5721,6 +5721,13 @@ ngx-openlayers@^0.8.22:
     "@types/openlayers" "4.3.x || 4.4.x"
     openlayers "4.3.x || 4.4.x"
 
+ngx-simple-modal@^1.4.11:
+  version "1.4.11"
+  resolved "https://registry.yarnpkg.com/ngx-simple-modal/-/ngx-simple-modal-1.4.11.tgz#a529dc0f796b64510cec29ca21f7696498f88463"
+  integrity sha512-mnIHZp2m0II0SKm/opPI8LrVjRrCADolu3KU4mxPa4kH4iwZmIuObb0ELNi17vXMP0SMM9obJvdTyaqf9Ny16w==
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-socket-io@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ngx-socket-io/-/ngx-socket-io-3.0.1.tgz#6dc50144ef4c793ecc597955081ec5c5dd9ce033"

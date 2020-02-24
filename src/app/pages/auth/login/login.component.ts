@@ -4,6 +4,7 @@ import { FormService } from '../../../services/core/form.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { Router } from '@angular/router';
+import { AppInitializerProvider } from '../../../services/app.initializer';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   ViewMode = ViewMode;
   constructor(
     private readonly router: Router,
+    private readonly initializerProvider: AppInitializerProvider,
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
   ) {}
@@ -60,6 +62,7 @@ export class LoginComponent implements OnInit {
     const op = await this.identityService.login(model);
     if (op.status === OperationResultStatus.Success) {
       if (op.data.token) {
+        await this.initializerProvider.refresh();
         await this.router.navigateByUrl('/dashboard');
         return;
       }

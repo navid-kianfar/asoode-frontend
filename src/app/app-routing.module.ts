@@ -5,25 +5,25 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ForgotComponent } from './pages/auth/forgot/forgot.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
-import {ProfileComponent} from './pages/account/profile/profile.component';
-import {FilesComponent} from './pages/storage/files/files.component';
-import {AnonymousGuard} from './guards/anonymous.guard';
+import { ProfileComponent } from './pages/account/profile/profile.component';
+import { FilesComponent } from './pages/storage/files/files.component';
+import { AnonymousGuard } from './guards/anonymous.guard';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [AnonymousGuard]
+    canActivate: [AnonymousGuard],
   },
   {
     path: 'register',
     component: RegisterComponent,
-    canActivate: [AnonymousGuard]
+    canActivate: [AnonymousGuard],
   },
   {
     path: 'forgot',
     component: ForgotComponent,
-    canActivate: [AnonymousGuard]
+    canActivate: [AnonymousGuard],
   },
   {
     path: 'dashboard',

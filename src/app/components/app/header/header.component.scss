@@ -18,9 +18,15 @@ h1 {
     }
   }
 }
-.logo-alt { display: none }
-.create-spacer { width: 40px }
-.menu-spacer { width: 10px }
+.logo-alt {
+  display: none;
+}
+.create-spacer {
+  width: 40px;
+}
+.menu-spacer {
+  width: 10px;
+}
 .create-button {
   color: #fff;
   background: #6b3d8d;
@@ -77,23 +83,28 @@ h1 {
   font-size: 1rem;
   font-weight: 600;
 }
-.action-container {display: flex}
+.action-container {
+  display: flex;
+}
 .flex-spacer {
   -webkit-box-flex: 1;
   flex-grow: 1;
 }
 
-@media(max-width: 780px) {
-  .search-container, .quick-access {
+@media (max-width: 780px) {
+  .search-container,
+  .quick-access {
     margin: 0 15px;
   }
 }
-@media(max-width: 620px) {
+@media (max-width: 620px) {
   nav {
     font-size: 0.8rem;
     font-weight: 300;
   }
-  .logo {display: none}
+  .logo {
+    display: none;
+  }
   .logo-alt {
     display: block;
     width: 30px !important;

@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router} from '@angular/router';
-import {IdentityService} from '../services/auth/identity.service';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+  Router,
+} from '@angular/router';
+import { IdentityService } from '../services/auth/identity.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AnonymousGuard implements CanActivate {
   constructor(
@@ -14,7 +20,9 @@ export class AnonymousGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
     const isAnonymous =
       !this.identityService.identity || !this.identityService.identity.token;
-    if (isAnonymous) { return true; }
+    if (isAnonymous) {
+      return true;
+    }
     this.router.navigate(['/dashboard']);
     return false;
   }

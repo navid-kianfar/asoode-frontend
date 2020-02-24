@@ -1,28 +1,32 @@
 <nav *ngIf="identityService.identity.token">
   <h1>
     <a routerLink="dashboard">
-      <img class="logo" src="/assets/images/asoode-logo.svg" alt="">
-      <img class="logo-alt" src="/assets/images/logo-colored.svg" alt="">
+      <img class="logo" src="/assets/images/asoode-logo.svg" alt="" />
+      <img class="logo-alt" src="/assets/images/logo-colored.svg" alt="" />
     </a>
   </h1>
 
   <span class="create-spacer"></span>
 
   <a href="javascript:void(0)" class="create-button">
-    {{ 'CREATE' | translate}}
+    {{ 'CREATE' | translate }}
   </a>
 
   <div class="flex-spacer"></div>
 
   <div class="action-container">
-    <a class="quick-access" href="javascript:void(0)"> {{ 'QUICK_ACCESS' | translate}} </a>
-    <a class="files" routerLink="files"> {{ 'FILES' | translate}} </a>
+    <a class="quick-access" href="javascript:void(0)">
+      {{ 'QUICK_ACCESS' | translate }}
+    </a>
+    <a class="files" routerLink="files"> {{ 'FILES' | translate }} </a>
     <div class="search-container">
       <app-input placeHolder="SEARCH_ANYWHERE"></app-input>
     </div>
     <div class="search-container-tiny">
       S
     </div>
-    <a class="account-info" routerLink="account"> NK </a>
+    <a class="account-info" routerLink="account">
+      {{ identityService.profile.initials }}
+    </a>
   </div>
 </nav>

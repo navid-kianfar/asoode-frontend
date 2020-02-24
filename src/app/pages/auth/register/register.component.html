@@ -5,10 +5,10 @@
         <div class="auth-form">
           <div class="logo"></div>
           <ng-container *ngIf="mode === ViewMode.Register">
-            <h2 class="title">{{ "CREATE_YOUR_ACCOUNT" | translate }}</h2>
+            <h2 class="title">{{ 'CREATE_YOUR_ACCOUNT' | translate }}</h2>
             <p class="more">
-              {{ "IF_YOU_HAVE_ACCOUNT" | translate }},
-              <a routerLink="/login">{{ "LOGIN_HERE" | translate }}</a>
+              {{ 'IF_YOU_HAVE_ACCOUNT' | translate }},
+              <a routerLink="/login">{{ 'LOGIN_HERE' | translate }}</a>
             </p>
 
             <app-form
@@ -20,7 +20,7 @@
             <hr />
             <a mat-stroked-button class="google" href="/google">
               <img src="/assets/images/pages/auth/google-logo.svg" alt="" />
-              <span>&nbsp;{{ "LOGIN_WITH_GOOGLE" | translate }}</span>
+              <span>&nbsp;{{ 'LOGIN_WITH_GOOGLE' | translate }}</span>
             </a>
           </ng-container>
 

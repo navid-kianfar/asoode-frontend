@@ -14,6 +14,15 @@ import {
 export class IdentityService {
   private readonly STORAGE_KEY = 'ASOODE_IDENTITY';
   private identityObject: IdentityObject;
+  private profileObject: any = {};
+
+  constructor(private readonly httpService: HttpService) {
+    this.identityObject = this.getIdentityInfo();
+  }
+
+  get profile() {
+    return this.profileObject;
+  }
 
   private getIdentityInfo(): IdentityObject {
     if (localStorage) {
@@ -32,12 +41,9 @@ export class IdentityService {
   }
   private removeIdentityInfo() {
     if (localStorage) {
-      this.identityObject = null;
       localStorage.removeItem(this.STORAGE_KEY);
     }
-  }
-  constructor(private readonly httpService: HttpService) {
-    this.identityObject = this.getIdentityInfo();
+    this.identityObject = { token: null, username: null, userId: null };
   }
 
   get identity(): IdentityObject {
@@ -70,5 +76,13 @@ export class IdentityService {
       '/account/register',
       model,
     );
+  }
+
+  async loadProfile(): Promise<OperationResult<any>> {
+    const op = await this.httpService.post<any>('/account/profile');
+    if (op.status === OperationResultStatus.Success) {
+      this.profileObject = op.data;
+    }
+    return op;
   }
 }
