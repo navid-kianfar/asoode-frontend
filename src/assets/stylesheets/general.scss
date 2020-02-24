@@ -140,6 +140,10 @@ html[dir='ltr'] {
   }
 }
 
+.primary-color {
+  color: #6b3d8d !important;
+}
+
 .mat-button-base {
   border-color: rgba(0, 0, 0, 0.12);
   border-radius: 20px !important;
@@ -192,6 +196,14 @@ input:focus {
     font-size: 0.8rem;
     font-weight: 500;
   }
+}
+[class^="icon-"], [class*=" icon-"] {
+  cursor: pointer;
+}
+
+[role="popper"] {
+  border-color: #f2f2f2 !important;
+  padding: 0 !important;
 }
 
 body {

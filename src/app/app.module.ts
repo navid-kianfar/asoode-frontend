@@ -55,6 +55,8 @@ import {
   MatTabsModule,
   MatToolbarModule,
   MatButtonModule,
+  _MatMenuDirectivesModule,
+  MatMenuModule,
 } from '@angular/material';
 import { ProfileComponent } from './pages/account/profile/profile.component';
 import { FilesComponent } from './pages/storage/files/files.component';
@@ -66,6 +68,9 @@ import { MomentAgoPipe } from './pipes/core/moment-ago.pipe';
 import { ConfirmComponent } from './modals/confirm/confirm.component';
 import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 import { EnterToBrPipe } from './pipes/core/enter-to-br.pipe';
+import { NgxPopperModule } from 'ngx-popper';
+import { QuickAccessComponent } from './components/app/quick-access/quick-access.component';
+import { SearchResultComponent } from './components/app/search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +119,8 @@ import { EnterToBrPipe } from './pipes/core/enter-to-br.pipe';
     MomentAgoPipe,
     ConfirmComponent,
     EnterToBrPipe,
+    QuickAccessComponent,
+    SearchResultComponent,
   ],
   entryComponents: [ConfirmComponent],
   imports: [
@@ -135,6 +142,8 @@ import { EnterToBrPipe } from './pipes/core/enter-to-br.pipe';
         closeOnClickOutside: true,
       },
     ),
+    MatMenuModule,
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
   ],
   providers: [
     // {

@@ -62,11 +62,28 @@ h1 {
   margin: 0 50px;
   border-radius: 25px;
   padding: 5px !important;
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap;
+
   ::ng-deep input {
     border: 1px solid transparent !important;
-    width: 180px !important;
+    width: 160px !important;
     font-size: 0.8rem;
-    padding: 0 !important;
+    padding: 0 10px !important;
+  }
+  app-input {
+    display: flex;
+    -webkit-box-align: center;
+  }
+  .holder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3px;
+    i {
+      font-size: 1.2rem;
+    }
   }
 }
 .account-info {
@@ -91,6 +108,17 @@ h1 {
   flex-grow: 1;
 }
 
+.quick-access-popper {
+  height: 60vh;
+  width: 300px;
+  background-color: #fff;
+}
+.search-popper {
+  height: 60vh;
+  width: 300px;
+  background-color: #fff;
+}
+
 @media (max-width: 780px) {
   .search-container,
   .quick-access {
@@ -99,7 +127,7 @@ h1 {
 }
 @media (max-width: 620px) {
   nav {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-weight: 300;
   }
   .logo {
@@ -115,6 +143,12 @@ h1 {
   }
   .quick-access {
     margin: 0 5px;
+    font-size: 0.7rem;
+    font-weight: 300;
+  }
+  .files {
+    font-size: 0.7rem;
+    font-weight: 300;
   }
   .search-container-tiny {
     display: flex;
@@ -122,6 +156,7 @@ h1 {
     width: 20px;
     align-items: center;
     justify-content: center;
+    font-size: 1.1rem;
   }
   .search-container {
     display: none;

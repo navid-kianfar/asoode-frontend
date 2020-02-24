@@ -33,9 +33,11 @@
     "ngx-cookie-service": "^2.3.0",
     "ngx-moment": "^3.5.0",
     "ngx-openlayers": "^0.8.22",
+    "ngx-popper": "^7.0.0",
     "ngx-simple-modal": "^1.4.11",
     "ngx-socket-io": "^3.0.1",
     "persian-date": "^1.1.0",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

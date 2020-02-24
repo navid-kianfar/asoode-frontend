@@ -15,18 +15,44 @@
   <div class="flex-spacer"></div>
 
   <div class="action-container">
-    <a class="quick-access" href="javascript:void(0)">
+    <a class="quick-access" href="javascript:void(0)"
+      [popper]="popperQuickAccess"
+      [popperTrigger]="'click'"
+      [popperHideOnClickOutside]="true"
+      [popperHideOnScroll]="true"
+      [popperPlacement]="'bottom'">
       {{ 'QUICK_ACCESS' | translate }}
     </a>
     <a class="files" routerLink="files"> {{ 'FILES' | translate }} </a>
     <div class="search-container">
       <app-input placeHolder="SEARCH_ANYWHERE"></app-input>
+      <div class="holder"
+           [popper]="popperSearch"
+           [popperTrigger]="'click'"
+           [popperHideOnClickOutside]="true"
+           [popperHideOnScroll]="true"
+           [popperPlacement]="'bottom-start'">
+        <i class="icon-search primary-color"></i>
+      </div>
     </div>
     <div class="search-container-tiny">
-      S
+      <i class="icon-search primary-color"></i>
     </div>
     <a class="account-info" routerLink="account">
       {{ identityService.profile.initials }}
     </a>
   </div>
+
+  <popper-content #popperQuickAccess>
+    <div class="quick-access-popper">
+      <app-quick-access></app-quick-access>
+    </div>
+  </popper-content>
+
+  <popper-content #popperSearch>
+    <div class="search-popper">
+      <app-search-result></app-search-result>
+    </div>
+  </popper-content>
+
 </nav>
