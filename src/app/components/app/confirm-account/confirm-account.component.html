@@ -1,0 +1,35 @@
+<div class="confirm-account">
+  <ng-container *ngIf="isEmail">
+    <h2 class="title">{{ 'CONFIRM_EMAIL_TITLE' | translate }}</h2>
+
+    <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="">
+
+    <p class="more">
+      {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat:username }}
+    </p>
+
+  </ng-container>
+
+  <ng-container *ngIf="!isEmail">
+    <h2 class="title">{{ 'CONFIRM_PHONE_TITLE' | translate }}</h2>
+
+    <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="">
+
+    <p class="more">
+      {{ 'CONFIRM_PHONE_DESCRIPTION' | translate | stringFormat:username }}
+    </p>
+
+    <div class="count-down">00:21</div>
+
+    <div class="send-again">
+      <button mat-button>{{ 'SEND_AGAIN' | translate}}</button>
+    </div>
+
+    <app-phone-verification></app-phone-verification>
+
+    <button mat-flat-button color="primary">
+      {{ 'VERIFY' | translate}}
+    </button>
+
+  </ng-container>
+</div>

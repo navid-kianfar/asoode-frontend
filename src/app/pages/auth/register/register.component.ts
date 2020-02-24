@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   form: IFormGroup[];
   mode: ViewMode;
   ViewMode = ViewMode;
+  username: string;
 
   constructor(
     private readonly router: Router,
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mode = ViewMode.Register;
+    this.username = 'nvd.kianfar@gmail.com';
+    this.mode = ViewMode.ConfirmPhone;
     this.form = [
       {
         size: 6,
@@ -100,10 +102,12 @@ export class RegisterComponent implements OnInit {
     this.waiting = false;
     if (op.status === OperationResultStatus.Success) {
       if (op.data.emailNotConfirmed) {
+        this.username = model.username;
         this.mode = ViewMode.ConfirmEmail;
         return;
       }
       if (op.data.phoneNotConfirmed) {
+        this.username = model.username;
         this.mode = ViewMode.ConfirmPhone;
         return;
       }

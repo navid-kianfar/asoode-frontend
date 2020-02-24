@@ -28,8 +28,10 @@
             </a>
           </ng-container>
 
-          <!--          <app-account-confirm-phone *ngIf="mode === ViewMode.ConfirmPhone" ></app-account-confirm-phone>-->
-          <!--          <app-account-confirm-email *ngIf="mode === ViewMode.ConfirmPhone" ></app-account-confirm-email>-->
+          <ng-container *ngIf="mode !== ViewMode.Login">
+            <app-confirm-account [username]="username"></app-confirm-account>
+          </ng-container>
+
         </div>
       </div>
       <div class="col-md-8 empty-column"></div>

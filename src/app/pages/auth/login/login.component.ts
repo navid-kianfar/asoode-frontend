@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   form: IFormGroup[];
   waiting: boolean;
   mode: ViewMode;
+  username: string;
 
   ViewMode = ViewMode;
   constructor(
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mode = ViewMode.Login;
+    this.username = '09122399413';
+    this.mode = ViewMode.ConfirmEmail;
     this.form = [
       {
         elements: [
@@ -86,10 +88,12 @@ export class LoginComponent implements OnInit {
         return;
       }
       if (op.data.emailNotConfirmed) {
+        this.username = model.username;
         this.mode = ViewMode.ConfirmEmail;
         return;
       }
       if (op.data.phoneNotConfirmed) {
+        this.username = model.username;
         this.mode = ViewMode.ConfirmPhone;
       }
       return;

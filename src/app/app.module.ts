@@ -71,6 +71,9 @@ import { EnterToBrPipe } from './pipes/core/enter-to-br.pipe';
 import { NgxPopperModule } from 'ngx-popper';
 import { QuickAccessComponent } from './components/app/quick-access/quick-access.component';
 import { SearchResultComponent } from './components/app/search-result/search-result.component';
+import { ConfirmAccountComponent } from './components/app/confirm-account/confirm-account.component';
+import { StringFormatPipe } from './pipes/core/string-format.pipe';
+import { PhoneVerificationComponent } from './components/app/phone-verification/phone-verification.component';
 
 @NgModule({
   declarations: [
@@ -121,6 +124,9 @@ import { SearchResultComponent } from './components/app/search-result/search-res
     EnterToBrPipe,
     QuickAccessComponent,
     SearchResultComponent,
+    ConfirmAccountComponent,
+    StringFormatPipe,
+    PhoneVerificationComponent,
   ],
   entryComponents: [ConfirmComponent],
   imports: [
