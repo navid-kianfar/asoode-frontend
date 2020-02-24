@@ -137,7 +137,9 @@ html[dir="ltr"] {
     direction: ltr; text-align: left;
   }
 }
-
+//.asoode-application {
+//  overflow-x: hidden;
+//}
 button.mat-button-base {
   border-radius: 30px !important;
   padding: 0 30px !important;

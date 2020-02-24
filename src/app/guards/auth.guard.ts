@@ -3,10 +3,8 @@ import {
   CanActivate,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
-  UrlTree,
   Router,
 } from '@angular/router';
-import { Observable } from 'rxjs';
 import { IdentityService } from '../services/auth/identity.service';
 
 @Injectable({
@@ -20,7 +18,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): any {
     const hasAccess =
-      this.identityService && this.identityService.identity.token;
+      this.identityService.identity && this.identityService.identity.token;
     if (hasAccess) {
       return true;
     }

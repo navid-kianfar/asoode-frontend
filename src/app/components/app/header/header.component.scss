@@ -18,6 +18,7 @@ h1 {
     }
   }
 }
+.logo-alt { display: none }
 .create-spacer { width: 40px }
 .menu-spacer { width: 10px }
 .create-button {
@@ -46,6 +47,9 @@ h1 {
   text-decoration: none !important;
   font-size: 0.8rem;
   font-weight: 500;
+}
+.search-container-tiny {
+  display: none;
 }
 .search-container {
   border: 1px solid #6b3d8d;
@@ -77,4 +81,38 @@ h1 {
 .flex-spacer {
   -webkit-box-flex: 1;
   flex-grow: 1;
+}
+
+@media(max-width: 780px) {
+  .search-container, .quick-access {
+    margin: 0 15px;
+  }
+}
+@media(max-width: 620px) {
+  nav {
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
+  .logo {display: none}
+  .logo-alt {
+    display: block;
+    width: 30px !important;
+    height: 40px;
+  }
+  .create-spacer {
+    width: 10px;
+  }
+  .quick-access {
+    margin: 0 5px;
+  }
+  .search-container-tiny {
+    display: flex;
+    margin: 0 10px;
+    width: 20px;
+    align-items: center;
+    justify-content: center;
+  }
+  .search-container {
+    display: none;
+  }
 }

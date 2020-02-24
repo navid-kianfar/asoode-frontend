@@ -1,7 +1,8 @@
 <nav *ngIf="identityService.identity.token">
   <h1>
     <a routerLink="dashboard">
-      <img src="/assets/images/asoode-logo.svg" alt="">
+      <img class="logo" src="/assets/images/asoode-logo.svg" alt="">
+      <img class="logo-alt" src="/assets/images/logo-colored.svg" alt="">
     </a>
   </h1>
 
@@ -18,6 +19,9 @@
     <a class="files" routerLink="files"> {{ 'FILES' | translate}} </a>
     <div class="search-container">
       <app-input placeHolder="SEARCH_ANYWHERE"></app-input>
+    </div>
+    <div class="search-container-tiny">
+      S
     </div>
     <a class="account-info" routerLink="account"> NK </a>
   </div>
