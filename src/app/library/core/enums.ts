@@ -40,3 +40,7 @@ export enum FormElementType {
   ZonePicker = 16,
   Verification = 17,
 }
+export enum DropdownKnownList {
+  Countries = 1,
+  Zones = 2,
+}

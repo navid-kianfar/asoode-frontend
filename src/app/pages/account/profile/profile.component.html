@@ -31,6 +31,8 @@
           [elements]="form"
           [actionWaiting]="waiting"
           (action)="update()"
+          [allowCancel]="true"
+          (cancel)="editing = false"
           [actionLabel]="'SAVE_CHANGES'"
         ></app-form>
       </div>

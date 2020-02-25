@@ -15,6 +15,7 @@ export class FormComponent implements OnInit {
   @Input() inline: boolean;
   @Input() actionWaiting: boolean;
   @Input() actionLabel: string;
+  @Input() allowCancel: boolean;
   @Output() action = new EventEmitter();
   @Input() cancelWaiting: boolean;
   @Input() cancelLabel: string;

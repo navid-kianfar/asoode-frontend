@@ -1,4 +1,4 @@
-import { FormElementType } from '../../../library/core/enums';
+import {DropdownKnownList, FormElementType} from '../../../library/core/enums';
 
 export interface IFormGroup {
   disabled?: boolean;
@@ -47,10 +47,9 @@ export interface IFormElementButton extends IFormElement {
     action: () => Promise<void>;
   };
 }
-export interface IFormElementDropDown extends IFormElement {
+export interface IFormElementCountryPicker extends IFormElement {
   params: {
     model: any;
-    items: any[];
     disabled?: boolean;
     label?: string;
   };
@@ -60,6 +59,26 @@ export interface IFormElement {
   config: IFormElementConfiguration;
   validation?: IFormElementStringValidation;
   params: any;
+}
+
+export interface IFormElementDropDown extends IFormElement {
+  params: {
+    model: any;
+    items: any[];
+    ltr?: boolean;
+    disabled?: boolean;
+    label?: string;
+    backend?: string;
+    prependIcon?: string;
+    chooseLabel?: string;
+    enum?: string;
+    choose?: boolean;
+    waiting?: boolean;
+    allowClear?: boolean;
+    backendParams?: any;
+    enumExcept?: number;
+    knownList?: DropdownKnownList;
+  };
 }
 export interface IFormElementConfiguration {
   cssClass?: string;

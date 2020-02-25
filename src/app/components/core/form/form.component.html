@@ -98,6 +98,17 @@
                     [disabled]="checkDisabled(group, element)"
                     [(model)]="element.params.model"
                     [(items)]="element.params.items"
+                    [ltr]="element.params.ltr"
+                    [allowClear]="element.params.allowClear"
+                    [backend]="element.params.backend"
+                    [backendParams]="element.params.backendParams"
+                    [choose]="element.params.choose"
+                    [chooseLabel]="element.params.chooseLabel"
+                    [enum]="element.params.enum"
+                    [enumExcept]="element.params.enumExcept"
+                    [knownList]="element.params.knownList"
+                    [prependIcon]="element.params.prependIcon"
+                    [waiting]="element.params.waiting"
                   ></app-dropdown>
                 </ng-container>
 
@@ -126,12 +137,12 @@
     &nbsp;
     <button
       [disabled]="actionWaiting || cancelWaiting"
-      *ngIf="cancelLabel"
+      *ngIf="allowCancel"
       (click)="cancel.emit()"
       mat-stroked-button
     >
       <i *ngIf="cancelWaiting" class="fa fa-spinner fa-spin"></i>
-      {{ cancelLabel | translate }}
+      {{ (cancelLabel || 'CANCEL') | translate }}
     </button>
   </div>
 </div>

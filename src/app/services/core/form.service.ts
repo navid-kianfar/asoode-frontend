@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
   IFormElement,
   IFormElementButton,
   IFormElementCaptcha,
+  IFormElementCountryPicker,
   IFormElementDropDown,
   IFormElementInput,
   IFormElementVerification,
   IFormGroup,
 } from '../../components/core/form/contracts';
-import { FormElementType } from '../../library/core/enums';
+import {DropdownKnownList, FormElementType} from '../../library/core/enums';
 
 const CAPTCHA_LENGTH = 5;
 const VERIFICATION_LENGTH = 6;
@@ -48,6 +49,21 @@ export class FormService {
     options.type = FormElementType.DropDown;
     options.validation = options.validation || { required: { value: false } };
     return options;
+  }
+  createCountryPicker(options: IFormElementCountryPicker): IFormElementDropDown {
+    const casted = options as IFormElementDropDown;
+    casted.type = FormElementType.DropDown;
+    casted.params.knownList = DropdownKnownList.Countries;
+    casted.validation = casted.validation || { required: { value: false } };
+    return casted;
+  }
+  createTimezone(options: IFormElementCountryPicker): IFormElementDropDown {
+    const casted = options as IFormElementDropDown;
+    casted.type = FormElementType.DropDown;
+    casted.params.knownList = DropdownKnownList.Zones;
+    casted.params.ltr = true;
+    casted.validation = casted.validation || { required: { value: false } };
+    return casted;
   }
 
   createCaptcha(): IFormElementCaptcha {

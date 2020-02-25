@@ -97,5 +97,7 @@
   "EMAIL_MAX_LENGTH": "",
   "TIME_ZONE_REQUIRED": "",
   "CALENDAR_REQUIRED": "",
+  "LIST_EMPTY": "موردی وجود ندارد",
+  "PLEASE_CHOOSE": "لطفا انتخاب کنید",
   "NONE_PROVIDED": "ثبت نشده"
 }

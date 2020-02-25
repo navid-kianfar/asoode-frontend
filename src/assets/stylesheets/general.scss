@@ -154,7 +154,10 @@ html[dir='ltr'] {
     text-align: left;
   }
 }
-
+.ltr {
+  text-align: left !important;
+  direction: ltr !important;
+}
 .icon-spin {
   display: inline-block;
   -webkit-animation-name: spin;

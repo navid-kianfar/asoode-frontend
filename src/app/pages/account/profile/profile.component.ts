@@ -87,9 +87,9 @@ export class ProfileComponent implements OnInit {
               maxLength: { value: 50, message: 'LAST_NAME_MAX_LENGTH' },
             },
           }),
-          this.formService.createDropDown({
+          this.formService.createTimezone({
             config: { field: 'timeZone', label: 'TIME_ZONE' },
-            params: { model: undefined, items: [] },
+            params: { model: undefined },
             validation: {
               required: { value: true, message: 'TIME_ZONE_REQUIRED' },
             },
