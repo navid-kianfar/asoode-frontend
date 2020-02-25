@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MaterialTranslatorService } from '../../../../services/core/material-translator.service';
 
 @Component({
   selector: 'app-transactions',
@@ -17,10 +18,13 @@ export class TransactionsComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-  // @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  constructor(private readonly translatorService: MaterialTranslatorService) {}
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
   ngOnInit() {
-    // this.dataSource.paginator = this.paginator;
+    this.translatorService.paginator(this.paginator);
+    this.dataSource.paginator = this.paginator;
   }
 }
 export interface PeriodicElement {

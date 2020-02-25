@@ -38,6 +38,23 @@ export interface IFormElementVerification extends IFormElement {
     disabled?: boolean;
   };
 }
+
+export interface IFormElementButton extends IFormElement {
+  params: {
+    model: string;
+    label?: string;
+    requireModel?: boolean;
+    action: () => Promise<void>;
+  };
+}
+export interface IFormElementDropDown extends IFormElement {
+  params: {
+    model: any;
+    items: any[];
+    disabled?: boolean;
+    label?: string;
+  };
+}
 export interface IFormElement {
   type?: FormElementType;
   config: IFormElementConfiguration;

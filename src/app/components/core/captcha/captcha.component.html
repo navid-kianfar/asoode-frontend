@@ -9,10 +9,10 @@
     appOnlyNumber
   />
   <div *ngIf="!image" class="loader">
-    <i class="fa fa-spinner fa-pulse"></i>
+    <span class="icon-spinner1 icon-spin"></span>
   </div>
   <img *ngIf="image" [src]="image" alt="captcha-image" />
   <button (click)="generate()" [disabled]="waiting || disabled">
-    <app-icon [width]="25" name="reload"></app-icon>
+    <i class="icon-reset"></i>
   </button>
 </div>

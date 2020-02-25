@@ -111,7 +111,9 @@ export class IdentityService {
     );
   }
 
-  async resetPassword(params: any): Promise<OperationResult<LoginResultViewModel>> {
+  async resetPassword(
+    params: any,
+  ): Promise<OperationResult<LoginResultViewModel>> {
     const op = await this.httpService.post<LoginResultViewModel>(
       '/account/password/recover',
       params,

@@ -16,7 +16,7 @@
             <ng-container *ngFor="let element of group.elements">
               <div
                 class="form-element-item form-group col-12 {{
-                  element.params.cssClass
+                  element.params.cssClass || element.config.cssClass || ''
                 }} {{
                   element.validation &&
                   element.validation.errors &&
@@ -32,12 +32,34 @@
                 </label>
 
                 <!-- Verification -->
-                <ng-container *ngIf="element.type === FormElementType.Verification">
+                <ng-container
+                  *ngIf="element.type === FormElementType.Verification"
+                >
                   <app-phone-verification
                     [cssClass]="element.config.cssClass"
                     [disabled]="checkDisabled(group, element)"
                     [(model)]="element.params.model"
                   ></app-phone-verification>
+                </ng-container>
+
+                <!-- Button -->
+                <ng-container *ngIf="element.type === FormElementType.Button">
+                  <div>
+                    <span *ngIf="element.params.model" class="button-label">
+                      {{ element.params.model }}
+                    </span>
+                    <span
+                      *ngIf="
+                        !element.params.model && element.params.requireModel
+                      "
+                      class="button-label"
+                    >
+                      {{ 'NONE_PROVIDED' | translate }}
+                    </span>
+                    <button mat-stroked-button>
+                      {{ element.params.label | translate }}
+                    </button>
+                  </div>
                 </ng-container>
 
                 <!-- Captcha -->
@@ -67,6 +89,16 @@
                     [disabled]="checkDisabled(group, element)"
                     [(model)]="element.params.model"
                   ></app-input>
+                </ng-container>
+
+                <!-- DropDown -->
+                <ng-container *ngIf="element.type === FormElementType.DropDown">
+                  <app-dropdown
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                    [(items)]="element.params.items"
+                  ></app-dropdown>
                 </ng-container>
 
                 <app-validation

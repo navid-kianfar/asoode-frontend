@@ -4,15 +4,15 @@ nav {
   flex-wrap: wrap;
   -webkit-box-align: center;
   align-items: center;
-  padding: 3px 16px 3px;
+  padding: 5px 16px 5px;
   border-bottom: 2px solid #cccccc;
 }
 
 h1 {
+  margin-bottom: 0;
   a {
     text-decoration: none !important;
     display: block;
-    margin-top: 10px;
     img {
       width: 90px;
     }
@@ -28,12 +28,9 @@ h1 {
   width: 10px;
 }
 .create-button {
-  color: #fff;
-  background: #6b3d8d;
-  border-radius: 30px;
-  padding: 5px 10px;
-  text-decoration: none !important;
-  font-size: 0.7rem;
+  font-size: 0.7rem !important;
+  line-height: 25px;
+  padding: 2px 0;
 }
 .quick-access {
   color: #6b3d8d;

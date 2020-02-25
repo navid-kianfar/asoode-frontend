@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
   IFormElement,
+  IFormElementButton,
   IFormElementCaptcha,
-  IFormElementInput, IFormElementVerification,
+  IFormElementDropDown,
+  IFormElementInput,
+  IFormElementVerification,
   IFormGroup,
 } from '../../components/core/form/contracts';
 import { FormElementType } from '../../library/core/enums';
@@ -22,12 +25,28 @@ export class FormService {
     return options;
   }
 
-  createVerification(options: IFormElementVerification): IFormElementVerification {
+  createVerification(
+    options: IFormElementVerification,
+  ): IFormElementVerification {
     options.type = FormElementType.Verification;
     options.validation = options.validation || {
       required: { value: true, message: 'VERIFICATION_REQUIRED' },
-      length: { value: VERIFICATION_LENGTH, message: 'VERIFICATION_CODE_INVALID' }
+      length: {
+        value: VERIFICATION_LENGTH,
+        message: 'VERIFICATION_CODE_INVALID',
+      },
     };
+    return options;
+  }
+
+  createButton(options: IFormElementButton): IFormElementButton {
+    options.type = FormElementType.Button;
+    options.validation = { errors: [], required: { value: false } };
+    return options;
+  }
+  createDropDown(options: IFormElementDropDown): IFormElementDropDown {
+    options.type = FormElementType.DropDown;
+    options.validation = options.validation || { required: { value: false } };
     return options;
   }
 
@@ -80,6 +99,20 @@ export class FormService {
       });
     });
     return model;
+  }
+  setModel(form: IFormGroup[], model: any): void {
+    form.forEach(group => {
+      group.elements.forEach(element => {
+        element.params.model = model[element.config.field];
+      });
+    });
+  }
+  reset(form: IFormGroup[]) {
+    form.forEach(group => {
+      group.elements.forEach(element => {
+        element.params.model = undefined;
+      });
+    });
   }
   private validateModel(form: IFormGroup[], model: any): boolean {
     let isValid = true;
@@ -194,6 +227,4 @@ export class FormService {
   private validateFile(element: IFormElement): boolean {
     return false;
   }
-
-
 }

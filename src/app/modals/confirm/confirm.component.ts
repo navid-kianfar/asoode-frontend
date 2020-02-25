@@ -20,12 +20,16 @@ export class ConfirmComponent
   cancelLabel?: string;
   actionWaiting: boolean;
   cancelWaiting: boolean;
+  heading?: string;
+  actionColor: any;
 
   constructor() {
     super();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.actionColor = this.actionColor || 'warn';
+  }
 
   async onAction($event: MouseEvent) {
     $event.stopPropagation();

@@ -1,22 +1,40 @@
 <div class="account-profile">
   <div class="header">
-    <div class="inner-content">
-      <div class="avatar-container"></div>
-      <div class="info">
-        <div class="full-name h2">{{ identityService.profile.fullName }}</div>
-        <div class="bio h3">{{ identityService.profile.bio }}</div>
-        <div class="email h3">{{ identityService.profile.email }}</div>
-        <div class="phone h3">{{ identityService.profile.phone }}</div>
+    <ng-container *ngIf="!editing">
+      <div class="inner-content">
+        <div class="avatar-container">
+          <img *ngIf="identityService.profile.avatar" src="" alt="" />
+          <div *ngIf="!identityService.profile.avatar">
+            {{ identityService.profile.initials }}
+          </div>
+        </div>
+        <div class="info">
+          <div class="full-name h2">{{ identityService.profile.fullName }}</div>
+          <div class="bio h3">{{ identityService.profile.bio }}</div>
+          <div class="email h3">{{ identityService.profile.email }}</div>
+          <div class="phone h3">{{ identityService.profile.phone }}</div>
+        </div>
+        <div class="actions">
+          <button class="edit" (click)="edit()" mat-stroked-button>
+            {{ 'EDIT' | translate }}</button
+          >&nbsp;
+          <button class="logout" (click)="logout()" mat-stroked-button>
+            {{ 'LOGOUT' | translate }}
+          </button>
+        </div>
       </div>
-      <div class="actions">
-        <button class="edit" (click)="edit()" mat-stroked-button>
-          {{ 'EDIT' | translate }}</button
-        >&nbsp;
-        <button class="logout" (click)="logout()" mat-stroked-button>
-          {{ 'LOGOUT' | translate }}
-        </button>
+    </ng-container>
+
+    <ng-container *ngIf="editing">
+      <div class="edit-inner-container">
+        <app-form
+          [elements]="form"
+          [actionWaiting]="waiting"
+          (action)="update()"
+          [actionLabel]="'SAVE_CHANGES'"
+        ></app-form>
       </div>
-    </div>
+    </ng-container>
   </div>
   <div class="body">
     <div class="fake-header"></div>

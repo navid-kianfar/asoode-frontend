@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {IFormGroup} from '../../../components/core/form/contracts';
-import {Router} from '@angular/router';
-import {AppInitializerProvider} from '../../../services/app.initializer';
-import {FormService} from '../../../services/core/form.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {ValidationService} from '../../../services/core/validation.service';
+import { Component, OnInit } from '@angular/core';
+import { IFormGroup } from '../../../components/core/form/contracts';
+import { Router } from '@angular/router';
+import { AppInitializerProvider } from '../../../services/app.initializer';
+import { FormService } from '../../../services/core/form.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { ValidationService } from '../../../services/core/validation.service';
 
 @Component({
   selector: 'app-forgot',
@@ -57,7 +57,7 @@ export class ForgotComponent implements OnInit {
           }),
           this.formService.createVerification({
             config: { field: 'code', label: 'VERIFICATION_CODE' },
-            params: { model: '' }
+            params: { model: '' },
           }),
         ],
       },
@@ -66,17 +66,17 @@ export class ForgotComponent implements OnInit {
       {
         elements: [
           this.formService.createInput({
-            config: {field: 'username', label: 'EMAIL_OR_PHONE'},
-            params: {model: '', ltr: true},
+            config: { field: 'username', label: 'EMAIL_OR_PHONE' },
+            params: { model: '', ltr: true },
             validation: {
-              required: {value: true, message: 'EMAIL_OR_PHONE_REQUIRED'},
-              minLength: {value: 10, message: 'EMAIL_OR_PHONE_MIN_LENGTH'},
-              maxLength: {value: 50, message: 'EMAIL_OR_PHONE_MAX_LENGTH'},
+              required: { value: true, message: 'EMAIL_OR_PHONE_REQUIRED' },
+              minLength: { value: 10, message: 'EMAIL_OR_PHONE_MIN_LENGTH' },
+              maxLength: { value: 50, message: 'EMAIL_OR_PHONE_MAX_LENGTH' },
             },
           }),
           this.formService.createCaptcha(),
-        ]
-      }
+        ],
+      },
     ];
   }
 
@@ -93,9 +93,7 @@ export class ForgotComponent implements OnInit {
       return;
     }
     if (op.data.lockedOut) {
-      this.formService.setErrors(this.form, 'username', [
-        'ACCOUNT_LOCKED_OUT',
-      ]);
+      this.formService.setErrors(this.form, 'username', ['ACCOUNT_LOCKED_OUT']);
       return;
     }
     if (op.data.notFound) {
@@ -105,9 +103,7 @@ export class ForgotComponent implements OnInit {
       return;
     }
     if (op.data.smsFailed) {
-      this.formService.setErrors(this.form, 'username', [
-        'ACCOUNT_SMS_FAILED',
-      ]);
+      this.formService.setErrors(this.form, 'username', ['ACCOUNT_SMS_FAILED']);
       return;
     }
     if (op.data.emailFailed) {
@@ -160,5 +156,5 @@ export class ForgotComponent implements OnInit {
 }
 export enum ViewMode {
   Forgot = 1,
-  Confirm = 2
+  Confirm = 2,
 }

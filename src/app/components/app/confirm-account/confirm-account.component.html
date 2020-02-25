@@ -2,13 +2,22 @@
   <ng-container *ngIf="isEmail">
     <h2 class="title">{{ 'CONFIRM_EMAIL_TITLE' | translate }}</h2>
 
-    <img class="image" src="/assets/images/pages/auth/email-verification.svg" alt="" />
+    <img
+      class="image"
+      src="/assets/images/pages/auth/email-verification.svg"
+      alt=""
+    />
 
     <div class="more">
       {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat: username }}
     </div>
 
-    <button (click)="goBack.emit()" class="back-to-login" mat-flat-button color="primary">
+    <button
+      (click)="goBack.emit()"
+      class="back-to-login"
+      mat-flat-button
+      color="primary"
+    >
       {{ 'BACK_TO_LOGIN' | translate }}
     </button>
   </ng-container>

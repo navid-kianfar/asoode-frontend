@@ -3,12 +3,19 @@
     <h4 class="modal-title">
       {{ title | translate: true }}
     </h4>
+    <button (click)="onCancel($event)">
+      <i class="icon-cross"></i>
+    </button>
   </div>
   <div class="modal-body">
+    <h2
+      *ngIf="heading"
+      [innerHTML]="heading | translate: true | enterToBr"
+    ></h2>
     <h3 [innerHTML]="message | translate: true | enterToBr"></h3>
   </div>
   <div class="modal-footer">
-    <button (click)="onAction($event)" mat-flat-button color="warn">
+    <button (click)="onAction($event)" mat-flat-button [color]="actionColor">
       {{ actionLabel | translate: true }}</button
     >&nbsp;
     <button (click)="onCancel($event)" mat-button>

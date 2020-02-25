@@ -2,18 +2,27 @@
   height: 100%;
   .header {
     min-height: 300px;
-    text-align: center;
 
     .inner-content {
       width: 200px;
+      margin: 50px auto 0;
+      text-align: center;
+    }
+    .edit-inner-container {
+      width: 500px;
       margin: 50px auto 0;
     }
     .avatar-container {
       width: 100px;
       height: 100px;
-      background-color: #666666;
+      background-color: #e6e6e6;
       border-radius: 50%;
       margin: 0 auto 20px;
+
+      div {
+        font-size: 3rem;
+        padding-top: 18px;
+      }
     }
     .info {
       .full-name {
@@ -56,5 +65,14 @@
       top: 0;
       left: 0;
     }
+  }
+
+  ::ng-deep .change-phone button {
+  }
+  ::ng-deep .change-phone .button-label {
+  }
+  ::ng-deep .change-password button {
+    display: block !important;
+    width: 100% !important;
   }
 }

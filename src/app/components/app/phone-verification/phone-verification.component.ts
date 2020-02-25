@@ -19,7 +19,9 @@ export class PhoneVerificationComponent implements OnInit {
   onKeyUp($event: KeyboardEvent, index: number) {
     const num = !isNaN(+$event.key);
     const currentNode = $event.target as any;
-    const allElements = document.querySelectorAll('input[maxlength="1"]') as any;
+    const allElements = document.querySelectorAll(
+      'input[maxlength="1"]',
+    ) as any;
     if (num && allElements && allElements.length) {
       // @ts-ignore
       const currentIndex = [...allElements].findIndex(el =>

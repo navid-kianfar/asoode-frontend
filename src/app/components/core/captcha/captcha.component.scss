@@ -31,7 +31,9 @@
     align-items: center;
     justify-content: center;
     i {
-      font-size: 1em;
+      font-size: 1.5rem;
+      font-weight: 300;
+      vertical-align: middle;
     }
   }
   img {
@@ -52,8 +54,8 @@
     width: 3.8rem;
     flex-shrink: 0;
     i {
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: 300;
       vertical-align: middle;
     }
   }

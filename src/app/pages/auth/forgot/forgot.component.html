@@ -24,21 +24,39 @@
             <h2 class="title">{{ 'PASSWORD_RECOVERY' | translate }}</h2>
 
             <ng-container *ngIf="isEmail">
-              <img class="image" src="/assets/images/pages/auth/email-verification.svg" alt="">
+              <img
+                class="image"
+                src="/assets/images/pages/auth/email-verification.svg"
+                alt=""
+              />
               <p class="more">
-                {{ 'RECOVERY_CHECK_EMAIL' | translate | stringFormat:username }}
+                {{
+                  'RECOVERY_CHECK_EMAIL' | translate | stringFormat: username
+                }}
               </p>
-              <br>
-              <a routerLink="login" class="back-to-login" mat-flat-button color="primary">
+              <br />
+              <a
+                routerLink="login"
+                class="back-to-login"
+                mat-flat-button
+                color="primary"
+              >
                 {{ 'BACK_TO_LOGIN' | translate }}
               </a>
-
             </ng-container>
 
             <ng-container *ngIf="!isEmail">
-              <img class="image" src="/assets/images/pages/auth/password-reset.svg" alt="">
+              <img
+                class="image"
+                src="/assets/images/pages/auth/password-reset.svg"
+                alt=""
+              />
               <p class="more">
-                {{ 'CONFIRM_PHONE_DESCRIPTION' | translate | stringFormat:username }}
+                {{
+                  'CONFIRM_PHONE_DESCRIPTION'
+                    | translate
+                    | stringFormat: username
+                }}
               </p>
 
               <app-form
@@ -48,7 +66,6 @@
                 [actionLabel]="'RESET_PASSWORD'"
               ></app-form>
             </ng-container>
-
           </ng-container>
         </div>
       </div>

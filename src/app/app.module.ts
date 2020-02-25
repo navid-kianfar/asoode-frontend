@@ -45,7 +45,6 @@ import { GridComponent } from './components/core/grid/grid.component';
 import { TranslatePipe } from './pipes/core/translate.pipe';
 import { RegisterComponent } from './pages/auth/register/register.component';
 import { ForgotComponent } from './pages/auth/forgot/forgot.component';
-import { IconComponent } from './components/core/icon/icon.component';
 import { ValidationComponent } from './components/core/validation/validation.component';
 import { OnlyNumberDirective } from './directives/core/only-number.directive';
 import { HeaderComponent } from './components/app/header/header.component';
@@ -109,7 +108,6 @@ import { PhoneVerificationComponent } from './components/app/phone-verification/
     TranslatePipe,
     RegisterComponent,
     ForgotComponent,
-    IconComponent,
     ValidationComponent,
     OnlyNumberDirective,
     HeaderComponent,

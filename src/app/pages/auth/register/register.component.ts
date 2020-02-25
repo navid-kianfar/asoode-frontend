@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
     const op = await this.identityService.register(model);
     this.waiting = false;
     if (op.status === OperationResultStatus.Success) {
-      op.data = op.data || {} as any;
+      op.data = op.data || ({} as any);
       if (op.data.emailNotConfirmed) {
         this.username = model.username;
         this.mode = ViewMode.Confirm;

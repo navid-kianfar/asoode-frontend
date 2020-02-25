@@ -7,6 +7,8 @@ export interface ModalParameters {
   icon?: string;
   title?: string;
   message?: string;
+  heading?: string;
+  actionColor?: string;
   actionLabel?: string;
   cancelLabel?: string;
 }
