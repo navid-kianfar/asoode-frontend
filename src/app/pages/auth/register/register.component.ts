@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.mode = ViewMode.Register;
+    this.username = '';
     this.form = [
       {
         size: 6,
