@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { CultureService } from './core/culture.service';
 import { TranslateService } from './core/translate.service';
 import { IdentityService } from './auth/identity.service';
+import {EnumsService} from './core/enums.service';
 
 @Injectable()
 export class AppInitializerProvider {
@@ -12,13 +13,15 @@ export class AppInitializerProvider {
     private readonly translateService: TranslateService,
     private readonly identityService: IdentityService,
     private readonly cultureService: CultureService,
+    private readonly enumsService: EnumsService,
   ) {}
 
   async load() {
     const lang = this.cultureService.lang;
-    const promise1 = this.translateService.loadTranslate(lang);
-    const promise2 = this.refresh();
-    return Promise.all([promise1, promise2]);
+    const promise1 = this.refresh();
+    const promise2 = this.translateService.loadTranslate(lang);
+    const promise3 = this.enumsService.load();
+    return Promise.all([promise1, promise2, promise3]);
   }
 
   refresh() {

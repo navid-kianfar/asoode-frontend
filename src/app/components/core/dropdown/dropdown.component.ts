@@ -5,6 +5,7 @@ import {ListViewModel} from '../../../view-models/core/list-types';
 import {CountryService} from '../../../services/core/country.service';
 import {TimezoneService} from '../../../services/core/timezone.service';
 import {MatMenuTrigger} from '@angular/material';
+import {EnumsService} from '../../../services/core/enums.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -35,9 +36,10 @@ export class DropdownComponent implements OnInit, OnChanges {
   showPlate: boolean;
   selectedItem: any;
   constructor(
-    readonly httpService: HttpService,
-    readonly countryService: CountryService,
-    readonly zoneService: TimezoneService,
+    private readonly httpService: HttpService,
+    private readonly countryService: CountryService,
+    private readonly zoneService: TimezoneService,
+    private readonly enumsService: EnumsService,
   ) {}
 
   updateItems(val) {
@@ -101,9 +103,14 @@ export class DropdownComponent implements OnInit, OnChanges {
     if (this.enum) {
       const items = [];
       this.enumExcept = this.enumExcept || [];
-      const enumObj = (window as any).Asoode.enums[this.enum];
+      const enumObj = this.enumsService.repository[this.enum[0].toLowerCase() + this.enum.substring(1)];
       Object.keys(enumObj).forEach(key => {
-        const text = `ENUMS.${this.enum}.${key}`.toUpperCase();
+        const changed = key.replace(/([a-z])([A-Z])/g, '$1-$2')
+          .replace(/-/g, '_');
+        const enumChanged = this.enum.replace(/([a-z])([A-Z])/g, '$1-$2')
+          .replace(/-/g, '_');
+        const text = `ENUMS_${enumChanged}_${changed}`.toUpperCase();
+        console.log(text);
         if (this.enumExcept.indexOf(enumObj[key]) !== -1) {
           return;
         }

@@ -99,5 +99,9 @@
   "CALENDAR_REQUIRED": "",
   "LIST_EMPTY": "موردی وجود ندارد",
   "PLEASE_CHOOSE": "لطفا انتخاب کنید",
-  "NONE_PROVIDED": "ثبت نشده"
+  "NONE_PROVIDED": "ثبت نشده",
+  "ENUMS_CALENDAR_TYPE_DEFAULT":  "پیشفرض",
+  "ENUMS_CALENDAR_TYPE_PERSIAN": "شمسی",
+  "ENUMS_CALENDAR_TYPE_GREGORIAN":  "میلادی",
+  "ENUMS_CALENDAR_TYPE_HIJRI": "قمری"
 }

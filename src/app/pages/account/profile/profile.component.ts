@@ -96,7 +96,7 @@ export class ProfileComponent implements OnInit {
           }),
           this.formService.createDropDown({
             config: { field: 'calendar', label: 'CALENDAR' },
-            params: { model: undefined, items: [] },
+            params: { model: undefined, items: [], enum: 'CalendarType' },
             validation: {
               required: { value: true, message: 'CALENDAR_REQUIRED' },
             },
