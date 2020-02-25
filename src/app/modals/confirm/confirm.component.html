@@ -5,7 +5,7 @@
     </h4>
   </div>
   <div class="modal-body">
-    <p [innerHTML]="message | translate: true | enterToBr"></p>
+    <h3 [innerHTML]="message | translate: true | enterToBr"></h3>
   </div>
   <div class="modal-footer">
     <button (click)="onAction($event)" mat-flat-button color="warn">

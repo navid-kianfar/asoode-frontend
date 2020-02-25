@@ -70,10 +70,16 @@ hr {
   }
 }
 .more {
+  width: 80%;
+  margin: 0 auto;
   font-size: 0.9rem;
   a {
     color: #982cf5;
   }
+}
+.back-to-login {
+  margin: 20px 0;
+  text-decoration: none !important;
 }
 app-form ::ng-deep .af-form-elements {
   width: 350px;

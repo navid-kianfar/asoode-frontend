@@ -16,3 +16,14 @@ export interface RegisterResultViewModel {
   phoneNotConfirmed: boolean;
   smsFailed: boolean;
 }
+
+export interface ForgotResultViewModel {
+  emailFailed: boolean;
+  emailNotConfirmed: boolean;
+  phoneNotConfirmed: boolean;
+  smsFailed: boolean;
+  lockedOut: boolean;
+  notFound: boolean;
+  wait: boolean;
+  id: string;
+}

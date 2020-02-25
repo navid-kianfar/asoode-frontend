@@ -4,6 +4,7 @@ import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import { OperationResultStatus } from '../../library/core/enums';
 import {
+  ForgotResultViewModel,
   LoginResultViewModel,
   RegisterResultViewModel,
 } from '../../view-models/auth/identity-view-models';
@@ -103,17 +104,25 @@ export class IdentityService {
     return op;
   }
 
-  async forgot(params: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
+  async forgot(params: any): Promise<OperationResult<ForgotResultViewModel>> {
+    return await this.httpService.post<ForgotResultViewModel>(
       '/account/password/forget',
       params,
     );
   }
 
-  async resetPassword(params: any): Promise<OperationResult<string>> {
-    return await this.httpService.post<string>(
+  async resetPassword(params: any): Promise<OperationResult<LoginResultViewModel>> {
+    const op = await this.httpService.post<LoginResultViewModel>(
       '/account/password/recover',
       params,
     );
+    if (op.status === OperationResultStatus.Success) {
+      this.setIdentityInfo({
+        userId: op.data.userId,
+        token: op.data.token,
+        username: op.data.username,
+      });
+    }
+    return op;
   }
 }

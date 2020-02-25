@@ -131,6 +131,10 @@ export class RegisterComponent implements OnInit {
       this.mode = ViewMode.Confirm;
     }
   }
+
+  async goBack() {
+    await this.router.navigateByUrl('login');
+  }
 }
 export enum ViewMode {
   Register = 1,

@@ -81,12 +81,6 @@ export class LoginComponent implements OnInit {
         ]);
         return;
       }
-      if (op.data.smsFailed) {
-        this.formService.setErrors(this.form, 'username', [
-          'ACCOUNT_SMS_FAILED',
-        ]);
-        return;
-      }
       if (op.data.emailNotConfirmed) {
         this.username = model.username;
         this.mode = ViewMode.Confirm;

@@ -25,7 +25,7 @@
             </a>
           </ng-container>
           <ng-container *ngIf="mode === ViewMode.Confirm">
-            <app-confirm-account [username]="username"></app-confirm-account>
+            <app-confirm-account (goBack)="goBack()" [username]="username"></app-confirm-account>
           </ng-container>
         </div>
       </div>

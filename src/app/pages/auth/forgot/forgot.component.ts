@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IFormGroup} from '../../../components/core/form/contracts';
 import {Router} from '@angular/router';
 import {AppInitializerProvider} from '../../../services/app.initializer';
 import {FormService} from '../../../services/core/form.service';
 import {IdentityService} from '../../../services/auth/identity.service';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {ValidationService} from '../../../services/core/validation.service';
 
 @Component({
   selector: 'app-forgot',
@@ -11,13 +13,15 @@ import {IdentityService} from '../../../services/auth/identity.service';
   styleUrls: ['./forgot.component.scss'],
 })
 export class ForgotComponent implements OnInit {
+  ViewMode = ViewMode;
   form: IFormGroup[];
   resetForm: IFormGroup[];
   waiting: boolean;
   mode: ViewMode;
   username: string;
+  tokenId: string;
+  isEmail: boolean;
 
-  ViewMode = ViewMode;
   constructor(
     private readonly router: Router,
     private readonly initializerProvider: AppInitializerProvider,
@@ -27,7 +31,7 @@ export class ForgotComponent implements OnInit {
 
   ngOnInit() {
     this.mode = ViewMode.Forgot;
-    this.username = '';
+    this.isEmail = false;
     this.resetForm = [
       {
         elements: [
@@ -52,7 +56,7 @@ export class ForgotComponent implements OnInit {
             },
           }),
           this.formService.createVerification({
-            config: { field: 'token', label: 'VERIFICATION_CODE' },
+            config: { field: 'code', label: 'VERIFICATION_CODE' },
             params: { model: '' }
           }),
         ],
@@ -83,17 +87,75 @@ export class ForgotComponent implements OnInit {
     }
     this.waiting = true;
     const op = await this.identityService.forgot(model);
-    console.log(op);
+    this.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    if (op.data.lockedOut) {
+      this.formService.setErrors(this.form, 'username', [
+        'ACCOUNT_LOCKED_OUT',
+      ]);
+      return;
+    }
+    if (op.data.notFound) {
+      this.formService.setErrors(this.form, 'username', [
+        'IF_YOU_DONT_HAVE_ACCOUNT',
+      ]);
+      return;
+    }
+    if (op.data.smsFailed) {
+      this.formService.setErrors(this.form, 'username', [
+        'ACCOUNT_SMS_FAILED',
+      ]);
+      return;
+    }
+    if (op.data.emailFailed) {
+      this.formService.setErrors(this.form, 'username', [
+        'ACCOUNT_EMAIL_FAILED',
+      ]);
+      return;
+    }
+    if (op.data.emailNotConfirmed) {
+      this.formService.setErrors(this.form, 'username', [
+        'EMAIL_NOT_CONFIRMED',
+      ]);
+      return;
+    }
+    if (op.data.phoneNotConfirmed) {
+      this.formService.setErrors(this.form, 'username', [
+        'PHONE_NOT_CONFIRMED',
+      ]);
+      return;
+    }
+
+    this.mode = ViewMode.Confirm;
+    this.username = model.username;
+    this.tokenId = op.data.id;
+    this.isEmail = ValidationService.isEmail(model.username);
   }
 
   async reset() {
-    const model = this.formService.prepare(this.resetForm);
+    const model = this.formService.prepare(this.resetForm) as any;
     if (!model) {
       return;
     }
+    model.id = this.tokenId;
     this.waiting = true;
     const op = await this.identityService.resetPassword(model);
-    console.log(op);
+    this.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      this.formService.setErrors(this.resetForm, 'code', [
+        'VERIFICATION_CODE_INVALID',
+      ]);
+      return;
+    }
+
+    if (op.data.token) {
+      await this.initializerProvider.refresh();
+      await this.router.navigateByUrl('/dashboard');
+      return;
+    }
   }
 }
 export enum ViewMode {
