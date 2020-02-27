@@ -1,0 +1,37 @@
+.modal-content {
+  width: 320px !important;
+}
+.form-group {
+  margin-bottom: 20px;
+  label {
+    min-width: 130px;
+  }
+  &.current {
+    span {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+  }
+  &.new {
+    .new-container {
+      display: flex;
+      ::ng-deep input {
+        width: 160px !important;
+      }
+    }
+    .send {
+      margin-right: 8px;
+      a {
+        display: block;
+        color: #6ebbe4;
+        text-decoration: underline;
+        margin-top: 5px;
+        text-align: center;
+      }
+      button {
+        display: block;
+      }
+    }
+  }
+  &.enter {}
+}

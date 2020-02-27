@@ -112,5 +112,11 @@
   "SEND_EMAIL_CONFIRMATION": "ارسال ایمیل تایید",
   "CHANGE_EMAIL_CONFIRM_EMAIL": "آدرس ایمیل جدید نیاز به تایید دارد و بعد از تایید، تغییر صورت می\u200Cگیرد",
   "NEW_EMAIL_MUST_DIFFER": "مقدار وارد شده و آدرس فعلی یکسان است",
-  "PLEASE_CHECK_EMAIL": "لطفا ایمیل خود را چک کنید"
+  "PLEASE_CHECK_EMAIL": "لطفا ایمیل خود را چک کنید",
+  "CURRENT_PHONE_NUMBER": "شماره همراه فعلی",
+  "SEND_VERIFICATION_CODE": "ارسال کد تایید",
+  "NEW_PHONE_NUMBER": "شماره همراه جدید",
+  "ENTER_VERIFICATION_HERE": "کد دریافتی را اینجا وارد کنید",
+  "PHONE_INVALID": "شماره همراه صحیح نیست",
+  "PHONE_TAKEN": "شماره همراه متعلق به حساب کاربری دیگری می\u200Cباشد"
 }
