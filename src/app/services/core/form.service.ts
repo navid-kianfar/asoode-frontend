@@ -111,6 +111,7 @@ export class FormService {
     const model = {} as any;
     form.forEach(group => {
       group.elements.forEach(element => {
+        if (element.type === FormElementType.Button) { return; }
         model[element.config.field] = element.params.model;
       });
     });
@@ -134,9 +135,8 @@ export class FormService {
     let isValid = true;
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (!element.validation) {
-          return;
-        }
+        if (element.type === FormElementType.Button) { return; }
+        if (!element.validation) { return; }
         const validated = this.validateField(element, model);
         if (validated) {
           return;
@@ -224,7 +224,7 @@ export class FormService {
       }
     }
     if (element.validation.maxLength && element.validation.maxLength.value) {
-      if (element.params.model.length > element.validation.maxLength.value) {
+      if (element.params.model && element.params.model.length > element.validation.maxLength.value) {
         element.validation.errors = [element.validation.maxLength.message];
         return false;
       }

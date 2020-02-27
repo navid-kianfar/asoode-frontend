@@ -60,7 +60,7 @@ export class DropdownComponent implements OnInit, OnChanges {
   }
 
   closePlate() {
-    this.trigger.closeMenu();
+    if (this.trigger) { this.trigger.closeMenu(); }
   }
 
   ngOnInit() {
@@ -152,7 +152,7 @@ export class DropdownComponent implements OnInit, OnChanges {
     if (this.disabled) {
       return;
     }
-    this.trigger.toggleMenu();
+    if (this.trigger) { this.trigger.toggleMenu(); }
   }
 
   onPick(item: ListViewModel, $event: MouseEvent, trigger: boolean = false) {
@@ -165,7 +165,7 @@ export class DropdownComponent implements OnInit, OnChanges {
       return;
     }
     this.selectedItem = item;
-    this.trigger.closeMenu();
+    if (this.trigger) { this.trigger.closeMenu(); }
     if (trigger) {
       this.updateModel(item.value);
     }
@@ -178,7 +178,7 @@ export class DropdownComponent implements OnInit, OnChanges {
   clear($event?: Event) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.trigger.closeMenu();
+    if (this.trigger) { this.trigger.closeMenu(); }
     this.selectedItem = undefined;
     this.model = undefined;
     this.modelChange.emit(undefined);

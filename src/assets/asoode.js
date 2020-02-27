@@ -7,9 +7,9 @@
   const rtl = (lang === 'fa' || lang === 'ar');
   const dir = rtl ? 'rtl' : 'ltr';
   const html = document.getElementsByTagName('html')[0];
-  const head = document.getElementsByTagName('head')[0];
   const base = document.getElementsByTagName('base')[0];
   base.setAttribute('href', baseUrl);
   html.setAttribute('lang', lang);
   html.setAttribute('dir', dir);
+  document.cookie = "culture=" + lang;
 })(window, document);

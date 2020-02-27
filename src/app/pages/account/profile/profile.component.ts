@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { IdentityService } from '../../../services/auth/identity.service';
-import { ModalService } from '../../../services/core/modal.service';
-import { Router } from '@angular/router';
-import { IFormGroup } from '../../../components/core/form/contracts';
-import { FormService } from '../../../services/core/form.service';
+import {Component, OnInit} from '@angular/core';
+import {IdentityService} from '../../../services/auth/identity.service';
+import {ModalService} from '../../../services/core/modal.service';
+import {Router} from '@angular/router';
+import {IFormGroup} from '../../../components/core/form/contracts';
+import {FormService} from '../../../services/core/form.service';
+import {OperationResultStatus} from '../../../library/core/enums';
 
 @Component({
   selector: 'app-profile',
@@ -145,5 +146,17 @@ export class ProfileComponent implements OnInit {
     this.editing = true;
   }
 
-  async update() {}
+  async update() {
+    const model = this.formService.prepare(this.form);
+    if (!model) { return; }
+    this.waiting = true;
+    const op = await this.identityService.updateProfile(model);
+    this.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    Object.assign(this.identityService.profile, model);
+    this.editing = false;
+  }
 }

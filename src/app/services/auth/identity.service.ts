@@ -127,4 +127,11 @@ export class IdentityService {
     }
     return op;
   }
+
+  async updateProfile(model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/account/profile/update',
+      model,
+    );
+  }
 }
