@@ -1,0 +1,39 @@
+<div class="modal-content prompt-modal {{ cssClass }}" [style.width.px]="width">
+  <div class="modal-header">
+    <h4 class="modal-title">
+      {{ title | translate: true }}
+    </h4>
+    <button (click)="onCancel($event)">
+      <i class="icon-cross"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2 class="summary-container" *ngIf="summary">
+      {{ summary | translate: true }}
+    </h2>
+    <div class="container">
+      <app-form
+        [standalone]="true"
+        [uploading]="progress"
+        [elements]="form"
+        [cancelWaiting]="cancelWaiting"
+        [actionWaiting]="actionWaiting"
+      ></app-form>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      [disabled]="actionWaiting"
+      (click)="onAction($event)"
+      mat-flat-button
+      [color]="actionColor"
+    >
+      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+      {{ actionLabel | translate: true }}</button
+    >&nbsp;
+    <button [disabled]="cancelWaiting" (click)="onCancel($event)" mat-button>
+      <i *ngIf="cancelWaiting" class="icon-spin icon-spinner2"></i>
+      {{ cancelLabel | translate: true }}
+    </button>
+  </div>
+</div>

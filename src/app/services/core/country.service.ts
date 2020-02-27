@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {CountryViewModel} from '../../view-models/core/general-types';
+import { CountryViewModel } from '../../view-models/core/general-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CountryService {
   countries: CountryViewModel[];

@@ -1,10 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {ModalService} from '../../../services/core/modal.service';
-import {Router} from '@angular/router';
-import {IFormGroup} from '../../../components/core/form/contracts';
-import {FormService} from '../../../services/core/form.service';
-import {OperationResultStatus} from '../../../library/core/enums';
+import { Component, OnInit } from '@angular/core';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { Router } from '@angular/router';
+import { IFormGroup } from '../../../components/core/form/contracts';
+import { FormService } from '../../../services/core/form.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { NotificationService } from '../../../services/core/notification.service';
+import { ChangePhoneComponent } from '../../../modals/change-phone/change-phone.component';
+import { ValidationService } from '../../../services/core/validation.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,14 +21,123 @@ export class ProfileComponent implements OnInit {
   form: IFormGroup[];
   constructor(
     public readonly identityService: IdentityService,
-    public readonly modalService: ModalService,
-    public readonly formService: FormService,
-    public readonly router: Router,
+    private readonly modalService: ModalService,
+    private readonly formService: FormService,
+    private readonly router: Router,
+    private readonly notificationService: NotificationService,
   ) {}
 
-  async changePhoneNumber() {}
-  async changePassword() {}
-  async changeEmail() {}
+  async prepareChangePhoneNumber() {
+    this.modalService.show(ChangePhoneComponent, {}).subscribe(() => {});
+  }
+  async changeEmail(model: any, form) {
+    if (model.email === this.identityService.profile.email) {
+      this.formService.setErrors(form, 'email', ['NEW_EMAIL_MUST_DIFFER']);
+      throw new Error('NEW_EMAIL_MUST_DIFFER');
+    }
+    const op = await this.identityService.changeEmail(model);
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.notificationService.success('PLEASE_CHECK_EMAIL');
+  }
+  async prepareChangeEmail() {
+    this.modalService
+      .show(PromptComponent, {
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { label: 'EMAIL', field: 'email' },
+                params: { model: '' },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'EMAIL_REQUIRED',
+                  },
+                  pattern: {
+                    value: ValidationService.emailRegex,
+                    message: 'EMAIL_INVALID',
+                  },
+                },
+              }),
+            ],
+          },
+        ],
+        summary: 'CHANGE_EMAIL_CONFIRM_EMAIL',
+        actionLabel: 'SEND_EMAIL_CONFIRMATION',
+        action: (model, form) => this.changeEmail(model, form),
+        actionColor: 'primary',
+        title: 'CHANGE_EMAIL',
+        width: 350,
+        model: {
+          email: this.identityService.profile.email,
+        },
+      })
+      .subscribe(() => {});
+  }
+  async changePassword(model: any, form) {
+    const op = await this.identityService.changePassword({
+      newPassword: model.password,
+      oldPassword: model.oldPassword,
+    });
+    if (op.status === OperationResultStatus.Success) {
+      this.notificationService.success('GENERAL_SUCCESS');
+    } else {
+      this.formService.setErrors(form, 'oldPassword', ['OLD_PASSWORD_INVALID']);
+      throw new Error('OLD_PASSWORD_INVALID');
+    }
+  }
+  async prepareChangePassword() {
+    this.modalService
+      .show(PromptComponent, {
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'oldPassword', label: 'OLD_PASSWORD' },
+                params: { model: '', password: true, ltr: true },
+                validation: {
+                  required: { value: true, message: 'OLD_PASSWORD_REQUIRED' },
+                  minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
+                  maxLength: { value: 50, message: 'PASSWORD_MAX_LENGTH' },
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'password', label: 'PASSWORD' },
+                params: { model: '', password: true, ltr: true },
+                validation: {
+                  required: { value: true, message: 'PASSWORD_REQUIRED' },
+                  minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
+                  maxLength: { value: 50, message: 'PASSWORD_MAX_LENGTH' },
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'confirmPassword', label: 'CONFIRM_PASSWORD' },
+                params: { model: '', password: true, ltr: true },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'CONFIRM_PASSWORD_REQUIRED',
+                  },
+                  match: {
+                    toField: 'password',
+                    message: 'CONFIRM_PASSWORD_MISS_MATCH',
+                  },
+                },
+              }),
+            ],
+          },
+        ],
+        actionLabel: 'RESET_PASSWORD',
+        action: (model, form) => this.changePassword(model, form),
+        actionColor: 'primary',
+        title: 'RESET_PASSWORD',
+        width: 350,
+      })
+      .subscribe(() => {});
+  }
 
   ngOnInit() {
     this.form = [
@@ -58,7 +171,7 @@ export class ProfileComponent implements OnInit {
               model: '',
               requireModel: true,
               label: 'CHANGE_PHONE',
-              action: this.changePhoneNumber,
+              action: () => this.prepareChangePhoneNumber(),
             },
           }),
           this.formService.createButton({
@@ -71,7 +184,7 @@ export class ProfileComponent implements OnInit {
               model: '',
               requireModel: true,
               label: 'CHANGE_EMAIL',
-              action: this.changeEmail,
+              action: () => this.prepareChangeEmail(),
             },
           }),
         ],
@@ -111,7 +224,7 @@ export class ProfileComponent implements OnInit {
             params: {
               model: '',
               label: 'CHANGE_PASSWORD',
-              action: this.changePassword,
+              action: () => this.prepareChangePassword(),
             },
           }),
         ],
@@ -143,12 +256,20 @@ export class ProfileComponent implements OnInit {
   edit() {
     this.formService.reset(this.form);
     this.formService.setModel(this.form, this.identityService.profile);
+    if (
+      this.identityService.profile.email &&
+      !this.identityService.profile.emailConfirmed
+    ) {
+      this.formService.setErrors(this.form, 'email', ['PLEASE_CHECK_EMAIL']);
+    }
     this.editing = true;
   }
 
   async update() {
     const model = this.formService.prepare(this.form);
-    if (!model) { return; }
+    if (!model) {
+      return;
+    }
     this.waiting = true;
     const op = await this.identityService.updateProfile(model);
     this.waiting = false;
@@ -158,5 +279,6 @@ export class ProfileComponent implements OnInit {
     }
     Object.assign(this.identityService.profile, model);
     this.editing = false;
+    this.notificationService.success('PROFILE_UPDATE_SUCCESS');
   }
 }

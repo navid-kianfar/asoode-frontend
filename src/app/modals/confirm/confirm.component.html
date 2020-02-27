@@ -16,9 +16,11 @@
   </div>
   <div class="modal-footer">
     <button (click)="onAction($event)" mat-flat-button [color]="actionColor">
+      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
       {{ actionLabel | translate: true }}</button
     >&nbsp;
     <button (click)="onCancel($event)" mat-button>
+      <i *ngIf="cancelWaiting" class="icon-spin icon-spinner2"></i>
       {{ cancelLabel | translate: true }}
     </button>
   </div>

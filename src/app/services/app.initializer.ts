@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import { CultureService } from './core/culture.service';
 import { TranslateService } from './core/translate.service';
 import { IdentityService } from './auth/identity.service';
-import {EnumsService} from './core/enums.service';
+import { EnumsService } from './core/enums.service';
 
 @Injectable()
 export class AppInitializerProvider {

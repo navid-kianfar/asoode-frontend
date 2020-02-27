@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {ListViewModel} from '../../view-models/core/list-types';
+import { ListViewModel } from '../../view-models/core/list-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TimezoneService {
   timezones: ListViewModel[];

@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {ConfigService} from './config.service';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './config.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EnumsService {
   repository: any = {};
   constructor(
     private readonly client: HttpClient,
     private readonly config: ConfigService,
-  ) { }
+  ) {}
 
   async load(): Promise<void> {
     return new Promise((resolve, reject) => {

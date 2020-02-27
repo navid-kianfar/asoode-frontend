@@ -27,6 +27,9 @@
     width: calc(100% - 80px) !important;
   }
 }
+::ng-deep input {
+  width: 100% !important;
+}
 ::ng-deep .has-error .af-captcha {
   border-color: #ff3547 !important;
 }

@@ -48,15 +48,13 @@ import { ForgotComponent } from './pages/auth/forgot/forgot.component';
 import { ValidationComponent } from './components/core/validation/validation.component';
 import { OnlyNumberDirective } from './directives/core/only-number.directive';
 import { HeaderComponent } from './components/app/header/header.component';
-import {
-  MatPaginatorModule,
-  MatTableModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatButtonModule,
-  _MatMenuDirectivesModule,
-  MatMenuModule,
-} from '@angular/material';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProfileComponent } from './pages/account/profile/profile.component';
 import { FilesComponent } from './pages/storage/files/files.component';
 import { TransactionsComponent } from './components/app/account/transactions/transactions.component';
@@ -73,6 +71,8 @@ import { SearchResultComponent } from './components/app/search-result/search-res
 import { ConfirmAccountComponent } from './components/app/confirm-account/confirm-account.component';
 import { StringFormatPipe } from './pipes/core/string-format.pipe';
 import { PhoneVerificationComponent } from './components/app/phone-verification/phone-verification.component';
+import { PromptComponent } from './modals/prompt/prompt.component';
+import { ChangePhoneComponent } from './modals/change-phone/change-phone.component';
 
 @NgModule({
   declarations: [
@@ -125,8 +125,10 @@ import { PhoneVerificationComponent } from './components/app/phone-verification/
     ConfirmAccountComponent,
     StringFormatPipe,
     PhoneVerificationComponent,
+    PromptComponent,
+    ChangePhoneComponent,
   ],
-  entryComponents: [ConfirmComponent],
+  entryComponents: [ConfirmComponent, PromptComponent, ChangePhoneComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -138,6 +140,8 @@ import { PhoneVerificationComponent } from './components/app/phone-verification/
     MatTabsModule,
     MatPaginatorModule,
     MatTableModule,
+    MatMenuModule,
+    MatSnackBarModule,
     SimpleModalModule.forRoot(
       { container: 'modal-container' },
       {
@@ -146,7 +150,6 @@ import { PhoneVerificationComponent } from './components/app/phone-verification/
         closeOnClickOutside: true,
       },
     ),
-    MatMenuModule,
     NgxPopperModule.forRoot({ placement: 'bottom' }),
   ],
   providers: [

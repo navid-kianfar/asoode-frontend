@@ -1,11 +1,23 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {DropdownKnownList, OperationResultStatus} from '../../../library/core/enums';
-import {HttpService} from '../../../services/core/http.service';
-import {ListViewModel} from '../../../view-models/core/list-types';
-import {CountryService} from '../../../services/core/country.service';
-import {TimezoneService} from '../../../services/core/timezone.service';
-import {MatMenuTrigger} from '@angular/material';
-import {EnumsService} from '../../../services/core/enums.service';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import {
+  DropdownKnownList,
+  OperationResultStatus,
+} from '../../../library/core/enums';
+import { HttpService } from '../../../services/core/http.service';
+import { ListViewModel } from '../../../view-models/core/list-types';
+import { CountryService } from '../../../services/core/country.service';
+import { TimezoneService } from '../../../services/core/timezone.service';
+import { MatMenuTrigger } from '@angular/material';
+import { EnumsService } from '../../../services/core/enums.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -60,7 +72,9 @@ export class DropdownComponent implements OnInit, OnChanges {
   }
 
   closePlate() {
-    if (this.trigger) { this.trigger.closeMenu(); }
+    if (this.trigger) {
+      this.trigger.closeMenu();
+    }
   }
 
   ngOnInit() {
@@ -69,7 +83,7 @@ export class DropdownComponent implements OnInit, OnChanges {
       const def = {
         value: undefined,
         separator: false,
-        text: this.chooseLabel || 'PLEASE_CHOOSE'
+        text: this.chooseLabel || 'PLEASE_CHOOSE',
       };
       this.items.unshift(def);
       if (this.model === undefined) {
@@ -103,11 +117,15 @@ export class DropdownComponent implements OnInit, OnChanges {
     if (this.enum) {
       const items = [];
       this.enumExcept = this.enumExcept || [];
-      const enumObj = this.enumsService.repository[this.enum[0].toLowerCase() + this.enum.substring(1)];
+      const enumObj = this.enumsService.repository[
+        this.enum[0].toLowerCase() + this.enum.substring(1)
+      ];
       Object.keys(enumObj).forEach(key => {
-        const changed = key.replace(/([a-z])([A-Z])/g, '$1-$2')
+        const changed = key
+          .replace(/([a-z])([A-Z])/g, '$1-$2')
           .replace(/-/g, '_');
-        const enumChanged = this.enum.replace(/([a-z])([A-Z])/g, '$1-$2')
+        const enumChanged = this.enum
+          .replace(/([a-z])([A-Z])/g, '$1-$2')
           .replace(/-/g, '_');
         const text = `ENUMS_${enumChanged}_${changed}`.toUpperCase();
         console.log(text);
@@ -152,7 +170,9 @@ export class DropdownComponent implements OnInit, OnChanges {
     if (this.disabled) {
       return;
     }
-    if (this.trigger) { this.trigger.toggleMenu(); }
+    if (this.trigger) {
+      this.trigger.toggleMenu();
+    }
   }
 
   onPick(item: ListViewModel, $event: MouseEvent, trigger: boolean = false) {
@@ -165,7 +185,9 @@ export class DropdownComponent implements OnInit, OnChanges {
       return;
     }
     this.selectedItem = item;
-    if (this.trigger) { this.trigger.closeMenu(); }
+    if (this.trigger) {
+      this.trigger.closeMenu();
+    }
     if (trigger) {
       this.updateModel(item.value);
     }
@@ -178,7 +200,9 @@ export class DropdownComponent implements OnInit, OnChanges {
   clear($event?: Event) {
     $event.stopPropagation();
     $event.preventDefault();
-    if (this.trigger) { this.trigger.closeMenu(); }
+    if (this.trigger) {
+      this.trigger.closeMenu();
+    }
     this.selectedItem = undefined;
     this.model = undefined;
     this.modelChange.emit(undefined);

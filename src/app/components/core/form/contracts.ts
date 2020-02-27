@@ -1,4 +1,7 @@
-import {DropdownKnownList, FormElementType} from '../../../library/core/enums';
+import {
+  DropdownKnownList,
+  FormElementType,
+} from '../../../library/core/enums';
 
 export interface IFormGroup {
   disabled?: boolean;
@@ -98,6 +101,7 @@ export interface IFormElementStringValidation extends IFormElementValidation {
   minLength?: { value: number; message: string };
   maxLength?: { value: number; message: string };
   match?: { toField: string; message: string };
+  pattern?: { value: RegExp; message: string };
 }
 
 export interface IFormElementCaptchaModel {

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IFormGroup } from './contracts';
 import { FormElementType } from '../../../library/core/enums';
+import { ModalProgress } from '../../../view-models/core/modal-types';
 
 @Component({
   selector: 'app-form',
@@ -10,6 +11,8 @@ import { FormElementType } from '../../../library/core/enums';
 export class FormComponent implements OnInit {
   @Input() elements: IFormGroup[];
   @Input() cssClass: string;
+  @Input() standalone?: boolean;
+  @Input() uploading?: ModalProgress;
   @Input() disabled: boolean;
   @Input() readonly: boolean;
   @Input() inline: boolean;

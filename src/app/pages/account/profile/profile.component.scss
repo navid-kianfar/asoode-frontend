@@ -4,7 +4,7 @@
     min-height: 300px;
 
     .inner-content {
-      width: 200px;
+      width: 350px;
       margin: 50px auto 0;
       text-align: center;
     }
@@ -37,6 +37,11 @@
         font-size: 1rem;
         font-weight: 300;
         color: #444;
+        margin-top: 10px;
+        &.check {
+          color: #b33634;
+          font-weight: 500;
+        }
       }
       .phone {
         font-size: 0.8rem;

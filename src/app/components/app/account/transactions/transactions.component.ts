@@ -8,22 +8,22 @@ import { MaterialTranslatorService } from '../../../../services/core/material-tr
   styleUrls: ['./transactions.component.scss'],
 })
 export class TransactionsComponent implements OnInit {
-  displayedColumns: string[] = [
-    'title',
-    'amount',
-    'createdAt',
-    'dueAt',
-    'previousDebt',
-    'download',
-  ];
-  dataSource = new MatTableDataSource<any>([]);
-
-  constructor(private readonly translatorService: MaterialTranslatorService) {}
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
+  // displayedColumns: string[] = [
+  //   'title',
+  //   'amount',
+  //   'createdAt',
+  //   'dueAt',
+  //   'previousDebt',
+  //   'download',
+  // ];
+  // dataSource = new MatTableDataSource<any>([]);
+  //
+  // constructor(private readonly translatorService: MaterialTranslatorService) {}
+  //
+  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  //
   ngOnInit() {
-    this.translatorService.paginator(this.paginator);
-    this.dataSource.paginator = this.paginator;
+    // this.translatorService.paginator(this.paginator);
+    // this.dataSource.paginator = this.paginator;
   }
 }

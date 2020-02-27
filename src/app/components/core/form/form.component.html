@@ -56,7 +56,11 @@
                     >
                       {{ 'NONE_PROVIDED' | translate }}
                     </span>
-                    <button mat-stroked-button>
+                    <button
+                      [disabled]="checkDisabled(group, element)"
+                      (click)="element.params.action($event)"
+                      mat-stroked-button
+                    >
                       {{ element.params.label | translate }}
                     </button>
                   </div>
@@ -123,7 +127,7 @@
     </ng-container>
   </form>
 
-  <div class="actions">
+  <div *ngIf="standalone !== true" class="actions">
     <button
       [disabled]="actionWaiting || cancelWaiting"
       *ngIf="actionLabel"
@@ -142,7 +146,7 @@
       mat-stroked-button
     >
       <i *ngIf="cancelWaiting" class="fa fa-spinner fa-spin"></i>
-      {{ (cancelLabel || 'CANCEL') | translate }}
+      {{ cancelLabel || 'CANCEL' | translate }}
     </button>
   </div>
 </div>

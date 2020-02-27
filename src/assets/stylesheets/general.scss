@@ -233,7 +233,7 @@ html[dir='ltr'] {
 .mat-flat-button.mat-primary,
 .mat-mini-fab.mat-primary,
 .mat-raised-button.mat-primary {
-  background-color: #6b3d8d;
+  background-color: #b977f7;
 }
 .mat-paginator-range-label {
   direction: ltr !important;
@@ -290,16 +290,26 @@ button[disabled] {
   z-index: 20;
 }
 
+.success-snack {
+  background-color: #9be4ad;
+  color: #333333;
+}
+.error-snack {
+  background-color: #b33634;
+  color: #ffffff;
+}
+
 body {
   .modal {
     display: none;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     z-index: 1000;
     background: rgba(0, 0, 0, 0.6);
+    overflow: auto;
 
     &.in {
       display: block;
@@ -330,7 +340,7 @@ body {
     }
     .modal-content {
       width: 600px;
-      margin: 200px auto 0;
+      margin: 200px auto;
       background: #fff;
       border-radius: 5px;
     }

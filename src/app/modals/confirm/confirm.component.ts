@@ -13,15 +13,15 @@ export class ConfirmComponent
   cancel?: () => Promise<any>;
   action?: () => Promise<any>;
   cssClass?: string;
-  icon?: string;
   title?: string;
-  message?: string;
   actionLabel?: string;
   cancelLabel?: string;
   actionWaiting: boolean;
   cancelWaiting: boolean;
-  heading?: string;
   actionColor: any;
+  icon?: string;
+  message?: string;
+  heading?: string;
 
   constructor() {
     super();

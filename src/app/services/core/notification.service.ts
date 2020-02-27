@@ -2,14 +2,21 @@ import { Injectable } from '@angular/core';
 import { OperationResultStatus } from '../../library/core/enums';
 import { StringDictionary } from '../../library/core/dictionary';
 import { TranslateService } from './translate.service';
-// import { ToastrService } from './toastr.service';
+import { MatSnackBar } from '@angular/material';
+
+const CONFIG = {
+  verticalPosition: 'top',
+  horizontalPosition: 'center',
+  duration: 7000,
+};
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotificationService {
   constructor(
-    readonly translate: TranslateService, // readonly toastr: ToastrService,
+    private readonly translate: TranslateService,
+    private readonly snackBar: MatSnackBar,
   ) {}
 
   handleRequest(op: OperationResultStatus) {
@@ -45,7 +52,7 @@ export class NotificationService {
   }
 
   clear() {
-    // this.toastr.clear();
+    this.snackBar.dismiss();
   }
 
   clean(input: string, replace: StringDictionary<string> = null): string {
@@ -63,54 +70,38 @@ export class NotificationService {
   }
 
   error(
-    key: string,
-    title: string = null,
+    message: string,
     replace: StringDictionary<string> = null,
-    options: NotificationOptions = null,
+    options: any = null,
   ) {
-    // this.toastr.error(
-    //   this.clean(key, replace),
-    //   this.clean(title, replace),
-    //   options,
-    // );
+    const params = { ...CONFIG, panelClass: 'error-snack', ...options };
+    this.snackBar.open(this.clean(message, replace), undefined, params);
   }
 
   info(
-    key: string,
-    title: string = null,
+    message: string,
     replace: StringDictionary<string> = null,
-    options: NotificationOptions = null,
+    options: any = null,
   ) {
-    // this.toastr.info(
-    //   this.clean(key, replace),
-    //   this.clean(title, replace),
-    //   options,
-    // );
+    const params = { ...CONFIG, panelClass: 'info-snack', ...options };
+    this.snackBar.open(this.clean(message, replace), undefined, params);
   }
 
   success(
-    key: string,
-    title: string = null,
+    message: string,
     replace: StringDictionary<string> = null,
-    options: NotificationOptions = null,
+    options: any = null,
   ) {
-    // this.toastr.success(
-    //   this.clean(key, replace),
-    //   this.clean(title, replace),
-    //   options,
-    // );
+    const params = { ...CONFIG, panelClass: 'success-snack', ...options };
+    this.snackBar.open(this.clean(message, replace), undefined, params);
   }
 
   warning(
-    key: string,
-    title: string = null,
+    message: string,
     replace: StringDictionary<string> = null,
-    options: NotificationOptions = null,
+    options: any = null,
   ) {
-    // this.toastr.warning(
-    //   this.clean(key, replace),
-    //   this.clean(title, replace),
-    //   options,
-    // );
+    const params = { ...CONFIG, panelClass: 'warning-snack', ...options };
+    this.snackBar.open(this.clean(message, replace), undefined, params);
   }
 }

@@ -44,3 +44,13 @@ export enum DropdownKnownList {
   Countries = 1,
   Zones = 2,
 }
+export enum CalendarType {
+  Default = 0,
+  Persian = 1,
+  Gregorian = 2,
+  Hijri = 3,
+}
+export enum UserType {
+  User = 2,
+  Marketer = 3,
+}

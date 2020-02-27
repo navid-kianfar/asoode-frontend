@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   IFormElement,
   IFormElementButton,
@@ -9,7 +9,7 @@ import {
   IFormElementVerification,
   IFormGroup,
 } from '../../components/core/form/contracts';
-import {DropdownKnownList, FormElementType} from '../../library/core/enums';
+import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 
 const CAPTCHA_LENGTH = 5;
 const VERIFICATION_LENGTH = 6;
@@ -50,7 +50,9 @@ export class FormService {
     options.validation = options.validation || { required: { value: false } };
     return options;
   }
-  createCountryPicker(options: IFormElementCountryPicker): IFormElementDropDown {
+  createCountryPicker(
+    options: IFormElementCountryPicker,
+  ): IFormElementDropDown {
     const casted = options as IFormElementDropDown;
     casted.type = FormElementType.DropDown;
     casted.params.knownList = DropdownKnownList.Countries;
@@ -111,7 +113,9 @@ export class FormService {
     const model = {} as any;
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (element.type === FormElementType.Button) { return; }
+        if (element.type === FormElementType.Button) {
+          return;
+        }
         model[element.config.field] = element.params.model;
       });
     });
@@ -135,8 +139,12 @@ export class FormService {
     let isValid = true;
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (element.type === FormElementType.Button) { return; }
-        if (!element.validation) { return; }
+        if (element.type === FormElementType.Button) {
+          return;
+        }
+        if (!element.validation) {
+          return;
+        }
         const validated = this.validateField(element, model);
         if (validated) {
           return;
@@ -224,8 +232,17 @@ export class FormService {
       }
     }
     if (element.validation.maxLength && element.validation.maxLength.value) {
-      if (element.params.model && element.params.model.length > element.validation.maxLength.value) {
+      if (
+        element.params.model &&
+        element.params.model.length > element.validation.maxLength.value
+      ) {
         element.validation.errors = [element.validation.maxLength.message];
+        return false;
+      }
+    }
+    if (element.validation.pattern && element.validation.pattern.value) {
+      if (!element.validation.pattern.value.test(element.params.model || '')) {
+        element.validation.errors = [element.validation.pattern.message];
         return false;
       }
     }

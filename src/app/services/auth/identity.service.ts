@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IdentityObject } from '../../view-models/auth/identity-types';
+import {
+  IdentityObject,
+  ProfileViewModel,
+} from '../../view-models/auth/identity-types';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import { OperationResultStatus } from '../../library/core/enums';
@@ -15,13 +18,13 @@ import {
 export class IdentityService {
   private readonly STORAGE_KEY = 'ASOODE_IDENTITY';
   private identityObject: IdentityObject;
-  private profileObject: any = {};
+  private profileObject: ProfileViewModel = {} as ProfileViewModel;
 
   constructor(private readonly httpService: HttpService) {
     this.identityObject = this.getIdentityInfo();
   }
 
-  get profile() {
+  get profile(): ProfileViewModel {
     return this.profileObject;
   }
 
@@ -133,5 +136,16 @@ export class IdentityService {
       '/account/profile/update',
       model,
     );
+  }
+
+  async changePassword(model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/account/password/change',
+      model,
+    );
+  }
+
+  async changeEmail(model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>('/account/email/change', model);
   }
 }

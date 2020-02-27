@@ -11,8 +11,28 @@
         <div class="info">
           <div class="full-name h2">{{ identityService.profile.fullName }}</div>
           <div class="bio h3">{{ identityService.profile.bio }}</div>
-          <div class="email h3">{{ identityService.profile.email }}</div>
-          <div class="phone h3">{{ identityService.profile.phone }}</div>
+          <div
+            *ngIf="identityService.profile.email"
+            [class.check]="!identityService.profile.emailConfirmed"
+            class="email h3"
+          >
+            <i
+              *ngIf="!identityService.profile.emailConfirmed"
+              class="icon-blocked"
+            ></i>
+            {{ identityService.profile.email }}
+          </div>
+          <div
+            *ngIf="identityService.profile.phoneNumber"
+            [class.check]="!identityService.profile.phoneConfirmed"
+            class="phone h3"
+          >
+            <i
+              *ngIf="!identityService.profile.phoneConfirmed"
+              class="icon-blocked"
+            ></i>
+            {{ identityService.profile.phoneNumber }}
+          </div>
         </div>
         <div class="actions">
           <button class="edit" (click)="edit()" mat-stroked-button>
@@ -24,7 +44,6 @@
         </div>
       </div>
     </ng-container>
-
     <ng-container *ngIf="editing">
       <div class="edit-inner-container">
         <app-form
