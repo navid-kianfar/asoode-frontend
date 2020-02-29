@@ -10,7 +10,7 @@ export interface ProjectViewModel extends BaseViewModel {
   subProjects: SubProjectViewModel[];
   workPackages: WorkPackageViewModel[];
 }
-export interface ProjectMemberViewModel {
+export interface ProjectMemberViewModel extends BaseViewModel{
   email: string;
   firstName: string;
   fullName: string;
@@ -27,7 +27,7 @@ export interface ProjectSeasonViewModel extends BaseViewModel {
   title: string;
   description: string;
 }
-export interface SubProjectViewModel {
+export interface SubProjectViewModel extends BaseViewModel {
   userId: string;
   projectId: string;
   parentId: string;

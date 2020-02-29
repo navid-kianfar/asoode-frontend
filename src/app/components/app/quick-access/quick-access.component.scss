@@ -1,0 +1,49 @@
+h3 {
+  font-weight: 400;
+  color: #4d4d4d;
+
+  span {
+    font-size: 0.8rem;
+  }
+}
+.project-item {
+  background: #ffffff;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: flex;
+
+  .color {
+    border-radius: 0 5px 5px 0;
+    display: flex;
+    width: 5px;
+    background-color: #007bff;
+    height: 42px;
+  }
+
+  .title {
+    padding: 10px 5px;
+    display: flex;
+    width: 130px;
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+
+  .description {
+    padding: 10px 0;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    color: #b3b3b3;
+    font-size: 0.7rem;
+  }
+}
+
+.more {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #666;
+  margin-top: 10px;
+  display: block;
+}
+.groups-container {
+  margin-top: 30px;
+}

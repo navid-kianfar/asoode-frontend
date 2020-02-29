@@ -107,9 +107,12 @@ h1 {
 }
 
 .quick-access-popper {
-  height: 60vh;
+  max-height: 60vh;
+  min-height: 30vh;
   width: 300px;
-  background-color: #fff;
+  background-color: #f2f2f2;
+  overflow: auto;
+  padding: 10px;
 }
 .search-popper {
   height: 60vh;

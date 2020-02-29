@@ -238,6 +238,9 @@ html[dir='ltr'] {
 .mat-paginator-range-label {
   direction: ltr !important;
 }
+.ngxp__arrow {
+  display: none !important;
+}
 button:focus,
 input:focus {
   outline: none !important;
