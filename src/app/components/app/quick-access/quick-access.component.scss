@@ -5,8 +5,11 @@ h3 {
   span {
     font-size: 0.8rem;
   }
+
+  cursor: pointer;
 }
 .project-item {
+  position: relative;
   background: #ffffff;
   border-radius: 5px;
   margin-top: 10px;
@@ -16,11 +19,13 @@ h3 {
     border-radius: 0 5px 5px 0;
     display: flex;
     width: 5px;
+    position: absolute;
+    height: 100%;
     background-color: #007bff;
-    height: 42px;
   }
 
   .title {
+    text-indent: 10px;
     padding: 10px 5px;
     display: flex;
     width: 130px;
@@ -46,4 +51,39 @@ h3 {
 }
 .groups-container {
   margin-top: 30px;
+
+  .group-item {
+    display: flex;
+    background: #ffffff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+
+    .avatar-container {
+      display: flex;
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      background: #f2f2f2;
+      align-items: center;
+
+      img {
+
+      }
+      i {
+        margin: 0 auto;
+      }
+    }
+    .text-container {
+      padding: 0 5px;
+    }
+    .title {
+      font-weight: 400;
+      font-size: 0.9rem;
+    }
+    .description {
+      color: #b3b3b3;
+      font-size: 0.7rem;
+    }
+  }
 }

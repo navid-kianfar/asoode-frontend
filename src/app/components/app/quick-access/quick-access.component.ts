@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProjectService} from '../../../services/projects/project.service';
 import {GroupService} from '../../../services/groups/group.service';
 import {MockService} from '../../../services/mock.service';
+import {GroupViewModel} from '../../../view-models/groups/group-types';
+import {ProjectViewModel} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-quick-access',
@@ -9,6 +11,9 @@ import {MockService} from '../../../services/mock.service';
   styleUrls: ['./quick-access.component.scss'],
 })
 export class QuickAccessComponent implements OnInit {
+
+  @Output() hide = new EventEmitter<any>();
+
   constructor(
     readonly projectService: ProjectService,
     readonly groupService: GroupService,
@@ -16,4 +21,14 @@ export class QuickAccessComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+
+  openGroup(group: GroupViewModel) {
+    console.log('open-group', group);
+    this.hide.emit();
+  }
+
+  openProject(project: ProjectViewModel) {
+    console.log('open-project', project);
+    this.hide.emit();
+  }
 }

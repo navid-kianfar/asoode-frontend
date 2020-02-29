@@ -4,7 +4,8 @@
       {{'PROJECTS' | translate}}&nbsp;
       <span class="ltr">({{projectService.projects.length}})</span>
     </h3>
-    <div class="project-item" *ngFor="let project of projectService.projects | slice:0:10">
+    <div (click)="openProject(project)" class="project-item"
+         *ngFor="let project of projectService.projects | slice:0:10">
       <div class="color"></div>
       <div class="title">{{ project.title }}</div>
       <div class="description">{{ project.description }}</div>
@@ -19,11 +20,16 @@
       {{'GROUPS' | translate}}&nbsp;
       <span class="ltr">({{groupService.groups.length}})</span>
     </h3>
-    <div class="group-item" *ngFor="let group of groupService.groups | slice:0:10">
-      <img *ngIf="group.avatarId" [src]="group.avatarId" alt="avatar">
-      <i *ngIf="!group.avatarId" class="icon-users2"></i>
-      <div class="title">{{ group.title }}</div>
-      <div class="description">{{ group.description }}</div>
+    <div (click)="openGroup(group)" class="group-item"
+         *ngFor="let group of groupService.groups | slice:0:10">
+      <div class="avatar-container">
+        <img *ngIf="group.avatarId" [src]="group.avatarId" alt="avatar">
+        <i *ngIf="!group.avatarId" class="icon-users2"></i>
+      </div>
+      <div class="text-container">
+        <div class="title">{{ group.title }}</div>
+        <div class="description">{{ group.description }}</div>
+      </div>
     </div>
     <div class="more" *ngIf="groupService.groups.length > 5">
       <i class="icon-cc"></i>

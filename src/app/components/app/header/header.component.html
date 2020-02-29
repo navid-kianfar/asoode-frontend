@@ -51,13 +51,13 @@
 
   <popper-content #popperQuickAccess>
     <div class="quick-access-popper">
-      <app-quick-access></app-quick-access>
+      <app-quick-access (hide)="popperQuickAccess.hide()"></app-quick-access>
     </div>
   </popper-content>
 
   <popper-content #popperSearch>
     <div class="search-popper">
-      <app-search-result></app-search-result>
+      <app-search-result (hide)="popperSearch.hide()"></app-search-result>
     </div>
   </popper-content>
 </nav>
