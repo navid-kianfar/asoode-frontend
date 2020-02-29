@@ -1,1 +1,31 @@
-<p>files works!</p>
+<div class="storage-files">
+  <div class="header">
+    <h2>{{'FILES'|translate}}</h2>
+  </div>
+  <div class="body">
+    <div class="fake-header"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <mat-tab-group animationDuration="0ms">
+            <mat-tab [label]="'MY_FILES' | translate">
+              <ng-template matTabContent>
+
+              </ng-template>
+            </mat-tab>
+            <mat-tab [label]="'MY_SHARED_FILES' | translate">
+              <ng-template matTabContent>
+
+              </ng-template>
+            </mat-tab>
+            <mat-tab [label]="'SHARED_FILES_WITH_ME' | translate">
+              <ng-template matTabContent>
+
+              </ng-template>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

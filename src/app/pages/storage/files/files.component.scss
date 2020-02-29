@@ -1,0 +1,24 @@
+.storage-files {
+  height: 100%;
+  .header {
+    h2 {
+      padding: 20px;
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  }
+  .body {
+    min-height: 500px;
+    background: #f2f2f2;
+    position: relative;
+
+    .fake-header {
+      position: absolute;
+      width: 100%;
+      height: 48px;
+      background-color: #fff;
+      top: 0;
+      left: 0;
+    }
+  }
+}
