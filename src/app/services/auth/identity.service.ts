@@ -84,7 +84,7 @@ export class IdentityService {
     );
   }
 
-  async loadProfile(): Promise<OperationResult<any>> {
+  async load(): Promise<OperationResult<any>> {
     const op = await this.httpService.post<any>('/account/profile');
     if (op.status === OperationResultStatus.Success) {
       this.profileObject = op.data;

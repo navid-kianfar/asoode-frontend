@@ -3,3 +3,9 @@ export interface CountryViewModel {
   code: string;
   text: string;
 }
+
+export interface BaseViewModel {
+  id: string;
+  createdAt: Date;
+  updatedAt?: Date;
+}
