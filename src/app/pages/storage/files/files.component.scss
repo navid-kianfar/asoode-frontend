@@ -20,5 +20,39 @@
       top: 0;
       left: 0;
     }
+
+    .relative {
+      position: relative;
+      .action-bar {
+        cursor: pointer;
+        position: absolute;
+        width: 100%;
+        z-index: 10;
+        display: flex;
+        padding-top: 25px;
+        .space {
+          display: flex;
+          flex-grow: 1;
+          -webkit-box-flex: 1;
+        }
+        .commands {
+          display: flex;
+          width: 300px;
+          button {
+
+          }
+        }
+        .views {
+          width: 50px;
+          text-align: center;
+          i {
+            color: #b3b3b3;
+            &.active {
+              color: #333333;
+            }
+          }
+        }
+      }
+    }
   }
 }
