@@ -1,5 +1,5 @@
 <div *ngIf="private" class="actions">
-  <button mat-stroked-button>+&nbsp;{{ 'ADD' | translate}}</button>
+  <button [matMenuTriggerFor]="menu" mat-stroked-button>+&nbsp;{{ 'ADD' | translate}}</button>
 </div>
 
 <div class="files-shared">
@@ -18,3 +18,11 @@
       [file]="file"></app-file-folder-preview>
   </ng-container>
 </div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    {{ 'NEW_FOLDER' | translate }}
+  </button>
+  <button mat-menu-item>
+    {{ 'UPLOAD' | translate }}
+  </button>
+</mat-menu>
