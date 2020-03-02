@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AppInitializerProvider} from './services/app.initializer';
 
 @Component({
   selector: 'app-root',
@@ -6,15 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  loaded: boolean;
-
-  constructor() {
-    this.removeWaitingFrame();
-  }
-
-  private removeWaitingFrame() {
+  constructor(readonly appInitializerProvider: AppInitializerProvider) {
     const loader = document.getElementById('app-loading-container');
     document.body.removeChild(loader);
-    this.loaded = true;
   }
 }

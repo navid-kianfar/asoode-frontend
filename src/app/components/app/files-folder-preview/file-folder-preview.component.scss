@@ -1,0 +1,115 @@
+.folder-item {
+  border: 2px solid #cccccc;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  display: flex;
+  width: 300px;
+
+  .avatar {
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 2.5rem;
+      color: #999999;
+    }
+  }
+
+  .info {
+
+    .title {
+      font-size: 1.0rem;
+      font-weight: 500;
+      color: #333333;
+    }
+    .created-at {
+      color: #808080;
+      font-size: 0.8rem;
+    }
+  }
+
+  &.selected {
+    position: relative;
+    border: none;
+    background-color: #f8f1fe;
+    padding: 12px;
+
+    .selected {
+      height: 4px;
+      background-color: #6b3d8d;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border-radius: 0 0 5px 5px;
+    }
+  }
+}
+.file-item {
+  border: 2px solid #cccccc;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px;
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
+
+  .preview {
+    flex: 0 0 100%;
+    background: #fff;
+    padding: 5px 25px;
+    position: relative;
+
+    .holder {
+      i {
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+
+        &.pdf { color: #bf2f27; }
+        &.image { color: #F87D2C; }
+        &.spreadsheet { color: #46975e; }
+        &.presentation { color: #ed432e; }
+
+        &.archive { color: #ed432e; }
+        &.document { color: #449df1; }
+        &.code { color: #ed432e; }
+        &.executable { color: #ed432e; }
+        &.other { color: #ed432e; }
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .info {
+    margin-top: 10px;
+    .title {
+      font-size: 1.0rem;
+      font-weight: 500;
+      color: #333333;
+    }
+    .created-at {
+      color: #808080;
+      font-size: 0.8rem;
+    }
+  }
+
+  &.selected {
+    position: relative;
+    border: none;
+    background-color: #f8f1fe;
+    padding: 12px;
+
+    .selected {
+      height: 4px;
+      background-color: #6b3d8d;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      border-radius: 0 0 5px 5px;
+    }
+  }
+}

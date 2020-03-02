@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {ProjectViewModel} from '../view-models/projects/project-types';
 import {GroupViewModel} from '../view-models/groups/group-types';
 import {GroupType} from '../library/app/enums';
+import {ExplorerViewModel} from '../view-models/storage/files-types';
 
 const members: any[] = [];
 
@@ -13,13 +14,198 @@ const members: any[] = [];
 export class MockService {
   projects: ProjectViewModel[] = [];
   groups: GroupViewModel[] = [];
-
+  files: ExplorerViewModel = { files: [], folders: [] };
 
   constructor() {
     if (environment.production) { return; }
     this.init();
   }
 
+  private initFiles() {
+    this.files = {
+      files: [
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: false,
+          isPdf: true,
+          isSpreadsheet: false,
+          isDocument: false,
+          isPresentation: false,
+          isArchive: false,
+          isExecutable: false,
+          isCode: false,
+          isOther: false,
+          selected: true
+        },
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: true,
+          isPdf: false,
+          isSpreadsheet: false,
+          isDocument: false,
+          isPresentation: false,
+          isArchive: false,
+          isExecutable: false,
+          isCode: false,
+          isOther: false,
+          selected: false
+        },
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: false,
+          isPdf: false,
+          isSpreadsheet: true,
+          isDocument: false,
+          isPresentation: false,
+          isArchive: false,
+          isExecutable: false,
+          isCode: false,
+          isOther: false,
+          selected: false
+        },
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: false,
+          isPdf: false,
+          isSpreadsheet: false,
+          isDocument: true,
+          isPresentation: false,
+          isArchive: false,
+          isExecutable: false,
+          isCode: false,
+          isOther: false,
+          selected: false
+        },
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: false,
+          isPdf: false,
+          isSpreadsheet: false,
+          isDocument: false,
+          isPresentation: true,
+          isArchive: false,
+          isExecutable: false,
+          isCode: false,
+          isOther: false,
+          selected: false
+        },
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: false,
+          isPdf: false,
+          isSpreadsheet: false,
+          isDocument: false,
+          isPresentation: false,
+          isArchive: true,
+          isExecutable: false,
+          isCode: false,
+          isOther: false,
+          selected: false
+        },
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: false,
+          isPdf: false,
+          isSpreadsheet: false,
+          isDocument: false,
+          isPresentation: false,
+          isArchive: false,
+          isExecutable: true,
+          isCode: false,
+          isOther: false,
+          selected: false
+        },
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: false,
+          isPdf: false,
+          isSpreadsheet: false,
+          isDocument: false,
+          isPresentation: false,
+          isArchive: false,
+          isExecutable: false,
+          isCode: true,
+          isOther: false,
+          selected: false
+        },
+        {
+          createdAt: new Date(),
+          extension: '.pdf',
+          extensionLessName: 'My Presentation',
+          name: 'My Presentation.pdf',
+          size: 123456,
+          isImage: false,
+          isPdf: false,
+          isSpreadsheet: false,
+          isDocument: false,
+          isPresentation: false,
+          isArchive: false,
+          isExecutable: false,
+          isCode: false,
+          isOther: true,
+          selected: false
+        }
+      ],
+      folders: [
+        {
+          name: 'دسترسی سریع',
+          createdAt: new Date(),
+          selected: false,
+          path: '/'
+        },
+        {
+          name: 'دسترسی سریع',
+          createdAt: new Date(),
+          selected: false,
+          path: '/'
+        },
+        {
+          name: 'دسترسی سریع',
+          createdAt: new Date(),
+          selected: false,
+          path: '/'
+        },
+        {
+          name: 'دسترسی سریع',
+          createdAt: new Date(),
+          selected: false,
+          path: '/'
+        }
+      ]
+    };
+  }
   private initProjects() {
     this.projects = [
       {
@@ -221,5 +407,6 @@ export class MockService {
   private init() {
     this.initProjects();
     this.initGroups();
+    this.initFiles();
   }
 }

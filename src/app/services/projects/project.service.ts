@@ -9,7 +9,7 @@ import {OperationResultStatus} from '../../library/core/enums';
 })
 export class ProjectService {
 
-  projects: ProjectViewModel[];
+  projects: ProjectViewModel[] = [];
 
   constructor(private readonly httpService: HttpService) { }
 

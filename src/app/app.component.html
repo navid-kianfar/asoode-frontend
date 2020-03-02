@@ -1,6 +1,6 @@
 <div class="asoode-application">
-  <app-waiting [cssClass]="'h-100'" *ngIf="!loaded"></app-waiting>
-  <ng-container *ngIf="loaded">
+  <app-waiting [cssClass]="'h-100'" *ngIf="!appInitializerProvider.loaded"></app-waiting>
+  <ng-container *ngIf="appInitializerProvider.loaded">
     <app-header></app-header>
     <router-outlet></router-outlet>
   </ng-container>

@@ -10,6 +10,8 @@ import {ProjectService} from './projects/project.service';
 
 @Injectable()
 export class AppInitializerProvider {
+  loaded: boolean;
+
   constructor(
     private readonly http: HttpClient,
     private readonly translateService: TranslateService,
@@ -19,7 +21,7 @@ export class AppInitializerProvider {
     private readonly groupService: GroupService,
     private readonly projectService: ProjectService,
     private readonly enumsService: EnumsService,
-  ) {}
+  ) { this.loaded = false; }
 
   async load() {
     const lang = this.cultureService.lang;
@@ -39,5 +41,9 @@ export class AppInitializerProvider {
 }
 
 export function AppInitializerFactory(provider: AppInitializerProvider) {
-  return () => provider.load();
+  return () => {
+    provider.load().then(() => {
+      provider.loaded = true;
+    });
+  };
 }

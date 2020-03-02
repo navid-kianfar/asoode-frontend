@@ -9,7 +9,7 @@ import {OperationResultStatus} from '../../library/core/enums';
 })
 export class MessengerService {
 
-  channels: ChannelViewModel[];
+  channels: ChannelViewModel[] = [];
 
   constructor(private readonly httpService: HttpService) { }
 

@@ -4,6 +4,9 @@
       {{'PROJECTS' | translate}}&nbsp;
       <span class="ltr">({{projectService.projects.length}})</span>
     </h3>
+    <div class="no-item">
+      {{'NO_PROJECTS' | translate}}
+    </div>
     <div (click)="openProject(project)" class="project-item"
          *ngFor="let project of projectService.projects | slice:0:10">
       <div class="color"></div>
@@ -20,6 +23,9 @@
       {{'GROUPS' | translate}}&nbsp;
       <span class="ltr">({{groupService.groups.length}})</span>
     </h3>
+    <div class="no-item">
+      {{'NO_GROUPS' | translate}}
+    </div>
     <div (click)="openGroup(group)" class="group-item"
          *ngFor="let group of groupService.groups | slice:0:10">
       <div class="avatar-container">

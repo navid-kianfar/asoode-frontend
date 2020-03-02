@@ -1,0 +1,22 @@
+import { Injectable } from '@angular/core';
+import {HttpService} from '../core/http.service';
+import {OperationResult} from '../../library/core/operation-result';
+import {ExplorerViewModel} from '../../view-models/storage/files-types';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class FilesService {
+  constructor(private readonly httpService: HttpService) { }
+
+  async myFiles(path: string): Promise<OperationResult<ExplorerViewModel>> {
+    return this.httpService.post<ExplorerViewModel>('/files/mine', {path});
+  }
+
+  async sharedByMe(path: string): Promise<OperationResult<ExplorerViewModel>> {
+    return this.httpService.post<ExplorerViewModel>('/files/shared-by-me', {path});
+  }
+  async sharedByOthers(path: string): Promise<OperationResult<ExplorerViewModel>> {
+    return this.httpService.post<ExplorerViewModel>('/files/shared-by-others', {path});
+  }
+}

@@ -73,6 +73,9 @@ import { StringFormatPipe } from './pipes/core/string-format.pipe';
 import { PhoneVerificationComponent } from './components/app/phone-verification/phone-verification.component';
 import { PromptComponent } from './modals/prompt/prompt.component';
 import { ChangePhoneComponent } from './modals/change-phone/change-phone.component';
+import { FileFolderPreviewComponent } from './components/app/files-folder-preview/file-folder-preview.component';
+import { FilesExplorerComponent } from './components/app/files-explorer/files-explorer.component';
+import { CtrlClickDirective } from './directives/core/ctrl-click.directive';
 
 @NgModule({
   declarations: [
@@ -127,6 +130,9 @@ import { ChangePhoneComponent } from './modals/change-phone/change-phone.compone
     PhoneVerificationComponent,
     PromptComponent,
     ChangePhoneComponent,
+    FileFolderPreviewComponent,
+    FilesExplorerComponent,
+    CtrlClickDirective,
   ],
   entryComponents: [ConfirmComponent, PromptComponent, ChangePhoneComponent],
   imports: [

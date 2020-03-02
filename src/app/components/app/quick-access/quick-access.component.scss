@@ -8,6 +8,14 @@ h3 {
 
   cursor: pointer;
 }
+.no-item {
+  background-color: #e6e6e6;
+  color: #808080;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
 .project-item {
   position: relative;
   background: #ffffff;

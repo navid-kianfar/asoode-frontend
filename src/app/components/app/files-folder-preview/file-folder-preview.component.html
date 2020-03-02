@@ -1,0 +1,31 @@
+<div *ngIf="file" class="file-item" [class.selected]="file.selected">
+  <div class="preview">
+    <div class="holder">
+      <i *ngIf="file.isImage" class="image icon-image2"></i>
+      <i *ngIf="file.isArchive" class=" archive icon-file-zip"></i>
+      <i *ngIf="file.isDocument" class="document icon-file-word"></i>
+      <i *ngIf="file.isPdf" class="pdf icon-file-pdf"></i>
+      <i *ngIf="file.isSpreadsheet" class="spreadsheet icon-file-excel"></i>
+      <i *ngIf="file.isCode" class="code icon-files-empty"></i>
+      <i *ngIf="file.isExecutable" class="executable icon-files-empty"></i>
+      <i *ngIf="file.isOther" class="other icon-files-empty"></i>
+      <i *ngIf="file.isPresentation" class="presentation icon-files-empty"></i>
+      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="">
+    </div>
+  </div>
+  <div class="info">
+    <div class="title">{{file.extensionLessName}}</div>
+    <div class="created-at">{{ file.createdAt | culturedDate:true }}</div>
+  </div>
+  <div class="selected"></div>
+</div>
+<div *ngIf="folder" class="folder-item" [class.selected]="folder.selected">
+  <div class="avatar">
+    <i class="icon-foledr"></i>
+  </div>
+  <div class="info">
+    <div class="title">{{folder.name}}</div>
+    <div class="created-at">{{ folder.createdAt | culturedDate:true }}</div>
+  </div>
+  <div class="selected"></div>
+</div>

@@ -9,7 +9,7 @@ import {OperationResultStatus} from '../../library/core/enums';
 })
 export class GroupService {
 
-  groups: GroupViewModel[];
+  groups: GroupViewModel[] = [];
 
   constructor(private readonly httpService: HttpService) { }
 
