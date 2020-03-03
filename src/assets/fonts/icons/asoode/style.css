@@ -10,7 +10,6 @@
   font-display: block;
 }
 
-
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'ASOODE' !important;
@@ -26,54 +25,99 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-paste:before {
+  content: "\e967";
+}
+.icon-cut:before {
+  content: "\e912";
+}
+.icon-copy3:before {
+  content: "\e913";
+}
+.icon-cube2:before {
+  content: "\e914";
+}
+.icon-grid61:before {
+  content: "\e915";
+}
+.icon-arrow-up8:before {
+  content: "\e916";
+}
+.icon-arrow-right81:before {
+  content: "\e917";
+}
+.icon-arrow-down8:before {
+  content: "\e918";
+}
+.icon-arrow-left8:before {
+  content: "\e919";
+}
+.icon-stack31:before {
+  content: "\e94a";
+}
+.icon-file-xml:before {
+  content: "\e94c";
+}
+.icon-file-presentation:before {
+  content: "\e950";
+}
 .icon-spinner2:before {
   content: "\e966";
 }
-.icon-spinner1 .path1:before {
+.icon-circles:before {
+  content: "\e952";
+}
+.icon-circles2:before {
+  content: "\e953";
+}
+.icon-Spin-1s-200px .path1:before {
   content: "\e95e";
   color: rgb(95, 42, 98);
 }
-.icon-spinner1 .path2:before {
+.icon-Spin-1s-200px .path2:before {
   content: "\e95f";
   margin-left: -1em;
   color: rgb(95, 42, 98);
   opacity: 0.875;
 }
-.icon-spinner1 .path3:before {
+.icon-Spin-1s-200px .path3:before {
   content: "\e960";
   margin-left: -1em;
   color: rgb(95, 42, 98);
   opacity: 0.75;
 }
-.icon-spinner1 .path4:before {
+.icon-Spin-1s-200px .path4:before {
   content: "\e961";
   margin-left: -1em;
   color: rgb(95, 42, 98);
   opacity: 0.625;
 }
-.icon-spinner1 .path5:before {
+.icon-Spin-1s-200px .path5:before {
   content: "\e962";
   margin-left: -1em;
   color: rgb(95, 42, 98);
   opacity: 0.5;
 }
-.icon-spinner1 .path6:before {
+.icon-Spin-1s-200px .path6:before {
   content: "\e963";
   margin-left: -1em;
   color: rgb(95, 42, 98);
   opacity: 0.375;
 }
-.icon-spinner1 .path7:before {
+.icon-Spin-1s-200px .path7:before {
   content: "\e964";
   margin-left: -1em;
   color: rgb(95, 42, 98);
   opacity: 0.25;
 }
-.icon-spinner1 .path8:before {
+.icon-Spin-1s-200px .path8:before {
   content: "\e965";
   margin-left: -1em;
   color: rgb(95, 42, 98);
   opacity: 0.125;
+}
+.icon-file-exe:before {
+  content: "\e955";
 }
 .icon-home2:before {
   content: "\e900";
@@ -128,30 +172,6 @@
 }
 .icon-users2:before {
   content: "\e911";
-}
-.icon-user2:before {
-  content: "\e912";
-}
-.icon-users3:before {
-  content: "\e913";
-}
-.icon-user-plus2:before {
-  content: "\e914";
-}
-.icon-user-minus2:before {
-  content: "\e915";
-}
-.icon-user-cancel2:before {
-  content: "\e916";
-}
-.icon-user-block2:before {
-  content: "\e917";
-}
-.icon-user-lock2:before {
-  content: "\e918";
-}
-.icon-user-check2:before {
-  content: "\e919";
 }
 .icon-trophy4:before {
   content: "\e91a";
@@ -297,14 +317,8 @@
 .icon-calendar:before {
   content: "\e949";
 }
-.icon-cut:before {
-  content: "\e94a";
-}
 .icon-delete:before {
   content: "\e94b";
-}
-.icon-depended:before {
-  content: "\e94c";
 }
 .icon-emoji:before {
   content: "\e94d";
@@ -315,23 +329,11 @@
 .icon-foledr:before {
   content: "\e94f";
 }
-.icon-hierarchy:before {
-  content: "\e950";
-}
 .icon-new-window:before {
   content: "\e951";
 }
-.icon-notification:before {
-  content: "\e952";
-}
-.icon-project:before {
-  content: "\e953";
-}
 .icon-search:before {
   content: "\e954";
-}
-.icon-settings:before {
-  content: "\e955";
 }
 .icon-shared-folder:before {
   content: "\e956";

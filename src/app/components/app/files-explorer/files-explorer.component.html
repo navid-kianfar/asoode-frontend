@@ -1,5 +1,35 @@
 <div *ngIf="private" class="actions">
-  <button [matMenuTriggerFor]="menu" mat-stroked-button>+&nbsp;{{ 'ADD' | translate}}</button>
+  <div class="action-container">
+    <div class="action-bar">
+      <div class="space">
+        <button [matMenuTriggerFor]="menu" mat-stroked-button>+&nbsp;{{ 'ADD' | translate}}</button>
+      </div>
+      <div class="commands">
+        <button (click)="actionCut()" *ngIf="atLeastOneSelected" mat-fab>
+          <i class="icon-cut"></i>
+        </button>
+        <button (click)="actionCopy()" *ngIf="atLeastOneSelected" mat-fab>
+          <i class="icon-copy3"></i>
+        </button>
+        <button (click)="actionPaste()" *ngIf="inClipboard" mat-fab>
+          <i class="icon-paste"></i>
+        </button>
+        <button (click)="actionDownload()" *ngIf="atLeastOneSelected" mat-fab>
+          <i class="icon-download4"></i>
+        </button>
+        <button (click)="actionOpen()" *ngIf="oneFileSelected && canOpen" mat-fab>
+          <i class="icon-eye2"></i>
+        </button>
+        <button (click)="actionOpenInNewTab()" *ngIf="oneFileSelected" mat-fab>
+          <i class="icon-new-window"></i>
+        </button>
+      </div>
+      <div class="views">
+        <i (click)="detail = false" [class.active]="!detail" class="icon-grid6"></i>&nbsp;
+        <i (click)="detail = true" [class.active]="detail" class="icon-list2"></i>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="files-shared">
@@ -16,13 +46,18 @@
       *ngFor="let file of data.files"
       [(selected)]="file.selected"
       [file]="file"></app-file-folder-preview>
+
+    <div *ngIf="!data.files.length && !data.folders.length" class="no-items-found">
+      <h3>{{ 'NO_FILES_OR_FOLDERS' | translate}}</h3>
+    </div>
+
   </ng-container>
 </div>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
+  <button (click)="prepareNewFolder()" mat-menu-item>
     {{ 'NEW_FOLDER' | translate }}
   </button>
-  <button mat-menu-item>
+  <button (click)="prepareUpload()" mat-menu-item>
     {{ 'UPLOAD' | translate }}
   </button>
 </mat-menu>

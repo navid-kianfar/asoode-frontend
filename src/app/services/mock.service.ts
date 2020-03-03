@@ -25,6 +25,7 @@ export class MockService {
     this.files = {
       files: [
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -39,9 +40,10 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: false,
-          selected: true
+          selected: false
         },
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -59,6 +61,7 @@ export class MockService {
           selected: false
         },
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -76,6 +79,7 @@ export class MockService {
           selected: false
         },
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -93,6 +97,7 @@ export class MockService {
           selected: false
         },
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -110,6 +115,7 @@ export class MockService {
           selected: false
         },
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -127,6 +133,7 @@ export class MockService {
           selected: false
         },
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -144,6 +151,7 @@ export class MockService {
           selected: false
         },
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -161,6 +169,7 @@ export class MockService {
           selected: false
         },
         {
+          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',

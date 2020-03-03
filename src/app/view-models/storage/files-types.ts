@@ -9,6 +9,7 @@ export interface ExplorerFolderViewModel {
   selected: boolean;
 }
 export interface ExplorerFileViewModel {
+  url: string;
   name: string;
   extensionLessName: string;
   extension: string;

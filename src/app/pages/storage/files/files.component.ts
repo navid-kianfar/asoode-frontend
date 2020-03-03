@@ -10,7 +10,6 @@ import {ProjectService} from '../../../services/projects/project.service';
 })
 export class FilesComponent implements OnInit {
   sharedAnyThing: boolean;
-  detail: boolean;
   constructor(
     private readonly messengerService: MessengerService,
     private readonly groupService: GroupService,

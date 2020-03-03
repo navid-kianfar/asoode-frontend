@@ -1,10 +1,13 @@
 .storage-files {
-  height: 100%;
+  height: calc(100vh - 57px) !important;
+  background: #f2f2f2;
   .header {
+    background: #ffffff;
     h2 {
       padding: 20px;
       font-size: 1.5rem;
       font-weight: 500;
+      margin-bottom: 0;
     }
   }
   .body {
@@ -21,38 +24,5 @@
       left: 0;
     }
 
-    .relative {
-      position: relative;
-      .action-bar {
-        cursor: pointer;
-        position: absolute;
-        width: 100%;
-        z-index: 10;
-        display: flex;
-        padding-top: 25px;
-        .space {
-          display: flex;
-          flex-grow: 1;
-          -webkit-box-flex: 1;
-        }
-        .commands {
-          display: flex;
-          width: 300px;
-          button {
-
-          }
-        }
-        .views {
-          width: 50px;
-          text-align: center;
-          i {
-            color: #b3b3b3;
-            &.active {
-              color: #333333;
-            }
-          }
-        }
-      }
-    }
   }
 }

@@ -6,11 +6,11 @@
       <i *ngIf="file.isDocument" class="document icon-file-word"></i>
       <i *ngIf="file.isPdf" class="pdf icon-file-pdf"></i>
       <i *ngIf="file.isSpreadsheet" class="spreadsheet icon-file-excel"></i>
-      <i *ngIf="file.isCode" class="code icon-files-empty"></i>
-      <i *ngIf="file.isExecutable" class="executable icon-files-empty"></i>
+      <i *ngIf="file.isCode" class="code icon-file-xml"></i>
+      <i *ngIf="file.isExecutable" class="executable icon-file-exe"></i>
       <i *ngIf="file.isOther" class="other icon-files-empty"></i>
-      <i *ngIf="file.isPresentation" class="presentation icon-files-empty"></i>
-      <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="">
+      <i *ngIf="file.isPresentation" class="presentation icon-file-presentation"></i>
+      <img [src]="file.url" alt="">
     </div>
   </div>
   <div class="info">
