@@ -1,0 +1,20 @@
+.section{
+  .header {
+    display: flex;
+    padding: 30px 20px 0;
+    h3 {
+      font-weight: 500;
+      margin-bottom: 0;
+      padding: 10px;
+    }
+    ::ng-deep .mat-tab-label-content {
+      i {
+        font-size: 1.6rem;
+      }
+    }
+  }
+  .content {
+    background: #f2f2f2;
+    min-height: 200px;
+  }
+}

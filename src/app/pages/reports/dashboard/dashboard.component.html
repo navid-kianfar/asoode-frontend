@@ -1,1 +1,60 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+  <div class="section report-container">
+    <div class="header">
+      <h3>{{ 'REPORTS' | translate}}</h3>
+    </div>
+    <div class="content">
+
+    </div>
+  </div>
+  <div class="section activities-container">
+    <div class="header">
+      <h3>{{ 'LATEST_ACTIVITIES' | translate}}</h3>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab *ngFor="let group of groupService.groups"
+                 [label]="group.title">
+          <ng-template matTabContent></ng-template>
+        </mat-tab>
+        <mat-tab [label]="'MY_ACTIVITIES' | translate">
+          <ng-template matTabContent></ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="content">
+      <app-waiting *ngIf="activitiesWaiting"></app-waiting>
+      <div *ngIf="!activitiesWaiting" class="activities"></div>
+    </div>
+  </div>
+  <div class="section projects-container">
+    <div class="header">
+      <h3>{{ 'PROJECTS' | translate}}</h3>
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="icon-users2"></i>&nbsp;
+            {{'PRIVATE' | translate}}
+          </ng-template>
+          <ng-template matTabContent></ng-template>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="icon-users2"></i>&nbsp;
+            {{'TEAMWORK' | translate}}
+          </ng-template>
+          <ng-template matTabContent></ng-template>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="icon-www"></i>&nbsp;
+            {{'PUBLIC' | translate}}
+          </ng-template>
+          <ng-template matTabContent></ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+    <div class="content">
+      <app-waiting *ngIf="projectsWaiting"></app-waiting>
+      <div *ngIf="!projectsWaiting" class="projects"></div>
+    </div>
+  </div>
+</div>
