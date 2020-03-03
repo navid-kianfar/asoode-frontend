@@ -1,22 +1,33 @@
 import { Injectable } from '@angular/core';
-import {HttpService} from '../core/http.service';
-import {OperationResult} from '../../library/core/operation-result';
-import {ExplorerViewModel} from '../../view-models/storage/files-types';
+import { HttpService } from '../core/http.service';
+import { OperationResult } from '../../library/core/operation-result';
+import {
+  ExplorerViewModel,
+  UploadViewModel,
+} from '../../view-models/storage/files-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FilesService {
-  constructor(private readonly httpService: HttpService) { }
+  uploading: UploadViewModel[] = [];
+
+  constructor(private readonly httpService: HttpService) {}
 
   async myFiles(path: string): Promise<OperationResult<ExplorerViewModel>> {
-    return this.httpService.post<ExplorerViewModel>('/files/mine', {path});
+    return this.httpService.post<ExplorerViewModel>('/files/mine', { path });
   }
 
   async sharedByMe(path: string): Promise<OperationResult<ExplorerViewModel>> {
-    return this.httpService.post<ExplorerViewModel>('/files/shared-by-me', {path});
+    return this.httpService.post<ExplorerViewModel>('/files/shared-by-me', {
+      path,
+    });
   }
-  async sharedByOthers(path: string): Promise<OperationResult<ExplorerViewModel>> {
-    return this.httpService.post<ExplorerViewModel>('/files/shared-by-others', {path});
+  async sharedByOthers(
+    path: string,
+  ): Promise<OperationResult<ExplorerViewModel>> {
+    return this.httpService.post<ExplorerViewModel>('/files/shared-by-others', {
+      path,
+    });
   }
 }

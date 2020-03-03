@@ -26,3 +26,14 @@ export interface ExplorerFileViewModel {
   isCode: boolean;
   isOther: boolean;
 }
+export interface UploadViewModel {
+  name: string;
+  extensionLessName: string;
+  extension: string;
+  size: number;
+  uploading: boolean;
+  progress: number;
+  file: File;
+  success: boolean;
+  failed: boolean;
+}

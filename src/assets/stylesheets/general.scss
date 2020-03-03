@@ -241,6 +241,10 @@ html[dir='ltr'] {
 .ngxp__arrow {
   display: none !important;
 }
+app-waiting {
+  flex-grow: 1;
+  -webkit-box-flex: 1;
+}
 button:focus,
 input:focus {
   outline: none !important;

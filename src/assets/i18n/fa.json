@@ -131,5 +131,6 @@
   "NEW_FOLDER": "پوشه جدید",
   "UPLOAD": "بارگذاری فایل جدید",
   "NO_FILES_OR_FOLDERS": "هیچ فایل یا پوشه\u200Cای یافت نشد",
-  "TITLE_REQUIRED": "لطفا عنوان را وارد کنید"
+  "TITLE_REQUIRED": "لطفا عنوان را وارد کنید",
+  "CURRENTLY_UPLOADING_FILES": "در حال بارگزاری {0} فایل"
 }

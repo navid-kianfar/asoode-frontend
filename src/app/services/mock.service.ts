@@ -1,31 +1,85 @@
-import {Injectable} from '@angular/core';
-import {environment} from '../../environments/environment';
-import {ProjectViewModel} from '../view-models/projects/project-types';
-import {GroupViewModel} from '../view-models/groups/group-types';
-import {GroupType} from '../library/app/enums';
-import {ExplorerViewModel} from '../view-models/storage/files-types';
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { ProjectViewModel } from '../view-models/projects/project-types';
+import { GroupViewModel } from '../view-models/groups/group-types';
+import { GroupType } from '../library/app/enums';
+import {
+  ExplorerViewModel,
+  UploadViewModel,
+} from '../view-models/storage/files-types';
 
 const members: any[] = [];
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MockService {
   projects: ProjectViewModel[] = [];
   groups: GroupViewModel[] = [];
   files: ExplorerViewModel = { files: [], folders: [] };
+  uploading: UploadViewModel[] = [];
 
   constructor() {
-    if (environment.production) { return; }
+    if (environment.production) {
+      return;
+    }
     this.init();
   }
 
+  private initUpload() {
+    this.uploading = [
+      {
+        extension: '.png',
+        extensionLessName: 'Profile',
+        name: 'Profile.png',
+        progress: 100,
+        size: 10000,
+        uploading: false,
+        file: undefined,
+        success: true,
+        failed: false,
+      },
+      {
+        extension: '.png',
+        extensionLessName: 'Profile',
+        name: 'Profile.png',
+        progress: 100,
+        size: 10000,
+        uploading: false,
+        file: undefined,
+        success: false,
+        failed: true,
+      },
+      {
+        extension: '.png',
+        extensionLessName: 'Profile',
+        name: 'Profile.png',
+        progress: 10,
+        size: 10000,
+        uploading: true,
+        file: undefined,
+        success: false,
+        failed: false,
+      },
+      {
+        extension: '.png',
+        extensionLessName: 'Profile',
+        name: 'Profile.png',
+        progress: 85,
+        size: 10000,
+        uploading: true,
+        file: undefined,
+        success: false,
+        failed: false,
+      },
+    ];
+  }
   private initFiles() {
     this.files = {
       files: [
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -40,10 +94,11 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: false,
-          selected: false
+          selected: false,
         },
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -58,10 +113,11 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: false,
-          selected: false
+          selected: false,
         },
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -76,10 +132,11 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: false,
-          selected: false
+          selected: false,
         },
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -94,10 +151,11 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: false,
-          selected: false
+          selected: false,
         },
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -112,10 +170,11 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: false,
-          selected: false
+          selected: false,
         },
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -130,10 +189,11 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: false,
-          selected: false
+          selected: false,
         },
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -148,10 +208,11 @@ export class MockService {
           isExecutable: true,
           isCode: false,
           isOther: false,
-          selected: false
+          selected: false,
         },
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -166,10 +227,11 @@ export class MockService {
           isExecutable: false,
           isCode: true,
           isOther: false,
-          selected: false
+          selected: false,
         },
         {
-          url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url:
+            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -184,35 +246,35 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: true,
-          selected: false
-        }
+          selected: false,
+        },
       ],
       folders: [
         {
           name: 'دسترسی سریع',
           createdAt: new Date(),
           selected: false,
-          path: '/'
+          path: '/',
         },
         {
           name: 'دسترسی سریع',
           createdAt: new Date(),
           selected: false,
-          path: '/'
+          path: '/',
         },
         {
           name: 'دسترسی سریع',
           createdAt: new Date(),
           selected: false,
-          path: '/'
+          path: '/',
         },
         {
           name: 'دسترسی سریع',
           createdAt: new Date(),
           selected: false,
-          path: '/'
-        }
-      ]
+          path: '/',
+        },
+      ],
     };
   }
   private initProjects() {
@@ -232,7 +294,7 @@ export class MockService {
             updatedAt: undefined,
             id: '1',
             projectId: '1',
-            userId: '1'
+            userId: '1',
           },
           {
             title: 'فصل 2',
@@ -241,8 +303,8 @@ export class MockService {
             updatedAt: undefined,
             id: '2',
             projectId: '1',
-            userId: '1'
-          }
+            userId: '1',
+          },
         ],
         members: [...members],
         subProjects: [
@@ -256,7 +318,7 @@ export class MockService {
             parentId: undefined,
             id: '1',
             projectId: '1',
-            userId: '1'
+            userId: '1',
           },
           {
             title: 'زیر پروژه 2',
@@ -268,10 +330,10 @@ export class MockService {
             parentId: undefined,
             id: '2',
             projectId: '1',
-            userId: '1'
-          }
+            userId: '1',
+          },
         ],
-        workPackages: []
+        workPackages: [],
       },
       {
         id: '1',
@@ -288,7 +350,7 @@ export class MockService {
             updatedAt: undefined,
             id: '1',
             projectId: '1',
-            userId: '1'
+            userId: '1',
           },
           {
             title: 'فصل 2',
@@ -297,8 +359,8 @@ export class MockService {
             updatedAt: undefined,
             id: '2',
             projectId: '1',
-            userId: '1'
-          }
+            userId: '1',
+          },
         ],
         members: [...members],
         subProjects: [
@@ -312,7 +374,7 @@ export class MockService {
             parentId: undefined,
             id: '1',
             projectId: '1',
-            userId: '1'
+            userId: '1',
           },
           {
             title: 'زیر پروژه 2',
@@ -324,10 +386,10 @@ export class MockService {
             parentId: undefined,
             id: '2',
             projectId: '1',
-            userId: '1'
-          }
+            userId: '1',
+          },
         ],
-        workPackages: []
+        workPackages: [],
       },
       {
         id: '1',
@@ -344,7 +406,7 @@ export class MockService {
             updatedAt: undefined,
             id: '1',
             projectId: '1',
-            userId: '1'
+            userId: '1',
           },
           {
             title: 'فصل 2',
@@ -353,8 +415,8 @@ export class MockService {
             updatedAt: undefined,
             id: '2',
             projectId: '1',
-            userId: '1'
-          }
+            userId: '1',
+          },
         ],
         members: [...members],
         subProjects: [
@@ -368,7 +430,7 @@ export class MockService {
             parentId: undefined,
             id: '1',
             projectId: '1',
-            userId: '1'
+            userId: '1',
           },
           {
             title: 'زیر پروژه 2',
@@ -380,11 +442,11 @@ export class MockService {
             parentId: undefined,
             id: '2',
             projectId: '1',
-            userId: '1'
-          }
+            userId: '1',
+          },
         ],
-        workPackages: []
-      }
+        workPackages: [],
+      },
     ];
   }
   private initGroups() {
@@ -398,7 +460,7 @@ export class MockService {
         avatarId: '',
         userId: '1',
         type: GroupType.Holding,
-        members: [...members]
+        members: [...members],
       },
       {
         title: 'گروه فنی 2',
@@ -409,13 +471,14 @@ export class MockService {
         avatarId: '',
         userId: '1',
         type: GroupType.Company,
-        members: [...members]
-      }
+        members: [...members],
+      },
     ];
   }
   private init() {
     this.initProjects();
     this.initGroups();
     this.initFiles();
+    this.initUpload();
   }
 }

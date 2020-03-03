@@ -2,7 +2,9 @@
   <div class="action-container">
     <div class="action-bar">
       <div class="space">
-        <button [matMenuTriggerFor]="menu" mat-stroked-button>+&nbsp;{{ 'ADD' | translate}}</button>
+        <button [matMenuTriggerFor]="menu" mat-stroked-button>
+          +&nbsp;{{ 'ADD' | translate }}
+        </button>
       </div>
       <div class="commands">
         <button (click)="actionCut()" *ngIf="atLeastOneSelected" mat-fab>
@@ -14,10 +16,17 @@
         <button (click)="actionPaste()" *ngIf="inClipboard" mat-fab>
           <i class="icon-paste"></i>
         </button>
+        <button (click)="actionRename()" *ngIf="onlyOneSelected" mat-fab>
+          <i class="icon-pencil"></i>
+        </button>
         <button (click)="actionDownload()" *ngIf="atLeastOneSelected" mat-fab>
           <i class="icon-download4"></i>
         </button>
-        <button (click)="actionOpen()" *ngIf="oneFileSelected && canOpen" mat-fab>
+        <button
+          (click)="actionOpen()"
+          *ngIf="oneFileSelected && canOpen"
+          mat-fab
+        >
           <i class="icon-eye2"></i>
         </button>
         <button (click)="actionOpenInNewTab()" *ngIf="oneFileSelected" mat-fab>
@@ -25,14 +34,31 @@
         </button>
       </div>
       <div class="views">
-        <i (click)="detail = false" [class.active]="!detail" class="icon-grid6"></i>&nbsp;
-        <i (click)="detail = true" [class.active]="detail" class="icon-list2"></i>
+        <i
+          (click)="detail = false"
+          [class.active]="!detail"
+          class="icon-grid6"
+        ></i
+        >&nbsp;
+        <i
+          (click)="detail = true"
+          [class.active]="detail"
+          class="icon-list2"
+        ></i>
       </div>
     </div>
   </div>
 </div>
 
 <div class="files-shared">
+  <input
+    #filePicker
+    (change)="onChange($event.target)"
+    [accept]="allowedTypes"
+    multiple
+    hidden
+    type="file"
+  />
   <app-waiting *ngIf="waiting"></app-waiting>
   <ng-container *ngIf="!waiting">
     <app-file-folder-preview
@@ -40,17 +66,21 @@
       (dblclick)="enterFolder(folder)"
       *ngFor="let folder of data.folders"
       [(selected)]="folder.selected"
-      [folder]="folder"></app-file-folder-preview>
+      [folder]="folder"
+    ></app-file-folder-preview>
     <app-file-folder-preview
       (click)="selectFile($event, file)"
       *ngFor="let file of data.files"
       [(selected)]="file.selected"
-      [file]="file"></app-file-folder-preview>
+      [file]="file"
+    ></app-file-folder-preview>
 
-    <div *ngIf="!data.files.length && !data.folders.length" class="no-items-found">
-      <h3>{{ 'NO_FILES_OR_FOLDERS' | translate}}</h3>
+    <div
+      *ngIf="!data.files.length && !data.folders.length"
+      class="no-items-found"
+    >
+      <h3>{{ 'NO_FILES_OR_FOLDERS' | translate }}</h3>
     </div>
-
   </ng-container>
 </div>
 <mat-menu #menu="matMenu">

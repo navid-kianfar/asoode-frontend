@@ -28,10 +28,9 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async prepareChangePhoneNumber() {
-    this.modalService.show(ChangePhoneComponent, {})
-      .subscribe(() => {
-        this.formService.setModel(this.form, this.identityService.profile);
-      });
+    this.modalService.show(ChangePhoneComponent, {}).subscribe(() => {
+      this.formService.setModel(this.form, this.identityService.profile);
+    });
   }
   async changeEmail(model: any, form) {
     if (model.email === this.identityService.profile.email) {

@@ -9,13 +9,16 @@
       <i *ngIf="file.isCode" class="code icon-file-xml"></i>
       <i *ngIf="file.isExecutable" class="executable icon-file-exe"></i>
       <i *ngIf="file.isOther" class="other icon-files-empty"></i>
-      <i *ngIf="file.isPresentation" class="presentation icon-file-presentation"></i>
-      <img [src]="file.url" alt="">
+      <i
+        *ngIf="file.isPresentation"
+        class="presentation icon-file-presentation"
+      ></i>
+      <img [src]="file.url" alt="" />
     </div>
   </div>
   <div class="info">
-    <div class="title">{{file.extensionLessName}}</div>
-    <div class="created-at">{{ file.createdAt | culturedDate:true }}</div>
+    <div class="title">{{ file.extensionLessName }}</div>
+    <div class="created-at">{{ file.createdAt | culturedDate: true }}</div>
   </div>
   <div class="selected"></div>
 </div>
@@ -24,8 +27,8 @@
     <i class="icon-foledr"></i>
   </div>
   <div class="info">
-    <div class="title">{{folder.name}}</div>
-    <div class="created-at">{{ folder.createdAt | culturedDate:true }}</div>
+    <div class="title">{{ folder.name }}</div>
+    <div class="created-at">{{ folder.createdAt | culturedDate: true }}</div>
   </div>
   <div class="selected"></div>
 </div>

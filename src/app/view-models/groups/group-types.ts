@@ -1,5 +1,5 @@
-import {BaseViewModel} from '../core/general-types';
-import {AccessType, GroupType} from '../../library/app/enums';
+import { BaseViewModel } from '../core/general-types';
+import { AccessType, GroupType } from '../../library/app/enums';
 
 export interface GroupViewModel extends BaseViewModel {
   userId: string;

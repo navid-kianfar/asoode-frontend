@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {ValidationService} from '../../services/core/validation.service';
-import {IdentityService} from '../../services/auth/identity.service';
-import {OperationResultStatus} from '../../library/core/enums';
+import { Component, OnInit } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { ValidationService } from '../../services/core/validation.service';
+import { IdentityService } from '../../services/auth/identity.service';
+import { OperationResultStatus } from '../../library/core/enums';
 
 @Component({
   selector: 'app-change-phone',
   templateUrl: './change-phone.component.html',
   styleUrls: ['./change-phone.component.scss'],
 })
-export class ChangePhoneComponent
-  extends SimpleModalComponent<{}, string>
+export class ChangePhoneComponent extends SimpleModalComponent<{}, string>
   implements OnInit {
   cancel?: () => Promise<any>;
   action?: () => Promise<any>;
@@ -23,11 +22,11 @@ export class ChangePhoneComponent
   numberError: string;
   sendWaiting: boolean;
 
-  constructor(readonly identityService: IdentityService) { super(); }
-
-  ngOnInit() {
-
+  constructor(readonly identityService: IdentityService) {
+    super();
   }
+
+  ngOnInit() {}
 
   async onAction($event: MouseEvent) {
     $event.stopPropagation();
@@ -36,7 +35,7 @@ export class ChangePhoneComponent
     const op = await this.identityService.confirmPhone({
       phone: this.newNumber,
       id: this.tokenId,
-      code: this.verificationCode
+      code: this.verificationCode,
     });
     this.actionWaiting = false;
     if (op.status === OperationResultStatus.Success) {
@@ -62,7 +61,9 @@ export class ChangePhoneComponent
     }
     this.numberError = '';
     this.sendWaiting = true;
-    const op = await this.identityService.changePhone({phone: this.newNumber});
+    const op = await this.identityService.changePhone({
+      phone: this.newNumber,
+    });
     this.sendWaiting = false;
     if (op.status === OperationResultStatus.Duplicate) {
       this.numberError = 'PHONE_TAKEN';
@@ -74,7 +75,5 @@ export class ChangePhoneComponent
     }
   }
 
-  async sendAgain() {
-
-  }
+  async sendAgain() {}
 }

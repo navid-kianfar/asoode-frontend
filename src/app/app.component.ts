@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AppInitializerProvider} from './services/app.initializer';
+import { AppInitializerProvider } from './services/app.initializer';
 
 @Component({
   selector: 'app-root',

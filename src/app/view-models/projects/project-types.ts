@@ -1,5 +1,8 @@
-import {BaseViewModel} from '../core/general-types';
-import {AccessType, WorkPackageCommentPermission} from '../../library/app/enums';
+import { BaseViewModel } from '../core/general-types';
+import {
+  AccessType,
+  WorkPackageCommentPermission,
+} from '../../library/app/enums';
 
 export interface ProjectViewModel extends BaseViewModel {
   userId: string;
@@ -10,7 +13,7 @@ export interface ProjectViewModel extends BaseViewModel {
   subProjects: SubProjectViewModel[];
   workPackages: WorkPackageViewModel[];
 }
-export interface ProjectMemberViewModel extends BaseViewModel{
+export interface ProjectMemberViewModel extends BaseViewModel {
   email: string;
   firstName: string;
   fullName: string;

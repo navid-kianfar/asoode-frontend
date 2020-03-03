@@ -16,9 +16,8 @@
   }
 
   .info {
-
     .title {
-      font-size: 1.0rem;
+      font-size: 1rem;
       font-weight: 500;
       color: #333333;
     }
@@ -66,16 +65,34 @@
         left: 5px;
         bottom: 5px;
 
-        &.pdf { color: #bf2f27; }
-        &.image { color: #F87D2C; }
-        &.spreadsheet { color: #46975e; }
-        &.presentation { color: #ed432e; }
+        &.pdf {
+          color: #bf2f27;
+        }
+        &.image {
+          color: #f87d2c;
+        }
+        &.spreadsheet {
+          color: #46975e;
+        }
+        &.presentation {
+          color: #ed432e;
+        }
 
-        &.archive { color: #ed432e; }
-        &.document { color: #449df1; }
-        &.code { color: #ed432e; }
-        &.executable { color: #ed432e; }
-        &.other { color: #ed432e; }
+        &.archive {
+          color: #ed432e;
+        }
+        &.document {
+          color: #449df1;
+        }
+        &.code {
+          color: #ed432e;
+        }
+        &.executable {
+          color: #ed432e;
+        }
+        &.other {
+          color: #ed432e;
+        }
       }
       img {
         max-width: 100%;
@@ -86,7 +103,7 @@
   .info {
     margin-top: 10px;
     .title {
-      font-size: 1.0rem;
+      font-size: 1rem;
       font-weight: 500;
       color: #333333;
     }

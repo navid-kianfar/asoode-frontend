@@ -1,6 +1,6 @@
 <div class="storage-files">
   <div class="header">
-    <h2>{{'FILES'|translate}}</h2>
+    <h2>{{ 'FILES' | translate }}</h2>
   </div>
   <div class="body">
     <div class="fake-header"></div>
@@ -13,19 +13,60 @@
                 <app-files-explorer [private]="true"></app-files-explorer>
               </ng-template>
             </mat-tab>
-            <mat-tab *ngIf="sharedAnyThing"
-                     [label]="'MY_SHARED_FILES' | translate">
+            <mat-tab
+              *ngIf="sharedAnyThing"
+              [label]="'MY_SHARED_FILES' | translate"
+            >
               <ng-template matTabContent>
                 <app-files-explorer [sharedByMe]="true"></app-files-explorer>
               </ng-template>
             </mat-tab>
-            <mat-tab *ngIf="sharedAnyThing"
-                     [label]="'SHARED_FILES_WITH_ME' | translate">
+            <mat-tab
+              *ngIf="sharedAnyThing"
+              [label]="'SHARED_FILES_WITH_ME' | translate"
+            >
               <ng-template matTabContent>
                 <app-files-explorer [sharedByMe]="false"></app-files-explorer>
               </ng-template>
             </mat-tab>
           </mat-tab-group>
+        </div>
+      </div>
+    </div>
+    <div class="upload-container">
+      <div class="header">
+        <div class="title">
+          {{
+            'CURRENTLY_UPLOADING_FILES'
+              | translate
+              | stringFormat: filesService.uploading.length
+          }}
+        </div>
+        <div class="close" (click)="hide()">
+          <i class="icon-cross"></i>
+        </div>
+      </div>
+      <div class="uploading">
+        <div
+          *ngFor="let upload of filesService.uploading"
+          [class.success]="upload.success"
+          [class.failed]="upload.failed"
+          class="item"
+        >
+          <div class="progressbar-container">
+            <div class="progress" [style.width.%]="upload.progress"></div>
+          </div>
+          <div class="info">
+            <div class="name">{{ upload.name }}</div>
+            <div class="cancel">
+              <i
+                *ngIf="!upload.success && !upload.failed"
+                class="icon-cross"
+              ></i>
+              <i *ngIf="upload.success" class="icon-checkmark3"></i>
+              <i *ngIf="upload.failed" class="icon-warning2"></i>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -154,6 +154,9 @@ export class IdentityService {
   }
 
   async confirmPhone(model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>('/account/phone/confirm', model);
+    return await this.httpService.post<boolean>(
+      '/account/phone/confirm',
+      model,
+    );
   }
 }

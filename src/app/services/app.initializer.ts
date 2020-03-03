@@ -4,9 +4,9 @@ import { CultureService } from './core/culture.service';
 import { TranslateService } from './core/translate.service';
 import { IdentityService } from './auth/identity.service';
 import { EnumsService } from './core/enums.service';
-import {MessengerService} from './communication/messenger.service';
-import {GroupService} from './groups/group.service';
-import {ProjectService} from './projects/project.service';
+import { MessengerService } from './communication/messenger.service';
+import { GroupService } from './groups/group.service';
+import { ProjectService } from './projects/project.service';
 
 @Injectable()
 export class AppInitializerProvider {
@@ -21,7 +21,9 @@ export class AppInitializerProvider {
     private readonly groupService: GroupService,
     private readonly projectService: ProjectService,
     private readonly enumsService: EnumsService,
-  ) { this.loaded = false; }
+  ) {
+    this.loaded = false;
+  }
 
   async load() {
     const lang = this.cultureService.lang;
