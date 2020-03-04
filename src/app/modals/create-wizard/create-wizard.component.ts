@@ -32,7 +32,7 @@ export class CreateWizardComponent
     this.groupForm = [{
       elements: [
         this.formService.createInput({
-          config: { field: 'title', label: 'GROUP_TITLE' },
+          config: { field: 'title', label: 'GROUP_TITLE', cssClass: 'group-title' },
           params: { model: '' },
           validation: {
             required: {
@@ -47,7 +47,11 @@ export class CreateWizardComponent
         }),
         this.formService.createCheckbox({
           config: { field: 'channel', label: '' },
-          params: { model: false, label: 'GROUP_REQUIRE_CHANNEL', summary: 'GROUP_CHANNEL_DESCRIPTION'},
+          params: {
+            model: true,
+            label: 'GROUP_REQUIRE_CHANNEL',
+            summary: 'GROUP_CHANNEL_DESCRIPTION'
+          },
         })
       ]
     }];
@@ -80,6 +84,8 @@ export class CreateWizardComponent
   createGroup($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
+    const model = this.formService.prepare(this.groupForm);
+    console.log(model);
   }
 }
 enum WizardMode {

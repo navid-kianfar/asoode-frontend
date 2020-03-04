@@ -86,7 +86,7 @@ import { DashboardProjectComponent } from './components/app/dashboard-project/da
 import { DashboardProjectTemplatesComponent } from './components/app/dashboard-project-templates/dashboard-project-templates.component';
 import { ProjectInfoComponent } from './components/app/project-info/project-info.component';
 import { CreateWizardComponent } from './modals/create-wizard/create-wizard.component';
-import {MatRadioModule} from '@angular/material';
+import {MatCheckboxModule, MatRadioModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -184,6 +184,7 @@ import {MatRadioModule} from '@angular/material';
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,
+    MatCheckboxModule,
   ],
   providers: [
     // {
