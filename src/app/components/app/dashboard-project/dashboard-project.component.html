@@ -14,6 +14,6 @@
     <app-dashboard-project-templates></app-dashboard-project-templates>
   </div>
   <div class="projects-container" *ngIf="projectService.projects.length">
-    <app-project-info *ngFor="let project of projectService.projects"></app-project-info>
+    <app-project-info [project]="project" *ngFor="let project of projectService.projects"></app-project-info>
   </div>
 </div>

@@ -280,6 +280,7 @@ export class MockService {
   private initProjects() {
     this.projects = [
       {
+        tasks: 0,
         premium: true,
         id: '1',
         userId: '1',
@@ -337,6 +338,7 @@ export class MockService {
         workPackages: [],
       },
       {
+        tasks: 0,
         premium: false,
         id: '1',
         userId: '1',
@@ -394,6 +396,8 @@ export class MockService {
         workPackages: [],
       },
       {
+        premium: false,
+        tasks: 0,
         id: '1',
         userId: '1',
         title: 'آسوده ۱',

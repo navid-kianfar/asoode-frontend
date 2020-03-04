@@ -6,22 +6,24 @@
   </div>
   <div class="description">{{project.description}}</div>
   <div class="details">
-    <div class="item">
-      <i class="icon-flag3"></i>&nbsp;
-      <span>{{'N_SEASONS' | translate | stringFormat:0}}</span>
-    </div>
-    <div class="item">
-      <i class="icon-tree7"></i>&nbsp;
-      <span>{{'N_SUB_PROJECT' | translate | stringFormat:0}}</span>
-    </div>
-    <div class="item">
-      <i class="icon-cube2"></i>&nbsp;
-      <span>{{'N_WORK_PACKAGE' | translate | stringFormat:0}}</span>
-    </div>
-    <div class="item">
-      <i class="icon-circles2"></i>&nbsp;
-      <span>{{'N_CARDS' | translate | stringFormat:0}}</span>
-    </div>
+    <ng-container *ngIf="project.premium">
+      <div class="item">
+        <i class="icon-flag3"></i>&nbsp;
+        <span>{{'N_SEASONS' | translate | stringFormat:project.seasons.length}}</span>
+      </div>
+      <div class="item">
+        <i class="icon-tree7"></i>&nbsp;
+        <span>{{'N_SUB_PROJECT' | translate | stringFormat:project.subProjects.length}}</span>
+      </div>
+      <div class="item">
+        <i class="icon-cube2"></i>&nbsp;
+        <span>{{'N_WORK_PACKAGE' | translate | stringFormat:project.workPackages.length}}</span>
+      </div>
+      <div class="item">
+        <i class="icon-circles2"></i>&nbsp;
+        <span>{{'N_CARDS' | translate | stringFormat:project.tasks}}</span>
+      </div>
+    </ng-container>
   </div>
   <div class="members">
     <div class="item">
