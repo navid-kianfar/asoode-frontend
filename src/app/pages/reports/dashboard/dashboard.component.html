@@ -1,27 +1,26 @@
 <div class="dashboard">
   <div class="section report-container">
     <div class="header">
-      <h3>{{ 'REPORTS' | translate}}</h3>
+      <h3>{{ 'REPORTS' | translate }}</h3>
     </div>
     <div class="content reports">
       <div class="">
         <div class="reports-holder">
           <div class="events-holder">
             <div class="wrapper">
-              <h4>{{ 'THIS_MONTH_EVENTS' | translate}}</h4>
+              <h4>{{ 'THIS_MONTH_EVENTS' | translate }}</h4>
               <app-month-view></app-month-view>
-
             </div>
           </div>
           <div class="overall-holder">
             <div class="wrapper">
-              <h4>{{ 'OVERALL_REPORT' | translate}}</h4>
+              <h4>{{ 'OVERALL_REPORT' | translate }}</h4>
               <app-dashboard-overall></app-dashboard-overall>
             </div>
           </div>
           <div class="progress-holder">
             <div class="wrapper">
-              <h4>{{ 'PROGRESS_REPORT' | translate}}</h4>
+              <h4>{{ 'PROGRESS_REPORT' | translate }}</h4>
               <app-dashboard-progress></app-dashboard-progress>
             </div>
           </div>
@@ -31,10 +30,12 @@
   </div>
   <div class="section activities-container">
     <div class="header">
-      <h3>{{ 'LATEST_ACTIVITIES' | translate}}</h3>
+      <h3>{{ 'LATEST_ACTIVITIES' | translate }}</h3>
       <mat-tab-group animationDuration="0ms">
-        <mat-tab *ngFor="let group of groupService.groups"
-                 [label]="group.title">
+        <mat-tab
+          *ngFor="let group of groupService.groups"
+          [label]="group.title"
+        >
           <ng-template matTabContent></ng-template>
         </mat-tab>
         <mat-tab [label]="'MY_ACTIVITIES' | translate">
@@ -48,25 +49,25 @@
   </div>
   <div class="section projects-container">
     <div class="header">
-      <h3>{{ 'PROJECTS' | translate}}</h3>
+      <h3>{{ 'PROJECTS' | translate }}</h3>
       <mat-tab-group animationDuration="0ms">
         <mat-tab>
           <ng-template mat-tab-label>
-            {{'ALL' | translate}}
+            {{ 'ALL' | translate }}
           </ng-template>
           <ng-template matTabContent></ng-template>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
             <i class="icon-workpackage"></i>&nbsp;
-            {{'SIMPLE_PROJECTS' | translate}}
+            {{ 'SIMPLE_PROJECTS' | translate }}
           </ng-template>
           <ng-template matTabContent></ng-template>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
             <i class="icon-project"></i>&nbsp;
-            {{'WBS_PROJECTS' | translate}}&nbsp;
+            {{ 'WBS_PROJECTS' | translate }}&nbsp;
             <i class="premium icon-trophy4"></i>
           </ng-template>
           <ng-template matTabContent></ng-template>
@@ -74,7 +75,7 @@
         <mat-tab>
           <ng-template mat-tab-label>
             <i class="icon-www"></i>&nbsp;
-            {{'PUBLIC' | translate}}
+            {{ 'PUBLIC' | translate }}
           </ng-template>
           <ng-template matTabContent></ng-template>
         </mat-tab>

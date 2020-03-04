@@ -1,43 +1,48 @@
 <div class="month-view">
   <table>
     <thead>
-    <tr>
-      <th *ngFor="let title of dayNames" class="dow">
-        {{ title }}
-      </th>
-    </tr>
+      <tr>
+        <th *ngFor="let title of dayNames" class="dow">
+          {{ title }}
+        </th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let week of days">
-      <td *ngFor="let day of week">
-        <div class="square-wrapper"
-             [class.upcoming]="day.upcoming"
-             [class.past]="day.past"
-             [class.in-time]="day.inTime"
-             [class.today]="day.today">
-          <div class="square-inner">
-            <span>{{ day.day }}</span>
+      <tr *ngFor="let week of days">
+        <td *ngFor="let day of week">
+          <div
+            class="square-wrapper"
+            [class.upcoming]="day.upcoming"
+            [class.past]="day.past"
+            [class.in-time]="day.inTime"
+            [class.today]="day.today"
+          >
+            <div class="square-inner">
+              <span>{{ day.day }}</span>
+            </div>
           </div>
-        </div>
-      </td>
-    </tr>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
 <div class="info inline">
   <div class="item">
-    <div class="past color"></div>&nbsp;
-    {{ 'PAST' | translate}}
+    <div class="past color"></div>
+    &nbsp;
+    {{ 'PAST' | translate }}
   </div>
   <div class="item">
-    <div class="in-time color"></div>&nbsp;
-    {{ 'IN_TIME' | translate}}
+    <div class="in-time color"></div>
+    &nbsp;
+    {{ 'IN_TIME' | translate }}
   </div>
   <div class="item">
-    <div class="upcoming color"></div>&nbsp;
-    {{ 'UPCOMING' | translate}}
+    <div class="upcoming color"></div>
+    &nbsp;
+    {{ 'UPCOMING' | translate }}
   </div>
   <div class="details">
-    {{ 'DETAILS' | translate}}
+    {{ 'DETAILS' | translate }}
   </div>
 </div>

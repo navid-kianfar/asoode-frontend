@@ -1,9 +1,9 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-progress',
   templateUrl: './dashboard-progress.component.html',
-  styleUrls: ['./dashboard-progress.component.scss']
+  styleUrls: ['./dashboard-progress.component.scss'],
 })
 export class DashboardProgressComponent implements OnInit {
   chartData: any;
@@ -11,7 +11,7 @@ export class DashboardProgressComponent implements OnInit {
   timer: number;
   hidden: any;
 
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef) {}
 
   onResize(event) {
     if (this.timer) {
@@ -29,7 +29,9 @@ export class DashboardProgressComponent implements OnInit {
   calculateView() {
     const bound = this.element.nativeElement.parentNode.getBoundingClientRect();
     let width = bound.width - 50;
-    if (width < 300) { width = 300; }
+    if (width < 300) {
+      width = 300;
+    }
     this.view = [width, 200];
   }
 
@@ -42,123 +44,122 @@ export class DashboardProgressComponent implements OnInit {
         series: [
           {
             name: 'A',
-            value: 100
+            value: 100,
           },
           {
             name: 'B',
-            value: 70
+            value: 70,
           },
           {
             name: 'C',
-            value: 20
-          }
-        ]
+            value: 20,
+          },
+        ],
       },
       {
         name: '2 دی',
         series: [
           {
             name: 'A',
-            value: 100
+            value: 100,
           },
           {
             name: 'B',
-            value: 70
+            value: 70,
           },
           {
             name: 'C',
-            value: 20
-          }
-        ]
+            value: 20,
+          },
+        ],
       },
       {
         name: '3 دی',
         series: [
           {
             name: 'A',
-            value: 100
+            value: 100,
           },
           {
             name: 'B',
-            value: 70
+            value: 70,
           },
           {
             name: 'C',
-            value: 20
-          }
-        ]
+            value: 20,
+          },
+        ],
       },
       {
         name: '4 دی',
         series: [
           {
             name: 'A',
-            value: 100
+            value: 100,
           },
           {
             name: 'B',
-            value: 70
+            value: 70,
           },
           {
             name: 'C',
-            value: 20
-          }
-        ]
+            value: 20,
+          },
+        ],
       },
       {
         name: '5 دی',
         series: [
           {
             name: 'A',
-            value: 100
+            value: 100,
           },
           {
             name: 'B',
-            value: 70
+            value: 70,
           },
           {
             name: 'C',
-            value: 20
-          }
-        ]
+            value: 20,
+          },
+        ],
       },
       {
         name: '6 دی',
         series: [
           {
             name: 'A',
-            value: 100
+            value: 100,
           },
           {
             name: 'B',
-            value: 70
+            value: 70,
           },
           {
             name: 'C',
-            value: 20
-          }
-        ]
+            value: 20,
+          },
+        ],
       },
       {
         name: '7 دی',
         series: [
           {
             name: 'A',
-            value: 100
+            value: 100,
           },
           {
             name: 'B',
-            value: 70
+            value: 70,
           },
           {
             name: 'C',
-            value: 20
-          }
-        ]
-      }
+            value: 20,
+          },
+        ],
+      },
     ];
 
     this.chartData = data;
   }
-
 }

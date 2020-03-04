@@ -1,49 +1,49 @@
 <div class="modal-content create-modal">
   <ng-container *ngIf="mode === WizardMode.Choose">
     <div class="modal-header">
-      <h4 class="modal-title">
-        {{ 'CREATE' | translate: true }}&nbsp;...
-      </h4>
+      <h4 class="modal-title">{{ 'CREATE' | translate: true }}&nbsp;...</h4>
       <button (click)="onCancel($event)">
         <i class="icon-cross"></i>
       </button>
     </div>
     <div class="modal-body choose">
-
       <mat-radio-group [(ngModel)]="continueAs" class="items">
         <mat-radio-button color="primary" [value]="WizardMode.SimpleProject">
           <span class="title">
             <i class="icon-project"></i>
-            {{'SIMPLE_PROJECTS' | translate }}
+            {{ 'SIMPLE_PROJECTS' | translate }}
           </span>
-          <p class="description">{{'SIMPLE_PROJECTS_DESCRIPTION' | translate }}</p>
+          <p class="description">
+            {{ 'SIMPLE_PROJECTS_DESCRIPTION' | translate }}
+          </p>
         </mat-radio-button>
         <mat-radio-button color="primary" [value]="WizardMode.ComplexProject">
           <span class="title">
             <i class="icon-tree7"></i>
-            {{'WBS_PROJECTS' | translate }}
+            {{ 'WBS_PROJECTS' | translate }}
           </span>
-          <p class="description">{{'WBS_PROJECTS_DESCRIPTION' | translate }}</p>
+          <p class="description">
+            {{ 'WBS_PROJECTS_DESCRIPTION' | translate }}
+          </p>
         </mat-radio-button>
         <mat-radio-button color="primary" [value]="WizardMode.Group">
           <span class="title">
             <i class="icon-team"></i>
-            {{'NEW_GROUP' | translate }}
+            {{ 'NEW_GROUP' | translate }}
           </span>
-          <p class="description">{{'NEW_GROUP_DESCRIPTION' | translate }}</p>
+          <p class="description">{{ 'NEW_GROUP_DESCRIPTION' | translate }}</p>
         </mat-radio-button>
         <mat-radio-button color="primary" [value]="WizardMode.Import">
           <i class="icon-paste"></i>
-          <span class="title">{{'IMPORT' | translate }}</span>
-          <p class="description">{{'IMPORT_DESCRIPTION' | translate }}</p>
+          <span class="title">{{ 'IMPORT' | translate }}</span>
+          <p class="description">{{ 'IMPORT_DESCRIPTION' | translate }}</p>
         </mat-radio-button>
       </mat-radio-group>
-
     </div>
     <div class="modal-footer">
       <button (click)="next($event)" mat-flat-button [color]="'primary'">
-        {{ 'CONTINUE' | translate }}</button
-      >
+        {{ 'CONTINUE' | translate }}
+      </button>
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Group">
@@ -52,9 +52,7 @@
         <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
         <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
       </button>
-      <h4 class="modal-title">
-        {{ 'NEW_GROUP' | translate: true }}&nbsp;...
-      </h4>
+      <h4 class="modal-title">{{ 'NEW_GROUP' | translate: true }}&nbsp;...</h4>
       <button (click)="onCancel($event)">
         <i class="icon-cross"></i>
       </button>
@@ -69,8 +67,8 @@
     <div class="modal-footer">
       <button (click)="createGroup($event)" mat-flat-button [color]="'primary'">
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-        {{ 'CREATE_GROUP' | translate: true }}</button
-      >
+        {{ 'CREATE_GROUP' | translate: true }}
+      </button>
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Import">
@@ -79,16 +77,12 @@
         <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
         <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
       </button>
-      <h4 class="modal-title">
-        {{ 'IMPORT' | translate: true }}&nbsp;...
-      </h4>
+      <h4 class="modal-title">{{ 'IMPORT' | translate: true }}&nbsp;...</h4>
       <button (click)="onCancel($event)">
         <i class="icon-cross"></i>
       </button>
     </div>
-    <div class="modal-body">
-
-    </div>
+    <div class="modal-body"></div>
     <div class="modal-footer">
       <!--    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">-->
       <!--      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>-->
@@ -101,9 +95,7 @@
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.SimpleProject">
-    <div class="modal-body">
-
-    </div>
+    <div class="modal-body"></div>
     <div class="modal-footer">
       <!--    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">-->
       <!--      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>-->
@@ -116,9 +108,7 @@
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.ComplexProject">
-    <div class="modal-body">
-
-    </div>
+    <div class="modal-body"></div>
     <div class="modal-footer">
       <!--    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">-->
       <!--      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>-->

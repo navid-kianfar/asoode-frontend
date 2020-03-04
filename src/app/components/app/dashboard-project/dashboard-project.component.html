@@ -1,19 +1,22 @@
 <div class="project-reports">
   <div class="no-projects" *ngIf="!projectService.projects.length">
-    <h5>{{ 'NO_PROJECTS_YET' | translate}}</h5>
+    <h5>{{ 'NO_PROJECTS_YET' | translate }}</h5>
 
     <div class="create-holder">
       <div class="plus">
         <i class="icon-plus2"></i>
       </div>
       <div class="actions">
-        {{ 'CREATE_SIMPLE_OR_COMPLEX_PROJECT' | translate}}
+        {{ 'CREATE_SIMPLE_OR_COMPLEX_PROJECT' | translate }}
       </div>
     </div>
 
     <app-dashboard-project-templates></app-dashboard-project-templates>
   </div>
   <div class="projects-container" *ngIf="projectService.projects.length">
-    <app-project-info [project]="project" *ngFor="let project of projectService.projects"></app-project-info>
+    <app-project-info
+      [project]="project"
+      *ngFor="let project of projectService.projects"
+    ></app-project-info>
   </div>
 </div>

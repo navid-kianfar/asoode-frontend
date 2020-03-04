@@ -1,4 +1,7 @@
-<mat-checkbox [disabled]="disabled"
-              [(ngModel)]="model"
-              [color]="color || 'primary'">{{label | translate:true}}</mat-checkbox>
-<div class="summary" *ngIf="summary">{{summary | translate:true}}</div>
+<mat-checkbox
+  [disabled]="disabled"
+  [(ngModel)]="model"
+  [color]="color || 'primary'"
+  >{{ label | translate: true }}</mat-checkbox
+>
+<div class="summary" *ngIf="summary">{{ summary | translate: true }}</div>

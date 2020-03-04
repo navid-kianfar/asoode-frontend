@@ -7,7 +7,8 @@ import {
   IFormElementDropDown,
   IFormElementInput,
   IFormElementVerification,
-  FormViewModel, IFormElementCheckbox,
+  FormViewModel,
+  IFormElementCheckbox,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 

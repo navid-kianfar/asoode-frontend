@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {CreateModalParameters} from '../../view-models/modals/modals-types';
-import {CultureService} from '../../services/core/culture.service';
-import {FormViewModel} from '../../components/core/form/contracts';
-import {FormService} from '../../services/core/form.service';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { CreateModalParameters } from '../../view-models/modals/modals-types';
+import { CultureService } from '../../services/core/culture.service';
+import { FormViewModel } from '../../components/core/form/contracts';
+import { FormService } from '../../services/core/form.service';
 
 @Component({
   selector: 'app-create-wizard',
   templateUrl: './create-wizard.component.html',
-  styleUrls: ['./create-wizard.component.scss']
+  styleUrls: ['./create-wizard.component.scss'],
 })
 export class CreateWizardComponent
   extends SimpleModalComponent<CreateModalParameters, boolean>
@@ -22,39 +22,47 @@ export class CreateWizardComponent
 
   constructor(
     readonly cultureService: CultureService,
-    private readonly formService: FormService
-  ) { super(); }
+    private readonly formService: FormService,
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
 
-    this.groupForm = [{
-      elements: [
-        this.formService.createInput({
-          config: { field: 'title', label: 'GROUP_TITLE', cssClass: 'group-title' },
-          params: { model: '' },
-          validation: {
-            required: {
-              value: true,
-              message: 'GROUP_TITLE_REQUIRED'
-            }
-          }
-        }),
-        this.formService.createInput({
-          config: { field: 'description', label: 'DESCRIPTION' },
-          params: { model: '', textArea: true },
-        }),
-        this.formService.createCheckbox({
-          config: { field: 'channel', label: '' },
-          params: {
-            model: true,
-            label: 'GROUP_REQUIRE_CHANNEL',
-            summary: 'GROUP_CHANNEL_DESCRIPTION'
-          },
-        })
-      ]
-    }];
+    this.groupForm = [
+      {
+        elements: [
+          this.formService.createInput({
+            config: {
+              field: 'title',
+              label: 'GROUP_TITLE',
+              cssClass: 'group-title',
+            },
+            params: { model: '' },
+            validation: {
+              required: {
+                value: true,
+                message: 'GROUP_TITLE_REQUIRED',
+              },
+            },
+          }),
+          this.formService.createInput({
+            config: { field: 'description', label: 'DESCRIPTION' },
+            params: { model: '', textArea: true },
+          }),
+          this.formService.createCheckbox({
+            config: { field: 'channel', label: '' },
+            params: {
+              model: true,
+              label: 'GROUP_REQUIRE_CHANNEL',
+              summary: 'GROUP_CHANNEL_DESCRIPTION',
+            },
+          }),
+        ],
+      },
+    ];
   }
   async onAction($event: MouseEvent) {
     $event.stopPropagation();
@@ -93,5 +101,5 @@ enum WizardMode {
   Group = 2,
   SimpleProject = 3,
   ComplexProject = 4,
-  Import = 5
+  Import = 5,
 }

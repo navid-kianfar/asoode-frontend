@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgxPopperModule } from 'ngx-popper';
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -80,13 +80,13 @@ import { CtrlClickDirective } from './directives/core/ctrl-click.directive';
 import { MonthViewComponent } from './components/app/month-view/month-view.component';
 import { DashboardOverallComponent } from './components/app/dashboard-overall/dashboard-overall.component';
 import { DashboardProgressComponent } from './components/app/dashboard-progress/dashboard-progress.component';
-import {BarChartModule} from '@swimlane/ngx-charts';
+import { BarChartModule } from '@swimlane/ngx-charts';
 import { DashboardActivityComponent } from './components/app/dashboard-activity/dashboard-activity.component';
 import { DashboardProjectComponent } from './components/app/dashboard-project/dashboard-project.component';
 import { DashboardProjectTemplatesComponent } from './components/app/dashboard-project-templates/dashboard-project-templates.component';
 import { ProjectInfoComponent } from './components/app/project-info/project-info.component';
 import { CreateWizardComponent } from './modals/create-wizard/create-wizard.component';
-import {MatCheckboxModule, MatRadioModule} from '@angular/material';
+import { MatCheckboxModule, MatRadioModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -157,7 +157,7 @@ import {MatCheckboxModule, MatRadioModule} from '@angular/material';
     ConfirmComponent,
     PromptComponent,
     ChangePhoneComponent,
-    CreateWizardComponent
+    CreateWizardComponent,
   ],
   imports: [
     BrowserModule,
@@ -173,14 +173,14 @@ import {MatCheckboxModule, MatRadioModule} from '@angular/material';
     MatMenuModule,
     MatSnackBarModule,
     SimpleModalModule.forRoot(
-      {container: 'modal-container'},
+      { container: 'modal-container' },
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
         closeOnClickOutside: true,
       },
     ),
-    NgxPopperModule.forRoot({placement: 'bottom'}),
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,

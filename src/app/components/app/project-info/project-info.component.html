@@ -2,33 +2,41 @@
   <div class="title">
     <i *ngIf="project.premium" class="icon-project"></i>
     <i *ngIf="!project.premium" class="icon-workpackage"></i>
-    &nbsp;<span>{{project.title}}</span>
+    &nbsp;<span>{{ project.title }}</span>
   </div>
-  <div class="description">{{project.description}}</div>
+  <div class="description">{{ project.description }}</div>
   <div class="details">
     <ng-container *ngIf="project.premium">
       <div class="item">
         <i class="icon-flag3"></i>&nbsp;
-        <span>{{'N_SEASONS' | translate | stringFormat:project.seasons.length}}</span>
+        <span>{{
+          'N_SEASONS' | translate | stringFormat: project.seasons.length
+        }}</span>
       </div>
       <div class="item">
         <i class="icon-tree7"></i>&nbsp;
-        <span>{{'N_SUB_PROJECT' | translate | stringFormat:project.subProjects.length}}</span>
+        <span>{{
+          'N_SUB_PROJECT' | translate | stringFormat: project.subProjects.length
+        }}</span>
       </div>
       <div class="item">
         <i class="icon-workpackage"></i>&nbsp;
-        <span>{{'N_WORK_PACKAGE' | translate | stringFormat:project.workPackages.length}}</span>
+        <span>{{
+          'N_WORK_PACKAGE'
+            | translate
+            | stringFormat: project.workPackages.length
+        }}</span>
       </div>
       <div class="item">
         <i class="icon-task"></i>&nbsp;
-        <span>{{'N_CARDS' | translate | stringFormat:project.tasks}}</span>
+        <span>{{ 'N_CARDS' | translate | stringFormat: project.tasks }}</span>
       </div>
     </ng-container>
   </div>
   <div class="members">
     <div class="item">
       <i class="icon-users"></i>&nbsp;
-      <span>{{ 'N_USERS' | translate | stringFormat:0}}</span>
+      <span>{{ 'N_USERS' | translate | stringFormat: 0 }}</span>
     </div>
   </div>
 </div>
