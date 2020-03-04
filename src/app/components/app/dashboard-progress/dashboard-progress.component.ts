@@ -27,9 +27,8 @@ export class DashboardProgressComponent implements OnInit {
   }
 
   calculateView() {
-    const bound = this.element.nativeElement.getBoundingClientRect();
-    console.log(bound);
-    let width = bound.x - 50;
+    const bound = this.element.nativeElement.parentNode.getBoundingClientRect();
+    let width = bound.width - 50;
     if (width < 300) { width = 300; }
     this.view = [width, 200];
   }

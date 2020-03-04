@@ -81,6 +81,10 @@ import { MonthViewComponent } from './components/app/month-view/month-view.compo
 import { DashboardOverallComponent } from './components/app/dashboard-overall/dashboard-overall.component';
 import { DashboardProgressComponent } from './components/app/dashboard-progress/dashboard-progress.component';
 import {BarChartModule} from '@swimlane/ngx-charts';
+import { DashboardActivityComponent } from './components/app/dashboard-activity/dashboard-activity.component';
+import { DashboardProjectComponent } from './components/app/dashboard-project/dashboard-project.component';
+import { DashboardProjectTemplatesComponent } from './components/app/dashboard-project-templates/dashboard-project-templates.component';
+import { ProjectInfoComponent } from './components/app/project-info/project-info.component';
 
 @NgModule({
   declarations: [
@@ -141,6 +145,10 @@ import {BarChartModule} from '@swimlane/ngx-charts';
     MonthViewComponent,
     DashboardOverallComponent,
     DashboardProgressComponent,
+    DashboardActivityComponent,
+    DashboardProjectComponent,
+    DashboardProjectTemplatesComponent,
+    ProjectInfoComponent,
   ],
   entryComponents: [ConfirmComponent, PromptComponent, ChangePhoneComponent],
   imports: [

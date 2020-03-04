@@ -1,3 +1,50 @@
 .progress-report {
   direction: ltr !important;
+  height: 200px;
+}
+.info {
+  display: flex;
+  margin: 20px 0;
+
+  .item {
+    display: flex;
+    font-size: 0.7rem;
+    color: #999999;
+    margin: 0 10px;
+    .color {
+      display: flex;
+      width: 7px;
+      height: 7px;
+      border-radius: 7px;
+      position: relative;
+      top: 5px;
+
+      &.blocked {
+        background-color: #ee6285;
+      }
+      &.done {
+        background-color: #74d68c;
+      }
+      &.created {
+        background-color: #59a8ef;
+      }
+    }
+  }
+
+  .details {
+    color: #666666;
+    display: flex;
+    font-size: 0.7rem;
+    flex-grow: 1;
+    -webkit-box-flex: 1;
+    direction: ltr;
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+::ng-deep .ngx-charts text {
+  fill: #808080;
+  font-size: 0.7rem !important;
+  font-weight: 500;
 }

@@ -1,6 +1,22 @@
-<div class="progress-report">
+<div class="info inline">
+  <div class="item">
+    <div class="blocked color"></div>&nbsp;
+    {{ 'BLOCKED_CARDS' | translate}}
+  </div>
+  <div class="item">
+    <div class="done color"></div>&nbsp;
+    {{ 'DONE_CARDS' | translate}}
+  </div>
+  <div class="item">
+    <div class="created color"></div>&nbsp;
+    {{ 'CREATED_CARDS' | translate}}
+  </div>
+  <div class="details">
+    {{ 'DETAILS' | translate}}
+  </div>
+</div>
+<div class="progress-report" [hidden]="hidden">
   <ngx-charts-bar-vertical-2d
-    [hidden]="hidden"
     [view]="view"
     [gradient]="false"
     [xAxis]="true"

@@ -59,3 +59,44 @@
   }
 
 }
+
+.info {
+  display: flex;
+
+  .item {
+    display: flex;
+    font-size: 0.7rem;
+    color: #999999;
+    margin: 0 10px;
+    .color {
+      display: flex;
+      width: 7px;
+      height: 7px;
+      border-radius: 7px;
+      position: relative;
+      top: 5px;
+
+      &.past {
+        background-color: #ee6285;
+      }
+      &.in-time {
+        background-color: #74d68c;
+      }
+      &.upcoming {
+        background-color: #fef386;
+      }
+    }
+  }
+
+  .details {
+    color: #666666;
+    display: flex;
+    font-size: 0.7rem;
+    flex-grow: 1;
+    -webkit-box-flex: 1;
+    direction: ltr;
+    text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

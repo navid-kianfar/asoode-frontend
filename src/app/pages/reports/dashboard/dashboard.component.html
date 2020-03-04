@@ -10,23 +10,7 @@
             <div class="wrapper">
               <h4>{{ 'THIS_MONTH_EVENTS' | translate}}</h4>
               <app-month-view></app-month-view>
-              <div class="info inline">
-                <div class="item">
-                  <div class="past color"></div>&nbsp;
-                  {{ 'PAST' | translate}}
-                </div>
-                <div class="item">
-                  <div class="in-time color"></div>&nbsp;
-                  {{ 'IN_TIME' | translate}}
-                </div>
-                <div class="item">
-                  <div class="upcoming color"></div>&nbsp;
-                  {{ 'UPCOMING' | translate}}
-                </div>
-                <div class="details">
-                  {{ 'DETAILS' | translate}}
-                </div>
-              </div>
+
             </div>
           </div>
           <div class="overall-holder">
@@ -59,8 +43,7 @@
       </mat-tab-group>
     </div>
     <div class="content">
-      <app-waiting *ngIf="activitiesWaiting"></app-waiting>
-      <div *ngIf="!activitiesWaiting" class="activities"></div>
+      <app-dashboard-activity></app-dashboard-activity>
     </div>
   </div>
   <div class="section projects-container">
@@ -69,15 +52,22 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab>
           <ng-template mat-tab-label>
-            <i class="icon-user"></i>&nbsp;
-            {{'PRIVATE' | translate}}
+            {{'ALL' | translate}}
           </ng-template>
           <ng-template matTabContent></ng-template>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
-            <i class="icon-users4"></i>&nbsp;
-            {{'TEAMWORK' | translate}}
+            <i class="icon-cube2"></i>&nbsp;
+            {{'SIMPLE_PROJECTS' | translate}}
+          </ng-template>
+          <ng-template matTabContent></ng-template>
+        </mat-tab>
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <i class="icon-stack31"></i>&nbsp;
+            {{'WBS_PROJECTS' | translate}}&nbsp;
+            <i class="premium icon-trophy4"></i>
           </ng-template>
           <ng-template matTabContent></ng-template>
         </mat-tab>
@@ -91,8 +81,7 @@
       </mat-tab-group>
     </div>
     <div class="content">
-      <app-waiting *ngIf="projectsWaiting"></app-waiting>
-      <div *ngIf="!projectsWaiting" class="projects"></div>
+      <app-dashboard-project></app-dashboard-project>
     </div>
   </div>
 </div>

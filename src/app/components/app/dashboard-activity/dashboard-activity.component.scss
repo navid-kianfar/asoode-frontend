@@ -1,0 +1,22 @@
+.activities-report {
+  padding: 20px;
+
+  .no-activity {
+    background: #ffffff;
+    width: 300px;
+    padding: 10px;
+    border-radius: 5px;
+
+    i {
+      color: #e6e6e6;
+      display: block;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 2rem;
+    }
+    h5 {
+      text-align: justify;
+      color: #999999;
+    }
+  }
+}
