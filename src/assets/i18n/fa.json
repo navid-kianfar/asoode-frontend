@@ -138,5 +138,12 @@
   "MY_ACTIVITIES": "فعالیت\u200Cهای من",
   "PRIVATE": "شخصی",
   "TEAMWORK": "گروهی",
-  "PUBLIC": "عمومی"
+  "PUBLIC": "عمومی",
+  "THIS_MONTH_EVENTS": "رویداد\u200Cهای این ماه",
+  "OVERALL_REPORT": "گزارش کلی",
+  "PROGRESS_REPORT": "گزارش پیشرفت",
+  "PAST": "گذشته",
+  "IN_TIME": "به موقع",
+  "UPCOMING": "در راه",
+  "DETAILS": "جزئیات"
 }

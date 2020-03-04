@@ -3,8 +3,46 @@
     <div class="header">
       <h3>{{ 'REPORTS' | translate}}</h3>
     </div>
-    <div class="content">
-
+    <div class="content reports">
+      <div class="">
+        <div class="reports-holder">
+          <div class="events-holder">
+            <div class="wrapper">
+              <h4>{{ 'THIS_MONTH_EVENTS' | translate}}</h4>
+              <app-month-view></app-month-view>
+              <div class="info inline">
+                <div class="item">
+                  <div class="past color"></div>&nbsp;
+                  {{ 'PAST' | translate}}
+                </div>
+                <div class="item">
+                  <div class="in-time color"></div>&nbsp;
+                  {{ 'IN_TIME' | translate}}
+                </div>
+                <div class="item">
+                  <div class="upcoming color"></div>&nbsp;
+                  {{ 'UPCOMING' | translate}}
+                </div>
+                <div class="details">
+                  {{ 'DETAILS' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="overall-holder">
+            <div class="wrapper">
+              <h4>{{ 'OVERALL_REPORT' | translate}}</h4>
+              <app-dashboard-overall></app-dashboard-overall>
+            </div>
+          </div>
+          <div class="progress-holder">
+            <div class="wrapper">
+              <h4>{{ 'PROGRESS_REPORT' | translate}}</h4>
+              <app-dashboard-progress></app-dashboard-progress>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="section activities-container">
@@ -31,14 +69,14 @@
       <mat-tab-group animationDuration="0ms">
         <mat-tab>
           <ng-template mat-tab-label>
-            <i class="icon-users2"></i>&nbsp;
+            <i class="icon-user"></i>&nbsp;
             {{'PRIVATE' | translate}}
           </ng-template>
           <ng-template matTabContent></ng-template>
         </mat-tab>
         <mat-tab>
           <ng-template mat-tab-label>
-            <i class="icon-users2"></i>&nbsp;
+            <i class="icon-users4"></i>&nbsp;
             {{'TEAMWORK' | translate}}
           </ng-template>
           <ng-template matTabContent></ng-template>

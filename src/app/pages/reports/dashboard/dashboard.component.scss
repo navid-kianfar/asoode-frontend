@@ -17,4 +17,86 @@
     background: #f2f2f2;
     min-height: 200px;
   }
+
+  .reports {
+    padding: 20px;
+
+    .reports-holder {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .events-holder {
+        max-width: 100%;
+        width: 300px;
+      }
+
+      .overall-holder {
+        width: 250px;
+        margin: 0 20px;
+      }
+
+      .progress-holder {
+        flex-grow: 1;
+        -webkit-box-flex: 1;
+      }
+    }
+
+    .wrapper {
+      background: #ffffff;
+      border-radius: 10px;
+      min-height: 150px;
+      padding: 20px;
+      h4 {
+        color: #999999;
+        font-size: 0.9rem;
+      }
+
+      .info {
+        display: flex;
+
+        .item {
+          display: flex;
+          font-size: 0.7rem;
+          color: #999999;
+          margin: 0 10px;
+          .color {
+            display: flex;
+            width: 7px;
+            height: 7px;
+            border-radius: 7px;
+            position: relative;
+            top: 5px;
+
+           &.past {
+             background-color: #ee6285;
+           }
+           &.in-time {
+             background-color: #74d68c;
+           }
+           &.upcoming {
+             background-color: #fef386;
+           }
+          }
+        }
+
+        .details {
+          color: #666666;
+          display: flex;
+          font-size: 0.7rem;
+          flex-grow: 1;
+          -webkit-box-flex: 1;
+          direction: ltr;
+          text-decoration: underline;
+          font-weight: 600;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 500px) {
+  .header {
+    display: block !important;
+  }
 }

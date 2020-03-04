@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="upload-container">
+    <div *ngIf="filesService.uploading.length" class="upload-container">
       <div class="header">
         <div class="title">
           {{

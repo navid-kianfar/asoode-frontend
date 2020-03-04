@@ -76,6 +76,9 @@ import { ChangePhoneComponent } from './modals/change-phone/change-phone.compone
 import { FileFolderPreviewComponent } from './components/app/files-folder-preview/file-folder-preview.component';
 import { FilesExplorerComponent } from './components/app/files-explorer/files-explorer.component';
 import { CtrlClickDirective } from './directives/core/ctrl-click.directive';
+import { MonthViewComponent } from './components/app/month-view/month-view.component';
+import { DashboardOverallComponent } from './components/app/dashboard-overall/dashboard-overall.component';
+import { DashboardProgressComponent } from './components/app/dashboard-progress/dashboard-progress.component';
 
 @NgModule({
   declarations: [
@@ -133,6 +136,9 @@ import { CtrlClickDirective } from './directives/core/ctrl-click.directive';
     FileFolderPreviewComponent,
     FilesExplorerComponent,
     CtrlClickDirective,
+    MonthViewComponent,
+    DashboardOverallComponent,
+    DashboardProgressComponent,
   ],
   entryComponents: [ConfirmComponent, PromptComponent, ChangePhoneComponent],
   imports: [

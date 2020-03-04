@@ -1,0 +1,61 @@
+.month-view {
+  padding-top: 10px;
+  padding-bottom: 30px;
+  table {
+    margin: 0 auto;
+    color: #808080;
+
+    th {
+      font-size: 0.7rem;
+      padding-bottom: 10px;
+      text-align: center;
+    }
+
+    td {
+      //padding-bottom: 10px;
+      font-size: 0.9rem;
+
+      .square-wrapper {
+        width: 30px;
+        height: 30px;
+
+        .square-inner {
+          justify-content: center;
+          display: flex;
+          height: 100%;
+          align-items: center;
+
+
+        }
+
+        &.past {
+          .square-inner {
+            background: #ee6285;
+            border-radius: 30px;
+            color: #fff;
+          }
+        }
+        &.in-time {
+          .square-inner {
+            background: #74d68c;
+            border-radius: 30px;
+          }
+        }
+        &.upcoming {
+          .square-inner {
+            background: #fef386;
+            border-radius: 30px;
+          }
+        }
+        &.today {
+          .square-inner {
+            background: #2a70b6;
+            border-radius: 30px;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+}
