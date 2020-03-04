@@ -1,5 +1,4 @@
 .overall-report {
-
   .circles-container {
     width: 170px;
     height: 170px;
@@ -53,9 +52,21 @@
         font-size: 0.5rem;
       }
 
-      &.box-1 { .label { background-color: #b977f7 } }
-      &.box-2 { .label { background-color: #74d68c } }
-      &.box-3 { .label { background-color: #ee6285 } }
+      &.box-1 {
+        .label {
+          background-color: #b977f7;
+        }
+      }
+      &.box-2 {
+        .label {
+          background-color: #74d68c;
+        }
+      }
+      &.box-3 {
+        .label {
+          background-color: #ee6285;
+        }
+      }
     }
   }
 }

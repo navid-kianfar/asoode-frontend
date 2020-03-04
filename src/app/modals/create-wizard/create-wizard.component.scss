@@ -1,4 +1,6 @@
-.modal-body { padding: 20px }
+.modal-body {
+  padding: 20px;
+}
 .choose {
   .items {
     display: flex;
@@ -22,7 +24,8 @@
 }
 .create-group {
   ::ng-deep .af-textbox {
-    input, textarea {
+    input,
+    textarea {
       width: 300px !important;
       resize: none;
     }

@@ -23,11 +23,12 @@ body {
 }
 @font-face {
   font-family: 'ASOODE';
-  src:  url('/assets/fonts/icons/asoode/ASOODE.eot?j3anoh');
-  src:  url('/assets/fonts/icons/asoode/ASOODE.eot?j3anoh#iefix') format('embedded-opentype'),
-  url('/assets/fonts/icons/asoode/ASOODE.ttf?j3anoh') format('truetype'),
-  url('/assets/fonts/icons/asoode/ASOODE.woff?j3anoh') format('woff'),
-  url('/assets/fonts/icons/asoode/ASOODE.svg?j3anoh#ASOODE') format('svg');
+  src: url('/assets/fonts/icons/asoode/ASOODE.eot?j3anoh');
+  src: url('/assets/fonts/icons/asoode/ASOODE.eot?j3anoh#iefix')
+      format('embedded-opentype'),
+    url('/assets/fonts/icons/asoode/ASOODE.ttf?j3anoh') format('truetype'),
+    url('/assets/fonts/icons/asoode/ASOODE.woff?j3anoh') format('woff'),
+    url('/assets/fonts/icons/asoode/ASOODE.svg?j3anoh#ASOODE') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
