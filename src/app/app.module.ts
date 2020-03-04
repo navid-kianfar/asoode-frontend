@@ -85,6 +85,7 @@ import { DashboardActivityComponent } from './components/app/dashboard-activity/
 import { DashboardProjectComponent } from './components/app/dashboard-project/dashboard-project.component';
 import { DashboardProjectTemplatesComponent } from './components/app/dashboard-project-templates/dashboard-project-templates.component';
 import { ProjectInfoComponent } from './components/app/project-info/project-info.component';
+import { CreateWizardComponent } from './modals/create-wizard/create-wizard.component';
 
 @NgModule({
   declarations: [
@@ -149,8 +150,14 @@ import { ProjectInfoComponent } from './components/app/project-info/project-info
     DashboardProjectComponent,
     DashboardProjectTemplatesComponent,
     ProjectInfoComponent,
+    CreateWizardComponent,
   ],
-  entryComponents: [ConfirmComponent, PromptComponent, ChangePhoneComponent],
+  entryComponents: [
+    ConfirmComponent,
+    PromptComponent,
+    ChangePhoneComponent,
+    CreateWizardComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
