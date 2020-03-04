@@ -28,7 +28,6 @@ export class MonthViewComponent implements OnInit {
         };
       }
     }
-    console.log(days);
     this.days = days;
   }
 

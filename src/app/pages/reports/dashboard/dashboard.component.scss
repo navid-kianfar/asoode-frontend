@@ -19,24 +19,25 @@
   }
 
   .reports {
-    padding: 20px;
+    padding: 20px 20px 0;
 
     .reports-holder {
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
 
       .events-holder {
         max-width: 100%;
         width: 300px;
+        margin-bottom: 20px;
       }
 
       .overall-holder {
         width: 250px;
-        margin: 0 20px;
+        margin: 0 20px 20px;
       }
 
       .progress-holder {
+        margin-bottom: 20px;
         flex-grow: 1;
         -webkit-box-flex: 1;
       }
@@ -45,7 +46,7 @@
     .wrapper {
       background: #ffffff;
       border-radius: 10px;
-      min-height: 150px;
+      min-height: 330px;
       padding: 20px;
       h4 {
         color: #999999;

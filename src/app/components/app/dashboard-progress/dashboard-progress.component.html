@@ -1,1 +1,17 @@
-<p>dashboard-progress works!</p>
+<div class="progress-report">
+  <ngx-charts-bar-vertical-2d
+    [hidden]="hidden"
+    [view]="view"
+    [gradient]="false"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="false"
+    [showXAxisLabel]="false"
+    [showYAxisLabel]="false"
+    [xAxisLabel]="''"
+    [yAxisLabel]="''"
+    [scheme]="{ domain: ['#ee6285', '#74d68c', '#59a8ef'] }"
+    [results]="chartData"
+    (window:resize)="onResize($event)"
+  ></ngx-charts-bar-vertical-2d>
+</div>

@@ -5,6 +5,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgxPopperModule } from 'ngx-popper';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptor } from './services/http.interceptor';
@@ -48,13 +58,6 @@ import { ForgotComponent } from './pages/auth/forgot/forgot.component';
 import { ValidationComponent } from './components/core/validation/validation.component';
 import { OnlyNumberDirective } from './directives/core/only-number.directive';
 import { HeaderComponent } from './components/app/header/header.component';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProfileComponent } from './pages/account/profile/profile.component';
 import { FilesComponent } from './pages/storage/files/files.component';
 import { TransactionsComponent } from './components/app/account/transactions/transactions.component';
@@ -63,9 +66,7 @@ import { CulturedDatePipe } from './pipes/core/cultured-date.pipe';
 import { CulturedDateTimePipe } from './pipes/core/cultured-date-time.pipe';
 import { MomentAgoPipe } from './pipes/core/moment-ago.pipe';
 import { ConfirmComponent } from './modals/confirm/confirm.component';
-import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 import { EnterToBrPipe } from './pipes/core/enter-to-br.pipe';
-import { NgxPopperModule } from 'ngx-popper';
 import { QuickAccessComponent } from './components/app/quick-access/quick-access.component';
 import { SearchResultComponent } from './components/app/search-result/search-result.component';
 import { ConfirmAccountComponent } from './components/app/confirm-account/confirm-account.component';
@@ -79,7 +80,7 @@ import { CtrlClickDirective } from './directives/core/ctrl-click.directive';
 import { MonthViewComponent } from './components/app/month-view/month-view.component';
 import { DashboardOverallComponent } from './components/app/dashboard-overall/dashboard-overall.component';
 import { DashboardProgressComponent } from './components/app/dashboard-progress/dashboard-progress.component';
-import {RoundProgressModule} from 'angular-svg-round-progressbar';
+import {BarChartModule} from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -165,6 +166,7 @@ import {RoundProgressModule} from 'angular-svg-round-progressbar';
     ),
     NgxPopperModule.forRoot({placement: 'bottom'}),
     RoundProgressModule,
+    BarChartModule,
   ],
   providers: [
     // {

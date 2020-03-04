@@ -11,8 +11,4 @@ export class DashboardOverallComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  callback($event: number) {
-    console.log($event);
-  }
 }
