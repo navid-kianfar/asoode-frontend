@@ -1,7 +1,7 @@
 <div class="project-info" [class.template]="template">
   <div class="title">
-    <i *ngIf="project.premium" class="icon-stack31"></i>
-    <i *ngIf="!project.premium" class="icon-cube2"></i>
+    <i *ngIf="project.premium" class="icon-project"></i>
+    <i *ngIf="!project.premium" class="icon-workpackage"></i>
     &nbsp;<span>{{project.title}}</span>
   </div>
   <div class="description">{{project.description}}</div>
@@ -16,11 +16,11 @@
         <span>{{'N_SUB_PROJECT' | translate | stringFormat:project.subProjects.length}}</span>
       </div>
       <div class="item">
-        <i class="icon-cube2"></i>&nbsp;
+        <i class="icon-workpackage"></i>&nbsp;
         <span>{{'N_WORK_PACKAGE' | translate | stringFormat:project.workPackages.length}}</span>
       </div>
       <div class="item">
-        <i class="icon-circles2"></i>&nbsp;
+        <i class="icon-task"></i>&nbsp;
         <span>{{'N_CARDS' | translate | stringFormat:project.tasks}}</span>
       </div>
     </ng-container>
