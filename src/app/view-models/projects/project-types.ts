@@ -8,6 +8,7 @@ export interface ProjectViewModel extends BaseViewModel {
   userId: string;
   title: string;
   description: string;
+  premium: boolean;
   members: ProjectMemberViewModel[];
   seasons: ProjectSeasonViewModel[];
   subProjects: SubProjectViewModel[];

@@ -154,5 +154,10 @@
   "SIMPLE_PROJECTS": "پروژه ساده",
   "WBS_PROJECTS": "پروژه دارای ساختار",
   "NO_PROJECTS_YET": "هنوز پروژه\u200Cای ایجاد نشده",
-  "CREATE_SIMPLE_OR_COMPLEX_PROJECT": "ایجاد پروژه ساده یا دارای ساختار"
+  "CREATE_SIMPLE_OR_COMPLEX_PROJECT": "ایجاد پروژه ساده یا دارای ساختار",
+  "N_SEASONS": "{0} فصل",
+  "N_SUB_PROJECT": "{0} زیر پروژه",
+  "N_WORK_PACKAGE": "{0} بسته کاری",
+  "N_CARDS": "{0} کارت",
+  "N_USERS": "{0} عضو"
 }
