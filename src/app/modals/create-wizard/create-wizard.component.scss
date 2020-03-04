@@ -7,6 +7,16 @@
 
     ::ng-deep .mat-radio-label {
       white-space: pre-line;
+      align-items: end;
+    }
+
+    ::ng-deep span.title {
+      font-weight: 500;
+      font-size: 1rem;
+    }
+    ::ng-deep p.description {
+      color: #808080;
+      font-size: 0.8rem;
     }
   }
 }

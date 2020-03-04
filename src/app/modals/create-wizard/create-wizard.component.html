@@ -1,36 +1,41 @@
 <div class="modal-content create-modal">
-  <div class="modal-header">
-    <button *ngIf="mode !== WizardMode.Choose" (click)="onBack($event)">
-      <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
-      <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
-    </button>
-    <h4 class="modal-title">
-      {{ 'CREATE' | translate: true }}&nbsp;...
-    </h4>
-    <button (click)="onCancel($event)">
-      <i class="icon-cross"></i>
-    </button>
-  </div>
-
   <ng-container *ngIf="mode === WizardMode.Choose">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        {{ 'CREATE' | translate: true }}&nbsp;...
+      </h4>
+      <button (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
     <div class="modal-body choose">
 
       <mat-radio-group [(ngModel)]="continueAs" class="items">
         <mat-radio-button color="primary" [value]="WizardMode.SimpleProject">
-          <span>{{'SIMPLE_PROJECTS' | translate }}</span>
-          <p>{{'SIMPLE_PROJECTS_DESCRIPTION' | translate }}</p>
+          <span class="title">
+            <i class="icon-project"></i>
+            {{'SIMPLE_PROJECTS' | translate }}
+          </span>
+          <p class="description">{{'SIMPLE_PROJECTS_DESCRIPTION' | translate }}</p>
         </mat-radio-button>
         <mat-radio-button color="primary" [value]="WizardMode.ComplexProject">
-          <span>{{'WBS_PROJECTS' | translate }}</span>
-          <p>{{'WBS_PROJECTS_DESCRIPTION' | translate }}</p>
+          <span class="title">
+            <i class="icon-tree7"></i>
+            {{'WBS_PROJECTS' | translate }}
+          </span>
+          <p class="description">{{'WBS_PROJECTS_DESCRIPTION' | translate }}</p>
         </mat-radio-button>
         <mat-radio-button color="primary" [value]="WizardMode.Group">
-          <span>{{'NEW_GROUP' | translate }}</span>
-          <p>{{'NEW_GROUP_DESCRIPTION' | translate }}</p>
+          <span class="title">
+            <i class="icon-team"></i>
+            {{'NEW_GROUP' | translate }}
+          </span>
+          <p class="description">{{'NEW_GROUP_DESCRIPTION' | translate }}</p>
         </mat-radio-button>
         <mat-radio-button color="primary" [value]="WizardMode.Import">
-          <span>{{'IMPORT' | translate }}</span>
-          <p>{{'IMPORT_DESCRIPTION' | translate }}</p>
+          <i class="icon-paste"></i>
+          <span class="title">{{'IMPORT' | translate }}</span>
+          <p class="description">{{'IMPORT_DESCRIPTION' | translate }}</p>
         </mat-radio-button>
       </mat-radio-group>
 
@@ -42,6 +47,45 @@
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Group">
+    <div class="modal-header">
+      <button (click)="onBack($event)">
+        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
+        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
+      </button>
+      <h4 class="modal-title">
+        {{ 'NEW_GROUP' | translate: true }}&nbsp;...
+      </h4>
+      <button (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
+    <div class="modal-body">
+
+    </div>
+    <div class="modal-footer">
+      <!--    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">-->
+      <!--      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>-->
+      <!--      {{ actionLabel | translate: true }}</button-->
+      <!--    >&nbsp;-->
+      <!--    <button (click)="onCancel($event)" mat-button>-->
+      <!--      <i *ngIf="cancelWaiting" class="icon-spin icon-spinner2"></i>-->
+      <!--      {{ cancelLabel | translate: true }}-->
+      <!--    </button>-->
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mode === WizardMode.Import">
+    <div class="modal-header">
+      <button (click)="onBack($event)">
+        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
+        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
+      </button>
+      <h4 class="modal-title">
+        {{ 'IMPORT' | translate: true }}&nbsp;...
+      </h4>
+      <button (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
     <div class="modal-body">
 
     </div>
@@ -72,21 +116,6 @@
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.ComplexProject">
-    <div class="modal-body">
-
-    </div>
-    <div class="modal-footer">
-      <!--    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">-->
-      <!--      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>-->
-      <!--      {{ actionLabel | translate: true }}</button-->
-      <!--    >&nbsp;-->
-      <!--    <button (click)="onCancel($event)" mat-button>-->
-      <!--      <i *ngIf="cancelWaiting" class="icon-spin icon-spinner2"></i>-->
-      <!--      {{ cancelLabel | translate: true }}-->
-      <!--    </button>-->
-    </div>
-  </ng-container>
-  <ng-container *ngIf="mode === WizardMode.Import">
     <div class="modal-body">
 
     </div>

@@ -39,10 +39,13 @@ export class CreateWizardComponent
   onBack($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
+    this.mode = WizardMode.Choose;
   }
 
   next($event: MouseEvent) {
-
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.mode = this.continueAs;
   }
 }
 enum WizardMode {
