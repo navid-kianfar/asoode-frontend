@@ -1,0 +1,61 @@
+.overall-report {
+
+  .circles-container {
+    width: 170px;
+    height: 170px;
+    //background: red;
+    position: relative;
+    margin: 10px auto;
+
+    .circle-1 {
+      width: 150px;
+      height: 150px;
+      //background: blue;
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      z-index: 1;
+    }
+    .circle-2 {
+      width: 120px;
+      height: 120px;
+      //background: green;
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      z-index: 2;
+    }
+    .circle-3 {
+      width: 90px;
+      height: 90px;
+      //background: yellow;
+      position: absolute;
+      top: 45px;
+      left: 45px;
+      z-index: 3;
+    }
+  }
+
+  .info {
+    display: flex;
+    text-align: center;
+    .box {
+      .label {
+        width: 40px;
+        height: 3px;
+        margin: 0 auto;
+      }
+      .number {
+        font-size: 2rem;
+        font-weight: 400;
+      }
+      .title {
+        font-size: 0.5rem;
+      }
+
+      &.box-1 { .label { background-color: #b977f7 } }
+      &.box-2 { .label { background-color: #74d68c } }
+      &.box-3 { .label { background-color: #ee6285 } }
+    }
+  }
+}

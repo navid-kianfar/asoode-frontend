@@ -1,1 +1,71 @@
-<p>dashboard-overall works!</p>
+<div class="overall-report">
+  <div class="circles-container">
+    <div class="circle-1">
+      <round-progress
+        [current]="50"
+        [max]="100"
+        [color]="'#b977f7'"
+        [background]="'#e6e6e6'"
+        [stroke]="4"
+        [semicircle]="false"
+        [rounded]="true"
+        [clockwise]="false"
+        [responsive]="true"
+        [duration]="400"
+        [animation]="'easeInOutQuart'"
+        [animationDelay]="0"
+        (onRender)="callback($event)"></round-progress>
+    </div>
+    <div class="circle-2">
+      <round-progress
+        [current]="50"
+        [max]="100"
+        [color]="'#74d68c'"
+        [background]="'#e6e6e6'"
+        [stroke]="4"
+        [semicircle]="false"
+        [rounded]="true"
+        [clockwise]="false"
+        [responsive]="true"
+        [duration]="600"
+        [animation]="'easeInOutQuart'"
+        [animationDelay]="0"
+        (onRender)="callback($event)"></round-progress>
+    </div>
+    <div class="circle-3">
+      <round-progress
+        [current]="50"
+        [max]="100"
+        [color]="'#ee6285'"
+        [background]="'#e6e6e6'"
+        [stroke]="4"
+        [semicircle]="false"
+        [rounded]="true"
+        [clockwise]="false"
+        [responsive]="true"
+        [duration]="800"
+        [animation]="'easeInOutQuart'"
+        [animationDelay]="0"
+        (onRender)="callback($event)"></round-progress>
+    </div>
+  </div>
+  <div class="info">
+    <div class="box box-1">
+      <div class="label"></div>
+      <div class="number">123</div>
+      <div class="title">{{ 'DONE_CARDS' | translate}}</div>
+    </div>
+    <div class="box box-2">
+      <div class="label"></div>
+      <div class="number">123</div>
+      <div class="title">{{ 'DONE_CARDS' | translate}}</div>
+    </div>
+    <div class="box box-3">
+      <div class="label"></div>
+      <div class="number">123</div>
+      <div class="title">{{ 'DONE_CARDS' | translate}}</div>
+    </div>
+  </div>
+</div>
+
+

@@ -79,6 +79,7 @@ import { CtrlClickDirective } from './directives/core/ctrl-click.directive';
 import { MonthViewComponent } from './components/app/month-view/month-view.component';
 import { DashboardOverallComponent } from './components/app/dashboard-overall/dashboard-overall.component';
 import { DashboardProgressComponent } from './components/app/dashboard-progress/dashboard-progress.component';
+import {RoundProgressModule} from 'angular-svg-round-progressbar';
 
 @NgModule({
   declarations: [
@@ -155,14 +156,15 @@ import { DashboardProgressComponent } from './components/app/dashboard-progress/
     MatMenuModule,
     MatSnackBarModule,
     SimpleModalModule.forRoot(
-      { container: 'modal-container' },
+      {container: 'modal-container'},
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
         closeOnClickOutside: true,
       },
     ),
-    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    NgxPopperModule.forRoot({placement: 'bottom'}),
+    RoundProgressModule,
   ],
   providers: [
     // {
