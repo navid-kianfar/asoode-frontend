@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SimpleModalComponent} from 'ngx-simple-modal';
 import {CreateModalParameters} from '../../view-models/modals/modals-types';
+import {CultureService} from '../../services/core/culture.service';
 
 @Component({
   selector: 'app-create-wizard',
@@ -10,10 +11,44 @@ import {CreateModalParameters} from '../../view-models/modals/modals-types';
 export class CreateWizardComponent
   extends SimpleModalComponent<CreateModalParameters, boolean>
   implements OnInit {
+  WizardMode = WizardMode;
+  actionWaiting: boolean;
+  cancelWaiting: boolean;
+  mode: WizardMode;
+  continueAs: WizardMode;
 
-  constructor() { super(); }
+  constructor(readonly cultureService: CultureService) { super(); }
 
   ngOnInit() {
+    this.mode = WizardMode.Choose;
+    this.continueAs = WizardMode.SimpleProject;
+  }
+  async onAction($event: MouseEvent) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    // this.actionWaiting = true;
   }
 
+  async onCancel($event: MouseEvent) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.result = false;
+    this.close();
+  }
+
+  onBack($event: MouseEvent) {
+    $event.stopPropagation();
+    $event.preventDefault();
+  }
+
+  next($event: MouseEvent) {
+
+  }
+}
+enum WizardMode {
+  Choose = 1,
+  Group = 2,
+  SimpleProject = 3,
+  ComplexProject = 4,
+  Import = 5
 }
