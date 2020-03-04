@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IFormGroup } from './contracts';
+import { FormViewModel } from './contracts';
 import { FormElementType } from '../../../library/core/enums';
 import { ModalProgress } from '../../../view-models/core/modal-types';
 
@@ -9,7 +9,7 @@ import { ModalProgress } from '../../../view-models/core/modal-types';
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
-  @Input() elements: IFormGroup[];
+  @Input() elements: FormViewModel[];
   @Input() cssClass: string;
   @Input() standalone?: boolean;
   @Input() uploading?: ModalProgress;
@@ -29,7 +29,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {}
 
-  checkDisabled(group: IFormGroup, element: any) {
+  checkDisabled(group: FormViewModel, element: any) {
     return (
       this.cancelWaiting ||
       this.actionWaiting ||
@@ -61,7 +61,7 @@ export class FormComponent implements OnInit {
   //   }
   // }
 
-  columnSize(group: IFormGroup): string {
+  columnSize(group: FormViewModel): string {
     if (!group.size) {
       return 'col-sm-12';
     }

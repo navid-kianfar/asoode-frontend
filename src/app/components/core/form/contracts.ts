@@ -3,7 +3,7 @@ import {
   FormElementType,
 } from '../../../library/core/enums';
 
-export interface IFormGroup {
+export interface FormViewModel {
   disabled?: boolean;
   title?: string;
   visible?: boolean;
@@ -12,8 +12,17 @@ export interface IFormGroup {
   elements: IFormElement[];
 }
 
+export interface IFormElementCheckbox extends IFormElement {
+  params: {
+    disabled?: boolean;
+    model: boolean;
+    label: string;
+    summary?: string;
+  };
+}
 export interface IFormElementCaptcha extends IFormElement {
   params: {
+    disabled?: boolean;
     model: IFormElementCaptchaModel;
   };
 }

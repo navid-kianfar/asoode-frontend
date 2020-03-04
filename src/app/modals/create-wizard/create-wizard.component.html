@@ -60,17 +60,17 @@
       </button>
     </div>
     <div class="modal-body">
-
+      <app-form
+        [standalone]="true"
+        [elements]="groupForm"
+        [actionWaiting]="actionWaiting"
+      ></app-form>
     </div>
     <div class="modal-footer">
-      <!--    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">-->
-      <!--      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>-->
-      <!--      {{ actionLabel | translate: true }}</button-->
-      <!--    >&nbsp;-->
-      <!--    <button (click)="onCancel($event)" mat-button>-->
-      <!--      <i *ngIf="cancelWaiting" class="icon-spin icon-spinner2"></i>-->
-      <!--      {{ cancelLabel | translate: true }}-->
-      <!--    </button>-->
+      <button (click)="createGroup($event)" mat-flat-button [color]="'primary'">
+        <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+        {{ 'CREATE_GROUP' | translate: true }}</button
+      >
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Import">

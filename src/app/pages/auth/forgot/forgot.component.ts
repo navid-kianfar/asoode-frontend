@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IFormGroup } from '../../../components/core/form/contracts';
+import { FormViewModel } from '../../../components/core/form/contracts';
 import { Router } from '@angular/router';
 import { AppInitializerProvider } from '../../../services/app.initializer';
 import { FormService } from '../../../services/core/form.service';
@@ -14,8 +14,8 @@ import { ValidationService } from '../../../services/core/validation.service';
 })
 export class ForgotComponent implements OnInit {
   ViewMode = ViewMode;
-  form: IFormGroup[];
-  resetForm: IFormGroup[];
+  form: FormViewModel[];
+  resetForm: FormViewModel[];
   waiting: boolean;
   mode: ViewMode;
   username: string;

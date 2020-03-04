@@ -7,7 +7,7 @@ import {
   IFormElementDropDown,
   IFormElementInput,
   IFormElementVerification,
-  IFormGroup,
+  FormViewModel, IFormElementCheckbox,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 
@@ -20,6 +20,11 @@ const VERIFICATION_LENGTH = 6;
 export class FormService {
   constructor() {}
 
+  createCheckbox(options: IFormElementCheckbox): IFormElementCheckbox {
+    options.type = FormElementType.Checkbox;
+    options.validation = options.validation || { required: { value: false } };
+    return options;
+  }
   createInput(options: IFormElementInput): IFormElementInput {
     options.type = FormElementType.Input;
     options.validation = options.validation || { required: { value: false } };
@@ -80,7 +85,7 @@ export class FormService {
     } as IFormElementCaptcha;
   }
 
-  prepare(form: IFormGroup[]): any {
+  prepare(form: FormViewModel[]): any {
     this.clearErrors(form);
     const model = this.getModel(form);
     const isValid = this.validateModel(form, model);
@@ -89,7 +94,7 @@ export class FormService {
     }
     return model;
   }
-  clearErrors(form: IFormGroup[]) {
+  clearErrors(form: FormViewModel[]) {
     form.forEach(group => {
       group.elements.forEach(element => {
         if (!element.validation) {
@@ -99,7 +104,7 @@ export class FormService {
       });
     });
   }
-  setErrors(form: IFormGroup[], field: string, errors: string[]) {
+  setErrors(form: FormViewModel[], field: string, errors: string[]) {
     form.forEach(group => {
       group.elements.forEach(element => {
         if (!element.validation || element.config.field !== field) {
@@ -109,7 +114,7 @@ export class FormService {
       });
     });
   }
-  getModel(form: IFormGroup[]): any {
+  getModel(form: FormViewModel[]): any {
     const model = {} as any;
     form.forEach(group => {
       group.elements.forEach(element => {
@@ -121,21 +126,21 @@ export class FormService {
     });
     return model;
   }
-  setModel(form: IFormGroup[], model: any): void {
+  setModel(form: FormViewModel[], model: any): void {
     form.forEach(group => {
       group.elements.forEach(element => {
         element.params.model = model[element.config.field];
       });
     });
   }
-  reset(form: IFormGroup[]) {
+  reset(form: FormViewModel[]) {
     form.forEach(group => {
       group.elements.forEach(element => {
         element.params.model = undefined;
       });
     });
   }
-  private validateModel(form: IFormGroup[], model: any): boolean {
+  private validateModel(form: FormViewModel[], model: any): boolean {
     let isValid = true;
     form.forEach(group => {
       group.elements.forEach(element => {

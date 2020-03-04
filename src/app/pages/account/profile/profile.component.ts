@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { ModalService } from '../../../services/core/modal.service';
 import { Router } from '@angular/router';
-import { IFormGroup } from '../../../components/core/form/contracts';
+import { FormViewModel } from '../../../components/core/form/contracts';
 import { FormService } from '../../../services/core/form.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
@@ -18,7 +18,7 @@ import { ValidationService } from '../../../services/core/validation.service';
 export class ProfileComponent implements OnInit {
   editing: boolean;
   waiting: boolean;
-  form: IFormGroup[];
+  form: FormViewModel[];
   constructor(
     public readonly identityService: IdentityService,
     private readonly modalService: ModalService,

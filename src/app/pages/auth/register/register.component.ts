@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IFormGroup } from '../../../components/core/form/contracts';
+import { FormViewModel } from '../../../components/core/form/contracts';
 import { FormService } from '../../../services/core/form.service';
 import { Router } from '@angular/router';
 import { IdentityService } from '../../../services/auth/identity.service';
@@ -12,7 +12,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 })
 export class RegisterComponent implements OnInit {
   waiting: boolean;
-  form: IFormGroup[];
+  form: FormViewModel[];
   mode: ViewMode;
   ViewMode = ViewMode;
   username: string;

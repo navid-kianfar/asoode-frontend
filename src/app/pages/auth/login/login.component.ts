@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IFormGroup } from '../../../components/core/form/contracts';
+import { FormViewModel } from '../../../components/core/form/contracts';
 import { FormService } from '../../../services/core/form.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';
@@ -12,7 +12,7 @@ import { AppInitializerProvider } from '../../../services/app.initializer';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  form: IFormGroup[];
+  form: FormViewModel[];
   waiting: boolean;
   mode: ViewMode;
   username: string;

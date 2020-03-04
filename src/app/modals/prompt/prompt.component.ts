@@ -5,7 +5,7 @@ import {
   ModalProgress,
 } from '../../view-models/core/modal-types';
 import { FormService } from '../../services/core/form.service';
-import { IFormGroup } from '../../components/core/form/contracts';
+import { FormViewModel } from '../../components/core/form/contracts';
 
 @Component({
   selector: 'app-prompt',
@@ -16,10 +16,10 @@ export class PromptComponent
   extends SimpleModalComponent<PromptModalParameters, boolean>
   implements OnInit {
   progress?: ModalProgress;
-  cancel?: (params?: any, form?: IFormGroup[]) => Promise<any>;
-  action?: (params: any, form: IFormGroup[]) => Promise<any>;
+  cancel?: (params?: any, form?: FormViewModel[]) => Promise<any>;
+  action?: (params: any, form: FormViewModel[]) => Promise<any>;
   cssClass?: string;
-  form: IFormGroup[];
+  form: FormViewModel[];
   title?: string;
   summary?: string;
   actionLabel?: string;

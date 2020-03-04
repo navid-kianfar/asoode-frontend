@@ -1,4 +1,4 @@
-import { IFormGroup } from '../../components/core/form/contracts';
+import { FormViewModel } from '../../components/core/form/contracts';
 
 export interface ModalParameters {
   cancel?: () => Promise<any>;
@@ -14,10 +14,10 @@ export interface ModalParameters {
 }
 export interface PromptModalParameters {
   title: string;
-  form: IFormGroup[];
+  form: FormViewModel[];
   progress?: ModalProgress;
-  cancel?: (params?: any, form?: IFormGroup[]) => Promise<any>;
-  action?: (params: any, form: IFormGroup[]) => Promise<any>;
+  cancel?: (params?: any, form?: FormViewModel[]) => Promise<any>;
+  action?: (params: any, form: FormViewModel[]) => Promise<any>;
   cssClass?: string;
   summary?: string;
   actionColor?: string;

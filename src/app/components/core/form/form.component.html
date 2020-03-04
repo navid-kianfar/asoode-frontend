@@ -66,6 +66,17 @@
                   </div>
                 </ng-container>
 
+                <!-- Checkbox -->
+                <ng-container *ngIf="element.type === FormElementType.Checkbox">
+                  <app-checkbox
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                    [summary]="element.params.summary"
+                    [label]="element.params.label"
+                  ></app-checkbox>
+                </ng-container>
+
                 <!-- Captcha -->
                 <ng-container *ngIf="element.type === FormElementType.Captcha">
                   <app-captcha
