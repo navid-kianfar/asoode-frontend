@@ -8,7 +8,7 @@ import {
   IFormElementInput,
   IFormElementVerification,
   FormViewModel,
-  IFormElementCheckbox,
+  IFormElementCheckbox, IFormElementLabel,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 import {CaptchaObject} from '../../view-models/core/captcha-types';
@@ -49,6 +49,12 @@ export class FormService {
 
   createButton(options: IFormElementButton): IFormElementButton {
     options.type = FormElementType.Button;
+    options.validation = { errors: [], required: { value: false } };
+    return options;
+  }
+
+  createLabel(options: IFormElementLabel): IFormElementLabel {
+    options.type = FormElementType.Label;
     options.validation = { errors: [], required: { value: false } };
     return options;
   }
@@ -124,7 +130,7 @@ export class FormService {
     const model = {} as any;
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (element.type === FormElementType.Button) {
+        if (element.type === FormElementType.Button || element.type === FormElementType.Label) {
           return;
         }
         model[element.config.field] = element.params.model;
@@ -180,7 +186,7 @@ export class FormService {
     let isValid = true;
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (element.type === FormElementType.Button) {
+        if (element.type === FormElementType.Button || element.type === FormElementType.Label) {
           return;
         }
         if (!element.validation) {

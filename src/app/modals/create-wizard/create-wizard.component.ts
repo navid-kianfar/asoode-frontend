@@ -118,6 +118,11 @@ export class CreateWizardComponent
     this.requireMapMembers = true;
     this.mapForm = [{
       elements: [
+        this.formService.createLabel({
+          config: { field: '', label: 'IMPORT_USERNAME' },
+          params: { label: 'IMPORT_USER_MAPPED_EMAIL' }
+        }),
+        ...[
         {id: '1', username: 'Navid Kianfar'},
         {id: '2', username: 'Saba Kianfar'},
         {id: '3', username: 'Hamid Siahpoosh'},
@@ -138,7 +143,7 @@ export class CreateWizardComponent
             },
           }
         });
-      })
+      })]
     }];
   }
 

@@ -4,14 +4,39 @@
   <div class="holder">
     <div class="input-holder">
       <app-auto-complete [backend]="'/groups/invite-query'"
+                         [(model)]="currentEmail"
                          [placeHolder]="'EMAIL_OR_PHONE'"
                          (pick)="memberPicked($event)"
                          (startModify)="startModify($event)"
                          ltr="true"></app-auto-complete>
-      <app-dropdown [model]="AccessType.Editor" [items]="roles"></app-dropdown>
+      <app-dropdown [(model)]="currentRole" [items]="roles"></app-dropdown>
     </div>
     <div class="action">
-      <button mat-stroked-button color="primary">{{'ADD' | translate}}</button>
+      &nbsp;&nbsp;
+      <button (click)="addMember()" mat-stroked-button color="primary">{{'ADD' | translate}}</button>
+    </div>
+  </div>
+
+  <div class="members">
+    <div *ngFor="let member of members" class="member">
+      <div class="info">
+        <app-member-info [model]="member"></app-member-info>
+      </div>
+      <div class="role">
+        <ng-container *ngIf="member.access === AccessType.Owner else otherRole">
+          {{ 'ENUMS_ACCESS_TYPE_OWNER' | translate}}
+        </ng-container>
+        <ng-template #otherRole>
+          <app-dropdown [(model)]="member.access"
+                        [enum]="'AccessType'"
+                        [enumExcept]="[AccessType.Owner]"></app-dropdown>
+        </ng-template>
+      </div>
+      <div class="action">
+        <button *ngIf="member.access !== AccessType.Owner" mat-stroked-button color="warn">
+          {{ 'REMOVE' | translate}}
+        </button>
+      </div>
     </div>
   </div>
 </div>

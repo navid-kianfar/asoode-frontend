@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AccessType} from '../../../library/app/enums';
 import {ListViewModel} from '../../../view-models/core/list-types';
-import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
+import {InviteMemberViewModel, MemberInfoViewModel} from '../../../view-models/auth/identity-types';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-invite-member',
@@ -11,14 +12,39 @@ import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
 export class InviteMemberComponent implements OnInit {
 
   @Input() addOwner: boolean;
+  @Input() members: InviteMemberViewModel[];
+  @Output() membersChange = new EventEmitter<InviteMemberViewModel[]>();
 
   AccessType = AccessType;
   roles: ListViewModel[];
   current: MemberInfoViewModel;
+  currentRole: AccessType;
+  currentEmail: string;
 
-  constructor() { }
+  constructor(
+    private readonly identityService: IdentityService
+  ) { }
 
   ngOnInit() {
+    this.currentRole = AccessType.Editor;
+    if (!this.members) {
+      this.members = [];
+      if (this.addOwner) {
+        this.members.push({
+          ...this.identityService.profile,
+          access: AccessType.Owner
+        });
+      }
+      this.membersChange.emit(this.members);
+    } else {
+      if (this.addOwner) {
+        this.members.unshift({
+          ...this.identityService.profile,
+          access: AccessType.Owner
+        });
+      }
+      this.membersChange.emit(this.members);
+    }
     this.roles = [
       {
         text: 'ENUMS_ACCESS_TYPE_ADMIN',
@@ -50,5 +76,24 @@ export class InviteMemberComponent implements OnInit {
 
   startModify(text: string) {
     this.current = undefined;
+  }
+
+  addMember() {
+    if (this.current) {
+      this.members.push({
+        ...this.current,
+        access: this.currentRole
+      });
+      this.current = undefined;
+    } else {
+      this.members.push({
+        access: this.currentRole,
+        email: this.currentEmail,
+        fullName: 'UNKNOWN',
+        initials: 'UK'
+      } as InviteMemberViewModel);
+    }
+    this.currentRole = AccessType.Editor;
+    this.currentEmail = '';
   }
 }

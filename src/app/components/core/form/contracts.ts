@@ -51,6 +51,11 @@ export interface IFormElementVerification extends IFormElement {
   };
 }
 
+export interface IFormElementLabel extends IFormElement {
+  params: {
+    label: string;
+  };
+}
 export interface IFormElementButton extends IFormElement {
   params: {
     model: string;

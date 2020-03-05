@@ -1,7 +1,7 @@
 <div class="af-auto-complete">
   <input [placeholder]="placeHolder | translate:true"
          [matAutocomplete]="auto"
-         [class.ltr]="ltr">
+         [class.ltr]="ltr" [(ngModel)]="model">
   <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
     <mat-option *ngIf="isLoading" class="is-loading">
       <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
@@ -10,7 +10,7 @@
 
       <ng-container *ngFor="let item of filtered">
 
-        <mat-option (click)="pick.emit(item.payload)" class="member-item" [value]="item.value">
+        <mat-option (click)="update(item)" class="member-item" [value]="item.value">
 
           <ng-container *ngIf="(item.payload && item.payload.initials) else normal">
             <app-member-info [model]="item.payload"></app-member-info>

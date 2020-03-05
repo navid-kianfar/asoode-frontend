@@ -49,6 +49,9 @@ export class AutoCompleteComponent implements OnInit {
         })
       )
       .subscribe(data => {
+        const search = input.value;
+        this.model = search;
+        this.modelChange.emit(search);
         if (data.status === OperationResultStatus.Success) {
           this.filtered = data.data as ListViewModel[];
           console.log(this.filtered);
@@ -57,5 +60,11 @@ export class AutoCompleteComponent implements OnInit {
         }
         this.isLoading = false;
       });
+  }
+
+  update(item: ListViewModel) {
+    this.pick.emit(item.payload);
+    this.model = item.value;
+    this.modelChange.emit(item.value);
   }
 }

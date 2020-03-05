@@ -187,5 +187,8 @@
   "ACCESS_TYPE_ADMIN_DESCRIPTION": "ویرایش کارتها و مدیریت تنظیمات و اعضا",
   "ACCESS_TYPE_EDITOR_DESCRIPTION": "ویرایش کارتها و مدیریت برخی تنظیمات",
   "ACCESS_TYPE_HIDDEN_EDITOR_DESCRIPTION": "ویراستاری که تنها برای مدیران قابل مشاهده است",
-  "ACCESS_TYPE_VISITOR_DESCRIPTION": "تنها میتواند اطلاعات کارت\u200Cها را مشاهده نماید"
+  "ACCESS_TYPE_VISITOR_DESCRIPTION": "تنها میتواند اطلاعات کارت\u200Cها را مشاهده نماید",
+  "IMPORT_USERNAME": "نام عضو در برنامه ورودی",
+  "IMPORT_USER_MAPPED_EMAIL": "ایمیل عضو در آسوده",
+  "REMOVE": "حذف"
 }
