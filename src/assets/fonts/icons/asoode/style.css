@@ -13,6 +13,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-import:before {
+  content: "\e976";
+}
 .icon-download41:before {
   content: "\e970";
 }
