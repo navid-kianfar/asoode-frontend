@@ -128,7 +128,6 @@ export class DropdownComponent implements OnInit, OnChanges {
           .replace(/([a-z])([A-Z])/g, '$1-$2')
           .replace(/-/g, '_');
         const text = `ENUMS_${enumChanged}_${changed}`.toUpperCase();
-        console.log(text);
         if (this.enumExcept.indexOf(enumObj[key]) !== -1) {
           return;
         }

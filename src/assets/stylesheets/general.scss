@@ -223,9 +223,27 @@ html[dir='ltr'] {
     transform: rotate(360deg);
   }
 }
+.mat-menu-item.has-description {
+  height: 46px;
+  display: flex;
+  flex-wrap: wrap;
 
+  .title {
+    display: flex;
+    flex: 0 0 100%;
+    line-height: 23px;
+  }
+  .sub-title {
+    color: #999999;
+    font-size: 0.7rem;
+    line-height: 23px;
+  }
+}
 .primary-color {
   color: #6b3d8d !important;
+}
+.primary-bg-color {
+  background-color: #6b3d8d !important;
 }
 
 .mat-button-base {

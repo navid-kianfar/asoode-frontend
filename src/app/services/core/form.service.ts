@@ -11,6 +11,7 @@ import {
   IFormElementCheckbox,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
+import {CaptchaObject} from '../../view-models/core/captcha-types';
 
 const CAPTCHA_LENGTH = 5;
 const VERIFICATION_LENGTH = 6;
@@ -141,7 +142,37 @@ export class FormService {
   reset(form: FormViewModel[]) {
     form.forEach(group => {
       group.elements.forEach(element => {
-        element.params.model = undefined;
+
+        switch (element.type) {
+          case FormElementType.Input:
+          case FormElementType.Verification:
+          case FormElementType.AutoComplete:
+          case FormElementType.ZonePicker:
+          case FormElementType.CountryPicker:
+          case FormElementType.LocationPicker:
+          case FormElementType.Editor:
+          case FormElementType.ColorPicker:
+            element.params.model = '';
+            break;
+          case FormElementType.Captcha:
+            element.params.model = {
+              token: '', expire: '', code: ''
+            } as CaptchaObject;
+            break;
+          case FormElementType.DropDown:
+          case FormElementType.DatePicker:
+          case FormElementType.Radio:
+          case FormElementType.File:
+            element.params.model = undefined;
+            break;
+          case FormElementType.Switch:
+          case FormElementType.Checkbox:
+            element.params.model = false;
+            break;
+          case FormElementType.Tag:
+            element.params.model = [];
+            break;
+        }
       });
     });
   }
@@ -175,7 +206,6 @@ export class FormService {
       case FormElementType.DatePicker:
         return this.validateDate(element);
       case FormElementType.Radio:
-      case FormElementType.Checkbox:
       case FormElementType.Switch:
       case FormElementType.ZonePicker:
       case FormElementType.CountryPicker:
@@ -183,6 +213,8 @@ export class FormService {
       case FormElementType.Editor:
       case FormElementType.LocationPicker:
         return this.validateDefined(element);
+      case FormElementType.Checkbox:
+        return this.validateBoolean(element);
       case FormElementType.ColorPicker:
         return this.validateColor(element);
       case FormElementType.File:
@@ -190,6 +222,16 @@ export class FormService {
       case FormElementType.Tag:
         return this.validateArray(element);
     }
+  }
+  private validateBoolean(element: IFormElement): boolean {
+    if (element.validation && element.validation.required && element.validation.required.value) {
+      const isValid = element.params.model !== undefined;
+      if (!isValid) {
+        element.validation.errors = [element.validation.required.message];
+      }
+      return isValid;
+    }
+    return true;
   }
   private validateDefined(element: IFormElement): boolean {
     const isValid = element.params.model !== undefined;

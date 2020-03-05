@@ -1,0 +1,66 @@
+.member-info {
+  display: flex;
+  width: 250px;
+  max-width: 100%;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  &.selected {
+    border: 1px solid #59a8ef;
+    background-color: rgba(89, 168, 239, 0.16);
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+
+    img {
+      max-width: 50px;
+    }
+  }
+  .initials-holder {
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    .initials {
+      width: 30px;
+      height: 30px;
+      border-radius: 50px;
+      border: 2px solid #666666;
+      background-color: #e6e6e6;
+      padding-top: 3px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+  }
+  .info {
+    display: flex;
+    flex-grow: 1;
+    -webkit-box-flex: 1;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    .name {
+      display: flex;
+      flex: 0 0 100%;
+      font-weight: 400;
+      font-size: 0.9rem;
+      color: #666666;
+    }
+    .email, .bio {
+      display: flex;
+      flex: 0 0 100%;
+      font-size: 0.8rem;
+      color: #999999;
+    }
+  }
+}

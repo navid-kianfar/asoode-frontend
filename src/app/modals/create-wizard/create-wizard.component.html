@@ -10,7 +10,7 @@
       <mat-radio-group [(ngModel)]="continueAs" class="items">
         <mat-radio-button color="primary" [value]="WizardMode.SimpleProject">
           <span class="title">
-            <i class="icon-project"></i>
+            <i class="icon-workpackage"></i>
             {{ 'SIMPLE_PROJECTS' | translate }}
           </span>
           <p class="description">
@@ -57,19 +57,33 @@
         <i class="icon-cross"></i>
       </button>
     </div>
-    <div class="modal-body create-group">
-      <app-form
-        [standalone]="true"
-        [elements]="groupForm"
-        [actionWaiting]="actionWaiting"
-      ></app-form>
+
+    <div *ngIf="inviteGroupMembers">
+      <div class="modal-body create-group">
+        <app-invite-member [addOwner]="true"></app-invite-member>
+      </div>
+      <div class="modal-footer">
+        <button (click)="createGroup($event)" mat-flat-button [color]="'primary'">
+          <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+          {{ 'CREATE_GROUP' | translate: true }}
+        </button>
+      </div>
     </div>
-    <div class="modal-footer">
-      <button (click)="createGroup($event)" mat-flat-button [color]="'primary'">
-        <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-        {{ 'CREATE_GROUP' | translate: true }}
-      </button>
+    <div *ngIf="!inviteGroupMembers">
+      <div class="modal-body create-group">
+        <app-form
+          [standalone]="true"
+          [elements]="groupForm"
+          [actionWaiting]="actionWaiting"
+        ></app-form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="inviteToGroup($event)" mat-flat-button [color]="'primary'">
+          {{ 'CONTINUE' | translate: true }}
+        </button>
+      </div>
     </div>
+
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Import">
     <div class="modal-header">
@@ -143,7 +157,23 @@
         </mat-progress-bar>
       </div>
     </ng-container>
-    <ng-container *ngIf="requireMapMembers"></ng-container>
+    <ng-container *ngIf="requireMapMembers">
+      <div class="modal-body map-members">
+        <h4>{{ 'MAP_MEMBERS_DESCRIPTION' | translate}}</h4>
+
+        <app-form
+          [standalone]="true"
+          [elements]="mapForm"
+          [actionWaiting]="actionWaiting"
+        ></app-form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="importTrelloMapped($event)" mat-flat-button [color]="'primary'">
+          <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+          {{ 'IMPORT_DATA' | translate: true }}
+        </button>
+      </div>
+    </ng-container>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.SimpleProject">
     <div class="modal-body"></div>

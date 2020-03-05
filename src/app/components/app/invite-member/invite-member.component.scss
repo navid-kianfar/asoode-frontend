@@ -1,0 +1,35 @@
+.invite-member {
+  h3 {
+    font-size: 0.8rem;
+  }
+  .holder {
+    display: flex;
+
+    .input-holder {
+      display: flex;
+      flex-grow: 1;
+      -webkit-box-flex: 1;
+
+      ::ng-deep .af-auto-complete {
+        input {
+          border: 1px solid #dedede;
+          width: 250px !important;
+          line-height: 21px;
+          border-radius: 0 5px 5px 0;
+        }
+      }
+      ::ng-deep .af-dropdown {
+        button.dropdown-toggle {
+          width: 150px;
+          border-radius: 5px 0 0 5px;
+        }
+      }
+    }
+
+    .action {
+      button {
+
+      }
+    }
+  }
+}

@@ -5,7 +5,7 @@ export interface IdentityObject {
   userId: string;
   username: string;
 }
-export interface ProfileViewModel {
+export interface MemberInfoViewModel {
   email: string;
   avatar: string;
   firstName: string;
@@ -13,12 +13,14 @@ export interface ProfileViewModel {
   id: string;
   initials: string;
   lastName: string;
-  phoneNumber: string;
   username: string;
+  bio: string;
+}
+export interface ProfileViewModel extends MemberInfoViewModel {
+  phoneNumber: string;
   userType: UserType;
   timeZone: string;
   calendar: CalendarType;
-  bio: string;
   emailConfirmed: boolean;
   phoneConfirmed: boolean;
 }

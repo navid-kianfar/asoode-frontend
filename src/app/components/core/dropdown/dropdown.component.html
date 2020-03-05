@@ -21,10 +21,14 @@
     <button
       mat-menu-item
       [class.ltr]="ltr"
+      [class.has-description]="item.description"
       *ngFor="let item of items"
       (click)="onPick(item, $event, true)"
     >
-      {{ item.text | translate: true }}
+      <span class="title">{{ item.text | translate: true }}</span>
+      <span *ngIf="item.description" class="sub-title">
+        {{ item.description | translate: true }}
+      </span>
     </button>
   </mat-menu>
 </div>

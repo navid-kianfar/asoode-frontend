@@ -3,7 +3,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { Socket } from 'ngx-socket-io';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -86,7 +86,9 @@ import { DashboardProjectComponent } from './components/app/dashboard-project/da
 import { DashboardProjectTemplatesComponent } from './components/app/dashboard-project-templates/dashboard-project-templates.component';
 import { ProjectInfoComponent } from './components/app/project-info/project-info.component';
 import { CreateWizardComponent } from './modals/create-wizard/create-wizard.component';
-import {MatCheckboxModule, MatProgressBarModule, MatRadioModule} from '@angular/material';
+import {MatAutocompleteModule, MatCheckboxModule, MatFormFieldModule, MatProgressBarModule, MatRadioModule} from '@angular/material';
+import { InviteMemberComponent } from './components/app/invite-member/invite-member.component';
+import { MemberInfoComponent } from './components/app/member-info/member-info.component';
 
 @NgModule({
   declarations: [
@@ -152,6 +154,8 @@ import {MatCheckboxModule, MatProgressBarModule, MatRadioModule} from '@angular/
     DashboardProjectTemplatesComponent,
     ProjectInfoComponent,
     CreateWizardComponent,
+    InviteMemberComponent,
+    MemberInfoComponent,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -159,34 +163,37 @@ import {MatCheckboxModule, MatProgressBarModule, MatRadioModule} from '@angular/
     ChangePhoneComponent,
     CreateWizardComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatTabsModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatMenuModule,
-        MatSnackBarModule,
-        SimpleModalModule.forRoot(
-            {container: 'modal-container'},
-            {
-                ...defaultSimpleModalOptions,
-                closeOnEscape: true,
-                closeOnClickOutside: true,
-            },
-        ),
-        NgxPopperModule.forRoot({placement: 'bottom'}),
-        RoundProgressModule,
-        BarChartModule,
-        MatRadioModule,
-        MatCheckboxModule,
-        MatProgressBarModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    SimpleModalModule.forRoot(
+      {container: 'modal-container'},
+      {
+        ...defaultSimpleModalOptions,
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+      },
+    ),
+    NgxPopperModule.forRoot({placement: 'bottom'}),
+    RoundProgressModule,
+    BarChartModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatProgressBarModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     // {
     //   provide: LocationStrategy,

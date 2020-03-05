@@ -4,6 +4,7 @@ import { CreateModalParameters } from '../../view-models/modals/modals-types';
 import { CultureService } from '../../services/core/culture.service';
 import { FormViewModel } from '../../components/core/form/contracts';
 import { FormService } from '../../services/core/form.service';
+import {ValidationService} from '../../services/core/validation.service';
 
 @Component({
   selector: 'app-create-wizard',
@@ -21,6 +22,8 @@ export class CreateWizardComponent
   requireMapMembers: boolean;
   uploading: boolean;
   groupForm: FormViewModel[];
+  mapForm: FormViewModel[];
+  inviteGroupMembers: boolean;
 
   constructor(
     readonly cultureService: CultureService,
@@ -30,9 +33,11 @@ export class CreateWizardComponent
   }
 
   ngOnInit() {
-    this.mode = WizardMode.Choose;
+    this.inviteGroupMembers = true;
+    this.mode = WizardMode.Group;
+    // this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
-
+    this.mapForm = [];
     this.groupForm = [
       {
         elements: [
@@ -92,6 +97,7 @@ export class CreateWizardComponent
     // RESET ALL
     this.formService.clean(this.groupForm);
     this.requireMapMembers = false;
+    this.inviteGroupMembers = false;
 
     this.mode = this.continueAs;
   }
@@ -99,12 +105,41 @@ export class CreateWizardComponent
   createGroup($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
+  }
+
+  inviteToGroup($event: MouseEvent) {
     const model = this.formService.prepare(this.groupForm);
     console.log(model);
+    if (!model) { return; }
+    this.inviteGroupMembers = true;
   }
 
   importFromTrello() {
     this.requireMapMembers = true;
+    this.mapForm = [{
+      elements: [
+        {id: '1', username: 'Navid Kianfar'},
+        {id: '2', username: 'Saba Kianfar'},
+        {id: '3', username: 'Hamid Siahpoosh'},
+        {id: '4', username: 'Pouya Faridi'},
+        {id: '5', username: 'Neda Toussi'},
+      ].map(user => {
+        return this.formService.createInput({
+          config: { field: user.id, label: user.username },
+          params: { model: '' },
+          validation: {
+            required: {
+              value: true,
+              message: 'EMAIL_REQUIRED',
+            },
+            pattern: {
+              value: ValidationService.emailRegex,
+              message: 'EMAIL_INVALID',
+            },
+          }
+        });
+      })
+    }];
   }
 
   importFromTaskWorld() {
@@ -117,6 +152,11 @@ export class CreateWizardComponent
 
   importFromTaskulu() {
 
+  }
+
+  importTrelloMapped($event: MouseEvent) {
+    const model = this.formService.prepare(this.mapForm);
+    console.log(model);
   }
 }
 enum WizardMode {

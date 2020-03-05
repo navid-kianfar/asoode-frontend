@@ -1,0 +1,13 @@
+<div class="member-info" [class.selected]="selected">
+  <div *ngIf="model.avatar" class="avatar">
+    <img [src]="model.avatar"/>
+  </div>
+  <div *ngIf="!model.avatar" class="initials-holder">
+    <div class="initials">{{model.initials}}</div>
+  </div>
+  <div class="info">
+    <div class="name">{{model.fullName}}</div>
+    <div *ngIf="!model.bio" class="email">{{model.email}}</div>
+    <div *ngIf="model.bio" class="bio">{{model.bio}}</div>
+  </div>
+</div>

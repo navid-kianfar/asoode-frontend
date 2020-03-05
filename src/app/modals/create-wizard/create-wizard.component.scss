@@ -60,6 +60,29 @@
   }
 
   hr {
-    border: 1px solid #e6e6e6;;
+    border: 1px solid #e6e6e6;
+  }
+}
+.map-members {
+  h4 {
+    margin-bottom: 20px;
+  }
+  ::ng-deep .form-group {
+    display: flex !important;
+
+    > label {
+      display: flex;
+      flex-grow: 1;
+      -webkit-box-flex: 1;
+    }
+
+    app-input {
+      display: flex;
+    }
+
+    .af-validation-messages {
+      padding: 0 5px;
+      min-width: 120px;
+    }
   }
 }

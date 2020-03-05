@@ -1,0 +1,17 @@
+<div class="invite-member">
+  <h3>{{ 'INVITE_NEW_MEMBER' | translate}}</h3>
+
+  <div class="holder">
+    <div class="input-holder">
+      <app-auto-complete [backend]="'/groups/invite-query'"
+                         [placeHolder]="'EMAIL_OR_PHONE'"
+                         (pick)="memberPicked($event)"
+                         (startModify)="startModify($event)"
+                         ltr="true"></app-auto-complete>
+      <app-dropdown [model]="AccessType.Editor" [items]="roles"></app-dropdown>
+    </div>
+    <div class="action">
+      <button mat-stroked-button color="primary">{{'ADD' | translate}}</button>
+    </div>
+  </div>
+</div>

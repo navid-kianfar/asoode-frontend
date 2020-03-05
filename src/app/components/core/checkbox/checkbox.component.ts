@@ -16,4 +16,9 @@ export class CheckboxComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  update($event: any) {
+    this.model = $event;
+    this.modelChange.emit($event);
+  }
 }

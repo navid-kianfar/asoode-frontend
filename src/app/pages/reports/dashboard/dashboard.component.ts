@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { GroupService } from '../../../services/groups/group.service';
-import { ProjectService } from '../../../services/projects/project.service';
+import {Component, OnInit} from '@angular/core';
+import {GroupService} from '../../../services/groups/group.service';
+import {ProjectService} from '../../../services/projects/project.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +13,9 @@ export class DashboardComponent implements OnInit {
   constructor(
     readonly groupService: GroupService,
     readonly projectService: ProjectService,
-  ) {}
+  ) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }
