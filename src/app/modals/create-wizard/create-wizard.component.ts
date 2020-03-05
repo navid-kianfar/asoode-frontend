@@ -33,9 +33,7 @@ export class CreateWizardComponent
   }
 
   ngOnInit() {
-    this.inviteGroupMembers = true;
-    this.mode = WizardMode.Group;
-    // this.mode = WizardMode.Choose;
+    this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
     this.mapForm = [];
     this.groupForm = [

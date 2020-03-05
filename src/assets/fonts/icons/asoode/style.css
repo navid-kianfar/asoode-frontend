@@ -13,6 +13,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-download41:before {
+  content: "\e970";
+}
+.icon-upload41:before {
+  content: "\e971";
+}
+.icon-cog2:before {
+  content: "\e972";
+}
+.icon-bubble-dots:before {
+  content: "\e973";
+}
+.icon-server:before {
+  content: "\e974";
+}
+.icon-calendar1:before {
+  content: "\e975";
+}
 .icon-plus2:before {
   content: "\e96e";
 }
