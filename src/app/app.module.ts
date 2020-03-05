@@ -86,7 +86,7 @@ import { DashboardProjectComponent } from './components/app/dashboard-project/da
 import { DashboardProjectTemplatesComponent } from './components/app/dashboard-project-templates/dashboard-project-templates.component';
 import { ProjectInfoComponent } from './components/app/project-info/project-info.component';
 import { CreateWizardComponent } from './modals/create-wizard/create-wizard.component';
-import { MatCheckboxModule, MatRadioModule } from '@angular/material';
+import {MatCheckboxModule, MatProgressBarModule, MatRadioModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -159,33 +159,34 @@ import { MatCheckboxModule, MatRadioModule } from '@angular/material';
     ChangePhoneComponent,
     CreateWizardComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatTabsModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatMenuModule,
-    MatSnackBarModule,
-    SimpleModalModule.forRoot(
-      { container: 'modal-container' },
-      {
-        ...defaultSimpleModalOptions,
-        closeOnEscape: true,
-        closeOnClickOutside: true,
-      },
-    ),
-    NgxPopperModule.forRoot({ placement: 'bottom' }),
-    RoundProgressModule,
-    BarChartModule,
-    MatRadioModule,
-    MatCheckboxModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatTabsModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatMenuModule,
+        MatSnackBarModule,
+        SimpleModalModule.forRoot(
+            {container: 'modal-container'},
+            {
+                ...defaultSimpleModalOptions,
+                closeOnEscape: true,
+                closeOnClickOutside: true,
+            },
+        ),
+        NgxPopperModule.forRoot({placement: 'bottom'}),
+        RoundProgressModule,
+        BarChartModule,
+        MatRadioModule,
+        MatCheckboxModule,
+        MatProgressBarModule,
+    ],
   providers: [
     // {
     //   provide: LocationStrategy,

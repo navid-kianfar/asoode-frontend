@@ -1,6 +1,6 @@
 .month-view {
   padding-top: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   table {
     margin: 0 auto;
     color: #808080;
@@ -28,26 +28,26 @@
 
         &.past {
           .square-inner {
-            background: #ee6285;
+            background: rgba(238, 98, 133, 0.7);
             border-radius: 30px;
             color: #fff;
           }
         }
         &.in-time {
           .square-inner {
-            background: #74d68c;
+            background: rgba(116, 214, 140, 0.4);
             border-radius: 30px;
           }
         }
         &.upcoming {
           .square-inner {
-            background: #fef386;
+            background: rgba(254, 243, 134, 0.7);
             border-radius: 30px;
           }
         }
         &.today {
           .square-inner {
-            background: #2a70b6;
+            background: rgba(42, 112, 182, 0.7);
             border-radius: 30px;
             color: #fff;
           }
@@ -59,12 +59,14 @@
 
 .info {
   display: flex;
+  flex-wrap: wrap;
 
   .item {
     display: flex;
     font-size: 0.7rem;
     color: #999999;
     margin: 0 10px;
+    width: calc(50% - 20px);
     .color {
       display: flex;
       width: 7px;
@@ -81,6 +83,9 @@
       }
       &.upcoming {
         background-color: #fef386;
+      }
+      &.today {
+        background-color: #2a70b6;
       }
     }
   }

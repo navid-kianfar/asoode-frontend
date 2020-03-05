@@ -35,3 +35,31 @@
     font-size: 0.8rem;
   }
 }
+.import {
+
+  padding: 20px 0;
+  .item {
+    margin: 10px 0;
+    display: flex;
+    flex-grow: 1;
+    -webkit-box-flex: 1;
+
+    .logo {
+      display: flex;
+      flex-grow: 1;
+      -webkit-box-flex: 1;
+      img {
+        width: 150px;
+      }
+    }
+    .action {
+      display: flex;
+      min-width: 150px;
+      align-items: center;
+    }
+  }
+
+  hr {
+    border: 1px solid #e6e6e6;;
+  }
+}

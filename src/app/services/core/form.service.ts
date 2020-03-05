@@ -95,6 +95,10 @@ export class FormService {
     }
     return model;
   }
+  clean(form: FormViewModel[]) {
+    this.reset(form);
+    this.clearErrors(form);
+  }
   clearErrors(form: FormViewModel[]) {
     form.forEach(group => {
       group.elements.forEach(element => {

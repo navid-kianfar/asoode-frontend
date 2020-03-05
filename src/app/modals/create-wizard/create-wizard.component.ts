@@ -18,6 +18,8 @@ export class CreateWizardComponent
   continueAs: WizardMode;
   actionWaiting: boolean;
   cancelWaiting: boolean;
+  requireMapMembers: boolean;
+  uploading: boolean;
   groupForm: FormViewModel[];
 
   constructor(
@@ -86,6 +88,11 @@ export class CreateWizardComponent
   next($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
+
+    // RESET ALL
+    this.formService.clean(this.groupForm);
+    this.requireMapMembers = false;
+
     this.mode = this.continueAs;
   }
 
@@ -94,6 +101,22 @@ export class CreateWizardComponent
     $event.preventDefault();
     const model = this.formService.prepare(this.groupForm);
     console.log(model);
+  }
+
+  importFromTrello() {
+    this.requireMapMembers = true;
+  }
+
+  importFromTaskWorld() {
+
+  }
+
+  importFromMonday() {
+
+  }
+
+  importFromTaskulu() {
+
   }
 }
 enum WizardMode {
