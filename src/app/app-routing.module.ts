@@ -8,6 +8,8 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { ProfileComponent } from './pages/account/profile/profile.component';
 import { FilesComponent } from './pages/storage/files/files.component';
 import { AnonymousGuard } from './guards/anonymous.guard';
+import {MessengerComponent} from './pages/communication/messenger/messenger.component';
+import {GroupComponent} from './pages/collaboration/group/group.component';
 
 const routes: Routes = [
   {
@@ -38,6 +40,16 @@ const routes: Routes = [
   {
     path: 'account',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'messenger',
+    component: MessengerComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'group',
+    component: GroupComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'dashboard' },

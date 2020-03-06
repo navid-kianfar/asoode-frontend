@@ -178,7 +178,23 @@
     </ng-container>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.SimpleProject">
-    <div class="modal-body"></div>
+    <div class="modal-header">
+      <button (click)="onBack($event)">
+        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
+        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
+      </button>
+      <h4 class="modal-title">{{ 'SIMPLE_PROJECTS' | translate: true }}&nbsp;...</h4>
+      <button (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
+    <div class="modal-body create-simple-form">
+      <app-form
+        [standalone]="true"
+        [elements]="groupForm"
+        [actionWaiting]="actionWaiting"
+      ></app-form>
+    </div>
     <div class="modal-footer">
       <!--    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">-->
       <!--      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>-->
@@ -191,7 +207,23 @@
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.ComplexProject">
-    <div class="modal-body"></div>
+    <div class="modal-header">
+      <button (click)="onBack($event)">
+        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
+        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
+      </button>
+      <h4 class="modal-title">{{ 'WBS_PROJECTS' | translate: true }}&nbsp;...</h4>
+      <button (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
+    <div class="modal-body create-complex-form">
+      <app-form
+        [standalone]="true"
+        [elements]="groupForm"
+        [actionWaiting]="actionWaiting"
+      ></app-form>
+    </div>
     <div class="modal-footer">
       <!--    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">-->
       <!--      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>-->

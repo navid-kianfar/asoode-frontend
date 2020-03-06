@@ -89,6 +89,8 @@ import { CreateWizardComponent } from './modals/create-wizard/create-wizard.comp
 import {MatAutocompleteModule, MatCheckboxModule, MatFormFieldModule, MatProgressBarModule, MatRadioModule} from '@angular/material';
 import { InviteMemberComponent } from './components/app/invite-member/invite-member.component';
 import { MemberInfoComponent } from './components/app/member-info/member-info.component';
+import { MessengerComponent } from './pages/communication/messenger/messenger.component';
+import { GroupComponent } from './pages/collaboration/group/group.component';
 
 @NgModule({
   declarations: [
@@ -156,6 +158,8 @@ import { MemberInfoComponent } from './components/app/member-info/member-info.co
     CreateWizardComponent,
     InviteMemberComponent,
     MemberInfoComponent,
+    MessengerComponent,
+    GroupComponent,
   ],
   entryComponents: [
     ConfirmComponent,

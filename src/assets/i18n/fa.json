@@ -190,5 +190,8 @@
   "ACCESS_TYPE_VISITOR_DESCRIPTION": "تنها میتواند اطلاعات کارت\u200Cها را مشاهده نماید",
   "IMPORT_USERNAME": "نام عضو در برنامه ورودی",
   "IMPORT_USER_MAPPED_EMAIL": "ایمیل عضو در آسوده",
-  "REMOVE": "حذف"
+  "REMOVE": "حذف",
+  "HUMAN_RESOURCES": "منابع انسانی",
+  "MEMBERS": "اعضا",
+  "ORGANIZATION_CHART": "ساختار سازمانی"
 }

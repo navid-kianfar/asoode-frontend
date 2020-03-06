@@ -1,0 +1,74 @@
+.group-page {
+  height: 100%;
+  .header {
+    min-height: 300px;
+
+    .inner-content {
+      width: 350px;
+      margin: 50px auto 0;
+      text-align: center;
+    }
+    .edit-inner-container {
+      width: 500px;
+      margin: 50px auto 0;
+    }
+    .avatar-container {
+      width: 100px;
+      height: 100px;
+      background-color: #e6e6e6;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+
+      div {
+        font-size: 3rem;
+        padding-top: 18px;
+      }
+    }
+    .info {
+      .full-name {
+        font-size: 2rem;
+        font-weight: 500;
+      }
+      .bio {
+        font-size: 1.5rem;
+        font-weight: 400;
+      }
+      .email {
+        font-size: 1rem;
+        font-weight: 300;
+        color: #444;
+        margin-top: 10px;
+        &.check {
+          color: #b33634;
+          font-weight: 500;
+        }
+      }
+      .phone {
+        font-size: 0.8rem;
+        font-weight: 300;
+        color: #888;
+        margin: 5px 0;
+      }
+    }
+    .actions {
+      margin-top: 10px;
+      .mat-stroked-button {
+        border-width: 2px;
+      }
+    }
+  }
+  .body {
+    min-height: 500px;
+    background: #f2f2f2;
+    position: relative;
+
+    .fake-header {
+      position: absolute;
+      width: 100%;
+      height: 48px;
+      background-color: #fff;
+      top: 0;
+      left: 0;
+    }
+  }
+}
