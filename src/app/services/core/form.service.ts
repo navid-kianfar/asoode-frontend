@@ -8,10 +8,11 @@ import {
   IFormElementInput,
   IFormElementVerification,
   FormViewModel,
-  IFormElementCheckbox, IFormElementLabel,
+  IFormElementCheckbox,
+  IFormElementLabel,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
-import {CaptchaObject} from '../../view-models/core/captcha-types';
+import { CaptchaObject } from '../../view-models/core/captcha-types';
 
 const CAPTCHA_LENGTH = 5;
 const VERIFICATION_LENGTH = 6;
@@ -130,7 +131,10 @@ export class FormService {
     const model = {} as any;
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (element.type === FormElementType.Button || element.type === FormElementType.Label) {
+        if (
+          element.type === FormElementType.Button ||
+          element.type === FormElementType.Label
+        ) {
           return;
         }
         model[element.config.field] = element.params.model;
@@ -148,7 +152,6 @@ export class FormService {
   reset(form: FormViewModel[]) {
     form.forEach(group => {
       group.elements.forEach(element => {
-
         switch (element.type) {
           case FormElementType.Input:
           case FormElementType.Verification:
@@ -162,7 +165,9 @@ export class FormService {
             break;
           case FormElementType.Captcha:
             element.params.model = {
-              token: '', expire: '', code: ''
+              token: '',
+              expire: '',
+              code: '',
             } as CaptchaObject;
             break;
           case FormElementType.DropDown:
@@ -186,7 +191,10 @@ export class FormService {
     let isValid = true;
     form.forEach(group => {
       group.elements.forEach(element => {
-        if (element.type === FormElementType.Button || element.type === FormElementType.Label) {
+        if (
+          element.type === FormElementType.Button ||
+          element.type === FormElementType.Label
+        ) {
           return;
         }
         if (!element.validation) {
@@ -230,7 +238,11 @@ export class FormService {
     }
   }
   private validateBoolean(element: IFormElement): boolean {
-    if (element.validation && element.validation.required && element.validation.required.value) {
+    if (
+      element.validation &&
+      element.validation.required &&
+      element.validation.required.value
+    ) {
       const isValid = element.params.model !== undefined;
       if (!isValid) {
         element.validation.errors = [element.validation.required.message];

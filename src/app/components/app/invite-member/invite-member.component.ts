@@ -1,16 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AccessType} from '../../../library/app/enums';
-import {ListViewModel} from '../../../view-models/core/list-types';
-import {InviteMemberViewModel, MemberInfoViewModel} from '../../../view-models/auth/identity-types';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AccessType } from '../../../library/app/enums';
+import { ListViewModel } from '../../../view-models/core/list-types';
+import {
+  InviteMemberViewModel,
+  MemberInfoViewModel,
+} from '../../../view-models/auth/identity-types';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-invite-member',
   templateUrl: './invite-member.component.html',
-  styleUrls: ['./invite-member.component.scss']
+  styleUrls: ['./invite-member.component.scss'],
 })
 export class InviteMemberComponent implements OnInit {
-
   @Input() addOwner: boolean;
   @Input() members: InviteMemberViewModel[];
   @Output() membersChange = new EventEmitter<InviteMemberViewModel[]>();
@@ -21,9 +23,7 @@ export class InviteMemberComponent implements OnInit {
   currentRole: AccessType;
   currentEmail: string;
 
-  constructor(
-    private readonly identityService: IdentityService
-  ) { }
+  constructor(private readonly identityService: IdentityService) {}
 
   ngOnInit() {
     this.currentRole = AccessType.Editor;
@@ -32,7 +32,7 @@ export class InviteMemberComponent implements OnInit {
       if (this.addOwner) {
         this.members.push({
           ...this.identityService.profile,
-          access: AccessType.Owner
+          access: AccessType.Owner,
         });
       }
       this.membersChange.emit(this.members);
@@ -40,7 +40,7 @@ export class InviteMemberComponent implements OnInit {
       if (this.addOwner) {
         this.members.unshift({
           ...this.identityService.profile,
-          access: AccessType.Owner
+          access: AccessType.Owner,
         });
       }
       this.membersChange.emit(this.members);
@@ -49,23 +49,23 @@ export class InviteMemberComponent implements OnInit {
       {
         text: 'ENUMS_ACCESS_TYPE_ADMIN',
         value: AccessType.Admin,
-        description: 'ACCESS_TYPE_ADMIN_DESCRIPTION'
+        description: 'ACCESS_TYPE_ADMIN_DESCRIPTION',
       },
       {
         text: 'ENUMS_ACCESS_TYPE_EDITOR',
         value: AccessType.Editor,
-        description: 'ACCESS_TYPE_EDITOR_DESCRIPTION'
+        description: 'ACCESS_TYPE_EDITOR_DESCRIPTION',
       },
       {
         text: 'ENUMS_ACCESS_TYPE_HIDDEN_EDITOR',
         value: AccessType.HiddenEditor,
-        description: 'ACCESS_TYPE_HIDDEN_EDITOR_DESCRIPTION'
+        description: 'ACCESS_TYPE_HIDDEN_EDITOR_DESCRIPTION',
       },
       {
         text: 'ENUMS_ACCESS_TYPE_VISITOR',
         value: AccessType.Visitor,
-        description: 'ACCESS_TYPE_VISITOR_DESCRIPTION'
-      }
+        description: 'ACCESS_TYPE_VISITOR_DESCRIPTION',
+      },
     ];
   }
 
@@ -82,7 +82,7 @@ export class InviteMemberComponent implements OnInit {
     if (this.current) {
       this.members.push({
         ...this.current,
-        access: this.currentRole
+        access: this.currentRole,
       });
       this.current = undefined;
     } else {
@@ -90,7 +90,7 @@ export class InviteMemberComponent implements OnInit {
         access: this.currentRole,
         email: this.currentEmail,
         fullName: 'UNKNOWN',
-        initials: 'UK'
+        initials: 'UK',
       } as InviteMemberViewModel);
     }
     this.currentRole = AccessType.Editor;

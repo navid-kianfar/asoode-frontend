@@ -4,7 +4,7 @@ import { CreateModalParameters } from '../../view-models/modals/modals-types';
 import { CultureService } from '../../services/core/culture.service';
 import { FormViewModel } from '../../components/core/form/contracts';
 import { FormService } from '../../services/core/form.service';
-import {ValidationService} from '../../services/core/validation.service';
+import { ValidationService } from '../../services/core/validation.service';
 
 @Component({
   selector: 'app-create-wizard',
@@ -108,54 +108,53 @@ export class CreateWizardComponent
   inviteToGroup($event: MouseEvent) {
     const model = this.formService.prepare(this.groupForm);
     console.log(model);
-    if (!model) { return; }
+    if (!model) {
+      return;
+    }
     this.inviteGroupMembers = true;
   }
 
   importFromTrello() {
     this.requireMapMembers = true;
-    this.mapForm = [{
-      elements: [
-        this.formService.createLabel({
-          config: { field: '', label: 'IMPORT_USERNAME' },
-          params: { label: 'IMPORT_USER_MAPPED_EMAIL' }
-        }),
-        ...[
-        {id: '1', username: 'Navid Kianfar'},
-        {id: '2', username: 'Saba Kianfar'},
-        {id: '3', username: 'Hamid Siahpoosh'},
-        {id: '4', username: 'Pouya Faridi'},
-        {id: '5', username: 'Neda Toussi'},
-      ].map(user => {
-        return this.formService.createInput({
-          config: { field: user.id, label: user.username },
-          params: { model: '' },
-          validation: {
-            required: {
-              value: true,
-              message: 'EMAIL_REQUIRED',
-            },
-            pattern: {
-              value: ValidationService.emailRegex,
-              message: 'EMAIL_INVALID',
-            },
-          }
-        });
-      })]
-    }];
+    this.mapForm = [
+      {
+        elements: [
+          this.formService.createLabel({
+            config: { field: '', label: 'IMPORT_USERNAME' },
+            params: { label: 'IMPORT_USER_MAPPED_EMAIL' },
+          }),
+          ...[
+            { id: '1', username: 'Navid Kianfar' },
+            { id: '2', username: 'Saba Kianfar' },
+            { id: '3', username: 'Hamid Siahpoosh' },
+            { id: '4', username: 'Pouya Faridi' },
+            { id: '5', username: 'Neda Toussi' },
+          ].map(user => {
+            return this.formService.createInput({
+              config: { field: user.id, label: user.username },
+              params: { model: '' },
+              validation: {
+                required: {
+                  value: true,
+                  message: 'EMAIL_REQUIRED',
+                },
+                pattern: {
+                  value: ValidationService.emailRegex,
+                  message: 'EMAIL_INVALID',
+                },
+              },
+            });
+          }),
+        ],
+      },
+    ];
   }
 
-  importFromTaskWorld() {
+  importFromTaskWorld() {}
 
-  }
+  importFromMonday() {}
 
-  importFromMonday() {
-
-  }
-
-  importFromTaskulu() {
-
-  }
+  importFromTaskulu() {}
 
   importTrelloMapped($event: MouseEvent) {
     const model = this.formService.prepare(this.mapForm);

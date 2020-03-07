@@ -1,5 +1,5 @@
 import { CalendarType, UserType } from '../../library/core/enums';
-import {AccessType} from '../../library/app/enums';
+import { AccessType } from '../../library/app/enums';
 
 export interface IdentityObject {
   token: string;
@@ -17,7 +17,7 @@ export interface MemberInfoViewModel {
   username: string;
   bio: string;
 }
-export interface InviteMemberViewModel extends MemberInfoViewModel{
+export interface InviteMemberViewModel extends MemberInfoViewModel {
   access: AccessType;
 }
 export interface ProfileViewModel extends MemberInfoViewModel {

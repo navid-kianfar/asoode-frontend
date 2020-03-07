@@ -1,9 +1,16 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ListViewModel} from '../../../view-models/core/list-types';
-import {debounceTime, switchMap, tap} from 'rxjs/operators';
-import {HttpService} from '../../../services/core/http.service';
-import {fromEvent} from 'rxjs';
-import {OperationResultStatus} from '../../../library/core/enums';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { ListViewModel } from '../../../view-models/core/list-types';
+import { debounceTime, switchMap, tap } from 'rxjs/operators';
+import { HttpService } from '../../../services/core/http.service';
+import { fromEvent } from 'rxjs';
+import { OperationResultStatus } from '../../../library/core/enums';
 
 @Component({
   selector: 'app-auto-complete',
@@ -25,7 +32,7 @@ export class AutoCompleteComponent implements OnInit {
   filtered: ListViewModel[];
   constructor(
     private readonly httpService: HttpService,
-    private readonly ref: ElementRef
+    private readonly ref: ElementRef,
   ) {}
 
   displayFn(value) {
@@ -45,8 +52,8 @@ export class AutoCompleteComponent implements OnInit {
         switchMap(project => {
           const search = input.value;
           this.startModify.emit(search);
-          return this.httpService.post(this.backend, {search});
-        })
+          return this.httpService.post(this.backend, { search });
+        }),
       )
       .subscribe(data => {
         const search = input.value;

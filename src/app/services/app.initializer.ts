@@ -34,6 +34,10 @@ export class AppInitializerProvider {
   }
 
   refresh() {
+    if (!this.identityService.identity.token) {
+      return Promise.resolve();
+    }
+
     const promise1 = this.identityService.load();
     const promise2 = this.messengerService.load();
     const promise3 = this.groupService.load();

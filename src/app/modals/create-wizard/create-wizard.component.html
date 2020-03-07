@@ -16,7 +16,7 @@
           <p class="description">
             {{ 'SIMPLE_PROJECTS_DESCRIPTION' | translate }}
           </p>
-          <img src="/assets/images/project/simple-proj.svg" alt="">
+          <img src="/assets/images/project/simple-proj.svg" alt="" />
         </mat-radio-button>
         <mat-radio-button color="primary" [value]="WizardMode.ComplexProject">
           <span class="title">
@@ -26,7 +26,7 @@
           <p class="description">
             {{ 'WBS_PROJECTS_DESCRIPTION' | translate }}
           </p>
-          <img src="/assets/images/project/structured-proj.svg" alt="">
+          <img src="/assets/images/project/structured-proj.svg" alt="" />
         </mat-radio-button>
         <mat-radio-button color="primary" [value]="WizardMode.Group">
           <span class="title">
@@ -65,7 +65,11 @@
         <app-invite-member [addOwner]="true"></app-invite-member>
       </div>
       <div class="modal-footer">
-        <button (click)="createGroup($event)" mat-flat-button [color]="'primary'">
+        <button
+          (click)="createGroup($event)"
+          mat-flat-button
+          [color]="'primary'"
+        >
           <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
           {{ 'CREATE_GROUP' | translate: true }}
         </button>
@@ -80,12 +84,15 @@
         ></app-form>
       </div>
       <div class="modal-footer">
-        <button (click)="inviteToGroup($event)" mat-flat-button [color]="'primary'">
+        <button
+          (click)="inviteToGroup($event)"
+          mat-flat-button
+          [color]="'primary'"
+        >
           {{ 'CONTINUE' | translate: true }}
         </button>
       </div>
     </div>
-
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Import">
     <div class="modal-header">
@@ -106,45 +113,61 @@
               <img src="/assets/images/import/trello-logo-blue.svg" />
             </div>
             <div class="action">
-              <button (click)="importFromTrello()" [disabled]="actionWaiting" mat-button>
+              <button
+                (click)="importFromTrello()"
+                [disabled]="actionWaiting"
+                mat-button
+              >
                 <i class="icon-upload4"></i>&nbsp;
-                {{ 'IMPORT_JSON_FILE' | translate}}
+                {{ 'IMPORT_JSON_FILE' | translate }}
               </button>
             </div>
           </div>
-          <hr>
+          <hr />
           <div class="taskulu item">
             <div class="logo">
               <img src="/assets/images/import/taskulu-logo.png" />
             </div>
             <div class="action">
-              <button (click)="importFromTaskulu()" [disabled]="actionWaiting" mat-button>
+              <button
+                (click)="importFromTaskulu()"
+                [disabled]="actionWaiting"
+                mat-button
+              >
                 <i class="icon-upload4"></i>&nbsp;
-                {{ 'IMPORT_ZIP_FILE' | translate}}
+                {{ 'IMPORT_ZIP_FILE' | translate }}
               </button>
             </div>
           </div>
-          <hr>
+          <hr />
           <div class="monday item">
             <div class="logo">
               <img src="/assets/images/import/monday-logo.svg" />
             </div>
             <div class="action">
-              <button (click)="importFromMonday()" [disabled]="actionWaiting" mat-button>
+              <button
+                (click)="importFromMonday()"
+                [disabled]="actionWaiting"
+                mat-button
+              >
                 <i class="icon-upload4"></i>&nbsp;
-                {{ 'IMPORT_ZIP_FILE' | translate}}
+                {{ 'IMPORT_ZIP_FILE' | translate }}
               </button>
             </div>
           </div>
-          <hr>
+          <hr />
           <div class="taskworld item">
             <div class="logo">
               <img src="/assets/images/import/taskworld.svg" />
             </div>
             <div class="action">
-              <button (click)="importFromTaskWorld()" [disabled]="actionWaiting" mat-button>
+              <button
+                (click)="importFromTaskWorld()"
+                [disabled]="actionWaiting"
+                mat-button
+              >
                 <i class="icon-upload4"></i>&nbsp;
-                {{ 'IMPORT_JSON_FILE' | translate}}
+                {{ 'IMPORT_JSON_FILE' | translate }}
               </button>
             </div>
           </div>
@@ -155,13 +178,14 @@
           [color]="'primary'"
           [mode]="'determinate'"
           [value]="50"
-          [bufferValue]="100">
+          [bufferValue]="100"
+        >
         </mat-progress-bar>
       </div>
     </ng-container>
     <ng-container *ngIf="requireMapMembers">
       <div class="modal-body map-members">
-        <h4>{{ 'MAP_MEMBERS_DESCRIPTION' | translate}}</h4>
+        <h4>{{ 'MAP_MEMBERS_DESCRIPTION' | translate }}</h4>
 
         <app-form
           [standalone]="true"
@@ -170,7 +194,11 @@
         ></app-form>
       </div>
       <div class="modal-footer">
-        <button (click)="importTrelloMapped($event)" mat-flat-button [color]="'primary'">
+        <button
+          (click)="importTrelloMapped($event)"
+          mat-flat-button
+          [color]="'primary'"
+        >
           <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
           {{ 'IMPORT_DATA' | translate: true }}
         </button>
@@ -183,7 +211,9 @@
         <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
         <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
       </button>
-      <h4 class="modal-title">{{ 'SIMPLE_PROJECTS' | translate: true }}&nbsp;...</h4>
+      <h4 class="modal-title">
+        {{ 'SIMPLE_PROJECTS' | translate: true }}&nbsp;...
+      </h4>
       <button (click)="onCancel($event)">
         <i class="icon-cross"></i>
       </button>
@@ -212,7 +242,9 @@
         <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
         <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
       </button>
-      <h4 class="modal-title">{{ 'WBS_PROJECTS' | translate: true }}&nbsp;...</h4>
+      <h4 class="modal-title">
+        {{ 'WBS_PROJECTS' | translate: true }}&nbsp;...
+      </h4>
       <button (click)="onCancel($event)">
         <i class="icon-cross"></i>
       </button>
