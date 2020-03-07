@@ -199,5 +199,8 @@
   "ENUMS_CONVERSATION_TYPE_GROUP": "گروه",
   "ENUMS_CONVERSATION_TYPE_DIRECT": "مستقیم",
   "VIEW_IN_PROJECT_PAGE": "مشاهده در صفحه پروژه",
-  "SETTING": "تنظیمات"
+  "VIEW_IN_GROUP_PAGE": "مشاهده در صفحه گروه",
+  "SETTING": "تنظیمات",
+  "NO_CHANNEL_SELECTED": "لطفآ برای نمایش پیام\u200Cها یک مکالمه را انتخاب کنید",
+  "NO_CHANNELS": "هیچ مکالمه\u200Cای وجود ندارد؛ ابتدا یک پروژه یا گروه ایجاد نماید تا کانالی برای شما و هم تیمی\u200Cهایتان ایجاد شود"
 }

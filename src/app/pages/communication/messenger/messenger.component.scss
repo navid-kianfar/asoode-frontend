@@ -106,8 +106,43 @@
       }
       .action-container {
         display: flex;
-        width: 180px;
+        width: 200px;
         align-items: center;
+
+        button {
+          color: #4d4d4d;
+          align-items: center;
+
+          &.file {
+            i {
+              font-size: 1.9rem;
+              position: relative;
+              top: 3px;
+            }
+          }
+          &.setting {
+            i {
+              font-size: 1.1rem;
+            }
+          }
+
+          span {
+            font-size: 0.7rem;
+          }
+
+        }
+      }
+    }
+
+    &.no-item {
+      .channel-header {
+        border-bottom: none;
+      }
+
+      h3 {
+        margin-top: 200px;
+        text-align: center;
+        color: #555;
       }
     }
     .channel-content {

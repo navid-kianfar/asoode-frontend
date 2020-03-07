@@ -7,7 +7,7 @@
     <div class="aside-items">
       <div class="aside-item">
         <div class="title">{{ 'PROJECTS' | translate}}</div>
-        <div [class.selected]="current === channel"
+        <div matRipple [class.selected]="current === channel"
              (click)="open(channel)"
              *ngFor="let channel of mockService.channels | search:['type']:ConversationType.Project" class="item">
           {{ channel.title }}
@@ -15,7 +15,7 @@
       </div>
       <div class="aside-item">
         <div class="title">{{ 'GROUPS' | translate}}</div>
-        <div [class.selected]="current === channel"
+        <div matRipple [class.selected]="current === channel"
              (click)="open(channel)"
              *ngFor="let channel of mockService.channels | search:['type']:ConversationType.Group" class="item">
           {{ channel.title }}
@@ -23,6 +23,17 @@
       </div>
     </div>
   </div>
+  <ng-container *ngIf="!current">
+    <div class="channel-container no-item">
+      <div class="channel-header"></div>
+      <div class="channel-content">
+        <h3>
+          <i class="icon-bubble-dots2"></i>
+          {{ ( mockService.channels.length ? 'NO_CHANNEL_SELECTED' : 'NO_CHANNELS') | translate}}
+        </h3>
+      </div>
+    </div>
+  </ng-container>
   <ng-container *ngIf="current">
     <div class="channel-container">
       <div class="channel-header">
@@ -40,19 +51,21 @@
               <i class="icon-new-window"></i>
               {{ 'VIEW_IN_PROJECT_PAGE' | translate}}
             </a>
+            <a *ngIf="current.type === ConversationType.Group" [routerLink]="'/group'" class="go-to">
+              <i class="icon-new-window"></i>
+              {{ 'VIEW_IN_GROUP_PAGE' | translate}}
+            </a>
           </div>
         </div>
         <div class="action-container">
-          <div class="action files">
-            <button mat-button>
-              <i class="icon-foledr"></i>
-              <span>{{ 'FILES' | translate}}</span>
-            </button>&nbsp;
-            <button mat-button>
-              <i class="icon-cog2"></i>
-              <span>{{ 'SETTING' | translate}}</span>
-            </button>
-          </div>
+          <button mat-button class="file">
+            <i class="icon-shared-folder"></i>&nbsp;
+            <span>{{ 'FILES' | translate}}</span>
+          </button>&nbsp;
+          <button mat-button class="setting">
+            <i class="icon-cog2"></i>&nbsp;
+            <span>{{ 'SETTING' | translate}}</span>
+          </button>
         </div>
       </div>
       <div class="channel-content"></div>
