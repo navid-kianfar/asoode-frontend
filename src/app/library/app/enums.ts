@@ -24,3 +24,8 @@ export enum WorkPackageCommentPermission {
   Members = 2,
   MembersAndObservers = 3,
 }
+export enum ConversationType {
+  Direct = 1,
+  Project = 2,
+  Group = 3,
+}

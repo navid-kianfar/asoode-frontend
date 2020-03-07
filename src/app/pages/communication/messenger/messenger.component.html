@@ -1,5 +1,28 @@
 <div class="messenger-container">
-  <div class="aside"></div>
+  <div class="aside">
+    <div class="aside-header">
+      <img src="/assets/images/messenger/asoode-chat-icon.svg" alt="asoode-chat-icon">&nbsp;
+      <span>{{ 'ASOODE_MESSENGER' | translate}}</span>
+    </div>
+    <div class="aside-items">
+      <div class="aside-item">
+        <div class="title">{{ 'PROJECTS' | translate}}</div>
+        <div [class.selected]="current === channel"
+             (click)="open(channel)"
+             *ngFor="let channel of mockService.channels | search:['type']:ConversationType.Project" class="item">
+          {{ channel.title }}
+        </div>
+      </div>
+      <div class="aside-item">
+        <div class="title">{{ 'GROUPS' | translate}}</div>
+        <div [class.selected]="current === channel"
+             (click)="open(channel)"
+             *ngFor="let channel of mockService.channels | search:['type']:ConversationType.Group" class="item">
+          {{ channel.title }}
+        </div>
+      </div>
+    </div>
+  </div>
   <ng-container *ngIf="true">
     <div class="channel-container">
       <div class="channel-header"></div>

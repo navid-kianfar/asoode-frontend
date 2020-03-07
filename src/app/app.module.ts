@@ -100,6 +100,7 @@ import { GroupComponent } from './pages/collaboration/group/group.component';
 import { MessengerShortcutComponent } from './components/app/messenger-shortcut/messenger-shortcut.component';
 import { ProjectComponent } from './pages/project-management/project/project.component';
 import { WorkPackageComponent } from './pages/project-management/work-package/work-package.component';
+import { SearchPipe } from './pipes/core/search.pipe';
 
 @NgModule({
   declarations: [
@@ -172,6 +173,7 @@ import { WorkPackageComponent } from './pages/project-management/work-package/wo
     MessengerShortcutComponent,
     ProjectComponent,
     WorkPackageComponent,
+    SearchPipe,
   ],
   entryComponents: [
     ConfirmComponent,

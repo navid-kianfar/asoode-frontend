@@ -1,12 +1,9 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { ProjectViewModel } from '../view-models/projects/project-types';
-import { GroupViewModel } from '../view-models/groups/group-types';
-import { GroupType } from '../library/app/enums';
-import {
-  ExplorerViewModel,
-  UploadViewModel,
-} from '../view-models/storage/files-types';
+import {Injectable} from '@angular/core';
+import {ProjectViewModel} from '../view-models/projects/project-types';
+import {GroupViewModel} from '../view-models/groups/group-types';
+import {ConversationType, GroupType} from '../library/app/enums';
+import {ExplorerViewModel, UploadViewModel,} from '../view-models/storage/files-types';
+import {ChannelViewModel} from '../view-models/communication/messenger-types';
 
 const members: any[] = [];
 
@@ -14,6 +11,7 @@ const members: any[] = [];
   providedIn: 'root',
 })
 export class MockService {
+  channels: ChannelViewModel[] = [];
   projects: ProjectViewModel[] = [];
   groups: GroupViewModel[] = [];
   files: ExplorerViewModel = { files: [], folders: [] };
@@ -23,6 +21,24 @@ export class MockService {
     this.init();
   }
 
+  private initChannels() {
+    this.channels = [
+      ...this.projects.map(p => {
+        return {
+          type: ConversationType.Project,
+          title: p.title,
+          members: []
+        };
+      }),
+      ...this.groups.map(p => {
+        return {
+          type: ConversationType.Group,
+          title: p.title,
+          members: []
+        };
+      })
+    ];
+  }
   private initUpload() {
     this.uploading = [
       {
@@ -483,5 +499,6 @@ export class MockService {
     this.initGroups();
     this.initFiles();
     this.initUpload();
+    this.initChannels();
   }
 }
