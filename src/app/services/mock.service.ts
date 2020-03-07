@@ -23,17 +23,19 @@ export class MockService {
 
   private initChannels() {
     this.channels = [
-      ...this.projects.map(p => {
+      ...this.projects.map((p, idx) => {
         return {
           type: ConversationType.Project,
           title: p.title,
+          recordId: `${idx + 1}`,
           members: []
         };
       }),
-      ...this.groups.map(p => {
+      ...this.groups.map((p, idx) => {
         return {
           type: ConversationType.Group,
           title: p.title,
+          recordId: `${idx + 1}`,
           members: []
         };
       })

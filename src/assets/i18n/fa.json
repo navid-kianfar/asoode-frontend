@@ -194,5 +194,10 @@
   "HUMAN_RESOURCES": "منابع انسانی",
   "MEMBERS": "اعضا",
   "ORGANIZATION_CHART": "ساختار سازمانی",
-  "ASOODE_MESSENGER": "پیام رسان آسوده"
+  "ASOODE_MESSENGER": "پیام رسان آسوده",
+  "ENUMS_CONVERSATION_TYPE_PROJECT": "پروژه",
+  "ENUMS_CONVERSATION_TYPE_GROUP": "گروه",
+  "ENUMS_CONVERSATION_TYPE_DIRECT": "مستقیم",
+  "VIEW_IN_PROJECT_PAGE": "مشاهده در صفحه پروژه",
+  "SETTING": "تنظیمات"
 }

@@ -23,9 +23,38 @@
       </div>
     </div>
   </div>
-  <ng-container *ngIf="true">
+  <ng-container *ngIf="current">
     <div class="channel-container">
-      <div class="channel-header"></div>
+      <div class="channel-header">
+        <div class="wrapper">
+          <div class="title-container">
+            <span class="title">{{current.title}}</span>&nbsp;
+            <i *ngIf="current.type === ConversationType.Group" class="icon-team"></i>
+            <i *ngIf="current.type === ConversationType.Project" class="icon-workpackage"></i>&nbsp;
+            <span class="category">{{current.title}}</span>
+          </div>
+          <div class="info-container">
+            <div class="type">{{ current.type | enum:'ConversationType' }}</div>
+            <div class="members">|&nbsp;&nbsp;{{ 'N_USERS' | translate | stringFormat:current.members.length}}&nbsp;&nbsp;|</div>
+            <a *ngIf="current.type === ConversationType.Project" [routerLink]="'/project'" class="go-to">
+              <i class="icon-new-window"></i>
+              {{ 'VIEW_IN_PROJECT_PAGE' | translate}}
+            </a>
+          </div>
+        </div>
+        <div class="action-container">
+          <div class="action files">
+            <button mat-button>
+              <i class="icon-foledr"></i>
+              <span>{{ 'FILES' | translate}}</span>
+            </button>&nbsp;
+            <button mat-button>
+              <i class="icon-cog2"></i>
+              <span>{{ 'SETTING' | translate}}</span>
+            </button>
+          </div>
+        </div>
+      </div>
       <div class="channel-content"></div>
     </div>
     <div class="channel-aside"></div>

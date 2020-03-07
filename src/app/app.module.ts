@@ -101,6 +101,7 @@ import { MessengerShortcutComponent } from './components/app/messenger-shortcut/
 import { ProjectComponent } from './pages/project-management/project/project.component';
 import { WorkPackageComponent } from './pages/project-management/work-package/work-package.component';
 import { SearchPipe } from './pipes/core/search.pipe';
+import { EnumPipe } from './pipes/core/enum.pipe';
 
 @NgModule({
   declarations: [
@@ -174,6 +175,7 @@ import { SearchPipe } from './pipes/core/search.pipe';
     ProjectComponent,
     WorkPackageComponent,
     SearchPipe,
+    EnumPipe,
   ],
   entryComponents: [
     ConfirmComponent,

@@ -7,6 +7,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    border-left: 1px solid #e6e6e6;
 
     .aside-header {
       padding: 10px;
@@ -56,15 +57,62 @@
     flex-wrap: wrap;
 
     .channel-header {
-      height: 100px;
-      background: green;
+      height: 55px;
       display: flex;
       width: 100%;
+      border-bottom: 1px solid #e6e6e6;
+
+      .wrapper {
+        display: flex;
+        flex-grow: 1;
+        -webkit-box-flex: 1;
+        flex-direction: column;
+        padding: 5px;
+
+        .title-container {
+          display: flex;
+          align-items: center;
+
+          .title {
+            font-weight: 600;
+            padding-inline-end: 10px;
+          }
+
+          i {
+            color: #999999;
+            font-size: 12px;
+          }
+
+          .category {
+            font-size: 0.7rem;
+            color: #999999;
+          }
+        }
+        .info-container {
+          color: #999999;
+          display: flex;
+          font-size: 0.7rem;
+          .type {
+          }
+          .members {
+            margin: 0 10px;
+          }
+
+          a {
+            color: #999999;
+            text-decoration: underline;
+          }
+        }
+      }
+      .action-container {
+        display: flex;
+        width: 180px;
+        align-items: center;
+      }
     }
     .channel-content {
-      height: calc(100% - 100px);
+      height: calc(100% - 55px);
       width: 100%;
-      background-color: blue;
     }
   }
   .channel-aside {
