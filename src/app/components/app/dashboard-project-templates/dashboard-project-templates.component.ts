@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MockService } from '../../../services/mock.service';
+import {ProjectService} from '../../../services/projects/project.service';
 
 @Component({
   selector: 'app-dashboard-project-templates',
@@ -7,7 +8,10 @@ import { MockService } from '../../../services/mock.service';
   styleUrls: ['./dashboard-project-templates.component.scss'],
 })
 export class DashboardProjectTemplatesComponent implements OnInit {
-  constructor(readonly mockService: MockService) {}
+  constructor(
+    readonly projectService: ProjectService,
+    readonly mockService: MockService,
+  ) {}
 
   ngOnInit() {}
 }

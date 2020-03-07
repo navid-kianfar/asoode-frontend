@@ -2,21 +2,21 @@
   <div class="projects-container">
     <h3>
       {{ 'PROJECTS' | translate }}&nbsp;
-      <span class="ltr">({{ projectService.projects.length }})</span>
+      <span class="ltr">({{ mockService.projects.length }})</span>
     </h3>
-    <div class="no-item">
+    <div *ngIf="!mockService.projects.length" class="no-item">
       {{ 'NO_PROJECTS' | translate }}
     </div>
     <div
       (click)="openProject(project)"
       class="project-item"
-      *ngFor="let project of projectService.projects | slice: 0:10"
+      *ngFor="let project of mockService.projects | slice: 0:10"
     >
       <div class="color"></div>
       <div class="title">{{ project.title }}</div>
       <div class="description">{{ project.description }}</div>
     </div>
-    <div class="more" *ngIf="projectService.projects.length > 5">
+    <div class="more" *ngIf="mockService.projects.length > 5">
       <i class="icon-cc"></i>
       {{ 'SHOW_MORE' | translate }}
     </div>
@@ -24,15 +24,15 @@
   <div class="groups-container">
     <h3>
       {{ 'GROUPS' | translate }}&nbsp;
-      <span class="ltr">({{ groupService.groups.length }})</span>
+      <span class="ltr">({{ mockService.groups.length }})</span>
     </h3>
-    <div class="no-item">
+    <div *ngIf="!mockService.groups.length" class="no-item">
       {{ 'NO_GROUPS' | translate }}
     </div>
     <div
       (click)="openGroup(group)"
       class="group-item"
-      *ngFor="let group of groupService.groups | slice: 0:10"
+      *ngFor="let group of mockService.groups | slice: 0:10"
     >
       <div class="avatar-container">
         <img *ngIf="group.avatarId" [src]="group.avatarId" alt="avatar" />
@@ -43,7 +43,7 @@
         <div class="description">{{ group.description }}</div>
       </div>
     </div>
-    <div class="more" *ngIf="groupService.groups.length > 5">
+    <div class="more" *ngIf="mockService.groups.length > 5">
       <i class="icon-cc"></i>
       {{ 'SHOW_MORE' | translate }}
     </div>

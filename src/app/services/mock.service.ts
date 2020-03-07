@@ -20,9 +20,6 @@ export class MockService {
   uploading: UploadViewModel[] = [];
 
   constructor() {
-    if (environment.production) {
-      return;
-    }
     this.init();
   }
 
@@ -284,8 +281,8 @@ export class MockService {
         premium: true,
         id: '1',
         userId: '1',
-        title: 'آسوده ۱',
-        description: 'طراحی فاز ۱',
+        title: 'آسوده 1',
+        description: 'کارهای مربوط به آسوده ۱',
         createdAt: new Date(),
         updatedAt: undefined,
         seasons: [
@@ -340,10 +337,10 @@ export class MockService {
       {
         tasks: 0,
         premium: false,
-        id: '1',
+        id: '2',
         userId: '1',
-        title: 'آسوده ۱',
-        description: 'طراحی فاز ۱',
+        title: 'آسوده 2',
+        description: 'کارهای مربوط به آسوده 2',
         createdAt: new Date(),
         updatedAt: undefined,
         seasons: [
@@ -398,10 +395,10 @@ export class MockService {
       {
         premium: false,
         tasks: 0,
-        id: '1',
+        id: '3',
         userId: '1',
-        title: 'آسوده ۱',
-        description: 'طراحی فاز ۱',
+        title: 'آسوده 3',
+        description: 'کارهای مربوط به آسوده 3',
         createdAt: new Date(),
         updatedAt: undefined,
         seasons: [

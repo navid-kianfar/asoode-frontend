@@ -97,6 +97,9 @@ import { InviteMemberComponent } from './components/app/invite-member/invite-mem
 import { MemberInfoComponent } from './components/app/member-info/member-info.component';
 import { MessengerComponent } from './pages/communication/messenger/messenger.component';
 import { GroupComponent } from './pages/collaboration/group/group.component';
+import { MessengerShortcutComponent } from './components/app/messenger-shortcut/messenger-shortcut.component';
+import { ProjectComponent } from './pages/project-management/project/project.component';
+import { WorkPackageComponent } from './pages/project-management/work-package/work-package.component';
 
 @NgModule({
   declarations: [
@@ -166,6 +169,9 @@ import { GroupComponent } from './pages/collaboration/group/group.component';
     MemberInfoComponent,
     MessengerComponent,
     GroupComponent,
+    MessengerShortcutComponent,
+    ProjectComponent,
+    WorkPackageComponent,
   ],
   entryComponents: [
     ConfirmComponent,

@@ -4,6 +4,7 @@ import { GroupService } from '../../../services/groups/group.service';
 import { MockService } from '../../../services/mock.service';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-quick-access',
@@ -17,17 +18,18 @@ export class QuickAccessComponent implements OnInit {
     readonly projectService: ProjectService,
     readonly groupService: GroupService,
     readonly mockService: MockService,
+    private readonly router: Router
   ) {}
 
   ngOnInit() {}
 
   openGroup(group: GroupViewModel) {
-    console.log('open-group', group);
+    this.router.navigateByUrl('group');
     this.hide.emit();
   }
 
   openProject(project: ProjectViewModel) {
-    console.log('open-project', project);
+    this.router.navigateByUrl('project');
     this.hide.emit();
   }
 }
