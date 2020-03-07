@@ -14,7 +14,7 @@ export class MessengerComponent implements OnInit {
   ConversationType = ConversationType;
   constructor(
     private readonly messengerService: MessengerService,
-    private readonly mockService: MockService,
+    readonly mockService: MockService,
   ) {}
 
   ngOnInit() {}
