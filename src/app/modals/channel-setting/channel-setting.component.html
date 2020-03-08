@@ -8,38 +8,59 @@
     </button>
   </div>
   <div class="modal-body">
-
     <div class="box">
-      <div class="title">{{'RECEIVE_MESSAGE_NOTIFICATIONS' | translate}}</div>
+      <div class="title">{{ 'RECEIVE_MESSAGE_NOTIFICATIONS' | translate }}</div>
       <div class="content">
         <mat-radio-group [(ngModel)]="receiveMode">
-          <mat-radio-button color="primary" [value]="ChannelNotificationReceive.All">
-            <span class="title">{{ 'NOTIFY_FOR_ALL' | translate}} - </span>
-            <span class="description">{{ 'NOTIFY_FOR_ALL_DESCRIPTION' | translate}}</span>
+          <mat-radio-button
+            color="primary"
+            [value]="ChannelNotificationReceive.All"
+          >
+            <span class="title">{{ 'NOTIFY_FOR_ALL' | translate }} - </span>
+            <span class="description">{{
+              'NOTIFY_FOR_ALL_DESCRIPTION' | translate
+            }}</span>
           </mat-radio-button>
-          <mat-radio-button color="primary" [value]="ChannelNotificationReceive.Mine">
-            <span class="title">{{ 'NOTIFY_FOR_MINE' | translate}} - </span>
-            <span class="description">{{ 'NOTIFY_FOR_MINE_DESCRIPTION' | translate}}</span>
+          <mat-radio-button
+            color="primary"
+            [value]="ChannelNotificationReceive.Mine"
+          >
+            <span class="title">{{ 'NOTIFY_FOR_MINE' | translate }} - </span>
+            <span class="description">{{
+              'NOTIFY_FOR_MINE_DESCRIPTION' | translate
+            }}</span>
+            <span class="at-me">@{{ identityService.profile.fullName }}</span>
           </mat-radio-button>
-          <mat-radio-button color="primary" [value]="ChannelNotificationReceive.None">
-            <span class="title">{{ 'NOTIFY_FOR_NONE' | translate}} - </span>
-            <span class="description">{{ 'NOTIFY_FOR_NONE_DESCRIPTION' | translate}}</span>
+          <mat-radio-button
+            color="primary"
+            [value]="ChannelNotificationReceive.None"
+          >
+            <span class="title">{{ 'NOTIFY_FOR_NONE' | translate }} - </span>
+            <span class="description">{{
+              'NOTIFY_FOR_NONE_DESCRIPTION' | translate
+            }}</span>
           </mat-radio-button>
         </mat-radio-group>
       </div>
     </div>
 
     <div class="box sound">
-      <div class="title">{{'NOTIFICATION_SOUND_APPEARANCE' | translate}}</div>
+      <div class="title">{{ 'NOTIFICATION_SOUND_APPEARANCE' | translate }}</div>
       <div class="content">
         <mat-checkbox color="primary" [(ngModel)]="skipMobile">
-          <span class="title">{{ 'SKIP_MOBILE_NOTIFICATION' | translate}}</span>
+          <span class="title">{{
+            'SKIP_MOBILE_NOTIFICATION' | translate
+          }}</span>
         </mat-checkbox>
         <mat-checkbox color="primary" [(ngModel)]="skipDesktop">
-          <span class="title">{{ 'SKIP_DESKTOP_NOTIFICATION' | translate}}</span>
+          <span class="title">{{
+            'SKIP_DESKTOP_NOTIFICATION' | translate
+          }}</span>
         </mat-checkbox>
         <mat-checkbox color="primary" [(ngModel)]="showSummary">
-          <span class="title">{{ 'SHOW_NOTIFICATION_SUMMARY' | translate}}</span>
+          <span class="title">{{
+            'SHOW_NOTIFICATION_SUMMARY' | translate
+          }}</span>
         </mat-checkbox>
       </div>
     </div>

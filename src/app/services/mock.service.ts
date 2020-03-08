@@ -1,9 +1,12 @@
-import {Injectable} from '@angular/core';
-import {ProjectViewModel} from '../view-models/projects/project-types';
-import {GroupViewModel} from '../view-models/groups/group-types';
-import {ConversationType, GroupType} from '../library/app/enums';
-import {ExplorerViewModel, UploadViewModel,} from '../view-models/storage/files-types';
-import {ChannelViewModel} from '../view-models/communication/messenger-types';
+import { Injectable } from '@angular/core';
+import { ProjectViewModel } from '../view-models/projects/project-types';
+import { GroupViewModel } from '../view-models/groups/group-types';
+import { ConversationType, GroupType } from '../library/app/enums';
+import {
+  ExplorerViewModel,
+  UploadViewModel,
+} from '../view-models/storage/files-types';
+import { ChannelViewModel } from '../view-models/communication/messenger-types';
 
 const members: any[] = [];
 
@@ -28,7 +31,7 @@ export class MockService {
           type: ConversationType.Project,
           title: p.title,
           recordId: `${idx + 1}`,
-          members: []
+          members: [],
         };
       }),
       ...this.groups.map((p, idx) => {
@@ -36,9 +39,9 @@ export class MockService {
           type: ConversationType.Group,
           title: p.title,
           recordId: `${idx + 1}`,
-          members: []
+          members: [],
         };
-      })
+      }),
     ];
   }
   private initUpload() {

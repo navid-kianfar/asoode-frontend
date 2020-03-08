@@ -10,8 +10,8 @@ import { FilesComponent } from './pages/storage/files/files.component';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { MessengerComponent } from './pages/communication/messenger/messenger.component';
 import { GroupComponent } from './pages/collaboration/group/group.component';
-import {ProjectComponent} from './pages/project-management/project/project.component';
-import {WorkPackageComponent} from './pages/project-management/work-package/work-package.component';
+import { ProjectComponent } from './pages/project-management/project/project.component';
+import { WorkPackageComponent } from './pages/project-management/work-package/work-package.component';
 
 const routes: Routes = [
   {

@@ -1,5 +1,6 @@
 <div class="project-templates">
-  <app-project-info *ngFor="let project of mockService.projects"
+  <app-project-info
+    *ngFor="let project of mockService.projects"
     [template]="true"
     [project]="project"
   ></app-project-info>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MockService } from '../../../services/mock.service';
-import {ProjectService} from '../../../services/projects/project.service';
+import { ProjectService } from '../../../services/projects/project.service';
 
 @Component({
   selector: 'app-dashboard-project-templates',

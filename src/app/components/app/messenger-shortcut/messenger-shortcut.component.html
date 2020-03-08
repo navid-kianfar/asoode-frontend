@@ -1,4 +1,20 @@
-<div (click)="open()" class="messenger-shortcut">
-  <img src="/assets/images/messenger/asoode-chat-icon.svg" alt="asoode-chat-icon">
+<div *ngIf="!showMessages" (click)="open()" class="messenger-shortcut">
+  <img
+    src="/assets/images/messenger/asoode-chat-icon.svg"
+    alt="asoode-chat-icon"
+  />
   <div class="badge">5</div>
+</div>
+<div *ngIf="showMessages" class="shortcut-messenger-container">
+  <div class="header">
+    <img
+      src="/assets/images/messenger/asoode-chat-icon.svg"
+      alt="asoode-chat-icon"
+    />&nbsp;
+    <span (click)="goToMessenger()">
+      {{ 'ASOODE_MESSENGER' | translate }}&nbsp;
+      <i class="icon-new-window"></i>
+    </span>
+    <i (click)="hide()" class="close icon-cross"></i>
+  </div>
 </div>

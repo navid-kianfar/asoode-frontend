@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MessengerService} from '../../../services/communication/messenger.service';
-import {ChannelViewModel} from '../../../view-models/communication/messenger-types';
-import {MockService} from '../../../services/mock.service';
-import {ConversationType} from '../../../library/app/enums';
-import {ModalService} from '../../../services/core/modal.service';
-import {ChannelSettingComponent} from '../../../modals/channel-setting/channel-setting.component';
+import { MessengerService } from '../../../services/communication/messenger.service';
+import { ChannelViewModel } from '../../../view-models/communication/messenger-types';
+import { MockService } from '../../../services/mock.service';
+import { ConversationType } from '../../../library/app/enums';
+import { ModalService } from '../../../services/core/modal.service';
+import { ChannelSettingComponent } from '../../../modals/channel-setting/channel-setting.component';
 
 @Component({
   selector: 'app-messenger',
@@ -32,7 +32,6 @@ export class MessengerComponent implements OnInit {
   }
 
   openSetting() {
-    this.modalService.show(ChannelSettingComponent, {})
-      .subscribe(() => {});
+    this.modalService.show(ChannelSettingComponent, {}).subscribe(() => {});
   }
 }

@@ -4,7 +4,7 @@ import { GroupService } from '../../../services/groups/group.service';
 import { MockService } from '../../../services/mock.service';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quick-access',
@@ -18,7 +18,7 @@ export class QuickAccessComponent implements OnInit {
     readonly projectService: ProjectService,
     readonly groupService: GroupService,
     readonly mockService: MockService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   ngOnInit() {}

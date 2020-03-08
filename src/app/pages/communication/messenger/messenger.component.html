@@ -1,23 +1,40 @@
 <div class="messenger-container">
   <div class="aside">
     <div class="aside-header">
-      <img src="/assets/images/messenger/asoode-chat-icon.svg" alt="asoode-chat-icon">&nbsp;
-      <span>{{ 'ASOODE_MESSENGER' | translate}}</span>
+      <img
+        src="/assets/images/messenger/asoode-chat-icon.svg"
+        alt="asoode-chat-icon"
+      />&nbsp;
+      <span>{{ 'ASOODE_MESSENGER' | translate }}</span>
     </div>
     <div class="aside-items">
       <div class="aside-item">
-        <div class="title">{{ 'PROJECTS' | translate}}</div>
-        <div matRipple [class.selected]="current === channel"
-             (click)="open(channel)"
-             *ngFor="let channel of mockService.channels | search:['type']:ConversationType.Project" class="item">
+        <div class="title">{{ 'PROJECTS' | translate }}</div>
+        <div
+          matRipple
+          [class.selected]="current === channel"
+          (click)="open(channel)"
+          *ngFor="
+            let channel of mockService.channels
+              | search: ['type']:ConversationType.Project
+          "
+          class="item"
+        >
           {{ channel.title }}
         </div>
       </div>
       <div class="aside-item">
-        <div class="title">{{ 'GROUPS' | translate}}</div>
-        <div matRipple [class.selected]="current === channel"
-             (click)="open(channel)"
-             *ngFor="let channel of mockService.channels | search:['type']:ConversationType.Group" class="item">
+        <div class="title">{{ 'GROUPS' | translate }}</div>
+        <div
+          matRipple
+          [class.selected]="current === channel"
+          (click)="open(channel)"
+          *ngFor="
+            let channel of mockService.channels
+              | search: ['type']:ConversationType.Group
+          "
+          class="item"
+        >
           {{ channel.title }}
         </div>
       </div>
@@ -29,7 +46,12 @@
       <div class="channel-content">
         <h3>
           <i class="icon-bubble-dots2"></i>
-          {{ ( mockService.channels.length ? 'NO_CHANNEL_SELECTED' : 'NO_CHANNELS') | translate}}
+          {{
+            (mockService.channels.length
+              ? 'NO_CHANNEL_SELECTED'
+              : 'NO_CHANNELS'
+            ) | translate
+          }}
         </h3>
       </div>
     </div>
@@ -39,32 +61,54 @@
       <div class="channel-header">
         <div class="wrapper">
           <div class="title-container">
-            <span class="title">{{current.title}}</span>&nbsp;
-            <i *ngIf="current.type === ConversationType.Group" class="icon-team"></i>
-            <i *ngIf="current.type === ConversationType.Project" class="icon-workpackage"></i>&nbsp;
-            <span class="category">{{current.title}}</span>
+            <span class="title">{{ current.title }}</span
+            >&nbsp;
+            <i
+              *ngIf="current.type === ConversationType.Group"
+              class="icon-team"
+            ></i>
+            <i
+              *ngIf="current.type === ConversationType.Project"
+              class="icon-workpackage"
+            ></i
+            >&nbsp;
+            <span class="category">{{ current.title }}</span>
           </div>
           <div class="info-container">
-            <div class="type">{{ current.type | enum:'ConversationType' }}</div>
-            <div class="members">|&nbsp;&nbsp;{{ 'N_USERS' | translate | stringFormat:current.members.length}}&nbsp;&nbsp;|</div>
-            <a *ngIf="current.type === ConversationType.Project" [routerLink]="'/project'" class="go-to">
+            <div class="type">
+              {{ current.type | enum: 'ConversationType' }}
+            </div>
+            <div class="members">
+              |&nbsp;&nbsp;{{
+                'N_USERS' | translate | stringFormat: current.members.length
+              }}&nbsp;&nbsp;|
+            </div>
+            <a
+              *ngIf="current.type === ConversationType.Project"
+              [routerLink]="'/project'"
+              class="go-to"
+            >
               <i class="icon-new-window"></i>
-              {{ 'VIEW_IN_PROJECT_PAGE' | translate}}
+              {{ 'VIEW_IN_PROJECT_PAGE' | translate }}
             </a>
-            <a *ngIf="current.type === ConversationType.Group" [routerLink]="'/group'" class="go-to">
+            <a
+              *ngIf="current.type === ConversationType.Group"
+              [routerLink]="'/group'"
+              class="go-to"
+            >
               <i class="icon-new-window"></i>
-              {{ 'VIEW_IN_GROUP_PAGE' | translate}}
+              {{ 'VIEW_IN_GROUP_PAGE' | translate }}
             </a>
           </div>
         </div>
         <div class="action-container">
           <button (click)="toggleFiles()" mat-button class="file">
             <i class="icon-shared-folder"></i>&nbsp;
-            <span>{{ 'FILES' | translate}}</span>
-          </button>&nbsp;
+            <span>{{ 'FILES' | translate }}</span></button
+          >&nbsp;
           <button (click)="openSetting()" mat-button class="setting">
             <i class="icon-cog2"></i>&nbsp;
-            <span>{{ 'SETTING' | translate}}</span>
+            <span>{{ 'SETTING' | translate }}</span>
           </button>
         </div>
       </div>

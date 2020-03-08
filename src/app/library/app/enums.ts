@@ -32,5 +32,5 @@ export enum ConversationType {
 export enum ChannelNotificationReceive {
   All = 1,
   Mine = 2,
-  None = 3
+  None = 3,
 }
