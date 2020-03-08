@@ -63,10 +63,7 @@
           <div class="title-container">
             <span class="title">{{ current.title }}</span
             >&nbsp;
-            <i
-              *ngIf="current.type === ChannelType.Group"
-              class="icon-team"
-            ></i>
+            <i *ngIf="current.type === ChannelType.Group" class="icon-team"></i>
             <i
               *ngIf="current.type === ChannelType.Project"
               class="icon-workpackage"

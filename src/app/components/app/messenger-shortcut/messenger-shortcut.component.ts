@@ -1,9 +1,9 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import {ModalService} from '../../../services/core/modal.service';
-import {MessengerSettingComponent} from '../../../modals/messenger-setting/messenger-setting.component';
-import {ChannelViewModel} from '../../../view-models/communication/messenger-types';
-import {MockService} from '../../../services/mock.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { MessengerSettingComponent } from '../../../modals/messenger-setting/messenger-setting.component';
+import { ChannelViewModel } from '../../../view-models/communication/messenger-types';
+import { MockService } from '../../../services/mock.service';
 
 @Component({
   selector: 'app-messenger-shortcut',

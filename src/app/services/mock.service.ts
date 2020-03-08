@@ -1,9 +1,15 @@
-import {Injectable} from '@angular/core';
-import {ProjectViewModel} from '../view-models/projects/project-types';
-import {GroupViewModel} from '../view-models/groups/group-types';
-import {ChannelType, ConversationType, GroupType} from '../library/app/enums';
-import {ExplorerViewModel, UploadViewModel } from '../view-models/storage/files-types';
-import {ChannelViewModel, ConversationViewModel} from '../view-models/communication/messenger-types';
+import { Injectable } from '@angular/core';
+import { ProjectViewModel } from '../view-models/projects/project-types';
+import { GroupViewModel } from '../view-models/groups/group-types';
+import { ChannelType, ConversationType, GroupType } from '../library/app/enums';
+import {
+  ExplorerViewModel,
+  UploadViewModel,
+} from '../view-models/storage/files-types';
+import {
+  ChannelViewModel,
+  ConversationViewModel,
+} from '../view-models/communication/messenger-types';
 
 const members: any[] = [];
 
@@ -25,7 +31,8 @@ export class MockService {
   private initMessages() {
     this.messages = [
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -33,10 +40,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -44,10 +52,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -55,10 +64,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -66,10 +76,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -77,10 +88,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -88,10 +100,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -99,10 +112,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -110,10 +124,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -121,10 +136,11 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
       {
-        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        message:
+          'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
@@ -132,7 +148,7 @@ export class MockService {
         title: '',
         userId: '1',
         replyId: '1',
-        fromBot: true
+        fromBot: true,
       },
     ];
   }
@@ -144,7 +160,7 @@ export class MockService {
           title: p.title,
           recordId: `${idx + 1}`,
           members: [],
-          messages: this.messages
+          messages: this.messages,
         } as ChannelViewModel;
       }),
       ...this.groups.map((p, idx) => {
@@ -153,7 +169,7 @@ export class MockService {
           title: p.title,
           recordId: `${idx + 1}`,
           members: [],
-          messages: this.messages
+          messages: this.messages,
         } as ChannelViewModel;
       }),
     ];

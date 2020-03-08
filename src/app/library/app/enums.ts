@@ -33,7 +33,7 @@ export enum ConversationType {
   Text = 1,
   Upload = 2,
   Task = 3,
-  Link = 4
+  Link = 4,
 }
 export enum ChannelNotificationReceive {
   All = 1,
