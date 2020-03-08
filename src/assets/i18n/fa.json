@@ -214,5 +214,6 @@
   "NOTIFY_FOR_NONE_DESCRIPTION": "هیچ اعلانی به شما صورت نخواهد گرفت",
   "SKIP_DESKTOP_NOTIFICATION": "بستن همه صداهای چت روی موبایل",
   "SKIP_MOBILE_NOTIFICATION": "بستن همه صداهای چت روی دسکتاپ",
-  "SHOW_NOTIFICATION_SUMMARY": "نمایش خلاصه پیام ها زمانی که در صفحه ای غیر از صفحه مربوط به آن هستید"
+  "SHOW_NOTIFICATION_SUMMARY": "نمایش خلاصه پیام ها زمانی که در صفحه ای غیر از صفحه مربوط به آن هستید",
+  "WELCOME_TO_ASOODE": "به آسود خوش آمدید"
 }

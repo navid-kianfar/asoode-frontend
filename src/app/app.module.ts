@@ -103,7 +103,7 @@ import { ProjectComponent } from './pages/project-management/project/project.com
 import { WorkPackageComponent } from './pages/project-management/work-package/work-package.component';
 import { SearchPipe } from './pipes/core/search.pipe';
 import { EnumPipe } from './pipes/core/enum.pipe';
-import { ChannelSettingComponent } from './modals/channel-setting/channel-setting.component';
+import { MessengerSettingComponent } from './modals/messenger-setting/messenger-setting.component';
 
 @NgModule({
   declarations: [
@@ -178,14 +178,14 @@ import { ChannelSettingComponent } from './modals/channel-setting/channel-settin
     WorkPackageComponent,
     SearchPipe,
     EnumPipe,
-    ChannelSettingComponent,
+    MessengerSettingComponent,
   ],
   entryComponents: [
     ConfirmComponent,
     PromptComponent,
     ChangePhoneComponent,
     CreateWizardComponent,
-    ChannelSettingComponent,
+    MessengerSettingComponent,
   ],
   imports: [
     BrowserModule,

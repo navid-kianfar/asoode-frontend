@@ -4,7 +4,7 @@ import { ChannelViewModel } from '../../../view-models/communication/messenger-t
 import { MockService } from '../../../services/mock.service';
 import { ConversationType } from '../../../library/app/enums';
 import { ModalService } from '../../../services/core/modal.service';
-import { ChannelSettingComponent } from '../../../modals/channel-setting/channel-setting.component';
+import { MessengerSettingComponent } from '../../../modals/messenger-setting/messenger-setting.component';
 
 @Component({
   selector: 'app-messenger',
@@ -32,6 +32,6 @@ export class MessengerComponent implements OnInit {
   }
 
   openSetting() {
-    this.modalService.show(ChannelSettingComponent, {}).subscribe(() => {});
+    this.modalService.show(MessengerSettingComponent, {}).subscribe(() => {});
   }
 }

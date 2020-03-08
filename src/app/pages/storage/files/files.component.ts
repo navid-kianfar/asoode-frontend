@@ -22,7 +22,7 @@ export class FilesComponent implements OnInit {
       this.messengerService.channels.length > 0 ||
       this.projectService.projects.length > 0 ||
       this.groupService.groups.length > 0 ||
-      false;
+      true;
   }
 
   hide() {}

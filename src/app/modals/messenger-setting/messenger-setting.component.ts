@@ -5,10 +5,10 @@ import { IdentityService } from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-channel-setting',
-  templateUrl: './channel-setting.component.html',
-  styleUrls: ['./channel-setting.component.scss'],
+  templateUrl: './messenger-setting.component.html',
+  styleUrls: ['./messenger-setting.component.scss'],
 })
-export class ChannelSettingComponent extends SimpleModalComponent<{}, boolean>
+export class MessengerSettingComponent extends SimpleModalComponent<{}, boolean>
   implements OnInit {
   actionWaiting: boolean;
   receiveMode: ChannelNotificationReceive;

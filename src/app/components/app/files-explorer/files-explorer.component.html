@@ -19,7 +19,11 @@
         <button (click)="actionRename()" *ngIf="onlyOneSelected" mat-mini-fab>
           <i class="icon-pencil"></i>
         </button>
-        <button (click)="actionDownload()" *ngIf="atLeastOneSelected" mat-mini-fab>
+        <button
+          (click)="actionDownload()"
+          *ngIf="atLeastOneSelected"
+          mat-mini-fab
+        >
           <i class="icon-download4"></i>
         </button>
         <button
@@ -29,7 +33,11 @@
         >
           <i class="icon-eye2"></i>
         </button>
-        <button (click)="actionOpenInNewTab()" *ngIf="oneFileSelected" mat-mini-fab>
+        <button
+          (click)="actionOpenInNewTab()"
+          *ngIf="oneFileSelected"
+          mat-mini-fab
+        >
           <i class="icon-new-window"></i>
         </button>
       </div>
