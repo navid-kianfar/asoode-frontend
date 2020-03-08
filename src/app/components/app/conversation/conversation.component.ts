@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MappedConversationViewModel} from '../../../view-models/communication/messenger-types';
 import {MockService} from '../../../services/mock.service';
+import { ConversationType } from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-conversation',
@@ -13,6 +14,7 @@ export class ConversationComponent implements OnInit {
   waiting: boolean;
   mappedConversations: MappedConversationViewModel[] = [];
 
+  ConversationType = ConversationType;
   constructor(
     private readonly mockService: MockService
   ) { }
@@ -20,7 +22,7 @@ export class ConversationComponent implements OnInit {
   ngOnInit() {
     this.mappedConversations = [
       {
-        date: '23/3',
+        date: 'جمعه ۲۳ خرداد',
         messages: this.mockService.messages
       }
     ];

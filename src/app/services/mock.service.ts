@@ -25,54 +25,114 @@ export class MockService {
   private initMessages() {
     this.messages = [
       {
-        message: 'message message message message message message message message message message',
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
         channelId: '1',
-        title: 'title',
+        title: '',
         userId: '1',
-        replyId: '1'
+        replyId: '1',
+        fromBot: true
       },
       {
-        message: 'message message message message message message message message message message',
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
         channelId: '1',
-        title: 'title',
+        title: '',
         userId: '1',
-        replyId: '1'
+        replyId: '1',
+        fromBot: true
       },
       {
-        message: 'message message message message message message message message message message',
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
         channelId: '1',
-        title: 'title',
+        title: '',
         userId: '1',
-        replyId: '1'
+        replyId: '1',
+        fromBot: true
       },
       {
-        message: 'message message message message message message message message message message',
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
         channelId: '1',
-        title: 'title',
+        title: '',
         userId: '1',
-        replyId: '1'
+        replyId: '1',
+        fromBot: true
       },
       {
-        message: 'message message message message message message message message message message',
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
         createdAt: new Date(),
         id: '1',
         type: ConversationType.Text,
         channelId: '1',
-        title: 'title',
+        title: '',
         userId: '1',
-        replyId: '1'
+        replyId: '1',
+        fromBot: true
+      },
+      {
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: '',
+        userId: '1',
+        replyId: '1',
+        fromBot: true
+      },
+      {
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: '',
+        userId: '1',
+        replyId: '1',
+        fromBot: true
+      },
+      {
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: '',
+        userId: '1',
+        replyId: '1',
+        fromBot: true
+      },
+      {
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: '',
+        userId: '1',
+        replyId: '1',
+        fromBot: true
+      },
+      {
+        message: 'این یک پیام تستی می‌باشد از سمت آسوده بات این یک پیام تستی می‌باشد از سمت آسوده بات ',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: '',
+        userId: '1',
+        replyId: '1',
+        fromBot: true
       },
     ];
   }

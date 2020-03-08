@@ -9,6 +9,7 @@ import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 export class MemberInfoComponent implements OnInit {
   @Input() model: MemberInfoViewModel;
   @Input() selected: boolean;
+  @Input() small: boolean;
   constructor() {}
 
   ngOnInit() {}

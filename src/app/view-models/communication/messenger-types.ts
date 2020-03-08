@@ -22,4 +22,6 @@ export interface ConversationViewModel extends BaseViewModel {
   title?: string;
   type: ConversationType;
   userId: string;
+  fromBot: boolean;
+  member?: MemberInfoViewModel;
 }

@@ -57,6 +57,10 @@
     .views {
       width: 50px;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
       i {
         color: #b3b3b3;
         &.active {

@@ -25,13 +25,18 @@
 .shortcut-messenger-container {
   background: #ffffff;
   width: 300px;
-  height: calc(100vh - 57px);
+  max-height: calc(100vh - 57px);
   position: fixed;
   bottom: 0;
   left: 0;
   z-index: 20;
   box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+
+  .messeges-container {
+    max-height: 550px;
+    overflow: scroll;
+  }
 
   .header {
     display: flex;

@@ -4,7 +4,22 @@
     <div class="date-grouped" *ngFor="let conversation of mappedConversations">
       <div class="date">{{ conversation.date }}</div>
       <div *ngFor="let message of conversation.messages" class="message">
-        {{message.title}}
+        <div class="from">
+          <img *ngIf="message.fromBot" src="/assets/images/messenger/asoode-bot-icon.svg" alt="bot">
+          <app-member-info *ngIf="!message.fromBot"
+                           [small]="true"
+                           [model]="message.member"></app-member-info>
+        </div>
+        <div class="text">
+          <div class="wrapper">
+            <div *ngIf="message.fromBot" class="name">{{'ASOODE_BOT' | translate}}</div>
+            <div class="hour">12:12</div>
+<!--            <div class="hour">{{ message.createdAt | amTimeAgo }}</div>-->
+          </div>
+          <div *ngIf="message.type === ConversationType.Text" class="text-message">
+            {{message.message}}
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>

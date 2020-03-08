@@ -105,6 +105,7 @@ import { SearchPipe } from './pipes/core/search.pipe';
 import { EnumPipe } from './pipes/core/enum.pipe';
 import { MessengerSettingComponent } from './modals/messenger-setting/messenger-setting.component';
 import { ConversationComponent } from './components/app/conversation/conversation.component';
+import {MomentModule} from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -203,7 +204,7 @@ import { ConversationComponent } from './components/app/conversation/conversatio
     MatMenuModule,
     MatSnackBarModule,
     SimpleModalModule.forRoot(
-      { container: 'modal-container' },
+      {container: 'modal-container'},
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -212,7 +213,7 @@ import { ConversationComponent } from './components/app/conversation/conversatio
         wrapperDefaultClasses: 'modal fade-anim',
       },
     ),
-    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    NgxPopperModule.forRoot({placement: 'bottom'}),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,
@@ -222,6 +223,7 @@ import { ConversationComponent } from './components/app/conversation/conversatio
     MatFormFieldModule,
     ReactiveFormsModule,
     MatRippleModule,
+    MomentModule,
   ],
   providers: [
     // {
