@@ -12,9 +12,15 @@
       align-items: end;
     }
 
-    ::ng-deep span.title {
+    ::ng-deep .title {
+      display: flex;
       font-weight: 500;
       font-size: 1rem;
+      align-items: center;
+
+      &.import {
+        align-items: end;
+      }
     }
     ::ng-deep p.description {
       color: #808080;
@@ -40,7 +46,6 @@
   }
 }
 .import {
-  padding: 20px 0;
   .item {
     margin: 10px 0;
     display: flex;

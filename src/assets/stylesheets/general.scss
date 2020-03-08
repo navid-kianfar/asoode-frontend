@@ -375,6 +375,10 @@ body {
       margin: 200px auto;
       background: #fff;
       border-radius: 5px;
+
+      &.create-modal {
+        margin: 50px auto;
+      }
     }
     .modal-body {
       padding: 10px 15px 0;

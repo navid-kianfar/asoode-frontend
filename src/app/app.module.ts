@@ -202,6 +202,8 @@ import { EnumPipe } from './pipes/core/enum.pipe';
                 ...defaultSimpleModalOptions,
                 closeOnEscape: true,
                 closeOnClickOutside: true,
+                wrapperClass: 'in',
+                wrapperDefaultClasses: 'modal fade-anim'
             },
         ),
         NgxPopperModule.forRoot({placement: 'bottom'}),
