@@ -16,7 +16,7 @@ export class ChannelSettingComponent extends SimpleModalComponent<{}, boolean>
   skipMobile: boolean;
   skipDesktop: boolean;
   showSummary: boolean;
-  constructor(private readonly identityService: IdentityService) {
+  constructor(readonly identityService: IdentityService) {
     super();
   }
 

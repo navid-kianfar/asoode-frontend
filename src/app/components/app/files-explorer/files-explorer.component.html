@@ -7,29 +7,29 @@
         </button>
       </div>
       <div class="commands">
-        <button (click)="actionCut()" *ngIf="atLeastOneSelected" mat-fab>
+        <button (click)="actionCut()" *ngIf="atLeastOneSelected" mat-mini-fab>
           <i class="icon-cut"></i>
         </button>
-        <button (click)="actionCopy()" *ngIf="atLeastOneSelected" mat-fab>
+        <button (click)="actionCopy()" *ngIf="atLeastOneSelected" mat-mini-fab>
           <i class="icon-copy3"></i>
         </button>
-        <button (click)="actionPaste()" *ngIf="inClipboard" mat-fab>
+        <button (click)="actionPaste()" *ngIf="inClipboard" mat-mini-fab>
           <i class="icon-paste"></i>
         </button>
-        <button (click)="actionRename()" *ngIf="onlyOneSelected" mat-fab>
+        <button (click)="actionRename()" *ngIf="onlyOneSelected" mat-mini-fab>
           <i class="icon-pencil"></i>
         </button>
-        <button (click)="actionDownload()" *ngIf="atLeastOneSelected" mat-fab>
+        <button (click)="actionDownload()" *ngIf="atLeastOneSelected" mat-mini-fab>
           <i class="icon-download4"></i>
         </button>
         <button
           (click)="actionOpen()"
           *ngIf="oneFileSelected && canOpen"
-          mat-fab
+          mat-mini-fab
         >
           <i class="icon-eye2"></i>
         </button>
-        <button (click)="actionOpenInNewTab()" *ngIf="oneFileSelected" mat-fab>
+        <button (click)="actionOpenInNewTab()" *ngIf="oneFileSelected" mat-mini-fab>
           <i class="icon-new-window"></i>
         </button>
       </div>
