@@ -1,12 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { CultureService } from './core/culture.service';
-import { TranslateService } from './core/translate.service';
-import { IdentityService } from './auth/identity.service';
-import { EnumsService } from './core/enums.service';
-import { MessengerService } from './communication/messenger.service';
-import { GroupService } from './groups/group.service';
-import { ProjectService } from './projects/project.service';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {CultureService} from './core/culture.service';
+import {TranslateService} from './core/translate.service';
+import {IdentityService} from './auth/identity.service';
+import {EnumsService} from './core/enums.service';
+import {MessengerService} from './communication/messenger.service';
+import {GroupService} from './groups/group.service';
+import {ProjectService} from './projects/project.service';
+import {OperationResultStatus} from '../library/core/enums';
 
 @Injectable()
 export class AppInitializerProvider {
@@ -42,6 +43,14 @@ export class AppInitializerProvider {
     const promise2 = this.messengerService.load();
     const promise3 = this.groupService.load();
     const promise4 = this.projectService.load();
+
+    promise1.then(op => {
+      if (op.status === OperationResultStatus.NotFound) {
+        this.identityService.logout();
+        window.location.reload();
+      }
+    });
+
     return Promise.all([promise1, promise2, promise3, promise4]);
   }
 }

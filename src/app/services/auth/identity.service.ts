@@ -11,7 +11,6 @@ import {
   LoginResultViewModel,
   RegisterResultViewModel,
 } from '../../view-models/auth/identity-view-models';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +22,6 @@ export class IdentityService {
 
   constructor(
     private readonly httpService: HttpService,
-    private readonly router: Router,
   ) {
     this.identityObject = this.getIdentityInfo();
   }
@@ -90,15 +88,6 @@ export class IdentityService {
 
   async load(): Promise<OperationResult<any>> {
     const op = await this.httpService.post<any>('/account/profile');
-
-    if (op.status === OperationResultStatus.NotFound) {
-      this.logout();
-      setTimeout(() => {
-        this.router.navigateByUrl('/login');
-      }, 10);
-      return op;
-    }
-
     if (op.status === OperationResultStatus.Success) {
       this.profileObject = op.data;
     }
