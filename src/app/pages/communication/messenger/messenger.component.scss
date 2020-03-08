@@ -61,6 +61,7 @@
       display: flex;
       width: 100%;
       border-bottom: 1px solid #e6e6e6;
+      box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.2);
 
       .wrapper {
         display: flex;
@@ -137,6 +138,7 @@
     &.no-item {
       .channel-header {
         border-bottom: none;
+        box-shadow: none;
       }
 
       h3 {

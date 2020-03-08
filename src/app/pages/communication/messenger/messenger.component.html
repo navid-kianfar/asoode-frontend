@@ -58,11 +58,11 @@
           </div>
         </div>
         <div class="action-container">
-          <button mat-button class="file">
+          <button (click)="toggleFiles()" mat-button class="file">
             <i class="icon-shared-folder"></i>&nbsp;
             <span>{{ 'FILES' | translate}}</span>
           </button>&nbsp;
-          <button mat-button class="setting">
+          <button (click)="openSetting()" mat-button class="setting">
             <i class="icon-cog2"></i>&nbsp;
             <span>{{ 'SETTING' | translate}}</span>
           </button>
@@ -70,6 +70,6 @@
       </div>
       <div class="channel-content"></div>
     </div>
-    <div class="channel-aside"></div>
+    <div *ngIf="showFiles" class="channel-aside"></div>
   </ng-container>
 </div>

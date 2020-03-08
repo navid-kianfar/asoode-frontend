@@ -102,6 +102,7 @@ import { ProjectComponent } from './pages/project-management/project/project.com
 import { WorkPackageComponent } from './pages/project-management/work-package/work-package.component';
 import { SearchPipe } from './pipes/core/search.pipe';
 import { EnumPipe } from './pipes/core/enum.pipe';
+import { ChannelSettingComponent } from './modals/channel-setting/channel-setting.component';
 
 @NgModule({
   declarations: [
@@ -176,12 +177,14 @@ import { EnumPipe } from './pipes/core/enum.pipe';
     WorkPackageComponent,
     SearchPipe,
     EnumPipe,
+    ChannelSettingComponent,
   ],
   entryComponents: [
     ConfirmComponent,
     PromptComponent,
     ChangePhoneComponent,
     CreateWizardComponent,
+    ChannelSettingComponent
   ],
     imports: [
         BrowserModule,

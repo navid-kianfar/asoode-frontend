@@ -29,3 +29,8 @@ export enum ConversationType {
   Project = 2,
   Group = 3,
 }
+export enum ChannelNotificationReceive {
+  All = 1,
+  Mine = 2,
+  None = 3
+}
