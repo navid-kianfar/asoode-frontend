@@ -1,12 +1,12 @@
-<div class="project-info" [class.template]="template">
+<div class="project-info" [class.template]="template" (click)="openProject()">
   <div class="title">
-    <i *ngIf="project.premium" class="icon-project"></i>
-    <i *ngIf="!project.premium" class="icon-workpackage"></i>
+    <i *ngIf="project.complex" class="icon-project"></i>
+    <i *ngIf="!project.complex" class="icon-workpackage"></i>
     &nbsp;<span>{{ project.title }}</span>
   </div>
   <div class="description">{{ project.description }}</div>
   <div class="details">
-    <ng-container *ngIf="project.premium">
+    <ng-container *ngIf="project.complex">
       <div class="item">
         <i class="icon-flag3"></i>&nbsp;
         <span>{{

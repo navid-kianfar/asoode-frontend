@@ -29,7 +29,7 @@ export class QuickAccessComponent implements OnInit {
   }
 
   openProject(project: ProjectViewModel) {
-    this.router.navigateByUrl('project');
+    this.router.navigateByUrl(project.complex ? 'project' : 'work-package');
     this.hide.emit();
   }
 }

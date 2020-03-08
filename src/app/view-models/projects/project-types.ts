@@ -9,6 +9,7 @@ export interface ProjectViewModel extends BaseViewModel {
   title: string;
   description: string;
   premium: boolean;
+  complex: boolean;
   tasks: number;
   members: ProjectMemberViewModel[];
   seasons: ProjectSeasonViewModel[];
