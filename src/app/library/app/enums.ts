@@ -24,10 +24,16 @@ export enum WorkPackageCommentPermission {
   Members = 2,
   MembersAndObservers = 3,
 }
-export enum ConversationType {
+export enum ChannelType {
   Direct = 1,
   Project = 2,
   Group = 3,
+}
+export enum ConversationType {
+  Text = 1,
+  Upload = 2,
+  Task = 3,
+  Link = 4
 }
 export enum ChannelNotificationReceive {
   All = 1,

@@ -1,0 +1,11 @@
+<div class="conversation-block">
+  <app-waiting *ngIf="waiting"></app-waiting>
+  <ng-container *ngIf="!waiting">
+    <div class="date-grouped" *ngFor="let conversation of mappedConversations">
+      <div class="date">{{ conversation.date }}</div>
+      <div *ngFor="let message of conversation.messages" class="message">
+        {{message.title}}
+      </div>
+    </div>
+  </ng-container>
+</div>

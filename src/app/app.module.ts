@@ -104,6 +104,7 @@ import { WorkPackageComponent } from './pages/project-management/work-package/wo
 import { SearchPipe } from './pipes/core/search.pipe';
 import { EnumPipe } from './pipes/core/enum.pipe';
 import { MessengerSettingComponent } from './modals/messenger-setting/messenger-setting.component';
+import { ConversationComponent } from './components/app/conversation/conversation.component';
 
 @NgModule({
   declarations: [
@@ -179,6 +180,7 @@ import { MessengerSettingComponent } from './modals/messenger-setting/messenger-
     SearchPipe,
     EnumPipe,
     MessengerSettingComponent,
+    ConversationComponent,
   ],
   entryComponents: [
     ConfirmComponent,

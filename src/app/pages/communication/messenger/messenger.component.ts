@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessengerService } from '../../../services/communication/messenger.service';
 import { ChannelViewModel } from '../../../view-models/communication/messenger-types';
 import { MockService } from '../../../services/mock.service';
-import { ConversationType } from '../../../library/app/enums';
+import { ConversationType, ChannelType } from '../../../library/app/enums';
 import { ModalService } from '../../../services/core/modal.service';
 import { MessengerSettingComponent } from '../../../modals/messenger-setting/messenger-setting.component';
 
@@ -13,7 +13,7 @@ import { MessengerSettingComponent } from '../../../modals/messenger-setting/mes
 })
 export class MessengerComponent implements OnInit {
   current: ChannelViewModel;
-  ConversationType = ConversationType;
+  ChannelType = ChannelType;
   showFiles: boolean;
   constructor(
     private readonly messengerService: MessengerService,

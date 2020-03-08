@@ -16,7 +16,7 @@
           (click)="open(channel)"
           *ngFor="
             let channel of mockService.channels
-              | search: ['type']:ConversationType.Project
+              | search: ['type']:ChannelType.Project
           "
           class="item"
         >
@@ -31,7 +31,7 @@
           (click)="open(channel)"
           *ngFor="
             let channel of mockService.channels
-              | search: ['type']:ConversationType.Group
+              | search: ['type']:ChannelType.Group
           "
           class="item"
         >
@@ -64,11 +64,11 @@
             <span class="title">{{ current.title }}</span
             >&nbsp;
             <i
-              *ngIf="current.type === ConversationType.Group"
+              *ngIf="current.type === ChannelType.Group"
               class="icon-team"
             ></i>
             <i
-              *ngIf="current.type === ConversationType.Project"
+              *ngIf="current.type === ChannelType.Project"
               class="icon-workpackage"
             ></i
             >&nbsp;
@@ -76,7 +76,7 @@
           </div>
           <div class="info-container">
             <div class="type">
-              {{ current.type | enum: 'ConversationType' }}
+              {{ current.type | enum: 'ChannelType' }}
             </div>
             <div class="members">
               |&nbsp;&nbsp;{{
@@ -84,7 +84,7 @@
               }}&nbsp;&nbsp;|
             </div>
             <a
-              *ngIf="current.type === ConversationType.Project"
+              *ngIf="current.type === ChannelType.Project"
               [routerLink]="'/project'"
               class="go-to"
             >
@@ -92,7 +92,7 @@
               {{ 'VIEW_IN_PROJECT_PAGE' | translate }}
             </a>
             <a
-              *ngIf="current.type === ConversationType.Group"
+              *ngIf="current.type === ChannelType.Group"
               [routerLink]="'/group'"
               class="go-to"
             >

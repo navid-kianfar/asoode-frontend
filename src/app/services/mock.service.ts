@@ -1,12 +1,9 @@
-import { Injectable } from '@angular/core';
-import { ProjectViewModel } from '../view-models/projects/project-types';
-import { GroupViewModel } from '../view-models/groups/group-types';
-import { ConversationType, GroupType } from '../library/app/enums';
-import {
-  ExplorerViewModel,
-  UploadViewModel,
-} from '../view-models/storage/files-types';
-import { ChannelViewModel } from '../view-models/communication/messenger-types';
+import {Injectable} from '@angular/core';
+import {ProjectViewModel} from '../view-models/projects/project-types';
+import {GroupViewModel} from '../view-models/groups/group-types';
+import {ChannelType, ConversationType, GroupType} from '../library/app/enums';
+import {ExplorerViewModel, UploadViewModel } from '../view-models/storage/files-types';
+import {ChannelViewModel, ConversationViewModel} from '../view-models/communication/messenger-types';
 
 const members: any[] = [];
 
@@ -14,6 +11,7 @@ const members: any[] = [];
   providedIn: 'root',
 })
 export class MockService {
+  messages: ConversationViewModel[];
   channels: ChannelViewModel[] = [];
   projects: ProjectViewModel[] = [];
   groups: GroupViewModel[] = [];
@@ -24,23 +22,79 @@ export class MockService {
     this.init();
   }
 
+  private initMessages() {
+    this.messages = [
+      {
+        message: 'message message message message message message message message message message',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: 'title',
+        userId: '1',
+        replyId: '1'
+      },
+      {
+        message: 'message message message message message message message message message message',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: 'title',
+        userId: '1',
+        replyId: '1'
+      },
+      {
+        message: 'message message message message message message message message message message',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: 'title',
+        userId: '1',
+        replyId: '1'
+      },
+      {
+        message: 'message message message message message message message message message message',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: 'title',
+        userId: '1',
+        replyId: '1'
+      },
+      {
+        message: 'message message message message message message message message message message',
+        createdAt: new Date(),
+        id: '1',
+        type: ConversationType.Text,
+        channelId: '1',
+        title: 'title',
+        userId: '1',
+        replyId: '1'
+      },
+    ];
+  }
   private initChannels() {
     this.channels = [
       ...this.projects.map((p, idx) => {
         return {
-          type: ConversationType.Project,
+          type: ChannelType.Project,
           title: p.title,
           recordId: `${idx + 1}`,
           members: [],
-        };
+          messages: this.messages
+        } as ChannelViewModel;
       }),
       ...this.groups.map((p, idx) => {
         return {
-          type: ConversationType.Group,
+          type: ChannelType.Group,
           title: p.title,
           recordId: `${idx + 1}`,
           members: [],
-        };
+          messages: this.messages
+        } as ChannelViewModel;
       }),
     ];
   }
@@ -504,6 +558,7 @@ export class MockService {
     this.initGroups();
     this.initFiles();
     this.initUpload();
+    this.initMessages();
     this.initChannels();
   }
 }
