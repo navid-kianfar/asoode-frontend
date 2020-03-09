@@ -4,6 +4,7 @@ import { AccessType, GroupType } from '../../library/app/enums';
 export interface GroupViewModel extends BaseViewModel {
   userId: string;
   title: string;
+  avatar?: string;
   subTitle?: string;
   brandTitle?: string;
   supervisorName?: string;

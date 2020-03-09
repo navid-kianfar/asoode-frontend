@@ -108,6 +108,7 @@ import { EnumPipe } from './pipes/core/enum.pipe';
 import { MessengerSettingComponent } from './modals/messenger-setting/messenger-setting.component';
 import { ConversationComponent } from './components/app/conversation/conversation.component';
 import { TasksComponent } from './pages/project-management/tasks/tasks.component';
+import { InitialsPipe } from './pipes/app/initials.pipe';
 
 @NgModule({
   declarations: [
@@ -185,6 +186,7 @@ import { TasksComponent } from './pages/project-management/tasks/tasks.component
     MessengerSettingComponent,
     ConversationComponent,
     TasksComponent,
+    InitialsPipe,
   ],
   entryComponents: [
     ConfirmComponent,

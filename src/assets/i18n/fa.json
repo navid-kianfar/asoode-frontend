@@ -235,5 +235,6 @@
   "ENUMS_SORT_TYPE_DATE_ASC": "تاریخ - جدید ترین",
   "ENUMS_SORT_TYPE_DATE_DESC": "تاریخ - قدیمی ترین",
   "ENUMS_SORT_TYPE_NAME_ASC": "نام - ترتیب الفبا",
-  "ENUMS_SORT_TYPE_NAME_DESC": "نام - عکس الفبا"
+  "ENUMS_SORT_TYPE_NAME_DESC": "نام - عکس الفبا",
+  "DETAIL": "جزئیات"
 }
