@@ -5,12 +5,14 @@
 
     .inner-content {
       width: 350px;
+      max-width: 100%;
       margin: 50px auto 0;
       text-align: center;
     }
     .edit-inner-container {
       width: 500px;
       margin: 50px auto 0;
+      max-width: 100%;
     }
     .avatar-container {
       width: 100px;
@@ -79,5 +81,9 @@
   ::ng-deep .change-password button {
     display: block !important;
     width: 100% !important;
+    max-width: 220px !important;
+  }
+  ::ng-deep input {
+    width: 220px !important;
   }
 }
