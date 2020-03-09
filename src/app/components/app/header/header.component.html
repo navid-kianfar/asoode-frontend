@@ -20,6 +20,9 @@
   <div class="flex-spacer"></div>
 
   <div class="action-container">
+    <a class="tasks" routerLink="tasks">
+      {{ 'TASKS_MANAGEMENT' | translate }}
+    </a>
     <a
       class="quick-access"
       href="javascript:void(0)"
@@ -29,11 +32,8 @@
       [popperHideOnScroll]="true"
       [popperPlacement]="'bottom'"
     >
-      {{ 'QUICK_ACCESS' | translate }}&nbsp;
+      <span>{{ 'QUICK_ACCESS' | translate }}&nbsp;</span>
       <i class="icon-arrow-down2"></i>
-    </a>
-    <a class="tasks" routerLink="tasks">
-      {{ 'TASKS_MANAGEMENT' | translate }}
     </a>
     <a class="files" routerLink="files"> {{ 'FILES' | translate }} </a>
     <div class="search-container">

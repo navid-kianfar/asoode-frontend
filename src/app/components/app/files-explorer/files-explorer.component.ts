@@ -35,9 +35,9 @@ export class FilesExplorerComponent implements OnInit {
   canOpen: boolean;
   oneFileSelected: boolean;
   allowedTypes: string;
-  SortType = SortType;
 
   @ViewChild('filePicker', { static: false }) filePicker;
+  sort: SortType;
   constructor(
     private readonly filesService: FilesService,
     private readonly modalService: ModalService,
@@ -46,6 +46,7 @@ export class FilesExplorerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.sort = SortType.DateAsc;
     this.data = { folders: [], files: [] };
     this.allowedTypes = [
       'image/*',

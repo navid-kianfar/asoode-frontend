@@ -42,6 +42,10 @@ h1 {
   font-size: 0.8rem;
   font-weight: 500;
   //margin: 0 50px;
+  span {
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
 }
 .files,
 .tasks {
@@ -101,9 +105,9 @@ h1 {
 }
 .action-container {
   display: flex;
-  width: 50%;
   justify-content: space-between;
-  max-width: 600px;
+  width: 550px;
+  max-width: 550px;
 }
 .flex-spacer {
   -webkit-box-flex: 1;
@@ -124,12 +128,76 @@ h1 {
   background-color: #fff;
 }
 
-//@media (max-width: 780px) {
-//  .search-container,
-//  .quick-access {
-//    margin: 0 15px;
-//  }
-//}
+@media (max-width: 800px) {
+  .create-spacer {
+    width: 10px;
+  }
+  .action-container {
+    width: 500px;
+    max-width: 500px;
+    min-width: auto;
+  }
+    .logo {
+      display: none;
+    }
+    .logo-alt {
+      display: block;
+      width: 30px !important;
+      height: 40px;
+    }
+}
+@media (max-width: 700px) {
+  .action-container {
+    width: 300px;
+    max-width: 300px;
+  }
+    .search-container-tiny {
+      display: flex;
+      width: 20px;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+    .search-container {
+      display: none;
+    }
+  .logo {
+    display: block;
+  }
+  .logo-alt {
+    display: none;
+  }
+}
+@media (max-width: 550px) {
+  .logo {
+    display: none;
+  }
+  .logo-alt {
+    display: block;
+    width: 30px !important;
+    height: 40px;
+  }
+}
+@media (max-width: 450px) {
+  .action-container {
+    max-width: 250px;
+
+    .files,
+    .tasks, a.quick-access {
+      font-size: 0.6rem;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .action-container {
+    max-width: 180px;
+    a.quick-access {
+      span {
+        display: none;
+      }
+    }
+  }
+}
 //@media (max-width: 620px) {
 //  nav {
 //    font-size: 0.7rem;

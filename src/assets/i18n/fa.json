@@ -231,7 +231,7 @@
   "DELETE": "حذف",
   "VIEW": "نمایش",
   "OPEN": "باز",
-  "SORT_BY": "مراتب سازی بر اساس",
+  "SORT_BY": "مرتب سازی بر اساس",
   "ENUMS_SORT_TYPE_DATE_ASC": "تاریخ - جدید ترین",
   "ENUMS_SORT_TYPE_DATE_DESC": "تاریخ - قدیمی ترین",
   "ENUMS_SORT_TYPE_NAME_ASC": "نام - ترتیب الفبا",

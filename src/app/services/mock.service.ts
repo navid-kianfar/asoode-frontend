@@ -226,8 +226,7 @@ export class MockService {
     this.files = {
       files: [
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/232/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -245,8 +244,7 @@ export class MockService {
           selected: false,
         },
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/233/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -264,8 +262,7 @@ export class MockService {
           selected: false,
         },
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/234/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -283,8 +280,7 @@ export class MockService {
           selected: false,
         },
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/235/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -302,8 +298,7 @@ export class MockService {
           selected: false,
         },
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/236/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -321,8 +316,7 @@ export class MockService {
           selected: false,
         },
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/237/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -340,8 +334,7 @@ export class MockService {
           selected: false,
         },
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/238/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -359,8 +352,7 @@ export class MockService {
           selected: false,
         },
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/239/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
@@ -378,8 +370,7 @@ export class MockService {
           selected: false,
         },
         {
-          url:
-            'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+          url: 'https://i.picsum.photos/id/240/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
           extensionLessName: 'My Presentation',
