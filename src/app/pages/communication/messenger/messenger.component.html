@@ -1,5 +1,5 @@
 <div class="messenger-container">
-  <div class="aside">
+  <div [class.selected]="current !== undefined" class="aside">
     <div class="aside-header">
       <img
         src="/assets/images/messenger/asoode-chat-icon.svg"
@@ -101,11 +101,14 @@
         <div class="action-container">
           <button (click)="toggleFiles()" mat-button class="file">
             <i class="icon-shared-folder"></i>&nbsp;
-            <span>{{ 'FILES' | translate }}</span></button
+            <span class="lbl">{{ 'FILES' | translate }}</span></button
           >&nbsp;
           <button (click)="openSetting()" mat-button class="setting">
             <i class="icon-cog2"></i>&nbsp;
-            <span>{{ 'SETTING' | translate }}</span>
+            <span class="lbl">{{ 'SETTING' | translate }}</span>
+          </button>&nbsp;
+          <button (click)="openChannels()" mat-button class="channels">
+            <i class="icon-menu3"></i>&nbsp;
           </button>
         </div>
       </div>

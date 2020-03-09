@@ -55,6 +55,7 @@
     flex-grow: 1;
     -webkit-box-flex: 1;
     flex-wrap: wrap;
+    min-width: 445px;
     //height: calc(100vh - 111px);
     //overflow: scroll;
 
@@ -129,6 +130,9 @@
             }
           }
 
+          &.channels {
+            display: none;
+          }
           span {
             font-size: 0.7rem;
           }
@@ -156,12 +160,79 @@
   }
   .channel-aside {
     width: 300px;
-    background: yellow;
+    min-width: 300px;
+    background: rgba(255, 255, 0, 0.14);
     display: flex;
   }
 
   ::ng-deep .conversations {
     height: calc(100vh - 210px);
     overflow: scroll;
+  }
+}
+@media (max-width: 1000px) {
+  .channel-aside {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .messenger-container .aside {
+    min-width: 150px;
+    width: 150px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .action-container {
+    width: 70px !important;
+    justify-content: space-between;
+
+    button {
+      margin: 0;
+      padding: 0;
+      min-width: 30px;
+    }
+    .lbl {
+      display: none;
+    }
+  }
+  .channel-container {
+    min-width: 290px !important;
+
+    &.no-item {
+      min-width: auto !important;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .aside.selected {
+    display: none !important;
+  }
+  .action-container {
+    width: 100px !important;
+    button.channels {
+      display: block !important;
+    }
+  }
+}
+@media (max-width: 350px) {
+  .action-container {
+    width: 80px !important;
+    button {
+      display: block !important;
+      min-width: 20px;
+
+      i {
+        font-size: 20px;
+      }
+    }
   }
 }

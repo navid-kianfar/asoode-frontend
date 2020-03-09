@@ -36,4 +36,8 @@ export class MessengerComponent implements OnInit {
   openSetting() {
     this.modalService.show(MessengerSettingComponent, {}).subscribe(() => {});
   }
+
+  openChannels() {
+    this.current = undefined;
+  }
 }
