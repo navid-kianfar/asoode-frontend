@@ -31,6 +31,7 @@
     width: 100%;
     z-index: 10;
     display: flex;
+    align-items: center;
     .space {
       display: flex;
       width: 50%;
@@ -40,6 +41,10 @@
       display: flex;
       flex-grow: 1;
       -webkit-box-flex: 1;
+      direction: ltr;
+      text-align: left;
+      padding: 0 20px;
+
       button {
         border-radius: 50px !important;
         margin: 0 5px;
@@ -51,6 +56,18 @@
           font-size: 1.1rem;
           position: relative;
           top: 5px;
+        }
+      }
+
+      ::ng-deep .mat-mini-fab .mat-button-wrapper {
+        padding: 0;
+
+        .btn-inner {
+          i {
+          }
+          .sub-title {
+            font-size: 0.7rem;
+          }
         }
       }
     }
@@ -67,6 +84,22 @@
           color: #333333;
         }
       }
+    }
+  }
+}
+.sort-by {
+  display: flex;
+  flex: 0 0 100%;
+  margin-bottom: 10px;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #999999;
+
+  ::ng-deep .af-dropdown button {
+    border: none !important;
+
+    span.arrow {
+      display: none;
     }
   }
 }

@@ -8,37 +8,64 @@
       </div>
       <div class="commands">
         <button (click)="actionCut()" *ngIf="atLeastOneSelected" mat-mini-fab>
-          <i class="icon-cut"></i>
+          <span class="btn-inner">
+            <i class="icon-delete"></i>
+            <span class="sub-title">{{ 'DELETE' | translate }}</span>
+          </span>
+        </button>
+        <button (click)="actionCut()" *ngIf="atLeastOneSelected" mat-mini-fab>
+          <span class="btn-inner">
+            <i class="icon-cut"></i>
+            <span class="sub-title">{{ 'CUT' | translate }}</span>
+          </span>
         </button>
         <button (click)="actionCopy()" *ngIf="atLeastOneSelected" mat-mini-fab>
-          <i class="icon-copy3"></i>
+          <span class="btn-inner">
+            <i class="icon-copy3"></i>
+            <span class="sub-title">{{ 'COPY' | translate }}</span>
+          </span>
         </button>
         <button (click)="actionPaste()" *ngIf="inClipboard" mat-mini-fab>
-          <i class="icon-paste"></i>
+          <span class="btn-inner">
+            <i class="icon-paste"></i>
+            <span class="sub-title">{{ 'PASTE' | translate }}</span>
+          </span>
         </button>
         <button (click)="actionRename()" *ngIf="onlyOneSelected" mat-mini-fab>
-          <i class="icon-pencil"></i>
+          <span class="btn-inner">
+            <i class="icon-pencil"></i>
+            <span class="sub-title">{{ 'RENAME' | translate }}</span>
+          </span>
         </button>
         <button
           (click)="actionDownload()"
           *ngIf="atLeastOneSelected"
           mat-mini-fab
         >
-          <i class="icon-download4"></i>
+          <span class="btn-inner">
+            <i class="icon-download4"></i>
+            <span class="sub-title">{{ 'DOWNLOAD' | translate }}</span>
+          </span>
         </button>
         <button
           (click)="actionOpen()"
           *ngIf="oneFileSelected && canOpen"
           mat-mini-fab
         >
-          <i class="icon-eye2"></i>
+          <span class="btn-inner">
+            <i class="icon-eye2"></i>
+            <span class="sub-title">{{ 'VIEW' | translate }}</span>
+          </span>
         </button>
         <button
           (click)="actionOpenInNewTab()"
           *ngIf="oneFileSelected"
           mat-mini-fab
         >
-          <i class="icon-new-window"></i>
+          <span class="btn-inner">
+            <i class="icon-new-window"></i>
+            <span class="sub-title">{{ 'OPEN' | translate }}</span>
+          </span>
         </button>
       </div>
       <div class="views">
@@ -69,6 +96,13 @@
   />
   <app-waiting *ngIf="waiting"></app-waiting>
   <ng-container *ngIf="!waiting">
+    <div class="sort-by">
+      <i class="icon-arrow-down8"></i>&nbsp;
+      <span class="label">{{ 'SORT_BY' | translate }}</span
+      >&nbsp;
+      <app-dropdown enum="SortType" [model]="SortType.DateAsc"></app-dropdown>
+    </div>
+
     <app-file-folder-preview
       (click)="handleClick($event, folder)"
       (dblclick)="enterFolder(folder)"

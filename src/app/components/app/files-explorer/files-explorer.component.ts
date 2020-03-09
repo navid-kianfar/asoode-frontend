@@ -12,6 +12,7 @@ import { ModalService } from '../../../services/core/modal.service';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../services/core/form.service';
+import { SortType } from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-files-explorer',
@@ -34,6 +35,7 @@ export class FilesExplorerComponent implements OnInit {
   canOpen: boolean;
   oneFileSelected: boolean;
   allowedTypes: string;
+  SortType = SortType;
 
   @ViewChild('filePicker', { static: false }) filePicker;
   constructor(

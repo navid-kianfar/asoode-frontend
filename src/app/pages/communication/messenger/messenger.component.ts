@@ -21,7 +21,9 @@ export class MessengerComponent implements OnInit {
     readonly modalService: ModalService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.showFiles = true;
+  }
 
   open(channel: ChannelViewModel) {
     this.current = channel;

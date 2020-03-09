@@ -1,5 +1,5 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {CultureService} from '../../../services/core/culture.service';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { CultureService } from '../../../services/core/culture.service';
 import Quill from 'quill';
 import 'quill-mention';
 import 'quill-emoji/dist/quill-emoji.js';
@@ -16,7 +16,8 @@ export class EditorComponent implements OnInit {
   @Input() placeHolder: string;
 
   modules: any;
-  @ViewChild(QuillEditorComponent, { static: true }) editor: QuillEditorComponent;
+  @ViewChild(QuillEditorComponent, { static: true })
+  editor: QuillEditorComponent;
   constructor(readonly cultureService: CultureService) {}
 
   ngOnInit() {
@@ -37,7 +38,7 @@ export class EditorComponent implements OnInit {
           source: (searchTerm, renderList) => {
             const values = [
               { id: 1, value: 'نوید کیانفر' },
-              { id: 2, value: 'صبا کیانفر' }
+              { id: 2, value: 'صبا کیانفر' },
             ];
 
             if (searchTerm.length === 0) {
@@ -45,14 +46,18 @@ export class EditorComponent implements OnInit {
             } else {
               const matches = [];
 
-              values.forEach((entry) => {
-                if (entry.value.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1) {
+              values.forEach(entry => {
+                if (
+                  entry.value
+                    .toLowerCase()
+                    .indexOf(searchTerm.toLowerCase()) !== -1
+                ) {
                   matches.push(entry);
                 }
               });
               renderList(matches, searchTerm);
             }
-          }
+          },
         },
       };
     }

@@ -107,6 +107,7 @@ import { SearchPipe } from './pipes/core/search.pipe';
 import { EnumPipe } from './pipes/core/enum.pipe';
 import { MessengerSettingComponent } from './modals/messenger-setting/messenger-setting.component';
 import { ConversationComponent } from './components/app/conversation/conversation.component';
+import { TasksComponent } from './pages/project-management/tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -183,6 +184,7 @@ import { ConversationComponent } from './components/app/conversation/conversatio
     EnumPipe,
     MessengerSettingComponent,
     ConversationComponent,
+    TasksComponent,
   ],
   entryComponents: [
     ConfirmComponent,

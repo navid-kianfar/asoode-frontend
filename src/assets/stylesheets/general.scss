@@ -341,7 +341,7 @@ button[disabled] {
   border-radius: 0 0 5px 5px !important;
 }
 .ql-toolbar.ql-snow .ql-formats {
- margin: 0;
+  margin: 0;
 }
 #emoji-palette {
   top: unset !important;
@@ -353,22 +353,18 @@ button[disabled] {
 .textarea-emoji-control {
   display: none !important;
 }
-quill-editor[dir="rtl"] {
+quill-editor[dir='rtl'] {
   .ql-editor {
     direction: rtl;
     text-align: right;
   }
   .ql-mention-list-container {
     left: unset !important;
-
   }
-
 }
 .ql-editor {
   padding: 12px 15px;
 }
-
-
 
 .success-snack {
   background-color: #9be4ad;

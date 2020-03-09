@@ -40,3 +40,9 @@ export enum ChannelNotificationReceive {
   Mine = 2,
   None = 3,
 }
+export enum SortType {
+  DateAsc = 1,
+  DateDesc = 2,
+  NameAsc = 3,
+  NameDesc = 4,
+}

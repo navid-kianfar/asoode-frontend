@@ -149,8 +149,8 @@
       }
     }
     .channel-content {
-      height: calc(100vh - 111px);
-      overflow: scroll;
+      //height: calc(100vh - 111px);
+      //overflow: scroll;
       width: 100%;
     }
   }
@@ -158,5 +158,10 @@
     width: 300px;
     background: yellow;
     display: flex;
+  }
+
+  ::ng-deep .conversations {
+    height: calc(100vh - 210px);
+    overflow: scroll;
   }
 }

@@ -221,5 +221,19 @@
   "INSERT_EMOJI": "وارد کردن شکلک",
   "CHANGE_COLOR": "تغییر رنگ نوشتار",
   "CHANGE_BACKGROUND_COLOR": "تغییر رنگ پس زمینه",
-  "ATTACHMENT": "پیوست"
+  "ATTACHMENT": "پیوست",
+  "TASKS_MANAGEMENT": "مدیریت کارها",
+  "CUT": "انتقال",
+  "COPY": "کپی",
+  "PASTE": "چسباندن",
+  "DOWNLOAD": "دانلود",
+  "RENAME": "نام",
+  "DELETE": "حذف",
+  "VIEW": "نمایش",
+  "OPEN": "باز",
+  "SORT_BY": "مراتب سازی بر اساس",
+  "ENUMS_SORT_TYPE_DATE_ASC": "تاریخ - جدید ترین",
+  "ENUMS_SORT_TYPE_DATE_DESC": "تاریخ - قدیمی ترین",
+  "ENUMS_SORT_TYPE_NAME_ASC": "نام - ترتیب الفبا",
+  "ENUMS_SORT_TYPE_NAME_DESC": "نام - عکس الفبا"
 }

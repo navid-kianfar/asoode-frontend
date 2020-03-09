@@ -10,6 +10,7 @@ import { ConversationType } from 'src/app/library/app/enums';
 })
 export class ConversationComponent implements OnInit {
   @Input() recordId: string;
+  @Input() dashboard: boolean;
   waiting: boolean;
   mappedConversations: MappedConversationViewModel[] = [];
 

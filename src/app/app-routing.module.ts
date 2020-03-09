@@ -12,6 +12,7 @@ import { MessengerComponent } from './pages/communication/messenger/messenger.co
 import { GroupComponent } from './pages/collaboration/group/group.component';
 import { ProjectComponent } from './pages/project-management/project/project.component';
 import { WorkPackageComponent } from './pages/project-management/work-package/work-package.component';
+import { TasksComponent } from './pages/project-management/tasks/tasks.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,11 @@ const routes: Routes = [
   {
     path: 'work-package',
     component: WorkPackageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'tasks',
+    component: TasksComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'dashboard' },
