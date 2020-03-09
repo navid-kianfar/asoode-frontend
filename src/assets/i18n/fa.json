@@ -216,5 +216,10 @@
   "SKIP_MOBILE_NOTIFICATION": "بستن همه صداهای چت روی دسکتاپ",
   "SHOW_NOTIFICATION_SUMMARY": "نمایش خلاصه پیام ها زمانی که در صفحه ای غیر از صفحه مربوط به آن هستید",
   "WELCOME_TO_ASOODE": "به آسوده خوش آمدید",
-  "ASOODE_BOT": "آسوده بات"
+  "ASOODE_BOT": "آسوده بات",
+  "ENTER_YOUR_MESSAGE": "پیام خود را بنویسید، برای اشاره به فرد خاصی از @ استفاده کنید",
+  "INSERT_EMOJI": "وارد کردن شکلک",
+  "CHANGE_COLOR": "تغییر رنگ نوشتار",
+  "CHANGE_BACKGROUND_COLOR": "تغییر رنگ پس زمینه",
+  "ATTACHMENT": "پیوست"
 }

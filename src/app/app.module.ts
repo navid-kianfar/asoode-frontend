@@ -15,6 +15,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NgxPopperModule } from 'ngx-popper';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
+import { BarChartModule } from '@swimlane/ngx-charts';
+import {
+  MatAutocompleteModule,
+  MatCheckboxModule,
+  MatFormFieldModule,
+  MatProgressBarModule,
+  MatRadioModule,
+  MatRippleModule,
+} from '@angular/material';
+import { MomentModule } from 'ngx-moment';
+import { QuillModule } from 'ngx-quill';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptor } from './services/http.interceptor';
@@ -80,20 +91,11 @@ import { CtrlClickDirective } from './directives/core/ctrl-click.directive';
 import { MonthViewComponent } from './components/app/month-view/month-view.component';
 import { DashboardOverallComponent } from './components/app/dashboard-overall/dashboard-overall.component';
 import { DashboardProgressComponent } from './components/app/dashboard-progress/dashboard-progress.component';
-import { BarChartModule } from '@swimlane/ngx-charts';
 import { DashboardActivityComponent } from './components/app/dashboard-activity/dashboard-activity.component';
 import { DashboardProjectComponent } from './components/app/dashboard-project/dashboard-project.component';
 import { DashboardProjectTemplatesComponent } from './components/app/dashboard-project-templates/dashboard-project-templates.component';
 import { ProjectInfoComponent } from './components/app/project-info/project-info.component';
 import { CreateWizardComponent } from './modals/create-wizard/create-wizard.component';
-import {
-  MatAutocompleteModule,
-  MatCheckboxModule,
-  MatFormFieldModule,
-  MatProgressBarModule,
-  MatRadioModule,
-  MatRippleModule,
-} from '@angular/material';
 import { InviteMemberComponent } from './components/app/invite-member/invite-member.component';
 import { MemberInfoComponent } from './components/app/member-info/member-info.component';
 import { MessengerComponent } from './pages/communication/messenger/messenger.component';
@@ -105,7 +107,6 @@ import { SearchPipe } from './pipes/core/search.pipe';
 import { EnumPipe } from './pipes/core/enum.pipe';
 import { MessengerSettingComponent } from './modals/messenger-setting/messenger-setting.component';
 import { ConversationComponent } from './components/app/conversation/conversation.component';
-import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -203,6 +204,7 @@ import { MomentModule } from 'ngx-moment';
     MatTableModule,
     MatMenuModule,
     MatSnackBarModule,
+    QuillModule.forRoot(),
     SimpleModalModule.forRoot(
       { container: 'modal-container' },
       {

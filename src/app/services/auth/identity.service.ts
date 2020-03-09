@@ -20,9 +20,7 @@ export class IdentityService {
   private identityObject: IdentityObject;
   private profileObject: ProfileViewModel = {} as ProfileViewModel;
 
-  constructor(
-    private readonly httpService: HttpService,
-  ) {
+  constructor(private readonly httpService: HttpService) {
     this.identityObject = this.getIdentityInfo();
   }
 

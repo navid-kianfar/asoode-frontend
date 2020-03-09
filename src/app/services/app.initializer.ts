@@ -1,13 +1,13 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {CultureService} from './core/culture.service';
-import {TranslateService} from './core/translate.service';
-import {IdentityService} from './auth/identity.service';
-import {EnumsService} from './core/enums.service';
-import {MessengerService} from './communication/messenger.service';
-import {GroupService} from './groups/group.service';
-import {ProjectService} from './projects/project.service';
-import {OperationResultStatus} from '../library/core/enums';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { CultureService } from './core/culture.service';
+import { TranslateService } from './core/translate.service';
+import { IdentityService } from './auth/identity.service';
+import { EnumsService } from './core/enums.service';
+import { MessengerService } from './communication/messenger.service';
+import { GroupService } from './groups/group.service';
+import { ProjectService } from './projects/project.service';
+import { OperationResultStatus } from '../library/core/enums';
 
 @Injectable()
 export class AppInitializerProvider {

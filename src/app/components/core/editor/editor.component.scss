@@ -1,0 +1,11 @@
+.asoode-editor {
+  max-width: 600px;
+  //direction: ltr;
+  //text-align: left;
+
+  ::ng-deep .action-buttons {
+    i, svg {
+      opacity: 0.9;
+    }
+  }
+}

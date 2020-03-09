@@ -1,6 +1,7 @@
 <div class="conversation-block">
   <app-waiting *ngIf="waiting"></app-waiting>
-  <ng-container *ngIf="!waiting">
+
+  <div *ngIf="!waiting" class="conversations">
     <div class="date-grouped" *ngFor="let conversation of mappedConversations">
       <div class="date">{{ conversation.date }}</div>
       <div *ngFor="let message of conversation.messages" class="message">
@@ -33,5 +34,9 @@
         </div>
       </div>
     </div>
-  </ng-container>
+  </div>
+
+  <div class="send-message">
+    <app-editor [messenger]="true"></app-editor>
+  </div>
 </div>
