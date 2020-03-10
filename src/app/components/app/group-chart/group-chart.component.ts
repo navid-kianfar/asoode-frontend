@@ -2,11 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import {GroupViewModel} from '../../../view-models/groups/group-types';
 
 @Component({
-  selector: 'app-group-reports',
-  templateUrl: './group-reports.component.html',
-  styleUrls: ['./group-reports.component.scss']
+  selector: 'app-group-chart',
+  templateUrl: './group-chart.component.html',
+  styleUrls: ['./group-chart.component.scss']
 })
-export class GroupReportsComponent implements OnInit {
+export class GroupChartComponent implements OnInit {
 
   @Input() group: GroupViewModel;
   constructor() { }

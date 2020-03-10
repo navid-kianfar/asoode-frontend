@@ -30,7 +30,7 @@
           <mat-tab-group animationDuration="0ms" [selectedIndex]="1">
             <mat-tab [label]="'ORGANIZATION_CHART' | translate">
               <ng-template matTabContent>
-                <app-org-chart></app-org-chart>
+                <app-group-chart [group]="group"></app-group-chart>
               </ng-template>
             </mat-tab>
             <mat-tab [label]="'MEMBERS' | translate">
@@ -40,22 +40,17 @@
             </mat-tab>
             <mat-tab [label]="'PROJECTS' | translate">
               <ng-template matTabContent>
-                <div class="group-projects">
-                  <app-project-info
-                    [project]="project"
-                    *ngFor="let project of mockService.projects"
-                  ></app-project-info>
-                </div>
+                <app-group-projects [group]="group"></app-group-projects>
               </ng-template>
             </mat-tab>
             <mat-tab [label]="'HUMAN_RESOURCES' | translate">
               <ng-template matTabContent>
-                <app-human-resources></app-human-resources>
+                <app-human-resources [group]="group"></app-human-resources>
               </ng-template>
             </mat-tab>
             <mat-tab [label]="'REPORTS' | translate">
               <ng-template matTabContent>
-                <app-group-reports></app-group-reports>
+                <app-group-reports [group]="group"></app-group-reports>
               </ng-template>
             </mat-tab>
           </mat-tab-group>

@@ -113,6 +113,8 @@ import { OrgChartComponent } from './components/app/org-chart/org-chart.componen
 import { GroupMembersComponent } from './components/app/group-members/group-members.component';
 import { HumanResourcesComponent } from './components/app/human-resources/human-resources.component';
 import { GroupReportsComponent } from './components/app/group-reports/group-reports.component';
+import { GroupProjectsComponent } from './components/app/group-projects/group-projects.component';
+import { GroupChartComponent } from './components/app/group-chart/group-chart.component';
 
 @NgModule({
   declarations: [
@@ -195,6 +197,8 @@ import { GroupReportsComponent } from './components/app/group-reports/group-repo
     GroupMembersComponent,
     HumanResourcesComponent,
     GroupReportsComponent,
+    GroupProjectsComponent,
+    GroupChartComponent,
   ],
   entryComponents: [
     ConfirmComponent,

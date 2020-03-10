@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {GroupViewModel} from '../../../view-models/groups/group-types';
 
 @Component({
   selector: 'app-human-resources',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HumanResourcesComponent implements OnInit {
 
+  @Input() group: GroupViewModel;
   constructor() { }
 
   ngOnInit() {

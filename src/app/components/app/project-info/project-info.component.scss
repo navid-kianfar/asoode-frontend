@@ -10,8 +10,9 @@
 
   .title {
     display: flex;
-    min-width: 300px;
     align-items: center;
+    min-width: 200px;
+    margin-bottom: 10px;
 
     i {
       font-size: 2rem;
@@ -22,6 +23,7 @@
 
   .description {
     width: 300px;
+    margin-bottom: 10px;
     display: flex;
     color: #999999;
   }
