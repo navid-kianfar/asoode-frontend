@@ -12,6 +12,11 @@
     margin-bottom: 50px;
 
     .free {
+
+      ::ng-deep .chart-node {
+        margin: 20px auto;
+      }
+
       .go-premium {
         background-color: #cfaf4e;
         padding:20px 10px;

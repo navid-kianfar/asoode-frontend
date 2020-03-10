@@ -1,1 +1,16 @@
-<p>org-chart-node works!</p>
+<div class="chart-node">
+  <div class="info">
+    <div class="name">{{group.title}}</div>
+    <div class="description">{{group.description}}</div>
+  </div>
+  <div *ngIf="group.avatar" class="avatar">
+    <img [src]="group.avatar" />
+  </div>
+  <div *ngIf="!group.avatar" class="initials-holder">
+    <div class="initials">{{ group.title | initials }}</div>
+  </div>
+
+  <button *ngIf="canAdd" class="add">
+    <i class="icon-plus2"></i>
+  </button>
+</div>

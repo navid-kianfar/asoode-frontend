@@ -4,7 +4,7 @@
   </div>
   <div class="box">
     <div *ngIf="!group.premium" class="free">
-      <app-org-chart-node [group]="group"></app-org-chart-node>
+      <app-org-chart-node [canAdd]="true" [group]="group"></app-org-chart-node>
       <div class="go-premium">
         <i class="icon-trophy4"></i>
         <h3>{{ 'GO_PREMIUM_DESCRIPTION' | translate}}</h3>

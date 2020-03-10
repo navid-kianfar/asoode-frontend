@@ -1,0 +1,60 @@
+.chart-node {
+  border: 1px solid #e6e6e6;
+  padding: 5px;
+  border-radius: 5px;
+  background: #ffffff;
+  width: 250px;
+  display: flex;
+
+  .info {
+    width: 200px;
+
+    .name {
+      color: #4d4d4d;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .description {
+      color: #999999;
+      font-size: 0.7rem;
+      font-weight: 300;
+    }
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+
+    img {
+      max-width: 50px;
+    }
+  }
+  .initials-holder {
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    .initials {
+      width: 30px;
+      height: 30px;
+      border-radius: 50px;
+      border: 2px solid #666666;
+      background-color: #e6e6e6;
+      padding-top: 3px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+  }
+
+  .add {
+    display: none;
+  }
+}

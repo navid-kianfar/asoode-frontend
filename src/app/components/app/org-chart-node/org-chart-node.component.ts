@@ -8,6 +8,7 @@ import {GroupViewModel} from '../../../view-models/groups/group-types';
 })
 export class OrgChartNodeComponent implements OnInit {
 
+  @Input() canAdd: boolean;
   @Input() group: GroupViewModel;
   constructor() { }
 
