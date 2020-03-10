@@ -3,7 +3,7 @@
     <h2>{{ 'ORGANIZATION_CHART' | translate }}</h2>
   </div>
   <div class="box">
-    <div *ngIf="!group.premium" class="free">
+    <div *ngIf="false && !group.premium" class="free">
       <app-org-chart-node [canAdd]="true" [group]="group"></app-org-chart-node>
       <div class="go-premium">
         <i class="icon-trophy4"></i>
@@ -13,8 +13,8 @@
         </button>
       </div>
     </div>
-    <div *ngIf="group.premium" class="premium">
-      <app-org-chart></app-org-chart>
+    <div *ngIf="true || group.premium" class="premium">
+      <app-org-chart [group]="group"></app-org-chart>
     </div>
   </div>
 </div>
