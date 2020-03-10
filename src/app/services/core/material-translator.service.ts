@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { TranslateService } from './translate.service';
+import {StringHelpers} from '../../helpers/string.helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +25,10 @@ export class MaterialTranslatorService {
     paginator._intl.previousPageLabel = this.translateService.fromKey(
       'PAGINATOR_PREV',
     );
+    paginator._intl.getRangeLabel = (page, pageSize, length) => {
+      const from = (page * pageSize);
+      const to = from + pageSize;
+      return StringHelpers.format(this.translateService.fromKey('PAGINATOR_OF'), from + 1, to, length);
+    };
   }
 }

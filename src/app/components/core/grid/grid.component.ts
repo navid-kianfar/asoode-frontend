@@ -64,8 +64,8 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   ) {}
 
   ngOnInit() {
-    // this.paginator.pageSizeOptions = [10, 20];
-    // this.paginator.pageIndex = 0;
+    this.paginator.pageSizeOptions = [10, 20];
+    this.paginator.pageIndex = 0;
     this.paginator.pageSize = 10;
     this.translatorService.paginator(this.paginator);
     this.dataSource.paginator = this.paginator;

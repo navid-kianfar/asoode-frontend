@@ -109,6 +109,10 @@ import { MessengerSettingComponent } from './modals/messenger-setting/messenger-
 import { ConversationComponent } from './components/app/conversation/conversation.component';
 import { TasksComponent } from './pages/project-management/tasks/tasks.component';
 import { InitialsPipe } from './pipes/app/initials.pipe';
+import { OrgChartComponent } from './components/app/org-chart/org-chart.component';
+import { GroupMembersComponent } from './components/app/group-members/group-members.component';
+import { HumanResourcesComponent } from './components/app/human-resources/human-resources.component';
+import { GroupReportsComponent } from './components/app/group-reports/group-reports.component';
 
 @NgModule({
   declarations: [
@@ -187,6 +191,10 @@ import { InitialsPipe } from './pipes/app/initials.pipe';
     ConversationComponent,
     TasksComponent,
     InitialsPipe,
+    OrgChartComponent,
+    GroupMembersComponent,
+    HumanResourcesComponent,
+    GroupReportsComponent,
   ],
   entryComponents: [
     ConfirmComponent,

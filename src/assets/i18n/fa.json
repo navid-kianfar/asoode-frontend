@@ -83,6 +83,7 @@
   "PAGINATOR_LAST": "آخرین",
   "PAGINATOR_NEXT": "بعدی",
   "PAGINATOR_PREV": "قبلی",
+  "PAGINATOR_OF": "نمایش {0} تا {1} از {2}",
   "SAVE_CHANGES": "ذخیره تغیرات",
   "BIO": "بیوگرافی",
   "EMAIL": "ایمیل",
