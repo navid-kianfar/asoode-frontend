@@ -1,11 +1,28 @@
-import {Injectable} from '@angular/core';
-import {ProjectMemberViewModel, ProjectViewModel} from '../view-models/projects/project-types';
-import {GroupMemberViewModel, GroupViewModel} from '../view-models/groups/group-types';
-import {AccessType, ChannelType, ConversationType, GroupType} from '../library/app/enums';
-import {ExplorerViewModel, UploadViewModel,} from '../view-models/storage/files-types';
-import {ChannelViewModel, ConversationViewModel,} from '../view-models/communication/messenger-types';
-import {TransactionViewModel} from '../view-models/payment/payment-types';
-import {MemberInfoViewModel} from '../view-models/auth/identity-types';
+import { Injectable } from '@angular/core';
+import {
+  ProjectMemberViewModel,
+  ProjectViewModel,
+} from '../view-models/projects/project-types';
+import {
+  GroupMemberViewModel,
+  GroupViewModel,
+} from '../view-models/groups/group-types';
+import {
+  AccessType,
+  ChannelType,
+  ConversationType,
+  GroupType,
+} from '../library/app/enums';
+import {
+  ExplorerViewModel,
+  UploadViewModel,
+} from '../view-models/storage/files-types';
+import {
+  ChannelViewModel,
+  ConversationViewModel,
+} from '../view-models/communication/messenger-types';
+import { TransactionViewModel } from '../view-models/payment/payment-types';
+import { MemberInfoViewModel } from '../view-models/auth/identity-types';
 
 const members: MemberInfoViewModel[] = [
   {
@@ -17,7 +34,7 @@ const members: MemberInfoViewModel[] = [
     bio: 'Software Engineer',
     avatar: '',
     firstName: 'Navid',
-    lastName: 'Kianfar'
+    lastName: 'Kianfar',
   },
   {
     id: '2',
@@ -28,20 +45,19 @@ const members: MemberInfoViewModel[] = [
     bio: 'Designer',
     avatar: '',
     firstName: 'Saba',
-    lastName: 'Kianfar'
+    lastName: 'Kianfar',
   },
 ];
 const groupMembers = members.map(m => {
-  const mapped = (({...m}) as any) as GroupMemberViewModel;
+  const mapped = ({ ...m } as any) as GroupMemberViewModel;
   mapped.access = AccessType.Editor;
   return mapped;
 });
 const projectMembers = members.map(m => {
-  const mapped = (({...m}) as any) as ProjectMemberViewModel;
+  const mapped = ({ ...m } as any) as ProjectMemberViewModel;
   mapped.access = AccessType.Editor;
   return mapped;
 });
-
 
 @Injectable({
   providedIn: 'root',

@@ -49,10 +49,10 @@ export enum SortType {
 export enum RequestStatus {
   Pending = 1,
   Approved = 2,
-  Canceled = 3
+  Canceled = 3,
 }
 export enum ShiftType {
   Fixed = 1,
   Float = 2,
-  Open = 3
+  Open = 3,
 }
