@@ -60,7 +60,44 @@
       <h3>{{ 'PAYMENTS' | translate}}</h3>
     </div>
     <div class="content">
-      <app-grid [columns]="[]" [rows]="[]"></app-grid>
+      <app-grid [columns]="['title','amount', 'createdAt','paidAt','download']" [rows]="[]">
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef>{{ 'AMOUNT' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.amount | number }}</td>
+        </ng-container>
+
+        <!-- Created at Column -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>{{ 'CREATED_AT' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.createdAt | culturedDate }}
+          </td>
+        </ng-container>
+
+        <!-- Paid at Column -->
+        <ng-container matColumnDef="paidAt">
+          <th mat-header-cell *matHeaderCellDef>{{ 'PAID_AT' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.paidAt | culturedDate }}
+          </td>
+        </ng-container>
+
+        <!-- Download Column -->
+        <ng-container matColumnDef="download">
+          <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+          <td mat-cell *matCellDef="let element">
+            &nbsp;
+            <i class="icon-download4"></i>
+          </td>
+        </ng-container>
+      </app-grid>
     </div>
   </div>
   <div class="box">
@@ -72,7 +109,62 @@
       </button>
     </div>
     <div class="content">
-      <app-grid [columns]="[]" [rows]="[]"></app-grid>
+      <app-grid [columns]="['title', 'shiftRange','shiftType','floatLimit','workingHours','restingHours']" [rows]="[]">
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+        </ng-container>
+
+        <!-- Shift range Column -->
+        <ng-container matColumnDef="shiftRange">
+          <th mat-header-cell *matHeaderCellDef>{{ 'SHIFT_RANGE' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            shiftRange
+          </td>
+        </ng-container>
+
+        <!-- Shift type at Column -->
+        <ng-container matColumnDef="shiftType">
+          <th mat-header-cell *matHeaderCellDef>{{ 'SHIFT_TYPE' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.shiftType | enum:'ShiftType' }}
+          </td>
+        </ng-container>
+
+        <!-- Float limit at Column -->
+        <ng-container matColumnDef="floatLimit">
+          <th mat-header-cell *matHeaderCellDef>{{ 'SHIFT_FLOAT_LIMIT' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.floatLimit | number }}
+          </td>
+        </ng-container>
+
+        <!-- Working hours at Column -->
+        <ng-container matColumnDef="workingHours">
+          <th mat-header-cell *matHeaderCellDef>{{ 'WORKING_HOURS' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.workingHours | number }}
+          </td>
+        </ng-container>
+
+        <!-- Resting hours at Column -->
+        <ng-container matColumnDef="restingHours">
+          <th mat-header-cell *matHeaderCellDef>{{ 'RESTING_HOURS' | translate }}</th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.restingHours | number }}
+          </td>
+        </ng-container>
+
+        <!-- Download Column -->
+        <ng-container matColumnDef="download">
+          <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+          <td mat-cell *matCellDef="let element">
+            &nbsp;
+            <i class="icon-download4"></i>
+          </td>
+        </ng-container>
+      </app-grid>
     </div>
   </div>
 </div>

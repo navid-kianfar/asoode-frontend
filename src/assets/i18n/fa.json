@@ -245,5 +245,11 @@
   "CREATE_SHIFT": "ایجاد برنامه کاری",
   "REQUESTED_AT": "تاریخ درخواست",
   "TIME_OFF_AT": "تاریخ مرخصی",
-  "STATUS": "وضعیت"
+  "STATUS": "وضعیت",
+  "PAID_AT": "تاریخ پرداخت",
+  "SHIFT_TYPE": "نوع شیفت",
+  "SHIFT_RANGE": "بازه کاری",
+  "SHIFT_FLOAT_LIMIT": "میزان مجاز تاخیر",
+  "WORKING_HOURS": "ساعت کاری",
+  "RESTING_HOURS": "ساعت استراحت"
 }

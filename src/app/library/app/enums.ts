@@ -51,3 +51,8 @@ export enum RequestStatus {
   Approved = 2,
   Canceled = 3
 }
+export enum ShiftType {
+  Fixed = 1,
+  Float = 2,
+  Open = 3
+}
