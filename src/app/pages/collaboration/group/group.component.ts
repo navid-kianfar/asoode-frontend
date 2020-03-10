@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {GroupViewModel} from '../../../view-models/groups/group-types';
-import {MockService} from '../../../services/mock.service';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { MockService } from '../../../services/mock.service';
 
 @Component({
   selector: 'app-group',
@@ -15,7 +15,5 @@ export class GroupComponent implements OnInit {
     this.group = this.mockService.groups[0];
   }
 
-  detail() {
-
-  }
+  detail() {}
 }

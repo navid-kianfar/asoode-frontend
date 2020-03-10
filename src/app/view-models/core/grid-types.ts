@@ -11,3 +11,13 @@ export interface GridResult<T> {
   pageSize: number;
   items: T[];
 }
+
+export interface GridCommand<T> {
+  data?: T;
+  reload?: boolean;
+  nextPage?: boolean;
+  prevPage?: boolean;
+  firstPage?: boolean;
+  lastPage?: boolean;
+  goToPage?: number;
+}

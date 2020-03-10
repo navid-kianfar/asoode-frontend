@@ -137,30 +137,30 @@ h1 {
     max-width: 500px;
     min-width: auto;
   }
-    .logo {
-      display: none;
-    }
-    .logo-alt {
-      display: block;
-      width: 30px !important;
-      height: 40px;
-    }
+  .logo {
+    display: none;
+  }
+  .logo-alt {
+    display: block;
+    width: 30px !important;
+    height: 40px;
+  }
 }
 @media (max-width: 700px) {
   .action-container {
     width: 300px;
     max-width: 300px;
   }
-    .search-container-tiny {
-      display: flex;
-      width: 20px;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-    }
-    .search-container {
-      display: none;
-    }
+  .search-container-tiny {
+    display: flex;
+    width: 20px;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+  .search-container {
+    display: none;
+  }
   .logo {
     display: block;
   }
@@ -183,7 +183,8 @@ h1 {
     max-width: 250px;
 
     .files,
-    .tasks, a.quick-access {
+    .tasks,
+    a.quick-access {
       font-size: 0.6rem;
     }
   }

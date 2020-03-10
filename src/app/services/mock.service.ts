@@ -10,6 +10,7 @@ import {
   ChannelViewModel,
   ConversationViewModel,
 } from '../view-models/communication/messenger-types';
+import { TransactionViewModel } from '../view-models/payment/payment-types';
 
 const members: any[] = [];
 
@@ -17,6 +18,7 @@ const members: any[] = [];
   providedIn: 'root',
 })
 export class MockService {
+  transactions: TransactionViewModel[] = [];
   messages: ConversationViewModel[];
   channels: ChannelViewModel[] = [];
   projects: ProjectViewModel[] = [];
@@ -28,6 +30,150 @@ export class MockService {
     this.init();
   }
 
+  private initTransactions() {
+    this.transactions = [
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+      {
+        createdAt: new Date(),
+        id: '1',
+        amount: 1000,
+        dueAt: new Date(2020, 2, 13),
+        title: 'پرداخت ماه آبان',
+      },
+    ];
+  }
   private initMessages() {
     this.messages = [
       {
@@ -630,5 +776,6 @@ export class MockService {
     this.initUpload();
     this.initMessages();
     this.initChannels();
+    this.initTransactions();
   }
 }

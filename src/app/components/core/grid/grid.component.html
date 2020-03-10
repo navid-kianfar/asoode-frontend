@@ -1,1 +1,9 @@
-<p>grid works!</p>
+<div class="af-grid {{ cssClass }}">
+  <table mat-table [dataSource]="dataSource">
+    <ng-content></ng-content>
+    <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+  </table>
+
+  <mat-paginator showFirstLastButtons></mat-paginator>
+</div>
