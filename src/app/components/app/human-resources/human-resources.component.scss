@@ -1,0 +1,40 @@
+.human-resources {
+  h2 {
+    margin: 20px 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h3 {
+        color: #4d4d4d;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      ::ng-deep .mat-button-wrapper {
+        color: #666666;
+        font-weight: 500;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  ::ng-deep .mat-table th.mat-header-cell {
+    background-color: #ffffff !important;
+    font-size: 0.7rem !important;
+    font-weight: 500 !important;
+    color: #b3b3b3;
+    border-bottom: none;
+  }
+}

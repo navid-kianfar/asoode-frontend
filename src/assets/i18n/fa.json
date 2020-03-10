@@ -237,5 +237,13 @@
   "ENUMS_SORT_TYPE_DATE_DESC": "تاریخ - قدیمی ترین",
   "ENUMS_SORT_TYPE_NAME_ASC": "نام - ترتیب الفبا",
   "ENUMS_SORT_TYPE_NAME_DESC": "نام - عکس الفبا",
-  "DETAIL": "جزئیات"
+  "DETAIL": "جزئیات",
+  "TIME_OFF": "درخواست\u200Cهای مرخصی",
+  "REQUEST_TIME_OFF": "درخواست مرخصی جدید",
+  "PAYMENTS": "پرداخت ها",
+  "SHIFTS": "برنامه کاری",
+  "CREATE_SHIFT": "ایجاد برنامه کاری",
+  "REQUESTED_AT": "تاریخ درخواست",
+  "TIME_OFF_AT": "تاریخ مرخصی",
+  "STATUS": "وضعیت"
 }

@@ -46,3 +46,8 @@ export enum SortType {
   NameAsc = 3,
   NameDesc = 4,
 }
+export enum RequestStatus {
+  Pending = 1,
+  Approved = 2,
+  Canceled = 3
+}
