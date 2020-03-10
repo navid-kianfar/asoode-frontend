@@ -1,1 +1,25 @@
-<p>group-members works!</p>
+<div class="group-members">
+  <div class="title">
+    <h2>{{ 'MEMBERS' | translate}}</h2>
+  </div>
+  <div class="box">
+    <div class="filter">
+      <input [(ngModel)]="filter" [placeholder]="'MEMBER_SEARCH' | translate" type="text">
+    </div>
+    <div class="members">
+      <div *ngFor="let member of group.members | search:query:filter" class="member">
+        <div class="info">
+          <app-member-info [model]="member"></app-member-info>
+        </div>
+        <div class="status"></div>
+        <div class="actions">
+          <app-dropdown [(model)]="member.access"
+                        [enum]="'AccessType'"></app-dropdown>&nbsp;
+          <button mat-flat-button color="warn">
+            {{ 'REMOVE_ACCESS' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

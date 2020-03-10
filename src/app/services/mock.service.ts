@@ -1,18 +1,47 @@
-import { Injectable } from '@angular/core';
-import { ProjectViewModel } from '../view-models/projects/project-types';
-import { GroupViewModel } from '../view-models/groups/group-types';
-import { ChannelType, ConversationType, GroupType } from '../library/app/enums';
-import {
-  ExplorerViewModel,
-  UploadViewModel,
-} from '../view-models/storage/files-types';
-import {
-  ChannelViewModel,
-  ConversationViewModel,
-} from '../view-models/communication/messenger-types';
-import { TransactionViewModel } from '../view-models/payment/payment-types';
+import {Injectable} from '@angular/core';
+import {ProjectMemberViewModel, ProjectViewModel} from '../view-models/projects/project-types';
+import {GroupMemberViewModel, GroupViewModel} from '../view-models/groups/group-types';
+import {AccessType, ChannelType, ConversationType, GroupType} from '../library/app/enums';
+import {ExplorerViewModel, UploadViewModel,} from '../view-models/storage/files-types';
+import {ChannelViewModel, ConversationViewModel,} from '../view-models/communication/messenger-types';
+import {TransactionViewModel} from '../view-models/payment/payment-types';
+import {MemberInfoViewModel} from '../view-models/auth/identity-types';
 
-const members: any[] = [];
+const members: MemberInfoViewModel[] = [
+  {
+    id: '1',
+    username: 'nvd.kianfar',
+    initials: 'NK',
+    fullName: 'Navid Kianfar',
+    email: 'nvd@kianfar.me',
+    bio: 'Software Engineer',
+    avatar: '',
+    firstName: 'Navid',
+    lastName: 'Kianfar'
+  },
+  {
+    id: '2',
+    username: 'saba.kianfar',
+    initials: 'SK',
+    fullName: 'Saba Kianfar',
+    email: 'saba@kianfar.me',
+    bio: 'Designer',
+    avatar: '',
+    firstName: 'Saba',
+    lastName: 'Kianfar'
+  },
+];
+const groupMembers = members.map(m => {
+  const mapped = (({...m}) as any) as GroupMemberViewModel;
+  mapped.access = AccessType.Editor;
+  return mapped;
+});
+const projectMembers = members.map(m => {
+  const mapped = (({...m}) as any) as ProjectMemberViewModel;
+  mapped.access = AccessType.Editor;
+  return mapped;
+});
+
 
 @Injectable({
   providedIn: 'root',
@@ -594,7 +623,7 @@ export class MockService {
             userId: '1',
           },
         ],
-        members: [...members],
+        members: [...projectMembers],
         subProjects: [
           {
             title: 'زیر پروژه ۱',
@@ -653,7 +682,7 @@ export class MockService {
             userId: '1',
           },
         ],
-        members: [...members],
+        members: [...projectMembers],
         subProjects: [
           {
             title: 'زیر پروژه ۱',
@@ -712,7 +741,7 @@ export class MockService {
             userId: '1',
           },
         ],
-        members: [...members],
+        members: [...projectMembers],
         subProjects: [
           {
             title: 'زیر پروژه ۱',
@@ -754,7 +783,7 @@ export class MockService {
         avatarId: '',
         userId: '1',
         type: GroupType.Holding,
-        members: [...members],
+        members: [...groupMembers],
       },
       {
         title: 'گروه فنی 2',
@@ -765,7 +794,7 @@ export class MockService {
         avatarId: '',
         userId: '1',
         type: GroupType.Company,
-        members: [...members],
+        members: [...groupMembers],
       },
     ];
   }

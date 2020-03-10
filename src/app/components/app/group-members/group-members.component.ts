@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {GroupViewModel} from '../../../view-models/groups/group-types';
 
 @Component({
   selector: 'app-group-members',
@@ -7,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupMembersComponent implements OnInit {
 
+  @Input() group: GroupViewModel;
+  filter: string;
+  query: string[] = ['fullName', 'username', 'email', 'phoneNumber', 'bio'];
   constructor() { }
 
   ngOnInit() {

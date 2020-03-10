@@ -1,0 +1,72 @@
+.group-members{
+  h2 {
+    margin: 20px 0;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      h3 {
+        color: #4d4d4d;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      ::ng-deep .mat-button-wrapper {
+        color: #666666;
+        font-weight: 500;
+        font-size: 0.8rem;
+      }
+    }
+
+    .filter {
+      input {
+        border: 1px solid #e6e6e6;
+        width: 300px;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 0.9rem;
+      }
+    }
+
+    .members {
+      .member {
+        border-bottom: 1px solid #e6e6e6;
+        padding: 20px 0 5px;
+        display: flex;
+
+        .info {
+          display: flex;
+          flex-grow: 1;
+          -webkit-box-flex: 1;
+        }
+        .status {
+          display: flex;
+        }
+        .actions {
+          display: flex;
+          ::ng-deep .af-dropdown button {
+            width: 130px !important;
+          }
+          button {
+            max-height: 35px;
+          }
+        }
+
+        &:last-child {
+          border-bottom: 1px solid transparent;
+        }
+      }
+    }
+  }
+}
