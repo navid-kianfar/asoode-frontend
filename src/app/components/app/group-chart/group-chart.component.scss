@@ -10,5 +10,32 @@
     padding: 15px;
     border-radius: 10px;
     margin-bottom: 50px;
+
+    .free {
+      .go-premium {
+        background-color: #cfaf4e;
+        padding:20px 10px;
+        margin: 0 100px;
+        border-radius: 5px;
+        text-align: center;
+        color: #fff;
+
+        i {
+          font-size: 2rem;
+        }
+        h3 {
+          font-size: 0.9rem;
+          font-weight: 300;
+          margin: 20px 0;
+        }
+        button {
+          border-color: #ffffff;
+        }
+      }
+    }
+
+    .premium {
+
+    }
   }
 }

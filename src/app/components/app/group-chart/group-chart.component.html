@@ -3,6 +3,18 @@
     <h2>{{ 'ORGANIZATION_CHART' | translate }}</h2>
   </div>
   <div class="box">
-    <app-org-chart></app-org-chart>
+    <div *ngIf="!group.premium" class="free">
+      <app-org-chart-node [group]="group"></app-org-chart-node>
+      <div class="go-premium">
+        <i class="icon-trophy4"></i>
+        <h3>{{ 'GO_PREMIUM_DESCRIPTION' | translate}}</h3>
+        <button mat-stroked-button>
+          {{ 'GO_PREMIUM' | translate}}
+        </button>
+      </div>
+    </div>
+    <div *ngIf="group.premium" class="premium">
+      <app-org-chart></app-org-chart>
+    </div>
   </div>
 </div>
