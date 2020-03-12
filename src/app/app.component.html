@@ -4,7 +4,7 @@
     *ngIf="!appInitializerProvider.loaded"
   ></app-waiting>
   <ng-container *ngIf="appInitializerProvider.loaded">
-    <app-header></app-header>
+    <app-header *ngIf="appInitializerProvider.profileLoaded"></app-header>
     <router-outlet></router-outlet>
   </ng-container>
 </div>

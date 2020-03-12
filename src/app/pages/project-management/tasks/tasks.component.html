@@ -1,17 +1,21 @@
 <div class="account-profile">
-  <div class="header">
-
-  </div>
+  <div class="header"></div>
   <div class="body">
     <div class="fake-header"></div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12 wrapper">
-          <div class="title">{{ 'TASKS_MANAGEMENT' | translate}}</div>
+          <div class="title">{{ 'TASKS_MANAGEMENT' | translate }}</div>
           <mat-tab-group animationDuration="0ms" [(selectedIndex)]="tab">
-            <mat-tab [label]="'CALENDAR' | translate"><ng-template matTabContent></ng-template></mat-tab>
-            <mat-tab [label]="'TIME_SPENT' | translate"><ng-template matTabContent></ng-template></mat-tab>
-            <mat-tab [label]="'KARTABL' | translate"><ng-template matTabContent></ng-template></mat-tab>
+            <mat-tab [label]="'CALENDAR' | translate"
+              ><ng-template matTabContent></ng-template
+            ></mat-tab>
+            <mat-tab [label]="'TIME_SPENT' | translate"
+              ><ng-template matTabContent></ng-template
+            ></mat-tab>
+            <mat-tab [label]="'KARTABL' | translate"
+              ><ng-template matTabContent></ng-template
+            ></mat-tab>
           </mat-tab-group>
         </div>
       </div>

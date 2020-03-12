@@ -4,6 +4,7 @@ import { FormService } from '../../../services/core/form.service';
 import { Router } from '@angular/router';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,7 @@ export class RegisterComponent implements OnInit {
   ViewMode = ViewMode;
   username: string;
   verificationCode: string;
+  googleOauth: string;
 
   constructor(
     private readonly router: Router,
@@ -25,6 +27,7 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.googleOauth = environment.googleOauth;
     this.mode = ViewMode.Register;
     this.username = '';
     this.form = [

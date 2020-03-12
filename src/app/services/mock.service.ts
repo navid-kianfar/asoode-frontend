@@ -800,7 +800,7 @@ export class MockService {
         userId: '1',
         type: GroupType.Holding,
         members: [...groupMembers],
-        premium: false
+        premium: false,
       },
       {
         title: 'گروه فنی 2',
@@ -812,7 +812,7 @@ export class MockService {
         userId: '1',
         type: GroupType.Company,
         members: [...groupMembers],
-        premium: false
+        premium: false,
       },
     ];
   }

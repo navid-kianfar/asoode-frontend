@@ -19,13 +19,14 @@
             ></app-form>
 
             <hr />
-            <a mat-stroked-button class="google" href="/google">
+            <a mat-stroked-button class="google" [href]="googleOauth">
               <img src="/assets/images/pages/auth/google-logo.svg" alt="" />
               <span>&nbsp;{{ 'LOGIN_WITH_GOOGLE' | translate }}</span>
             </a>
           </ng-container>
           <ng-container *ngIf="mode === ViewMode.Confirm">
-            <app-confirm-account [id]="verificationCode"
+            <app-confirm-account
+              [id]="verificationCode"
               (goBack)="goBack()"
               [username]="username"
             ></app-confirm-account>

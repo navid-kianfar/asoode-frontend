@@ -3,8 +3,9 @@ import { FormViewModel } from '../../../components/core/form/contracts';
 import { FormService } from '../../../services/core/form.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppInitializerProvider } from '../../../services/app.initializer';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -16,19 +17,32 @@ export class LoginComponent implements OnInit {
   waiting: boolean;
   mode: ViewMode;
   username: string;
+  googleOauth: string;
 
   ViewMode = ViewMode;
   verificationCode: string;
   constructor(
     private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
     private readonly initializerProvider: AppInitializerProvider,
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
   ) {}
 
   ngOnInit() {
+    this.googleOauth = environment.googleOauth;
     this.mode = ViewMode.Login;
     this.username = '';
+
+    const oauth = (this.activatedRoute.snapshot.queryParams as any).access;
+    if (oauth) {
+      const access = JSON.parse(atob(oauth));
+      this.identityService.setIdentityInfo(access);
+      this.mode = ViewMode.OAuth;
+      this.initializerProvider.refresh().then(() => {
+        this.router.navigateByUrl('/dashboard');
+      });
+    }
     this.form = [
       {
         elements: [
@@ -103,4 +117,5 @@ export class LoginComponent implements OnInit {
 export enum ViewMode {
   Login = 1,
   Confirm = 2,
+  OAuth = 3,
 }

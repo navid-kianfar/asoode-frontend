@@ -1,9 +1,9 @@
 <li *ngIf="level <= 5">
-  <div class="node level-{{level}}">
+  <div class="node level-{{ level }}">
     <div class="chart-node">
       <div class="info">
-        <div class="name">{{group.title}}</div>
-        <div class="description">{{group.description}}</div>
+        <div class="name">{{ group.title }}</div>
+        <div class="description">{{ group.description }}</div>
       </div>
       <div *ngIf="group.avatar" class="avatar">
         <img [src]="group.avatar" />
@@ -19,7 +19,11 @@
   </div>
   <ol *ngIf="filtered.length">
     <li *ngFor="let grp of filtered">
-      <app-org-chart-node [level]="level + 1" [groups]="groups" [group]="grp"></app-org-chart-node>
+      <app-org-chart-node
+        [level]="level + 1"
+        [groups]="groups"
+        [group]="grp"
+      ></app-org-chart-node>
     </li>
   </ol>
 </li>

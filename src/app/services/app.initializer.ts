@@ -12,6 +12,7 @@ import { OperationResultStatus } from '../library/core/enums';
 @Injectable()
 export class AppInitializerProvider {
   loaded: boolean;
+  profileLoaded: boolean;
 
   constructor(
     private readonly http: HttpClient,
@@ -24,6 +25,7 @@ export class AppInitializerProvider {
     private readonly enumsService: EnumsService,
   ) {
     this.loaded = false;
+    this.profileLoaded = false;
   }
 
   async load() {
@@ -34,7 +36,7 @@ export class AppInitializerProvider {
     return Promise.all([promise1, promise2, promise3]);
   }
 
-  refresh() {
+  async refresh() {
     if (!this.identityService.identity.token) {
       return Promise.resolve();
     }
@@ -48,10 +50,14 @@ export class AppInitializerProvider {
       if (op.status === OperationResultStatus.NotFound) {
         this.identityService.logout();
         window.location.reload();
+        return;
       }
     });
 
-    return Promise.all([promise1, promise2, promise3, promise4]);
+    return Promise.all([promise1, promise2, promise3, promise4]).then(() => {
+      this.profileLoaded = true;
+      return Promise.resolve();
+    });
   }
 }
 

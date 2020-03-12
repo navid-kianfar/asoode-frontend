@@ -11,6 +11,7 @@ import {
   LoginResultViewModel,
   RegisterResultViewModel,
 } from '../../view-models/auth/identity-view-models';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +21,12 @@ export class IdentityService {
   private identityObject: IdentityObject;
   private profileObject: ProfileViewModel = {} as ProfileViewModel;
 
-  constructor(private readonly httpService: HttpService) {
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly cookieService: CookieService,
+  ) {
     this.identityObject = this.getIdentityInfo();
+    this.cookieService.deleteAll();
   }
 
   get profile(): ProfileViewModel {
@@ -38,7 +43,7 @@ export class IdentityService {
     return { token: null, username: null, userId: null };
   }
 
-  private setIdentityInfo(identity: IdentityObject) {
+  setIdentityInfo(identity: IdentityObject) {
     if (localStorage) {
       this.identityObject = identity;
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(identity));
