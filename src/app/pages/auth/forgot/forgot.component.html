@@ -34,15 +34,6 @@
                   'RECOVERY_CHECK_EMAIL' | translate | stringFormat: username
                 }}
               </p>
-              <br />
-              <a
-                routerLink="login"
-                class="back-to-login"
-                mat-flat-button
-                color="primary"
-              >
-                {{ 'BACK_TO_LOGIN' | translate }}
-              </a>
             </ng-container>
 
             <ng-container *ngIf="!isEmail">
@@ -58,14 +49,14 @@
                     | stringFormat: username
                 }}
               </p>
-
-              <app-form
-                [elements]="resetForm"
-                [actionWaiting]="waiting"
-                (action)="reset()"
-                [actionLabel]="'RESET_PASSWORD'"
-              ></app-form>
             </ng-container>
+
+            <app-form
+              [elements]="resetForm"
+              [actionWaiting]="waiting"
+              (action)="reset()"
+              [actionLabel]="'RESET_PASSWORD'"
+            ></app-form>
           </ng-container>
         </div>
       </div>

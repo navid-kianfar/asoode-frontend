@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   username: string;
 
   ViewMode = ViewMode;
+  verificationCode: string;
   constructor(
     private readonly router: Router,
     private readonly initializerProvider: AppInitializerProvider,
@@ -63,6 +64,7 @@ export class LoginComponent implements OnInit {
     this.waiting = true;
     const op = await this.identityService.login(model);
     if (op.status === OperationResultStatus.Success) {
+      this.verificationCode = op.data.id;
       if (op.data.token) {
         await this.initializerProvider.refresh();
         await this.router.navigateByUrl('/dashboard');

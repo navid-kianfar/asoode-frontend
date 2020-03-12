@@ -11,15 +11,6 @@
     <div class="more">
       {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat: username }}
     </div>
-
-    <button
-      (click)="goBack.emit()"
-      class="back-to-login"
-      mat-flat-button
-      color="primary"
-    >
-      {{ 'BACK_TO_LOGIN' | translate }}
-    </button>
   </ng-container>
 
   <ng-container *ngIf="!isEmail">
@@ -30,29 +21,29 @@
     <div class="more">
       {{ 'CONFIRM_PHONE_DESCRIPTION' | translate | stringFormat: username }}
     </div>
-
-    <div class="count-down">
-      {{ remaining * 1000 | date: 'mm:ss':'UTC' }}
-    </div>
-
-    <div class="send-again">
-      <button (click)="sendAgain()" [disabled]="remaining > 0" mat-button>
-        {{ 'SEND_AGAIN' | translate }}
-      </button>
-    </div>
-
-    <app-phone-verification
-      [disabled]="disabled"
-      [hasError]="hasError"
-      [(model)]="verificationCode"
-    ></app-phone-verification>
-
-    <div *ngIf="errorMessage" class="error-container">
-      {{ errorMessage | translate }}
-    </div>
-
-    <button (click)="verify()" mat-flat-button color="primary">
-      {{ 'VERIFY' | translate }}
-    </button>
   </ng-container>
+
+  <div class="count-down">
+    {{ remaining * 1000 | date: 'mm:ss':'UTC' }}
+  </div>
+
+  <div class="send-again">
+    <button (click)="sendAgain()" [disabled]="remaining > 0" mat-button>
+      {{ 'SEND_AGAIN' | translate }}
+    </button>
+  </div>
+
+  <app-phone-verification
+    [disabled]="disabled"
+    [hasError]="hasError"
+    [(model)]="verificationCode"
+  ></app-phone-verification>
+
+  <div *ngIf="errorMessage" class="error-container">
+    {{ errorMessage | translate }}
+  </div>
+
+  <button (click)="verify()" mat-flat-button color="primary">
+    {{ 'VERIFY' | translate }}
+  </button>
 </div>

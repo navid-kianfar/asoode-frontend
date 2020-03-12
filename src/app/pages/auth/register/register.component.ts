@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   mode: ViewMode;
   ViewMode = ViewMode;
   username: string;
+  verificationCode: string;
 
   constructor(
     private readonly router: Router,
@@ -102,6 +103,7 @@ export class RegisterComponent implements OnInit {
     this.waiting = false;
     if (op.status === OperationResultStatus.Success) {
       op.data = op.data || ({} as any);
+      this.verificationCode = op.data.id;
       if (op.data.emailNotConfirmed) {
         this.username = model.username;
         this.mode = ViewMode.Confirm;

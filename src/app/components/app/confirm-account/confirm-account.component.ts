@@ -13,6 +13,7 @@ import { AppInitializerProvider } from '../../../services/app.initializer';
 export class ConfirmAccountComponent implements OnInit {
   @Output() goBack = new EventEmitter();
   @Input() username: string;
+  @Input() id: string;
   disabled: boolean;
   isEmail: boolean;
   remaining: number;
@@ -56,8 +57,8 @@ export class ConfirmAccountComponent implements OnInit {
       return;
     }
     this.disabled = true;
-    const op = await this.identityService.verifyPhone({
-      phone: this.username,
+    const op = await this.identityService.verifyAccount({
+      id: this.id,
       code: this.verificationCode,
     });
     if (op.status !== OperationResultStatus.Success) {

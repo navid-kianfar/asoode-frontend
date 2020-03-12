@@ -8,6 +8,7 @@ export interface LoginResultViewModel {
   token: string;
   userId: string;
   username: string;
+  id: string;
 }
 export interface RegisterResultViewModel {
   duplicate: boolean;
@@ -15,6 +16,7 @@ export interface RegisterResultViewModel {
   emailNotConfirmed: boolean;
   phoneNotConfirmed: boolean;
   smsFailed: boolean;
+  id: string;
 }
 
 export interface ForgotResultViewModel {

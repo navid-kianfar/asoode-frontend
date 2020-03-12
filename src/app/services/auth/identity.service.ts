@@ -92,9 +92,9 @@ export class IdentityService {
     return op;
   }
 
-  async verifyPhone(params): Promise<OperationResult<LoginResultViewModel>> {
+  async verifyAccount(params): Promise<OperationResult<LoginResultViewModel>> {
     const op = await this.httpService.post<LoginResultViewModel>(
-      '/account/phone/confirm',
+      '/account/confirm',
       params,
     );
     if (op.status === OperationResultStatus.Success) {
