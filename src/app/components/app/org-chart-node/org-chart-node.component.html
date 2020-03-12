@@ -1,16 +1,25 @@
-<div class="chart-node">
-  <div class="info">
-    <div class="name">{{group.title}}</div>
-    <div class="description">{{group.description}}</div>
-  </div>
-  <div *ngIf="group.avatar" class="avatar">
-    <img [src]="group.avatar" />
-  </div>
-  <div *ngIf="!group.avatar" class="initials-holder">
-    <div class="initials">{{ group.title | initials }}</div>
-  </div>
+<li *ngIf="level <= 5">
+  <div class="node level-{{level}}">
+    <div class="chart-node">
+      <div class="info">
+        <div class="name">{{group.title}}</div>
+        <div class="description">{{group.description}}</div>
+      </div>
+      <div *ngIf="group.avatar" class="avatar">
+        <img [src]="group.avatar" />
+      </div>
+      <div *ngIf="!group.avatar" class="initials-holder">
+        <div class="initials">{{ group.title | initials }}</div>
+      </div>
 
-  <button *ngIf="canAdd" class="add">
-    <i class="icon-plus2"></i>
-  </button>
-</div>
+      <button *ngIf="canAdd" class="add">
+        <i class="icon-plus2"></i>
+      </button>
+    </div>
+  </div>
+  <ol *ngIf="filtered.length">
+    <li *ngFor="let grp of filtered">
+      <app-org-chart-node [level]="level + 1" [groups]="groups" [group]="grp"></app-org-chart-node>
+    </li>
+  </ol>
+</li>

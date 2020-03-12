@@ -1,0 +1,44 @@
+.body {
+  min-height: calc(100vh - 57px);
+  background: #f2f2f2;
+  position: relative;
+
+  .fake-header {
+    position: absolute;
+    width: 100%;
+    height: 48px;
+    background-color: #fff;
+    top: 0;
+    left: 0;
+  }
+}
+.wrapper {
+  display: flex;
+  flex: 0 0 100%;
+  .title {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    font-weight: 500;
+  }
+
+  mat-tab-group {
+    display: flex;
+    flex-grow: 1;
+    -webkit-box-flex: 1;
+  }
+}
+@media (max-width: 1000px) {
+  .wrapper {
+    .title {
+      width: 100px;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .wrapper {
+    .title {
+      display: none;
+    }
+  }
+}

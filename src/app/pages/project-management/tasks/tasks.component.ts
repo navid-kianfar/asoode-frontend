@@ -6,7 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit {
+  TaskTab = TaskTab;
+  tab: number;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.tab = TaskTab.Calendar;
+  }
+}
+export enum TaskTab {
+  Calendar = 0,
+  TimeSpent = 1,
+  Kartabl = 2,
 }
