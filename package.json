@@ -32,6 +32,7 @@
     "jalali-moment": "^3.3.3",
     "moment": "^2.24.0",
     "moment-hijri": "^2.1.2",
+    "moment-timezone": "^0.5.28",
     "ngx-cookie-service": "^2.3.0",
     "ngx-moment": "^3.5.0",
     "ngx-openlayers": "^0.8.22",

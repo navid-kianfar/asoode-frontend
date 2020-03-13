@@ -1,5 +1,9 @@
 .conversation-block {
   padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 125px) !important;
+
   .conversations {
   }
   .date-grouped {
@@ -49,5 +53,9 @@
         }
       }
     }
+  }
+
+  ::ng-deep .ql-editor {
+    max-height: 200px;
   }
 }
