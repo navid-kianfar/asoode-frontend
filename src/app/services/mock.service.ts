@@ -23,7 +23,7 @@ import {
 } from '../view-models/communication/messenger-types';
 import { TransactionViewModel } from '../view-models/payment/payment-types';
 import { MemberInfoViewModel } from '../view-models/auth/identity-types';
-import {SearchResultViewModel} from '../view-models/general/search-types';
+import { SearchResultViewModel } from '../view-models/general/search-types';
 
 const members: MemberInfoViewModel[] = [
   {
@@ -83,10 +83,10 @@ export class MockService {
       projects: [...this.projects],
       storage: {
         files: [...this.files.files],
-        folders: [...this.files.folders]
+        folders: [...this.files.folders],
       },
       tasks: [],
-      groups: [...this.groups]
+      groups: [...this.groups],
     };
   }
   private initTransactions() {

@@ -2,18 +2,21 @@
   <div class="loading">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
-  <div class="no-results" *ngIf="
-    !results.tasks.length &&
-    !results.projects.length &&
-    !results.storage.files.length &&
-    !results.storage.folders.length &&
-    !results.groups.length &&
-    !results.members.length
-  ">
-    <img src="" alt="">
+  <div
+    class="no-results"
+    *ngIf="
+      !results.tasks.length &&
+      !results.projects.length &&
+      !results.storage.files.length &&
+      !results.storage.folders.length &&
+      !results.groups.length &&
+      !results.members.length
+    "
+  >
+    <img src="" alt="" />
   </div>
   <div *ngIf="results.tasks.length" class="box">
-    <div class="title">{{ 'TASKS' | translate}}</div>
+    <div class="title">{{ 'TASKS' | translate }}</div>
     <div class="tasks">
       <div class="task" *ngFor="let task of results.tasks">
         task
@@ -21,15 +24,18 @@
     </div>
   </div>
   <div *ngIf="results.projects.length" class="box">
-    <div class="title">{{ 'PROJECTS' | translate}}</div>
+    <div class="title">{{ 'PROJECTS' | translate }}</div>
     <div class="projects">
       <div class="project" *ngFor="let project of results.projects">
         <app-project-info-mini [model]="project"></app-project-info-mini>
       </div>
     </div>
   </div>
-  <div *ngIf="results.storage.files.length || results.storage.folders.length" class="box">
-    <div class="title">{{ 'FILES' | translate}}</div>
+  <div
+    *ngIf="results.storage.files.length || results.storage.folders.length"
+    class="box"
+  >
+    <div class="title">{{ 'FILES' | translate }}</div>
     <div class="files">
       <div class="file item" *ngFor="let file of results.storage.files">
         <i *ngIf="file.isImage" class="image icon-image2"></i>
@@ -40,10 +46,13 @@
         <i *ngIf="file.isCode" class="code icon-file-xml"></i>
         <i *ngIf="file.isExecutable" class="executable icon-file-exe"></i>
         <i *ngIf="file.isOther" class="other icon-files-empty"></i>
-        <i *ngIf="file.isPresentation" class="presentation icon-file-presentation"></i>
+        <i
+          *ngIf="file.isPresentation"
+          class="presentation icon-file-presentation"
+        ></i>
         <div class="info">
-          <div class="name">{{file.name}}</div>
-          <div class="date">{{file.createdAt | culturedDate:true}}</div>
+          <div class="name">{{ file.name }}</div>
+          <div class="date">{{ file.createdAt | culturedDate: true }}</div>
         </div>
       </div>
     </div>
@@ -51,14 +60,14 @@
       <div class="folder item" *ngFor="let folder of results.storage.folders">
         <i class="icon-shared-folder"></i>
         <div class="info">
-          <div class="name">{{folder.name}}</div>
-          <div class="date">{{folder.createdAt | culturedDate:true}}</div>
+          <div class="name">{{ folder.name }}</div>
+          <div class="date">{{ folder.createdAt | culturedDate: true }}</div>
         </div>
       </div>
     </div>
   </div>
   <div *ngIf="results.groups.length" class="box">
-    <div class="title">{{ 'GROUPS' | translate}}</div>
+    <div class="title">{{ 'GROUPS' | translate }}</div>
     <div class="groups">
       <div class="group" *ngFor="let group of results.groups">
         <app-group-info [model]="group"></app-group-info>
@@ -66,7 +75,7 @@
     </div>
   </div>
   <div *ngIf="results.members.length" class="box">
-    <div class="title">{{ 'MEMBERS' | translate}}</div>
+    <div class="title">{{ 'MEMBERS' | translate }}</div>
     <div class="members">
       <div class="member" *ngFor="let member of results.members">
         <app-member-info [model]="member"></app-member-info>

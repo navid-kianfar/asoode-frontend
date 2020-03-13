@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {SearchService} from '../../../services/general/search.service';
-import {MockService} from '../../../services/mock.service';
-import {SearchResultViewModel} from '../../../view-models/general/search-types';
+import { SearchService } from '../../../services/general/search.service';
+import { MockService } from '../../../services/mock.service';
+import { SearchResultViewModel } from '../../../view-models/general/search-types';
 
 @Component({
   selector: 'app-search-result',

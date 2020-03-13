@@ -119,7 +119,6 @@ import { OrgChartNodeComponent } from './components/app/org-chart-node/org-chart
 import { GroupInfoComponent } from './components/app/group-info/group-info.component';
 import { ProjectInfoMiniComponent } from './components/app/project-info-mini/project-info-mini.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
