@@ -1,0 +1,12 @@
+<div class="group-info">
+  <div *ngIf="model.avatar" class="avatar">
+    <img [src]="model.avatar" />
+  </div>
+  <div *ngIf="!model.avatar" class="initials-holder">
+    <div class="initials">{{ model.title | initials }}</div>
+  </div>
+  <div class="info">
+    <div class="name">{{ model.title }}</div>
+    <div class="description">{{ model.description }}</div>
+  </div>
+</div>

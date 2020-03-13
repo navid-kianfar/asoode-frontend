@@ -1,0 +1,8 @@
+<div class="project-info-mini">
+  <i *ngIf="model.complex" class="icon-project"></i>
+  <i *ngIf="!model.complex" class="icon-workpackage"></i>
+  <div class="info">
+    <div class="name">{{ model.title }}</div>
+    <div class="description">{{ model.description }}</div>
+  </div>
+</div>

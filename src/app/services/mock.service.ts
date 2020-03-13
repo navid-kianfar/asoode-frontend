@@ -23,6 +23,7 @@ import {
 } from '../view-models/communication/messenger-types';
 import { TransactionViewModel } from '../view-models/payment/payment-types';
 import { MemberInfoViewModel } from '../view-models/auth/identity-types';
+import {SearchResultViewModel} from '../view-models/general/search-types';
 
 const members: MemberInfoViewModel[] = [
   {
@@ -63,6 +64,7 @@ const projectMembers = members.map(m => {
   providedIn: 'root',
 })
 export class MockService {
+  searchResult: SearchResultViewModel;
   transactions: TransactionViewModel[] = [];
   messages: ConversationViewModel[];
   channels: ChannelViewModel[] = [];
@@ -75,6 +77,18 @@ export class MockService {
     this.init();
   }
 
+  private initSearchResults() {
+    this.searchResult = {
+      members: [...members],
+      projects: [...this.projects],
+      storage: {
+        files: [...this.files.files],
+        folders: [...this.files.folders]
+      },
+      tasks: [],
+      groups: [...this.groups]
+    };
+  }
   private initTransactions() {
     this.transactions = [
       {
@@ -822,6 +836,7 @@ export class MockService {
     this.initFiles();
     this.initUpload();
     this.initMessages();
+    this.initSearchResults();
     this.initChannels();
     this.initTransactions();
   }

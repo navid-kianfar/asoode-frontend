@@ -1,4 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {SearchService} from '../../../services/general/search.service';
+import {MockService} from '../../../services/mock.service';
+import {SearchResultViewModel} from '../../../view-models/general/search-types';
 
 @Component({
   selector: 'app-search-result',
@@ -7,7 +10,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class SearchResultComponent implements OnInit {
   @Output() hide = new EventEmitter<any>();
-  constructor() {}
 
-  ngOnInit() {}
+  results: SearchResultViewModel;
+  constructor(
+    private readonly searchService: SearchService,
+    private readonly mockService: MockService,
+  ) {}
+
+  ngOnInit() {
+    this.results = this.mockService.searchResult;
+  }
 }
