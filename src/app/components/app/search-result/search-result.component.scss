@@ -1,4 +1,4 @@
-.search-result{
+.search-result {
   padding: 5px;
   cursor: pointer;
 
@@ -17,7 +17,8 @@
       margin-bottom: 5px;
     }
 
-    .group, .project {
+    .group,
+    .project {
       margin-bottom: 5px;
     }
     .member {
@@ -82,7 +83,6 @@
       }
     }
 
-
     ::ng-deep .group-info {
       &:hover {
         background: #f9f9f9;
@@ -110,6 +110,71 @@
         color: #808080 !important;
         font-weight: 400 !important;
         font-size: 0.6rem !important;
+      }
+    }
+  }
+
+  .tasks {
+    .task {
+      border: 2px solid #e6e6e6;
+      border-radius: 5px;
+      margin-bottom: 5px;
+
+      &:hover {
+        background: #f9f9f9;
+      }
+      .info {
+        padding: 10px 10px 0;
+        .title {
+          color: #4d4d4d;
+        }
+        .description {
+          font-size: 0.7rem;
+          color: #999;
+        }
+      }
+
+      .labels {
+        padding: 5px;
+        display: flex;
+        .label {
+          padding: 2px 5px;
+          margin-inline-end: 5px;
+          margin-bottom: 5px;
+          color: #ffffff;
+          border-radius: 5px;
+          font-size: 0.7rem;
+          min-width: 50px;
+          text-align: center;
+          font-weight: 400;
+
+          &.dark {
+            color: #444444;
+          }
+        }
+      }
+
+
+      .more {
+        padding: 10px;
+        border-top: 2px solid #e6e6e6;
+        display: flex;
+
+        .item {
+          margin-inline-end: 15px;
+          display: flex;
+          &:last-child {
+            margin-inline-end: 0;
+          }
+          .lbl {
+            color: #b3b3b3;
+            font-size: 0.7rem;
+          }
+          span {
+            color: #808080;
+            font-size: 0.7rem;
+          }
+        }
       }
     }
   }

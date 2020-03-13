@@ -56,3 +56,8 @@ export enum ShiftType {
   Float = 2,
   Open = 3,
 }
+export enum TaskStatus {
+  ToDo = 1,
+  Done = 2,
+  Blocked = 3,
+}

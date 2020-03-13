@@ -11,7 +11,7 @@ import {
   AccessType,
   ChannelType,
   ConversationType,
-  GroupType,
+  GroupType, TaskStatus,
 } from '../library/app/enums';
 import {
   ExplorerViewModel,
@@ -79,13 +79,104 @@ export class MockService {
 
   private initSearchResults() {
     this.searchResult = {
+      tasks: [
+        {
+          status: TaskStatus.ToDo,
+          title: 'پیاده سازی ظاهر جدید جستجو',
+          description: 'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
+          archivedAt: undefined,
+          createdAt: new Date(),
+          list: 'پنل جدید',
+          workPackage: 'رابط کاربری جدید',
+          project: 'آسوده نسخه ۲',
+          workPackageId: '1',
+          projectId: '1',
+          labels: [
+            {
+              title: 'مهم',
+              color: '#dc3831',
+              dark: false
+            },
+            {
+              title: 'مهم',
+              color: '#333333',
+              dark: false
+            },
+            {
+              title: 'مهم',
+              color: '#50a9dd',
+              dark: false
+            }
+          ],
+          members: [...members]
+        },
+        {
+          status: TaskStatus.Done,
+          title: 'پیاده سازی ظاهر جدید جستجو',
+          description: 'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
+          archivedAt: undefined,
+          createdAt: new Date(),
+          list: 'پنل جدید',
+          workPackage: 'رابط کاربری جدید',
+          project: 'آسوده نسخه ۲',
+          workPackageId: '1',
+          projectId: '1',
+          labels: [
+            {
+              title: 'مهم',
+              color: '#dc3831',
+              dark: false
+            },
+            {
+              title: 'مهم',
+              color: '#333333',
+              dark: false
+            },
+            {
+              title: 'مهم',
+              color: '#50a9dd',
+              dark: false
+            }
+          ],
+          members: [...members]
+        },
+        {
+          status: TaskStatus.Blocked,
+          title: 'پیاده سازی ظاهر جدید جستجو',
+          description: 'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
+          archivedAt: undefined,
+          createdAt: new Date(),
+          list: 'پنل جدید',
+          workPackage: 'رابط کاربری جدید',
+          project: 'آسوده نسخه ۲',
+          workPackageId: '1',
+          projectId: '1',
+          labels: [
+            {
+              title: 'مهم',
+              color: '#dc3831',
+              dark: false
+            },
+            {
+              title: 'مهم',
+              color: '#333333',
+              dark: false
+            },
+            {
+              title: 'مهم',
+              color: '#50a9dd',
+              dark: false
+            }
+          ],
+          members: [...members]
+        }
+      ],
       members: [...members],
       projects: [...this.projects],
       storage: {
         files: [...this.files.files],
         folders: [...this.files.folders],
       },
-      tasks: [],
       groups: [...this.groups],
     };
   }
