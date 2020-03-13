@@ -10,6 +10,8 @@ import { FilesService } from '../../../services/storage/files.service';
   styleUrls: ['./files.component.scss'],
 })
 export class FilesComponent implements OnInit {
+  ViewMode = ViewMode;
+  tab: ViewMode;
   sharedAnyThing: boolean;
   constructor(
     private readonly messengerService: MessengerService,
@@ -18,6 +20,7 @@ export class FilesComponent implements OnInit {
     readonly filesService: FilesService,
   ) {}
   ngOnInit() {
+    this.tab = ViewMode.Mine;
     this.sharedAnyThing =
       this.messengerService.channels.length > 0 ||
       this.projectService.projects.length > 0 ||
@@ -26,4 +29,9 @@ export class FilesComponent implements OnInit {
   }
 
   hide() {}
+}
+export enum ViewMode {
+  Mine = 0,
+  SharedByMe = 1,
+  SharedByOthers = 2
 }

@@ -1,15 +1,15 @@
 .storage-files {
   height: calc(100vh - 57px) !important;
   background: #f2f2f2;
-  .header {
-    background: #ffffff;
-    h2 {
-      padding: 20px;
-      font-size: 1.5rem;
-      font-weight: 500;
-      margin-bottom: 0;
-    }
-  }
+  //.header {
+  //  background: #ffffff;
+  //  h2 {
+  //    padding: 20px;
+  //    font-size: 1.5rem;
+  //    font-weight: 500;
+  //    margin-bottom: 0;
+  //  }
+  //}
   .body {
     min-height: 500px;
     background: #f2f2f2;
@@ -132,6 +132,37 @@
           }
         }
       }
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex: 0 0 100%;
+  .title {
+    display: flex;
+    width: 300px;
+    align-items: center;
+    font-weight: 500;
+  }
+
+  mat-tab-group {
+    display: flex;
+    flex-grow: 1;
+    -webkit-box-flex: 1;
+  }
+}
+@media (max-width: 1000px) {
+  .wrapper {
+    .title {
+      width: 100px;
+    }
+  }
+}
+@media (max-width: 500px) {
+  .wrapper {
+    .title {
+      display: none;
     }
   }
 }

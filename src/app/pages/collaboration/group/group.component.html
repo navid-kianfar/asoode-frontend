@@ -48,6 +48,11 @@
                 <app-human-resources [group]="group"></app-human-resources>
               </ng-template>
             </mat-tab>
+            <mat-tab [label]="'TIME_SPENT' | translate">
+              <ng-template matTabContent>
+                <app-group-timespent [group]="group"></app-group-timespent>
+              </ng-template>
+            </mat-tab>
             <mat-tab [label]="'REPORTS' | translate">
               <ng-template matTabContent>
                 <app-group-reports [group]="group"></app-group-reports>

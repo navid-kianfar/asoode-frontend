@@ -365,7 +365,10 @@ quill-editor[dir='rtl'] {
 .ql-editor {
   padding: 12px 15px;
 }
-
+.ql-mention-list-container {
+  display: flex;
+  flex-direction: column;
+}
 .success-snack {
   background-color: #9be4ad;
   color: #333333;
