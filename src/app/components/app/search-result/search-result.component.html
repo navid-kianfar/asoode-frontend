@@ -1,5 +1,5 @@
 <div class="search-result">
-  <div class="loading">
+  <div *ngIf="loading" class="loading">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
   <div
@@ -13,7 +13,8 @@
       !results.members.length
     "
   >
-    <img src="" alt="" />
+    <h3>{{ 'SEARCH_NO_RESULT' | translate}}</h3>
+    <img src="/assets/images/search/no-results.svg" alt="" />
   </div>
   <div *ngIf="results.tasks.length" class="box">
     <div class="title">{{ 'TASKS' | translate }}</div>

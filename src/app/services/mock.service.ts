@@ -64,7 +64,11 @@ const projectMembers = members.map(m => {
   providedIn: 'root',
 })
 export class MockService {
-  searchResult: SearchResultViewModel;
+  searchResult: SearchResultViewModel = {
+    members: [], storage: {
+      files: [], folders: []
+    }, groups: [], projects: [], tasks: []
+  };
   transactions: TransactionViewModel[] = [];
   messages: ConversationViewModel[];
   channels: ChannelViewModel[] = [];
@@ -927,7 +931,7 @@ export class MockService {
     this.initFiles();
     this.initUpload();
     this.initMessages();
-    this.initSearchResults();
+    // this.initSearchResults();
     this.initChannels();
     this.initTransactions();
   }

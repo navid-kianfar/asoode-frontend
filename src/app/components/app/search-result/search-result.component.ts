@@ -10,8 +10,9 @@ import { SearchResultViewModel } from '../../../view-models/general/search-types
 })
 export class SearchResultComponent implements OnInit {
   @Output() hide = new EventEmitter<any>();
+  @Output() results: SearchResultViewModel;
+  @Output() loading: any;
 
-  results: SearchResultViewModel;
   constructor(
     private readonly searchService: SearchService,
     private readonly mockService: MockService,
