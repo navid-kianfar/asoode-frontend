@@ -100,6 +100,19 @@
           color: #808080;
         }
       }
+
+      .actions {
+        align-items: center;
+        display: flex;
+
+        button {
+          padding: 5px;
+          background: none;
+          border: none;
+          font-size: 0.8rem;
+          color: #808080;
+        }
+      }
     }
   }
 }
