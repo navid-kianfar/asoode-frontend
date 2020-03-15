@@ -265,5 +265,10 @@
   "SEARCH_NO_RESULT": "برای عبارت جستجو شده موردی یافت نشد",
   "VIEW_IN_FILES_PAGE": "مشاهده در صفحه فایل ها",
   "FILE_TYPES": "نوع فایل",
-  "EVERYONE_FILES": "فایل\u200Cهای همه"
+  "EVERYONE_FILES": "فایل\u200Cهای همه",
+  "CREATE_NEW_GROUP": "ایجاد گروه جدید",
+  "NEW_GROUP_MEMBERS": "انتخاب اعضای گروه",
+  "INVITE_GROUP": "گروه ها",
+  "INVITE_GROUP_DESCRIPTION": "گروه\u200Cها و افراد مورد نظر خود را اضافه کنید",
+  "INVITE_INDIVIDUALS": "افراد"
 }

@@ -271,6 +271,7 @@ app-waiting {
   -webkit-box-flex: 1;
 }
 button:focus,
+textarea:focus,
 input:focus {
   outline: none !important;
   box-shadow: none !important;

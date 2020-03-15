@@ -74,4 +74,10 @@ export class AutoCompleteComponent implements OnInit {
     this.model = item.value;
     this.modelChange.emit(item.value);
   }
+
+  hide(trigger) {
+    setTimeout(() => {
+      trigger.closePanel();
+    }, 300);
+  }
 }

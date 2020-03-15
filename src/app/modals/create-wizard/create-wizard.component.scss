@@ -24,6 +24,13 @@
       font-size: 1rem;
       align-items: center;
 
+      i {
+        &.premium {
+          color: #cfaf4e;
+          font-size: 1.3rem;
+        }
+      }
+
       &.import {
         align-items: end;
       }

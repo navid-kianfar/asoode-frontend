@@ -124,6 +124,8 @@ import { UsernamePipe } from './pipes/app/username.pipe';
 import { ProjectWizardComponent } from './components/app/project-wizard/project-wizard.component';
 import { GroupWizardComponent } from './components/app/group-wizard/group-wizard.component';
 import { ImportWizardComponent } from './components/app/import-wizard/import-wizard.component';
+import { InviteGroupComponent } from './components/app/invite-group/invite-group.component';
+import { InvitePeopleComponent } from './components/app/invite-people/invite-people.component';
 
 @NgModule({
   declarations: [
@@ -217,6 +219,8 @@ import { ImportWizardComponent } from './components/app/import-wizard/import-wiz
     ProjectWizardComponent,
     GroupWizardComponent,
     ImportWizardComponent,
+    InviteGroupComponent,
+    InvitePeopleComponent,
   ],
   entryComponents: [
     ConfirmComponent,

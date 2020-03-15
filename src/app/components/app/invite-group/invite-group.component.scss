@@ -1,0 +1,33 @@
+.groups {
+  padding: 10px;
+  .group {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e6e6e6 !important;
+    display: flex;
+    align-items: center;
+
+    .pick {
+      display: flex;
+      width: 40px;
+    }
+    .info {
+      flex-grow: 1;
+      display: flex;
+    }
+    .access {
+      width: 180px;
+      display: flex;
+
+      ::ng-deep .af-dropdown {
+        button {
+          width: 150px;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .group-info {
+  border: none !important;
+  max-width: unset !important;
+}

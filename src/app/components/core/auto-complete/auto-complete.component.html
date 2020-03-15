@@ -1,32 +1,30 @@
 <div class="af-auto-complete">
   <input
     [placeholder]="placeHolder | translate: true"
+    #trigger="matAutocompleteTrigger"
+    (blur)="hide(trigger)"
     [matAutocomplete]="auto"
     [class.ltr]="ltr"
     [(ngModel)]="model"
   />
-  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+  <mat-autocomplete  #auto="matAutocomplete" [displayWith]="displayFn">
     <mat-option *ngIf="isLoading" class="is-loading">
       <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
     </mat-option>
-    <ng-container *ngIf="!isLoading">
-      <ng-container *ngFor="let item of filtered">
-        <mat-option
-          (click)="update(item)"
-          class="member-item"
-          [value]="item.value"
-        >
-          <ng-container
-            *ngIf="item.payload && item.payload.initials; else normal"
-          >
-            <app-member-info [model]="item.payload"></app-member-info>
-          </ng-container>
-
-          <ng-template #normal>
-            <span>{{ item.text | translate: true }}</span>
-          </ng-template>
-        </mat-option>
+    <mat-option *ngFor="let item of filtered"
+                (click)="update(item)"
+                class="member-item"
+                [value]="item.value"
+    >
+      <ng-container
+        *ngIf="item.payload && item.payload.initials; else normal"
+      >
+        <app-member-info [model]="item.payload"></app-member-info>
       </ng-container>
-    </ng-container>
+
+      <ng-template #normal>
+        <span>{{ item.text | translate: true }}</span>
+      </ng-template>
+    </mat-option>
   </mat-autocomplete>
 </div>

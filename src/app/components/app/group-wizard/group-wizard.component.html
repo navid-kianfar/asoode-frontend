@@ -10,7 +10,13 @@
     <div class="text">
       <h4 class="modal-title">
         <i class="icon-team"></i><br>
-        {{ 'NEW_GROUP' | translate: true }}&nbsp;...
+        <span *ngIf="mode === ViewMode.Form">
+          {{ 'CREATE_NEW_GROUP' | translate: true }}
+        </span>
+        <span *ngIf="mode === ViewMode.Invite">
+          {{ 'NEW_GROUP_MEMBERS' | translate: true }}
+        </span>
+
       </h4>
     </div>
     <div class="btn">
@@ -21,4 +27,37 @@
 
   </div>
 
+  <ng-container *ngIf="mode === ViewMode.Invite">
+    <div class="modal-body create-group">
+      <app-invite-people></app-invite-people>
+    </div>
+    <div class="modal-footer">
+      <button
+        (click)="createGroup($event)"
+        mat-flat-button
+        [color]="'primary'"
+      >
+        <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+        {{ 'CREATE_GROUP' | translate: true }}
+      </button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mode === ViewMode.Form">
+    <div class="modal-body create-group">
+      <app-form
+        [standalone]="true"
+        [elements]="groupForm"
+        [actionWaiting]="actionWaiting"
+      ></app-form>
+    </div>
+    <div class="modal-footer">
+      <button
+        (click)="inviteToGroup($event)"
+        mat-flat-button
+        [color]="'primary'"
+      >
+        {{ 'CONTINUE' | translate: true }}
+      </button>
+    </div>
+  </ng-container>
 </div>

@@ -2,6 +2,8 @@ import { BaseViewModel } from '../core/general-types';
 import { AccessType, GroupType } from '../../library/app/enums';
 
 export interface GroupViewModel extends BaseViewModel {
+  selected?: boolean;
+  access?: AccessType;
   userId: string;
   title: string;
   premium: boolean;
