@@ -161,8 +161,12 @@
   .channel-aside {
     width: 300px;
     min-width: 300px;
-    background: rgba(255, 255, 0, 0.14);
     display: flex;
+    border-right: 1px solid #e6e6e6;
+
+    app-channel-files {
+      width: 100%;
+    }
   }
 
   ::ng-deep .conversations {

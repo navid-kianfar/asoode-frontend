@@ -44,8 +44,8 @@ export class IdentityService {
   }
 
   setIdentityInfo(identity: IdentityObject) {
+    this.identityObject = identity;
     if (localStorage) {
-      this.identityObject = identity;
       localStorage.setItem(this.STORAGE_KEY, JSON.stringify(identity));
     }
   }

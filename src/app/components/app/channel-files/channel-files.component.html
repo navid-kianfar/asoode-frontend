@@ -1,0 +1,20 @@
+<div class="channel-files">
+  <div class="header">
+    <div class="info">
+      <div class="more">
+        <a routerLink="/files">
+          <i class="icon-new-window"></i>
+          {{ 'VIEW_IN_FILES_PAGE' | translate}}
+        </a>
+        <button (click)="hide.emit()">
+          <i class="icon-cross"></i>
+        </button>
+      </div>
+    </div>
+    <div class="filter">
+      <app-dropdown [chooseLabel]="'FILE_TYPES'"></app-dropdown>&nbsp;
+      <app-dropdown [chooseLabel]="'EVERYONE_FILES'"></app-dropdown>
+    </div>
+  </div>
+  <div class="files"></div>
+</div>

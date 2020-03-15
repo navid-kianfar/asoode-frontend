@@ -262,5 +262,8 @@
   "TASKS": "کارت ها",
   "LIST": "لیست",
   "PROJECT": "پروژه",
-  "SEARCH_NO_RESULT": "برای عبارت جستجو شده موردی یافت نشد"
+  "SEARCH_NO_RESULT": "برای عبارت جستجو شده موردی یافت نشد",
+  "VIEW_IN_FILES_PAGE": "مشاهده در صفحه فایل ها",
+  "FILE_TYPES": "نوع فایل",
+  "EVERYONE_FILES": "فایل\u200Cهای همه"
 }

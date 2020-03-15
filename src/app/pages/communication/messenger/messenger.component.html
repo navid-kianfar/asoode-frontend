@@ -116,6 +116,8 @@
         <app-conversation></app-conversation>
       </div>
     </div>
-    <div *ngIf="showFiles" class="channel-aside"></div>
+    <div *ngIf="showFiles" class="channel-aside">
+      <app-channel-files (hide)="showFiles = false"></app-channel-files>
+    </div>
   </ng-container>
 </div>

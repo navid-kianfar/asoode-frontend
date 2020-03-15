@@ -1,0 +1,55 @@
+.channel-files {
+  .header {
+    height: 55px;
+    border-bottom: 1px solid #e6e6e6;
+
+    .info {
+      //display: flex;
+      //flex-direction: row;
+      padding: 5px 5px 0;
+
+      .more {
+        display: flex;
+        justify-content: space-between;
+        flex-grow: 1;
+
+        a {
+          color: #999999;
+          text-decoration: underline;
+          font-size: 0.7rem;
+          i {
+
+          }
+        }
+
+        button {
+          border: none;
+          background: none;
+          font-size: 0.6rem;
+          padding: 5px 10px;
+          color: #808080;
+
+          i {
+
+          }
+        }
+      }
+    }
+
+    .filter {
+      padding: 0 5px;
+      display: flex;
+      ::ng-deep .af-dropdown {
+
+        button {
+          font-size: 0.7rem;
+          padding: 0;
+          width: auto;
+          border: none !important;
+        }
+
+
+      }
+    }
+  }
+}
