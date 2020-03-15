@@ -9,7 +9,9 @@ export interface ExplorerFolderViewModel {
   selected: boolean;
 }
 export interface ExplorerFileViewModel {
+  userId?: string;
   url: string;
+  thumbnail: string;
   name: string;
   extensionLessName: string;
   extension: string;

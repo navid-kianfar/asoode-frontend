@@ -119,6 +119,8 @@ import { OrgChartNodeComponent } from './components/app/org-chart-node/org-chart
 import { GroupInfoComponent } from './components/app/group-info/group-info.component';
 import { ProjectInfoMiniComponent } from './components/app/project-info-mini/project-info-mini.component';
 import { GroupTimespentComponent } from './components/app/group-timespent/group-timespent.component';
+import { ChannelFilesComponent } from './components/app/channel-files/channel-files.component';
+import { UsernamePipe } from './pipes/app/username.pipe';
 
 @NgModule({
   declarations: [
@@ -207,6 +209,8 @@ import { GroupTimespentComponent } from './components/app/group-timespent/group-
     GroupInfoComponent,
     ProjectInfoMiniComponent,
     GroupTimespentComponent,
+    ChannelFilesComponent,
+    UsernamePipe,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -237,7 +241,7 @@ import { GroupTimespentComponent } from './components/app/group-timespent/group-
         closeOnClickOutside: true,
         wrapperClass: 'in',
         wrapperDefaultClasses: 'modal fade-anim',
-        bodyClass: 'modal-open'
+        bodyClass: 'modal-open',
       },
     ),
     NgxPopperModule.forRoot({ placement: 'bottom' }),

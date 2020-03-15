@@ -33,5 +33,5 @@ export class FilesComponent implements OnInit {
 export enum ViewMode {
   Mine = 0,
   SharedByMe = 1,
-  SharedByOthers = 2
+  SharedByOthers = 2,
 }

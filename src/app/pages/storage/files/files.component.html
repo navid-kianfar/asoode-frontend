@@ -7,9 +7,19 @@
         <div class="col-md-12 wrapper">
           <div class="title">{{ 'FILES' | translate }}</div>
           <mat-tab-group [(selectedIndex)]="tab" animationDuration="0ms">
-            <mat-tab [label]="'MY_FILES' | translate"><ng-template matTabContent></ng-template></mat-tab>
-            <mat-tab *ngIf="sharedAnyThing" [label]="'MY_SHARED_FILES' | translate"><ng-template matTabContent></ng-template></mat-tab>
-            <mat-tab *ngIf="sharedAnyThing" [label]="'SHARED_FILES_WITH_ME' | translate"><ng-template matTabContent></ng-template></mat-tab></mat-tab-group>
+            <mat-tab [label]="'MY_FILES' | translate"
+              ><ng-template matTabContent></ng-template
+            ></mat-tab>
+            <mat-tab
+              *ngIf="sharedAnyThing"
+              [label]="'MY_SHARED_FILES' | translate"
+              ><ng-template matTabContent></ng-template
+            ></mat-tab>
+            <mat-tab
+              *ngIf="sharedAnyThing"
+              [label]="'SHARED_FILES_WITH_ME' | translate"
+              ><ng-template matTabContent></ng-template></mat-tab
+          ></mat-tab-group>
         </div>
       </div>
       <div class="row" *ngIf="tab === ViewMode.Mine">

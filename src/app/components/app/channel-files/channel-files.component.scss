@@ -18,7 +18,6 @@
           text-decoration: underline;
           font-size: 0.7rem;
           i {
-
           }
         }
 
@@ -30,7 +29,6 @@
           color: #808080;
 
           i {
-
           }
         }
       }
@@ -40,15 +38,67 @@
       padding: 0 5px;
       display: flex;
       ::ng-deep .af-dropdown {
-
         button {
           font-size: 0.7rem;
           padding: 0;
           width: auto;
           border: none !important;
+
+          span.arrow {
+            font-size: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+
+  .files {
+    .file-item {
+      cursor: pointer;
+      &:hover {
+        background: #f5f5f5;
+      }
+      display: flex;
+      padding: 5px;
+      border-bottom: 1px solid #e6e6e6;
+      .image {
+        display: flex;
+        width: 50px;
+        justify-content: center;
+        align-items: center;
+        background: #e6e6e6;
+
+        img {
+          max-width: 50px;
+          max-height: 50px;
         }
 
+        i {
+          font-size: 30px;
+        }
+      }
+      .info {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        padding-inline-start: 10px;
 
+        .title {
+          color: #333333;
+          font-weight: 500;
+          font-size: 0.9rem;
+        }
+
+        .created-at {
+          font-size: 0.7rem;
+          font-weight: 400;
+          color: #808080;
+        }
+        .sender {
+          font-size: 0.8rem;
+          font-weight: 500;
+          color: #808080;
+        }
       }
     }
   }

@@ -11,7 +11,8 @@ import {
   AccessType,
   ChannelType,
   ConversationType,
-  GroupType, TaskStatus,
+  GroupType,
+  TaskStatus,
 } from '../library/app/enums';
 import {
   ExplorerViewModel,
@@ -65,9 +66,14 @@ const projectMembers = members.map(m => {
 })
 export class MockService {
   searchResult: SearchResultViewModel = {
-    members: [], storage: {
-      files: [], folders: []
-    }, groups: [], projects: [], tasks: []
+    members: [],
+    storage: {
+      files: [],
+      folders: [],
+    },
+    groups: [],
+    projects: [],
+    tasks: [],
   };
   transactions: TransactionViewModel[] = [];
   messages: ConversationViewModel[];
@@ -87,7 +93,8 @@ export class MockService {
         {
           status: TaskStatus.ToDo,
           title: 'پیاده سازی ظاهر جدید جستجو',
-          description: 'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
+          description:
+            'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
           archivedAt: undefined,
           createdAt: new Date(),
           list: 'پنل جدید',
@@ -99,25 +106,26 @@ export class MockService {
             {
               title: 'مهم',
               color: '#dc3831',
-              dark: false
+              dark: false,
             },
             {
               title: 'مهم',
               color: '#333333',
-              dark: false
+              dark: false,
             },
             {
               title: 'مهم',
               color: '#50a9dd',
-              dark: false
-            }
+              dark: false,
+            },
           ],
-          members: [...members]
+          members: [...members],
         },
         {
           status: TaskStatus.Done,
           title: 'پیاده سازی ظاهر جدید جستجو',
-          description: 'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
+          description:
+            'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
           archivedAt: undefined,
           createdAt: new Date(),
           list: 'پنل جدید',
@@ -129,25 +137,26 @@ export class MockService {
             {
               title: 'مهم',
               color: '#dc3831',
-              dark: false
+              dark: false,
             },
             {
               title: 'مهم',
               color: '#333333',
-              dark: false
+              dark: false,
             },
             {
               title: 'مهم',
               color: '#50a9dd',
-              dark: false
-            }
+              dark: false,
+            },
           ],
-          members: [...members]
+          members: [...members],
         },
         {
           status: TaskStatus.Blocked,
           title: 'پیاده سازی ظاهر جدید جستجو',
-          description: 'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
+          description:
+            'طراحی انجام شده توسط خانم سهیلی را هر چه سریع تر پیاده سازی کنید',
           archivedAt: undefined,
           createdAt: new Date(),
           list: 'پنل جدید',
@@ -159,21 +168,21 @@ export class MockService {
             {
               title: 'مهم',
               color: '#dc3831',
-              dark: false
+              dark: false,
             },
             {
               title: 'مهم',
               color: '#333333',
-              dark: false
+              dark: false,
             },
             {
               title: 'مهم',
               color: '#50a9dd',
-              dark: false
-            }
+              dark: false,
+            },
           ],
-          members: [...members]
-        }
+          members: [...members],
+        },
       ],
       members: [...members],
       projects: [...this.projects],
@@ -526,11 +535,12 @@ export class MockService {
     this.files = {
       files: [
         {
+          thumbnail: 'https://i.picsum.photos/id/232/70/70.jpg',
           url: 'https://i.picsum.photos/id/232/250/100.jpg',
           createdAt: new Date(),
           extension: '.pdf',
-          extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
+          extensionLessName: 'Resume',
+          name: 'Resume.pdf',
           size: 123456,
           isImage: false,
           isPdf: true,
@@ -544,11 +554,12 @@ export class MockService {
           selected: false,
         },
         {
+          thumbnail: 'https://i.picsum.photos/id/233/70/70.jpg',
           url: 'https://i.picsum.photos/id/233/250/100.jpg',
           createdAt: new Date(),
-          extension: '.pdf',
-          extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
+          extension: '.jpg',
+          extensionLessName: 'My Image',
+          name: 'My Image.jpg',
           size: 123456,
           isImage: true,
           isPdf: false,
@@ -562,11 +573,12 @@ export class MockService {
           selected: false,
         },
         {
+          thumbnail: 'https://i.picsum.photos/id/234/70/70.jpg',
           url: 'https://i.picsum.photos/id/234/250/100.jpg',
           createdAt: new Date(),
-          extension: '.pdf',
-          extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
+          extension: '.xlsx',
+          extensionLessName: 'Payments',
+          name: 'Payments.xlsx',
           size: 123456,
           isImage: false,
           isPdf: false,
@@ -580,11 +592,12 @@ export class MockService {
           selected: false,
         },
         {
+          thumbnail: 'https://i.picsum.photos/id/235/70/70.jpg',
           url: 'https://i.picsum.photos/id/235/250/100.jpg',
           createdAt: new Date(),
-          extension: '.pdf',
+          extension: '.docx',
           extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
+          name: 'My Presentation.docx',
           size: 123456,
           isImage: false,
           isPdf: false,
@@ -598,11 +611,12 @@ export class MockService {
           selected: false,
         },
         {
+          thumbnail: 'https://i.picsum.photos/id/236/70/70.jpg',
           url: 'https://i.picsum.photos/id/236/250/100.jpg',
           createdAt: new Date(),
-          extension: '.pdf',
+          extension: '.pptx',
           extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
+          name: 'My Presentation.pptx',
           size: 123456,
           isImage: false,
           isPdf: false,
@@ -616,11 +630,12 @@ export class MockService {
           selected: false,
         },
         {
+          thumbnail: '',
           url: 'https://i.picsum.photos/id/237/250/100.jpg',
           createdAt: new Date(),
-          extension: '.pdf',
-          extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
+          extension: '.zip',
+          extensionLessName: 'Archive',
+          name: 'Archive.zip',
           size: 123456,
           isImage: false,
           isPdf: false,
@@ -631,60 +646,6 @@ export class MockService {
           isExecutable: false,
           isCode: false,
           isOther: false,
-          selected: false,
-        },
-        {
-          url: 'https://i.picsum.photos/id/238/250/100.jpg',
-          createdAt: new Date(),
-          extension: '.pdf',
-          extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
-          size: 123456,
-          isImage: false,
-          isPdf: false,
-          isSpreadsheet: false,
-          isDocument: false,
-          isPresentation: false,
-          isArchive: false,
-          isExecutable: true,
-          isCode: false,
-          isOther: false,
-          selected: false,
-        },
-        {
-          url: 'https://i.picsum.photos/id/239/250/100.jpg',
-          createdAt: new Date(),
-          extension: '.pdf',
-          extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
-          size: 123456,
-          isImage: false,
-          isPdf: false,
-          isSpreadsheet: false,
-          isDocument: false,
-          isPresentation: false,
-          isArchive: false,
-          isExecutable: false,
-          isCode: true,
-          isOther: false,
-          selected: false,
-        },
-        {
-          url: 'https://i.picsum.photos/id/240/250/100.jpg',
-          createdAt: new Date(),
-          extension: '.pdf',
-          extensionLessName: 'My Presentation',
-          name: 'My Presentation.pdf',
-          size: 123456,
-          isImage: false,
-          isPdf: false,
-          isSpreadsheet: false,
-          isDocument: false,
-          isPresentation: false,
-          isArchive: false,
-          isExecutable: false,
-          isCode: false,
-          isOther: true,
           selected: false,
         },
       ],

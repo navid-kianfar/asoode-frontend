@@ -13,7 +13,7 @@
       !results.members.length
     "
   >
-    <h3>{{ 'SEARCH_NO_RESULT' | translate}}</h3>
+    <h3>{{ 'SEARCH_NO_RESULT' | translate }}</h3>
     <img src="/assets/images/search/no-results.svg" alt="" />
   </div>
   <div *ngIf="results.tasks.length" class="box">
@@ -21,24 +21,27 @@
     <div class="tasks">
       <div class="task" *ngFor="let task of results.tasks">
         <div class="info">
-          <div class="title">{{task.title}}</div>
-          <div class="description">{{task.description}}</div>
+          <div class="title">{{ task.title }}</div>
+          <div class="description">{{ task.description }}</div>
         </div>
         <div class="labels">
-          <div class="label" [class.dark]="label.dark"
-               [style.backgroundColor]="label.color"
-               *ngFor="let label of task.labels">
-            {{label.title}}
+          <div
+            class="label"
+            [class.dark]="label.dark"
+            [style.backgroundColor]="label.color"
+            *ngFor="let label of task.labels"
+          >
+            {{ label.title }}
           </div>
         </div>
         <div class="more">
           <div class="item">
-            <div class="lbl">{{ 'LIST' | translate}}&nbsp;:&nbsp;</div>
-            <span>{{task.list}}</span>
+            <div class="lbl">{{ 'LIST' | translate }}&nbsp;:&nbsp;</div>
+            <span>{{ task.list }}</span>
           </div>
           <div class="item">
-            <div class="lbl">{{ 'PROJECT' | translate}}&nbsp;:&nbsp;</div>
-            <span>{{task.workPackage}}</span>
+            <div class="lbl">{{ 'PROJECT' | translate }}&nbsp;:&nbsp;</div>
+            <span>{{ task.workPackage }}</span>
           </div>
         </div>
       </div>

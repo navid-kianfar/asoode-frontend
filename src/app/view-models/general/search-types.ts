@@ -5,8 +5,8 @@ import {
   ExplorerFileViewModel,
   ExplorerFolderViewModel,
 } from '../storage/files-types';
-import {TaskLabelViewModel} from '../projects/task-types';
-import {TaskStatus} from '../../library/app/enums';
+import { TaskLabelViewModel } from '../projects/task-types';
+import { TaskStatus } from '../../library/app/enums';
 
 export interface SearchResultViewModel {
   tasks: SearchTaskViewModel[];

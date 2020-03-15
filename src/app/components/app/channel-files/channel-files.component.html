@@ -4,7 +4,7 @@
       <div class="more">
         <a routerLink="/files">
           <i class="icon-new-window"></i>
-          {{ 'VIEW_IN_FILES_PAGE' | translate}}
+          {{ 'VIEW_IN_FILES_PAGE' | translate }}
         </a>
         <button (click)="hide.emit()">
           <i class="icon-cross"></i>
@@ -16,5 +16,33 @@
       <app-dropdown [chooseLabel]="'EVERYONE_FILES'"></app-dropdown>
     </div>
   </div>
-  <div class="files"></div>
+  <div class="files">
+    <div class="file-item" *ngFor="let file of mockService.files.files">
+      <div class="image">
+        <ng-container *ngIf="file.thumbnail || file.isImage; else iconHolder">
+          <img [src]="file.thumbnail || file.url" alt="" />
+        </ng-container>
+
+        <ng-template #iconHolder>
+          <i *ngIf="file.isImage" class="image icon-image2"></i>
+          <i *ngIf="file.isArchive" class=" archive icon-file-zip"></i>
+          <i *ngIf="file.isDocument" class="document icon-file-word"></i>
+          <i *ngIf="file.isPdf" class="pdf icon-file-pdf"></i>
+          <i *ngIf="file.isSpreadsheet" class="spreadsheet icon-file-excel"></i>
+          <i *ngIf="file.isCode" class="code icon-file-xml"></i>
+          <i *ngIf="file.isExecutable" class="executable icon-file-exe"></i>
+          <i *ngIf="file.isOther" class="other icon-files-empty"></i>
+          <i
+            *ngIf="file.isPresentation"
+            class="presentation icon-file-presentation"
+          ></i>
+        </ng-template>
+      </div>
+      <div class="info">
+        <div class="title">{{ file.name }}</div>
+        <div class="created-at">{{ file.createdAt | culturedDate: true }}</div>
+        <div class="sender">{{ file.userId | username }}</div>
+      </div>
+    </div>
+  </div>
 </div>
