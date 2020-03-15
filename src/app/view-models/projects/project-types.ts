@@ -4,6 +4,16 @@ import {
   WorkPackageCommentPermission,
 } from '../../library/app/enums';
 
+export interface ProjectTemplateViewModel extends BaseViewModel {
+  title: string;
+  description: string;
+  image: string;
+  icon: string;
+  seasons: ProjectSeasonViewModel[];
+  subProjects: SubProjectViewModel[];
+  workPackages: WorkPackageViewModel[];
+}
+
 export interface ProjectViewModel extends BaseViewModel {
   userId: string;
   title: string;

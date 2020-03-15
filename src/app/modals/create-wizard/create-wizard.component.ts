@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { CreateModalParameters } from '../../view-models/modals/modals-types';
 import { CultureService } from '../../services/core/culture.service';
-import { FormViewModel } from '../../components/core/form/contracts';
-import { FormService } from '../../services/core/form.service';
-import { ValidationService } from '../../services/core/validation.service';
 
 @Component({
   selector: 'app-create-wizard',
@@ -18,29 +15,19 @@ export class CreateWizardComponent
   mode: WizardMode;
   continueAs: WizardMode;
   actionWaiting: boolean;
-  cancelWaiting: boolean;
-  requireMapMembers: boolean;
   uploading: boolean;
-  mapForm: FormViewModel[];
 
   constructor(
     readonly cultureService: CultureService,
-    private readonly formService: FormService,
   ) {
     super();
   }
 
   ngOnInit() {
-    this.mode = WizardMode.Choose;
+    this.mode = WizardMode.ComplexProject;
+    // this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
-    this.mapForm = [];
   }
-  async onAction($event: MouseEvent) {
-    $event.stopPropagation();
-    $event.preventDefault();
-    // this.actionWaiting = true;
-  }
-
   async onCancel($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
@@ -48,27 +35,11 @@ export class CreateWizardComponent
     this.close();
   }
 
-  onBack($event: MouseEvent) {
-    $event.stopPropagation();
-    $event.preventDefault();
-    this.mode = WizardMode.Choose;
-  }
-
   next($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-
-    // RESET ALL
-    // this.formService.clean(this.groupForm);
-    // this.requireMapMembers = false;
-    // this.inviteGroupMembers = false;
-    //
     this.mode = this.continueAs;
   }
-
-
-
-
 }
 enum WizardMode {
   Choose = 1,

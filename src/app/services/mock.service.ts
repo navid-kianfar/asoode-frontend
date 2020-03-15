@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  ProjectMemberViewModel,
+  ProjectMemberViewModel, ProjectTemplateViewModel,
   ProjectViewModel,
 } from '../view-models/projects/project-types';
 import {
@@ -78,6 +78,7 @@ export class MockService {
   transactions: TransactionViewModel[] = [];
   messages: ConversationViewModel[];
   channels: ChannelViewModel[] = [];
+  templates: ProjectTemplateViewModel[] = [];
   projects: ProjectViewModel[] = [];
   groups: GroupViewModel[] = [];
   files: ExplorerViewModel = { files: [], folders: [] };
@@ -87,6 +88,70 @@ export class MockService {
     this.init();
   }
 
+  private initTemplates() {
+    this.templates = [
+      {
+        id: '1',
+        title: 'پزشکان',
+        description: 'توضیحات مربوط به قالب پزشکان',
+        icon: 'icon-user',
+        image: '/assets/images/project/complex.png',
+        createdAt: new Date(),
+        updatedAt: undefined,
+        seasons: [],
+        subProjects: [],
+        workPackages: []
+      },
+      {
+        id: '2',
+        title: 'مدارس',
+        description: 'توضیحات مربوط به قالب مدارس',
+        icon: 'icon-user',
+        image: '/assets/images/project/complex.png',
+        createdAt: new Date(),
+        updatedAt: undefined,
+        seasons: [],
+        subProjects: [],
+        workPackages: []
+      },
+      {
+        id: '3',
+        title: 'برنامه نویسان',
+        description: 'توضیحات مربوط به قالب برنامه نویسان',
+        icon: 'icon-user',
+        image: '/assets/images/project/complex.png',
+        createdAt: new Date(),
+        updatedAt: undefined,
+        seasons: [],
+        subProjects: [],
+        workPackages: []
+      },
+      {
+        id: '4',
+        title: 'مشاورین',
+        description: 'توضیحات مربوط به قالب مشاورین',
+        icon: 'icon-user',
+        image: '/assets/images/project/complex.png',
+        createdAt: new Date(),
+        updatedAt: undefined,
+        seasons: [],
+        subProjects: [],
+        workPackages: []
+      },
+      {
+        id: '5',
+        title: 'هلدینگ',
+        description: 'توضیحات مربوط به قالب هلدینگ',
+        icon: 'icon-user',
+        image: '/assets/images/project/complex.png',
+        createdAt: new Date(),
+        updatedAt: undefined,
+        seasons: [],
+        subProjects: [],
+        workPackages: []
+      }
+    ];
+  }
   private initSearchResults() {
     this.searchResult = {
       tasks: [
@@ -895,5 +960,6 @@ export class MockService {
     this.initSearchResults();
     this.initChannels();
     this.initTransactions();
+    this.initTemplates();
   }
 }

@@ -1,0 +1,64 @@
+::ng-deep .af-form-elements {
+  input {
+    border: none !important;
+    font-weight: 400;
+    font-size: 1.5rem;
+  }
+
+  textarea {
+    border: none !important;
+    font-weight: 300;
+    font-size: 1.2rem;
+    width: 100%;
+    resize: none;
+  }
+
+  ::ng-deep .summary {
+    color: #999999;
+    font-size: 0.8rem;
+  }
+}
+.create-project {
+  padding: 20px 50px !important;
+
+  ::ng-deep .mat-tab-body-content {
+    padding-top: 30px;
+  }
+}
+.templates{
+  .titles {
+    button {
+      cursor: pointer;
+      background: #e6e6e6;
+      border: 2px solid transparent !important;
+      color: #333333;
+      line-height: 25px;
+      border-radius: 5px;
+      margin-inline-end: 5px;
+      i {
+        position: relative;
+        top: 5px;
+        font-weight: 500;
+        font-size: 1.2rem;
+      }
+    }
+    button.selected {
+      border: 2px solid #61b8ef !important;
+      i {
+        color: #808080;
+      }
+    }
+  }
+}
+.preview {
+  h4 {
+    margin-top: 30px;
+    font-size: 1.0rem;
+    font-weight: 400;
+  }
+  img {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+}

@@ -68,72 +68,7 @@
                     (back)="mode = WizardMode.Choose"></app-group-wizard>
 </ng-container>
 <ng-container *ngIf="mode === WizardMode.SimpleProject || mode === WizardMode.ComplexProject">
-  <app-project-wizard (close)="close()"
-                      (exit)="mode = WizardMode.Choose"
+  <app-project-wizard (exit)="close()"
+                      (back)="mode = WizardMode.Choose"
                       [complex]="mode === WizardMode.ComplexProject"></app-project-wizard>
 </ng-container>
-
-
-<!--  <ng-container *ngIf="mode === WizardMode.SimpleProject">-->
-<!--    <div class="modal-header">-->
-<!--      <button (click)="onBack($event)">-->
-<!--        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>-->
-<!--        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>-->
-<!--      </button>-->
-<!--      <h4 class="modal-title">-->
-<!--        {{ 'SIMPLE_PROJECTS' | translate: true }}&nbsp;...-->
-<!--      </h4>-->
-<!--      <button (click)="onCancel($event)">-->
-<!--        <i class="icon-cross"></i>-->
-<!--      </button>-->
-<!--    </div>-->
-<!--    <div class="modal-body create-simple-form">-->
-<!--      <app-form-->
-<!--        [standalone]="true"-->
-<!--        [elements]="groupForm"-->
-<!--        [actionWaiting]="actionWaiting"-->
-<!--      ></app-form>-->
-<!--    </div>-->
-<!--    <div class="modal-footer">-->
-<!--      &lt;!&ndash;    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">&ndash;&gt;-->
-<!--      &lt;!&ndash;      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>&ndash;&gt;-->
-<!--      &lt;!&ndash;      {{ actionLabel | translate: true }}</button&ndash;&gt;-->
-<!--      &lt;!&ndash;    >&nbsp;&ndash;&gt;-->
-<!--      &lt;!&ndash;    <button (click)="onCancel($event)" mat-button>&ndash;&gt;-->
-<!--      &lt;!&ndash;      <i *ngIf="cancelWaiting" class="icon-spin icon-spinner2"></i>&ndash;&gt;-->
-<!--      &lt;!&ndash;      {{ cancelLabel | translate: true }}&ndash;&gt;-->
-<!--      &lt;!&ndash;    </button>&ndash;&gt;-->
-<!--    </div>-->
-<!--  </ng-container>-->
-<!--  <ng-container *ngIf="mode === WizardMode.ComplexProject">-->
-<!--    <div class="modal-header">-->
-<!--      <button (click)="onBack($event)">-->
-<!--        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>-->
-<!--        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>-->
-<!--      </button>-->
-<!--      <h4 class="modal-title">-->
-<!--        {{ 'WBS_PROJECTS' | translate: true }}&nbsp;...-->
-<!--      </h4>-->
-<!--      <button (click)="onCancel($event)">-->
-<!--        <i class="icon-cross"></i>-->
-<!--      </button>-->
-<!--    </div>-->
-<!--    <div class="modal-body create-complex-form">-->
-<!--      <app-form-->
-<!--        [standalone]="true"-->
-<!--        [elements]="groupForm"-->
-<!--        [actionWaiting]="actionWaiting"-->
-<!--      ></app-form>-->
-<!--    </div>-->
-<!--    <div class="modal-footer">-->
-<!--      &lt;!&ndash;    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">&ndash;&gt;-->
-<!--      &lt;!&ndash;      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>&ndash;&gt;-->
-<!--      &lt;!&ndash;      {{ actionLabel | translate: true }}</button&ndash;&gt;-->
-<!--      &lt;!&ndash;    >&nbsp;&ndash;&gt;-->
-<!--      &lt;!&ndash;    <button (click)="onCancel($event)" mat-button>&ndash;&gt;-->
-<!--      &lt;!&ndash;      <i *ngIf="cancelWaiting" class="icon-spin icon-spinner2"></i>&ndash;&gt;-->
-<!--      &lt;!&ndash;      {{ cancelLabel | translate: true }}&ndash;&gt;-->
-<!--      &lt;!&ndash;    </button>&ndash;&gt;-->
-<!--    </div>-->
-<!--  </ng-container>-->
-<!--</div>-->
