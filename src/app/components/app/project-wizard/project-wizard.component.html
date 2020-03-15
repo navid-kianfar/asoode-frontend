@@ -1,0 +1,24 @@
+<div class="modal-content create-modal">
+  <div class="modal-alt-header">
+    <div class="btn">
+      <button (click)="onBack($event)">
+        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
+        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
+      </button>
+    </div>
+
+    <div class="text">
+      <h4 class="modal-title">
+        <i class="{{ complex ? 'icon-project' : 'icon-workpackage' }}"></i><br>
+        {{ (complex ? 'WBS_PROJECTS' : 'SIMPLE_PROJECTS') | translate: true }}&nbsp;...
+      </h4>
+    </div>
+    <div class="btn">
+      <button (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
+
+  </div>
+
+</div>

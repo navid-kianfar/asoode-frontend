@@ -394,6 +394,41 @@ body {
       display: block;
     }
 
+    .modal-alt-header {
+      padding: 30px 30px 0;
+      display: flex;
+      align-items: baseline;
+
+      .btn {
+        display: flex;
+        width: 40px;
+        align-items: baseline;
+        justify-content: center;
+      }
+
+      .text {
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+
+        h4 {
+          text-align: center;
+          font-size: 1.5rem;
+          font-weight: 500;
+
+          i {
+            font-size: 2rem;
+          }
+        }
+      }
+
+      button {
+        background: none;
+        border: none;
+      }
+
+    }
+
     .modal-header {
       border-bottom: 1px solid #e6e6e6;
       padding: 10px 0 0;
@@ -415,6 +450,12 @@ body {
         width: 40px;
         height: 30px;
         color: #b3b3b3;
+        position: relative;
+        top: -3px;
+
+        i {
+          font-size: 0.6rem;
+        }
       }
     }
     .modal-content {
@@ -426,6 +467,8 @@ body {
 
       &.create-modal {
         margin: 50px auto;
+        width: 800px;
+        max-width: 98%;
       }
     }
     .modal-body {

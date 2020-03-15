@@ -1,0 +1,56 @@
+.import {
+  .item {
+    margin: 10px 0;
+    display: flex;
+    flex-grow: 1;
+    -webkit-box-flex: 1;
+
+    .logo {
+      display: flex;
+      flex-grow: 1;
+      -webkit-box-flex: 1;
+      img {
+        width: 120px;
+      }
+    }
+    .action {
+      display: flex;
+      min-width: 150px;
+      align-items: center;
+    }
+  }
+
+  hr {
+    border: 1px solid #e6e6e6;
+  }
+}
+.map-members {
+  h4 {
+    margin-bottom: 20px;
+  }
+  ::ng-deep .form-group {
+    display: flex !important;
+
+    > label {
+      min-width: 180px;
+
+      &:not(.label-value) {
+        display: flex;
+        flex-grow: 1;
+        -webkit-box-flex: 1;
+      }
+    }
+
+    app-input {
+      display: flex;
+    }
+
+    .af-validation-messages {
+      padding: 0 5px;
+      min-width: 120px;
+    }
+  }
+}
+.modal-title i {
+  font-size: 50px;
+}

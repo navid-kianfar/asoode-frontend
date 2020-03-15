@@ -4,8 +4,14 @@
 .choose {
   .items {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin: 15px 0;
+    flex-wrap: wrap;
+
+    ::ng-deep mat-radio-button {
+      display: flex;
+      width: 50%;
+    }
 
     ::ng-deep .mat-radio-label {
       white-space: pre-line;
@@ -45,52 +51,14 @@
     font-size: 0.8rem;
   }
 }
-.import {
-  .item {
-    margin: 10px 0;
-    display: flex;
-    flex-grow: 1;
-    -webkit-box-flex: 1;
 
-    .logo {
-      display: flex;
-      flex-grow: 1;
-      -webkit-box-flex: 1;
-      img {
-        width: 120px;
+
+@media (max-width: 500px) {
+  .choose {
+    .items {
+      ::ng-deep mat-radio-button {
+        width: 100%;
       }
-    }
-    .action {
-      display: flex;
-      min-width: 150px;
-      align-items: center;
-    }
-  }
-
-  hr {
-    border: 1px solid #e6e6e6;
-  }
-}
-.map-members {
-  h4 {
-    margin-bottom: 20px;
-  }
-  ::ng-deep .form-group {
-    display: flex !important;
-
-    > label {
-      display: flex;
-      flex-grow: 1;
-      -webkit-box-flex: 1;
-    }
-
-    app-input {
-      display: flex;
-    }
-
-    .af-validation-messages {
-      padding: 0 5px;
-      min-width: 120px;
     }
   }
 }

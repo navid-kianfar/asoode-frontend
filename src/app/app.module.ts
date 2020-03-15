@@ -121,6 +121,9 @@ import { ProjectInfoMiniComponent } from './components/app/project-info-mini/pro
 import { GroupTimespentComponent } from './components/app/group-timespent/group-timespent.component';
 import { ChannelFilesComponent } from './components/app/channel-files/channel-files.component';
 import { UsernamePipe } from './pipes/app/username.pipe';
+import { ProjectWizardComponent } from './components/app/project-wizard/project-wizard.component';
+import { GroupWizardComponent } from './components/app/group-wizard/group-wizard.component';
+import { ImportWizardComponent } from './components/app/import-wizard/import-wizard.component';
 
 @NgModule({
   declarations: [
@@ -211,6 +214,9 @@ import { UsernamePipe } from './pipes/app/username.pipe';
     GroupTimespentComponent,
     ChannelFilesComponent,
     UsernamePipe,
+    ProjectWizardComponent,
+    GroupWizardComponent,
+    ImportWizardComponent,
   ],
   entryComponents: [
     ConfirmComponent,
