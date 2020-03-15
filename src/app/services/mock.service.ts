@@ -931,7 +931,7 @@ export class MockService {
     this.initFiles();
     this.initUpload();
     this.initMessages();
-    // this.initSearchResults();
+    this.initSearchResults();
     this.initChannels();
     this.initTransactions();
   }
