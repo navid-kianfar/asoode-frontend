@@ -5,7 +5,7 @@
     display: flex;
     .list {
       display: flex;
-      width: 400px;
+      width: 600px;
       padding: 10px;
       flex-direction: column;
 
@@ -39,6 +39,7 @@
           .description {
             color: #808080;
             font-size: 0.8rem;
+            padding-top: 10px;
           }
           .work-package {
             color: #444444;

@@ -10,20 +10,20 @@
     <div class="text">
       <h4 *ngIf="mode === ViewMode.Form" class="modal-title">
         <ng-container *ngIf="complex">
-          <i class="icon-project"></i><br>
+          <i class="icon-project"></i><br />
           {{ 'CREATE_COMPLEX_PROJECT' | translate }}
         </ng-container>
         <ng-container *ngIf="!complex">
-          <i class="icon-workpackage"></i><br>
+          <i class="icon-workpackage"></i><br />
           {{ 'CREATE_SIMPLE_PROJECT' | translate }}
         </ng-container>
       </h4>
       <h4 *ngIf="mode === ViewMode.Invite" class="modal-title">
-        <i class="icon-users2"></i><br>
+        <i class="icon-users2"></i><br />
         {{ 'NEW_PROJECT_MEMBERS' | translate: true }}
       </h4>
       <h4 *ngIf="mode === ViewMode.Template" class="modal-title">
-        <i class="icon-tree7"></i><br>
+        <i class="icon-tree7"></i><br />
         {{ 'NEW_PROJECT_TEMPLATE' | translate: true }}
       </h4>
     </div>
@@ -32,21 +32,13 @@
         <i class="icon-cross"></i>
       </button>
     </div>
-
   </div>
   <ng-container *ngIf="mode === ViewMode.Form">
     <div class="modal-body create-project">
-      <app-form
-        [standalone]="true"
-        [elements]="projectForm"
-      ></app-form>
+      <app-form [standalone]="true" [elements]="projectForm"></app-form>
     </div>
     <div class="modal-footer">
-      <button
-        (click)="next($event)"
-        mat-flat-button
-        [color]="'primary'"
-      >
+      <button (click)="next($event)" mat-flat-button [color]="'primary'">
         {{ 'CONTINUE' | translate: true }}
       </button>
     </div>
@@ -57,11 +49,7 @@
       <app-invite-people></app-invite-people>
     </div>
     <div class="modal-footer">
-      <button
-        (click)="next($event)"
-        mat-flat-button
-        [color]="'primary'"
-      >
+      <button (click)="next($event)" mat-flat-button [color]="'primary'">
         {{ 'CONTINUE' | translate: true }}
       </button>
     </div>
@@ -69,35 +57,35 @@
 
   <ng-container *ngIf="mode === ViewMode.Template">
     <div class="modal-body create-project">
-      <h4>{{ 'CHOOSE_TEMPLATE' | translate}}</h4>
+      <h4>{{ 'CHOOSE_TEMPLATE' | translate }}</h4>
 
       <ng-container *ngIf="complex">
         <div class="templates">
           <div class="titles">
-            <button (click)="template = undefined"
-                    [class.selected]="!template">
+            <button (click)="template = undefined" [class.selected]="!template">
               <i class="icon-blocked"></i>
-              {{ 'NO_TEMPLATE' | translate}}
+              {{ 'NO_TEMPLATE' | translate }}
             </button>
-            <button *ngFor="let t of mockService.templates"
-                    (click)="template = t"
-                    [class.selected]="template === t">
+            <button
+              *ngFor="let t of mockService.templates"
+              (click)="template = t"
+              [class.selected]="template === t"
+            >
               <i [class]="t.icon"></i>
               {{ t.title }}
             </button>
           </div>
         </div>
         <div *ngIf="!template" class="preview">
-          <h4>{{ 'NO_TEMPLATE_DESCRIPTION' | translate}}</h4>
+          <h4>{{ 'NO_TEMPLATE_DESCRIPTION' | translate }}</h4>
         </div>
         <div *ngIf="template" class="preview">
-          <h4>{{ template.description}}</h4>
-          <img [src]="template.image" alt="">
+          <h4>{{ template.description }}</h4>
+          <img [src]="template.image" alt="" />
         </div>
       </ng-container>
 
       <ng-container *ngIf="!complex">
-
         <ul class="board-template-options">
           <li
             *ngFor="let t of boardTemplates"
@@ -105,7 +93,10 @@
             [class.selected]="boardTemplate === t.type"
           >
             <div class="image-wrapper">
-              <img [src]="boardTemplate === t.type ? t.image_alt : t.image" alt=""/>
+              <img
+                [src]="boardTemplate === t.type ? t.image_alt : t.image"
+                alt=""
+              />
             </div>
             <div class="title">
               {{ t.type | enum: 'BoardTemplate' }}
@@ -113,10 +104,7 @@
           </li>
         </ul>
         <ng-container *ngFor="let t of boardTemplates">
-          <div
-            *ngIf="boardTemplate === t.type"
-            class="template-image"
-          >
+          <div *ngIf="boardTemplate === t.type" class="template-image">
             <div *ngFor="let title of t.lists" class="board-list">
               <div class="board-list-header">
                 <div class="list-title">
@@ -199,9 +187,7 @@
             </div>
           </div>
         </ng-container>
-
       </ng-container>
-
     </div>
     <div class="modal-footer">
       <button

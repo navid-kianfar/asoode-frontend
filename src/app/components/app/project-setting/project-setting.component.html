@@ -1,5 +1,5 @@
 <div class="project-setting">
-  <h3>{{ 'SETTINGS' | translate}}</h3>
+  <h3>{{ 'SETTINGS' | translate }}</h3>
 
   <div class="box disk">
     <div class="header">
@@ -7,17 +7,17 @@
         <i class="icon-server"></i>
       </div>
       <div class="title">
-        <h4>{{ 'DISK_USAGE' | translate}}</h4>
+        <h4>{{ 'DISK_USAGE' | translate }}</h4>
       </div>
       <div class="action">
         <button mat-stroked-button>
-          {{ 'BUY_MORE_SPACE' | translate}}
+          {{ 'BUY_MORE_SPACE' | translate }}
         </button>
       </div>
     </div>
     <div class="body">
       <mat-progress-bar [value]="50" [bufferValue]="100"></mat-progress-bar>
-      <h5>{{ 'DISK_USAGE_DETAIL' | translate | stringFormat:500:1500}}</h5>
+      <h5>{{ 'DISK_USAGE_DETAIL' | translate | stringFormat: 500:1500 }}</h5>
     </div>
   </div>
 
@@ -27,16 +27,16 @@
         <i class="icon-users"></i>
       </div>
       <div class="title">
-        <h4>{{ 'PROJECT_MEMBERS' | translate}}</h4>
+        <h4>{{ 'PROJECT_MEMBERS' | translate }}</h4>
       </div>
       <div class="action">
         <button mat-stroked-button>
-          {{ 'INVITE_MEMBER' | translate}}
+          {{ 'INVITE_MEMBER' | translate }}
         </button>
       </div>
     </div>
     <div class="body">
-      <h5>{{ 'MEMBER_USAGE_DETAIL' | translate | stringFormat:500:1500}}</h5>
+      <h5>{{ 'MEMBER_USAGE_DETAIL' | translate | stringFormat: 500:1500 }}</h5>
       <div class="members">
         <div *ngFor="let member of model.members" class="member">
           <div class="info">
@@ -47,7 +47,7 @@
           </div>
           <div class="action">
             <button mat-flat-button color="warn">
-              {{ 'REMOVE_ACCESS' | translate}}
+              {{ 'REMOVE_ACCESS' | translate }}
             </button>
           </div>
         </div>
@@ -61,17 +61,17 @@
         <i class="icon-upload41"></i>
       </div>
       <div class="title">
-        <h4>{{ 'EXPORT_PROJECT_TITLE' | translate}}</h4>
+        <h4>{{ 'EXPORT_PROJECT_TITLE' | translate }}</h4>
       </div>
       <div class="action">
         <button mat-stroked-button>
-          {{ 'EXPORT_PROJECT' | translate}}
+          {{ 'EXPORT_PROJECT' | translate }}
         </button>
       </div>
     </div>
     <div class="body">
-      <h5>{{ 'EXPORT_PROJECT_DESCRIPTION' | translate}}</h5>
-      <h5 class="warn">{{ 'EXPORT_PROJECT_DESCRIPTION_MORE' | translate}}</h5>
+      <h5>{{ 'EXPORT_PROJECT_DESCRIPTION' | translate }}</h5>
+      <h5 class="warn">{{ 'EXPORT_PROJECT_DESCRIPTION_MORE' | translate }}</h5>
     </div>
   </div>
 
@@ -81,17 +81,16 @@
         <i class="archive icon-archive"></i>
       </div>
       <div class="title">
-        <h4>{{ 'ARCHIVE_PROJECT' | translate}}</h4>
+        <h4>{{ 'ARCHIVE_PROJECT' | translate }}</h4>
       </div>
       <div class="action">
         <button mat-stroked-button>
-          {{ 'ARCHIVE_PROJECT' | translate}}
+          {{ 'ARCHIVE_PROJECT' | translate }}
         </button>
       </div>
     </div>
     <div class="body">
-      <h5>{{ 'ARCHIVE_PROJECT_DESCRIPTION' | translate}}</h5>
+      <h5>{{ 'ARCHIVE_PROJECT_DESCRIPTION' | translate }}</h5>
     </div>
   </div>
-
 </div>

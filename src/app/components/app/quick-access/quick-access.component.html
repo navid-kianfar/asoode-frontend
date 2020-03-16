@@ -14,7 +14,7 @@
     >
       <div class="color"></div>
       <div class="title">{{ project.title }}</div>
-      <div class="description">{{ project.description | truncate:100 }}</div>
+      <div class="description">{{ project.description | truncate: 100 }}</div>
     </div>
     <div class="more" *ngIf="mockService.projects.length > 5">
       <i class="icon-cc"></i>
@@ -40,7 +40,7 @@
       </div>
       <div class="text-container">
         <div class="title">{{ group.title }}</div>
-        <div class="description">{{ group.description | truncate:100 }}</div>
+        <div class="description">{{ group.description | truncate: 100 }}</div>
       </div>
     </div>
     <div class="more" *ngIf="mockService.groups.length > 5">

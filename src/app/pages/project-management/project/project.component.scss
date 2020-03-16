@@ -7,6 +7,7 @@
   .header {
     display: flex;
     flex-grow: 1;
+    min-height: 200px;
 
     .info {
       display: flex;
@@ -115,7 +116,8 @@
           font-weight: 500;
         }
 
-        &:hover, &.selected {
+        &:hover,
+        &.selected {
           color: #6b3d8d;
         }
       }

@@ -23,7 +23,7 @@
   ::ng-deep .mat-tab-body-content {
     padding-top: 30px;
   }
-  .templates{
+  .templates {
     .titles {
       button {
         cursor: pointer;
@@ -51,7 +51,7 @@
   .preview {
     h4 {
       margin-top: 30px;
-      font-size: 1.0rem;
+      font-size: 1rem;
       font-weight: 400;
     }
     img {
@@ -71,7 +71,6 @@
       flex: 0 0 20%;
       text-align: center;
       color: #b3bac5;
-
 
       .image-wrapper {
         width: 70%;
@@ -204,7 +203,7 @@
             position: relative;
             background-color: #fff;
             border-radius: 3px;
-            box-shadow: 0 1px 0 rgba(9,45,66,.25);
+            box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
             cursor: pointer;
             min-height: 32px;
             padding: 6px 8px 2px;
