@@ -30,7 +30,7 @@ export class MaterialTranslatorService {
       const to = from + pageSize;
       return StringHelpers.format(
         this.translateService.fromKey('PAGINATOR_OF'),
-        [from + 1, to, length]
+        [from + 1, to, length],
       );
     };
   }

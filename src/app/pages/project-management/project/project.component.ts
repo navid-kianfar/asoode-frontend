@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectViewModel} from '../../../view-models/projects/project-types';
-import {MockService} from '../../../services/mock.service';
+import { ProjectViewModel } from '../../../view-models/projects/project-types';
+import { MockService } from '../../../services/mock.service';
 
 @Component({
   selector: 'app-project',

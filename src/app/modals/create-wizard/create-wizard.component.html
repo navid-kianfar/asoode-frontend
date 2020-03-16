@@ -3,9 +3,7 @@
     <div class="modal-alt-header">
       <div class="btn"></div>
       <div class="text">
-        <h4 class="modal-title">
-          {{ 'CREATE' | translate: true }}&nbsp;...
-        </h4>
+        <h4 class="modal-title">{{ 'CREATE' | translate: true }}&nbsp;...</h4>
       </div>
       <div class="btn">
         <button class="close" (click)="onCancel($event)">
@@ -15,7 +13,11 @@
     </div>
     <div class="modal-body choose">
       <mat-radio-group [(ngModel)]="continueAs" class="items">
-        <mat-radio-button color="primary" [value]="WizardMode.SimpleProject">
+        <mat-radio-button
+          class="border"
+          color="primary"
+          [value]="WizardMode.SimpleProject"
+        >
           <div class="title">
             <i class="icon-workpackage"></i>&nbsp;
             {{ 'SIMPLE_PROJECTS' | translate }}
@@ -25,7 +27,11 @@
           </p>
           <img src="/assets/images/project/simple-proj.svg" alt="" />
         </mat-radio-button>
-        <mat-radio-button color="primary" [value]="WizardMode.ComplexProject">
+        <mat-radio-button
+          class="border"
+          color="primary"
+          [value]="WizardMode.ComplexProject"
+        >
           <div class="title">
             <i class="icon-project"></i>&nbsp;
             {{ 'WBS_PROJECTS' | translate }}&nbsp;
@@ -60,15 +66,25 @@
   </div>
 </ng-container>
 <ng-container *ngIf="mode === WizardMode.Import">
-  <app-import-wizard (exit)="close()"
-                     (back)="mode = WizardMode.Choose"></app-import-wizard>
+  <app-import-wizard
+    (exit)="close()"
+    (back)="mode = WizardMode.Choose"
+  ></app-import-wizard>
 </ng-container>
 <ng-container *ngIf="mode === WizardMode.Group">
-  <app-group-wizard (exit)="close()"
-                    (back)="mode = WizardMode.Choose"></app-group-wizard>
+  <app-group-wizard
+    (exit)="close()"
+    (back)="mode = WizardMode.Choose"
+  ></app-group-wizard>
 </ng-container>
-<ng-container *ngIf="mode === WizardMode.SimpleProject || mode === WizardMode.ComplexProject">
-  <app-project-wizard (exit)="close()"
-                      (back)="mode = WizardMode.Choose"
-                      [complex]="mode === WizardMode.ComplexProject"></app-project-wizard>
+<ng-container
+  *ngIf="
+    mode === WizardMode.SimpleProject || mode === WizardMode.ComplexProject
+  "
+>
+  <app-project-wizard
+    (exit)="close()"
+    (back)="mode = WizardMode.Choose"
+    [complex]="mode === WizardMode.ComplexProject"
+  ></app-project-wizard>
 </ng-container>

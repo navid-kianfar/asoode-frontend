@@ -1,0 +1,76 @@
+.project-objectives {
+  h3 {
+  }
+  .inner {
+    display: flex;
+    .list {
+      display: flex;
+      width: 400px;
+      padding: 10px;
+      flex-direction: column;
+
+      .item {
+        cursor: pointer;
+        display: flex;
+        background: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+
+        &:hover {
+          background: #fafafa;
+        }
+
+        .ico {
+          //display: flex;
+          //width: 30px;
+          i {
+            color: #666666;
+          }
+        }
+        .info {
+          //display: flex;
+          //flex-grow: 1;
+          .title {
+            color: #4d4d4d;
+            font-weight: 500;
+            font-size: 0.9rem;
+          }
+          .description {
+            color: #808080;
+            font-size: 0.8rem;
+          }
+          .work-package {
+            color: #444444;
+            font-size: 0.7rem;
+            align-items: center;
+            display: flex;
+            i {
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
+    .info-full {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      .summary {
+        padding: 10px 50px;
+        border-inline-start: 2px dashed #ddd;
+        margin-inline-start: 20px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+          color: #4d4d4d;
+        }
+        h4 {
+          color: #808080;
+        }
+      }
+    }
+  }
+}

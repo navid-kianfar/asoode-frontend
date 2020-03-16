@@ -1,15 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CultureService} from '../../../services/core/culture.service';
-import {FormService} from '../../../services/core/form.service';
-import {FormViewModel} from '../../core/form/contracts';
-import {MockService} from '../../../services/mock.service';
-import {BoardTemplateViewModel, ProjectTemplateViewModel} from '../../../view-models/projects/project-types';
-import {BoardTemplate} from '../../../library/app/enums';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CultureService } from '../../../services/core/culture.service';
+import { FormService } from '../../../services/core/form.service';
+import { FormViewModel } from '../../core/form/contracts';
+import { MockService } from '../../../services/mock.service';
+import {
+  BoardTemplateViewModel,
+  ProjectTemplateViewModel,
+} from '../../../view-models/projects/project-types';
+import { BoardTemplate } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-wizard',
   templateUrl: './project-wizard.component.html',
-  styleUrls: ['./project-wizard.component.scss']
+  styleUrls: ['./project-wizard.component.scss'],
 })
 export class ProjectWizardComponent implements OnInit {
   ViewMode = ViewMode;
@@ -25,7 +28,7 @@ export class ProjectWizardComponent implements OnInit {
     readonly cultureService: CultureService,
     private readonly formService: FormService,
     readonly mockService: MockService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.boardTemplate = BoardTemplate.Blank;
@@ -38,7 +41,7 @@ export class ProjectWizardComponent implements OnInit {
               field: 'title',
               label: '',
               cssClass: 'project-title',
-              hideLabel: true
+              hideLabel: true,
             },
             params: { model: '', placeHolder: 'PROJECT_TITLE' },
             validation: {
@@ -68,7 +71,7 @@ export class ProjectWizardComponent implements OnInit {
         type: BoardTemplate.Blank,
         image: '/assets/images/project/blank.png',
         image_alt: '/assets/images/project/blank-enabled.png',
-        lists: ['', '', '']
+        lists: ['', '', ''],
       },
       {
         type: BoardTemplate.WeekDay,
@@ -143,13 +146,11 @@ export class ProjectWizardComponent implements OnInit {
     }
   }
 
-  createProject($event: MouseEvent) {
-
-  }
+  createProject($event: MouseEvent) {}
 }
 
 export enum ViewMode {
   Form = 1,
   Invite = 2,
-  Template = 3
+  Template = 3,
 }

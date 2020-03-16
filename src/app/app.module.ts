@@ -126,8 +126,8 @@ import { GroupWizardComponent } from './components/app/group-wizard/group-wizard
 import { ImportWizardComponent } from './components/app/import-wizard/import-wizard.component';
 import { InviteGroupComponent } from './components/app/invite-group/invite-group.component';
 import { InvitePeopleComponent } from './components/app/invite-people/invite-people.component';
-import {ContentLoaderModule} from '@netbasal/ngx-content-loader';
-import {TrendModule} from 'ngx-trend';
+import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
+import { TrendModule } from 'ngx-trend';
 import { TruncatePipe } from './pipes/core/truncate.pipe';
 import { ProjectRoadMapComponent } from './components/app/project-road-map/project-road-map.component';
 import { ProjectTreeComponent } from './components/app/project-tree/project-tree.component';
@@ -245,45 +245,45 @@ import { AccessListComponent } from './components/app/access-list/access-list.co
     CreateWizardComponent,
     MessengerSettingComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatTabsModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatMenuModule,
-        MatSnackBarModule,
-        QuillModule.forRoot(),
-        SimpleModalModule.forRoot(
-            {container: 'modal-container'},
-            {
-                ...defaultSimpleModalOptions,
-                closeOnEscape: true,
-                closeOnClickOutside: true,
-                wrapperClass: 'in',
-                wrapperDefaultClasses: 'modal fade-anim',
-                bodyClass: 'modal-open',
-            },
-        ),
-        NgxPopperModule.forRoot({placement: 'bottom'}),
-        RoundProgressModule,
-        BarChartModule,
-        MatRadioModule,
-        MatCheckboxModule,
-        MatProgressBarModule,
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatRippleModule,
-        MomentModule,
-        ContentLoaderModule,
-        TrendModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    QuillModule.forRoot(),
+    SimpleModalModule.forRoot(
+      { container: 'modal-container' },
+      {
+        ...defaultSimpleModalOptions,
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        wrapperClass: 'in',
+        wrapperDefaultClasses: 'modal fade-anim',
+        bodyClass: 'modal-open',
+      },
+    ),
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    RoundProgressModule,
+    BarChartModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatProgressBarModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatRippleModule,
+    MomentModule,
+    ContentLoaderModule,
+    TrendModule,
+  ],
   providers: [
     // {
     //   provide: LocationStrategy,

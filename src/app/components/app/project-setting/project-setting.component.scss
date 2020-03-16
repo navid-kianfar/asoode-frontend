@@ -1,6 +1,5 @@
 .project-setting {
   h3 {
-
   }
 
   .box {
@@ -30,7 +29,6 @@
         font-weight: 400;
         font-size: 0.9rem;
         h4 {
-
         }
       }
       .action {
@@ -38,7 +36,6 @@
         width: 150px;
         justify-content: flex-end;
         button {
-
         }
       }
     }
@@ -66,6 +63,10 @@
         display: flex;
         margin-bottom: 10px;
         border-bottom: 1px solid #efefef;
+
+        &:last-child {
+          border-bottom: none;
+        }
 
         .info {
           display: flex;

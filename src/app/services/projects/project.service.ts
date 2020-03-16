@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
-import {ProjectTemplateViewModel, ProjectViewModel} from '../../view-models/projects/project-types';
+import {
+  ProjectTemplateViewModel,
+  ProjectViewModel,
+} from '../../view-models/projects/project-types';
 import { OperationResultStatus } from '../../library/core/enums';
 
 @Injectable({

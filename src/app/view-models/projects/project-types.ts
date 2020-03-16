@@ -1,8 +1,15 @@
 import { BaseViewModel } from '../core/general-types';
 import {
-  AccessType, BoardTemplate,
+  AccessType,
+  BoardTemplate,
   WorkPackageCommentPermission,
 } from '../../library/app/enums';
+
+export interface ProjectObjectiveViewModel extends BaseViewModel {
+  title: string;
+  description: string;
+  workPackage: string;
+}
 
 export interface ProjectTemplateViewModel extends BaseViewModel {
   title: string;

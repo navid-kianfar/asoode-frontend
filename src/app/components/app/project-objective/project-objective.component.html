@@ -1,1 +1,28 @@
-<p>project-road-objective works!</p>
+<div class="project-objectives">
+  <h3>{{ 'OBJECTIVES' | translate }}</h3>
+  <div class="inner">
+    <div class="list">
+      <div *ngFor="let objective of mockService.objectives" class="item">
+        <div class="ico">
+          <i class="icon-subtask"></i>
+        </div>
+        <div class="info">
+          <div class="title">{{ objective.title }}</div>
+          <div class="description">
+            {{ objective.description | truncate: 150 }}
+          </div>
+          <div class="work-package">
+            <i class="icon-workpackage"></i>&nbsp;
+            {{ objective.workPackage }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="info-full">
+      <div class="summary" *ngIf="!selected">
+        <h2>{{ 'OBJECTIVE_USE_TITLE' | translate }}</h2>
+        <h4>{{ 'OBJECTIVE_USE_DESCRIPTION' | translate }}</h4>
+      </div>
+    </div>
+  </div>
+</div>

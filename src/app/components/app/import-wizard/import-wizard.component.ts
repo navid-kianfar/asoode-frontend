@@ -1,16 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormViewModel} from '../../core/form/contracts';
-import {CultureService} from '../../../services/core/culture.service';
-import {FormService} from '../../../services/core/form.service';
-import {ValidationService} from '../../../services/core/validation.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormViewModel } from '../../core/form/contracts';
+import { CultureService } from '../../../services/core/culture.service';
+import { FormService } from '../../../services/core/form.service';
+import { ValidationService } from '../../../services/core/validation.service';
 
 @Component({
   selector: 'app-import-wizard',
   templateUrl: './import-wizard.component.html',
-  styleUrls: ['./import-wizard.component.scss']
+  styleUrls: ['./import-wizard.component.scss'],
 })
 export class ImportWizardComponent implements OnInit {
-
   @Input() complex: boolean;
   @Output() back = new EventEmitter();
   @Output() exit = new EventEmitter();
@@ -22,10 +21,9 @@ export class ImportWizardComponent implements OnInit {
   constructor(
     readonly cultureService: CultureService,
     private readonly formService: FormService,
-  ) { }
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   onBack($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
@@ -86,5 +84,4 @@ export class ImportWizardComponent implements OnInit {
     const model = this.formService.prepare(this.mapForm);
     console.log(model);
   }
-
 }

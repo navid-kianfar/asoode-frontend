@@ -11,6 +11,11 @@
     ::ng-deep mat-radio-button {
       display: flex;
       width: 50%;
+
+      &.border {
+        border-bottom: 2px solid #efefef;
+        margin-bottom: 10px;
+      }
     }
 
     ::ng-deep .mat-radio-label {
@@ -45,26 +50,17 @@
     }
   }
 }
-.create-group {
-  ::ng-deep .af-textbox {
-    input,
-    textarea {
-      width: 300px !important;
-      resize: none;
-    }
-  }
-  ::ng-deep .summary {
-    color: #999999;
-    font-size: 0.8rem;
-  }
-}
-
 
 @media (max-width: 500px) {
   .choose {
     .items {
       ::ng-deep mat-radio-button {
         width: 100%;
+
+        &.border {
+          border-bottom: none;
+          margin-bottom: 0;
+        }
       }
     }
   }

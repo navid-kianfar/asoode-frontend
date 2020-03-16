@@ -17,9 +17,7 @@ export class CreateWizardComponent
   actionWaiting: boolean;
   uploading: boolean;
 
-  constructor(
-    readonly cultureService: CultureService,
-  ) {
+  constructor(readonly cultureService: CultureService) {
     super();
   }
 

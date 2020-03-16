@@ -1,15 +1,14 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {CultureService} from '../../../services/core/culture.service';
-import {FormService} from '../../../services/core/form.service';
-import {FormViewModel} from '../../core/form/contracts';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CultureService } from '../../../services/core/culture.service';
+import { FormService } from '../../../services/core/form.service';
+import { FormViewModel } from '../../core/form/contracts';
 
 @Component({
   selector: 'app-group-wizard',
   templateUrl: './group-wizard.component.html',
-  styleUrls: ['./group-wizard.component.scss']
+  styleUrls: ['./group-wizard.component.scss'],
 })
 export class GroupWizardComponent implements OnInit {
-
   @Output() back = new EventEmitter();
   @Output() exit = new EventEmitter();
   ViewMode = ViewMode;
@@ -19,7 +18,7 @@ export class GroupWizardComponent implements OnInit {
   constructor(
     readonly cultureService: CultureService,
     private readonly formService: FormService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.mode = ViewMode.Form;
@@ -31,7 +30,7 @@ export class GroupWizardComponent implements OnInit {
               field: 'title',
               label: '',
               cssClass: 'group-title',
-              hideLabel: true
+              hideLabel: true,
             },
             params: { model: '', placeHolder: 'GROUP_TITLE' },
             validation: {
@@ -87,5 +86,5 @@ export class GroupWizardComponent implements OnInit {
 }
 export enum ViewMode {
   Form = 1,
-  Invite = 2
+  Invite = 2,
 }

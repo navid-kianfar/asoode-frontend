@@ -1,9 +1,11 @@
 <div class="invite-group">
-
   <div class="groups">
     <div class="group" *ngFor="let group of mockService.groups">
       <div class="pick">
-        <mat-checkbox color="primary" [(ngModel)]="group.selected"></mat-checkbox>
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="group.selected"
+        ></mat-checkbox>
       </div>
       <div class="info">
         <app-group-info [model]="group"></app-group-info>
