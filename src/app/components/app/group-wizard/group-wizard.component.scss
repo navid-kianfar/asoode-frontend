@@ -1,26 +1,26 @@
-::ng-deep .af-form-elements {
-  input {
-    border: none !important;
-    font-weight: 400;
-    font-size: 1.5rem;
-  }
 
-  textarea {
-    border: none !important;
-    font-weight: 300;
-    font-size: 1.2rem;
-    width: 100%;
-    resize: none;
-  }
-
-  ::ng-deep .summary {
-    color: #999999;
-    font-size: 0.8rem;
-  }
-}
 .create-group {
   padding: 20px 50px !important;
+  ::ng-deep .af-form-elements {
+    input {
+      border: none !important;
+      font-weight: 400;
+      font-size: 1.5rem;
+    }
 
+    textarea {
+      border: none !important;
+      font-weight: 300;
+      font-size: 1.2rem;
+      width: 100%;
+      resize: none;
+    }
+
+    ::ng-deep .summary {
+      color: #999999;
+      font-size: 0.8rem;
+    }
+  }
   ::ng-deep .mat-tab-body-content {
     padding-top: 30px;
   }

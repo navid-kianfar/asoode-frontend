@@ -24,8 +24,7 @@ export class CreateWizardComponent
   }
 
   ngOnInit() {
-    this.mode = WizardMode.SimpleProject;
-    // this.mode = WizardMode.Choose;
+    this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
   }
   async onCancel($event: MouseEvent) {

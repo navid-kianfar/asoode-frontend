@@ -29,8 +29,7 @@ export class ProjectWizardComponent implements OnInit {
 
   ngOnInit() {
     this.boardTemplate = BoardTemplate.Blank;
-    this.mode = ViewMode.Template;
-    // this.mode = ViewMode.Form;
+    this.mode = ViewMode.Form;
     this.projectForm = [
       {
         elements: [
