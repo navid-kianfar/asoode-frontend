@@ -3,7 +3,8 @@ import {CultureService} from '../../../services/core/culture.service';
 import {FormService} from '../../../services/core/form.service';
 import {FormViewModel} from '../../core/form/contracts';
 import {MockService} from '../../../services/mock.service';
-import {ProjectTemplateViewModel} from '../../../view-models/projects/project-types';
+import {BoardTemplateViewModel, ProjectTemplateViewModel} from '../../../view-models/projects/project-types';
+import {BoardTemplate} from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-wizard',
@@ -18,6 +19,8 @@ export class ProjectWizardComponent implements OnInit {
   mode: ViewMode;
   projectForm: FormViewModel[];
   template: ProjectTemplateViewModel;
+  boardTemplates: BoardTemplateViewModel[];
+  boardTemplate: BoardTemplate;
   constructor(
     readonly cultureService: CultureService,
     private readonly formService: FormService,
@@ -25,6 +28,7 @@ export class ProjectWizardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.boardTemplate = BoardTemplate.Blank;
     this.mode = ViewMode.Template;
     // this.mode = ViewMode.Form;
     this.projectForm = [
@@ -57,6 +61,54 @@ export class ProjectWizardComponent implements OnInit {
               summary: 'PROJECT_CHANNEL_DESCRIPTION',
             },
           }),
+        ],
+      },
+    ];
+    this.boardTemplates = [
+      {
+        type: BoardTemplate.Blank,
+        image: '/assets/images/project/blank.png',
+        image_alt: '/assets/images/project/blank-enabled.png',
+        lists: ['', '', '']
+      },
+      {
+        type: BoardTemplate.WeekDay,
+        image: '/assets/images/project/weekday.png',
+        image_alt: '/assets/images/project/weekday-enabled.png',
+        lists: [
+          'ENUMS_WEEKDAY_SUNDAY',
+          'ENUMS_WEEKDAY_MONDAY',
+          'ENUMS_WEEKDAY_TUESDAY',
+        ],
+      },
+      {
+        type: BoardTemplate.TeamMembers,
+        image: '/assets/images/project/team-member.png',
+        image_alt: '/assets/images/project/team-member-enabled.png',
+        lists: [
+          'BOARD_TEMPLATES_SAMPLES_TEAM_MEMBERS_1',
+          'BOARD_TEMPLATES_SAMPLES_TEAM_MEMBERS_2',
+          'BOARD_TEMPLATES_SAMPLES_TEAM_MEMBERS_3',
+        ],
+      },
+      {
+        type: BoardTemplate.Departments,
+        image: '/assets/images/project/departments.png',
+        image_alt: '/assets/images/project/departments-enabled.png',
+        lists: [
+          'BOARD_TEMPLATES_SAMPLES_DEPARTMENT_1',
+          'BOARD_TEMPLATES_SAMPLES_DEPARTMENT_2',
+          'BOARD_TEMPLATES_SAMPLES_DEPARTMENT_3',
+        ],
+      },
+      {
+        type: BoardTemplate.Kanban,
+        image: '/assets/images/project/kanban.png',
+        image_alt: '/assets/images/project/kanban-enabled.png',
+        lists: [
+          'BOARD_TEMPLATES_SAMPLES_KANBAN_1',
+          'BOARD_TEMPLATES_SAMPLES_KANBAN_2',
+          'BOARD_TEMPLATES_SAMPLES_KANBAN_3',
         ],
       },
     ];

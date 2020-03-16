@@ -24,7 +24,7 @@ export class CreateWizardComponent
   }
 
   ngOnInit() {
-    this.mode = WizardMode.ComplexProject;
+    this.mode = WizardMode.SimpleProject;
     // this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
   }

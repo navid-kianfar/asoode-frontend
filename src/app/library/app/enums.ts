@@ -61,3 +61,10 @@ export enum TaskStatus {
   Done = 2,
   Blocked = 3,
 }
+export enum BoardTemplate {
+  Blank = 1,
+  WeekDay = 2,
+  TeamMembers = 3,
+  Departments = 4,
+  Kanban = 5,
+}

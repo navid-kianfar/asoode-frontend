@@ -962,6 +962,13 @@
   resolved "https://registry.yarnpkg.com/@istanbuljs/schema/-/schema-0.1.2.tgz#26520bf09abe4a5644cd5414e37125a8954241dd"
   integrity sha512-tsAQNx32a8CoFhjhijUIhI4kccIAgmGhy8LZMZgGfmXcpMbPRUqn5LWmgRttILi6yeGmBJd2xsPkFMs0PzgPCw==
 
+"@netbasal/ngx-content-loader@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@netbasal/ngx-content-loader/-/ngx-content-loader-3.0.0.tgz#398b72388fb8e9861bf6e36ec1f8f6330d209d8f"
+  integrity sha512-NOVmB6vmWzdpaHFBHw8DLEsDarr/CiEhPdo5Vjl9KffPFOphM+9ZNYKJ3y8uonJw64WAjkL2WR06ToKDrA2Dug==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@8.3.25":
   version "8.3.25"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.3.25.tgz#f33dfb114463662b16b719031fd99ebf21354cf1"

@@ -62,3 +62,160 @@
     max-width: 100%;
   }
 }
+.board-template-options {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  cursor: pointer;
+
+  li {
+    flex: 0 0 20%;
+    text-align: center;
+    color: #b3bac5;
+
+
+    .image-wrapper {
+      width: 70%;
+      padding-top: 70%;
+      position: relative;
+      margin: 0 auto;
+      border: 2px solid #d4d6db;
+      border-radius: 4px;
+      img {
+        position: absolute;
+        top: 20%;
+        width: 60%;
+        height: 60%;
+        right: 20%;
+        -o-object-fit: contain;
+        object-fit: contain;
+      }
+    }
+    &.selected {
+      color: #27b6ba;
+
+      .image-wrapper {
+        border: 2px solid #27b6ba;
+      }
+    }
+
+    .title {
+      margin: 5px 0;
+      font-weight: 500;
+    }
+  }
+}
+.template-image {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  justify-content: space-around;
+
+  .board-list {
+    flex-shrink: 0;
+    width: 210px;
+    margin: 0 4px;
+    background-color: #f2f5fc;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .board-list-header {
+      display: flex;
+      align-items: flex-start;
+      padding: 4px;
+      flex-shrink: 0;
+
+      .list-title {
+        flex: 1 1 auto;
+        position: relative;
+        font-weight: 700;
+        margin: 2px;
+        overflow-wrap: break-word;
+        min-width: 0;
+
+        .list-title-holder {
+          padding: 4px 8px;
+          max-height: 256px;
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          overflow: auto;
+
+          span {
+            font-weight: 500;
+
+            &.title-holder {
+              display: block;
+              height: 1.5rem;
+              border: 1px dashed #c5c5c5;
+              border-radius: 5px;
+            }
+          }
+        }
+      }
+      .edit-btn {
+        width: 32px;
+        height: 32px;
+        background: none;
+        border: none;
+        padding: 7px;
+
+        i {
+          padding: 0;
+          -webkit-padding-start: 0;
+          padding-inline-start: 0;
+        }
+      }
+
+      .edit-btn-container {
+        flex: 0 0 auto;
+        position: relative;
+
+        .edit-btn {
+          width: 32px;
+          height: 32px;
+          background: none;
+          border: none;
+          padding: 7px;
+
+          i {
+            padding: 0;
+            -webkit-padding-start: 0;
+            padding-inline-start: 0;
+          }
+        }
+      }
+    }
+    .board-list-body {
+      overflow: auto;
+      padding: 8px;
+      margin: 0;
+      flex: 1 1 auto;
+
+      .list-card {
+        margin-bottom: 8px;
+        position: relative;
+
+        .list-card-inner {
+          position: relative;
+          background-color: #fff;
+          border-radius: 3px;
+          box-shadow: 0 1px 0 rgba(9,45,66,.25);
+          cursor: pointer;
+          min-height: 32px;
+          padding: 6px 8px 2px;
+        }
+
+        &.dir-img {
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+}

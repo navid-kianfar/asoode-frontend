@@ -126,6 +126,7 @@ import { GroupWizardComponent } from './components/app/group-wizard/group-wizard
 import { ImportWizardComponent } from './components/app/import-wizard/import-wizard.component';
 import { InviteGroupComponent } from './components/app/invite-group/invite-group.component';
 import { InvitePeopleComponent } from './components/app/invite-people/invite-people.component';
+import {ContentLoaderModule} from '@netbasal/ngx-content-loader';
 
 @NgModule({
   declarations: [
@@ -244,7 +245,7 @@ import { InvitePeopleComponent } from './components/app/invite-people/invite-peo
     MatSnackBarModule,
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
-      { container: 'modal-container' },
+      {container: 'modal-container'},
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -254,7 +255,7 @@ import { InvitePeopleComponent } from './components/app/invite-people/invite-peo
         bodyClass: 'modal-open',
       },
     ),
-    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    NgxPopperModule.forRoot({placement: 'bottom'}),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,
@@ -265,6 +266,7 @@ import { InvitePeopleComponent } from './components/app/invite-people/invite-peo
     ReactiveFormsModule,
     MatRippleModule,
     MomentModule,
+    ContentLoaderModule,
   ],
   providers: [
     // {

@@ -1,6 +1,6 @@
 import { BaseViewModel } from '../core/general-types';
 import {
-  AccessType,
+  AccessType, BoardTemplate,
   WorkPackageCommentPermission,
 } from '../../library/app/enums';
 
@@ -87,4 +87,10 @@ export interface WorkPackageMemberViewModel extends BaseViewModel {
   access: AccessType;
   blockNotification: boolean;
   showStats: boolean;
+}
+export interface BoardTemplateViewModel {
+  type: BoardTemplate;
+  image: string;
+  image_alt: string;
+  lists: string[];
 }
