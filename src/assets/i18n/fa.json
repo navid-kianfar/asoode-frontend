@@ -315,5 +315,17 @@
   "TREE_VIEW": "نمودار درختی",
   "SEASONS": "فصل ها",
   "OBJECTIVES": "اهداف",
-  "SETTINGS": "تنظیمات"
+  "SETTINGS": "تنظیمات",
+  "ARCHIVE_PROJECT": "آرشیو پروژه",
+  "EXPORT_PROJECT": "دریافت خروجی از پروژه",
+  "EXPORT_PROJECT_TITLE": "خروجی گرفتن از پروژه",
+  "PROJECT_MEMBERS": "اعضای پروژه",
+  "INVITE_MEMBER": "دعوت از اعضا",
+  "BUY_MORE_SPACE": "خرید حجم بیشتر",
+  "DISK_USAGE": "مصرف دیسک",
+  "DISK_USAGE_DETAIL": "{0} مگابایت از {1} مگابایت فضای اختصاصی این پروژه را مصرف کردید",
+  "ARCHIVE_PROJECT_DESCRIPTION": "بعد از آرشیو شدن، این پروژه از دسترس اعضای پروژه خارج میشود، اما شما همچنان دسترسی خواهید داشت",
+  "EXPORT_PROJECT_DESCRIPTION": "فایل خروجی شامل شامل چت ها، بسته\u200Cهای کاری، کارت\u200Cها و پیوست\u200Cها میشود",
+  "EXPORT_PROJECT_DESCRIPTION_MORE": "توجه داشته باشید این کار تنها ۱ بار در ۲۴ ساعت امکان پذیر است",
+  "MEMBER_USAGE_DETAIL": "{0} کاربر از {1} کاربر این پروژه فعال شده ا\u200Cند"
 }

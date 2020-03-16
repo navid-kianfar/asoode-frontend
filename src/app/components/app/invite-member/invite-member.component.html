@@ -1,6 +1,5 @@
 <div class="invite-member">
   <h3>{{ 'INVITE_NEW_MEMBER' | translate }}</h3>
-
   <div class="holder">
     <div class="input-holder">
       <app-auto-complete
@@ -11,7 +10,7 @@
         (startModify)="startModify($event)"
         ltr="true"
       ></app-auto-complete>
-      <app-dropdown [(model)]="currentRole" [items]="roles"></app-dropdown>
+      <app-access-list [(access)]="currentRole"></app-access-list>
     </div>
     <div class="action">
       &nbsp;&nbsp;
@@ -33,11 +32,7 @@
           {{ 'ENUMS_ACCESS_TYPE_OWNER' | translate }}
         </ng-container>
         <ng-template #otherRole>
-          <app-dropdown
-            [(model)]="member.access"
-            [enum]="'AccessType'"
-            [enumExcept]="[AccessType.Owner]"
-          ></app-dropdown>
+          <app-access-list [(access)]="member.access"></app-access-list>
         </ng-template>
       </div>
       <div class="action">

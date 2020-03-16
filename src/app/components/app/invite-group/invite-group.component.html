@@ -9,8 +9,7 @@
         <app-group-info [model]="group"></app-group-info>
       </div>
       <div class="access">
-        <app-dropdown [enum]="'AccessType'"
-                      [enumExcept]="[AccessType.Owner]"></app-dropdown>
+        <app-access-list [(access)]="group.access"></app-access-list>
       </div>
     </div>
   </div>

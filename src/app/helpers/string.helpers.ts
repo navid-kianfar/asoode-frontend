@@ -1,8 +1,8 @@
 export class StringHelpers {
   static readonly dot = '...';
-  static format(input: string, ...args) {
-    return input.replace(/{(\d+)}/g, function(match, number) {
-      return typeof args[number] !== 'undefined' ? String(args[number]) : match;
+  static format(input: string, args: any[]) {
+    return input.replace(/{(\d+)}/g, (match, num) => {
+      return typeof args[num] !== 'undefined' ? String(args[num]) : match;
     });
   }
   static truncate(input: string, limit, middle) {

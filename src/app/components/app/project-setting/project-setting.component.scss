@@ -1,0 +1,95 @@
+.project-setting {
+  h3 {
+
+  }
+
+  .box {
+    padding: 20px;
+    background: #ffffff;
+    margin-bottom: 10px;
+    border-radius: 5px;
+
+    .header {
+      display: flex;
+      color: #444444;
+      align-items: baseline;
+      .ico {
+        display: flex;
+        margin-inline-end: 10px;
+        i {
+          &.archive {
+            font-size: 1.6rem;
+            position: relative;
+            top: 10px;
+          }
+        }
+      }
+      .title {
+        display: flex;
+        flex-grow: 1;
+        font-weight: 400;
+        font-size: 0.9rem;
+        h4 {
+
+        }
+      }
+      .action {
+        display: flex;
+        width: 150px;
+        justify-content: flex-end;
+        button {
+
+        }
+      }
+    }
+
+    .body {
+      padding-top: 20px;
+
+      mat-progress-bar {
+        max-width: 700px;
+        margin-bottom: 10px;
+      }
+
+      h5 {
+        color: #999999;
+        font-size: 0.8rem;
+
+        &.warn {
+          color: #bf2f27;
+        }
+      }
+    }
+
+    .members {
+      .member {
+        display: flex;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #efefef;
+
+        .info {
+          display: flex;
+          flex-grow: 1;
+        }
+        .access {
+          display: flex;
+          width: 150px;
+
+          ::ng-deep .af-dropdown {
+            button {
+              width: auto;
+            }
+          }
+        }
+        .action {
+          display: flex;
+          width: 100px;
+
+          button {
+            max-height: 35px;
+          }
+        }
+      }
+    }
+  }
+}

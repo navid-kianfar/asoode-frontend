@@ -125,6 +125,11 @@
       flex-grow: 1;
       min-height: 300px;
       border-top: 2px solid #ffffff;
+      padding: 20px;
+
+      > div {
+        width: 100%;
+      }
     }
   }
 }

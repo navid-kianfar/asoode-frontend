@@ -134,6 +134,7 @@ import { ProjectTreeComponent } from './components/app/project-tree/project-tree
 import { ProjectSeasonComponent } from './components/app/project-season/project-season.component';
 import { ProjectObjectiveComponent } from './components/app/project-objective/project-objective.component';
 import { ProjectSettingComponent } from './components/app/project-setting/project-setting.component';
+import { AccessListComponent } from './components/app/access-list/access-list.component';
 
 @NgModule({
   declarations: [
@@ -235,6 +236,7 @@ import { ProjectSettingComponent } from './components/app/project-setting/projec
     ProjectSeasonComponent,
     ProjectObjectiveComponent,
     ProjectSettingComponent,
+    AccessListComponent,
   ],
   entryComponents: [
     ConfirmComponent,
