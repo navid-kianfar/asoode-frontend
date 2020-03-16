@@ -310,5 +310,10 @@
   "BOARD_TEMPLATES_SAMPLES_KANBAN_2": "در حال انجام",
   "BOARD_TEMPLATES_SAMPLES_KANBAN_3":"انجام شده",
   "INDIVIDUAL_USERS": "عضو مستقل",
-  "PROJECT_PROGRESS": "پیشرفت پروژه"
+  "PROJECT_PROGRESS": "پیشرفت پروژه",
+  "ROAD_MAP": "نقشه راه",
+  "TREE_VIEW": "نمودار درختی",
+  "SEASONS": "فصل ها",
+  "OBJECTIVES": "اهداف",
+  "SETTINGS": "تنظیمات"
 }

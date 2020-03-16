@@ -92,7 +92,7 @@
 
     ::ng-deep .project-info-mini {
       border-radius: 0;
-      padding: 5px 0;
+      padding: 5px;
       margin-bottom: 5px;
       &:hover {
         background: #f9f9f9;
@@ -110,6 +110,7 @@
         color: #808080 !important;
         font-weight: 400 !important;
         font-size: 0.6rem !important;
+        text-align: justify;
       }
     }
   }

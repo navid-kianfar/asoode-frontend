@@ -60,5 +60,51 @@
       </div>
     </div>
   </div>
+  <div class="inner-container">
+    <div class="aside">
+      <button (click)="mode = ViewMode.RoadMap"
+              [class.selected]="mode === ViewMode.RoadMap">
+        <i class="icon-map5"></i>
+        <span>{{ 'ROAD_MAP' | translate}}</span>
+      </button>
+      <button (click)="mode = ViewMode.Tree"
+              [class.selected]="mode === ViewMode.Tree">
+        <i class="icon-tree7"></i>
+        <span>{{ 'TREE_VIEW' | translate}}</span>
+      </button>
+      <button (click)="mode = ViewMode.Seasons"
+              [class.selected]="mode === ViewMode.Seasons">
+        <i class="icon-flag3"></i>
+        <span>{{ 'SEASONS' | translate}}</span>
+      </button>
+      <button (click)="mode = ViewMode.Objectives"
+              [class.selected]="mode === ViewMode.Objectives">
+        <i class="icon-subtask"></i>
+        <span>{{ 'OBJECTIVES' | translate}}</span>
+      </button>
+      <button (click)="mode = ViewMode.Settings"
+              [class.selected]="mode === ViewMode.Settings">
+        <i class="icon-cog2"></i>
+        <span>{{ 'SETTINGS' | translate}}</span>
+      </button>
+    </div>
+    <div class="wrapper">
+      <div *ngIf="mode === ViewMode.RoadMap" class="road-map-container">
+        <app-project-road-map [model]="project"></app-project-road-map>
+      </div>
+      <div *ngIf="mode === ViewMode.Tree" class="tree-container">
+        <app-project-tree [model]="project"></app-project-tree>
+      </div>
+      <div *ngIf="mode === ViewMode.Seasons" class="seasons-container">
+        <app-project-season [model]="project"></app-project-season>
+      </div>
+      <div *ngIf="mode === ViewMode.Objectives" class="objectives-container">
+        <app-project-objective [model]="project"></app-project-objective>
+      </div>
+      <div *ngIf="mode === ViewMode.Settings" class="settings-container">
+        <app-project-setting [model]="project"></app-project-setting>
+      </div>
+    </div>
+  </div>
 </div>
 <app-messenger-shortcut></app-messenger-shortcut>

@@ -8,10 +8,20 @@ import {MockService} from '../../../services/mock.service';
   styleUrls: ['./project.component.scss'],
 })
 export class ProjectComponent implements OnInit {
+  ViewMode = ViewMode;
+  mode: ViewMode;
   project: ProjectViewModel;
   constructor(private readonly mockService: MockService) {}
 
   ngOnInit() {
+    this.mode = ViewMode.RoadMap;
     this.project = this.mockService.projects[0];
   }
+}
+export enum ViewMode {
+  RoadMap = 1,
+  Tree = 2,
+  Seasons = 3,
+  Objectives = 4,
+  Settings = 5,
 }

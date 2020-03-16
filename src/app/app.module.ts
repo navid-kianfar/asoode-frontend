@@ -128,6 +128,12 @@ import { InviteGroupComponent } from './components/app/invite-group/invite-group
 import { InvitePeopleComponent } from './components/app/invite-people/invite-people.component';
 import {ContentLoaderModule} from '@netbasal/ngx-content-loader';
 import {TrendModule} from 'ngx-trend';
+import { TruncatePipe } from './pipes/core/truncate.pipe';
+import { ProjectRoadMapComponent } from './components/app/project-road-map/project-road-map.component';
+import { ProjectTreeComponent } from './components/app/project-tree/project-tree.component';
+import { ProjectSeasonComponent } from './components/app/project-season/project-season.component';
+import { ProjectObjectiveComponent } from './components/app/project-objective/project-objective.component';
+import { ProjectSettingComponent } from './components/app/project-setting/project-setting.component';
 
 @NgModule({
   declarations: [
@@ -223,6 +229,12 @@ import {TrendModule} from 'ngx-trend';
     ImportWizardComponent,
     InviteGroupComponent,
     InvitePeopleComponent,
+    TruncatePipe,
+    ProjectRoadMapComponent,
+    ProjectTreeComponent,
+    ProjectSeasonComponent,
+    ProjectObjectiveComponent,
+    ProjectSettingComponent,
   ],
   entryComponents: [
     ConfirmComponent,

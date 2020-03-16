@@ -39,17 +39,17 @@ h3 {
     text-indent: 10px;
     padding: 10px 5px;
     display: flex;
-    width: 130px;
+    min-width: 80px;
     font-weight: 400;
     font-size: 0.9rem;
   }
 
   .description {
-    padding: 10px 0;
-    -webkit-box-flex: 1;
+    padding: 10px 5px;
     flex-grow: 1;
     color: #b3b3b3;
     font-size: 0.7rem;
+    text-align: justify;
   }
 }
 

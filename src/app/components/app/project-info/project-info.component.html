@@ -4,7 +4,7 @@
     <i *ngIf="!project.complex" class="icon-workpackage"></i>
     &nbsp;<span>{{ project.title }}</span>
   </div>
-  <div class="description">{{ project.description }}</div>
+  <div class="description">{{ project.description | truncate:200 }}</div>
   <div class="details">
     <ng-container *ngIf="project.complex">
       <div class="item">
