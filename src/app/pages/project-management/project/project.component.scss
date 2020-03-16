@@ -1,0 +1,85 @@
+.project-detail {
+  background-color: #f2f2f2;
+  display: flex;
+  min-height: calc(100vh - 57px);
+
+  .header {
+    display: flex;
+    flex-grow: 1;
+
+    .info {
+      display: flex;
+      flex-grow: 1;
+      padding: 40px;
+      flex-direction: column;
+
+      h4 {
+        color: #333333;
+        font-size: 2rem;
+        font-weight: 400;
+      }
+
+      h5 {
+        color: #808080;
+        text-align: justify;
+        min-height: 75px;
+      }
+
+      .members {
+        .member {
+          display: flex;
+          color: #666666;
+          font-size: 0.8rem;
+          align-content: center;
+          i {
+            background: #fff;
+            color: #444444;
+            padding: 6px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+          }
+          span {
+            padding-top: 3px;
+          }
+        }
+      }
+    }
+
+    .reports {
+      display: flex;
+      min-width: 250px;
+      padding: 40px;
+      padding-inline-start: 0;
+      flex-direction: column;
+
+      h5 {
+        color: #808080;
+        font-size: 0.8rem;
+        font-weight: 400;
+      }
+
+      .report {
+        margin-bottom: 10px;
+        display: flex;
+
+        .change {
+          font-size: 0.8rem;
+          display: flex;
+          align-items: center;
+
+          i {
+            font-size: 0.5rem;
+            color: #ed505c;
+            &.up {
+              color: #4fb8ab;
+            }
+          }
+        }
+        .total {
+          font-weight: 500;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
