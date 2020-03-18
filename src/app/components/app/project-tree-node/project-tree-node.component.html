@@ -1,42 +1,61 @@
-<div class="project-tree-node level-{{level}}">
+<div class="project-tree-node level-{{ level }}">
   <div class="node">
     <div (click)="expanded = !expanded" class="collapse">
-      <i *ngIf="!expanded && (subProjects.length || workPackages.length)" class="icon-arrow-left2"></i>
-      <i *ngIf="expanded && (subProjects.length || workPackages.length)" class="icon-arrow-down2"></i>
+      <i
+        *ngIf="!expanded && (subProjects.length || workPackages.length)"
+        class="icon-arrow-left2"
+      ></i>
+      <i
+        *ngIf="expanded && (subProjects.length || workPackages.length)"
+        class="icon-arrow-down2"
+      ></i>
     </div>
     <div class="title">
-      <i class="sub {{ subProject ? 'icon-sub-season' : 'icon-workpackage' }}"></i>&nbsp;
-      <span>{{subProject ? subProject.title : workPackage.title}}</span>&nbsp;
+      <i
+        class="sub {{ subProject ? 'icon-sub-season' : 'icon-workpackage' }}"
+      ></i
+      >&nbsp;
+      <span>{{ subProject ? subProject.title : workPackage.title }}</span
+      >&nbsp;
       <i *ngIf="subProject" class="add icon-plus2"></i>
     </div>
     <div class="description">
-      {{subProject ? subProject.description : workPackage.description}}
+      {{ subProject ? subProject.description : workPackage.description }}
     </div>
     <div class="members">
-      <app-member-info small="true"
-                       *ngFor="let member of (subProject ? project.members : workPackage.members)"
-                       [model]="member"></app-member-info>
+      <app-member-info
+        small="true"
+        *ngFor="
+          let member of subProject ? project.members : workPackage.members
+        "
+        [model]="member"
+      ></app-member-info>
     </div>
     <div class="progress">
-      <mat-progress-bar [value]="50" [bufferValue]="100"></mat-progress-bar>
+      <mat-progress-bar [value]="50" [bufferValue]="100"></mat-progress-bar
+      >&nbsp; {{ 50 }}%
     </div>
     <div class="time-span">
-      <ng-container *ngIf="from">{{from | culturedDate}}</ng-container>
+      <ng-container *ngIf="from">{{ from | culturedDate }}</ng-container>
       <ng-container *ngIf="from && to">&nbsp;-&nbsp;</ng-container>
-      <ng-container *ngIf="to">{{to | culturedDate}}</ng-container>
+      <ng-container *ngIf="to">{{ to | culturedDate }}</ng-container>
     </div>
     <div class="time-spent">
-      {{ 100000 | msToDuration}}
+      {{ 100000 | msToDuration }}
     </div>
   </div>
   <ng-container *ngIf="expanded">
-    <app-project-tree-node *ngFor="let subProject of subProjects"
-                           [level]="level + 1"
-                           [project]="project"
-                           [subProject]="subProject"></app-project-tree-node>
-    <app-project-tree-node *ngFor="let workPackage of workPackages"
-                           [level]="level + 1"
-                           [project]="project"
-                           [workPackage]="workPackage"></app-project-tree-node>
+    <app-project-tree-node
+      *ngFor="let subProject of subProjects"
+      [level]="level + 1"
+      [project]="project"
+      [subProject]="subProject"
+    ></app-project-tree-node>
+    <app-project-tree-node
+      *ngFor="let workPackage of workPackages"
+      [level]="level + 1"
+      [project]="project"
+      [workPackage]="workPackage"
+    ></app-project-tree-node>
   </ng-container>
 </div>

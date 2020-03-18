@@ -4,19 +4,23 @@
     <div class="header">
       <div class="collapse">&nbsp;</div>
       <div class="title">&nbsp;</div>
-      <div class="description">{{ 'DESCRIPTION' | translate}}</div>
-      <div class="members">{{ 'MEMBERS' | translate}}</div>
-      <div class="progress">{{ 'PROGRESS_REPORT' | translate}}</div>
-      <div class="time-span">{{ 'TIME_SPAN' | translate}}</div>
-      <div class="time-spent">{{ 'TIME_SPENT' | translate}}</div>
+      <div class="description">{{ 'DESCRIPTION' | translate }}</div>
+      <div class="members">{{ 'MEMBERS' | translate }}</div>
+      <div class="progress">{{ 'PROGRESS_REPORT' | translate }}</div>
+      <div class="time-span">{{ 'TIME_SPAN' | translate }}</div>
+      <div class="time-spent">{{ 'TIME_SPENT' | translate }}</div>
     </div>
-    <app-project-tree-node *ngFor="let subProject of subProjects"
-                           [level]="1"
-                           [project]="model"
-                           [subProject]="subProject"></app-project-tree-node>
-    <app-project-tree-node *ngFor="let workPackage of workPackages"
-                           [level]="1"
-                           [project]="model"
-                           [workPackage]="workPackage"></app-project-tree-node>
+    <app-project-tree-node
+      *ngFor="let subProject of subProjects"
+      [level]="1"
+      [project]="model"
+      [subProject]="subProject"
+    ></app-project-tree-node>
+    <app-project-tree-node
+      *ngFor="let workPackage of workPackages"
+      [level]="1"
+      [project]="model"
+      [workPackage]="workPackage"
+    ></app-project-tree-node>
   </div>
 </div>

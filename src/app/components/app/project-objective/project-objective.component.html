@@ -48,19 +48,24 @@
             {{ 'ESTIMATED_PRICE' | translate }}
           </div>
           <div class="records">
-            <app-grid [showFooter]="false"
-                      [columns]="['name', 'date', 'time', 'amount', 'group']"
-                      [rows]="estimated">
-
+            <app-grid
+              [showFooter]="false"
+              [columns]="['name', 'date', 'time', 'amount', 'group']"
+              [rows]="estimated"
+            >
               <!-- Name Column -->
               <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>{{ 'NAME' | translate }}</th>
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'NAME' | translate }}
+                </th>
                 <td mat-cell *matCellDef="let element">{{ element.user }}</td>
               </ng-container>
 
               <!-- Date Column -->
               <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef>{{ 'DATE' | translate }}</th>
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'DATE' | translate }}
+                </th>
                 <td mat-cell *matCellDef="let element">
                   {{ element.date | culturedDate }}
                 </td>
@@ -68,7 +73,9 @@
 
               <!-- Time Column -->
               <ng-container matColumnDef="time">
-                <th mat-header-cell *matHeaderCellDef>{{ 'SPENT_TIME' | translate }}</th>
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'SPENT_TIME' | translate }}
+                </th>
                 <td mat-cell *matCellDef="let element">
                   {{ element.time | msToDuration }}
                 </td>
@@ -76,26 +83,32 @@
 
               <!-- Amount Column -->
               <ng-container matColumnDef="amount">
-                <th mat-header-cell *matHeaderCellDef>{{ 'AMOUNT' | translate }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.amount | number }}</td>
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'AMOUNT' | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.amount | number }}
+                </td>
               </ng-container>
 
               <!-- Team Column -->
               <ng-container matColumnDef="group">
-                <th mat-header-cell *matHeaderCellDef>{{ 'GROUP' | translate }}</th>
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ 'GROUP' | translate }}
+                </th>
                 <td mat-cell *matCellDef="let element">{{ element.group }}</td>
               </ng-container>
             </app-grid>
 
             <div class="sum-container">
-              <div class="label">{{ 'TOTAL_SUM' | translate}}</div>
+              <div class="label">{{ 'TOTAL_SUM' | translate }}</div>
               <div class="time">
                 <h4>{{ estimatedTotalTime | msToDuration }}</h4>
-                <h5>{{ 'TIME_SPENT' | translate}}</h5>
+                <h5>{{ 'TIME_SPENT' | translate }}</h5>
               </div>
               <div class="amount">
                 <h4>{{ estimatedTotalAmount | number }}</h4>
-                <h5>{{ 'AMOUNT' | translate}}</h5>
+                <h5>{{ 'AMOUNT' | translate }}</h5>
               </div>
             </div>
           </div>

@@ -93,7 +93,10 @@
               (click)="boardTemplate = bt.type"
               [class.selected]="boardTemplate === bt.type"
             >
-              <img [src]="boardTemplate === bt.type ? bt.image_alt : bt.image" alt="">
+              <img
+                [src]="boardTemplate === bt.type ? bt.image_alt : bt.image"
+                alt=""
+              />
               {{ bt.type | enum: 'BoardTemplate' }}
             </button>
           </div>

@@ -142,7 +142,8 @@
               display: flex;
             }
 
-            .time, .amount {
+            .time,
+            .amount {
               width: 150px;
               display: flex;
               flex-direction: column;

@@ -1,10 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ProjectViewModel, SubProjectViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  ProjectViewModel,
+  SubProjectViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-project-tree-node',
   templateUrl: './project-tree-node.component.html',
-  styleUrls: ['./project-tree-node.component.scss']
+  styleUrls: ['./project-tree-node.component.scss'],
 })
 export class ProjectTreeNodeComponent implements OnInit {
   @Input() workPackage: WorkPackageViewModel;
@@ -26,9 +30,12 @@ export class ProjectTreeNodeComponent implements OnInit {
       this.subProjects = [];
       this.workPackages = [];
     } else {
-      this.subProjects = this.project.subProjects.filter(s => s.parentId === this.subProject.id);
-      this.workPackages = this.project.workPackages.filter(w => w.subProjectId === this.subProject.id);
+      this.subProjects = this.project.subProjects.filter(
+        s => s.parentId === this.subProject.id,
+      );
+      this.workPackages = this.project.workPackages.filter(
+        w => w.subProjectId === this.subProject.id,
+      );
     }
   }
-
 }

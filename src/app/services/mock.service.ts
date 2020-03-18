@@ -1,17 +1,33 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   ProjectMemberViewModel,
   ProjectObjectiveViewModel,
   ProjectTemplateViewModel,
   ProjectViewModel,
 } from '../view-models/projects/project-types';
-import {GroupMemberViewModel, GroupViewModel,} from '../view-models/groups/group-types';
-import {AccessType, ChannelType, ConversationType, GroupType, TaskStatus, WorkPackageCommentPermission,} from '../library/app/enums';
-import {ExplorerViewModel, UploadViewModel,} from '../view-models/storage/files-types';
-import {ChannelViewModel, ConversationViewModel,} from '../view-models/communication/messenger-types';
-import {TransactionViewModel} from '../view-models/payment/payment-types';
-import {MemberInfoViewModel} from '../view-models/auth/identity-types';
-import {SearchResultViewModel} from '../view-models/general/search-types';
+import {
+  GroupMemberViewModel,
+  GroupViewModel,
+} from '../view-models/groups/group-types';
+import {
+  AccessType,
+  ChannelType,
+  ConversationType,
+  GroupType,
+  TaskStatus,
+  WorkPackageCommentPermission,
+} from '../library/app/enums';
+import {
+  ExplorerViewModel,
+  UploadViewModel,
+} from '../view-models/storage/files-types';
+import {
+  ChannelViewModel,
+  ConversationViewModel,
+} from '../view-models/communication/messenger-types';
+import { TransactionViewModel } from '../view-models/payment/payment-types';
+import { MemberInfoViewModel } from '../view-models/auth/identity-types';
+import { SearchResultViewModel } from '../view-models/general/search-types';
 
 const members: MemberInfoViewModel[] = [
   {
@@ -910,7 +926,8 @@ export class MockService {
           {
             id: '1',
             title: 'لورم ایپسوم',
-            description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
+            description:
+              'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
             subProjectId: '1',
             createdAt: new Date(),
             allowAttachment: true,
@@ -936,7 +953,8 @@ export class MockService {
           {
             id: '2',
             title: 'لورم ایپسوم',
-            description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
+            description:
+              'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
             subProjectId: '5',
             createdAt: new Date(),
             allowAttachment: true,
@@ -962,7 +980,8 @@ export class MockService {
           {
             id: '3',
             title: 'لورم ایپسوم',
-            description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
+            description:
+              'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
             subProjectId: '5',
             createdAt: new Date(),
             allowAttachment: true,
@@ -988,7 +1007,8 @@ export class MockService {
           {
             id: '4',
             title: 'لورم ایپسوم',
-            description: 'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
+            description:
+              'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.',
             subProjectId: undefined,
             createdAt: new Date(),
             allowAttachment: true,

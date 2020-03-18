@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {ProjectViewModel, SubProjectViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
+import {
+  ProjectViewModel,
+  SubProjectViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-project-tree',

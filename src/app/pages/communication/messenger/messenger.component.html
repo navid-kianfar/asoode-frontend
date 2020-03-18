@@ -8,7 +8,6 @@
       <span>{{ 'ASOODE_MESSENGER' | translate }}</span>
     </div>
     <div class="aside-items">
-
       <mat-tab-group animationDuration="0ms">
         <mat-tab [label]="'PROJECTS' | translate">
           <ng-template matTabContent>
@@ -18,9 +17,9 @@
                 [class.selected]="current === channel"
                 (click)="open(channel)"
                 *ngFor="
-            let channel of mockService.channels
-              | search: ['type']:ChannelType.Project
-          "
+                  let channel of mockService.channels
+                    | search: ['type']:ChannelType.Project
+                "
                 class="item"
               >
                 {{ channel.title }}
@@ -36,9 +35,9 @@
                 [class.selected]="current === channel"
                 (click)="open(channel)"
                 *ngFor="
-            let channel of mockService.channels
-              | search: ['type']:ChannelType.Group
-          "
+                  let channel of mockService.channels
+                    | search: ['type']:ChannelType.Group
+                "
                 class="item"
               >
                 {{ channel.title }}
@@ -51,15 +50,25 @@
             <div class="members-container">
               <div class="filter">
                 <div class="wrapper">
-                  <input [(ngModel)]="filter" type="text" [placeholder]="'SEARCH' | translate">
+                  <input
+                    [(ngModel)]="filter"
+                    type="text"
+                    [placeholder]="'SEARCH' | translate"
+                  />
                   <i class="icon-search"></i>
                 </div>
               </div>
-              <div class="member" [class.online]="index % 2 === 0"
-                   *ngFor="let member of current?.members | search:['fullName', 'email', 'phoneNumber']:filter; let index = index">
+              <div
+                class="member"
+                [class.online]="index % 2 === 0"
+                *ngFor="
+                  let member of current?.members
+                    | search: ['fullName', 'email', 'phoneNumber']:filter;
+                  let index = index
+                "
+              >
                 <app-member-info [model]="member"></app-member-info>
               </div>
-
             </div>
           </ng-template>
         </mat-tab>

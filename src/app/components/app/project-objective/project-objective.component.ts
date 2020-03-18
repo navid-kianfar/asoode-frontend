@@ -26,52 +26,56 @@ export class ProjectObjectiveComponent implements OnInit {
         amount: 100000,
         time: 1000000,
         group: 'Development',
-        user: 'Navid Kianfar'
+        user: 'Navid Kianfar',
       },
       {
         date: new Date(),
         amount: 100000,
         time: 1000000,
         group: 'Development',
-        user: 'Navid Kianfar'
+        user: 'Navid Kianfar',
       },
       {
         date: new Date(),
         amount: 100000,
         time: 1000000,
         group: 'Development',
-        user: 'Navid Kianfar'
+        user: 'Navid Kianfar',
       },
       {
         date: new Date(),
         amount: 100000,
         time: 1000000,
         group: 'Development',
-        user: 'Navid Kianfar'
+        user: 'Navid Kianfar',
       },
       {
         date: new Date(),
         amount: 100000,
         time: 1000000,
         group: 'Development',
-        user: 'Navid Kianfar'
+        user: 'Navid Kianfar',
       },
       {
         date: new Date(),
         amount: 100000,
         time: 1000000,
         group: 'Development',
-        user: 'Navid Kianfar'
+        user: 'Navid Kianfar',
       },
       {
         date: new Date(),
         amount: 100000,
         time: 1000000,
         group: 'Development',
-        user: 'Navid Kianfar'
-      }
+        user: 'Navid Kianfar',
+      },
     ];
-    this.estimatedTotalAmount = this.estimated.map(e => e.amount).reduce((p, c) => p + c, 0);
-    this.estimatedTotalTime = this.estimated.map(e => e.time).reduce((p, c) => p + c, 0);
+    this.estimatedTotalAmount = this.estimated
+      .map(e => e.amount)
+      .reduce((p, c) => p + c, 0);
+    this.estimatedTotalTime = this.estimated
+      .map(e => e.time)
+      .reduce((p, c) => p + c, 0);
   }
 }

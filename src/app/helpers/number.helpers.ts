@@ -1,4 +1,4 @@
-import {TimeViewModel} from '../view-models/core/general-types';
+import { TimeViewModel } from '../view-models/core/general-types';
 
 const secondTicks = 10000000;
 const minuteTicks = 600000000;
