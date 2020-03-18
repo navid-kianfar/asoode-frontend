@@ -25,16 +25,11 @@
     }
 
     .aside-items {
-      .aside-item {
+      width: 249px;
+      ::ng-deep .aside-item {
+        padding-top: 10px;
         border-bottom: 1px solid #e6e6e6;
         margin-bottom: 10px;
-
-        .title {
-          color: #808080;
-          font-size: 0.8rem;
-          font-weight: 400;
-          padding: 10px;
-        }
         .item {
           cursor: pointer;
           padding: 10px;
@@ -47,6 +42,53 @@
             color: #ffffff;
           }
         }
+      }
+      ::ng-deep .mat-tab-group .mat-tab-label {
+        min-width: auto !important;
+        font-size: 0.8rem;
+      }
+      ::ng-deep .members-container {
+
+        .filter {
+          padding: 10px;
+          .wrapper {
+            border: 1px solid #dddddd;
+            display: flex;
+            padding: 5px;
+            border-radius: 5px;
+            align-items: center;
+            input {
+              border: none;
+              display: flex;
+              flex-grow: 1;
+              font-size: 0.8rem;
+            }
+
+            i {
+              color: #dddddd;
+              width: 20px;
+              font-weight: 500;
+              font-size: 1.4rem;
+            }
+          }
+        }
+
+        .member {
+          ::ng-deep .member-info {
+            .initials {
+              border-color: #ee6285;
+            }
+          }
+        }
+        .member.online {
+          ::ng-deep .member-info {
+            .initials {
+              border-color: #5eb258;
+            }
+          }
+        }
+
+
       }
     }
   }

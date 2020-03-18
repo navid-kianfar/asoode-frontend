@@ -604,7 +604,7 @@ export class MockService {
           type: ChannelType.Project,
           title: p.title,
           recordId: `${idx + 1}`,
-          members: [],
+          members: [...members],
           messages: this.messages,
         } as ChannelViewModel;
       }),
@@ -613,7 +613,7 @@ export class MockService {
           type: ChannelType.Group,
           title: p.title,
           recordId: `${idx + 1}`,
-          members: [],
+          members: [...members],
           messages: this.messages,
         } as ChannelViewModel;
       }),

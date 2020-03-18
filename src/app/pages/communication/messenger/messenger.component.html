@@ -8,36 +8,62 @@
       <span>{{ 'ASOODE_MESSENGER' | translate }}</span>
     </div>
     <div class="aside-items">
-      <div class="aside-item">
-        <div class="title">{{ 'PROJECTS' | translate }}</div>
-        <div
-          matRipple
-          [class.selected]="current === channel"
-          (click)="open(channel)"
-          *ngFor="
+
+      <mat-tab-group animationDuration="0ms">
+        <mat-tab [label]="'PROJECTS' | translate">
+          <ng-template matTabContent>
+            <div class="aside-item">
+              <div
+                matRipple
+                [class.selected]="current === channel"
+                (click)="open(channel)"
+                *ngFor="
             let channel of mockService.channels
               | search: ['type']:ChannelType.Project
           "
-          class="item"
-        >
-          {{ channel.title }}
-        </div>
-      </div>
-      <div class="aside-item">
-        <div class="title">{{ 'GROUPS' | translate }}</div>
-        <div
-          matRipple
-          [class.selected]="current === channel"
-          (click)="open(channel)"
-          *ngFor="
+                class="item"
+              >
+                {{ channel.title }}
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab [label]="'GROUPS' | translate">
+          <ng-template matTabContent>
+            <div class="aside-item">
+              <div
+                matRipple
+                [class.selected]="current === channel"
+                (click)="open(channel)"
+                *ngFor="
             let channel of mockService.channels
               | search: ['type']:ChannelType.Group
           "
-          class="item"
-        >
-          {{ channel.title }}
-        </div>
-      </div>
+                class="item"
+              >
+                {{ channel.title }}
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab [label]="'MEMBERS' | translate">
+          <ng-template matTabContent>
+            <div class="members-container">
+              <div class="filter">
+                <div class="wrapper">
+                  <input type="text" [placeholder]="'SEARCH' | translate">
+                  <i class="icon-search"></i>
+                </div>
+              </div>
+              <div class="member" [class.online]="index % 2 === 0"
+                   *ngFor="let member of current?.members; let index = index">
+                <app-member-info [model]="member"></app-member-info>
+              </div>
+
+            </div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
   <ng-container *ngIf="!current">
