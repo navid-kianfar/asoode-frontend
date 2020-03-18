@@ -79,6 +79,15 @@
 .icon-spinner2:before {
   content: "\e966";
 }
+.icon-cost .path1:before {
+  content: "\e981";
+  color: rgb(68, 68, 68);
+}
+.icon-cost .path2:before {
+  content: "\e982";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+}
 .icon-map2:before {
   content: "\e97e";
 }

@@ -86,23 +86,18 @@
       </ng-container>
 
       <ng-container *ngIf="!complex">
-        <ul class="board-template-options">
-          <li
-            *ngFor="let t of boardTemplates"
-            (click)="boardTemplate = t.type"
-            [class.selected]="boardTemplate === t.type"
-          >
-            <div class="image-wrapper">
-              <img
-                [src]="boardTemplate === t.type ? t.image_alt : t.image"
-                alt=""
-              />
-            </div>
-            <div class="title">
-              {{ t.type | enum: 'BoardTemplate' }}
-            </div>
-          </li>
-        </ul>
+        <div class="templates">
+          <div class="titles">
+            <button
+              *ngFor="let bt of boardTemplates"
+              (click)="boardTemplate = bt.type"
+              [class.selected]="boardTemplate === bt.type"
+            >
+              <img [src]="boardTemplate === bt.type ? bt.image_alt : bt.image" alt="">
+              {{ bt.type | enum: 'BoardTemplate' }}
+            </button>
+          </div>
+        </div>
         <ng-container *ngFor="let t of boardTemplates">
           <div *ngIf="boardTemplate === t.type" class="template-image">
             <div *ngFor="let title of t.lists" class="board-list">

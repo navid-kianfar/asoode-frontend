@@ -51,12 +51,12 @@
             <div class="members-container">
               <div class="filter">
                 <div class="wrapper">
-                  <input type="text" [placeholder]="'SEARCH' | translate">
+                  <input [(ngModel)]="filter" type="text" [placeholder]="'SEARCH' | translate">
                   <i class="icon-search"></i>
                 </div>
               </div>
               <div class="member" [class.online]="index % 2 === 0"
-                   *ngFor="let member of current?.members; let index = index">
+                   *ngFor="let member of current?.members | search:['fullName', 'email', 'phoneNumber']:filter; let index = index">
                 <app-member-info [model]="member"></app-member-info>
               </div>
 

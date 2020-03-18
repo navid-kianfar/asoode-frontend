@@ -64,4 +64,16 @@
       color: #999999;
     }
   }
+
+  &.small {
+    width: 40px;
+
+    .initials-holder {
+      width: 30px;
+      height: 30px;
+    }
+    .info {
+      display: none;
+    }
+  }
 }

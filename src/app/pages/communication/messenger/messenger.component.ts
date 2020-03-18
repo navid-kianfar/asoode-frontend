@@ -15,6 +15,7 @@ export class MessengerComponent implements OnInit {
   current: ChannelViewModel;
   ChannelType = ChannelType;
   showFiles: boolean;
+  filter: string;
   constructor(
     private readonly messengerService: MessengerService,
     readonly mockService: MockService,

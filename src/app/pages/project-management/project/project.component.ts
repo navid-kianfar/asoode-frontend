@@ -14,7 +14,7 @@ export class ProjectComponent implements OnInit {
   constructor(private readonly mockService: MockService) {}
 
   ngOnInit() {
-    this.mode = ViewMode.RoadMap;
+    this.mode = ViewMode.Tree;
     this.project = this.mockService.projects[0];
   }
 }

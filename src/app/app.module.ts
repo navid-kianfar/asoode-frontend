@@ -136,6 +136,7 @@ import { ProjectObjectiveComponent } from './components/app/project-objective/pr
 import { ProjectSettingComponent } from './components/app/project-setting/project-setting.component';
 import { AccessListComponent } from './components/app/access-list/access-list.component';
 import { MsToDurationPipe } from './pipes/core/ms-to-duration.pipe';
+import { ProjectTreeNodeComponent } from './components/app/project-tree-node/project-tree-node.component';
 
 @NgModule({
   declarations: [
@@ -239,6 +240,7 @@ import { MsToDurationPipe } from './pipes/core/ms-to-duration.pipe';
     ProjectSettingComponent,
     AccessListComponent,
     MsToDurationPipe,
+    ProjectTreeNodeComponent,
   ],
   entryComponents: [
     ConfirmComponent,

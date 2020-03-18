@@ -16,6 +16,7 @@ import { BoardTemplate } from '../../../library/app/enums';
 })
 export class ProjectWizardComponent implements OnInit {
   ViewMode = ViewMode;
+  BoardTemplate = BoardTemplate;
   @Input() complex: boolean;
   @Output() back = new EventEmitter();
   @Output() exit = new EventEmitter();

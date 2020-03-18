@@ -1,1 +1,13 @@
-<p>project-road-tree works!</p>
+<div class="project-tree">
+  <h3>{{ 'TREE_VIEW' | translate }}</h3>
+  <div class="box">
+    <app-project-tree-node *ngFor="let subProject of subProjects"
+                           [level]="1"
+                           [project]="model"
+                           [subProject]="subProject"></app-project-tree-node>
+    <app-project-tree-node *ngFor="let workPackage of workPackages"
+                           [level]="1"
+                           [project]="model"
+                           [workPackage]="workPackage"></app-project-tree-node>
+  </div>
+</div>

@@ -24,6 +24,7 @@
     padding-top: 30px;
   }
   .templates {
+    padding-bottom: 10px;
     .titles {
       button {
         cursor: pointer;
@@ -33,6 +34,9 @@
         line-height: 25px;
         border-radius: 5px;
         margin-inline-end: 5px;
+        img {
+          max-width: 30px;
+        }
         i {
           position: relative;
           top: 5px;
@@ -58,49 +62,6 @@
       margin-top: 10px;
       width: 100%;
       max-width: 100%;
-    }
-  }
-  .board-template-options {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 20px 0;
-    cursor: pointer;
-
-    li {
-      flex: 0 0 20%;
-      text-align: center;
-      color: #b3bac5;
-
-      .image-wrapper {
-        width: 70%;
-        padding-top: 70%;
-        position: relative;
-        margin: 0 auto;
-        border: 2px solid #d4d6db;
-        border-radius: 4px;
-        img {
-          position: absolute;
-          top: 20%;
-          width: 60%;
-          height: 60%;
-          right: 20%;
-          -o-object-fit: contain;
-          object-fit: contain;
-        }
-      }
-      &.selected {
-        color: #27b6ba;
-
-        .image-wrapper {
-          border: 2px solid #27b6ba;
-        }
-      }
-
-      .title {
-        margin: 5px 0;
-        font-weight: 500;
-      }
     }
   }
   .template-image {
