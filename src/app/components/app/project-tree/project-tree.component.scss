@@ -1,5 +1,79 @@
 .project-tree {
   h3 {
+    margin-bottom: 20px;
+  }
 
+  .header {
+    display: flex;
+    color: #808080;
+    font-size: 0.8rem;
+    font-weight: 400;
+    padding: 5px 0;
+
+    .collapse{
+      min-width: 50px;
+      width: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .title{
+      border-inline-end: 2px dashed #b3b3b3;
+      min-width: 300px;
+      width: 300px;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      justify-content: center;
+    }
+    .description{
+      min-width: 200px;
+      width: 200px;
+      display: flex;
+      border-inline-end: 2px dashed #b3b3b3;
+      align-items: center;
+      padding: 0 5px;
+      justify-content: center;
+    }
+    .members {
+      min-width: 200px;
+      width: 200px;
+      display: flex;
+      border-inline-end: 2px dashed #b3b3b3;
+      align-items: center;
+      padding: 0 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .progress {
+      min-width: 200px;
+      width: 200px;
+      display: flex;
+      border-inline-end: 2px dashed #b3b3b3;
+      align-items: center;
+      padding: 0 30px;
+      justify-content: center;
+    }
+    .time-span {
+      min-width: 150px;
+      width: 150px;
+      display: flex;
+      border-inline-end: 2px dashed #b3b3b3;
+      align-items: center;
+      color: #808080;
+      font-size: 0.8rem;
+      padding: 0 5px;
+      justify-content: center;
+    }
+    .time-spent {
+      min-width: 150px;
+      width: 150px;
+      display: flex;
+      align-items: center;
+      color: #808080;
+      font-size: 0.8rem;
+      padding: 0 5px;
+      justify-content: center;
+    }
   }
 }
