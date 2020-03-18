@@ -5,6 +5,13 @@ import {
   WorkPackageCommentPermission,
 } from '../../library/app/enums';
 
+export interface ProjectObjectiveEstimatedPriceViewModel {
+  date: Date;
+  time: number;
+  amount: number;
+  user: string;
+  group: string;
+}
 export interface ProjectObjectiveViewModel extends BaseViewModel {
   title: string;
   description: string;

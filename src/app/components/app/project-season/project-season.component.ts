@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {ProjectSeasonViewModel, ProjectViewModel} from '../../../view-models/projects/project-types';
+import {
+  ProjectSeasonViewModel,
+  ProjectViewModel,
+} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-project-season',

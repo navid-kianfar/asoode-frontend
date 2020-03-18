@@ -135,6 +135,7 @@ import { ProjectSeasonComponent } from './components/app/project-season/project-
 import { ProjectObjectiveComponent } from './components/app/project-objective/project-objective.component';
 import { ProjectSettingComponent } from './components/app/project-setting/project-setting.component';
 import { AccessListComponent } from './components/app/access-list/access-list.component';
+import { MsToDurationPipe } from './pipes/core/ms-to-duration.pipe';
 
 @NgModule({
   declarations: [
@@ -237,6 +238,7 @@ import { AccessListComponent } from './components/app/access-list/access-list.co
     ProjectObjectiveComponent,
     ProjectSettingComponent,
     AccessListComponent,
+    MsToDurationPipe,
   ],
   entryComponents: [
     ConfirmComponent,

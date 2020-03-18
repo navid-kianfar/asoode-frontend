@@ -333,5 +333,10 @@
   "SEASON_USE_TITLE": "فصل\u200Cها چه کاربردی دارند؟",
   "SEASON_USE_DESCRIPTION": "",
   "ESTIMATED_PRICE": "هزینه تمام شده",
-  "CREATE_SEASON": "ایجاد فصل"
+  "CREATE_SEASON": "ایجاد فصل",
+  "SPENT_TIME": "زمان صرف شده",
+  "NAME": "نام",
+  "DATE": "تاریخ",
+  "GROUP": "گروه",
+  "TOTAL_SUM": "جمع کل"
 }

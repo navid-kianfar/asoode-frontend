@@ -9,3 +9,8 @@ export interface BaseViewModel {
   createdAt: Date;
   updatedAt?: Date;
 }
+export interface TimeViewModel {
+  hour: number;
+  minute: number;
+  second: number;
+}

@@ -118,7 +118,42 @@
             color: #333333;
 
             i {
+            }
+          }
 
+          .records {
+            padding-top: 20px;
+
+            ::ng-deep .mat-table th.mat-header-cell {
+              background-color: #ffffff !important;
+              color: #808080 !important;
+              font-size: 0.9rem;
+              font-weight: 300;
+            }
+          }
+
+          .sum-container {
+            padding-top: 30px;
+            display: flex;
+            .label {
+              font-weight: 500;
+              color: #4d4d4d;
+              width: 150px;
+              display: flex;
+            }
+
+            .time, .amount {
+              width: 150px;
+              display: flex;
+              flex-direction: column;
+              h4 {
+                font-weight: 500;
+                color: #4d4d4d;
+              }
+              h5 {
+                color: #999999;
+                font-size: 0.7rem;
+              }
             }
           }
         }
