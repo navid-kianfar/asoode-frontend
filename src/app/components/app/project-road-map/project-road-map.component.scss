@@ -1,0 +1,30 @@
+.project-road-map {
+  .seasons {
+    display: flex;
+    .season {
+      padding: 0 10px;
+      width: 250px;
+      border-inline-end: 1px dashed #b3b3b3;
+      display: block;
+      flex-direction: column;
+      min-height: 350px;
+
+      .info {
+        .title {
+          font-size: 0.8rem;
+          i {
+            color: #b3b3b3;
+          }
+          span {
+            color: #4d4d4d;
+            font-weight: bold;
+          }
+        }
+        .description {
+          font-size: 0.7rem;
+          color: #b3b3b3;
+        }
+      }
+    }
+  }
+}

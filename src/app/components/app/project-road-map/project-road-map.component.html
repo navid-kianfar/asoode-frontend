@@ -1,4 +1,15 @@
 <div class="project-road-map">
-  <h3>{{ 'ROAD_MAP' | translate }}</h3>
-
+  <div class="seasons">
+    <div class="season" *ngFor="let season of model.seasons">
+      <div class="info">
+        <div class="title">
+          <i class="icon-flag7"></i>&nbsp;
+          <span>{{season.title}}</span>
+        </div>
+        <div class="description">
+          {{season.description | truncate:100}}
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
