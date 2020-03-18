@@ -71,6 +71,11 @@
       align-items: center;
       padding: 0 30px;
       justify-content: center;
+
+      span {
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
     }
     .time-span {
       min-width: 150px;

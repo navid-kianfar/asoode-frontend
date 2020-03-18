@@ -33,7 +33,7 @@
     </div>
     <div class="progress">
       <mat-progress-bar [value]="50" [bufferValue]="100"></mat-progress-bar
-      >&nbsp; {{ 50 }}%
+      >&nbsp;<span>{{ 50 }}%</span>
     </div>
     <div class="time-span">
       <ng-container *ngIf="from">{{ from | culturedDate }}</ng-container>
