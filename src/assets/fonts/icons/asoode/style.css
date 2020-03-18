@@ -79,6 +79,36 @@
 .icon-spinner2:before {
   content: "\e966";
 }
+.icon-map2:before {
+  content: "\e97e";
+}
+.icon-flag7:before {
+  content: "\e97f";
+}
+.icon-target:before {
+  content: "\e980";
+}
+.icon-user-tie:before {
+  content: "\e977";
+}
+.icon-embed2:before {
+  content: "\e978";
+}
+.icon-stethoscope:before {
+  content: "\e979";
+}
+.icon-spinner10:before {
+  content: "\e97a";
+}
+.icon-stack2:before {
+  content: "\e97b";
+}
+.icon-graduation:before {
+  content: "\e97c";
+}
+.icon-library2:before {
+  content: "\e97d";
+}
 .icon-users21:before {
   content: "\e968";
 }

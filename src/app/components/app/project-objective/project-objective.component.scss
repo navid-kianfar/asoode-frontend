@@ -5,9 +5,13 @@
     display: flex;
     .list {
       display: flex;
+      min-width: 600px;
       width: 600px;
-      padding: 10px;
+      margin-inline-end: 10px;
+      padding: 0 10px;
       flex-direction: column;
+      max-height: 500px;
+      overflow-y: auto;
 
       .item {
         cursor: pointer;
@@ -31,6 +35,7 @@
         .info {
           //display: flex;
           //flex-grow: 1;
+          padding-inline-start: 5px;
           .title {
             color: #4d4d4d;
             font-weight: 500;
@@ -57,6 +62,8 @@
       display: flex;
       flex-grow: 1;
       flex-direction: column;
+      min-height: 400px;
+
       .summary {
         padding: 10px 50px;
         border-inline-start: 2px dashed #ddd;
@@ -70,6 +77,50 @@
         }
         h4 {
           color: #808080;
+        }
+      }
+
+      .box {
+        padding: 30px;
+        background: #fff;
+        border-radius: 5px;
+        margin-inline-start: 10px;
+
+        .title {
+          font-size: 1.3rem;
+          font-weight: 500;
+          color: #4d4d4d;
+          i {
+            color: #666666;
+            position: relative;
+            top: 5px;
+          }
+        }
+        .description {
+          color: #808080;
+          font-size: 0.9rem;
+          text-align: justify;
+          margin: 10px 0;
+        }
+        .work-package {
+          color: #b3b3b3;
+          font-size: 0.8rem;
+          i {
+            position: relative;
+            top: 5px;
+            font-size: 1rem;
+          }
+        }
+        .price-container {
+          margin-top: 50px;
+
+          .price-title {
+            color: #333333;
+
+            i {
+
+            }
+          }
         }
       }
     }

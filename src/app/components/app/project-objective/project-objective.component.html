@@ -2,9 +2,9 @@
   <h3>{{ 'OBJECTIVES' | translate }}</h3>
   <div class="inner">
     <div class="list">
-      <div *ngFor="let objective of mockService.objectives" class="item">
+      <div *ngFor="let objective of mockService.objectives" (click)="selected = objective" class="item">
         <div class="ico">
-          <i class="icon-subtask"></i>
+          <i class="icon-target"></i>
         </div>
         <div class="info">
           <div class="title">{{ objective.title }}</div>
@@ -22,6 +22,25 @@
       <div class="summary" *ngIf="!selected">
         <h2>{{ 'OBJECTIVE_USE_TITLE' | translate }}</h2>
         <h4>{{ 'OBJECTIVE_USE_DESCRIPTION' | translate }}</h4>
+      </div>
+      <div class="box" *ngIf="selected">
+        <div class="title">
+          <i class="icon-target"></i>
+          {{ selected.title }}
+        </div>
+        <div class="description">
+          {{selected.description}}
+        </div>
+        <div class="work-package">
+          <i class="icon-workpackage"></i>
+          {{ selected.workPackage }}
+        </div>
+        <div class="price-container">
+          <div class="title">
+            <i class="icon-cog2"></i>
+            {{ 'ESTIMATED_PRICE' | translate }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
