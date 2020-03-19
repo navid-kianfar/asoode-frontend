@@ -1,5 +1,9 @@
 .work-package {
+  background: #e6e6e6;
+  height: calc(100vh - 57px);
+
   .header {
+    background: #ffffff;
     display: flex;
     border-bottom: 1px solid #e6e6e6;
     box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.2);

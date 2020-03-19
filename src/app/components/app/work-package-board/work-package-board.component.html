@@ -1,1 +1,36 @@
-<p>work-space-board works!</p>
+<div class="work-package-board">
+  <div class="board-lists">
+    <div *ngFor="let list of workPackage.lists" class="board-list">
+      <div class="header">
+        <span>{{ list.title | truncate:30 }}</span>&nbsp;
+        <i (click)="createNewTask(list)" class="icon-plus2"></i>&nbsp;
+        <i class="icon-menu"></i>
+      </div>
+      <div *ngIf="list.expanded" class="new-task">
+        <div class="wrapper">
+          <textarea rows="4"></textarea>
+          <div class="buttons">
+            <button mat-stroked-button>{{ 'CREATE' | translate}}</button>&nbsp;
+            <button (click)="cancelNewTask(list)" mat-stroked-button>{{ 'CANCEL' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="board-list add-new">
+      <div (click)="createNewList()" class="header">
+        <i class="icon-plus2"></i>&nbsp;
+        <span>{{ 'CREATE_NEW_LIST' | translate}}</span>
+      </div>
+      <div *ngIf="expanded" class="new-task">
+        <div class="wrapper">
+          <textarea rows="4"></textarea>
+          <div class="buttons">
+            <button mat-stroked-button>{{ 'CREATE' | translate}}</button>&nbsp;
+            <button (click)="cancelNewList()" mat-stroked-button>{{ 'CANCEL' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="board-list empty">&nbsp;</div>
+  </div>
+</div>

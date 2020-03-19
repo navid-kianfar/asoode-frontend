@@ -94,6 +94,8 @@ export interface WorkPackageViewModel extends BaseViewModel {
   allowState: boolean;
   allowTimeSpent: boolean;
   members: WorkPackageMemberViewModel[];
+  lists: WorkPackageListViewModel[];
+  tasks: WorkPackageTaskViewModel[];
 }
 export interface WorkPackageMemberViewModel extends BaseViewModel {
   userId: string;
@@ -107,4 +109,15 @@ export interface BoardTemplateViewModel {
   image: string;
   image_alt: string;
   lists: string[];
+}
+export interface WorkPackageListViewModel extends BaseViewModel {
+  packageId: string;
+  title: string;
+  color: string;
+  darkColor: boolean;
+  expanded?: boolean;
+  order: number;
+}
+export interface WorkPackageTaskViewModel extends BaseViewModel {
+
 }

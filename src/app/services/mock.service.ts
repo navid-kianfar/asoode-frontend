@@ -1122,6 +1122,81 @@ export class MockService {
             projectId: '1',
             userId: '1',
             members: [],
+            lists: [
+              {
+                id: '1',
+                createdAt: new Date(),
+                color: '',
+                darkColor: false,
+                order: 1,
+                packageId: '2',
+                title: 'لیست شماره ۱'
+              },
+              {
+                id: '2',
+                createdAt: new Date(),
+                color: '',
+                darkColor: false,
+                order: 2,
+                packageId: '2',
+                title: 'لیست شماره 2'
+              },
+              {
+                id: '3',
+                createdAt: new Date(),
+                color: '',
+                darkColor: false,
+                order: 3,
+                packageId: '2',
+                title: 'لیست شماره 3'
+              },
+              {
+                id: '4',
+                createdAt: new Date(),
+                color: '',
+                darkColor: false,
+                order: 4,
+                packageId: '2',
+                title: 'لیست شماره 4'
+              },
+              {
+                id: '1',
+                createdAt: new Date(),
+                color: '',
+                darkColor: false,
+                order: 1,
+                packageId: '2',
+                title: 'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4'
+              },
+              {
+                id: '2',
+                createdAt: new Date(),
+                color: '',
+                darkColor: false,
+                order: 2,
+                packageId: '2',
+                title: 'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4'
+              },
+              {
+                id: '3',
+                createdAt: new Date(),
+                color: '',
+                darkColor: false,
+                order: 3,
+                packageId: '2',
+                title: 'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4'
+              },
+              {
+                id: '4',
+                createdAt: new Date(),
+                color: '',
+                darkColor: false,
+                order: 4,
+                packageId: '2',
+                title: 'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4'
+              },
+            ],
+            tasks: [],
           },
         ],
       },
