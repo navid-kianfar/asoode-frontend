@@ -39,11 +39,7 @@ export class ProjectTreeNodeComponent implements OnInit {
     }
   }
 
-  newSubProject() {
+  newSubProject() {}
 
-  }
-
-  newWorkPackage() {
-
-  }
+  newWorkPackage() {}
 }

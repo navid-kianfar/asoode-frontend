@@ -1063,7 +1063,12 @@ export class MockService {
             userId: '1',
           },
         ],
-        members: [...projectMembers,...projectMembers,...projectMembers,...projectMembers],
+        members: [
+          ...projectMembers,
+          ...projectMembers,
+          ...projectMembers,
+          ...projectMembers,
+        ],
         subProjects: [
           {
             title: 'زیر پروژه ۱',
@@ -1117,7 +1122,7 @@ export class MockService {
             projectId: '1',
             userId: '1',
             members: [],
-          }
+          },
         ],
       },
       {
@@ -1151,7 +1156,7 @@ export class MockService {
           },
         ],
         members: [...projectMembers],
-        subProjects: [ ],
+        subProjects: [],
         workPackages: [],
       },
     ];

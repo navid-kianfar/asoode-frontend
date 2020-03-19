@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
-import {MockService} from '../../../services/mock.service';
+import {
+  ProjectViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
+import { MockService } from '../../../services/mock.service';
 
 @Component({
   selector: 'app-work-package',
@@ -24,5 +27,5 @@ export enum ViewMode {
   Board = 1,
   List = 2,
   TimeSpan = 3,
-  Calendar = 4
+  Calendar = 4,
 }

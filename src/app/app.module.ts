@@ -137,6 +137,10 @@ import { ProjectSettingComponent } from './components/app/project-setting/projec
 import { AccessListComponent } from './components/app/access-list/access-list.component';
 import { MsToDurationPipe } from './pipes/core/ms-to-duration.pipe';
 import { ProjectTreeNodeComponent } from './components/app/project-tree-node/project-tree-node.component';
+import { WorkPackageBoardComponent } from './components/app/work-package-board/work-package-board.component';
+import { WorkPackageListComponent } from './components/app/work-package-list/work-package-list.component';
+import { WorkPackageTimeSpanComponent } from './components/app/work-package-time-span/work-package-time-span.component';
+import { WorkPackageCalendarComponent } from './components/app/work-package-calendar/work-package-calendar.component';
 
 @NgModule({
   declarations: [
@@ -241,6 +245,10 @@ import { ProjectTreeNodeComponent } from './components/app/project-tree-node/pro
     AccessListComponent,
     MsToDurationPipe,
     ProjectTreeNodeComponent,
+    WorkPackageBoardComponent,
+    WorkPackageListComponent,
+    WorkPackageTimeSpanComponent,
+    WorkPackageCalendarComponent,
   ],
   entryComponents: [
     ConfirmComponent,
