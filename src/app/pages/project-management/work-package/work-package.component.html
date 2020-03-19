@@ -16,7 +16,26 @@
 <!--        <i class="icon-star-empty"></i>-->
       </div>
     </div>
-    <div class="sections-container"></div>
+    <div class="sections-container">
+      <ul>
+        <li (click)="mode = ViewMode.Board"
+            [class.selected]="mode === ViewMode.Board">
+          {{ 'BOARD' | translate}}
+        </li>
+        <li (click)="mode = ViewMode.List"
+            [class.selected]="mode === ViewMode.List">
+          {{ 'LIST' | translate}}
+        </li>
+        <li (click)="mode = ViewMode.TimeSpan"
+            [class.selected]="mode === ViewMode.TimeSpan">
+          {{ 'TIME_SPAN' | translate}}
+        </li>
+        <li (click)="mode = ViewMode.Calendar"
+            [class.selected]="mode === ViewMode.Calendar">
+          {{ 'CALENDAR' | translate}}
+        </li>
+      </ul>
+    </div>
     <div class="properties-container">
       <div class="progress-container">
         <div class="progress-wrapper">

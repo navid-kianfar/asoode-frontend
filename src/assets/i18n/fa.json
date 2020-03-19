@@ -338,5 +338,6 @@
   "TIME_SPAN": "محدوده زمانی",
   "NEW_SUB_PROJECT": "ایجاد زیر پروژه جدید",
   "NEW_WORK_PACKAGE": "ایجاد بسته کاری جدید",
-  "ADD_STRUCTURE": "افزودن ساختار به پروژه"
+  "ADD_STRUCTURE": "افزودن ساختار به پروژه",
+  "BOARD": "بورد"
 }
