@@ -10,7 +10,10 @@ export class MemberInfoComponent implements OnInit {
   @Input() model: MemberInfoViewModel;
   @Input() selected: boolean;
   @Input() small: boolean;
+  @Input() cssClass: string;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cssClass = `${this.cssClass} member-info`;
+  }
 }

@@ -1,7 +1,17 @@
 .project-tree {
-  h3 {
-    margin-bottom: 20px;
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+
+    h3 {
+      margin-bottom: 20px;
+    }
+    button {
+      max-height: 35px;
+    }
   }
+
 
   .header {
     display: flex;

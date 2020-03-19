@@ -283,8 +283,6 @@
   "CHOOSE_TEMPLATE": "در صورت تمایل یک الگو را انتخاب کنید",
   "NO_TEMPLATE": "بدون الگو",
   "NO_TEMPLATE_DESCRIPTION": "این پروژه بدون الگو ساخته میشود و اجزای تشکیل دهنده پروژه، مانند: فاز؛ بسته\u200Cهای کاری؛ اهداف و ... توسط خود شما مشخص میشود",
-
-
   "ENUMS_WEEKDAY_FRIDAY": "جمعه",
   "ENUMS_WEEKDAY_MONDAY": "دو شنبه",
   "ENUMS_WEEKDAY_SATURDAY": "شنبه",
@@ -292,14 +290,11 @@
   "ENUMS_WEEKDAY_THURSDAY": "پنج شنبه",
   "ENUMS_WEEKDAY_TUESDAY": "سه شنبه",
   "ENUMS_WEEKDAY_WEDNESDAY": "چهار شنبه",
-
-
   "ENUMS_BOARD_TEMPLATE_BLANK": "بدون الگو",
   "ENUMS_BOARD_TEMPLATE_WEEK_DAY":"روزهای هفته",
   "ENUMS_BOARD_TEMPLATE_TEAM_MEMBERS": "اعضای پروژه",
   "ENUMS_BOARD_TEMPLATE_DEPARTMENTS":"واحد اداری",
   "ENUMS_BOARD_TEMPLATE_KANBAN": "کانبان",
-
   "BOARD_TEMPLATES_SAMPLES_TEAM_MEMBERS_1":"نوید کیانفر",
   "BOARD_TEMPLATES_SAMPLES_TEAM_MEMBERS_2": "حمیدرضا سیه پوش",
   "BOARD_TEMPLATES_SAMPLES_TEAM_MEMBERS_3":"ندا طوسی",
@@ -340,5 +335,8 @@
   "GROUP": "گروه",
   "TOTAL_SUM": "جمع کل",
   "SEARCH": "جستجو",
-  "TIME_SPAN": "محدوده زمانی"
+  "TIME_SPAN": "محدوده زمانی",
+  "NEW_SUB_PROJECT": "ایجاد زیر پروژه جدید",
+  "NEW_WORK_PACKAGE": "ایجاد بسته کاری جدید",
+  "ADD_STRUCTURE": "افزودن ساختار به پروژه"
 }

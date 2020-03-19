@@ -38,4 +38,12 @@ export class ProjectTreeNodeComponent implements OnInit {
       );
     }
   }
+
+  newSubProject() {
+
+  }
+
+  newWorkPackage() {
+
+  }
 }

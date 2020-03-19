@@ -1,0 +1,153 @@
+.work-package {
+  .header {
+    display: flex;
+    border-bottom: 1px solid #e6e6e6;
+    box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.2);
+    padding: 0 0 3px;
+    cursor: pointer;
+    .structure-container {
+      display: flex;
+      min-width: 200px;
+      width: 300px;
+      flex-direction: column;
+
+      .upgrade {
+        display: flex;
+        align-items: center;
+        padding: 3px 10px;
+        border-radius: 20px;
+        ::ng-deep button {
+          background: #cfaf4e;
+          color: #ffffff;
+          line-height: 25px;
+          i {
+            font-size: 1.1rem;
+          }
+          span {
+            font-size: 0.7rem;
+          }
+        }
+      }
+      .title {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        i {
+          font-size: 18px;
+        }
+        span {
+          font-weight: 500;
+          font-size: 0.8rem;
+        }
+      }
+    }
+    .sections-container {
+      display: flex;
+      flex-grow: 1;
+    }
+    .properties-container {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: row;
+      align-items: center;
+
+      .progress-container {
+        display: flex;
+        flex-grow: 1;
+      }
+      .objectives-container {
+        display: flex;
+        width: 100px;
+        align-items: center;
+        .info {
+          display: flex;
+          align-items: center;
+
+          i {
+            color: #50a9dd;
+          }
+          span.label {
+            color: #4d4d4d;
+            font-size: 0.8rem;
+          }
+
+
+          span.badge {
+            color: #4d4d4d;
+            background: #e6e6e6;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+          }
+        }
+      }
+      .members-container {
+        display: flex;
+        //flex-grow: 1;
+        align-items: center;
+        position: relative;
+        width: 250px;
+
+        ::ng-deep .member-info {
+          padding: 0;
+          width: 32px;
+          //position: absolute;
+          //right: -15px;
+          //
+          //&.skip {
+          //  right: unset;
+          //}
+        }
+
+        .add {
+          width: 25px;
+          height: 25px;
+          border-radius: 50px;
+          border: 1px dashed #666666;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.7rem;
+
+          i {
+            color: #666666;
+          }
+        }
+      }
+      .filters-container {
+        display: flex;
+        padding: 0 20px;
+
+        i {
+          font-size: 1.6rem;
+          position: relative;
+          top: 3px;
+        }
+        span {
+          color: #4d4d4d;
+          background: #e6e6e6;
+          padding: 0 10px;
+          border-radius: 20px;
+          font-weight: 500;
+          font-size: 0.8rem;
+          display: flex;
+          align-items: center;
+        }
+      }
+      .settings-container {
+        display: flex;
+        padding: 0 20px;
+        i {
+          color: #555555;
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+  .inner-container {
+
+  }
+}

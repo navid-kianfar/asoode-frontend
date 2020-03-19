@@ -1,2 +1,57 @@
-<p>work-package works!</p>
+<div class="work-package">
+  <div class="header">
+    <div class="structure-container">
+      <ng-container *ngIf="!project.complex">
+        <div class="upgrade">
+          <button mat-flat-button>
+            <i class="icon-trophy4"></i>&nbsp;
+            <span>{{ 'ADD_STRUCTURE' | translate}}</span>
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="project.complex"></ng-container>
+      <div class="title">
+        <i class="icon-workpackage"></i>&nbsp;
+        <span>{{workPackage.title}}</span>&nbsp;
+<!--        <i class="icon-star-empty"></i>-->
+      </div>
+    </div>
+    <div class="sections-container"></div>
+    <div class="properties-container">
+      <div class="progress-container">
+
+      </div>
+      <div class="objectives-container">
+        <div class="info">
+          <i class="icon-target"></i>&nbsp;
+          <span class="label">{{ 'OBJECTIVES' | translate}}</span>&nbsp;
+          <span class="badge">1</span>
+        </div>
+      </div>
+      <div class="members-container">
+        <app-member-info [model]="member"
+                         small="true"
+                         *ngFor="let member of project.members | slice: 0:5"></app-member-info>
+        &nbsp;
+        <div *ngIf="project.members.length > 5" class="add more">
+          <i class="icon-menu"></i>
+        </div>
+        &nbsp;
+        <div class="add">
+          <i class="icon-plus2"></i>
+        </div>
+      </div>
+      <div class="filters-container">
+        <i class="icon-filters"></i>&nbsp;
+        <span>1</span>
+      </div>
+      <div class="settings-container">
+        <i class="icon-cog2"></i>
+      </div>
+    </div>
+  </div>
+  <div class="inner-container">
+
+  </div>
+</div>
 <app-messenger-shortcut></app-messenger-shortcut>

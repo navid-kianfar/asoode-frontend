@@ -17,7 +17,17 @@
       >&nbsp;
       <span>{{ subProject ? subProject.title : workPackage.title }}</span
       >&nbsp;
-      <i *ngIf="subProject" class="add icon-plus2"></i>
+      <i [matMenuTriggerFor]="menu" *ngIf="subProject" class="add icon-plus2"></i>
+      <mat-menu #menu="matMenu" class="add-dropdown">
+        <button *ngIf="level < 3" (click)="newSubProject()" mat-menu-item>
+          <i class="icon-sub-season"></i>
+          {{ 'NEW_SUB_PROJECT' | translate }}
+        </button>
+        <button (click)="newWorkPackage()" mat-menu-item>
+          <i class="icon-workpackage"></i>
+          {{ 'NEW_WORK_PACKAGE' | translate }}
+        </button>
+      </mat-menu>
     </div>
     <div class="description">
       {{ subProject ? subProject.description : workPackage.description }}

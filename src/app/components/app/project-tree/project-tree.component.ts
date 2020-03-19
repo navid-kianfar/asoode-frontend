@@ -20,4 +20,12 @@ export class ProjectTreeComponent implements OnInit {
     this.workPackages = this.model.workPackages.filter(w => !w.subProjectId);
     this.subProjects = this.model.subProjects.filter(s => !s.parentId);
   }
+
+  newSubProject() {
+
+  }
+
+  newWorkPackage() {
+
+  }
 }

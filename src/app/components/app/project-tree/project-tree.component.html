@@ -1,5 +1,11 @@
 <div class="project-tree">
-  <h3>{{ 'TREE_VIEW' | translate }}</h3>
+  <div class="actions">
+    <h3>{{ 'TREE_VIEW' | translate }}</h3>
+    <button [matMenuTriggerFor]="menu" mat-stroked-button>
+      <i class="icon-plus2"></i>&nbsp;
+      {{ 'CREATE' | translate}}
+    </button>
+  </div>
   <div class="box">
     <div class="header">
       <div class="collapse">&nbsp;</div>
@@ -24,3 +30,13 @@
     ></app-project-tree-node>
   </div>
 </div>
+<mat-menu #menu="matMenu">
+  <button (click)="newSubProject()" mat-menu-item>
+    <i class="icon-sub-season"></i>
+    {{ 'NEW_SUB_PROJECT' | translate }}
+  </button>
+  <button (click)="newWorkPackage()" mat-menu-item>
+    <i class="icon-workpackage"></i>
+    {{ 'NEW_WORK_PACKAGE' | translate }}
+  </button>
+</mat-menu>

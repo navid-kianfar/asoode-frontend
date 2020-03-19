@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ProjectViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
+import {MockService} from '../../../services/mock.service';
 
 @Component({
   selector: 'app-work-package',
@@ -6,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./work-package.component.scss'],
 })
 export class WorkPackageComponent implements OnInit {
-  constructor() {}
+  project: ProjectViewModel;
+  workPackage: WorkPackageViewModel;
+  constructor(private readonly mockService: MockService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.project = this.mockService.projects[1];
+    this.workPackage = this.project.workPackages[0];
+  }
 }
