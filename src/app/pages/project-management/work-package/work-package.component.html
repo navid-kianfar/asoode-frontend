@@ -19,7 +19,25 @@
     <div class="sections-container"></div>
     <div class="properties-container">
       <div class="progress-container">
-
+        <div class="progress-wrapper">
+          <round-progress
+            [current]="50"
+            [max]="100"
+            [color]="'#50a9dd'"
+            [background]="'#f2f2f2'"
+            [stroke]="10"
+            [semicircle]="false"
+            [rounded]="true"
+            [clockwise]="false"
+            [responsive]="true"
+            [duration]="400"
+            [animation]="'easeInOutQuart'"
+            [animationDelay]="0"
+          ></round-progress>
+          <div class="percent">
+            50%
+          </div>
+        </div>
       </div>
       <div class="objectives-container">
         <div class="info">

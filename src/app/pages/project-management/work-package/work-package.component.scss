@@ -47,17 +47,37 @@
     }
     .properties-container {
       display: flex;
-      flex-grow: 1;
       flex-direction: row;
       align-items: center;
 
       .progress-container {
         display: flex;
-        flex-grow: 1;
+        width: 100px;
+
+        .progress-wrapper {
+          width: 40px;
+          height: 40px;
+          background: #f2f2f2;
+          border-radius: 20px;
+          padding: 2px;
+          position: relative;
+
+          .percent {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            justify-content: center;
+          }
+        }
       }
       .objectives-container {
         display: flex;
-        width: 100px;
+        width: 150px;
         align-items: center;
         .info {
           display: flex;
