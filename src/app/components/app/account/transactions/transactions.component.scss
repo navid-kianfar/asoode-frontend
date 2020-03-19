@@ -1,6 +1,16 @@
 .account-profile-transactions {
-  padding-top: 50px;
-  padding-bottom: 50px;
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 30px;
+
+  ::ng-deep .mat-table th.mat-header-cell {
+    background-color: #ffffff !important;
+    font-size: 0.7rem !important;
+    font-weight: 500 !important;
+    color: #b3b3b3;
+    border-bottom: none;
+  }
 }
 ::ng-deep {
   .mat-column-title {
