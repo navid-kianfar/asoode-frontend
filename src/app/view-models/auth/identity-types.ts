@@ -1,5 +1,6 @@
 import { CalendarType, UserType } from '../../library/core/enums';
 import { AccessType } from '../../library/app/enums';
+import {GroupViewModel} from '../groups/group-types';
 
 export interface IdentityObject {
   token: string;
@@ -17,8 +18,11 @@ export interface MemberInfoViewModel {
   username: string;
   bio: string;
 }
-export interface InviteMemberViewModel extends MemberInfoViewModel {
+export interface InviteViewModel {
+  id: string;
   access: AccessType;
+  selected?: boolean;
+  model?: MemberInfoViewModel | GroupViewModel;
 }
 export interface ProfileViewModel extends MemberInfoViewModel {
   phoneNumber: string;

@@ -6,8 +6,8 @@
         [backend]="'/groups/invite-query'"
         [(model)]="currentEmail"
         [placeHolder]="'EMAIL_OR_PHONE'"
-        (pick)="memberPicked($event)"
-        (startModify)="startModify($event)"
+        (pick)="current = $event"
+        (startModify)="current = undefined"
         ltr="true"
       ></app-auto-complete>
       <app-access-list [(access)]="currentRole"></app-access-list>
@@ -23,7 +23,7 @@
   <div class="members">
     <div *ngFor="let member of members" class="member">
       <div class="info">
-        <app-member-info [model]="member"></app-member-info>
+        <app-member-info [model]="member.model"></app-member-info>
       </div>
       <div class="role">
         <ng-container
@@ -36,7 +36,7 @@
         </ng-template>
       </div>
       <div class="action">
-        <button
+        <button (click)="remove(member)"
           *ngIf="member.access !== AccessType.Owner"
           mat-stroked-button
           color="warn"

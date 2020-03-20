@@ -1,6 +1,9 @@
 <div class="invite-group">
   <div class="groups">
-    <div class="group" *ngFor="let group of mockService.groups">
+    <div class="empty" *ngIf="!groups.length">
+      <h3>{{ 'NO_GROUPS' | translate}}</h3>
+    </div>
+    <div class="group" *ngFor="let group of groups">
       <div class="pick">
         <mat-checkbox
           color="primary"
@@ -8,7 +11,7 @@
         ></mat-checkbox>
       </div>
       <div class="info">
-        <app-group-info [model]="group"></app-group-info>
+        <app-group-info [model]="group.model"></app-group-info>
       </div>
       <div class="access">
         <app-access-list [(access)]="group.access"></app-access-list>

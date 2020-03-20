@@ -17,7 +17,6 @@ export class QuickAccessComponent implements OnInit {
   constructor(
     readonly projectService: ProjectService,
     readonly groupService: GroupService,
-    readonly mockService: MockService,
     private readonly router: Router,
   ) {}
 

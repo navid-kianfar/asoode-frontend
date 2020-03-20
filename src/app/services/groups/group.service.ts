@@ -19,4 +19,8 @@ export class GroupService {
     }
     return op;
   }
+
+  async create(model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>('/groups/create', model);
+  }
 }

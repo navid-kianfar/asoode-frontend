@@ -141,6 +141,7 @@ import { WorkPackageBoardComponent } from './components/app/work-package-board/w
 import { WorkPackageListComponent } from './components/app/work-package-list/work-package-list.component';
 import { WorkPackageTimeSpanComponent } from './components/app/work-package-time-span/work-package-time-span.component';
 import { WorkPackageCalendarComponent } from './components/app/work-package-calendar/work-package-calendar.component';
+import { ChangeEmailComponent } from './modals/change-email/change-email.component';
 
 @NgModule({
   declarations: [
@@ -249,6 +250,7 @@ import { WorkPackageCalendarComponent } from './components/app/work-package-cale
     WorkPackageListComponent,
     WorkPackageTimeSpanComponent,
     WorkPackageCalendarComponent,
+    ChangeEmailComponent,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -256,6 +258,7 @@ import { WorkPackageCalendarComponent } from './components/app/work-package-cale
     ChangePhoneComponent,
     CreateWizardComponent,
     MessengerSettingComponent,
+    ChangeEmailComponent
   ],
   imports: [
     BrowserModule,

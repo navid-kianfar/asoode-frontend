@@ -2,10 +2,12 @@
 <mat-tab-group animationDuration="0ms">
   <mat-tab [label]="'INVITE_GROUP' | translate">
     <ng-template matTabContent>
-      <app-invite-group></app-invite-group>
+      <app-invite-group [groups]="groups" (groupsChange)="updateGroups($event)"></app-invite-group>
     </ng-template>
   </mat-tab>
   <mat-tab [label]="'INVITE_INDIVIDUALS' | translate">
-    <app-invite-member [addOwner]="true"></app-invite-member>
+    <ng-template matTabContent>
+      <app-invite-member [members]="members" (membersChange)="updateMembers($event)"></app-invite-member>
+    </ng-template>
   </mat-tab>
 </mat-tab-group>

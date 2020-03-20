@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MockService } from '../../../services/mock.service';
-import { AccessType } from 'src/app/library/app/enums';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AccessType} from 'src/app/library/app/enums';
+import {GroupService} from '../../../services/groups/group.service';
+import {InviteViewModel} from '../../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-invite-group',
@@ -8,8 +9,20 @@ import { AccessType } from 'src/app/library/app/enums';
   styleUrls: ['./invite-group.component.scss'],
 })
 export class InviteGroupComponent implements OnInit {
+  @Input() groups: InviteViewModel[];
+  @Output() groupsChange = new EventEmitter<InviteViewModel[]>();
   AccessType = AccessType;
-  constructor(readonly mockService: MockService) {}
+  constructor(private readonly groupService: GroupService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.groups = this.groupService.groups.map(g => {
+      return {
+        id: g.id,
+        model: g,
+        access: AccessType.Editor,
+        selected: false
+      };
+    });
+    this.groupsChange.emit(this.groups);
+  }
 }

@@ -1,7 +1,7 @@
 <div class="modal-content create-modal">
   <div class="modal-alt-header">
     <div class="btn">
-      <button (click)="onBack($event)">
+      <button [disabled]="actionWaiting" (click)="onBack($event)">
         <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
         <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
       </button>
@@ -19,7 +19,7 @@
       </h4>
     </div>
     <div class="btn">
-      <button (click)="onCancel($event)">
+      <button [disabled]="actionWaiting" (click)="onCancel($event)">
         <i class="icon-cross"></i>
       </button>
     </div>
@@ -27,10 +27,10 @@
 
   <ng-container *ngIf="mode === ViewMode.Invite">
     <div class="modal-body create-group">
-      <app-invite-people></app-invite-people>
+      <app-invite-people [(members)]="members" [(groups)]="groups"></app-invite-people>
     </div>
     <div class="modal-footer">
-      <button (click)="createGroup($event)" mat-flat-button [color]="'primary'">
+      <button [disabled]="actionWaiting" (click)="createGroup($event)" mat-flat-button [color]="'primary'">
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
         {{ 'CREATE_GROUP' | translate: true }}
       </button>
