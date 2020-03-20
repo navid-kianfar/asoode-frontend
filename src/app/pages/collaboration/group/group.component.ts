@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
-import { MockService } from '../../../services/mock.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {GroupService} from '../../../services/groups/group.service';
 
 @Component({
   selector: 'app-group',
@@ -9,10 +10,19 @@ import { MockService } from '../../../services/mock.service';
 })
 export class GroupComponent implements OnInit {
   group: GroupViewModel;
-  constructor(private readonly mockService: MockService) {}
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router,
+    private readonly groupService: GroupService
+  ) {}
 
   ngOnInit() {
-    this.group = this.mockService.groups[0];
+    const id = this.activatedRoute.snapshot.params.id;
+    this.group = this.groupService.groups.find(g => g.id === id);
+    if (!this.group) {
+      this.router.navigateByUrl('dashboard');
+      return;
+    }
   }
 
   detail() {}

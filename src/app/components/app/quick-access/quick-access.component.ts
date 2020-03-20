@@ -23,7 +23,7 @@ export class QuickAccessComponent implements OnInit {
   ngOnInit() {}
 
   openGroup(group: GroupViewModel) {
-    this.router.navigateByUrl('group');
+    this.router.navigateByUrl('group/' + group.id);
     this.hide.emit();
   }
 

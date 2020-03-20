@@ -142,6 +142,7 @@ import { WorkPackageListComponent } from './components/app/work-package-list/wor
 import { WorkPackageTimeSpanComponent } from './components/app/work-package-time-span/work-package-time-span.component';
 import { WorkPackageCalendarComponent } from './components/app/work-package-calendar/work-package-calendar.component';
 import { ChangeEmailComponent } from './modals/change-email/change-email.component';
+import { ReloadOnParamsChangedDirective } from './directives/core/reload-on-params-changed.directive';
 
 @NgModule({
   declarations: [
@@ -251,6 +252,7 @@ import { ChangeEmailComponent } from './modals/change-email/change-email.compone
     WorkPackageTimeSpanComponent,
     WorkPackageCalendarComponent,
     ChangeEmailComponent,
+    ReloadOnParamsChangedDirective,
   ],
   entryComponents: [
     ConfirmComponent,
