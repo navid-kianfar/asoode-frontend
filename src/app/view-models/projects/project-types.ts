@@ -118,6 +118,4 @@ export interface WorkPackageListViewModel extends BaseViewModel {
   expanded?: boolean;
   order: number;
 }
-export interface WorkPackageTaskViewModel extends BaseViewModel {
-
-}
+export interface WorkPackageTaskViewModel extends BaseViewModel {}

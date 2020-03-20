@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {InviteViewModel} from '../../../view-models/auth/identity-types';
-import {AccessType} from '../../../library/app/enums';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { InviteViewModel } from '../../../view-models/auth/identity-types';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-invite-people',

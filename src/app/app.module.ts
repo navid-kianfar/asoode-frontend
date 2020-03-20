@@ -260,7 +260,7 @@ import { ReloadOnParamsChangedDirective } from './directives/core/reload-on-para
     ChangePhoneComponent,
     CreateWizardComponent,
     MessengerSettingComponent,
-    ChangeEmailComponent
+    ChangeEmailComponent,
   ],
   imports: [
     BrowserModule,

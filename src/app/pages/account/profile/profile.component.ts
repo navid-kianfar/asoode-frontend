@@ -9,7 +9,7 @@ import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ChangePhoneComponent } from '../../../modals/change-phone/change-phone.component';
 import { ValidationService } from '../../../services/core/validation.service';
-import {ChangeEmailComponent} from '../../../modals/change-email/change-email.component';
+import { ChangeEmailComponent } from '../../../modals/change-email/change-email.component';
 
 @Component({
   selector: 'app-profile',

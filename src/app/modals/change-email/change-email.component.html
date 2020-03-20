@@ -38,7 +38,11 @@
             {{ remaining * 1000 | date: 'mm:ss':'UTC' }}
           </div>
 
-          <a (click)="sendAgain()" *ngIf="sent && !remaining" href="javascript:void(0)">
+          <a
+            (click)="sendAgain()"
+            *ngIf="sent && !remaining"
+            href="javascript:void(0)"
+          >
             {{ 'SEND_AGAIN' | translate }}
           </a>
         </div>

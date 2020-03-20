@@ -950,7 +950,7 @@ export class MockService {
             userId: '1',
             members: [],
             lists: [],
-            tasks: []
+            tasks: [],
           },
           {
             id: '2',
@@ -979,7 +979,7 @@ export class MockService {
             userId: '1',
             members: [],
             lists: [],
-            tasks: []
+            tasks: [],
           },
           {
             id: '3',
@@ -1008,7 +1008,7 @@ export class MockService {
             userId: '1',
             members: [],
             lists: [],
-            tasks: []
+            tasks: [],
           },
           {
             id: '4',
@@ -1037,7 +1037,7 @@ export class MockService {
             userId: '1',
             members: [],
             lists: [],
-            tasks: []
+            tasks: [],
           },
         ],
       },
@@ -1138,7 +1138,7 @@ export class MockService {
                 darkColor: false,
                 order: 1,
                 packageId: '2',
-                title: 'لیست شماره ۱'
+                title: 'لیست شماره ۱',
               },
               {
                 id: '2',
@@ -1147,7 +1147,7 @@ export class MockService {
                 darkColor: false,
                 order: 2,
                 packageId: '2',
-                title: 'لیست شماره 2'
+                title: 'لیست شماره 2',
               },
               {
                 id: '3',
@@ -1156,7 +1156,7 @@ export class MockService {
                 darkColor: false,
                 order: 3,
                 packageId: '2',
-                title: 'لیست شماره 3'
+                title: 'لیست شماره 3',
               },
               {
                 id: '4',
@@ -1165,7 +1165,7 @@ export class MockService {
                 darkColor: false,
                 order: 4,
                 packageId: '2',
-                title: 'لیست شماره 4'
+                title: 'لیست شماره 4',
               },
               {
                 id: '1',
@@ -1174,7 +1174,8 @@ export class MockService {
                 darkColor: false,
                 order: 1,
                 packageId: '2',
-                title: 'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4'
+                title:
+                  'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4',
               },
               {
                 id: '2',
@@ -1183,7 +1184,8 @@ export class MockService {
                 darkColor: false,
                 order: 2,
                 packageId: '2',
-                title: 'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4'
+                title:
+                  'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4',
               },
               {
                 id: '3',
@@ -1192,7 +1194,8 @@ export class MockService {
                 darkColor: false,
                 order: 3,
                 packageId: '2',
-                title: 'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4'
+                title:
+                  'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4',
               },
               {
                 id: '4',
@@ -1201,7 +1204,8 @@ export class MockService {
                 darkColor: false,
                 order: 4,
                 packageId: '2',
-                title: 'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4'
+                title:
+                  'لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4 لیست شماره 4',
               },
             ],
             tasks: [],

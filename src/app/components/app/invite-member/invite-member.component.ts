@@ -27,22 +27,29 @@ export class InviteMemberComponent implements OnInit {
   }
 
   addMember() {
-    const model = this.current ? { ...this.current } : {
-      email: this.currentEmail,
-      fullName: 'UNKNOWN',
-      initials: 'UK',
-    } as MemberInfoViewModel;
+    const model = this.current
+      ? { ...this.current }
+      : ({
+          email: this.currentEmail,
+          fullName: 'UNKNOWN',
+          initials: 'UK',
+        } as MemberInfoViewModel);
     const found = this.members.find(m => {
-      return m.model.email.toLowerCase().trim() === this.currentEmail.toLowerCase().trim();
+      return (
+        m.model.email.toLowerCase().trim() ===
+        this.currentEmail.toLowerCase().trim()
+      );
     });
-    if (found) { return; }
+    if (found) {
+      return;
+    }
     const members: InviteViewModel[] = [
       ...this.members,
       {
         model,
         access: this.currentRole,
-        id: model.id || model.email
-      }
+        id: model.id || model.email,
+      },
     ];
     this.currentRole = AccessType.Editor;
     this.currentEmail = '';

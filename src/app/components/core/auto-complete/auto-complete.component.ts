@@ -61,7 +61,6 @@ export class AutoCompleteComponent implements OnInit {
         this.modelChange.emit(search);
         if (data.status === OperationResultStatus.Success) {
           this.filtered = data.data as ListViewModel[];
-          console.log(this.filtered);
         } else {
           this.filtered = [];
         }

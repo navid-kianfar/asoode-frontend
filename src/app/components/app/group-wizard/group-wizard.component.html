@@ -27,10 +27,18 @@
 
   <ng-container *ngIf="mode === ViewMode.Invite">
     <div class="modal-body create-group">
-      <app-invite-people [(members)]="members" [(groups)]="groups"></app-invite-people>
+      <app-invite-people
+        [(members)]="members"
+        [(groups)]="groups"
+      ></app-invite-people>
     </div>
     <div class="modal-footer">
-      <button [disabled]="actionWaiting" (click)="createGroup($event)" mat-flat-button [color]="'primary'">
+      <button
+        [disabled]="actionWaiting"
+        (click)="createGroup($event)"
+        mat-flat-button
+        [color]="'primary'"
+      >
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
         {{ 'CREATE_GROUP' | translate: true }}
       </button>

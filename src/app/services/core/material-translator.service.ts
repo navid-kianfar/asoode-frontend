@@ -29,9 +29,11 @@ export class MaterialTranslatorService {
       let from = 0;
       let to = 0;
       if (length) {
-        from = (page * pageSize) + 1;
+        from = page * pageSize + 1;
         to = from + pageSize - 1;
-        if (to > length) { to = length; }
+        if (to > length) {
+          to = length;
+        }
       }
       return StringHelpers.format(
         this.translateService.fromKey('PAGINATOR_OF'),

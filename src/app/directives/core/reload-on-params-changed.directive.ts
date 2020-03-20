@@ -1,8 +1,8 @@
-import {Directive, OnDestroy} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Directive, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Directive({
-  selector: '[appReloadOnParamsChanged]'
+  selector: '[appReloadOnParamsChanged]',
 })
 export class ReloadOnParamsChangedDirective implements OnDestroy {
   subscriber: any;

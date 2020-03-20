@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {IdentityService} from '../../services/auth/identity.service';
-import {OperationResultStatus} from '../../library/core/enums';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { IdentityService } from '../../services/auth/identity.service';
+import { OperationResultStatus } from '../../library/core/enums';
 import { ValidationService } from 'src/app/services/core/validation.service';
 
 @Component({
   selector: 'app-change-email',
   templateUrl: './change-email.component.html',
-  styleUrls: ['./change-email.component.scss']
+  styleUrls: ['./change-email.component.scss'],
 })
 export class ChangeEmailComponent extends SimpleModalComponent<{}, string>
   implements OnInit {

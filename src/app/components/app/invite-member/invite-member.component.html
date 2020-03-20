@@ -36,7 +36,8 @@
         </ng-template>
       </div>
       <div class="action">
-        <button (click)="remove(member)"
+        <button
+          (click)="remove(member)"
           *ngIf="member.access !== AccessType.Owner"
           mat-stroked-button
           color="warn"

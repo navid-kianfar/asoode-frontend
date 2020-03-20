@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AccessType} from 'src/app/library/app/enums';
-import {GroupService} from '../../../services/groups/group.service';
-import {InviteViewModel} from '../../../view-models/auth/identity-types';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AccessType } from 'src/app/library/app/enums';
+import { GroupService } from '../../../services/groups/group.service';
+import { InviteViewModel } from '../../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-invite-group',
@@ -20,7 +20,7 @@ export class InviteGroupComponent implements OnInit {
         id: g.id,
         model: g,
         access: AccessType.Editor,
-        selected: false
+        selected: false,
       };
     });
     this.groupsChange.emit(this.groups);

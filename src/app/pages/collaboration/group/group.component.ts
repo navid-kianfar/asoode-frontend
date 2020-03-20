@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
-import {ActivatedRoute, Router} from '@angular/router';
-import {GroupService} from '../../../services/groups/group.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GroupService } from '../../../services/groups/group.service';
 
 @Component({
   selector: 'app-group',
@@ -13,7 +13,7 @@ export class GroupComponent implements OnInit {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
-    private readonly groupService: GroupService
+    private readonly groupService: GroupService,
   ) {}
 
   ngOnInit() {

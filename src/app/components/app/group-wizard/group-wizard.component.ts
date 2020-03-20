@@ -1,12 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {CultureService} from '../../../services/core/culture.service';
-import {FormService} from '../../../services/core/form.service';
-import {FormViewModel} from '../../core/form/contracts';
-import {InviteViewModel} from '../../../view-models/auth/identity-types';
-import {GroupService} from '../../../services/groups/group.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {NotificationService} from '../../../services/core/notification.service';
-import {ValidationService} from '../../../services/core/validation.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CultureService } from '../../../services/core/culture.service';
+import { FormService } from '../../../services/core/form.service';
+import { FormViewModel } from '../../core/form/contracts';
+import { InviteViewModel } from '../../../view-models/auth/identity-types';
+import { GroupService } from '../../../services/groups/group.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { NotificationService } from '../../../services/core/notification.service';
+import { ValidationService } from '../../../services/core/validation.service';
 
 @Component({
   selector: 'app-group-wizard',
@@ -62,7 +62,7 @@ export class GroupWizardComponent implements OnInit {
               model: true,
               label: 'GROUP_REQUIRE_CHANNEL',
               summary: 'GROUP_CHANNEL_DESCRIPTION',
-              disabled: true
+              disabled: true,
             },
           }),
         ],
@@ -86,16 +86,18 @@ export class GroupWizardComponent implements OnInit {
   async createGroup($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.model.groups = this.groups.filter(g => g.selected).map(g => {
-      return {
-        id: g.id,
-        access: g.access
-      };
-    });
+    this.model.groups = this.groups
+      .filter(g => g.selected)
+      .map(g => {
+        return {
+          id: g.id,
+          access: g.access,
+        };
+      });
     this.model.members = this.members.map(m => {
       return {
         id: m.id,
-        access: m.access
+        access: m.access,
       };
     });
     this.actionWaiting = true;
