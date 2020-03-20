@@ -150,8 +150,8 @@ export class IdentityService {
     );
   }
 
-  async changeEmail(model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>('/account/email/change', model);
+  async changeEmail(model: any): Promise<OperationResult<string>> {
+    return await this.httpService.post<string>('/account/email/change', model);
   }
 
   async changePhone(model: any): Promise<OperationResult<string>> {
@@ -160,7 +160,14 @@ export class IdentityService {
 
   async confirmPhone(model: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      '/account/phone/confirm',
+      '/account/phone/change/confirm',
+      model,
+    );
+  }
+
+  async confirmEmail(model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/account/email/change/confirm',
       model,
     );
   }

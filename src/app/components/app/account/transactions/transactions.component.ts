@@ -15,6 +15,6 @@ export class TransactionsComponent implements OnInit {
     'previousDebt',
     'download',
   ];
-  constructor(readonly mockService: MockService) {}
+  constructor() {}
   ngOnInit() {}
 }

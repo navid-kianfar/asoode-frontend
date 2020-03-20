@@ -949,6 +949,8 @@ export class MockService {
             projectId: '1',
             userId: '1',
             members: [],
+            lists: [],
+            tasks: []
           },
           {
             id: '2',
@@ -976,6 +978,8 @@ export class MockService {
             projectId: '1',
             userId: '1',
             members: [],
+            lists: [],
+            tasks: []
           },
           {
             id: '3',
@@ -1003,6 +1007,8 @@ export class MockService {
             projectId: '1',
             userId: '1',
             members: [],
+            lists: [],
+            tasks: []
           },
           {
             id: '4',
@@ -1030,6 +1036,8 @@ export class MockService {
             projectId: '1',
             userId: '1',
             members: [],
+            lists: [],
+            tasks: []
           },
         ],
       },

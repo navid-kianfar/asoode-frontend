@@ -26,11 +26,16 @@ export class MaterialTranslatorService {
       'PAGINATOR_PREV',
     );
     paginator._intl.getRangeLabel = (page, pageSize, length) => {
-      const from = page * pageSize;
-      const to = from + pageSize;
+      let from = 0;
+      let to = 0;
+      if (length) {
+        from = (page * pageSize) + 1;
+        to = from + pageSize - 1;
+        if (to > length) { to = length; }
+      }
       return StringHelpers.format(
         this.translateService.fromKey('PAGINATOR_OF'),
-        [from + 1, to, length],
+        [from, to, length],
       );
     };
   }

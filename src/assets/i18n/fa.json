@@ -340,5 +340,8 @@
   "NEW_WORK_PACKAGE": "ایجاد بسته کاری جدید",
   "ADD_STRUCTURE": "افزودن ساختار به پروژه",
   "BOARD": "بورد",
-  "CREATE_NEW_LIST": "ایجاد لیست جدید"
+  "CREATE_NEW_LIST": "ایجاد لیست جدید",
+  "CURRENT_EMAIL": "ایمیل فعلی",
+  "NEW_EMAIL": "ایمیل جدید",
+  "EMAIL_TAKEN": "ایمیل متعلق به حساب کاربری دیگری می\u200Cباشد"
 }

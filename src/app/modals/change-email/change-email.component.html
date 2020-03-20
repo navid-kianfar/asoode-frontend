@@ -1,27 +1,27 @@
-<div class="modal-content change-phone-modal">
+<div class="modal-content change-email-modal">
   <div class="modal-header">
     <h4 class="modal-title">
-      {{ 'CHANGE_PHONE' | translate: true }}
+      {{ 'CHANGE_EMAIL' | translate: true }}
     </h4>
     <button (click)="onCancel($event)">
       <i class="icon-cross"></i>
     </button>
   </div>
   <div class="modal-body">
-    <div *ngIf="identityService.profile.phoneNumber" class="form-group current">
-      <label>{{ 'CURRENT_PHONE_NUMBER' | translate }}</label>
-      <span>{{ identityService.profile.phoneNumber }}</span>
+    <div *ngIf="identityService.profile.email" class="form-group current">
+      <label>{{ 'CURRENT_EMAIL' | translate }}</label>
+      <span>{{ identityService.profile.email }}</span>
     </div>
     <div class="form-group new">
-      <label>{{ 'NEW_PHONE_NUMBER' | translate }}</label>
+      <label>{{ 'NEW_EMAIL' | translate }}</label>
       <div class="new-container">
         <div class="input-container">
           <app-input
             [disabled]="sent"
-            [(model)]="newNumber"
+            [(model)]="newEmail"
             [ltr]="true"
           ></app-input>
-          <app-validation [model]="[numberError]"></app-validation>
+          <app-validation [model]="[emailError]"></app-validation>
         </div>
         <div class="send">
           <button
@@ -62,7 +62,7 @@
       color="primary"
     >
       <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-      {{ 'CHANGE_PHONE' | translate: true }}</button
+      {{ 'CHANGE_EMAIL' | translate: true }}</button
     >&nbsp;
     <button (click)="onCancel($event)" mat-button>
       {{ 'CANCEL' | translate: true }}

@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
-import { ValidationService } from '../../services/core/validation.service';
-import { IdentityService } from '../../services/auth/identity.service';
-import { OperationResultStatus } from '../../library/core/enums';
+import {SimpleModalComponent} from 'ngx-simple-modal';
+import {IdentityService} from '../../services/auth/identity.service';
+import {OperationResultStatus} from '../../library/core/enums';
+import { ValidationService } from 'src/app/services/core/validation.service';
 
 @Component({
-  selector: 'app-change-phone',
-  templateUrl: './change-phone.component.html',
-  styleUrls: ['./change-phone.component.scss'],
+  selector: 'app-change-email',
+  templateUrl: './change-email.component.html',
+  styleUrls: ['./change-email.component.scss']
 })
-export class ChangePhoneComponent extends SimpleModalComponent<{}, string>
+export class ChangeEmailComponent extends SimpleModalComponent<{}, string>
   implements OnInit {
   cancel?: () => Promise<any>;
   action?: () => Promise<any>;
   actionWaiting: boolean;
   sent: boolean;
-  newNumber: string;
+  newEmail: string;
   verificationCode: string;
   tokenId: string;
   ValidationService = ValidationService;
-  numberError: string;
+  emailError: string;
   sendWaiting: boolean;
   remaining: number;
   handler: any;
@@ -34,15 +34,15 @@ export class ChangePhoneComponent extends SimpleModalComponent<{}, string>
     $event.stopPropagation();
     $event.preventDefault();
     this.actionWaiting = true;
-    const op = await this.identityService.confirmPhone({
+    const op = await this.identityService.confirmEmail({
       id: this.tokenId,
       code: this.verificationCode,
     });
     this.actionWaiting = false;
     if (op.status === OperationResultStatus.Success) {
-      this.identityService.profile.phoneNumber = this.newNumber;
-      this.identityService.profile.phoneConfirmed = true;
-      this.result = this.newNumber;
+      this.identityService.profile.email = this.newEmail;
+      this.identityService.profile.emailConfirmed = true;
+      this.result = this.newEmail;
       this.close();
       return;
     }
@@ -56,18 +56,18 @@ export class ChangePhoneComponent extends SimpleModalComponent<{}, string>
   }
 
   async sendVerificationCode() {
-    if (!ValidationService.isMobile(this.newNumber)) {
-      this.numberError = 'PHONE_INVALID';
+    if (!ValidationService.isEmail(this.newEmail)) {
+      this.emailError = 'EMAIL_INVALID';
       return;
     }
-    this.numberError = '';
+    this.emailError = '';
     this.sendWaiting = true;
-    const op = await this.identityService.changePhone({
-      phone: this.newNumber,
+    const op = await this.identityService.changeEmail({
+      email: this.newEmail,
     });
     this.sendWaiting = false;
     if (op.status === OperationResultStatus.Duplicate) {
-      this.numberError = 'PHONE_TAKEN';
+      this.emailError = 'EMAIL_TAKEN';
       return;
     }
     if (op.status === OperationResultStatus.Success) {

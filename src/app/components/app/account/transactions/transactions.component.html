@@ -1,5 +1,5 @@
 <div class="account-profile-transactions">
-  <app-grid [(rows)]="mockService.transactions" [columns]="displayedColumns">
+  <app-grid backend="/account/transactions" [columns]="displayedColumns">
     <!-- Title Column -->
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>

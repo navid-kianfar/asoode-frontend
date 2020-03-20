@@ -9,6 +9,7 @@ import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ChangePhoneComponent } from '../../../modals/change-phone/change-phone.component';
 import { ValidationService } from '../../../services/core/validation.service';
+import {ChangeEmailComponent} from '../../../modals/change-email/change-email.component';
 
 @Component({
   selector: 'app-profile',
@@ -32,52 +33,10 @@ export class ProfileComponent implements OnInit {
       this.formService.setModel(this.form, this.identityService.profile);
     });
   }
-  async changeEmail(model: any, form) {
-    if (model.email === this.identityService.profile.email) {
-      this.formService.setErrors(form, 'email', ['NEW_EMAIL_MUST_DIFFER']);
-      throw new Error('NEW_EMAIL_MUST_DIFFER');
-    }
-    const op = await this.identityService.changeEmail(model);
-    if (op.status !== OperationResultStatus.Success) {
-      // TODO: handle error
-      return;
-    }
-    this.notificationService.success('PLEASE_CHECK_EMAIL');
-  }
   async prepareChangeEmail() {
-    this.modalService
-      .show(PromptComponent, {
-        form: [
-          {
-            elements: [
-              this.formService.createInput({
-                config: { label: 'EMAIL', field: 'email' },
-                params: { model: '' },
-                validation: {
-                  required: {
-                    value: true,
-                    message: 'EMAIL_REQUIRED',
-                  },
-                  pattern: {
-                    value: ValidationService.emailRegex,
-                    message: 'EMAIL_INVALID',
-                  },
-                },
-              }),
-            ],
-          },
-        ],
-        summary: 'CHANGE_EMAIL_CONFIRM_EMAIL',
-        actionLabel: 'SEND_EMAIL_CONFIRMATION',
-        action: (model, form) => this.changeEmail(model, form),
-        actionColor: 'primary',
-        title: 'CHANGE_EMAIL',
-        width: 350,
-        model: {
-          email: this.identityService.profile.email,
-        },
-      })
-      .subscribe(() => {});
+    this.modalService.show(ChangeEmailComponent, {}).subscribe(() => {
+      this.formService.setModel(this.form, this.identityService.profile);
+    });
   }
   async changePassword(model: any, form) {
     const op = await this.identityService.changePassword({
