@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { MockService } from '../../../services/mock.service';
+import {ProjectService} from '../../../services/projects/project.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -11,11 +13,20 @@ export class ProjectComponent implements OnInit {
   ViewMode = ViewMode;
   mode: ViewMode;
   project: ProjectViewModel;
-  constructor(private readonly mockService: MockService) {}
+  constructor(
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router,
+    private readonly projectService: ProjectService
+  ) {}
 
   ngOnInit() {
     this.mode = ViewMode.RoadMap;
-    this.project = this.mockService.projects[0];
+    const id = this.activatedRoute.snapshot.params.id;
+    this.project = this.projectService.projects.find(g => g.id === id);
+    if (!this.project) {
+      this.router.navigateByUrl('dashboard');
+      return;
+    }
   }
 }
 export enum ViewMode {

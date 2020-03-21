@@ -8,6 +8,10 @@ import {
   ProjectTemplateViewModel,
 } from '../../../view-models/projects/project-types';
 import { BoardTemplate } from '../../../library/app/enums';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {InviteViewModel} from '../../../view-models/auth/identity-types';
+import {ProjectService} from '../../../services/projects/project.service';
+import {NotificationService} from '../../../services/core/notification.service';
 
 @Component({
   selector: 'app-project-wizard',
@@ -25,13 +29,20 @@ export class ProjectWizardComponent implements OnInit {
   template: ProjectTemplateViewModel;
   boardTemplates: BoardTemplateViewModel[];
   boardTemplate: BoardTemplate;
+  model: any;
+  members: InviteViewModel[];
+  groups: InviteViewModel[];
+  actionWaiting: boolean;
   constructor(
     readonly cultureService: CultureService,
     private readonly formService: FormService,
-    readonly mockService: MockService,
+    private readonly projectService: ProjectService,
+    private readonly notificationService: NotificationService
   ) {}
 
   ngOnInit() {
+    this.members = [];
+    this.groups = [];
     this.boardTemplate = BoardTemplate.Blank;
     this.mode = ViewMode.Form;
     this.projectForm = [
@@ -62,6 +73,7 @@ export class ProjectWizardComponent implements OnInit {
               model: true,
               label: 'PROJECT_REQUIRE_CHANNEL',
               summary: 'PROJECT_CHANNEL_DESCRIPTION',
+              disabled: true
             },
           }),
         ],
@@ -138,6 +150,10 @@ export class ProjectWizardComponent implements OnInit {
     $event.stopPropagation();
     $event.preventDefault();
     if (this.mode === ViewMode.Form) {
+      this.model = this.formService.prepare(this.projectForm);
+      if (!this.model) {
+        return;
+      }
       this.mode = ViewMode.Invite;
       return;
     }
@@ -146,8 +162,38 @@ export class ProjectWizardComponent implements OnInit {
       return;
     }
   }
-
-  createProject($event: MouseEvent) {}
+  async createProject($event: MouseEvent) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.model.groups = this.groups
+      .filter(g => g.selected)
+      .map(g => {
+        return {
+          id: g.id,
+          access: g.access,
+        };
+      });
+    this.model.members = this.members.map(m => {
+      return {
+        id: m.id,
+        access: m.access,
+      };
+    });
+    this.actionWaiting = true;
+    const op = await this.projectService.create({
+      ...this.model,
+      boardTemplate: this.boardTemplate,
+      templateId: this.template ? this.template.id : undefined,
+      complex: this.complex
+    });
+    this.actionWaiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.notificationService.success('PROJECT_CREATED');
+    this.exit.emit();
+  }
 }
 
 export enum ViewMode {

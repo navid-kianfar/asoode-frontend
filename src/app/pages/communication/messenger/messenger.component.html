@@ -117,7 +117,7 @@
             </div>
             <a
               *ngIf="current.type === ChannelType.Project"
-              [routerLink]="'/project'"
+              routerLink="/project"
               class="go-to"
             >
               <i class="icon-new-window"></i>
@@ -125,7 +125,7 @@
             </a>
             <a
               *ngIf="current.type === ChannelType.Group"
-              [routerLink]="'/group'"
+              routerLink="/group"
               class="go-to"
             >
               <i class="icon-new-window"></i>
