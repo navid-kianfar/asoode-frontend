@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
+import {GroupService} from '../../../services/groups/group.service';
 
 @Component({
   selector: 'app-org-chart-node',
@@ -16,6 +17,6 @@ export class OrgChartNodeComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.filtered = this.groups || [];
+    this.filtered = this.groups.filter(g => g.parentId === this.group.id);
   }
 }

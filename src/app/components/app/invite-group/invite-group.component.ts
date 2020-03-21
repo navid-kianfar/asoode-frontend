@@ -15,14 +15,16 @@ export class InviteGroupComponent implements OnInit {
   constructor(private readonly groupService: GroupService) {}
 
   ngOnInit() {
-    this.groups = this.groupService.groups.map(g => {
-      return {
-        id: g.id,
-        model: g,
-        access: AccessType.Editor,
-        selected: false,
-      };
-    });
-    this.groupsChange.emit(this.groups);
+    setTimeout(() => {
+      this.groups = this.groupService.groups.map(g => {
+        return {
+          id: g.id,
+          model: g,
+          access: AccessType.Editor,
+          selected: false,
+        };
+      });
+      this.groupsChange.emit(this.groups);
+    }, 100);
   }
 }

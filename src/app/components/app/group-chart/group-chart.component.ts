@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
+import {GroupService} from '../../../services/groups/group.service';
 
 @Component({
   selector: 'app-group-chart',
@@ -8,7 +9,7 @@ import { GroupViewModel } from '../../../view-models/groups/group-types';
 })
 export class GroupChartComponent implements OnInit {
   @Input() group: GroupViewModel;
-  constructor() {}
+  constructor(readonly groupService: GroupService) {}
 
   ngOnInit() {}
 }

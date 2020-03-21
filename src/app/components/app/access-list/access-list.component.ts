@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ListViewModel } from '../../../view-models/core/list-types';
-import { AccessType } from 'src/app/library/app/enums';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ListViewModel} from '../../../view-models/core/list-types';
+import {AccessType} from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-access-list',
@@ -16,11 +16,6 @@ export class AccessListComponent implements OnInit {
 
   ngOnInit() {
     this.roles = [
-      {
-        text: 'ENUMS_ACCESS_TYPE_OWNER',
-        value: AccessType.Owner,
-        description: 'ACCESS_TYPE_OWNER_DESCRIPTION',
-      },
       {
         text: 'ENUMS_ACCESS_TYPE_ADMIN',
         value: AccessType.Admin,
@@ -42,5 +37,12 @@ export class AccessListComponent implements OnInit {
         description: 'ACCESS_TYPE_VISITOR_DESCRIPTION',
       },
     ];
+    if (this.access === AccessType.Owner) {
+      this.roles.unshift({
+        text: 'ENUMS_ACCESS_TYPE_OWNER',
+        value: AccessType.Owner,
+        description: 'ACCESS_TYPE_OWNER_DESCRIPTION',
+      });
+    }
   }
 }

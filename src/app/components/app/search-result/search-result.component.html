@@ -4,7 +4,7 @@
   </div>
   <div
     class="no-results"
-    *ngIf="
+    *ngIf=" !loading &&
       !results.tasks.length &&
       !results.projects.length &&
       !results.storage.files.length &&

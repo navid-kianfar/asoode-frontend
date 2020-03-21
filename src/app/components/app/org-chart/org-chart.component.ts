@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { MockService } from '../../../services/mock.service';
+import {GroupService} from '../../../services/groups/group.service';
 
 @Component({
   selector: 'app-org-chart',
@@ -10,7 +11,7 @@ import { MockService } from '../../../services/mock.service';
 export class OrgChartComponent implements OnInit {
   @Input() group: GroupViewModel;
 
-  constructor(readonly mockService: MockService) {}
+  constructor(readonly groupService: GroupService) {}
 
   ngOnInit() {}
 }

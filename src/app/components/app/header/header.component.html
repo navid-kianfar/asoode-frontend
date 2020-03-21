@@ -37,7 +37,7 @@
       <i class="icon-arrow-down2"></i>
     </a>
     <div class="search-container">
-      <app-input placeHolder="SEARCH_ANYWHERE"></app-input>
+      <input (focus)="popper = popperSearch" type="text" [placeholder]="'SEARCH_ANYWHERE' | translate" />
       <div
         class="holder"
         [popper]="popperSearch"
@@ -65,7 +65,10 @@
 
   <popper-content #popperSearch>
     <div class="search-popper">
-      <app-search-result (hide)="popperSearch.hide()"></app-search-result>
+      <app-search-result [loading]="loading"
+                         [results]="results"
+                         [term]="searchTerm"
+                         (hide)="popperSearch.hide()"></app-search-result>
     </div>
   </popper-content>
 </nav>

@@ -12,5 +12,6 @@ export class GroupMembersComponent implements OnInit {
   query: string[] = ['fullName', 'username', 'email', 'phoneNumber', 'bio'];
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }
