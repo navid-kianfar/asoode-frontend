@@ -12,7 +12,7 @@ export interface ProjectObjectiveEstimatedPriceViewModel {
   user: string;
   group: string;
 }
-export interface ProjectObjectiveViewModel extends BaseViewModel {
+export interface WorkPackageObjectiveViewModel extends BaseViewModel {
   title: string;
   description: string;
   workPackage: string;
@@ -71,6 +71,7 @@ export interface SubProjectViewModel extends BaseViewModel {
   order: number;
 }
 export interface WorkPackageViewModel extends BaseViewModel {
+  progress: number;
   userId: string;
   projectId: string;
   subProjectId: string;
@@ -100,13 +101,15 @@ export interface WorkPackageViewModel extends BaseViewModel {
   members: WorkPackageMemberViewModel[];
   lists: WorkPackageListViewModel[];
   tasks: WorkPackageTaskViewModel[];
+  objectives: WorkPackageObjectiveViewModel[];
 }
 export interface WorkPackageMemberViewModel extends BaseViewModel {
-  userId: string;
+  recordId: string;
   packageId: string;
   access: AccessType;
   blockNotification: boolean;
   showStats: boolean;
+  isGroup: boolean;
 }
 export interface BoardTemplateViewModel {
   type: BoardTemplate;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  ProjectObjectiveViewModel,
+  WorkPackageObjectiveViewModel,
   ProjectTemplateViewModel,
   ProjectViewModel,
 } from '../view-models/projects/project-types';
@@ -31,7 +31,7 @@ export class MockService {
     projects: [],
     tasks: [],
   };
-  objectives: ProjectObjectiveViewModel[] = [];
+  objectives: WorkPackageObjectiveViewModel[] = [];
   transactions: TransactionViewModel[] = [];
   messages: ConversationViewModel[];
   channels: ChannelViewModel[] = [];

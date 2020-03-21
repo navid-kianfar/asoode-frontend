@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { AccessType } from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-group-members',
@@ -8,6 +9,7 @@ import { GroupViewModel } from '../../../view-models/groups/group-types';
 })
 export class GroupMembersComponent implements OnInit {
   @Input() group: GroupViewModel;
+  AccessType = AccessType;
   filter: string;
   query: string[] = ['fullName', 'username', 'email', 'phoneNumber', 'bio'];
   constructor() {}

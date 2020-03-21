@@ -1,6 +1,6 @@
 <div class="work-package-board">
   <div class="board-lists">
-    <div *ngFor="let list of workPackage.lists" class="board-list">
+    <div *ngFor="let list of model.lists" class="board-list">
       <div class="header">
         <span>{{ list.title | truncate: 30 }}</span
         >&nbsp; <i (click)="createNewTask(list)" class="icon-plus2"></i>&nbsp;

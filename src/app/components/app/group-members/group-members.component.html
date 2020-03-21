@@ -20,13 +20,12 @@
         </div>
         <div class="status"></div>
         <div class="actions">
-          <app-dropdown
-            [(model)]="member.access"
-            [enum]="'AccessType'"
-          ></app-dropdown
-          >&nbsp;
-          <button mat-flat-button color="warn">
+          <app-access-list [(access)]="member.access"></app-access-list>&nbsp;
+          <button *ngIf="member.access !== AccessType.Owner" mat-flat-button color="warn">
             {{ 'REMOVE_ACCESS' | translate }}
+          </button>
+          <button *ngIf="member.access === AccessType.Owner" mat-flat-button color="accent">
+            {{ 'TRANSFER_OWNERSHIP' | translate }}
           </button>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
   ProjectObjectiveEstimatedPriceViewModel,
-  ProjectObjectiveViewModel,
+  WorkPackageObjectiveViewModel,
   ProjectViewModel,
 } from '../../../view-models/projects/project-types';
 import { MockService } from '../../../services/mock.service';
@@ -13,7 +13,7 @@ import { MockService } from '../../../services/mock.service';
 })
 export class ProjectObjectiveComponent implements OnInit {
   @Input() model: ProjectViewModel;
-  selected: ProjectObjectiveViewModel;
+  selected: WorkPackageObjectiveViewModel;
   estimated: ProjectObjectiveEstimatedPriceViewModel[];
   estimatedTotalTime: number;
   estimatedTotalAmount: number;

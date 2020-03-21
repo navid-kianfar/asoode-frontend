@@ -3,7 +3,7 @@
     <div class="structure-container">
       <ng-container *ngIf="!project.complex">
         <div class="upgrade">
-          <button mat-flat-button>
+          <button [disabled]="waiting" mat-flat-button>
             <i class="icon-trophy4"></i>&nbsp;
             <span>{{ 'ADD_STRUCTURE' | translate }}</span>
           </button>
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="sections-container">
-      <ul>
+      <ul *ngIf="!waiting">
         <li
           (click)="mode = ViewMode.Board"
           [class.selected]="mode === ViewMode.Board"
@@ -49,7 +49,7 @@
       <div class="progress-container">
         <div class="progress-wrapper">
           <round-progress
-            [current]="50"
+            [current]="workPackage.progress"
             [max]="100"
             [color]="'#50a9dd'"
             [background]="'#f2f2f2'"
@@ -63,7 +63,7 @@
             [animationDelay]="0"
           ></round-progress>
           <div class="percent">
-            50%
+            {{workPackage.progress}}%
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
           <i class="icon-target"></i>&nbsp;
           <span class="label">{{ 'OBJECTIVES' | translate }}</span
           >&nbsp;
-          <span class="badge">1</span>
+          <span class="badge">{{workPackage.objectives.length}}</span>
         </div>
       </div>
       <div class="members-container">
@@ -100,17 +100,20 @@
     </div>
   </div>
   <div class="inner-container">
-    <ng-container *ngIf="mode === ViewMode.Board">
-      <app-work-package-board></app-work-package-board>
-    </ng-container>
-    <ng-container *ngIf="mode === ViewMode.List">
-      <app-work-package-list></app-work-package-list>
-    </ng-container>
-    <ng-container *ngIf="mode === ViewMode.TimeSpan">
-      <app-work-package-time-span></app-work-package-time-span>
-    </ng-container>
-    <ng-container *ngIf="mode === ViewMode.Calendar">
-      <app-work-package-calendar></app-work-package-calendar>
+    <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
+    <ng-container *ngIf="!waiting">
+      <ng-container *ngIf="mode === ViewMode.Board">
+        <app-work-package-board [model]="workPackage"></app-work-package-board>
+      </ng-container>
+      <ng-container *ngIf="mode === ViewMode.List">
+        <app-work-package-list [model]="workPackage"></app-work-package-list>
+      </ng-container>
+      <ng-container *ngIf="mode === ViewMode.TimeSpan">
+        <app-work-package-time-span [model]="workPackage"></app-work-package-time-span>
+      </ng-container>
+      <ng-container *ngIf="mode === ViewMode.Calendar">
+        <app-work-package-calendar [model]="workPackage"></app-work-package-calendar>
+      </ng-container>
     </ng-container>
   </div>
 </div>

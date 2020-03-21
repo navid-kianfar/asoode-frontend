@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {
   WorkPackageListViewModel,
   WorkPackageViewModel,
@@ -11,12 +11,11 @@ import { MockService } from '../../../services/mock.service';
   styleUrls: ['./work-package-board.component.scss'],
 })
 export class WorkPackageBoardComponent implements OnInit {
-  workPackage: WorkPackageViewModel;
+  @Input() model: WorkPackageViewModel;
   expanded: boolean;
-  constructor(private readonly mockService: MockService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.workPackage = this.mockService.projects[1].workPackages[0];
   }
 
   cancelNewList() {

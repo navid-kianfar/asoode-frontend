@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {WorkPackageViewModel} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-work-package-calendar',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./work-package-calendar.component.scss'],
 })
 export class WorkPackageCalendarComponent implements OnInit {
+  @Input() model: WorkPackageViewModel;
   constructor() {}
 
   ngOnInit() {}
