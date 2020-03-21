@@ -188,7 +188,8 @@
       </ng-container>
     </div>
     <div class="modal-footer">
-      <button [disabled]="actionWaiting"
+      <button
+        [disabled]="actionWaiting"
         (click)="createProject($event)"
         mat-flat-button
         [color]="'primary'"

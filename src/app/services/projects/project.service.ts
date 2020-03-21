@@ -27,8 +27,6 @@ export class ProjectService {
   }
 
   async create(model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      '/projects/create', model
-    );
+    return await this.httpService.post<boolean>('/projects/create', model);
   }
 }

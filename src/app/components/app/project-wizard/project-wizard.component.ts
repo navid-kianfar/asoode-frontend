@@ -8,10 +8,10 @@ import {
   ProjectTemplateViewModel,
 } from '../../../view-models/projects/project-types';
 import { BoardTemplate } from '../../../library/app/enums';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {InviteViewModel} from '../../../view-models/auth/identity-types';
-import {ProjectService} from '../../../services/projects/project.service';
-import {NotificationService} from '../../../services/core/notification.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { InviteViewModel } from '../../../view-models/auth/identity-types';
+import { ProjectService } from '../../../services/projects/project.service';
+import { NotificationService } from '../../../services/core/notification.service';
 
 @Component({
   selector: 'app-project-wizard',
@@ -36,8 +36,8 @@ export class ProjectWizardComponent implements OnInit {
   constructor(
     readonly cultureService: CultureService,
     private readonly formService: FormService,
-    private readonly projectService: ProjectService,
-    private readonly notificationService: NotificationService
+    readonly projectService: ProjectService,
+    private readonly notificationService: NotificationService,
   ) {}
 
   ngOnInit() {
@@ -73,7 +73,7 @@ export class ProjectWizardComponent implements OnInit {
               model: true,
               label: 'PROJECT_REQUIRE_CHANNEL',
               summary: 'PROJECT_CHANNEL_DESCRIPTION',
-              disabled: true
+              disabled: true,
             },
           }),
         ],
@@ -184,7 +184,7 @@ export class ProjectWizardComponent implements OnInit {
       ...this.model,
       boardTemplate: this.boardTemplate,
       templateId: this.template ? this.template.id : undefined,
-      complex: this.complex
+      complex: this.complex,
     });
     this.actionWaiting = false;
     if (op.status !== OperationResultStatus.Success) {

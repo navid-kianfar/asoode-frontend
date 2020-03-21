@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { MockService } from '../../../services/mock.service';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -16,7 +16,7 @@ export class ProjectComponent implements OnInit {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
-    private readonly projectService: ProjectService
+    private readonly projectService: ProjectService,
   ) {}
 
   ngOnInit() {

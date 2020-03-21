@@ -4,8 +4,8 @@ import {
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
 import { MockService } from '../../../services/mock.service';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-work-package',
@@ -20,7 +20,7 @@ export class WorkPackageComponent implements OnInit {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
-    private readonly projectService: ProjectService
+    private readonly projectService: ProjectService,
   ) {}
 
   ngOnInit() {
@@ -28,7 +28,9 @@ export class WorkPackageComponent implements OnInit {
     const id = this.activatedRoute.snapshot.params.id;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.projectService.projects.length; i++) {
-      this.workPackage = this.projectService.projects[i].workPackages.find(w => w.id === id);
+      this.workPackage = this.projectService.projects[i].workPackages.find(
+        w => w.id === id,
+      );
       if (this.workPackage) {
         this.project = this.projectService.projects[i];
         break;
