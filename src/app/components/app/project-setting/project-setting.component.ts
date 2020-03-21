@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
+import { AccessType } from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-project-setting',
@@ -7,6 +8,7 @@ import { ProjectViewModel } from '../../../view-models/projects/project-types';
   styleUrls: ['./project-setting.component.scss'],
 })
 export class ProjectSettingComponent implements OnInit {
+  AccessType = AccessType;
   @Input() model: ProjectViewModel;
   constructor() {}
 

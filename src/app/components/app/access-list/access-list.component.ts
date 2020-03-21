@@ -17,6 +17,11 @@ export class AccessListComponent implements OnInit {
   ngOnInit() {
     this.roles = [
       {
+        text: 'ENUMS_ACCESS_TYPE_OWNER',
+        value: AccessType.Owner,
+        description: 'ACCESS_TYPE_OWNER_DESCRIPTION',
+      },
+      {
         text: 'ENUMS_ACCESS_TYPE_ADMIN',
         value: AccessType.Admin,
         description: 'ACCESS_TYPE_ADMIN_DESCRIPTION',

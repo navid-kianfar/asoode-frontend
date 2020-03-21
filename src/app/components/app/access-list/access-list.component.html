@@ -1,1 +1,1 @@
-<app-dropdown [(model)]="access" [items]="roles"></app-dropdown>
+<app-dropdown [disabled]="access === AccessType.Owner" [(model)]="access" [items]="roles"></app-dropdown>

@@ -16,8 +16,8 @@
       </div>
     </div>
     <div class="body">
-      <mat-progress-bar [value]="50" [bufferValue]="100"></mat-progress-bar>
-      <h5>{{ 'DISK_USAGE_DETAIL' | translate | stringFormat: 500:1500 }}</h5>
+      <mat-progress-bar [value]="model.diskSpaceUsed" [bufferValue]="model.diskSpaceCapacity"></mat-progress-bar>
+      <h5>{{ 'DISK_USAGE_DETAIL' | translate | stringFormat: model.diskSpaceUsed/1024:model.diskSpaceCapacity/1024 }}</h5>
     </div>
   </div>
 
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="body">
-      <h5>{{ 'MEMBER_USAGE_DETAIL' | translate | stringFormat: 500:1500 }}</h5>
+      <h5>{{ 'MEMBER_USAGE_DETAIL' | translate | stringFormat: model.membersUsed:model.membersCapacity }}</h5>
       <div class="members">
         <div *ngFor="let member of model.members" class="member">
           <div class="info">
@@ -46,8 +46,11 @@
             <app-access-list [(access)]="member.access"></app-access-list>
           </div>
           <div class="action">
-            <button mat-flat-button color="warn">
+            <button *ngIf="member.access !== AccessType.Owner" mat-flat-button color="warn">
               {{ 'REMOVE_ACCESS' | translate }}
+            </button>
+            <button *ngIf="member.access === AccessType.Owner" mat-flat-button color="accent">
+              {{ 'TRANSFER_OWNERSHIP' | translate }}
             </button>
           </div>
         </div>
