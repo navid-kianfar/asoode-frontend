@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ListViewModel} from '../../../view-models/core/list-types';
-import {AccessType} from 'src/app/library/app/enums';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ListViewModel } from '../../../view-models/core/list-types';
+import { AccessType } from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-access-list',
@@ -10,6 +10,7 @@ import {AccessType} from 'src/app/library/app/enums';
 export class AccessListComponent implements OnInit {
   AccessType = AccessType;
   roles: ListViewModel[];
+  @Input() disabled: boolean;
   @Input() access: AccessType;
   @Output() accessChange = new EventEmitter<AccessType>();
   constructor() {}

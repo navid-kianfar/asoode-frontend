@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { SearchResultViewModel } from '../../../view-models/general/search-types';
 
 @Component({
@@ -12,11 +12,7 @@ export class SearchResultComponent implements OnInit {
   @Input() loading: boolean;
   @Input() term: string;
 
-  constructor(
+  constructor() {}
 
-  ) {}
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }

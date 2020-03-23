@@ -50,7 +50,10 @@
   <div class="section projects-container">
     <div class="header">
       <h3>{{ 'PROJECTS' | translate }}</h3>
-      <mat-tab-group animationDuration="0ms" (selectedIndexChange)="filter = $event">
+      <mat-tab-group
+        animationDuration="0ms"
+        (selectedIndexChange)="filter = $event"
+      >
         <mat-tab>
           <ng-template mat-tab-label>
             {{ 'ALL' | translate }}

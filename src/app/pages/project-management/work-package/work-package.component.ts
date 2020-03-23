@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ProjectViewModel, WorkPackageViewModel,} from '../../../view-models/projects/project-types';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {OperationResultStatus} from '../../../library/core/enums';
+import { Component, OnInit } from '@angular/core';
+import {
+  ProjectViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import { OperationResultStatus } from '../../../library/core/enums';
 
 @Component({
   selector: 'app-work-package',

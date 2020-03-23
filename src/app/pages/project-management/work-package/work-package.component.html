@@ -62,9 +62,7 @@
             [animation]="'easeInOutQuart'"
             [animationDelay]="0"
           ></round-progress>
-          <div class="percent">
-            {{workPackage.progress}}%
-          </div>
+          <div class="percent">{{ workPackage.progress }}%</div>
         </div>
       </div>
       <div class="objectives-container">
@@ -72,7 +70,7 @@
           <i class="icon-target"></i>&nbsp;
           <span class="label">{{ 'OBJECTIVES' | translate }}</span
           >&nbsp;
-          <span class="badge">{{workPackage.objectives.length}}</span>
+          <span class="badge">{{ workPackage.objectives.length }}</span>
         </div>
       </div>
       <div class="members-container">
@@ -109,10 +107,14 @@
         <app-work-package-list [model]="workPackage"></app-work-package-list>
       </ng-container>
       <ng-container *ngIf="mode === ViewMode.TimeSpan">
-        <app-work-package-time-span [model]="workPackage"></app-work-package-time-span>
+        <app-work-package-time-span
+          [model]="workPackage"
+        ></app-work-package-time-span>
       </ng-container>
       <ng-container *ngIf="mode === ViewMode.Calendar">
-        <app-work-package-calendar [model]="workPackage"></app-work-package-calendar>
+        <app-work-package-calendar
+          [model]="workPackage"
+        ></app-work-package-calendar>
       </ng-container>
     </ng-container>
   </div>

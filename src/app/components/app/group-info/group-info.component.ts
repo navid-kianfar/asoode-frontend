@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { GroupService } from '../../../services/groups/group.service';
 
 @Component({
   selector: 'app-group-info',
@@ -7,8 +8,13 @@ import { GroupViewModel } from '../../../view-models/groups/group-types';
   styleUrls: ['./group-info.component.scss'],
 })
 export class GroupInfoComponent implements OnInit {
+  @Input() id: string;
   @Input() model: GroupViewModel;
-  constructor() {}
+  constructor(private readonly groupService: GroupService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.id) {
+      this.model = this.groupService.groups.find(g => g.id === this.id);
+    }
+  }
 }

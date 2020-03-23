@@ -74,6 +74,8 @@
         min-height: 25px;
         border-radius: 3px;
         margin-bottom: 10px;
+        font-size: 0.8rem;
+        padding: 5px 10px 3px;
 
         &.address {
           min-height: 50px;
@@ -90,7 +92,8 @@
   }
 
   ::ng-deep .af-textbox {
-    input, textarea {
+    input,
+    textarea {
       border: 1px solid #e6e6e6 !important;
       color: #4d4d4d;
       resize: none;

@@ -72,5 +72,5 @@ export enum ProjectFilter {
   All = 0,
   Simple = 1,
   Complex = 2,
-  Public = 3
+  Public = 3,
 }

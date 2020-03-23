@@ -4,7 +4,7 @@ import {
   InviteViewModel,
   MemberInfoViewModel,
 } from '../../../view-models/auth/identity-types';
-import {ValidationService} from '../../../services/core/validation.service';
+import { ValidationService } from '../../../services/core/validation.service';
 
 @Component({
   selector: 'app-invite-member',
@@ -12,6 +12,7 @@ import {ValidationService} from '../../../services/core/validation.service';
   styleUrls: ['./invite-member.component.scss'],
 })
 export class InviteMemberComponent implements OnInit {
+  @Input() exclude: string[];
   @Input() members: InviteViewModel[];
   @Output() membersChange = new EventEmitter<InviteViewModel[]>();
 

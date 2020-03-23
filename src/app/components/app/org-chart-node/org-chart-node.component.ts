@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
-import {GroupService} from '../../../services/groups/group.service';
+import { GroupService } from '../../../services/groups/group.service';
 
 @Component({
   selector: 'app-org-chart-node',

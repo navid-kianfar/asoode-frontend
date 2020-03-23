@@ -3,7 +3,8 @@ import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import {
   ProjectTemplateViewModel,
-  ProjectViewModel, WorkPackageViewModel,
+  ProjectViewModel,
+  WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
 import { OperationResultStatus } from '../../library/core/enums';
 
@@ -29,5 +30,4 @@ export class ProjectService {
   async create(model: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>('/projects/create', model);
   }
-
 }

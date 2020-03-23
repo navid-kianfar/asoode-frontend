@@ -15,9 +15,18 @@
   </div>
   <div class="projects-container" *ngIf="projectService.projects.length">
     <ng-container *ngFor="let project of projectService.projects">
-      <app-project-info *ngIf="filter === ProjectFilter.All" [project]="project"></app-project-info>
-      <app-project-info *ngIf="filter === ProjectFilter.Simple && !project.complex" [project]="project"></app-project-info>
-      <app-project-info *ngIf="filter === ProjectFilter.Complex && project.complex" [project]="project"></app-project-info>
+      <app-project-info
+        *ngIf="filter === ProjectFilter.All"
+        [project]="project"
+      ></app-project-info>
+      <app-project-info
+        *ngIf="filter === ProjectFilter.Simple && !project.complex"
+        [project]="project"
+      ></app-project-info>
+      <app-project-info
+        *ngIf="filter === ProjectFilter.Complex && project.complex"
+        [project]="project"
+      ></app-project-info>
     </ng-container>
   </div>
 </div>

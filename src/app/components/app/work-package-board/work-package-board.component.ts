@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   WorkPackageListViewModel,
   WorkPackageViewModel,
@@ -15,8 +15,7 @@ export class WorkPackageBoardComponent implements OnInit {
   expanded: boolean;
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   cancelNewList() {
     this.expanded = false;

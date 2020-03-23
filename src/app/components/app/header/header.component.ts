@@ -1,15 +1,21 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { ModalService } from '../../../services/core/modal.service';
 import { CreateWizardComponent } from '../../../modals/create-wizard/create-wizard.component';
 import { CreateModalParameters } from '../../../view-models/modals/modals-types';
-import {SearchResultViewModel} from '../../../view-models/general/search-types';
-import {fromEvent} from 'rxjs';
-import {debounceTime, switchMap, tap} from 'rxjs/operators';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {HttpService} from '../../../services/core/http.service';
-import {PopperContent} from 'ngx-popper';
-import {OperationResult} from '../../../library/core/operation-result';
+import { SearchResultViewModel } from '../../../view-models/general/search-types';
+import { fromEvent } from 'rxjs';
+import { debounceTime, switchMap, tap } from 'rxjs/operators';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { HttpService } from '../../../services/core/http.service';
+import { PopperContent } from 'ngx-popper';
+import { OperationResult } from '../../../library/core/operation-result';
 
 const EMPTY = {
   members: [],
@@ -39,7 +45,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     private readonly ref: ElementRef,
   ) {}
   ngOnInit(): void {
-    this.results = {...EMPTY};
+    this.results = { ...EMPTY };
   }
 
   ngAfterViewInit() {
@@ -48,7 +54,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
       .pipe(
         debounceTime(500),
         tap(() => {
-          this.results = {...EMPTY};
+          this.results = { ...EMPTY };
           this.loading = true;
           if (this.popper) {
             this.popper.show();
@@ -57,7 +63,9 @@ export class HeaderComponent implements AfterViewInit, OnInit {
         switchMap(project => {
           const search = input.value;
           if (!search) {
-            const op = OperationResult.Success<SearchResultViewModel>({...EMPTY});
+            const op = OperationResult.Success<SearchResultViewModel>({
+              ...EMPTY,
+            });
             return Promise.resolve(op);
           }
           return this.httpService.post('/search', { search });
@@ -68,7 +76,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
         if (data.status === OperationResultStatus.Success) {
           this.results = data.data as SearchResultViewModel;
         } else {
-          this.results = {...EMPTY};
+          this.results = { ...EMPTY };
         }
         this.loading = false;
       });

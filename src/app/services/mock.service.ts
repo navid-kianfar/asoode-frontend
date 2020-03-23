@@ -4,9 +4,7 @@ import {
   ProjectTemplateViewModel,
   ProjectViewModel,
 } from '../view-models/projects/project-types';
-import {
-  GroupViewModel,
-} from '../view-models/groups/group-types';
+import { GroupViewModel } from '../view-models/groups/group-types';
 import {
   ExplorerViewModel,
   UploadViewModel,

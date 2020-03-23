@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {GroupViewModel} from '../../../view-models/groups/group-types';
-import {ActivatedRoute, Router} from '@angular/router';
-import {GroupService} from '../../../services/groups/group.service';
-import {ModalService} from '../../../services/core/modal.service';
-import {GroupDetailComponent} from '../../../modals/group-detail/group-detail.component';
-import {AccessType} from '../../../library/app/enums';
+import { Component, OnInit } from '@angular/core';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GroupService } from '../../../services/groups/group.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { GroupDetailComponent } from '../../../modals/group-detail/group-detail.component';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-group',
@@ -30,13 +30,17 @@ export class GroupComponent implements OnInit {
       this.router.navigateByUrl('dashboard');
       return;
     }
-    this.permission = this.groupService.getPermission(id);
+    this.permission = this.groupService.getPermission(this.group);
   }
 
   detail() {
-    this.modalService.show(GroupDetailComponent, {
-      group: this.group,
-      canEdit: (this.permission === AccessType.Admin) || (this.permission ===  AccessType.Owner)
-    }).subscribe(() => {});
+    this.modalService
+      .show(GroupDetailComponent, {
+        group: this.group,
+        canEdit:
+          this.permission === AccessType.Admin ||
+          this.permission === AccessType.Owner,
+      })
+      .subscribe(() => {});
   }
 }

@@ -30,12 +30,18 @@
     }
 
     .filter {
+      display: flex;
+      justify-content: space-between;
       input {
         border: 1px solid #e6e6e6;
         width: 300px;
         padding: 10px;
         border-radius: 5px;
         font-size: 0.9rem;
+        max-width: 300px !important;
+      }
+      button {
+        max-height: 35px;
       }
     }
 
@@ -67,6 +73,10 @@
           border-bottom: 1px solid transparent;
         }
       }
+    }
+
+    ::ng-deep .group-info {
+      border: none !important;
     }
   }
 }

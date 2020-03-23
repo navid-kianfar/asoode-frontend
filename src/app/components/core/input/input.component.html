@@ -13,7 +13,8 @@
       }}"
     >
       <i *ngIf="prependIcon" [class]="prependIcon"></i>
-      <input [appOnlyNumber]="numeric"
+      <input
+        [appOnlyNumber]="numeric"
         [autofocus]="autofocus"
         (focus)="onFocus()"
         (blur)="onBlur()"

@@ -8,6 +8,7 @@ import { AccessType } from '../../../library/app/enums';
   styleUrls: ['./invite-people.component.scss'],
 })
 export class InvitePeopleComponent implements OnInit {
+  @Input() exclude: string[];
   @Input() groups: InviteViewModel[];
   @Input() members: InviteViewModel[];
   @Output() groupsChange = new EventEmitter<InviteViewModel[]>();

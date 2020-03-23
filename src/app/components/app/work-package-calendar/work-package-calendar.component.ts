@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {WorkPackageViewModel} from '../../../view-models/projects/project-types';
+import { Component, Input, OnInit } from '@angular/core';
+import { WorkPackageViewModel } from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-work-package-calendar',

@@ -1,10 +1,10 @@
-import {Injectable} from '@angular/core';
-import {HttpService} from '../core/http.service';
-import {OperationResult} from '../../library/core/operation-result';
-import {GroupViewModel} from '../../view-models/groups/group-types';
-import {OperationResultStatus} from '../../library/core/enums';
-import {AccessType} from '../../library/app/enums';
-import {IdentityService} from '../auth/identity.service';
+import { Injectable } from '@angular/core';
+import { HttpService } from '../core/http.service';
+import { OperationResult } from '../../library/core/operation-result';
+import { GroupViewModel } from '../../view-models/groups/group-types';
+import { OperationResultStatus } from '../../library/core/enums';
+import { AccessType } from '../../library/app/enums';
+import { IdentityService } from '../auth/identity.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,16 +17,24 @@ export class GroupService {
     private readonly identityService: IdentityService,
   ) {}
 
-  getPermission(groupId: string): AccessType {
-    const grp = this.groups.find(g => g.id === groupId);
-    const access = grp.members.find(m => m.id === this.identityService.identity.userId);
+  getPermission(group: GroupViewModel | string): AccessType {
+    const grp =
+      typeof group === 'string' ? this.groups.find(g => g.id === group) : group;
+    const access = grp.members.find(
+      m => m.recordId === this.identityService.identity.userId,
+    );
     if (access) {
       return access.access;
     }
 
-    // TODO fix this
-
-    return AccessType.Editor;
+    const multiple = [];
+    for (const ga of grp.members.filter(m => m.isGroup)) {
+      const found = this.groups.find(k => k.id === ga.recordId);
+      if (found) {
+        multiple.push(found.access);
+      }
+    }
+    return multiple.sort()[0];
   }
 
   async load(): Promise<OperationResult<GroupViewModel[]>> {

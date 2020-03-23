@@ -1,5 +1,6 @@
 import { BaseViewModel } from '../core/general-types';
 import { AccessType, GroupType } from '../../library/app/enums';
+import { MemberInfoViewModel } from '../auth/identity-types';
 
 export interface GroupViewModel extends BaseViewModel {
   access?: AccessType;
@@ -32,15 +33,11 @@ export interface GroupViewModel extends BaseViewModel {
   employees?: number;
   members: GroupMemberViewModel[];
 }
-export interface GroupMemberViewModel {
-  id: string;
-  email: string;
-  firstName: string;
-  fullName: string;
-  initials: string;
-  lastName: string;
-  phoneNumber: string;
-  username: string;
-  bio: string;
+export interface GroupMemberViewModel extends BaseViewModel {
+  isGroup: string;
+  recordId: string;
+  groupId: string;
+  member: MemberInfoViewModel;
   access: AccessType;
+  waiting?: boolean;
 }

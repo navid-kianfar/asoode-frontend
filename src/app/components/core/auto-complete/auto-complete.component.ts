@@ -35,7 +35,9 @@ export class AutoCompleteComponent implements OnInit {
     private readonly ref: ElementRef,
   ) {}
 
-  displayFn(value) { return value; }
+  displayFn(value) {
+    return value;
+  }
 
   ngOnInit() {
     const input = this.ref.nativeElement.querySelectorAll('input')[0];

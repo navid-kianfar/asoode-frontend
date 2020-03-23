@@ -9,7 +9,8 @@ import {
   IFormElementVerification,
   FormViewModel,
   IFormElementCheckbox,
-  IFormElementLabel, IFormElementDatePicker,
+  IFormElementLabel,
+  IFormElementDatePicker,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 import { CaptchaObject } from '../../view-models/core/captcha-types';

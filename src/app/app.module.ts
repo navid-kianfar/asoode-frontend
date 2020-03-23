@@ -144,6 +144,7 @@ import { WorkPackageCalendarComponent } from './components/app/work-package-cale
 import { ChangeEmailComponent } from './modals/change-email/change-email.component';
 import { ReloadOnParamsChangedDirective } from './directives/core/reload-on-params-changed.directive';
 import { GroupDetailComponent } from './modals/group-detail/group-detail.component';
+import { InviteModalComponent } from './modals/invite-modal/invite-modal.component';
 
 @NgModule({
   declarations: [
@@ -255,6 +256,7 @@ import { GroupDetailComponent } from './modals/group-detail/group-detail.compone
     ChangeEmailComponent,
     ReloadOnParamsChangedDirective,
     GroupDetailComponent,
+    InviteModalComponent,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -263,7 +265,8 @@ import { GroupDetailComponent } from './modals/group-detail/group-detail.compone
     CreateWizardComponent,
     MessengerSettingComponent,
     ChangeEmailComponent,
-    GroupDetailComponent
+    GroupDetailComponent,
+    InviteModalComponent,
   ],
   imports: [
     BrowserModule,

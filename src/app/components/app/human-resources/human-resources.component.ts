@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
-import {AccessType} from '../../../library/app/enums';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-human-resources',

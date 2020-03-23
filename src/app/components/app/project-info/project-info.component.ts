@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { Router } from '@angular/router';
-import {ProjectFilter} from '../../../library/app/enums';
+import { ProjectFilter } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-info',
@@ -21,6 +21,8 @@ export class ProjectInfoComponent implements OnInit {
       this.router.navigateByUrl('project/' + this.project.id);
       return;
     }
-    this.router.navigateByUrl('work-package/' + this.project.workPackages[0].id);
+    this.router.navigateByUrl(
+      'work-package/' + this.project.workPackages[0].id,
+    );
   }
 }

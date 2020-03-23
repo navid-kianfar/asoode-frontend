@@ -3,6 +3,7 @@
   <mat-tab [label]="'INVITE_GROUP' | translate">
     <ng-template matTabContent>
       <app-invite-group
+        [exclude]="exclude"
         [groups]="groups"
         (groupsChange)="updateGroups($event)"
       ></app-invite-group>
@@ -11,6 +12,7 @@
   <mat-tab [label]="'INVITE_INDIVIDUALS' | translate">
     <ng-template matTabContent>
       <app-invite-member
+        [exclude]="exclude"
         [members]="members"
         (membersChange)="updateMembers($event)"
       ></app-invite-member>

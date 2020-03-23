@@ -30,32 +30,50 @@
           <mat-tab-group animationDuration="0ms">
             <mat-tab [label]="'ORGANIZATION_CHART' | translate">
               <ng-template matTabContent>
-                <app-group-chart [permission]="permission" [group]="group"></app-group-chart>
+                <app-group-chart
+                  [permission]="permission"
+                  [group]="group"
+                ></app-group-chart>
               </ng-template>
             </mat-tab>
             <mat-tab [label]="'MEMBERS' | translate">
               <ng-template matTabContent>
-                <app-group-members [permission]="permission" [group]="group"></app-group-members>
+                <app-group-members
+                  [permission]="permission"
+                  [group]="group"
+                ></app-group-members>
               </ng-template>
             </mat-tab>
             <mat-tab [label]="'PROJECTS' | translate">
               <ng-template matTabContent>
-                <app-group-projects [permission]="permission" [group]="group"></app-group-projects>
+                <app-group-projects
+                  [permission]="permission"
+                  [group]="group"
+                ></app-group-projects>
               </ng-template>
             </mat-tab>
             <mat-tab [label]="'HUMAN_RESOURCES' | translate">
               <ng-template matTabContent>
-                <app-human-resources [permission]="permission" [group]="group"></app-human-resources>
+                <app-human-resources
+                  [permission]="permission"
+                  [group]="group"
+                ></app-human-resources>
               </ng-template>
             </mat-tab>
             <mat-tab [label]="'TIME_SPENT' | translate">
               <ng-template matTabContent>
-                <app-group-timespent [permission]="permission" [group]="group"></app-group-timespent>
+                <app-group-timespent
+                  [permission]="permission"
+                  [group]="group"
+                ></app-group-timespent>
               </ng-template>
             </mat-tab>
             <mat-tab [label]="'REPORTS' | translate">
               <ng-template matTabContent>
-                <app-group-reports [permission]="permission" [group]="group"></app-group-reports>
+                <app-group-reports
+                  [permission]="permission"
+                  [group]="group"
+                ></app-group-reports>
               </ng-template>
             </mat-tab>
           </mat-tab-group>

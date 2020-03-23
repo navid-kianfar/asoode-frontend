@@ -29,8 +29,7 @@ export class InputComponent implements OnInit {
 
   focusState: string;
 
-  constructor() {
-  }
+  constructor() {}
 
   ngOnInit() {
     this.focusState = 'no-focus';

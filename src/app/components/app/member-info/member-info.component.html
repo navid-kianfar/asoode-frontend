@@ -8,7 +8,10 @@
     <img [src]="model.avatar" />
   </div>
   <div *ngIf="!model.avatar" class="initials-holder">
-    <div class="initials">{{ model.initials }}</div>
+    <div class="initials">
+      <!--      {{ model.initials }}-->
+      <i class="icon-user"></i>
+    </div>
   </div>
   <div class="info">
     <div class="name">{{ model.fullName }}</div>

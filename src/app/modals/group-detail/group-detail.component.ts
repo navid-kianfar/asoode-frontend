@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {GroupViewModel} from '../../view-models/groups/group-types';
-import {FormViewModel} from '../../components/core/form/contracts';
-import {FormService} from '../../services/core/form.service';
-import {OperationResultStatus} from '../../library/core/enums';
-import {NotificationService} from '../../services/core/notification.service';
-import {GroupService} from '../../services/groups/group.service';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { GroupViewModel } from '../../view-models/groups/group-types';
+import { FormViewModel } from '../../components/core/form/contracts';
+import { FormService } from '../../services/core/form.service';
+import { OperationResultStatus } from '../../library/core/enums';
+import { NotificationService } from '../../services/core/notification.service';
+import { GroupService } from '../../services/groups/group.service';
 
 @Component({
   selector: 'app-group-detail',
   templateUrl: './group-detail.component.html',
-  styleUrls: ['./group-detail.component.scss']
+  styleUrls: ['./group-detail.component.scss'],
 })
 export class GroupDetailComponent
-  extends SimpleModalComponent<{group: GroupViewModel, canEdit: boolean}, boolean>
+  extends SimpleModalComponent<
+    { group: GroupViewModel; canEdit: boolean },
+    boolean
+  >
   implements OnInit {
   group: GroupViewModel;
   canEdit: boolean;
@@ -24,7 +27,9 @@ export class GroupDetailComponent
     private readonly formService: FormService,
     private readonly notificationService: NotificationService,
     private readonly groupService: GroupService,
-  ) { super(); }
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.form = [
@@ -36,9 +41,9 @@ export class GroupDetailComponent
             validation: {
               required: {
                 value: true,
-                message: 'GROUP_TITLE_REQUIRED'
-              }
-            }
+                message: 'GROUP_TITLE_REQUIRED',
+              },
+            },
           }),
           this.formService.createInput({
             config: { field: 'description', label: 'DESCRIPTION' },
@@ -108,15 +113,17 @@ export class GroupDetailComponent
             config: { field: 'employees', label: 'NO_OF_EMPLOYEES' },
             params: { model: undefined, numeric: true },
           }),
-        ]
-      }
+        ],
+      },
     ];
     this.formService.setModel(this.form, this.group);
   }
 
   async save() {
     const model = this.formService.prepare(this.form);
-    if (!model) { return; }
+    if (!model) {
+      return;
+    }
     this.waiting = true;
     const op = await this.groupService.edit(this.group.id, model);
     this.waiting = false;
