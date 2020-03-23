@@ -5,6 +5,7 @@ import {
   ProjectViewModel,
 } from '../../../view-models/projects/project-types';
 import { MockService } from '../../../services/mock.service';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-objective',
@@ -13,6 +14,7 @@ import { MockService } from '../../../services/mock.service';
 })
 export class ProjectObjectiveComponent implements OnInit {
   @Input() model: ProjectViewModel;
+  @Input() permission: AccessType;
   selected: WorkPackageObjectiveViewModel;
   estimated: ProjectObjectiveEstimatedPriceViewModel[];
   estimatedTotalTime: number;

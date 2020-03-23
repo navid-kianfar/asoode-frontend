@@ -34,7 +34,7 @@ export interface GroupViewModel extends BaseViewModel {
   members: GroupMemberViewModel[];
 }
 export interface GroupMemberViewModel extends BaseViewModel {
-  isGroup: string;
+  isGroup: boolean;
   recordId: string;
   groupId: string;
   member: MemberInfoViewModel;

@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {InviteViewModel} from '../../view-models/auth/identity-types';
-import {GroupService} from '../../services/groups/group.service';
-import {OperationResult} from '../../library/core/operation-result';
-import {OperationResultStatus} from '../../library/core/enums';
+import { Component, OnInit } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { InviteViewModel } from '../../view-models/auth/identity-types';
+import { GroupService } from '../../services/groups/group.service';
+import { OperationResult } from '../../library/core/operation-result';
+import { OperationResultStatus } from '../../library/core/enums';
 
 @Component({
   selector: 'app-invite-modal',
@@ -11,11 +11,14 @@ import {OperationResultStatus} from '../../library/core/enums';
   styleUrls: ['./invite-modal.component.scss'],
 })
 export class InviteModalComponent
-  extends SimpleModalComponent<{
-    existing: any[],
-    exclude: string[],
-    handler: (members) => Promise<OperationResult<boolean>>
-  }, void>
+  extends SimpleModalComponent<
+    {
+      existing: any[];
+      exclude: string[];
+      handler: (members) => Promise<OperationResult<boolean>>;
+    },
+    void
+  >
   implements OnInit {
   constructor(private readonly groupService: GroupService) {
     super();

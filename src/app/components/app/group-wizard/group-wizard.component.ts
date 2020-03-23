@@ -7,7 +7,7 @@ import { GroupService } from '../../../services/groups/group.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ValidationService } from '../../../services/core/validation.service';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-group-wizard',

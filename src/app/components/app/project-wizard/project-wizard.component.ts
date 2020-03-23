@@ -12,7 +12,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { InviteViewModel } from '../../../view-models/auth/identity-types';
 import { ProjectService } from '../../../services/projects/project.service';
 import { NotificationService } from '../../../services/core/notification.service';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-project-wizard',

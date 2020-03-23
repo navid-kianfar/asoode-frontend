@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchPipe implements PipeTransform {
   public transform(value, keys: string[], term: any): any[] {
-    if (!term) {
+    if (term === undefined || term === '') {
       return value;
     }
     if (typeof term === 'string') {

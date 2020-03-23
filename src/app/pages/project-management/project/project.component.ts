@@ -3,6 +3,7 @@ import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { MockService } from '../../../services/mock.service';
 import { ProjectService } from '../../../services/projects/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project',
@@ -13,6 +14,7 @@ export class ProjectComponent implements OnInit {
   ViewMode = ViewMode;
   mode: ViewMode;
   project: ProjectViewModel;
+  permission: AccessType;
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
@@ -27,6 +29,7 @@ export class ProjectComponent implements OnInit {
       this.router.navigateByUrl('dashboard');
       return;
     }
+    this.permission = this.projectService.getPermission(this.project);
   }
 }
 export enum ViewMode {

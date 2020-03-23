@@ -3,6 +3,7 @@ import {
   ProjectSeasonViewModel,
   ProjectViewModel,
 } from '../../../view-models/projects/project-types';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-season',
@@ -11,6 +12,7 @@ import {
 })
 export class ProjectSeasonComponent implements OnInit {
   @Input() model: ProjectViewModel;
+  @Input() permission: AccessType;
   selected: ProjectSeasonViewModel;
   constructor() {}
 

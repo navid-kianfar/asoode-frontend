@@ -145,6 +145,7 @@ import { ChangeEmailComponent } from './modals/change-email/change-email.compone
 import { ReloadOnParamsChangedDirective } from './directives/core/reload-on-params-changed.directive';
 import { GroupDetailComponent } from './modals/group-detail/group-detail.component';
 import { InviteModalComponent } from './modals/invite-modal/invite-modal.component';
+import { GroupNamePipe } from './pipes/app/group-name.pipe';
 
 @NgModule({
   declarations: [
@@ -257,6 +258,7 @@ import { InviteModalComponent } from './modals/invite-modal/invite-modal.compone
     ReloadOnParamsChangedDirective,
     GroupDetailComponent,
     InviteModalComponent,
+    GroupNamePipe,
   ],
   entryComponents: [
     ConfirmComponent,

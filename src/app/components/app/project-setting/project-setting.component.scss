@@ -92,5 +92,9 @@
         }
       }
     }
+
+    ::ng-deep .group-info {
+      border: none !important;
+    }
   }
 }

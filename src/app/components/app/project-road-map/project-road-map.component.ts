@@ -3,6 +3,7 @@ import {
   ProjectViewModel,
   SubProjectViewModel,
 } from '../../../view-models/projects/project-types';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-road-map',
@@ -11,6 +12,7 @@ import {
 })
 export class ProjectRoadMapComponent implements OnInit {
   @Input() model: ProjectViewModel;
+  @Input() permission: AccessType;
   subProjects: SubProjectViewModel[];
   constructor() {}
 

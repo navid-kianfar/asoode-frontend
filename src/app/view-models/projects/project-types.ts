@@ -4,7 +4,7 @@ import {
   BoardTemplate,
   WorkPackageCommentPermission,
 } from '../../library/app/enums';
-import {MemberInfoViewModel} from '../auth/identity-types';
+import { MemberInfoViewModel } from '../auth/identity-types';
 
 export interface ProjectObjectiveEstimatedPriceViewModel {
   date: Date;
@@ -46,7 +46,7 @@ export interface ProjectViewModel extends BaseViewModel {
   workPackages: WorkPackageViewModel[];
 }
 export interface ProjectMemberViewModel extends BaseViewModel {
-  isGroup: string;
+  isGroup: boolean;
   recordId: string;
   groupId: string;
   member: MemberInfoViewModel;

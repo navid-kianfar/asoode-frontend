@@ -4,6 +4,7 @@ import {
   SubProjectViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-tree',
@@ -12,6 +13,7 @@ import {
 })
 export class ProjectTreeComponent implements OnInit {
   @Input() model: ProjectViewModel;
+  @Input() permission: AccessType;
   subProjects: SubProjectViewModel[];
   workPackages: WorkPackageViewModel[];
   constructor() {}

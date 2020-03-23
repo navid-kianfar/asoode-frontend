@@ -41,7 +41,13 @@
         <h4>{{ 'PROJECT_MEMBERS' | translate }}</h4>
       </div>
       <div class="action">
-        <button mat-stroked-button>
+        <button
+          (click)="invite()"
+          *ngIf="
+            permission === AccessType.Admin || permission === AccessType.Owner
+          "
+          mat-stroked-button
+        >
           {{ 'INVITE_MEMBER' | translate }}
         </button>
       </div>
@@ -57,24 +63,45 @@
       <div class="members">
         <div *ngFor="let member of model.members" class="member">
           <div class="info">
-            <app-member-info [model]="member"></app-member-info>
+            <app-member-info
+              *ngIf="!member.isGroup"
+              [model]="member.member"
+            ></app-member-info>
+            <app-group-info
+              *ngIf="member.isGroup"
+              [id]="member.recordId"
+            ></app-group-info>
           </div>
           <div class="access">
-            <app-access-list [(access)]="member.access"></app-access-list>
+            <app-access-list
+              [disabled]="member.waiting || !canRemoveAccess(member)"
+              [access]="member.access"
+              (accessChange)="accessChange(member, $event)"
+            ></app-access-list
+            >&nbsp;
           </div>
           <div class="action">
             <button
-              *ngIf="member.access !== AccessType.Owner"
+              [disabled]="member.waiting"
+              (click)="removeAccess(member)"
+              *ngIf="canRemoveAccess(member)"
               mat-flat-button
               color="warn"
             >
+              <i *ngIf="member.waiting" class="icon-spin icon-spinner2"></i>
               {{ 'REMOVE_ACCESS' | translate }}
             </button>
             <button
-              *ngIf="member.access === AccessType.Owner"
+              (click)="transferOwnership(member)"
+              [disabled]="member.waiting"
+              *ngIf="
+                member.access === AccessType.Owner &&
+                permission === AccessType.Owner
+              "
               mat-flat-button
               color="accent"
             >
+              <i *ngIf="member.waiting" class="icon-spin icon-spinner2"></i>
               {{ 'TRANSFER_OWNERSHIP' | translate }}
             </button>
           </div>

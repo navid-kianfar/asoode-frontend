@@ -7,10 +7,16 @@
         <div class="member">
           <i class="icon-users"></i>&nbsp;
           <span>
-            {{ project.members.length }}&nbsp;
+            {{ (project.members | search: ['isGroup']:false).length }}&nbsp;
             {{ 'INDIVIDUAL_USERS' | translate }}
           </span>
         </div>
+        <ng-container *ngFor="let m of project.members">
+          <div *ngIf="m.isGroup" class="member">
+            <i class="icon-team"></i>&nbsp;
+            <span>{{ m.recordId | groupName }}</span>
+          </div>
+        </ng-container>
       </div>
     </div>
     <div class="reports">
@@ -169,19 +175,34 @@
     </div>
     <div class="wrapper">
       <div *ngIf="mode === ViewMode.RoadMap" class="road-map-container">
-        <app-project-road-map [model]="project"></app-project-road-map>
+        <app-project-road-map
+          [permission]="permission"
+          [model]="project"
+        ></app-project-road-map>
       </div>
       <div *ngIf="mode === ViewMode.Tree" class="tree-container">
-        <app-project-tree [model]="project"></app-project-tree>
+        <app-project-tree
+          [permission]="permission"
+          [model]="project"
+        ></app-project-tree>
       </div>
       <div *ngIf="mode === ViewMode.Seasons" class="seasons-container">
-        <app-project-season [model]="project"></app-project-season>
+        <app-project-season
+          [permission]="permission"
+          [model]="project"
+        ></app-project-season>
       </div>
       <div *ngIf="mode === ViewMode.Objectives" class="objectives-container">
-        <app-project-objective [model]="project"></app-project-objective>
+        <app-project-objective
+          [permission]="permission"
+          [model]="project"
+        ></app-project-objective>
       </div>
       <div *ngIf="mode === ViewMode.Settings" class="settings-container">
-        <app-project-setting [model]="project"></app-project-setting>
+        <app-project-setting
+          [permission]="permission"
+          [model]="project"
+        ></app-project-setting>
       </div>
     </div>
   </div>

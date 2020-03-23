@@ -28,15 +28,19 @@
       }
 
       .members {
+        display: flex;
+        align-items: center;
+
         .member {
           display: flex;
           color: #666666;
           font-size: 0.8rem;
-          align-content: center;
+          align-items: center;
+          margin-inline-end: 30px;
           i {
             background: #fff;
             color: #444444;
-            padding: 6px;
+            padding: 10px;
             font-size: 0.8rem;
             border-radius: 20px;
           }

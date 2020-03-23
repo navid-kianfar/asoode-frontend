@@ -1,6 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { AccessType } from 'src/app/library/app/enums';
+import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
+import { ProjectMemberViewModel } from '../../../view-models/projects/project-types';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { OperationResult } from '../../../library/core/operation-result';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { ModalService } from '../../../services/core/modal.service';
+import { TranslateService } from '../../../services/core/translate.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { GroupService } from '../../../services/groups/group.service';
 
 @Component({
   selector: 'app-project-setting',
@@ -10,7 +19,79 @@ import { AccessType } from 'src/app/library/app/enums';
 export class ProjectSettingComponent implements OnInit {
   AccessType = AccessType;
   @Input() model: ProjectViewModel;
-  constructor() {}
+  @Input() permission: AccessType;
+  constructor(
+    private readonly modalService: ModalService,
+    private readonly projectService: ProjectService,
+    private readonly groupService: GroupService,
+    private readonly translateService: TranslateService,
+  ) {}
 
   ngOnInit() {}
+  invite() {
+    this.modalService
+      .show(InviteModalComponent, {
+        existing: this.model.members,
+        exclude: [this.model.userId, this.model.id],
+        handler: async access => {
+          return this.projectService.addAccess(this.model.id, access);
+        },
+      })
+      .subscribe(() => {});
+  }
+
+  removeAccess(member: ProjectMemberViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
+      [
+        member.isGroup
+          ? this.groupService.groups.find(g => g.id === member.recordId).title
+          : member.member.fullName,
+      ],
+    );
+    this.modalService
+      .confirm({
+        title: 'REMOVE_ACCESS',
+        message: 'REMOVE_MEMBER_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_ACCESS',
+        cancelLabel: 'CANCEL',
+        action: async () => OperationResult.Success(true),
+      })
+      .subscribe(async confirmed => {
+        if (!confirmed) {
+          return;
+        }
+        member.waiting = true;
+        const op = await this.projectService.removeAccess(member.id);
+        member.waiting = false;
+        if (op.status !== OperationResultStatus.Success) {
+          // TODO: handle error
+          return;
+        }
+        this.model.members = this.model.members.filter(g => g !== member);
+      });
+  }
+
+  async accessChange(member: ProjectMemberViewModel, access: AccessType) {
+    member.access = access;
+    member.waiting = true;
+    const op = await this.projectService.changeAccess(member.id, { access });
+    member.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+  transferOwnership(member: ProjectMemberViewModel) {}
+
+  canRemoveAccess(member: ProjectMemberViewModel): boolean {
+    if (member.access === AccessType.Owner) {
+      return false;
+    }
+    return (
+      this.permission === AccessType.Owner ||
+      this.permission === AccessType.Admin
+    );
+  }
 }
