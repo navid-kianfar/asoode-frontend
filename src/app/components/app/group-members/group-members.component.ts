@@ -9,6 +9,7 @@ import { AccessType } from 'src/app/library/app/enums';
 })
 export class GroupMembersComponent implements OnInit {
   @Input() group: GroupViewModel;
+  @Input() permission: AccessType;
   AccessType = AccessType;
   filter: string;
   query: string[] = ['fullName', 'username', 'email', 'phoneNumber', 'bio'];

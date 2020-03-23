@@ -21,10 +21,12 @@
         <div class="status"></div>
         <div class="actions">
           <app-access-list [(access)]="member.access"></app-access-list>&nbsp;
-          <button *ngIf="member.access !== AccessType.Owner" mat-flat-button color="warn">
+          <button *ngIf="member.access !== AccessType.Owner &&
+          (permission === AccessType.Owner || permission === AccessType.Admin)" mat-flat-button color="warn">
             {{ 'REMOVE_ACCESS' | translate }}
           </button>
-          <button *ngIf="member.access === AccessType.Owner" mat-flat-button color="accent">
+          <button *ngIf="member.access === AccessType.Owner && permission === AccessType.Owner"
+                  mat-flat-button color="accent">
             {{ 'TRANSFER_OWNERSHIP' | translate }}
           </button>
         </div>

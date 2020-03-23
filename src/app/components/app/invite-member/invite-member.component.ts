@@ -4,6 +4,7 @@ import {
   InviteViewModel,
   MemberInfoViewModel,
 } from '../../../view-models/auth/identity-types';
+import {ValidationService} from '../../../services/core/validation.service';
 
 @Component({
   selector: 'app-invite-member',
@@ -34,6 +35,10 @@ export class InviteMemberComponent implements OnInit {
           fullName: 'UNKNOWN',
           initials: 'UK',
         } as MemberInfoViewModel);
+
+    if (!ValidationService.isEmail(model.email)) {
+      return;
+    }
     const found = this.members.find(m => {
       return (
         m.model.email.toLowerCase().trim() ===
@@ -53,11 +58,13 @@ export class InviteMemberComponent implements OnInit {
     ];
     this.currentRole = AccessType.Editor;
     this.currentEmail = '';
+    this.members = members;
     this.membersChange.emit(members);
   }
 
   remove(member: InviteViewModel) {
     const filtered = this.members.filter(m => m !== member);
+    this.members = filtered;
     this.membersChange.emit(filtered);
   }
 }

@@ -1,5 +1,127 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 
+const data = [
+  {
+    name: '1 دی',
+    series: [
+      {
+        name: 'A',
+        value: 100,
+      },
+      {
+        name: 'B',
+        value: 70,
+      },
+      {
+        name: 'C',
+        value: 20,
+      },
+    ],
+  },
+  {
+    name: '2 دی',
+    series: [
+      {
+        name: 'A',
+        value: 100,
+      },
+      {
+        name: 'B',
+        value: 70,
+      },
+      {
+        name: 'C',
+        value: 20,
+      },
+    ],
+  },
+  {
+    name: '3 دی',
+    series: [
+      {
+        name: 'A',
+        value: 100,
+      },
+      {
+        name: 'B',
+        value: 70,
+      },
+      {
+        name: 'C',
+        value: 20,
+      },
+    ],
+  },
+  {
+    name: '4 دی',
+    series: [
+      {
+        name: 'A',
+        value: 100,
+      },
+      {
+        name: 'B',
+        value: 70,
+      },
+      {
+        name: 'C',
+        value: 20,
+      },
+    ],
+  },
+  {
+    name: '5 دی',
+    series: [
+      {
+        name: 'A',
+        value: 100,
+      },
+      {
+        name: 'B',
+        value: 70,
+      },
+      {
+        name: 'C',
+        value: 20,
+      },
+    ],
+  },
+  {
+    name: '6 دی',
+    series: [
+      {
+        name: 'A',
+        value: 100,
+      },
+      {
+        name: 'B',
+        value: 70,
+      },
+      {
+        name: 'C',
+        value: 20,
+      },
+    ],
+  },
+  {
+    name: '7 دی',
+    series: [
+      {
+        name: 'A',
+        value: 100,
+      },
+      {
+        name: 'B',
+        value: 70,
+      },
+      {
+        name: 'C',
+        value: 20,
+      },
+    ],
+  },
+];
+
 @Component({
   selector: 'app-dashboard-progress',
   templateUrl: './dashboard-progress.component.html',
@@ -36,130 +158,9 @@ export class DashboardProgressComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.calculateView();
-
-    const data = [
-      {
-        name: '1 دی',
-        series: [
-          {
-            name: 'A',
-            value: 100,
-          },
-          {
-            name: 'B',
-            value: 70,
-          },
-          {
-            name: 'C',
-            value: 20,
-          },
-        ],
-      },
-      {
-        name: '2 دی',
-        series: [
-          {
-            name: 'A',
-            value: 100,
-          },
-          {
-            name: 'B',
-            value: 70,
-          },
-          {
-            name: 'C',
-            value: 20,
-          },
-        ],
-      },
-      {
-        name: '3 دی',
-        series: [
-          {
-            name: 'A',
-            value: 100,
-          },
-          {
-            name: 'B',
-            value: 70,
-          },
-          {
-            name: 'C',
-            value: 20,
-          },
-        ],
-      },
-      {
-        name: '4 دی',
-        series: [
-          {
-            name: 'A',
-            value: 100,
-          },
-          {
-            name: 'B',
-            value: 70,
-          },
-          {
-            name: 'C',
-            value: 20,
-          },
-        ],
-      },
-      {
-        name: '5 دی',
-        series: [
-          {
-            name: 'A',
-            value: 100,
-          },
-          {
-            name: 'B',
-            value: 70,
-          },
-          {
-            name: 'C',
-            value: 20,
-          },
-        ],
-      },
-      {
-        name: '6 دی',
-        series: [
-          {
-            name: 'A',
-            value: 100,
-          },
-          {
-            name: 'B',
-            value: 70,
-          },
-          {
-            name: 'C',
-            value: 20,
-          },
-        ],
-      },
-      {
-        name: '7 دی',
-        series: [
-          {
-            name: 'A',
-            value: 100,
-          },
-          {
-            name: 'B',
-            value: 70,
-          },
-          {
-            name: 'C',
-            value: 20,
-          },
-        ],
-      },
-    ];
-
-    this.chartData = data;
+    setTimeout(() => {
+      this.calculateView();
+      this.chartData = data;
+    }, 500);
   }
 }

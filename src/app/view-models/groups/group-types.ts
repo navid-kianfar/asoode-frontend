@@ -33,6 +33,7 @@ export interface GroupViewModel extends BaseViewModel {
   members: GroupMemberViewModel[];
 }
 export interface GroupMemberViewModel {
+  id: string;
   email: string;
   firstName: string;
   fullName: string;

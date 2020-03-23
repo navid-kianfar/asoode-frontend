@@ -34,6 +34,7 @@ export interface IFormElementInput extends IFormElement {
     readonly?: boolean;
     disabled?: boolean;
     growable?: boolean;
+    numeric?: boolean;
     appendIcon?: string;
     prependIcon?: string;
     label?: string;
@@ -77,7 +78,15 @@ export interface IFormElement {
   validation?: IFormElementStringValidation;
   params: any;
 }
-
+export interface IFormElementDatePicker extends IFormElement {
+  params: {
+    min?: Date;
+    max?: Date;
+    model: Date;
+    culture?: string;
+    disabled?: boolean;
+  };
+}
 export interface IFormElementDropDown extends IFormElement {
   params: {
     model: any;

@@ -9,8 +9,7 @@ import { MockService } from '../../../services/mock.service';
 })
 export class DashboardProjectComponent implements OnInit {
   constructor(
-    // readonly projectService: ProjectService,
-    readonly projectService: MockService,
+    readonly projectService: ProjectService,
   ) {}
 
   ngOnInit() {}

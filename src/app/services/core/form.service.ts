@@ -9,7 +9,7 @@ import {
   IFormElementVerification,
   FormViewModel,
   IFormElementCheckbox,
-  IFormElementLabel,
+  IFormElementLabel, IFormElementDatePicker,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 import { CaptchaObject } from '../../view-models/core/captcha-types';
@@ -64,6 +64,11 @@ export class FormService {
     options.validation = options.validation || { required: { value: false } };
     return options;
   }
+  createDatePicker(options: IFormElementDatePicker): IFormElementDatePicker {
+    options.type = FormElementType.DatePicker;
+    options.validation = options.validation || { required: { value: false } };
+    return options;
+  }
   createCountryPicker(
     options: IFormElementCountryPicker,
   ): IFormElementDropDown {
@@ -81,7 +86,6 @@ export class FormService {
     casted.validation = casted.validation || { required: { value: false } };
     return casted;
   }
-
   createCaptcha(): IFormElementCaptcha {
     return {
       validation: {
@@ -322,7 +326,19 @@ export class FormService {
     return false;
   }
   private validateDate(element: IFormElement): boolean {
-    return false;
+    if (element.validation.required && element.validation.required.value) {
+      if (!element.params.model) {
+        element.validation.errors = [element.validation.required.message];
+        return false;
+      }
+    }
+    // if (element.validation.min && element.validation.required.value) {
+    //   if (!element.params.model) {
+    //     element.validation.errors = [element.validation.required.message];
+    //     return false;
+    //   }
+    // }
+    return true;
   }
   private validateColor(element: IFormElement): boolean {
     return false;

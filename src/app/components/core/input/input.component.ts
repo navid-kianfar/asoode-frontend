@@ -9,6 +9,7 @@ export class InputComponent implements OnInit {
   @Input() disabled: boolean;
   @Input() cssClass: string;
   @Input() readonly: boolean;
+  @Input() numeric: boolean;
   @Input() password: boolean;
   @Input() textArea: boolean;
   @Input() growable?: boolean;
@@ -28,10 +29,12 @@ export class InputComponent implements OnInit {
 
   focusState: string;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
     this.focusState = 'no-focus';
+    this.ltr = this.numeric;
   }
 
   onFocus() {

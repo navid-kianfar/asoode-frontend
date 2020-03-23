@@ -23,6 +23,7 @@ export class InvitePeopleComponent implements OnInit {
     this.groupsChange.emit(groups);
   }
   updateMembers(members: InviteViewModel[]) {
+    this.members = members;
     this.membersChange.emit(members);
   }
 }

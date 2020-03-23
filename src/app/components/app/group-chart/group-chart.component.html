@@ -8,7 +8,7 @@
     </div>
     <div *ngIf="!group.premium" class="free">
       <app-org-chart-node [groups]="groupService.groups" [canAdd]="true" [group]="group"></app-org-chart-node>
-      <div class="go-premium">
+      <div *ngIf="(permission === AccessType.Owner) || (permission === AccessType.Admin)" class="go-premium">
         <i class="icon-trophy4"></i>
         <h3>{{ 'GO_PREMIUM_DESCRIPTION' | translate }}</h3>
         <button mat-stroked-button>

@@ -143,6 +143,7 @@ import { WorkPackageTimeSpanComponent } from './components/app/work-package-time
 import { WorkPackageCalendarComponent } from './components/app/work-package-calendar/work-package-calendar.component';
 import { ChangeEmailComponent } from './modals/change-email/change-email.component';
 import { ReloadOnParamsChangedDirective } from './directives/core/reload-on-params-changed.directive';
+import { GroupDetailComponent } from './modals/group-detail/group-detail.component';
 
 @NgModule({
   declarations: [
@@ -253,6 +254,7 @@ import { ReloadOnParamsChangedDirective } from './directives/core/reload-on-para
     WorkPackageCalendarComponent,
     ChangeEmailComponent,
     ReloadOnParamsChangedDirective,
+    GroupDetailComponent,
   ],
   entryComponents: [
     ConfirmComponent,
@@ -261,6 +263,7 @@ import { ReloadOnParamsChangedDirective } from './directives/core/reload-on-para
     CreateWizardComponent,
     MessengerSettingComponent,
     ChangeEmailComponent,
+    GroupDetailComponent
   ],
   imports: [
     BrowserModule,

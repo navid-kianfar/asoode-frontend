@@ -6,7 +6,7 @@
     [readonly]="waiting || disabled"
     (focus)="onFocus()"
     (blur)="onBlur()"
-    appOnlyNumber
+    [appOnlyNumber]="true"
   />
   <div *ngIf="!image" class="loader">
     <span class="icon-spinner1 icon-spin"></span>
