@@ -27,7 +27,7 @@
 
   <ng-container *ngIf="mode === ViewMode.Invite">
     <div class="modal-body create-group">
-      <app-invite-people
+      <app-invite-people [exclude]="exclude"
         [(members)]="members"
         [(groups)]="groups"
       ></app-invite-people>

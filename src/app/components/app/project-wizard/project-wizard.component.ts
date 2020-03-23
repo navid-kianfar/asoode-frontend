@@ -12,6 +12,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { InviteViewModel } from '../../../view-models/auth/identity-types';
 import { ProjectService } from '../../../services/projects/project.service';
 import { NotificationService } from '../../../services/core/notification.service';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-project-wizard',
@@ -33,14 +34,20 @@ export class ProjectWizardComponent implements OnInit {
   members: InviteViewModel[];
   groups: InviteViewModel[];
   actionWaiting: boolean;
+  exclude: string[];
   constructor(
     readonly cultureService: CultureService,
     private readonly formService: FormService,
     readonly projectService: ProjectService,
+    readonly identityService: IdentityService,
     private readonly notificationService: NotificationService,
   ) {}
 
   ngOnInit() {
+    this.exclude = [
+      this.identityService.identity.userId,
+      this.identityService.profile.email,
+    ];
     this.members = [];
     this.groups = [];
     this.boardTemplate = BoardTemplate.Blank;

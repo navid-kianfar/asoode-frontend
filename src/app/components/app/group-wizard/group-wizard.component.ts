@@ -7,6 +7,7 @@ import { GroupService } from '../../../services/groups/group.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ValidationService } from '../../../services/core/validation.service';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-group-wizard',
@@ -23,14 +24,20 @@ export class GroupWizardComponent implements OnInit {
   members: InviteViewModel[];
   groups: InviteViewModel[];
   model: any = {};
+  exclude: string[];
   constructor(
     readonly cultureService: CultureService,
     private readonly formService: FormService,
     private readonly groupService: GroupService,
+    readonly identityService: IdentityService,
     private readonly notificationService: NotificationService,
   ) {}
 
   ngOnInit() {
+    this.exclude = [
+      this.identityService.identity.userId,
+      this.identityService.profile.email,
+    ];
     this.members = [];
     this.groups = [];
     this.mode = ViewMode.Form;

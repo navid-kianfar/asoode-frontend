@@ -6,6 +6,8 @@ import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.co
 import {OperationResult} from '../../../library/core/operation-result';
 import {GroupService} from '../../../services/groups/group.service';
 import {OperationResultStatus} from '../../../library/core/enums';
+import {TranslateService} from '../../../services/core/translate.service';
+import {StringHelpers} from '../../../helpers/string.helpers';
 
 @Component({
   selector: 'app-group-members',
@@ -20,6 +22,7 @@ export class GroupMembersComponent implements OnInit {
   constructor(
     private readonly modalService: ModalService,
     private readonly groupService: GroupService,
+    private readonly translateService: TranslateService,
   ) {}
 
   ngOnInit() {}
@@ -36,15 +39,33 @@ export class GroupMembersComponent implements OnInit {
       .subscribe(() => { });
   }
 
-  async removeAccess(member: GroupMemberViewModel) {
-    member.waiting = true;
-    const op = await this.groupService.removeAccess(member.id);
-    member.waiting = false;
-    if (op.status !== OperationResultStatus.Success) {
-      // TODO: handle error
-      return;
-    }
-    this.group.members = this.group.members.filter(g => g !== member);
+  removeAccess(member: GroupMemberViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
+    [
+           member.isGroup ?
+             this.groupService.groups.find(g => g.id === member.recordId).title :
+             member.member.fullName
+         ]
+    );
+    this.modalService.confirm({
+      title: 'REMOVE_ACCESS',
+      message: 'REMOVE_MEMBER_CONFIRM',
+      heading,
+      actionLabel: 'REMOVE_ACCESS',
+      cancelLabel: 'CANCEL',
+      action: async () => OperationResult.Success(true)
+    }).subscribe(async (confirmed) => {
+      if (!confirmed) { return; }
+      member.waiting = true;
+      const op = await this.groupService.removeAccess(member.id);
+      member.waiting = false;
+      if (op.status !== OperationResultStatus.Success) {
+        // TODO: handle error
+        return;
+      }
+      this.group.members = this.group.members.filter(g => g !== member);
+    });
   }
 
   async accessChange(member: GroupMemberViewModel, access: AccessType) {
