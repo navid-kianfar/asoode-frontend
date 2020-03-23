@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ProjectService } from '../../../services/projects/project.service';
 import { MockService } from '../../../services/mock.service';
+import {ProjectFilter} from '../../../library/app/enums';
 
 @Component({
   selector: 'app-dashboard-project',
@@ -8,6 +9,8 @@ import { MockService } from '../../../services/mock.service';
   styleUrls: ['./dashboard-project.component.scss'],
 })
 export class DashboardProjectComponent implements OnInit {
+  @Input() filter: ProjectFilter;
+  ProjectFilter = ProjectFilter;
   constructor(
     readonly projectService: ProjectService,
   ) {}

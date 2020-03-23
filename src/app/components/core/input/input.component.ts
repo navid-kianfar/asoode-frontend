@@ -34,7 +34,7 @@ export class InputComponent implements OnInit {
 
   ngOnInit() {
     this.focusState = 'no-focus';
-    this.ltr = this.numeric;
+    this.ltr = this.ltr || this.numeric;
   }
 
   onFocus() {

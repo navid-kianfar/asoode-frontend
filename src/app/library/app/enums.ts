@@ -68,3 +68,9 @@ export enum BoardTemplate {
   Departments = 4,
   Kanban = 5,
 }
+export enum ProjectFilter {
+  All = 0,
+  Simple = 1,
+  Complex = 2,
+  Public = 3
+}
