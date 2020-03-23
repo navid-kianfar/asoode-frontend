@@ -86,7 +86,7 @@ export class GroupWizardComponent implements OnInit {
   async createGroup($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.model.groups = this.groups
+    this.model.groups = (this.groups || [])
       .filter(g => g.selected)
       .map(g => {
         return {
@@ -94,7 +94,7 @@ export class GroupWizardComponent implements OnInit {
           access: g.access,
         };
       });
-    this.model.members = this.members.map(m => {
+    this.model.members = (this.members || []).map(m => {
       return {
         id: m.id,
         access: m.access,

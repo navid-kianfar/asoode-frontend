@@ -165,7 +165,7 @@ export class ProjectWizardComponent implements OnInit {
   async createProject($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.model.groups = this.groups
+    this.model.groups = (this.groups || [])
       .filter(g => g.selected)
       .map(g => {
         return {
@@ -173,7 +173,7 @@ export class ProjectWizardComponent implements OnInit {
           access: g.access,
         };
       });
-    this.model.members = this.members.map(m => {
+    this.model.members = (this.members || []).map(m => {
       return {
         id: m.id,
         access: m.access,

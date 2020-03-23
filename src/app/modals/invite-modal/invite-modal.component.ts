@@ -47,7 +47,7 @@ export class InviteModalComponent
     }
     this.actionWaiting = true;
     const model = {} as any;
-    model.groups = this.groups
+    model.groups = (this.groups || [])
       .filter(g => g.selected)
       .map(g => {
         return {
@@ -55,7 +55,7 @@ export class InviteModalComponent
           access: g.access,
         };
       });
-    model.members = this.members.map(m => {
+    model.members = (this.members || []).map(m => {
       return {
         id: m.id,
         access: m.access,
