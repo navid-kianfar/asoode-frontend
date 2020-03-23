@@ -4,6 +4,7 @@ import {
   BoardTemplate,
   WorkPackageCommentPermission,
 } from '../../library/app/enums';
+import {MemberInfoViewModel} from '../auth/identity-types';
 
 export interface ProjectObjectiveEstimatedPriceViewModel {
   date: Date;
@@ -45,15 +46,12 @@ export interface ProjectViewModel extends BaseViewModel {
   workPackages: WorkPackageViewModel[];
 }
 export interface ProjectMemberViewModel extends BaseViewModel {
-  email: string;
-  firstName: string;
-  fullName: string;
-  initials: string;
-  lastName: string;
-  phoneNumber: string;
-  username: string;
-  bio: string;
+  isGroup: string;
+  recordId: string;
+  groupId: string;
+  member: MemberInfoViewModel;
   access: AccessType;
+  waiting?: boolean;
 }
 export interface ProjectSeasonViewModel extends BaseViewModel {
   userId: string;
