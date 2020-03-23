@@ -38,6 +38,11 @@ export class InviteMemberComponent implements OnInit {
         } as MemberInfoViewModel);
 
     if (!ValidationService.isEmail(model.email)) {
+      // TODO: show error
+      return;
+    }
+    if (this.exclude.indexOf(model.id || model.email) !== -1) {
+      // TODO: show error
       return;
     }
     const found = this.members.find(m => {

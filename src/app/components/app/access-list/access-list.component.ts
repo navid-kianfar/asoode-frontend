@@ -46,4 +46,9 @@ export class AccessListComponent implements OnInit {
       });
     }
   }
+
+  onChanged($event: any) {
+    this.access = $event;
+    this.accessChange.emit($event);
+  }
 }

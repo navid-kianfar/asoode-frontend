@@ -30,7 +30,8 @@
         <div class="actions">
           <app-access-list
             [disabled]="member.waiting || !canRemoveAccess(member)"
-            [(access)]="member.access"
+            [access]="member.access"
+            (accessChange)="accessChange(member, $event)"
           ></app-access-list
           >&nbsp;
           <button

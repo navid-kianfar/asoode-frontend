@@ -1,21 +1,17 @@
 <h4>{{ 'INVITE_GROUP_DESCRIPTION' | translate }}</h4>
 <mat-tab-group animationDuration="0ms">
   <mat-tab [label]="'INVITE_GROUP' | translate">
-    <ng-template matTabContent>
-      <app-invite-group
-        [exclude]="exclude"
-        [groups]="groups"
-        (groupsChange)="updateGroups($event)"
-      ></app-invite-group>
-    </ng-template>
+    <app-invite-group
+      [exclude]="exclude"
+      [groups]="groups"
+      (groupsChange)="updateGroups($event)"
+    ></app-invite-group>
   </mat-tab>
   <mat-tab [label]="'INVITE_INDIVIDUALS' | translate">
-    <ng-template matTabContent>
-      <app-invite-member
-        [exclude]="exclude"
-        [members]="members"
-        (membersChange)="updateMembers($event)"
-      ></app-invite-member>
-    </ng-template>
+    <app-invite-member
+      [exclude]="exclude"
+      [members]="members"
+      (membersChange)="updateMembers($event)"
+    ></app-invite-member>
   </mat-tab>
 </mat-tab-group>

@@ -1,5 +1,6 @@
 <app-dropdown
   [disabled]="disabled || access === AccessType.Owner"
-  [(model)]="access"
+  [model]="access"
+  (modelChange)="onChanged($event)"
   [items]="roles"
 ></app-dropdown>

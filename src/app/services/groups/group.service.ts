@@ -52,4 +52,15 @@ export class GroupService {
   async edit(id: string, model: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/groups/${id}/edit`, model);
   }
+
+  async removeAccess(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/remove-access/${id}`);
+  }
+  async addAccess(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/${id}/add-access`, model);
+  }
+
+  async changeAccess(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/change-access/${id}`, model);
+  }
 }
