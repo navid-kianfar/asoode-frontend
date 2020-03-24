@@ -57,8 +57,13 @@ export class ProfileComponent implements OnInit {
           {
             elements: [
               this.formService.createInput({
-                config: { field: 'oldPassword', label: 'OLD_PASSWORD' },
-                params: { model: '', password: true, ltr: true },
+                config: { field: 'oldPassword' },
+                params: {
+                  model: '',
+                  password: true,
+                  ltr: true,
+                  placeHolder: 'OLD_PASSWORD',
+                },
                 validation: {
                   required: { value: true, message: 'OLD_PASSWORD_REQUIRED' },
                   minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
@@ -66,8 +71,13 @@ export class ProfileComponent implements OnInit {
                 },
               }),
               this.formService.createInput({
-                config: { field: 'password', label: 'PASSWORD' },
-                params: { model: '', password: true, ltr: true },
+                config: { field: 'password' },
+                params: {
+                  model: '',
+                  password: true,
+                  ltr: true,
+                  placeHolder: 'PASSWORD',
+                },
                 validation: {
                   required: { value: true, message: 'PASSWORD_REQUIRED' },
                   minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
@@ -75,8 +85,13 @@ export class ProfileComponent implements OnInit {
                 },
               }),
               this.formService.createInput({
-                config: { field: 'confirmPassword', label: 'CONFIRM_PASSWORD' },
-                params: { model: '', password: true, ltr: true },
+                config: { field: 'confirmPassword' },
+                params: {
+                  model: '',
+                  password: true,
+                  ltr: true,
+                  placeHolder: 'CONFIRM_PASSWORD',
+                },
                 validation: {
                   required: {
                     value: true,
@@ -95,7 +110,6 @@ export class ProfileComponent implements OnInit {
         action: (model, form) => this.changePassword(model, form),
         actionColor: 'primary',
         title: 'RESET_PASSWORD',
-        width: 350,
       })
       .subscribe(() => {});
   }

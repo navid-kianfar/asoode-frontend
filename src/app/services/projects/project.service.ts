@@ -51,10 +51,28 @@ export class ProjectService {
     );
   }
 
+  async createSubProject(
+    id: string,
+    params: any,
+  ): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/projects/${id}/sub/create`,
+      params,
+    );
+  }
   async changeAccess(id: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/projects/change-access/${id}`,
       model,
+    );
+  }
+  async createWorkPackage(
+    id: string,
+    parmas: any,
+  ): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/projects/${id}/package/create`,
+      parmas,
     );
   }
 

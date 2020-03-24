@@ -22,11 +22,11 @@
       ></mat-progress-bar>
       <h5>
         {{
-        'GROUP_DISK_USAGE_DETAIL'
-          | translate
-          | stringFormat
-          : group.diskSpaceUsed / 1024
-            : group.diskSpaceCapacity / 1024
+          'GROUP_DISK_USAGE_DETAIL'
+            | translate
+            | stringFormat
+              : group.diskSpaceUsed / 1024
+              : group.diskSpaceCapacity / 1024
         }}
       </h5>
     </div>
@@ -62,8 +62,8 @@
       </div>
       <div class="action">
         <button color="accent" mat-flat-button>
-          {{ 'ARCHIVE_GROUP' | translate }}
-        </button>&nbsp;
+          {{ 'ARCHIVE_GROUP' | translate }}</button
+        >&nbsp;
         <button color="warn" mat-flat-button>
           {{ 'DELETE_GROUP' | translate }}
         </button>

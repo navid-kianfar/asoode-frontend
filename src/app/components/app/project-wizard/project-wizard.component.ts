@@ -13,6 +13,7 @@ import { InviteViewModel } from '../../../view-models/auth/identity-types';
 import { ProjectService } from '../../../services/projects/project.service';
 import { NotificationService } from '../../../services/core/notification.service';
 import { IdentityService } from '../../../services/auth/identity.service';
+import { OperationResult } from '../../../library/core/operation-result';
 
 @Component({
   selector: 'app-project-wizard',
@@ -23,6 +24,8 @@ export class ProjectWizardComponent implements OnInit {
   ViewMode = ViewMode;
   BoardTemplate = BoardTemplate;
   @Input() complex: boolean;
+  @Input() projectId: string;
+  @Input() parentId: string;
   @Output() back = new EventEmitter();
   @Output() exit = new EventEmitter();
   mode: ViewMode;
@@ -89,14 +92,12 @@ export class ProjectWizardComponent implements OnInit {
     this.boardTemplates = [
       {
         type: BoardTemplate.Blank,
-        image: '/assets/images/project/blank.png',
-        image_alt: '/assets/images/project/blank-enabled.png',
+        icon: 'icon-blocked',
         lists: ['', '', ''],
       },
       {
         type: BoardTemplate.WeekDay,
-        image: '/assets/images/project/weekday.png',
-        image_alt: '/assets/images/project/weekday-enabled.png',
+        icon: 'icon-calendar',
         lists: [
           'ENUMS_WEEKDAY_SUNDAY',
           'ENUMS_WEEKDAY_MONDAY',
@@ -105,8 +106,7 @@ export class ProjectWizardComponent implements OnInit {
       },
       {
         type: BoardTemplate.TeamMembers,
-        image: '/assets/images/project/team-member.png',
-        image_alt: '/assets/images/project/team-member-enabled.png',
+        icon: 'icon-team',
         lists: [
           'BOARD_TEMPLATES_SAMPLES_TEAM_MEMBERS_1',
           'BOARD_TEMPLATES_SAMPLES_TEAM_MEMBERS_2',
@@ -115,8 +115,7 @@ export class ProjectWizardComponent implements OnInit {
       },
       {
         type: BoardTemplate.Departments,
-        image: '/assets/images/project/departments.png',
-        image_alt: '/assets/images/project/departments-enabled.png',
+        icon: 'icon-city',
         lists: [
           'BOARD_TEMPLATES_SAMPLES_DEPARTMENT_1',
           'BOARD_TEMPLATES_SAMPLES_DEPARTMENT_2',
@@ -125,8 +124,7 @@ export class ProjectWizardComponent implements OnInit {
       },
       {
         type: BoardTemplate.Kanban,
-        image: '/assets/images/project/kanban.png',
-        image_alt: '/assets/images/project/kanban-enabled.png',
+        icon: 'icon-checkmark3',
         lists: [
           'BOARD_TEMPLATES_SAMPLES_KANBAN_1',
           'BOARD_TEMPLATES_SAMPLES_KANBAN_2',
@@ -187,12 +185,22 @@ export class ProjectWizardComponent implements OnInit {
       };
     });
     this.actionWaiting = true;
-    const op = await this.projectService.create({
-      ...this.model,
-      boardTemplate: this.boardTemplate,
-      templateId: this.template ? this.template.id : undefined,
-      complex: this.complex,
-    });
+    let op: OperationResult<boolean>;
+
+    if (this.projectId) {
+      op = await this.projectService.createWorkPackage(this.projectId, {
+        ...this.model,
+        boardTemplate: this.boardTemplate,
+      });
+    } else {
+      op = await this.projectService.create({
+        ...this.model,
+        boardTemplate: this.boardTemplate,
+        templateId: this.template ? this.template.id : undefined,
+        complex: this.complex,
+      });
+    }
+
     this.actionWaiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error

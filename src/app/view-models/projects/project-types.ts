@@ -111,8 +111,7 @@ export interface WorkPackageMemberViewModel extends BaseViewModel {
 }
 export interface BoardTemplateViewModel {
   type: BoardTemplate;
-  image: string;
-  image_alt: string;
+  icon: string;
   lists: string[];
 }
 export interface WorkPackageListViewModel extends BaseViewModel {

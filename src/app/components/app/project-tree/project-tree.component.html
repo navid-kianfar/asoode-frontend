@@ -17,6 +17,8 @@
       <div class="time-spent">{{ 'TIME_SPENT' | translate }}</div>
     </div>
     <app-project-tree-node
+      (createSubProject)="newSubProject($event)"
+      (createWorkPackage)="newWorkPackage($event)"
       *ngFor="let subProject of subProjects"
       [level]="1"
       [project]="model"

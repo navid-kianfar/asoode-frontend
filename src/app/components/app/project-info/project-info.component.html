@@ -38,17 +38,23 @@
   <div class="members">
     <div class="item">
       <i class="icon-users"></i>&nbsp;
-      <span>{{ (project.members | search: ['isGroup']:false).length }}&nbsp;{{ 'INDIVIDUAL_USERS' | translate }}</span>
-    </div>&nbsp;
-<!--    <div class="item">-->
-<!--      <i class="icon-team"></i>&nbsp;-->
-<!--      <span>{{ (project.members | search: ['isGroup']:true).length }}&nbsp;{{ 'GROUP' | translate }}</span>-->
-<!--    </div>-->
+      <span
+        >{{ (project.members | search: ['isGroup']:false).length }}&nbsp;{{
+          'INDIVIDUAL_USERS' | translate
+        }}</span
+      >
+    </div>
+    &nbsp;
+    <!--    <div class="item">-->
+    <!--      <i class="icon-team"></i>&nbsp;-->
+    <!--      <span>{{ (project.members | search: ['isGroup']:true).length }}&nbsp;{{ 'GROUP' | translate }}</span>-->
+    <!--    </div>-->
     <ng-container *ngFor="let m of project.members">
       <div *ngIf="m.isGroup" class="item">
         <i class="icon-team"></i>&nbsp;
         <span>{{ m.recordId | groupName }}</span>
-      </div>&nbsp;
+      </div>
+      &nbsp;
     </ng-container>
   </div>
 </div>

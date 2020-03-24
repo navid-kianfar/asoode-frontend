@@ -1,25 +1,27 @@
 <div class="modal-content prompt-modal {{ cssClass }}" [style.width.px]="width">
-  <div class="modal-header">
-    <h4 class="modal-title">
-      {{ title | translate: true }}
-    </h4>
-    <button (click)="onCancel($event)">
-      <i class="icon-cross"></i>
-    </button>
-  </div>
-  <div class="modal-body">
-    <h4 class="summary-container" *ngIf="summary">
-      {{ summary | translate: true }}
-    </h4>
-    <div class="container">
-      <app-form
-        [standalone]="true"
-        [uploading]="progress"
-        [elements]="form"
-        [cancelWaiting]="cancelWaiting"
-        [actionWaiting]="actionWaiting"
-      ></app-form>
+  <div class="modal-alt-header">
+    <div class="btn"></div>
+
+    <div class="text">
+      <h4 class="modal-title">
+        <i [className]="icon"></i><br />
+        {{ title | translate: true }}
+      </h4>
     </div>
+    <div class="btn">
+      <button [disabled]="actionWaiting" (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
+  </div>
+  <div class="modal-body create-project">
+    <app-form
+      [standalone]="true"
+      [uploading]="progress"
+      [elements]="form"
+      [cancelWaiting]="cancelWaiting"
+      [actionWaiting]="actionWaiting"
+    ></app-form>
   </div>
   <div class="modal-footer">
     <button

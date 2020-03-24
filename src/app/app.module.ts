@@ -147,6 +147,7 @@ import { GroupDetailComponent } from './modals/group-detail/group-detail.compone
 import { InviteModalComponent } from './modals/invite-modal/invite-modal.component';
 import { GroupNamePipe } from './pipes/app/group-name.pipe';
 import { GroupSettingsComponent } from './components/app/group-settings/group-settings.component';
+import { WorkPackageWizardComponent } from './modals/work-package-wizard/work-package-wizard.component';
 
 @NgModule({
   declarations: [
@@ -261,8 +262,10 @@ import { GroupSettingsComponent } from './components/app/group-settings/group-se
     InviteModalComponent,
     GroupNamePipe,
     GroupSettingsComponent,
+    WorkPackageWizardComponent,
   ],
   entryComponents: [
+    WorkPackageWizardComponent,
     ConfirmComponent,
     PromptComponent,
     ChangePhoneComponent,

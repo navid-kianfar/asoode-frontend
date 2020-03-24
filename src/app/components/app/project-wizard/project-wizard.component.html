@@ -1,21 +1,27 @@
 <div class="modal-content create-modal">
   <div class="modal-alt-header">
     <div class="btn">
-      <button [disabled]="actionWaiting" (click)="onBack($event)">
-        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
-        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
-      </button>
+      <ng-container *ngIf="!projectId || (projectId && mode !== ViewMode.Form)">
+        <button [disabled]="actionWaiting" (click)="onBack($event)">
+          <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
+          <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
+        </button>
+      </ng-container>
     </div>
 
     <div class="text">
       <h4 *ngIf="mode === ViewMode.Form" class="modal-title">
-        <ng-container *ngIf="complex">
+        <ng-container *ngIf="!projectId && complex">
           <i class="icon-project"></i><br />
           {{ 'CREATE_COMPLEX_PROJECT' | translate }}
         </ng-container>
-        <ng-container *ngIf="!complex">
+        <ng-container *ngIf="!projectId && !complex">
           <i class="icon-workpackage"></i><br />
           {{ 'CREATE_SIMPLE_PROJECT' | translate }}
+        </ng-container>
+        <ng-container *ngIf="projectId">
+          <i class="icon-workpackage"></i><br />
+          {{ 'NEW_WORK_PACKAGE' | translate }}
         </ng-container>
       </h4>
       <h4 *ngIf="mode === ViewMode.Invite" class="modal-title">
@@ -97,10 +103,7 @@
               (click)="boardTemplate = bt.type"
               [class.selected]="boardTemplate === bt.type"
             >
-              <img
-                [src]="boardTemplate === bt.type ? bt.image_alt : bt.image"
-                alt=""
-              />
+              <i [className]="bt.icon"></i>
               {{ bt.type | enum: 'BoardTemplate' }}
             </button>
           </div>

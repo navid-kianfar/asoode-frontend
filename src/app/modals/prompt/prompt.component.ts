@@ -20,6 +20,7 @@ export class PromptComponent
   action?: (params: any, form: FormViewModel[]) => Promise<any>;
   cssClass?: string;
   form: FormViewModel[];
+  icon?: string;
   title?: string;
   summary?: string;
   actionLabel?: string;

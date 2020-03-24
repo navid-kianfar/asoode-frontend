@@ -23,11 +23,11 @@
         class="add icon-plus2"
       ></i>
       <mat-menu #menu="matMenu" class="add-dropdown">
-        <button *ngIf="level < 3" (click)="newSubProject()" mat-menu-item>
+        <button *ngIf="level < 3" (click)="createSubProject.emit(subProject.id)" mat-menu-item>
           <i class="icon-sub-season"></i>
           {{ 'NEW_SUB_PROJECT' | translate }}
         </button>
-        <button (click)="newWorkPackage()" mat-menu-item>
+        <button (click)="createWorkPackage.emit(subProject.id)" mat-menu-item>
           <i class="icon-workpackage"></i>
           {{ 'NEW_WORK_PACKAGE' | translate }}
         </button>
@@ -60,6 +60,8 @@
   </div>
   <ng-container *ngIf="expanded">
     <app-project-tree-node
+      (createSubProject)="createSubProject.emit($event)"
+      (createWorkPackage)="createWorkPackage.emit($event)"
       *ngFor="let subProject of subProjects"
       [level]="level + 1"
       [project]="project"

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
   ProjectViewModel,
   SubProjectViewModel,
@@ -15,6 +15,8 @@ export class ProjectTreeNodeComponent implements OnInit {
   @Input() project: ProjectViewModel;
   @Input() subProject: SubProjectViewModel;
   @Input() level: number;
+  @Output() createSubProject = new EventEmitter<string>();
+  @Output() createWorkPackage = new EventEmitter<string>();
   subProjects: SubProjectViewModel[];
   expanded: boolean;
   from?: Date;
@@ -38,8 +40,4 @@ export class ProjectTreeNodeComponent implements OnInit {
       );
     }
   }
-
-  newSubProject() {}
-
-  newWorkPackage() {}
 }

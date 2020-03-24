@@ -1,0 +1,25 @@
+.prompt-modal {
+  margin: 50px auto !important;
+  .modal-body {
+    padding: 20px;
+  }
+
+  ::ng-deep .af-form-elements {
+    input {
+      border: none !important;
+      font-weight: 400;
+      font-size: 1.5rem;
+    }
+
+    textarea {
+      border: none !important;
+      font-weight: 300;
+      font-size: 1.2rem;
+      width: 100%;
+      resize: none;
+    }
+  }
+  ::ng-deep .mat-tab-body-content {
+    padding-top: 30px;
+  }
+}
