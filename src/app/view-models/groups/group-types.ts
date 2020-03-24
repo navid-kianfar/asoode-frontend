@@ -32,6 +32,10 @@ export interface GroupViewModel extends BaseViewModel {
   offices?: number;
   employees?: number;
   members: GroupMemberViewModel[];
+  membersCapacity: number;
+  membersUsed: number;
+  diskSpaceCapacity: number;
+  diskSpaceUsed: number;
 }
 export interface GroupMemberViewModel extends BaseViewModel {
   isGroup: boolean;

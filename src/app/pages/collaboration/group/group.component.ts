@@ -15,6 +15,7 @@ export class GroupComponent implements OnInit {
   group: GroupViewModel;
   showDetail: boolean;
   permission: AccessType;
+  AccessType = AccessType;
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,

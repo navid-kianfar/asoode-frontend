@@ -76,6 +76,14 @@
                 ></app-group-reports>
               </ng-template>
             </mat-tab>
+            <mat-tab *ngIf="permission === AccessType.Owner || permission === AccessType.Admin" [label]="'SETTINGS' | translate">
+              <ng-template matTabContent>
+                <app-group-settings
+                  [permission]="permission"
+                  [group]="group"
+                ></app-group-settings>
+              </ng-template>
+            </mat-tab>
           </mat-tab-group>
         </div>
       </div>

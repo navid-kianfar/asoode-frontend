@@ -389,5 +389,13 @@
   "NO_OF_MEMBERS": "تعداد اعضا",
   "CLOSE": "بستن",
   "REMOVE_MEMBER_CONFIRM": "در صورت تایید دسترسی ایشان قطع میشود، اما شما به کارهای انجام شده توسط ایشان در این مجموعه دسترسی دارید",
-  "REMOVE_MEMBER_CONFIRM_HEADING": "آیا از حذف {0} اطمینان دارید؟"
+  "REMOVE_MEMBER_CONFIRM_HEADING": "آیا از حذف {0} اطمینان دارید؟",
+  "GROUP_DISK_USAGE_DETAIL": "{0} مگابایت از {1} مگابایت فضای اختصاصی این گروه را مصرف کردید",
+  "DELETE_PROJECT": "حذف پروژه",
+  "DELETE_GROUP": "حذف گروه",
+  "ARCHIVE_GROUP": "آرشیو گروه",
+  "EXPORT_GROUP": "دریافت خروجی از گروه",
+  "EXPORT_GROUP_TITLE": "خروجی گرفتن از گروه",
+  "EXPORT_GROUP_DESCRIPTION": "فایل خروجی شامل چت ها و پیوست\u200Cها میشود",
+  "ARCHIVE_GROUP_DESCRIPTION": "بعد از آرشیو شدن، این گروه از دسترس اعضای گروه خارج میشود، اما شما همچنان دسترسی خواهید داشت"
 }

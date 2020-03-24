@@ -1,5 +1,8 @@
-.project-setting {
+.group-setting {
   h3 {
+    margin: 20px 0;
+    font-size: 1.4rem;
+    font-weight: 500;
   }
 
   .box {
@@ -56,45 +59,6 @@
           color: #bf2f27;
         }
       }
-    }
-
-    .members {
-      .member {
-        display: flex;
-        margin-bottom: 10px;
-        border-bottom: 1px solid #efefef;
-
-        &:last-child {
-          border-bottom: none;
-        }
-
-        .info {
-          display: flex;
-          flex-grow: 1;
-        }
-        .access {
-          display: flex;
-          width: 150px;
-
-          ::ng-deep .af-dropdown {
-            button {
-              width: auto;
-            }
-          }
-        }
-        .action {
-          display: flex;
-          width: 100px;
-
-          button {
-            max-height: 35px;
-          }
-        }
-      }
-    }
-
-    ::ng-deep .group-info {
-      border: none !important;
     }
   }
 }

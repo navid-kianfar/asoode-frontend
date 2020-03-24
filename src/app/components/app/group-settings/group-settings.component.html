@@ -1,0 +1,76 @@
+<div class="group-setting">
+  <h3>{{ 'SETTINGS' | translate }}</h3>
+
+  <div class="box disk">
+    <div class="header">
+      <div class="ico">
+        <i class="icon-server"></i>
+      </div>
+      <div class="title">
+        <h4>{{ 'DISK_USAGE' | translate }}</h4>
+      </div>
+      <div class="action">
+        <button mat-stroked-button>
+          {{ 'BUY_MORE_SPACE' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="body">
+      <mat-progress-bar
+        [value]="group.diskSpaceUsed"
+        [bufferValue]="group.diskSpaceCapacity"
+      ></mat-progress-bar>
+      <h5>
+        {{
+        'GROUP_DISK_USAGE_DETAIL'
+          | translate
+          | stringFormat
+          : group.diskSpaceUsed / 1024
+            : group.diskSpaceCapacity / 1024
+        }}
+      </h5>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="header">
+      <div class="ico">
+        <i class="icon-upload41"></i>
+      </div>
+      <div class="title">
+        <h4>{{ 'EXPORT_GROUP_TITLE' | translate }}</h4>
+      </div>
+      <div class="action">
+        <button mat-stroked-button>
+          {{ 'EXPORT_GROUP' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="body">
+      <h5>{{ 'EXPORT_GROUP_DESCRIPTION' | translate }}</h5>
+      <h5 class="warn">{{ 'EXPORT_PROJECT_DESCRIPTION_MORE' | translate }}</h5>
+    </div>
+  </div>
+
+  <div class="box">
+    <div class="header">
+      <div class="ico">
+        <i class="archive icon-archive"></i>
+      </div>
+      <div class="title">
+        <h4>{{ 'ARCHIVE_GROUP' | translate }}</h4>
+      </div>
+      <div class="action">
+        <button color="accent" mat-flat-button>
+          {{ 'ARCHIVE_GROUP' | translate }}
+        </button>&nbsp;
+        <button color="warn" mat-flat-button>
+          {{ 'DELETE_GROUP' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="body">
+      <h5>{{ 'ARCHIVE_GROUP_DESCRIPTION' | translate }}</h5>
+    </div>
+  </div>
+</div>
