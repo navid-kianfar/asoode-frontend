@@ -1,7 +1,14 @@
 <div class="project-objectives">
   <h3>{{ 'OBJECTIVES' | translate }}</h3>
   <div class="inner">
-    <div class="list">
+    <div class="empty" *ngIf="!mockService.objectives.length">
+      <h2>
+        <i class="icon-target"></i>
+        {{ 'NO_OBJECTIVE_DEFINED_TITLE' | translate}}
+      </h2>
+      <h4>{{ 'NO_OBJECTIVE_DEFINED' | translate}}</h4>
+    </div>
+    <div class="list" *ngIf="mockService.objectives.length">
       <div
         *ngFor="let objective of mockService.objectives"
         (click)="selected = objective"

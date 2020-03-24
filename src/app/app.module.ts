@@ -146,6 +146,7 @@ import { ReloadOnParamsChangedDirective } from './directives/core/reload-on-para
 import { GroupDetailComponent } from './modals/group-detail/group-detail.component';
 import { InviteModalComponent } from './modals/invite-modal/invite-modal.component';
 import { GroupNamePipe } from './pipes/app/group-name.pipe';
+import { GroupSettingsComponent } from './components/app/group-settings/group-settings.component';
 
 @NgModule({
   declarations: [
@@ -259,6 +260,7 @@ import { GroupNamePipe } from './pipes/app/group-name.pipe';
     GroupDetailComponent,
     InviteModalComponent,
     GroupNamePipe,
+    GroupSettingsComponent,
   ],
   entryComponents: [
     ConfirmComponent,

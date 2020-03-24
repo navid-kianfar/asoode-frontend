@@ -3,6 +3,18 @@
   }
   .inner {
     display: flex;
+
+    .empty {
+      padding: 10px 0;
+
+      h2 {
+        color: #4d4d4d;
+      }
+      h4 {
+        color: #808080;
+      }
+    }
+
     .list {
       display: flex;
       min-width: 600px;
