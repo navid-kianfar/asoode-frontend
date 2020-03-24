@@ -20,36 +20,36 @@ h3 {
   font-size: 0.8rem;
 }
 .project-item {
-  position: relative;
+  display: flex;
   background: #ffffff;
   border-radius: 5px;
-  margin-top: 10px;
-  display: flex;
+  margin-bottom: 10px;
+  padding: 10px;
 
-  .color {
-    border-radius: 0 5px 5px 0;
+  .avatar-container {
     display: flex;
-    width: 5px;
-    position: absolute;
-    height: 100%;
-    background-color: #007bff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    align-items: center;
+
+    img {
+    }
+    i {
+      margin: 0 auto;
+      font-size: 1.5rem;
+    }
   }
-
+  .text-container {
+    padding: 0 5px;
+  }
   .title {
-    text-indent: 10px;
-    padding: 10px 5px;
-    display: flex;
-    min-width: 80px;
     font-weight: 400;
     font-size: 0.9rem;
   }
-
   .description {
-    padding: 10px 5px;
-    flex-grow: 1;
     color: #b3b3b3;
     font-size: 0.7rem;
-    text-align: justify;
   }
 }
 

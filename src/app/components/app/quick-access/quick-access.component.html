@@ -8,13 +8,17 @@
       {{ 'NO_PROJECTS' | translate }}
     </div>
     <div
-      (click)="openProject(project)"
+      (click)="openProject(proj)"
       class="project-item"
-      *ngFor="let project of projectService.projects | slice: 0:10"
+      *ngFor="let proj of projectService.projects | slice: 0:10"
     >
-      <div class="color"></div>
-      <div class="title">{{ project.title }}</div>
-      <div class="description">{{ project.description | truncate: 100 }}</div>
+      <div class="avatar-container">
+        <i [class.icon-workpackage]="!proj.complex"  [class.icon-project]="proj.complex"></i>
+      </div>
+      <div class="text-container">
+        <div class="title">{{ proj.title }}</div>
+        <div class="description">{{ proj.description | truncate: 100 }}</div>
+      </div>
     </div>
     <div class="more" *ngIf="projectService.projects.length > 5">
       <i class="icon-cc"></i>
