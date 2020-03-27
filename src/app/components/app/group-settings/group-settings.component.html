@@ -1,36 +1,36 @@
 <div class="group-setting">
   <h3>{{ 'SETTINGS' | translate }}</h3>
 
-  <div class="box disk">
-    <div class="header">
-      <div class="ico">
-        <i class="icon-server"></i>
-      </div>
-      <div class="title">
-        <h4>{{ 'DISK_USAGE' | translate }}</h4>
-      </div>
-      <div class="action">
-        <button mat-stroked-button>
-          {{ 'BUY_MORE_SPACE' | translate }}
-        </button>
-      </div>
-    </div>
-    <div class="body">
-      <mat-progress-bar
-        [value]="group.diskSpaceUsed"
-        [bufferValue]="group.diskSpaceCapacity"
-      ></mat-progress-bar>
-      <h5>
-        {{
-          'GROUP_DISK_USAGE_DETAIL'
-            | translate
-            | stringFormat
-              : group.diskSpaceUsed / 1024
-              : group.diskSpaceCapacity / 1024
-        }}
-      </h5>
-    </div>
-  </div>
+<!--  <div class="box disk">-->
+<!--    <div class="header">-->
+<!--      <div class="ico">-->
+<!--        <i class="icon-server"></i>-->
+<!--      </div>-->
+<!--      <div class="title">-->
+<!--        <h4>{{ 'DISK_USAGE' | translate }}</h4>-->
+<!--      </div>-->
+<!--      <div class="action">-->
+<!--        <button mat-stroked-button>-->
+<!--          {{ 'BUY_MORE_SPACE' | translate }}-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="body">-->
+<!--      <mat-progress-bar-->
+<!--        [value]="group.diskSpaceUsed"-->
+<!--        [bufferValue]="group.diskSpaceCapacity"-->
+<!--      ></mat-progress-bar>-->
+<!--      <h5>-->
+<!--        {{-->
+<!--          'GROUP_DISK_USAGE_DETAIL'-->
+<!--            | translate-->
+<!--            | stringFormat-->
+<!--              : group.diskSpaceUsed / 1024-->
+<!--              : group.diskSpaceCapacity / 1024-->
+<!--        }}-->
+<!--      </h5>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <div class="box">
     <div class="header">

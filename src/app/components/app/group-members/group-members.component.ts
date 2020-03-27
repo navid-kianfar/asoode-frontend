@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
   GroupMemberViewModel,
-  GroupViewModel,
+  GroupViewModel, PendingInvitationViewModel,
 } from '../../../view-models/groups/group-types';
 import { AccessType } from 'src/app/library/app/enums';
 import { ModalService } from '../../../services/core/modal.service';
@@ -35,7 +35,11 @@ export class GroupMembersComponent implements OnInit {
       .show(InviteModalComponent, {
         noGroup: true,
         existing: this.group.members,
-        exclude: [this.group.userId, this.group.id],
+        exclude: [
+          this.group.userId,
+          this.group.id,
+          ...this.group.pending.map(p => p.identifier)
+        ],
         handler: async access => {
           return this.groupService.addAccess(this.group.id, access);
         },
@@ -96,5 +100,55 @@ export class GroupMembersComponent implements OnInit {
       this.permission === AccessType.Owner ||
       this.permission === AccessType.Admin
     );
+  }
+
+  canRemovePendingAccess(member: PendingInvitationViewModel) {
+    if (member.access === AccessType.Owner) {
+      return false;
+    }
+    return (
+      this.permission === AccessType.Owner ||
+      this.permission === AccessType.Admin
+    );
+  }
+
+  async accessPendingChange(member: PendingInvitationViewModel, access: AccessType) {
+    member.access = access;
+    member.waiting = true;
+    const op = await this.groupService.changePendingAccess(member.id, { access });
+    member.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  removePendingAccess(member: PendingInvitationViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
+      [member.identifier],
+    );
+    this.modalService
+      .confirm({
+        title: 'REMOVE_ACCESS',
+        message: 'REMOVE_MEMBER_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_ACCESS',
+        cancelLabel: 'CANCEL',
+        action: async () => OperationResult.Success(true),
+      })
+      .subscribe(async confirmed => {
+        if (!confirmed) {
+          return;
+        }
+        member.waiting = true;
+        const op = await this.groupService.removePendingAccess(member.id);
+        member.waiting = false;
+        if (op.status !== OperationResultStatus.Success) {
+          // TODO: handle error
+          return;
+        }
+        this.group.pending = this.group.pending.filter(g => g !== member);
+      });
   }
 }

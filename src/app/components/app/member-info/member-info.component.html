@@ -9,12 +9,12 @@
   </div>
   <div *ngIf="!model.avatar" class="initials-holder">
     <div class="initials">
-      <!--      {{ model.initials }}-->
-      <i class="icon-user"></i>
+      <span *ngIf="small || email">{{ model.initials }}</span>
+      <i *ngIf="!small" class="icon-user"></i>
     </div>
   </div>
   <div class="info">
-    <div class="name">{{ model.fullName }}</div>
+    <div class="name">{{ model.fullName || ((email ? 'PENDING' : 'UNKNOWN') | translate) }}</div>
     <div *ngIf="!model.bio" class="email">{{ model.email }}</div>
     <div *ngIf="model.bio" class="bio">{{ model.bio }}</div>
   </div>

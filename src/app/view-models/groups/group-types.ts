@@ -32,10 +32,17 @@ export interface GroupViewModel extends BaseViewModel {
   offices?: number;
   employees?: number;
   members: GroupMemberViewModel[];
+  pending: PendingInvitationViewModel[];
   membersCapacity: number;
   membersUsed: number;
   diskSpaceCapacity: number;
   diskSpaceUsed: number;
+}
+export interface PendingInvitationViewModel extends BaseViewModel {
+  identifier: string;
+  recordId: string;
+  waiting?: boolean;
+  access: AccessType;
 }
 export interface GroupMemberViewModel extends BaseViewModel {
   isGroup: boolean;

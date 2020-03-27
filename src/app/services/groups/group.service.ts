@@ -69,4 +69,15 @@ export class GroupService {
       model,
     );
   }
+
+  async changePendingAccess(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/groups/change-pending-access/${id}`,
+      model,
+    );
+  }
+
+  async removePendingAccess(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/remove-pending-access/${id}`);
+  }
 }
