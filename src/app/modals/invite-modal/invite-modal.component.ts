@@ -13,6 +13,7 @@ import { OperationResultStatus } from '../../library/core/enums';
 export class InviteModalComponent
   extends SimpleModalComponent<
     {
+      noGroup: boolean,
       existing: any[];
       exclude: string[];
       handler: (members) => Promise<OperationResult<boolean>>;
@@ -24,6 +25,7 @@ export class InviteModalComponent
     super();
   }
 
+  noGroup: boolean;
   actionWaiting: boolean;
   members: InviteViewModel[];
   groups: InviteViewModel[];

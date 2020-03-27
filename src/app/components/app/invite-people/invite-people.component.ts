@@ -9,6 +9,7 @@ import { AccessType } from '../../../library/app/enums';
 })
 export class InvitePeopleComponent implements OnInit {
   @Input() exclude: string[];
+  @Input() noGroup: boolean;
   @Input() groups: InviteViewModel[];
   @Input() members: InviteViewModel[];
   @Output() groupsChange = new EventEmitter<InviteViewModel[]>();

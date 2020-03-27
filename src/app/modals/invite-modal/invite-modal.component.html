@@ -16,7 +16,7 @@
   </div>
 
   <div class="modal-body create-group">
-    <app-invite-people
+    <app-invite-people [noGroup]="noGroup"
       [exclude]="exclude"
       [(members)]="members"
       [(groups)]="groups"
