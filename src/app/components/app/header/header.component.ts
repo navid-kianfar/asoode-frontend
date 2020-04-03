@@ -16,6 +16,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { HttpService } from '../../../services/core/http.service';
 import { PopperContent } from 'ngx-popper';
 import { OperationResult } from '../../../library/core/operation-result';
+import {Socket} from 'ngx-socket-io';
 
 const EMPTY = {
   members: [],
@@ -39,6 +40,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   results: SearchResultViewModel;
   popper: PopperContent;
   constructor(
+    private readonly socket: Socket,
     public readonly identityService: IdentityService,
     private readonly modalService: ModalService,
     private readonly httpService: HttpService,
@@ -46,6 +48,9 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   ) {}
   ngOnInit(): void {
     this.results = { ...EMPTY };
+    this.socket.on('push-notification', (notification: any) => {
+      console.log('socket event', notification);
+    });
   }
 
   ngAfterViewInit() {

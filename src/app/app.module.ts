@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { Socket } from 'ngx-socket-io';
+import {Socket, SocketIoModule} from 'ngx-socket-io';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -289,6 +289,7 @@ import {DeviceDetectorModule} from 'ngx-device-detector';
     MatTableModule,
     MatMenuModule,
     MatSnackBarModule,
+    SocketIoModule,
     DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
