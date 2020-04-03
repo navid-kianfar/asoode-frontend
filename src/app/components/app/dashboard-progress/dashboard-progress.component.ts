@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 
 const data = [
   {
@@ -127,7 +127,7 @@ const data = [
   templateUrl: './dashboard-progress.component.html',
   styleUrls: ['./dashboard-progress.component.scss'],
 })
-export class DashboardProgressComponent implements OnInit {
+export class DashboardProgressComponent implements OnInit, AfterViewInit {
   chartData: any;
   view: number[];
   timer: number;
@@ -135,7 +135,7 @@ export class DashboardProgressComponent implements OnInit {
 
   constructor(private element: ElementRef) {}
 
-  onResize(event) {
+  onResize(event?: any) {
     if (this.timer) {
       clearTimeout(this.timer);
     }
@@ -158,9 +158,11 @@ export class DashboardProgressComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.calculateView();
-      this.chartData = data;
-    }, 500);
+    this.hidden = true;
+    this.chartData = data;
+    this.onResize();
+  }
+
+  ngAfterViewInit(): void {
   }
 }

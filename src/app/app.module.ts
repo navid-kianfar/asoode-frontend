@@ -148,6 +148,7 @@ import { InviteModalComponent } from './modals/invite-modal/invite-modal.compone
 import { GroupNamePipe } from './pipes/app/group-name.pipe';
 import { GroupSettingsComponent } from './components/app/group-settings/group-settings.component';
 import { WorkPackageWizardComponent } from './modals/work-package-wizard/work-package-wizard.component';
+import {DeviceDetectorModule} from 'ngx-device-detector';
 
 @NgModule({
   declarations: [
@@ -288,6 +289,7 @@ import { WorkPackageWizardComponent } from './modals/work-package-wizard/work-pa
     MatTableModule,
     MatMenuModule,
     MatSnackBarModule,
+    DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
       { container: 'modal-container' },

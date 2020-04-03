@@ -462,6 +462,7 @@ body {
       max-width: 98%;
       width: 600px;
       margin: min(20vh, 200px) auto;
+
       background: #fff;
       border-radius: 5px;
 
@@ -482,6 +483,12 @@ body {
   }
   &.modal-open {
     overflow: hidden;
+  }
+
+  &.firefox {
+    .modal-content {
+      margin: 50px auto;
+    }
   }
 }
 

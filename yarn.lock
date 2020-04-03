@@ -5903,6 +5903,13 @@ ngx-cookie-service@^2.3.0:
   resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-2.3.0.tgz#290e6f55047ad9e9f1aa4ddf30d1ab8d41927949"
   integrity sha512-Cegg6ifVuAwhsdrj0sGDyS9lg2o/Uc6FkR8HLcI40rpNMu5tzMd8w23cUiB81a8jDUr/MC44f1S+G6zmWmoy0A==
 
+ngx-device-detector@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/ngx-device-detector/-/ngx-device-detector-1.4.1.tgz#32ee1bc9343bfdbc1cb944e6804903a18b74a334"
+  integrity sha512-yzbN0XDOP4OrRbjY6vFQ09i1DEwp4za85r7CU80mFvQup09QtSNVW4fgv/1EFmWMK6QxbAuD1LL35fOS5+02JA==
+  dependencies:
+    tslib "^1.9.0"
+
 ngx-moment@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/ngx-moment/-/ngx-moment-3.5.0.tgz#97a4575a05d038612229b9fe09c4910353020613"

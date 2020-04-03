@@ -18,7 +18,7 @@
     {{ 'DETAILS' | translate }}
   </div>
 </div>
-<div class="progress-report" [hidden]="hidden">
+<div class="progress-report" *ngIf="!hidden">
   <ngx-charts-bar-vertical-2d
     [view]="view"
     [gradient]="false"

@@ -24,7 +24,7 @@
 ::ng-deep .af-captcha {
   width: auto !important;
   input {
-    width: calc(100% - 80px) !important;
+    width: calc(100% - 80px - 3.8rem) !important;
   }
 }
 ::ng-deep input {

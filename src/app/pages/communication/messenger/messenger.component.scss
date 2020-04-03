@@ -210,7 +210,7 @@
 
   ::ng-deep .conversations {
     height: calc(100vh - 210px);
-    overflow: scroll;
+    overflow: auto;
   }
 }
 @media (max-width: 1000px) {
