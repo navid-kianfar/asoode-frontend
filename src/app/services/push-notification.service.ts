@@ -20,7 +20,7 @@ export class PushNotificationService {
   ) { }
 
   handleSocket(notification: any) {
-    const url = (notification.url || '').replace(window.location.origin, '');
+    const url = (notification.push.url || '').replace('https://panel.asoode.com', '');
     switch (notification.type) {
       case ActivityType.AccountEdit:
         if (this.identityService.identity.userId === notification.data.id) {
@@ -42,6 +42,14 @@ export class PushNotificationService {
           this.windowService.active) {
           this.router.navigateByUrl(url);
         }
+        break;
+      case ActivityType.GroupEdit:
+        const groupEdit = this.groupService.groups.find(g => g.id === notification.data.id);
+        if (!groupEdit) { return; }
+        notification.data.members = [...groupEdit.members];
+        notification.data.pending = [...groupEdit.pending];
+        console.log(groupEdit, notification.data);
+        Object.assign(groupEdit, notification.data);
         break;
     }
   }
