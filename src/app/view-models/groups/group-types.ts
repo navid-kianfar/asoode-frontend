@@ -42,6 +42,7 @@ export interface PendingInvitationViewModel extends BaseViewModel {
   identifier: string;
   recordId: string;
   waiting?: boolean;
+  deleting?: boolean;
   access: AccessType;
 }
 export interface GroupMemberViewModel extends BaseViewModel {

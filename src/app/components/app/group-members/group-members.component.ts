@@ -76,7 +76,6 @@ export class GroupMembersComponent implements OnInit {
           // TODO: handle error
           return;
         }
-        this.group.members = this.group.members.filter(g => g !== member);
       });
   }
 
@@ -141,9 +140,9 @@ export class GroupMembersComponent implements OnInit {
         if (!confirmed) {
           return;
         }
-        member.waiting = true;
+        member.deleting = true;
         const op = await this.groupService.removePendingAccess(member.id);
-        member.waiting = false;
+        member.deleting = false;
         if (op.status !== OperationResultStatus.Success) {
           // TODO: handle error
           return;

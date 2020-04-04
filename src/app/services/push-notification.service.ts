@@ -70,9 +70,18 @@ export class PushNotificationService {
           return;
         }
         break;
-      case ActivityType.GroupMemberAdd:
-        break;
       case ActivityType.GroupMemberRemove:
+        if (notification.data.groupId) {
+          find1 = this.groupService.groups.find(g => g.id === notification.data.groupId);
+          if (!find1) { return; }
+          find1.members = find1.members.filter(m => m.id !== notification.data.id);
+          return;
+        }
+        find1 = this.groupService.groups.find(g => g.id === notification.data.recordId);
+        if (!find1) { return; }
+        find1.pending = find1.pending.filter(m => m.id !== notification.data.id);
+        break;
+      case ActivityType.GroupMemberAdd:
         break;
     }
   }

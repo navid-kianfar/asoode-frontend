@@ -66,19 +66,19 @@
         <div class="status"></div>
         <div class="actions">
           <app-access-list
-            [disabled]="member.waiting || !canRemovePendingAccess(member)"
+            [disabled]="member.waiting || member.deleting || !canRemovePendingAccess(member)"
             [access]="member.access"
             (accessChange)="accessPendingChange(member, $event)"
           ></app-access-list
           >&nbsp;
           <button
-            [disabled]="member.waiting"
+            [disabled]="member.waiting || member.deleting"
             (click)="removePendingAccess(member)"
             *ngIf="canRemovePendingAccess(member)"
             mat-flat-button
             color="warn"
           >
-            <i *ngIf="member.waiting" class="icon-spin icon-spinner2"></i>
+            <i *ngIf="member.deleting" class="icon-spin icon-spinner2"></i>
             {{ 'REMOVE_ACCESS' | translate }}
           </button>
         </div>
