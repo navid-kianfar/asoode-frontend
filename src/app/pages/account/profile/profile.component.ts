@@ -30,12 +30,12 @@ export class ProfileComponent implements OnInit {
 
   async prepareChangePhoneNumber() {
     this.modalService.show(ChangePhoneComponent, {}).subscribe(() => {
-      this.formService.setModel(this.form, this.identityService.profile);
+      // this.formService.setModel(this.form, this.identityService.profile);
     });
   }
   async prepareChangeEmail() {
     this.modalService.show(ChangeEmailComponent, {}).subscribe(() => {
-      this.formService.setModel(this.form, this.identityService.profile);
+      // this.formService.setModel(this.form, this.identityService.profile);
     });
   }
   async changePassword(model: any, form) {
@@ -252,7 +252,7 @@ export class ProfileComponent implements OnInit {
       // TODO: handle error
       return;
     }
-    Object.assign(this.identityService.profile, model);
+    // Object.assign(this.identityService.profile, model);
     this.editing = false;
     this.notificationService.success('PROFILE_UPDATE_SUCCESS');
   }

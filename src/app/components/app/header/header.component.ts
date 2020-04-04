@@ -17,6 +17,7 @@ import { HttpService } from '../../../services/core/http.service';
 import { PopperContent } from 'ngx-popper';
 import { OperationResult } from '../../../library/core/operation-result';
 import {Socket} from 'ngx-socket-io';
+import {PushNotificationService} from '../../../services/push-notification.service';
 
 const EMPTY = {
   members: [],
@@ -43,14 +44,14 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     private readonly socket: Socket,
     public readonly identityService: IdentityService,
     private readonly modalService: ModalService,
+    private readonly pushNotificationService: PushNotificationService,
     private readonly httpService: HttpService,
     private readonly ref: ElementRef,
   ) {}
   ngOnInit(): void {
     this.results = { ...EMPTY };
-    this.socket.on('push-notification', (notification: any) => {
-      console.log('socket event', notification);
-    });
+    this.socket.on('push-notification', (notification: any) =>
+      this.pushNotificationService.handleSocket(notification));
   }
 
   ngAfterViewInit() {
