@@ -82,6 +82,11 @@ export class PushNotificationService {
         find1.pending = find1.pending.filter(m => m.id !== notification.data.id);
         break;
       case ActivityType.GroupMemberAdd:
+        find1 = this.groupService.groups.find(g => g.id === notification.data.groupId);
+        if (find1) {
+          find1.members = [...find1.members, ...notification.data.members];
+          find1.pending = [...find1.pending, ...notification.data.pending];
+        }
         break;
     }
   }
