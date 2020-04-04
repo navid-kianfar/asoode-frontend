@@ -8,7 +8,6 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ChangePhoneComponent } from '../../../modals/change-phone/change-phone.component';
-import { ValidationService } from '../../../services/core/validation.service';
 import { ChangeEmailComponent } from '../../../modals/change-email/change-email.component';
 
 @Component({
@@ -30,12 +29,10 @@ export class ProfileComponent implements OnInit {
 
   async prepareChangePhoneNumber() {
     this.modalService.show(ChangePhoneComponent, {}).subscribe(() => {
-      // this.formService.setModel(this.form, this.identityService.profile);
     });
   }
   async prepareChangeEmail() {
     this.modalService.show(ChangeEmailComponent, {}).subscribe(() => {
-      // this.formService.setModel(this.form, this.identityService.profile);
     });
   }
   async changePassword(model: any, form) {
@@ -252,7 +249,6 @@ export class ProfileComponent implements OnInit {
       // TODO: handle error
       return;
     }
-    // Object.assign(this.identityService.profile, model);
     this.editing = false;
     this.notificationService.success('PROFILE_UPDATE_SUCCESS');
   }

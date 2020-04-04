@@ -20,8 +20,15 @@ export class PushNotificationService {
       case ActivityType.AccountEdit:
         if (this.identityService.identity.userId === notification.data.id) {
           Object.assign(this.identityService.profile, notification.data);
-          console.log(this.identityService.profile);
         }
+        this.groupService.groups.forEach(g => {
+          const access = g.members.find(m => m.recordId === notification.data.id);
+          if (access) { Object.assign(access.member, notification.data); }
+        });
+        this.projectService.projects.forEach(g => {
+          const access = g.members.find(m => m.recordId === notification.data.id);
+          if (access) { Object.assign(access.member, notification.data); }
+        });
         break;
     }
   }
