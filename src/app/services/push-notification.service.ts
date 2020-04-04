@@ -20,6 +20,9 @@ export class PushNotificationService {
   ) { }
 
   handleSocket(notification: any) {
+    let find1: any = null;
+    let find2: any = null;
+    // let find3: any = null;
     const url = (notification.push.url || '').replace('https://panel.asoode.com', '');
     switch (notification.type) {
       case ActivityType.AccountEdit:
@@ -44,12 +47,32 @@ export class PushNotificationService {
         }
         break;
       case ActivityType.GroupEdit:
-        const groupEdit = this.groupService.groups.find(g => g.id === notification.data.id);
-        if (!groupEdit) { return; }
-        notification.data.members = [...groupEdit.members];
-        notification.data.pending = [...groupEdit.pending];
-        console.log(groupEdit, notification.data);
-        Object.assign(groupEdit, notification.data);
+        find1 = this.groupService.groups.find(g => g.id === notification.data.id);
+        if (!find1) { return; }
+        notification.data.members = [...find1.members];
+        notification.data.pending = [...find1.pending];
+        Object.assign(find1, notification.data);
+        break;
+      case ActivityType.GroupMemberPermission:
+        if (notification.data.groupId) {
+          find1 = this.groupService.groups.find(g => g.id === notification.data.groupId);
+          if (!find1) { return; }
+          find2 = find1.members.find(m => m.id === notification.data.id);
+          if (find2) {
+            find2.access = notification.data.access;
+            return;
+          }
+        }
+        find1 = this.groupService.groups.find(g => g.id === notification.data.recordId);
+        find2 = find1.pending.find(m => m.id === notification.data.id);
+        if (find2) {
+          find2.access = notification.data.access;
+          return;
+        }
+        break;
+      case ActivityType.GroupMemberAdd:
+        break;
+      case ActivityType.GroupMemberRemove:
         break;
     }
   }

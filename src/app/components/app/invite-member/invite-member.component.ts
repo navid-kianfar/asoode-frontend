@@ -41,7 +41,10 @@ export class InviteMemberComponent implements OnInit {
       // TODO: show error
       return;
     }
-    if (this.exclude.indexOf(model.id || model.email) !== -1) {
+    if (
+      this.exclude.indexOf(model.id) !== -1 ||
+      this.exclude.indexOf(model.email) !== -1
+    ) {
       // TODO: show error
       return;
     }

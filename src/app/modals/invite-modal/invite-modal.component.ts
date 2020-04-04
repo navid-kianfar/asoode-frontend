@@ -35,6 +35,8 @@ export class InviteModalComponent
 
   ngOnInit() {
     this.exclude = [...this.exclude, ...this.existing.map(e => e.recordId)];
+    this.groups = this.groups || [];
+    this.members = this.members || [];
   }
 
   async onCancel($event: MouseEvent) {
