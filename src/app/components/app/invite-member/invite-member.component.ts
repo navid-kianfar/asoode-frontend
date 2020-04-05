@@ -5,6 +5,7 @@ import {
   MemberInfoViewModel,
 } from '../../../view-models/auth/identity-types';
 import { ValidationService } from '../../../services/core/validation.service';
+import {NotificationService} from '../../../services/core/notification.service';
 
 @Component({
   selector: 'app-invite-member',
@@ -21,7 +22,9 @@ export class InviteMemberComponent implements OnInit {
   currentRole: AccessType;
   currentEmail: string;
 
-  constructor() {}
+  constructor(
+    private readonly notificationService: NotificationService,
+  ) {}
 
   ngOnInit() {
     this.currentRole = AccessType.Editor;
@@ -38,14 +41,14 @@ export class InviteMemberComponent implements OnInit {
         } as MemberInfoViewModel);
 
     if (!ValidationService.isEmail(model.email)) {
-      // TODO: show error
+      this.notificationService.error('EMAIL_INVALID');
       return;
     }
     if (
       this.exclude.indexOf(model.id) !== -1 ||
       this.exclude.indexOf(model.email) !== -1
     ) {
-      // TODO: show error
+      this.notificationService.error('MEMBER_EXISTS');
       return;
     }
     const found = this.members.find(m => {

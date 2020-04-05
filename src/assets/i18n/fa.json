@@ -195,7 +195,7 @@
   "HUMAN_RESOURCES": "منابع انسانی",
   "MEMBERS": "اعضا",
   "ORGANIZATION_CHART": "ساختار سازمانی",
-  "ASOODE_MESSENGER": "پیام\u200Cرسان آسوده",
+  "ASOODE_MESSENGER": "پیام رسان آسوده",
   "ENUMS_CHANNEL_TYPE_PROJECT": "پروژه",
   "ENUMS_CHANNEL_TYPE_GROUP": "گروه",
   "ENUMS_CHANNEL_TYPE_DIRECT": "مستقیم",
@@ -208,7 +208,7 @@
   "RECEIVE_MESSAGE_NOTIFICATIONS": "دریافت اعلانات کانال",
   "NOTIFICATION_SOUND_APPEARANCE": "صدا و نحوه نمایش",
   "NOTIFY_FOR_ALL": "اعلان برای همه پیام\u200Cها",
-  "NOTIFY_FOR_ALL_DESCRIPTION": "اعلان برای همه پیام هایی که ارسال می\u200Cشود.",
+  "NOTIFY_FOR_ALL_DESCRIPTION": "اعلان برای همه پیام\u200Cهایی که ارسال می\u200Cشود.",
   "NOTIFY_FOR_MINE": "پیام\u200Cهایی که مخاطبش من باشم",
   "NOTIFY_FOR_MINE_DESCRIPTION": "اعلان فقط برای کانال های خصوصی و پیام\u200Cهای با استفاده از",
   "NOTIFY_FOR_NONE": "عدم دریافت اعلان برای کانال",
@@ -275,7 +275,7 @@
   "PROJECT_TITLE": "عنوان پروژه",
   "PROJECT_TITLE_REQUIRED": "لطفا عنوان پروژه را وارد کنید.",
   "PROJECT_REQUIRE_CHANNEL": "ایجاد کانال چت برای این پروژه",
-  "PROJECT_CHANNEL_DESCRIPTION": "با انتخاب این گزینه کانالی برای ارتباط بین اعضای پروژه بوجود می\u200Cآید. فایل\u200Cهای فرستاده شده در این کانال در پوشه مختص این کانال در صفحه «فایلها» نیز در دسترس خواهد بود.",
+  "PROJECT_CHANNEL_DESCRIPTION": "با انتخاب این گزینه کانالی برای ارتباط بین اعضای پروژه بوجود می\u200Cآید. فایل\u200Cهای فرستاده شده در این کانال در پوشه مختص این کانال در صفحه «فایل\u200Cها» نیز در دسترس خواهد بود.",
   "CREATE_SIMPLE_PROJECT": "ایجاد پروژه ساده",
   "CREATE_COMPLEX_PROJECT": "ایجاد پروژه دارای ساختار",
   "NEW_PROJECT_MEMBERS": "انتخاب اعضای پروژه",
@@ -403,8 +403,5 @@
   "WORK_PACKAGE_CREATED": "بسته کاری جدید ایجاد شد.",
   "UNKNOWN": "نامشخص",
   "PENDING": "در انتظار تایید",
-
-
-
   "NO_PROJECT_ACCESS": "این گروه به هیچ پروژه\u200Cای دسترسی ندارد، بعد از دعوت شدن از این تیم، پروژه\u200Cها نمایان خواهند شد"
 }
