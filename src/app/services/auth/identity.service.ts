@@ -26,7 +26,7 @@ export class IdentityService {
     private readonly cookieService: CookieService,
   ) {
     this.identityObject = this.getIdentityInfo();
-    this.cookieService.deleteAll();
+    // this.cookieService.deleteAll();
   }
 
   get profile(): ProfileViewModel {
