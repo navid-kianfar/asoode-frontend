@@ -63,14 +63,14 @@
       <div class="row">
         <div class="col-md-12">
           <mat-tab-group animationDuration="0ms">
-            <mat-tab [label]="'TRANSACTIONS' | translate">
-              <ng-template matTabContent>
-                <app-transactions></app-transactions>
-              </ng-template>
-            </mat-tab>
             <mat-tab [label]="'PREMIUM_PLAN' | translate">
               <ng-template matTabContent>
                 <app-premium-plans></app-premium-plans>
+              </ng-template>
+            </mat-tab>
+            <mat-tab [label]="'TRANSACTIONS' | translate">
+              <ng-template matTabContent>
+                <app-transactions></app-transactions>
               </ng-template>
             </mat-tab>
           </mat-tab-group>

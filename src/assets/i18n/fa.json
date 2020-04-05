@@ -93,7 +93,8 @@
   "DETAIL": "جزئیات",
   "DETAILS": "جزئیات",
   "DISK_USAGE": "مصرف دیسک",
-  "DISK_USAGE_DETAIL": "{0} مگابایت از {1} مگابایت فضای اختصاصی این پروژه را مصرف کرده‌اید.",
+  "DISK_USAGE_GB_DETAIL": "{0} گیگابایت از {1} گیگابایت فضای اختصاصی را مصرف کرده‌اید.",
+  "DISK_USAGE_MB_DETAIL": "{0} مگابایت از {1} مگابایت فضای اختصاصی را مصرف کرده‌اید.",
   "DONE_CARDS": "کارت‌های انجام شده",
   "DOWNLOAD": "دانلود",
   "DUE_AT": "تاریخ سررسید",
@@ -184,7 +185,6 @@
   "GROUPS": "گروه‌ها",
   "GROUP_CHANNEL_DESCRIPTION": "با انتخاب این گزینه، کانالی برای ارتباط بین اعضای گروه بوجود می‌آید. فایل‌های فرستاده‌شده در این کانال در پوشه مختص این کانال در صفحه فایلها نیز در دسترس خواهد بود.",
   "GROUP_CREATED": "گروه با موفقیت ایجاد شد.",
-  "GROUP_DISK_USAGE_DETAIL": "{0} مگابایت از {1} مگابایت فضای اختصاصی این گروه را مصرف کرده‌اید.",
   "GROUP_LEVEL_MAX_REACHED": "امکان اضافه کردن گروهی وجود ندارد.",
   "GROUP_REQUIRE_CHANNEL": "ایجاد کانال چت برای این گروه",
   "GROUP_TITLE": "عنوان گروه",
@@ -226,7 +226,8 @@
   "MAP_MEMBERS_DESCRIPTION": "این کاربران از پروژه شما وارد شده ا‌ند.جهت تطبیق آنها با کاربران آسوده لطفا ایمیل آنها را وارد نماید. در صورتی که کاربران معرفی شده در آسوده عضو نباشند، برایشان ایمیل دعوت ارسال می‌شود.",
   "MEMBERS": "اعضا",
   "MEMBER_SEARCH": "جستجو اعضا",
-  "MEMBER_USAGE_DETAIL": " {0}کاربر از {1} کاربر این پروژه فعال شده‌اند.",
+  "MEMBER_USAGE_DETAIL": " {0}کاربر از {1} کاربر این پلان فعال شده‌اند.",
+  "GROUP_USAGE_DETAIL": " {0}گروه از {1} گروه این پلان فعال شده‌اند.",
   "MODALS_CONFIRM_MESSAGE": "برای ادامه کار خود می‌بایست مجدد وارد سیستم شوید.",
   "MODALS_CONFIRM_MESSAGE_HEADING": "آیا می‌خواهید از حساب کاربری خود خارج شوید؟",
   "MODALS_CONFIRM_TITLE": "خروج از حساب کاربری؟",
@@ -306,7 +307,7 @@
   "PLEASE_CHECK_EMAIL": "لطفا ایمیل خود را چک کنید.",
   "PLEASE_CHOOSE": "لطفا انتخاب کنید.",
   "POSTAL_CODE": "کد پستی",
-  "PREMIUM_PLAN": "پلان‌های پرداختی",
+  "PREMIUM_PLAN": "پلان آسوده",
   "PREVIOUS_DEBT": "بدهی گذشته",
   "PRIVATE": "شخصی",
   "PROFILE_UPDATE_SUCCESS": "اطلاعات با موفقیت بروزرسانی شد.",
@@ -403,5 +404,27 @@
   "WEBSITE": "وب سایت",
   "WELCOME_TO_ASOODE": "به آسوده خوش آمدید",
   "WORKING_HOURS": "ساعت کاری",
-  "WORK_PACKAGE_CREATED": "بسته کاری جدید ایجاد شد."
+  "WORK_PACKAGE_CREATED": "بسته کاری جدید ایجاد شد.",
+
+
+
+
+
+  "PLANS_COMPANY_TITLE": "شرکتی",
+  "PLANS_ECONOMY_TITLE": "اقتصادی",
+  "PLANS_FREE_TITLE": "پایه",
+  "PLANS_ORGANIZATION_TITLE": "سازمانی",
+  "PLANS_PERSONAL_TITLE": "شخصی",
+  "PLANS_FREE_DESCRIPTION": "",
+  "PLANS_PERSONAL_DESCRIPTION": "",
+  "PLANS_ECONOMY_DESCRIPTION": "",
+  "PLANS_COMPANY_DESCRIPTION": "",
+  "PLANS_ORGANIZATION_DESCRIPTION": "",
+  "USER_USAGE": "مصرف کاربر",
+  "GROUP_USAGE": "مصرف گروه",
+  "BUY_MORE_GROUP": "خرید گروه بیشتر",
+  "BUY_MORE_USER": "خرید کاربر بیشتر",
+  "PROJECT_USAGE": "مصرف پروژه",
+  "BUY_MORE_PROJECT": "خرید پروژه بیشتر",
+  "PROJECT_USAGE_DETAIL": "{0} پروژه از {1} پروژه این پلان فعال شده\u200Cاند."
 }

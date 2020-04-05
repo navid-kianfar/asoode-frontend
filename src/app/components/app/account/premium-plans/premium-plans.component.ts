@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {IdentityService} from '../../../../services/auth/identity.service';
+import { PlanType } from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-premium-plans',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./premium-plans.component.scss'],
 })
 export class PremiumPlansComponent implements OnInit {
-  constructor() {}
-
+  constructor(readonly identityService: IdentityService) {}
+  PlanType = PlanType;
   ngOnInit() {}
 }

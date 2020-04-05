@@ -1,1 +1,139 @@
-<p>premium-plans works!</p>
+<div class="account-profile-plan">
+  <div class="head">
+    <h2>{{ identityService.profile.plan.title | translate }}</h2>
+    <h3>{{ identityService.profile.plan.description | translate }}</h3>
+  </div>
+
+    <div class="box disk">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-server"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'DISK_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button mat-stroked-button>
+            {{ 'BUY_MORE_SPACE' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="body">
+        <mat-progress-bar
+          [value]="identityService.profile.plan.usedSpace"
+          [bufferValue]="identityService.profile.plan.diskSpace"
+        ></mat-progress-bar>
+        <h5 *ngIf="identityService.profile.plan.type === PlanType.Free">
+          {{
+            'DISK_USAGE_MB_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.usedSpace / 1024 / 1024
+                : identityService.profile.plan.diskSpace / 1024 / 1024
+          }}
+        </h5>
+        <h5 *ngIf="identityService.profile.plan.type !== PlanType.Free">
+          {{
+            'DISK_USAGE_GB_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.usedSpace / 1024 / 1024 / 1024
+                : identityService.profile.plan.diskSpace / 1024 / 1024 / 1024
+          }}
+        </h5>
+      </div>
+    </div>
+
+    <div class="box user">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-users2"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'USER_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button mat-stroked-button>
+            {{ 'BUY_MORE_USER' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="body">
+        <mat-progress-bar
+          [value]="identityService.profile.plan.usedUser"
+          [bufferValue]="identityService.profile.plan.users"
+        ></mat-progress-bar>
+        <h5>
+          {{
+            'MEMBER_USAGE_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.usedUser
+                : identityService.profile.plan.users
+          }}
+        </h5>
+      </div>
+    </div>
+
+    <div class="box group">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-team"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'GROUP_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button mat-stroked-button>
+            {{ 'BUY_MORE_GROUP' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="body">
+        <mat-progress-bar
+          [value]="identityService.profile.plan.totalUsedGroups"
+          [bufferValue]="identityService.profile.plan.totalGroups"
+        ></mat-progress-bar>
+        <h5>
+          {{
+            'GROUP_USAGE_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.totalUsedGroups
+                : identityService.profile.plan.totalGroups
+          }}
+        </h5>
+      </div>
+    </div>
+
+    <div class="box project">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-workpackage"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'PROJECT_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button mat-stroked-button>
+            {{ 'BUY_MORE_PROJECT' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="body">
+        <mat-progress-bar
+          [value]="identityService.profile.plan.totalUsedProjects"
+          [bufferValue]="identityService.profile.plan.totalProjects"
+        ></mat-progress-bar>
+        <h5>
+          {{
+            'PROJECT_USAGE_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.totalUsedProjects
+                : identityService.profile.plan.totalProjects
+          }}
+        </h5>
+      </div>
+    </div>
+</div>
