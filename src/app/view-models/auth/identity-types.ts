@@ -41,7 +41,7 @@ export interface UserPlanInfoViewModel {
   picture: string;
   type: PlanType;
   unit: CostUnit;
-  diskSpace: number;
+  space: number;
   enabled: boolean;
   oneTime: boolean;
   canExtend: boolean;
@@ -101,4 +101,5 @@ export interface UserPlanInfoViewModel {
   totalWorkPackages: number;
   totalComplexProjects: number;
   totalUsedProjects: number;
+  totalSpace: number;
 }

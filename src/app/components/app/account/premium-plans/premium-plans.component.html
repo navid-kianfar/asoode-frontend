@@ -21,7 +21,7 @@
       <div class="body">
         <mat-progress-bar
           [value]="identityService.profile.plan.usedSpace"
-          [bufferValue]="identityService.profile.plan.diskSpace"
+          [bufferValue]="identityService.profile.plan.totalSpace"
         ></mat-progress-bar>
         <h5 *ngIf="identityService.profile.plan.type === PlanType.Free">
           {{
@@ -29,7 +29,7 @@
               | translate
               | stringFormat
                 : identityService.profile.plan.usedSpace / 1024 / 1024
-                : identityService.profile.plan.diskSpace / 1024 / 1024
+                : identityService.profile.plan.space / 1024 / 1024
           }}
         </h5>
         <h5 *ngIf="identityService.profile.plan.type !== PlanType.Free">
@@ -38,7 +38,7 @@
               | translate
               | stringFormat
                 : identityService.profile.plan.usedSpace / 1024 / 1024 / 1024
-                : identityService.profile.plan.diskSpace / 1024 / 1024 / 1024
+                : identityService.profile.plan.space / 1024 / 1024 / 1024
           }}
         </h5>
       </div>
