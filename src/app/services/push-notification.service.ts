@@ -88,6 +88,15 @@ export class PushNotificationService {
           find1.pending = [...find1.pending, ...notification.data.pending];
         }
         break;
+
+      case ActivityType.ProjectAdd:
+        this.projectService.projects.push(notification.data);
+        if (
+          this.identityService.identity.userId === notification.data.userId &&
+          this.windowService.active) {
+          this.router.navigateByUrl(url);
+        }
+        break;
     }
   }
 }
