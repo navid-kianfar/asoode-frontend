@@ -5,6 +5,7 @@ import {
   WorkPackageCommentPermission,
 } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
+import {PendingInvitationViewModel} from '../groups/group-types';
 
 export interface ProjectObjectiveEstimatedPriceViewModel {
   date: Date;
@@ -40,6 +41,7 @@ export interface ProjectViewModel extends BaseViewModel {
   membersUsed: number;
   diskSpaceCapacity: number;
   diskSpaceUsed: number;
+  pending: PendingInvitationViewModel[];
   members: ProjectMemberViewModel[];
   seasons: ProjectSeasonViewModel[];
   subProjects: SubProjectViewModel[];
@@ -48,10 +50,11 @@ export interface ProjectViewModel extends BaseViewModel {
 export interface ProjectMemberViewModel extends BaseViewModel {
   isGroup: boolean;
   recordId: string;
-  groupId: string;
+  projectId: string;
   member: MemberInfoViewModel;
   access: AccessType;
   waiting?: boolean;
+  deleting?: boolean;
 }
 export interface ProjectSeasonViewModel extends BaseViewModel {
   userId: string;

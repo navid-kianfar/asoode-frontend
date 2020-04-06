@@ -71,7 +71,7 @@ export class ProjectService {
     parmas: any,
   ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/projects/${id}/package/create`,
+      `/work-packages/create/${id}`,
       parmas,
     );
   }
@@ -96,5 +96,16 @@ export class ProjectService {
       }
     }
     return multiple.sort()[0];
+  }
+
+  async changePendingAccess(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/projects/change-pending-access/${id}`,
+      model,
+    );
+  }
+
+  async removePendingAccess(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/projects/remove-pending-access/${id}`);
   }
 }

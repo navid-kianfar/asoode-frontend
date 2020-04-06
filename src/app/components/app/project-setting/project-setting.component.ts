@@ -10,6 +10,7 @@ import { ModalService } from '../../../services/core/modal.service';
 import { TranslateService } from '../../../services/core/translate.service';
 import { ProjectService } from '../../../services/projects/project.service';
 import { GroupService } from '../../../services/groups/group.service';
+import {GroupMemberViewModel, PendingInvitationViewModel} from '../../../view-models/groups/group-types';
 
 @Component({
   selector: 'app-project-setting',
@@ -31,8 +32,13 @@ export class ProjectSettingComponent implements OnInit {
   invite() {
     this.modalService
       .show(InviteModalComponent, {
+        noProject: true,
         existing: this.model.members,
-        exclude: [this.model.userId, this.model.id],
+        exclude: [
+          this.model.userId,
+          this.model.id,
+          ...this.model.pending.map(p => p.identifier)
+        ],
         handler: async access => {
           return this.projectService.addAccess(this.model.id, access);
         },
@@ -69,7 +75,6 @@ export class ProjectSettingComponent implements OnInit {
           // TODO: handle error
           return;
         }
-        this.model.members = this.model.members.filter(g => g !== member);
       });
   }
 
@@ -93,5 +98,55 @@ export class ProjectSettingComponent implements OnInit {
       this.permission === AccessType.Owner ||
       this.permission === AccessType.Admin
     );
+  }
+
+  canRemovePendingAccess(member: PendingInvitationViewModel) {
+    if (member.access === AccessType.Owner) {
+      return false;
+    }
+    return (
+      this.permission === AccessType.Owner ||
+      this.permission === AccessType.Admin
+    );
+  }
+
+  async accessPendingChange(member: PendingInvitationViewModel, access: AccessType) {
+    member.access = access;
+    member.waiting = true;
+    const op = await this.projectService.changePendingAccess(member.id, { access });
+    member.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  removePendingAccess(member: PendingInvitationViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
+      [member.identifier],
+    );
+    this.modalService
+      .confirm({
+        title: 'REMOVE_ACCESS',
+        message: 'REMOVE_MEMBER_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_ACCESS',
+        cancelLabel: 'CANCEL',
+        action: async () => OperationResult.Success(true),
+      })
+      .subscribe(async confirmed => {
+        if (!confirmed) {
+          return;
+        }
+        member.deleting = true;
+        const op = await this.projectService.removePendingAccess(member.id);
+        member.deleting = false;
+        if (op.status !== OperationResultStatus.Success) {
+          // TODO: handle error
+          return;
+        }
+        this.model.pending = this.model.pending.filter(g => g !== member);
+      });
   }
 }
