@@ -30,4 +30,8 @@ export class FilesService {
       path,
     });
   }
+
+  async newFolder(param: any): Promise<OperationResult<boolean>> {
+    return this.httpService.post<boolean>('/files/new-folder', param, false);
+  }
 }

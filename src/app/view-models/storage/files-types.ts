@@ -3,6 +3,7 @@ export interface ExplorerViewModel {
   folders: ExplorerFolderViewModel[];
 }
 export interface ExplorerFolderViewModel {
+  parent: string;
   path: string;
   name: string;
   createdAt: Date;

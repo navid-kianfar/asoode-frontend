@@ -12,18 +12,22 @@
   border-radius: 10px;
   margin-top: 10px;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   cursor: pointer;
+
+  .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
   .no-items-found {
     flex-grow: 1;
     h3 {
       text-align: center;
-      margin-top: 100px;
+      margin: 100px 0;
     }
   }
 }
-
 .action-container {
   position: relative;
   .action-bar {
@@ -94,6 +98,7 @@
   align-items: center;
   font-size: 0.8rem;
   color: #999999;
+  height: 40px;
 
   ::ng-deep .af-dropdown button {
     border: none !important;
@@ -101,5 +106,20 @@
     span.arrow {
       display: none;
     }
+  }
+}
+ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  height: 25px;
+  margin: 0 0 20px;
+
+  li {
+    font-size: 0.8rem;
+    color: #555555;
+    font-weight: 400;
+    margin-inline-end: 20px;
+    border-bottom: 1px solid #eee;
   }
 }

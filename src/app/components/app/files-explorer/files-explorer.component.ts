@@ -1,18 +1,14 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FilesService } from '../../../services/storage/files.service';
-import { OperationResultStatus } from '../../../library/core/enums';
-import {
-  ExplorerFileViewModel,
-  ExplorerFolderViewModel,
-  ExplorerViewModel,
-} from '../../../view-models/storage/files-types';
-import { OperationResult } from '../../../library/core/operation-result';
-import { MockService } from '../../../services/mock.service';
-import { ModalService } from '../../../services/core/modal.service';
-import { PromptComponent } from '../../../modals/prompt/prompt.component';
-import { PromptModalParameters } from '../../../view-models/core/modal-types';
-import { FormService } from '../../../services/core/form.service';
-import { SortType } from 'src/app/library/app/enums';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {FilesService} from '../../../services/storage/files.service';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {ExplorerFileViewModel, ExplorerFolderViewModel, ExplorerViewModel,} from '../../../view-models/storage/files-types';
+import {OperationResult} from '../../../library/core/operation-result';
+import {MockService} from '../../../services/mock.service';
+import {ModalService} from '../../../services/core/modal.service';
+import {PromptComponent} from '../../../modals/prompt/prompt.component';
+import {PromptModalParameters} from '../../../view-models/core/modal-types';
+import {FormService} from '../../../services/core/form.service';
+import {SortType} from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-files-explorer',
@@ -35,9 +31,10 @@ export class FilesExplorerComponent implements OnInit {
   canOpen: boolean;
   oneFileSelected: boolean;
   allowedTypes: string;
+  parent: ExplorerFolderViewModel[];
+  sort: SortType;
 
   @ViewChild('filePicker', { static: false }) filePicker;
-  sort: SortType;
   constructor(
     private readonly filesService: FilesService,
     private readonly modalService: ModalService,
@@ -46,6 +43,7 @@ export class FilesExplorerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.parent = [{path: '/', name: '', parent: '', createdAt: new Date(), selected: false}];
     this.sort = SortType.DateAsc;
     this.data = { folders: [], files: [] };
     this.allowedTypes = [
@@ -77,8 +75,7 @@ export class FilesExplorerComponent implements OnInit {
       // TODO: handle error
       return;
     }
-    // this.data = op.data;
-    this.data = this.mockService.files;
+    this.data = op.data;
     this.waiting = false;
   }
 
@@ -123,11 +120,18 @@ export class FilesExplorerComponent implements OnInit {
     this.oneFileSelected = this.onlyOneSelected && selectedFiles === 1;
   }
 
+  async goUp() {
+    this.parent.shift();
+    this.path = this.parent[0].path;
+    await this.fetch(this.path);
+  }
   async enterFolder(folder: ExplorerFolderViewModel) {
     this.preventSimpleClick = true;
     clearTimeout(this.timer);
     this.clearSelection();
-    await this.fetch(folder.path);
+    this.parent.unshift(folder);
+    this.path = folder.path;
+    await this.fetch(this.path);
   }
 
   selectFile($event: MouseEvent, file: ExplorerFileViewModel) {
@@ -182,8 +186,8 @@ export class FilesExplorerComponent implements OnInit {
           {
             elements: [
               this.formService.createInput({
-                config: { field: 'title', label: 'TITLE' },
-                params: { model: '' },
+                config: { field: 'title' },
+                params: { model: '', placeHolder: 'TITLE' },
                 validation: {
                   required: {
                     value: true,
@@ -194,12 +198,26 @@ export class FilesExplorerComponent implements OnInit {
             ],
           },
         ],
-        action: async (params, form) => {
-          console.log(params, form);
-        },
         actionLabel: 'CREATE',
         actionColor: 'primary',
         width: 300,
+        action: async (params, form) => {
+          const op = await this.filesService.newFolder({
+            path: this.path,
+            name: params.title
+          });
+          if (op.status === OperationResultStatus.Duplicate) {
+            this.formService.setErrors(form, 'title', ['DIRECTORY_EXISTS']);
+            throw new Error('DUPLICATE');
+          }
+          this.data.folders.push({
+            createdAt: new Date(),
+            name: params.title,
+            selected: false,
+            path: `${this.path}/${params.title}`,
+            parent: this.path
+          });
+        },
       } as PromptModalParameters)
       .subscribe(() => {});
   }
@@ -222,5 +240,17 @@ export class FilesExplorerComponent implements OnInit {
 
   onChange(target: any) {
     console.log(target.files);
+  }
+
+  async goTo(p: ExplorerFolderViewModel) {
+    let idx = this.parent.indexOf(p);
+    if (idx === 0) { return; }
+    let s: ExplorerFolderViewModel;
+    while (idx > 0) {
+      s = this.parent.shift();
+      idx--;
+    }
+    this.path = s.parent || '/';
+    await this.fetch(this.path);
   }
 }

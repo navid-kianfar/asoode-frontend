@@ -6,6 +6,10 @@
   display: flex;
   width: 300px;
 
+  &.up {
+    border-color: #d8a13e;
+  }
+
   .avatar {
     display: flex;
     align-items: center;

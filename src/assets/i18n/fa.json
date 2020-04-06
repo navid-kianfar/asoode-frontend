@@ -442,5 +442,7 @@
   "NEW_SEASON": "ایجاد فصل جدید",
   "SEASON_CREATED": "فصل جدید ایجاد شد",
   "SEASON_UPDATED": "تغیرات فصل ذخیره شد",
-  "EDIT_SEASON": "ویرایش فصل"
+  "EDIT_SEASON": "ویرایش فصل",
+  "DIRECTORY_EXISTS": "پوشه\u200Cای با این نام موجود است",
+  "FILE_EXISTS": "فایل\u200Cای با این نام موجود است"
 }

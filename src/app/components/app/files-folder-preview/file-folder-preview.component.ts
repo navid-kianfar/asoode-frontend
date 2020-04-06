@@ -14,7 +14,18 @@ export class FileFolderPreviewComponent implements OnInit {
   @Input() folder: ExplorerFolderViewModel;
   @Input() file: ExplorerFileViewModel;
   @Output() selectedChange = new EventEmitter<boolean>();
+  @Input() up: boolean;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (!this.file && !this.folder) {
+      this.folder = {
+        parent: '/',
+        selected: false,
+        createdAt: new Date(),
+        name: '...',
+        path: '/'
+      };
+    }
+  }
 }
