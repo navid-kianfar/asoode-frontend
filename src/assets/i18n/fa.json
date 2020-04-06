@@ -245,7 +245,7 @@
   "NEW_PHONE_NUMBER": "شماره همراه جدید",
   "NEW_PROJECT_MEMBERS": "انتخاب اعضای پروژه",
   "NEW_PROJECT_TEMPLATE": "انتخاب الگو برای پروژه",
-  "NEW_SUB_PROJECT": "ایجاد زیر پروژه جدید",
+  "NEW_SUB_PROJECT": "ایجاد شکست پروژه جدید",
   "NEW_WORK_PACKAGE": "ایجاد بسته کاری جدید",
   "NONE_PROVIDED": "ثبت نشده",
   "NOTIFICATION_SOUND_APPEARANCE": "صدا و نحوه نمایش",
@@ -272,7 +272,7 @@
   "NO_TEMPLATE_DESCRIPTION": "این پروژه بدون الگو ساخته می‌شود و اجزای تشکیل‌دهنده پروژه، مانند: فاز، بسته‌های کاری، اهداف و ... توسط خود شما مشخص می‌شود.",
   "N_CARDS": "{0} کارت",
   "N_SEASONS": "{0} فصل",
-  "N_SUB_PROJECT": "{0} زیر پروژه",
+  "N_SUB_PROJECT": "{0} شکست پروژه",
   "N_USERS": "{0} عضو",
   "N_WORK_PACKAGE": "{0} بسته کاری",
   "OBJECTIVES": "اهداف",
@@ -426,5 +426,21 @@
   "BUY_MORE_USER": "خرید کاربر بیشتر",
   "PROJECT_USAGE": "مصرف پروژه",
   "BUY_MORE_PROJECT": "خرید پروژه بیشتر",
-  "PROJECT_USAGE_DETAIL": "{0} پروژه از {1} پروژه این پلان فعال شده\u200Cاند."
+  "PROJECT_USAGE_DETAIL": "{0} پروژه از {1} پروژه این پلان فعال شده\u200Cاند.",
+
+
+
+  "REMOVE_SUB": "حذف شکست پروژه",
+  "REMOVE_SUB_CONFIRM_HEADING": "آیا از حذف شکست پروژه '{0}' اطمینان دارید؟",
+  "REMOVE_SUB_CONFIRM": "در صورت تایید تمامی فرزندان به یک پله بالاتر انتقال خواهند یافت، و تمامی اطلاعاتی که به این قسمت از شکست پروژه مربوط میشود از بین خواهد رفت!",
+  "REMOVE_SEASON": "حذف فصل",
+  "REMOVE_SEASON_CONFIRM_HEADING": "آیا از حذف فصل '{0}' اطمینان دارید؟",
+  "REMOVE_SEASON_CONFIRM": "در صورت تایید تمامی اطلاعاتی که به این فصل از پروژه مربوط میشود از بین خواهد رفت!",
+  "EDIT_SUB_PROJECT": "ویرایش شکست پروژه",
+  "SUB_PROJECT_CREATED": "شکست پروژه ایجاد شد",
+  "SUB_PROJECT_UPDATED": "تغیرات شکست پروژه ذخیره شد",
+  "NEW_SEASON": "ایجاد فصل جدید",
+  "SEASON_CREATED": "فصل جدید ایجاد شد",
+  "SEASON_UPDATED": "تغیرات فصل ذخیره شد",
+  "EDIT_SEASON": "ویرایش فصل"
 }

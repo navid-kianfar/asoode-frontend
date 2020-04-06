@@ -79,16 +79,14 @@ export class ProjectService {
   getPermission(project: ProjectViewModel | string): AccessType {
     const proj =
       typeof project === 'string'
-        ? this.groupService.groups.find(g => g.id === project)
+        ? this.projects.find(g => g.id === project)
         : project;
-    const access = proj.members.find(
-      m => m.recordId === this.identityService.identity.userId,
-    );
+    const access = proj.members.find(m => m.recordId === this.identityService.identity.userId);
+    const multiple = [];
     if (access) {
-      return access.access;
+      multiple.push(access.access);
     }
 
-    const multiple = [];
     for (const ga of proj.members.filter(m => m.isGroup)) {
       const found = this.groupService.groups.find(k => k.id === ga.recordId);
       if (found) {
@@ -107,5 +105,25 @@ export class ProjectService {
 
   async removePendingAccess(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/projects/remove-pending-access/${id}`);
+  }
+
+  async removeSubProject(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/projects/sub/${id}/remove`);
+  }
+
+  async editSubProject(id: string, params: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/projects/sub/${id}/edit`, params);
+  }
+
+  async createSeasonProject(id: string, params: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/projects/${id}/season/add`, params);
+  }
+
+  async removeSeason(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/projects/season/${id}/remove`);
+  }
+
+  async editSeason(id: string, params: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/projects/season/${id}/edit`, params);
   }
 }

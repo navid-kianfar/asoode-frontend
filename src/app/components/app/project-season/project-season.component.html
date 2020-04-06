@@ -1,7 +1,8 @@
 <div class="project-seasons">
   <div class="actions">
     <h3>{{ 'SEASONS' | translate }}</h3>
-    <button mat-flat-button>{{ 'CREATE_SEASON' | translate }}</button>
+    <button *ngIf="permission === AccessType.Owner || permission === AccessType.Admin"
+            (click)="prepareCreate()" mat-flat-button>{{ 'CREATE_SEASON' | translate }}</button>
   </div>
 
   <div class="inner">
@@ -15,6 +16,10 @@
           <div class="description">
             {{ season.description | truncate: 150 }}
           </div>
+        </div>
+        <div *ngIf="permission === AccessType.Owner || permission === AccessType.Admin" class="inner-actions">
+          <i (click)="prepareDelete(season)" class="icon-delete"></i>&nbsp;
+          <i (click)="prepareEdit(season)" class="icon-pencil"></i>
         </div>
       </div>
     </div>

@@ -30,15 +30,16 @@
         }
 
         .ico {
-          //display: flex;
-          //width: 30px;
+          display: flex;
+          width: 30px;
           i {
             color: #666666;
           }
         }
         .info {
-          //display: flex;
-          //flex-grow: 1;
+          display: flex;
+          flex-grow: 1;
+          flex-direction: column;
           padding-inline-start: 5px;
           .title {
             color: #4d4d4d;
@@ -58,6 +59,15 @@
             i {
               font-size: 0.9rem;
             }
+          }
+        }
+
+        .inner-actions {
+          display: flex;
+          width: 50px;
+          justify-content: space-between;
+          i {
+            color: #666666;
           }
         }
       }

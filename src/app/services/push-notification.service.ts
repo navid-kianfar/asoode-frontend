@@ -97,6 +97,10 @@ export class PushNotificationService {
           this.router.navigateByUrl(url);
         }
         break;
+      case ActivityType.ProjectSubAdd:
+        find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+        if (find1) { find1.subProjects.push(notification.data); }
+        break;
     }
   }
 }

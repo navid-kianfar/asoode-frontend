@@ -17,24 +17,28 @@
       <div class="time-spent">{{ 'TIME_SPENT' | translate }}</div>
     </div>
     <app-project-tree-node
+      (deleteSubProject)="deleteSubProject($event)"
+      (editSubProject)="editSubProject($event)"
       (createSubProject)="newSubProject($event)"
       (createWorkPackage)="newWorkPackage($event)"
       *ngFor="let subProject of subProjects"
       [level]="1"
       [project]="model"
       [subProject]="subProject"
+      [reCreate]="reCreate"
     ></app-project-tree-node>
     <app-project-tree-node
       *ngFor="let workPackage of workPackages"
       [level]="1"
       [project]="model"
       [workPackage]="workPackage"
+      [reCreate]="reCreate"
     ></app-project-tree-node>
   </div>
 </div>
 <mat-menu #menu="matMenu">
   <button (click)="newSubProject()" mat-menu-item>
-    <i class="icon-sub-season"></i>
+    <i class="icon-tree7"></i>
     {{ 'NEW_SUB_PROJECT' | translate }}
   </button>
   <button (click)="newWorkPackage()" mat-menu-item>

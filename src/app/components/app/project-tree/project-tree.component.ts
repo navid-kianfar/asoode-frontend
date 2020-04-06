@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {
   ProjectViewModel,
   SubProjectViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import { AccessType } from '../../../library/app/enums';
+import {AccessType, ActivityType} from '../../../library/app/enums';
 import { ProjectService } from '../../../services/projects/project.service';
 import { ModalService } from '../../../services/core/modal.service';
 import { FormService } from '../../../services/core/form.service';
@@ -13,6 +13,10 @@ import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { WorkPackageWizardComponent } from '../../../modals/work-package-wizard/work-package-wizard.component';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { NotificationService } from '../../../services/core/notification.service';
+import {Socket} from 'ngx-socket-io';
+import {OperationResult} from '../../../library/core/operation-result';
+import {StringHelpers} from '../../../helpers/string.helpers';
+import {TranslateService} from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-project-tree',
@@ -24,14 +28,37 @@ export class ProjectTreeComponent implements OnInit {
   @Input() permission: AccessType;
   subProjects: SubProjectViewModel[];
   workPackages: WorkPackageViewModel[];
+  reCreate = new EventEmitter<string>();
   constructor(
+    private readonly socket: Socket,
     private readonly projectService: ProjectService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
     private readonly notificationService: NotificationService,
+    private readonly translateService: TranslateService,
   ) {}
 
   ngOnInit() {
+    this.bind();
+    this.createTree();
+  }
+
+  bind() {
+    this.socket.on('push-notification', (notification: any) => {
+      switch (notification.type) {
+        case ActivityType.ProjectSubAdd:
+          setTimeout(() => {
+            if (notification.data.projectId === this.model.id) {
+              this.createTree();
+              this.reCreate.emit();
+            }
+          }, 500);
+          break;
+      }
+    });
+  }
+
+  createTree() {
     this.workPackages = this.model.workPackages.filter(w => !w.subProjectId);
     this.subProjects = this.model.subProjects.filter(s => !s.parentId);
   }
@@ -39,7 +66,7 @@ export class ProjectTreeComponent implements OnInit {
   newSubProject(parentId?: string) {
     this.modalService
       .show(PromptComponent, {
-        icon: 'icon-sub-season',
+        icon: 'icon-tree7',
         title: 'NEW_SUB_PROJECT',
         form: [
           {
@@ -77,7 +104,7 @@ export class ProjectTreeComponent implements OnInit {
             // TODO: handle error
             return;
           }
-          this.notificationService.success('WORK_PACKAGE_CREATED');
+          this.notificationService.success('SUB_PROJECT_CREATED');
         },
         actionLabel: 'CREATE',
         actionColor: 'primary',
@@ -91,6 +118,70 @@ export class ProjectTreeComponent implements OnInit {
         projectId: this.model.id,
         parentId,
       })
+      .subscribe(() => {});
+  }
+
+  deleteSubProject(id: string) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_SUB_CONFIRM_HEADING'),
+      [this.model.subProjects.find(s => s.id === id).title]
+    );
+    this.modalService.confirm({
+      title: 'REMOVE_SUB',
+      message: 'REMOVE_SUB_CONFIRM',
+      heading,
+      actionLabel: 'REMOVE_SUB',
+      cancelLabel: 'CANCEL',
+      action: async () => {
+        return await this.projectService.removeSubProject(id);
+      },
+    }).subscribe((confirmed) => { });
+  }
+
+  editSubProject(id: string) {
+    const sub = this.model.subProjects.find(s => s.id === id);
+    this.modalService
+      .show(PromptComponent, {
+        icon: 'icon-tree7',
+        title: 'EDIT_SUB_PROJECT',
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'title' },
+                params: { model: sub.title, placeHolder: 'TITLE' },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'TITLE_REQUIRED',
+                  },
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'description' },
+                params: {
+                  model: sub.description,
+                  textArea: true,
+                  placeHolder: 'DESCRIPTION',
+                },
+              }),
+            ],
+          },
+        ],
+        action: async (params, form) => {
+          const op = await this.projectService.editSubProject(
+            this.model.id,
+            params,
+          );
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          this.notificationService.success('SUB_PROJECT_UPDATED');
+        },
+        actionLabel: 'SAVE_CHANGES',
+        actionColor: 'primary',
+      } as PromptModalParameters)
       .subscribe(() => {});
   }
 }
