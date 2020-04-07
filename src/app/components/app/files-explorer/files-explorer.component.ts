@@ -1,7 +1,12 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FilesService} from '../../../services/storage/files.service';
 import {OperationResultStatus} from '../../../library/core/enums';
-import {ExplorerFileViewModel, ExplorerFolderViewModel, ExplorerViewModel,} from '../../../view-models/storage/files-types';
+import {
+  ExplorerFileViewModel,
+  ExplorerFolderViewModel,
+  ExplorerViewModel,
+  UploadViewModel,
+} from '../../../view-models/storage/files-types';
 import {OperationResult} from '../../../library/core/operation-result';
 import {MockService} from '../../../services/mock.service';
 import {ModalService} from '../../../services/core/modal.service';
@@ -238,8 +243,43 @@ export class FilesExplorerComponent implements OnInit {
 
   actionRename() {}
 
+  clearInputFile(f) {
+    if (f.value) {
+      try {
+        f.value = '';
+      } catch (err) { }
+      if (f.value) {
+        const form = document.createElement('form');
+        const parentNode = f.parentNode;
+        const ref = f.nextSibling;
+        form.appendChild(f);
+        form.reset();
+        parentNode.insertBefore(f, ref);
+      }
+    }
+  }
+
   onChange(target: any) {
-    console.log(target.files);
+    if (!target.files || !target.files.length) { return; }
+    const upload: UploadViewModel[] = [];
+    for (let i = 0; i < target.files.length; i++) {
+      const f = target.files.item(i);
+      upload.push({
+        uploading: false,
+        success: false,
+        failed: false,
+        progress: 0,
+        name: f.name,
+        size: f.size,
+        file: f,
+        extensionLessName: this.filesService.getExtensionLessFileName(f.name),
+        extension: this.filesService.getFileExtension(f.name),
+        promise: undefined
+      });
+    }
+    this.clearInputFile(target);
+    this.filesService.uploading = [...this.filesService.uploading, ...upload];
+    this.filesService.upload(upload, this.path);
   }
 
   async goTo(p: ExplorerFolderViewModel) {

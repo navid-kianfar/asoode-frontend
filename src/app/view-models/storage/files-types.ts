@@ -1,3 +1,5 @@
+import {OperationResult} from '../../library/core/operation-result';
+
 export interface ExplorerViewModel {
   files: ExplorerFileViewModel[];
   folders: ExplorerFolderViewModel[];
@@ -39,4 +41,5 @@ export interface UploadViewModel {
   file: File;
   success: boolean;
   failed: boolean;
+  promise: Promise<OperationResult<boolean>>;
 }
