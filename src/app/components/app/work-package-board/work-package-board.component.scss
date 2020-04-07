@@ -1,13 +1,12 @@
 .work-package-board {
   padding: 10px;
-  overflow-x: auto;
-  height: calc(100vh - 120px);
-
   .board-lists {
     display: flex;
+    overflow-x: auto;
+    height: calc(100vh - 140px);
     .board-list {
       min-width: 250px;
-      max-height: calc(100vh - 140px);
+      max-height: calc(100vh - 160px);
       background: #fff;
       border-radius: 5px;
       margin-inline-end: 20px;
@@ -64,5 +63,11 @@
         }
       }
     }
+
   }
+}
+
+.board-lists::-webkit-scrollbar  {
+  height: 10px;
+  border-radius: 0;
 }

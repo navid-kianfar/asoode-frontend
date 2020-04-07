@@ -1,0 +1,61 @@
+.cdk-drag-preview {
+  &.board-list {
+    min-width: 250px;
+    max-height: calc(100vh - 160px);
+    background: #fff;
+    border-radius: 5px;
+    margin-inline-end: 20px;
+    height: fit-content;
+
+    &.empty {
+      background: none;
+    }
+
+    .header {
+      display: flex;
+      padding: 10px 10px;
+      align-items: center;
+      cursor: pointer;
+      i {
+        display: flex;
+        min-width: 20px;
+        min-height: 20px;
+        border: 1px dashed #cccccc;
+        border-radius: 20px;
+        font-size: 0.6rem;
+        color: #b3b3b3;
+        align-items: center;
+        justify-content: center;
+      }
+      span {
+        font-size: 0.8rem;
+        color: #999999;
+        font-weight: 400;
+        flex-grow: 1;
+        display: flex;
+      }
+    }
+
+    .new-task {
+      padding: 5px;
+      .wrapper {
+        display: flex;
+        flex-direction: column;
+        textarea {
+          resize: none;
+          margin-bottom: 5px;
+          border: 1px dashed #cccccc;
+          font-size: 0.8rem;
+          color: #b3b3b3;
+        }
+        .buttons {
+          display: flex;
+          flex-direction: row;
+          button {
+            max-width: 70px;
+          }
+        }
+      }
+    }
+  }
+}

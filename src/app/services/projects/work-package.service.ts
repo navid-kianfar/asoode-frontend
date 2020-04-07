@@ -14,4 +14,10 @@ export class WorkPackageService {
       '/work-packages/get/' + id,
     );
   }
+
+  async repositionList(id: any, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/work-packages/lists/reposition/' + id, model
+    );
+  }
 }

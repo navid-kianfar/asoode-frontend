@@ -1,9 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import {
-  WorkPackageListViewModel,
-  WorkPackageViewModel,
-} from '../../../view-models/projects/project-types';
-import { MockService } from '../../../services/mock.service';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {WorkPackageListViewModel, WorkPackageViewModel,} from '../../../view-models/projects/project-types';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {WorkPackageService} from '../../../services/projects/work-package.service';
 
 @Component({
   selector: 'app-work-package-board',
@@ -13,9 +11,22 @@ import { MockService } from '../../../services/mock.service';
 export class WorkPackageBoardComponent implements OnInit {
   @Input() model: WorkPackageViewModel;
   expanded: boolean;
-  constructor() {}
+  dragDelay: number;
+  constructor(private readonly workPackageService: WorkPackageService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dragDelay = 0;
+  }
+
+  drop(event: CdkDragDrop<any[]>) {
+    const id = event.item.data.id;
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+    // this.workPackageService.repositionList(id, { order: event.currentIndex + 1 });
+  }
 
   cancelNewList() {
     this.expanded = false;

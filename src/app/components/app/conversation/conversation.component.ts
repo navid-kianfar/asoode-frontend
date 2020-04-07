@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MappedConversationViewModel} from '../../../view-models/communication/messenger-types';
 import {ConversationType} from 'src/app/library/app/enums';
 import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
@@ -10,7 +10,7 @@ import {OperationResultStatus} from '../../../library/core/enums';
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.scss'],
 })
-export class ConversationComponent implements OnInit {
+export class ConversationComponent implements OnInit, OnChanges {
   @Input() recordId: string;
   @Input() dashboard: boolean;
   @Input() members: MemberInfoViewModel[];
@@ -23,6 +23,12 @@ export class ConversationComponent implements OnInit {
   ngOnInit() {
     this.mappedConversations = [];
     this.fetch();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.recordId && !changes.recordId.firstChange) {
+      this.ngOnInit();
+    }
   }
 
   async fetch() {

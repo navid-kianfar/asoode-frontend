@@ -9,6 +9,8 @@ import { GroupService } from '../../../services/groups/group.service';
 })
 export class GroupInfoComponent implements OnInit {
   @Input() id: string;
+  @Input() cssClass: string;
+  @Input() small: boolean;
   @Input() model: GroupViewModel;
   constructor(private readonly groupService: GroupService) {}
 

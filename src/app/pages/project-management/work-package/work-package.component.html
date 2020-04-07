@@ -74,11 +74,21 @@
         </div>
       </div>
       <div class="members-container">
-        <app-member-info
-          [model]="member"
-          small="true"
-          *ngFor="let member of project.members | slice: 0:5"
-        ></app-member-info>
+
+        <ng-container *ngFor="let member of workPackage.members | slice: 0:5">
+          <app-member-info
+            *ngIf="!member.isGroup"
+            [model]="findMember(member.recordId)"
+            small="true"
+          ></app-member-info>
+          <app-group-info
+            *ngIf="member.isGroup"
+            [id]="member.recordId"
+            small="true"
+          ></app-group-info>
+        </ng-container>
+
+
         &nbsp;
         <div *ngIf="project.members.length > 5" class="add more">
           <i class="icon-menu"></i>

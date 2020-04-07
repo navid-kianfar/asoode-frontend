@@ -39,13 +39,12 @@ export class MessengerComponent implements OnInit {
     });
     this.projectService.projects.forEach(g => {
       g.members.forEach(m => {
-        console.log(m);
         if (m.isGroup || !m.member || members.find(k => k.id === m.member.id)) { return; }
         members.push(m.member);
       });
     });
     this.allMembers = members;
-    this.showFiles = true;
+    this.showFiles = false;
   }
 
   openGroup(group: GroupViewModel) {

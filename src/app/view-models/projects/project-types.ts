@@ -118,6 +118,8 @@ export interface BoardTemplateViewModel {
   lists: string[];
 }
 export interface WorkPackageListViewModel extends BaseViewModel {
+  adding?: any;
+  editing?: any;
   packageId: string;
   title: string;
   color: string;

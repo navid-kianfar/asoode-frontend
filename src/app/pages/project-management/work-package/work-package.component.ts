@@ -7,6 +7,7 @@ import { ProjectService } from '../../../services/projects/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkPackageService } from '../../../services/projects/work-package.service';
 import { OperationResultStatus } from '../../../library/core/enums';
+import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-work-package',
@@ -46,6 +47,7 @@ export class WorkPackageComponent implements OnInit {
     if (this.workPackage.progress === undefined) {
       this.workPackage.progress = 0;
     }
+    console.log(this.project.members, this.workPackage.members);
     this.fetch();
   }
 
@@ -58,6 +60,11 @@ export class WorkPackageComponent implements OnInit {
     }
     this.workPackage = op.data;
     this.waiting = false;
+  }
+
+  findMember(recordId: string): MemberInfoViewModel {
+    const access = this.project.members.find(m => m.recordId === recordId);
+    return access.member;
   }
 }
 export enum ViewMode {

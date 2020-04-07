@@ -45,12 +45,14 @@
       width: 30px;
       height: 30px;
       border-radius: 50px;
-      border: 2px solid #666666;
+      border: 1px solid #666666;
       background-color: #e6e6e6;
-      padding-top: 3px;
       text-align: center;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       i {
         position: relative;
@@ -61,5 +63,18 @@
 
   .add {
     display: none;
+  }
+
+  &.small {
+    width: 40px;
+    border: none;
+
+    .initials-holder {
+      width: 30px;
+      height: 30px;
+    }
+    .info {
+      display: none !important;
+    }
   }
 }

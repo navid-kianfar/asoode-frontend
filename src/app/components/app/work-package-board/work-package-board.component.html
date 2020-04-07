@@ -1,7 +1,16 @@
 <div class="work-package-board">
-  <div class="board-lists">
-    <div *ngFor="let list of model.lists" class="board-list">
-      <div class="header">
+  <div class="board-lists"
+       cdkDropList
+       cdkDropListOrientation="horizontal"
+       [cdkDropListData]="model.lists"
+       (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let list of model.lists"
+         class="board-list"
+         [cdkDragStartDelay]="dragDelay"
+         [cdkDragData]="list"
+         [cdkDragDisabled]="list.editing || list.adding"
+         cdkDrag>
+      <div cdkDragHandle class="header">
         <span>{{ list.title | truncate: 30 }}</span
         >&nbsp; <i (click)="createNewTask(list)" class="icon-plus2"></i>&nbsp;
         <i class="icon-menu"></i>
@@ -19,13 +28,13 @@
       </div>
     </div>
     <div class="board-list add-new">
-      <div (click)="createNewList()" class="header">
+      <div *ngIf="!expanded" (click)="createNewList()" class="header">
         <i class="icon-plus2"></i>&nbsp;
         <span>{{ 'CREATE_NEW_LIST' | translate }}</span>
       </div>
       <div *ngIf="expanded" class="new-task">
         <div class="wrapper">
-          <textarea rows="4"></textarea>
+          <textarea rows="2"></textarea>
           <div class="buttons">
             <button mat-stroked-button>{{ 'CREATE' | translate }}</button>&nbsp;
             <button (click)="cancelNewList()" mat-stroked-button>
@@ -35,6 +44,6 @@
         </div>
       </div>
     </div>
-    <div class="board-list empty">&nbsp;</div>
+<!--    <div class="board-list empty">&nbsp;</div>-->
   </div>
 </div>

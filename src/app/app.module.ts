@@ -120,7 +120,6 @@ import { GroupInfoComponent } from './components/app/group-info/group-info.compo
 import { ProjectInfoMiniComponent } from './components/app/project-info-mini/project-info-mini.component';
 import { GroupTimespentComponent } from './components/app/group-timespent/group-timespent.component';
 import { ChannelFilesComponent } from './components/app/channel-files/channel-files.component';
-import { UsernamePipe } from './pipes/app/username.pipe';
 import { ProjectWizardComponent } from './components/app/project-wizard/project-wizard.component';
 import { GroupWizardComponent } from './components/app/group-wizard/group-wizard.component';
 import { ImportWizardComponent } from './components/app/import-wizard/import-wizard.component';
@@ -149,6 +148,7 @@ import { GroupNamePipe } from './pipes/app/group-name.pipe';
 import { GroupSettingsComponent } from './components/app/group-settings/group-settings.component';
 import { WorkPackageWizardComponent } from './modals/work-package-wizard/work-package-wizard.component';
 import {DeviceDetectorModule} from 'ngx-device-detector';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -238,7 +238,6 @@ import {DeviceDetectorModule} from 'ngx-device-detector';
     ProjectInfoMiniComponent,
     GroupTimespentComponent,
     ChannelFilesComponent,
-    UsernamePipe,
     ProjectWizardComponent,
     GroupWizardComponent,
     ImportWizardComponent,
@@ -293,7 +292,7 @@ import {DeviceDetectorModule} from 'ngx-device-detector';
     DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
-      { container: 'modal-container' },
+      {container: 'modal-container'},
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -303,7 +302,7 @@ import {DeviceDetectorModule} from 'ngx-device-detector';
         bodyClass: 'modal-open',
       },
     ),
-    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    NgxPopperModule.forRoot({placement: 'bottom'}),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,
@@ -316,6 +315,7 @@ import {DeviceDetectorModule} from 'ngx-device-detector';
     MomentModule,
     ContentLoaderModule,
     TrendModule,
+    DragDropModule,
   ],
   providers: [
     // {
