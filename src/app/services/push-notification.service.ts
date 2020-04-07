@@ -30,7 +30,7 @@ export class PushNotificationService {
           Object.assign(this.identityService.profile, notification.data);
         }
         this.groupService.groups.forEach(g => {
-          const access = g.members.find(m => m.recordId === notification.data.id);
+          const access = g.members.find(m => m.userId === notification.data.id);
           if (access) { Object.assign(access.member, notification.data); }
         });
         this.projectService.projects.forEach(g => {

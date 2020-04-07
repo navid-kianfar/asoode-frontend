@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <div *ngIf="!dashboard" class="send-message">
-    <app-editor [messenger]="true"></app-editor>
+  <div *ngIf="!dashboard && !waiting" class="send-message">
+    <app-editor [members]="members" [messenger]="true"></app-editor>
   </div>
 </div>

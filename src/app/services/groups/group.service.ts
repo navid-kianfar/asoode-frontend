@@ -21,7 +21,7 @@ export class GroupService {
     const grp =
       typeof group === 'string' ? this.groups.find(g => g.id === group) : group;
     const access = grp.members.find(
-      m => m.recordId === this.identityService.identity.userId,
+      m => m.userId === this.identityService.identity.userId,
     );
     if (access) {
       return access.access;
@@ -29,7 +29,7 @@ export class GroupService {
 
     const multiple = [];
     for (const ga of grp.members.filter(m => m.isGroup)) {
-      const found = this.groups.find(k => k.id === ga.recordId);
+      const found = this.groups.find(k => k.id === ga.userId);
       if (found) {
         multiple.push(found.access);
       }

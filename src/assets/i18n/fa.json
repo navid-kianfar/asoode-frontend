@@ -444,5 +444,6 @@
   "SEASON_UPDATED": "تغیرات فصل ذخیره شد",
   "EDIT_SEASON": "ویرایش فصل",
   "DIRECTORY_EXISTS": "پوشه\u200Cای با این نام موجود است",
-  "FILE_EXISTS": "فایل\u200Cای با این نام موجود است"
+  "FILE_EXISTS": "فایل\u200Cای با این نام موجود است",
+  "ENUMS_CHANNEL_TYPE_WORK_PACKAGE": "بسته کاری"
 }

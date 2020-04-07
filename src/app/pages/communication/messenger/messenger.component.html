@@ -12,18 +12,36 @@
         <mat-tab [label]="'PROJECTS' | translate">
           <ng-template matTabContent>
             <div class="aside-item">
-              <div
-                matRipple
-                [class.selected]="current === channel"
-                (click)="open(channel)"
-                *ngFor="
-                  let channel of mockService.channels
-                    | search: ['type']:ChannelType.Project
-                "
-                class="item"
-              >
-                {{ channel.title }}
-              </div>
+              <ng-container *ngFor=" let project of projectService.projects">
+                <ng-container *ngIf="project.complex">
+                  <div
+                    matRipple
+                    [class.selected]="current?.recordId === project.id"
+                    (click)="openProject(project)"
+                    class="item"
+                  >
+                    {{ project.title }}
+                  </div>
+                  <div
+                    matRipple
+                    [class.selected]="current?.recordId === wp.id"
+                    (click)="openWorkPackage(project, wp)"
+                    *ngFor="let wp of project.workPackages"
+                    class="item"
+                  >
+                    {{ wp.title }}
+                  </div>
+                </ng-container>
+                <div
+                  matRipple
+                  [class.selected]="current?.recordId === project.workPackages[0].id"
+                  (click)="openWorkPackage(project, project.workPackages[0])"
+                  *ngIf="!project.complex"
+                  class="item"
+                >
+                  {{ project.workPackages[0].title }}
+                </div>
+              </ng-container>
             </div>
           </ng-template>
         </mat-tab>
@@ -32,15 +50,12 @@
             <div class="aside-item">
               <div
                 matRipple
-                [class.selected]="current === channel"
-                (click)="open(channel)"
-                *ngFor="
-                  let channel of mockService.channels
-                    | search: ['type']:ChannelType.Group
-                "
+                [class.selected]="current?.recordId === group.id"
+                (click)="openGroup(group)"
+                *ngFor=" let group of groupService.groups"
                 class="item"
               >
-                {{ channel.title }}
+                {{ group.title }}
               </div>
             </div>
           </ng-template>
@@ -58,16 +73,11 @@
                   <i class="icon-search"></i>
                 </div>
               </div>
-              <div
-                class="member"
-                [class.online]="index % 2 === 0"
-                *ngFor="
-                  let member of current?.members
-                    | search: ['fullName', 'email', 'phoneNumber']:filter;
-                  let index = index
-                "
-              >
-                <app-member-info [model]="member"></app-member-info>
+
+              <div class="member" *ngFor=" let member of allMembers | search: ['fullName', 'email', 'phoneNumber']:filter">
+                <app-member-info
+                  [model]="member"
+                ></app-member-info>
               </div>
             </div>
           </ng-template>
@@ -82,7 +92,7 @@
         <h3>
           <i class="icon-bubble-dots2"></i>
           {{
-            (mockService.channels.length
+            ((projectService.projects.length + groupService.groups.length)
               ? 'NO_CHANNEL_SELECTED'
               : 'NO_CHANNELS'
             ) | translate
@@ -96,14 +106,10 @@
       <div class="channel-header">
         <div class="wrapper">
           <div class="title-container">
-            <span class="title">{{ current.title }}</span
-            >&nbsp;
+            <span class="title">{{ current.title }}</span>&nbsp;
             <i *ngIf="current.type === ChannelType.Group" class="icon-team"></i>
-            <i
-              *ngIf="current.type === ChannelType.Project"
-              class="icon-workpackage"
-            ></i
-            >&nbsp;
+            <i *ngIf="current.type === ChannelType.WorkPackage" class="icon-workpackage"></i>&nbsp;
+            <i *ngIf="current.type === ChannelType.Project" class="icon-project"></i>&nbsp;
             <span class="category">{{ current.title }}</span>
           </div>
           <div class="info-container">
@@ -112,12 +118,20 @@
             </div>
             <div class="members">
               |&nbsp;&nbsp;{{
-                'N_USERS' | translate | stringFormat: current.members.length
+                'N_USERS' | translate | stringFormat: currentMembers.length
               }}&nbsp;&nbsp;|
             </div>
             <a
               *ngIf="current.type === ChannelType.Project"
-              routerLink="/project"
+              [routerLink]="'/project/' + current.recordId"
+              class="go-to"
+            >
+              <i class="icon-new-window"></i>
+              {{ 'VIEW_IN_PROJECT_PAGE' | translate }}
+            </a>
+            <a
+              *ngIf="current.type === ChannelType.WorkPackage"
+              [routerLink]="'/work-package/' + current.recordId"
               class="go-to"
             >
               <i class="icon-new-window"></i>
@@ -125,7 +139,7 @@
             </a>
             <a
               *ngIf="current.type === ChannelType.Group"
-              routerLink="/group"
+              [routerLink]="'/group/' + current.recordId"
               class="go-to"
             >
               <i class="icon-new-window"></i>
@@ -148,7 +162,7 @@
         </div>
       </div>
       <div class="channel-content">
-        <app-conversation></app-conversation>
+        <app-conversation [recordId]="current.recordId" [members]="currentMembers"></app-conversation>
       </div>
     </div>
     <div *ngIf="showFiles" class="channel-aside">

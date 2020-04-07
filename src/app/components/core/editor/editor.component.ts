@@ -4,6 +4,7 @@ import Quill from 'quill';
 import 'quill-mention';
 import 'quill-emoji/dist/quill-emoji.js';
 import { QuillEditorComponent } from 'ngx-quill';
+import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-editor',
@@ -14,6 +15,7 @@ export class EditorComponent implements OnInit {
   @Input() messenger: boolean;
   @Input() model: string;
   @Input() placeHolder: string;
+  @Input() members: MemberInfoViewModel[];
 
   modules: any;
   @ViewChild(QuillEditorComponent, { static: true })
@@ -36,10 +38,9 @@ export class EditorComponent implements OnInit {
             editor.insertText(editor.getLength() - 1, '', 'user');
           },
           source: (searchTerm, renderList) => {
-            const values = [
-              { id: 1, value: 'نوید کیانفر' },
-              { id: 2, value: 'صبا کیانفر' },
-            ];
+            const values = this.members.map(m => {
+              return { id: m.id, value: m.fullName };
+            });
 
             if (searchTerm.length === 0) {
               renderList(values, searchTerm);

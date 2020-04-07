@@ -52,7 +52,7 @@ export class GroupMembersComponent implements OnInit {
       this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
       [
         member.isGroup
-          ? this.groupService.groups.find(g => g.id === member.recordId).title
+          ? this.groupService.groups.find(g => g.id === member.userId).title
           : member.member.fullName,
       ],
     );

@@ -46,8 +46,7 @@ export interface PendingInvitationViewModel extends BaseViewModel {
   access: AccessType;
 }
 export interface GroupMemberViewModel extends BaseViewModel {
-  isGroup: boolean;
-  recordId: string;
+  userId: string;
   groupId: string;
   member: MemberInfoViewModel;
   access: AccessType;

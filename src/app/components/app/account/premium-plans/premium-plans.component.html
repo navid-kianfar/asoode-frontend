@@ -20,15 +20,15 @@
       </div>
       <div class="body">
         <mat-progress-bar
-          [value]="identityService.profile.plan.usedSpace"
-          [bufferValue]="identityService.profile.plan.totalSpace"
+          [value]="identityService.profile.plan.usedSpace / 1024 / 1024"
+          [bufferValue]="identityService.profile.plan.totalSpace / 1024 / 1024"
         ></mat-progress-bar>
         <h5 *ngIf="identityService.profile.plan.type === PlanType.Free">
           {{
             'DISK_USAGE_MB_DETAIL'
               | translate
               | stringFormat
-                : identityService.profile.plan.usedSpace / 1024 / 1024
+                : (identityService.profile.plan.usedSpace / 1024 / 1024).toFixed(2)
                 : identityService.profile.plan.space / 1024 / 1024
           }}
         </h5>
