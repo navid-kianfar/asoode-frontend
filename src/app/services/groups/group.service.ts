@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from '../core/http.service';
-import { OperationResult } from '../../library/core/operation-result';
-import { GroupViewModel } from '../../view-models/groups/group-types';
-import { OperationResultStatus } from '../../library/core/enums';
-import { AccessType } from '../../library/app/enums';
-import { IdentityService } from '../auth/identity.service';
+import {Injectable} from '@angular/core';
+import {HttpService} from '../core/http.service';
+import {OperationResult} from '../../library/core/operation-result';
+import {GroupViewModel} from '../../view-models/groups/group-types';
+import {OperationResultStatus} from '../../library/core/enums';
+import {AccessType} from '../../library/app/enums';
+import {IdentityService} from '../auth/identity.service';
 
 @Injectable({
   providedIn: 'root',
@@ -27,14 +27,7 @@ export class GroupService {
       return access.access;
     }
 
-    const multiple = [];
-    for (const ga of grp.members.filter(m => m.isGroup)) {
-      const found = this.groups.find(k => k.id === ga.userId);
-      if (found) {
-        multiple.push(found.access);
-      }
-    }
-    return multiple.sort()[0];
+    return AccessType.Visitor;
   }
 
   async load(): Promise<OperationResult<GroupViewModel[]>> {

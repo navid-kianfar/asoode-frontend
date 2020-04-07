@@ -50,11 +50,7 @@ export class GroupMembersComponent implements OnInit {
   removeAccess(member: GroupMemberViewModel) {
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
-      [
-        member.isGroup
-          ? this.groupService.groups.find(g => g.id === member.userId).title
-          : member.member.fullName,
-      ],
+      [member.member.fullName],
     );
     this.modalService
       .confirm({

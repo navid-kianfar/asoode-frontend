@@ -22,7 +22,7 @@ export class FilesComponent implements OnInit {
   ngOnInit() {
     this.tab = ViewMode.Mine;
     this.sharedAnyThing =
-      this.messengerService.channels.length > 0 ||
+      this.messengerService.channels.directs.length > 0 ||
       this.projectService.projects.length > 0 ||
       this.groupService.groups.length > 0 ||
       true;
