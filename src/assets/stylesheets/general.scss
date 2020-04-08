@@ -243,6 +243,23 @@ body {
     line-height: 23px;
   }
 }
+
+.mat-menu-item.action-btn {
+  .cnt {
+    display: flex;
+    align-content: baseline;
+
+    i {
+      font-size: 1.0rem;
+      margin-inline-end: 5px;
+      display: flex;
+      align-items: center;
+    }
+    span {
+      font-size: 0.8rem;
+    }
+  }
+}
 .primary-color {
   color: #6b3d8d !important;
 }

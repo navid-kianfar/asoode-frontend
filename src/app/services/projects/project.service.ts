@@ -50,7 +50,6 @@ export class ProjectService {
       model,
     );
   }
-
   async createSubProject(
     id: string,
     params: any,
@@ -96,6 +95,22 @@ export class ProjectService {
     return multiple.sort()[0];
   }
 
+  getWorkPackagePermission(project: ProjectViewModel, workPackage: WorkPackageViewModel): AccessType {
+    const access = workPackage.members.find(m => m.recordId === this.identityService.identity.userId);
+    const multiple = [];
+    if (access) {
+      multiple.push(access.access);
+    }
+
+    for (const ga of workPackage.members.filter(m => m.isGroup)) {
+      const found = this.groupService.groups.find(k => k.id === ga.recordId);
+      if (found) {
+        multiple.push(found.access);
+      }
+    }
+    return multiple.sort()[0];
+  }
+
   async changePendingAccess(id: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/projects/change-pending-access/${id}`,
@@ -126,4 +141,5 @@ export class ProjectService {
   async editSeason(id: string, params: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/projects/season/${id}/edit`, params);
   }
+
 }

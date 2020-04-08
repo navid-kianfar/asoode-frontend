@@ -2,6 +2,7 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {WorkPackageListViewModel, WorkPackageViewModel,} from '../../../view-models/projects/project-types';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {WorkPackageService} from '../../../services/projects/work-package.service';
+import {AccessType} from '../../../library/app/enums';
 
 @Component({
   selector: 'app-work-package-board',
@@ -10,6 +11,8 @@ import {WorkPackageService} from '../../../services/projects/work-package.servic
 })
 export class WorkPackageBoardComponent implements OnInit {
   @Input() model: WorkPackageViewModel;
+  @Input() permission: AccessType;
+  AccessType = AccessType;
   expanded: boolean;
   dragDelay: number;
   constructor(private readonly workPackageService: WorkPackageService) {}
@@ -37,9 +40,18 @@ export class WorkPackageBoardComponent implements OnInit {
   }
 
   createNewTask(list: WorkPackageListViewModel) {
+    this.model.lists.forEach(l => l.expanded = false);
     list.expanded = true;
   }
   cancelNewTask(list: WorkPackageListViewModel) {
     list.expanded = false;
+  }
+
+  changeSort(list: WorkPackageListViewModel) {
+    
+  }
+
+  showChart(list: WorkPackageListViewModel) {
+    
   }
 }

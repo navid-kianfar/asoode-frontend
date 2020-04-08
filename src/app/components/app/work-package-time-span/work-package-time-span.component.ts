@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WorkPackageViewModel } from '../../../view-models/projects/project-types';
+import {AccessType} from '../../../library/app/enums';
 
 @Component({
   selector: 'app-work-package-time-span',
@@ -8,6 +9,7 @@ import { WorkPackageViewModel } from '../../../view-models/projects/project-type
 })
 export class WorkPackageTimeSpanComponent implements OnInit {
   @Input() model: WorkPackageViewModel;
+  @Input() permission: AccessType;
   constructor() {}
 
   ngOnInit() {}

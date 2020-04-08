@@ -8,12 +8,12 @@
          class="board-list"
          [cdkDragStartDelay]="dragDelay"
          [cdkDragData]="list"
-         [cdkDragDisabled]="list.editing || list.adding"
+         [cdkDragDisabled]="list.editing || list.adding || permission === AccessType.Visitor"
          cdkDrag>
       <div cdkDragHandle class="header">
         <span>{{ list.title | truncate: 30 }}</span
-        >&nbsp; <i (click)="createNewTask(list)" class="icon-plus2"></i>&nbsp;
-        <i class="icon-menu"></i>
+        >&nbsp; <i *ngIf="permission !== AccessType.Visitor" (click)="createNewTask(list)" class="icon-plus2"></i>&nbsp;
+        <i [matMenuTriggerFor]="menu" *ngIf="permission !== AccessType.Visitor" class="icon-menu"></i>
       </div>
       <div *ngIf="list.expanded" class="new-task">
         <div class="wrapper">
@@ -26,6 +26,44 @@
           </div>
         </div>
       </div>
+      <mat-menu #menu="matMenu">
+        <button class="action-btn" (click)="createNewTask(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="icon-task"></i>
+            <span>{{ 'NEW_TASK' | translate }}</span>
+          </span>
+        </button>
+        <button class="action-btn" (click)="changeSort(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="icon-arrow-down8"></i>
+            <span>{{ 'SORT_ORDER' | translate }}</span>
+          </span>
+        </button>
+        <button class="action-btn" (click)="showChart(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="icon-checkmark3"></i>
+            <span>{{ 'SHOW_CHART' | translate }}</span>
+          </span>
+        </button>
+        <button class="action-btn" (click)="showChart(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="icon-filters"></i>
+            <span>{{ 'LIST_COLOR' | translate }}</span>
+          </span>
+        </button>
+        <button class="action-btn" (click)="showChart(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="icon-stop"></i>
+            <span>{{ 'ACCESS_LEVEL' | translate }}</span>
+          </span>
+        </button>
+        <button class="action-btn" (click)="showChart(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="icon-archive"></i>
+            <span>{{ 'ARCHIVE' | translate }}</span>
+          </span>
+        </button>
+      </mat-menu>
     </div>
     <div class="board-list add-new">
       <div *ngIf="!expanded" (click)="createNewList()" class="header">

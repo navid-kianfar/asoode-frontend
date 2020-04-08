@@ -3,7 +3,8 @@
     <div class="structure-container">
       <ng-container *ngIf="!project.complex">
         <div class="upgrade">
-          <button [disabled]="waiting" mat-flat-button>
+          <button [disabled]="waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
+                  mat-flat-button>
             <i class="icon-trophy4"></i>&nbsp;
             <span>{{ 'ADD_STRUCTURE' | translate }}</span>
           </button>
@@ -12,8 +13,7 @@
       <ng-container *ngIf="project.complex"></ng-container>
       <div class="title">
         <i class="icon-workpackage"></i>&nbsp;
-        <span>{{ workPackage.title }}</span
-        >&nbsp;
+        <span>{{ workPackage.title }}</span>&nbsp;
         <!--        <i class="icon-star-empty"></i>-->
       </div>
     </div>
@@ -128,7 +128,8 @@
         <i class="icon-filters"></i>&nbsp;
         <span>{{ (filters.mine ? 1 : 0) + (filters.archived ? 1 : 0) + (filters.active ? 1 : 0) }}</span>
       </div>
-      <div (click)="toggleSetting = !toggleSetting" class="settings-container">
+      <div *ngIf="(permission === AccessType.Admin || permission === AccessType.Owner)"
+           (click)="toggleSetting = !toggleSetting" class="settings-container">
         <i class="icon-cog2"></i>
       </div>
     </div>
@@ -138,18 +139,18 @@
       <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
       <ng-container *ngIf="!waiting">
         <ng-container *ngIf="mode === ViewMode.Board">
-          <app-work-package-board [model]="workPackage"></app-work-package-board>
+          <app-work-package-board [permission]="permission" [model]="workPackage"></app-work-package-board>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.List">
-          <app-work-package-list [model]="workPackage"></app-work-package-list>
+          <app-work-package-list [permission]="permission" [model]="workPackage"></app-work-package-list>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.TimeSpan">
-          <app-work-package-time-span
+          <app-work-package-time-span [permission]="permission"
             [model]="workPackage"
           ></app-work-package-time-span>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.Calendar">
-          <app-work-package-calendar
+          <app-work-package-calendar [permission]="permission"
             [model]="workPackage"
           ></app-work-package-calendar>
         </ng-container>
@@ -166,19 +167,20 @@
         <div class="box">
           <div class="title">{{ 'RECEIVE_NOTIFICATION' | translate}}</div>
           <div class="cnt">
-            <mat-radio-group>
-              <mat-radio-button color="primary" value="1">{{ 'RECEIVE_ALL_NOTIFICATION' | translate}}</mat-radio-button>
-              <mat-radio-button color="primary" value="2">{{ 'RECEIVE_MINE_NOTIFICATION' | translate}}</mat-radio-button>
-              <mat-radio-button color="primary" value="3">{{ 'RECEIVE_NONE_NOTIFICATION' | translate}}</mat-radio-button>
+            <mat-radio-group [(ngModel)]="receiveNotification">
+              <mat-radio-button color="primary" [value]="1">{{ 'RECEIVE_ALL_NOTIFICATION' | translate}}</mat-radio-button>
+              <mat-radio-button color="primary" [value]="2">{{ 'RECEIVE_MINE_NOTIFICATION' | translate}}</mat-radio-button>
+              <mat-radio-button color="primary" [value]="3">{{ 'RECEIVE_NONE_NOTIFICATION' | translate}}</mat-radio-button>
             </mat-radio-group>
           </div>
         </div>
         <div class="box">
           <div class="title">{{ 'APPEARANCE' | translate}}</div>
           <div class="cnt">
+            <app-checkbox label="SHOW_LIST_TOTAL_CARDS"></app-checkbox>
+            <br>
             <h6>{{ 'CHANGE_WORK_PACKAGE_COLOR' | translate}}</h6>
             <app-color-picker></app-color-picker>
-            <app-checkbox label="SHOW_LIST_TOTAL_CARDS"></app-checkbox>
           </div>
         </div>
         <div class="box">
@@ -225,7 +227,7 @@
     <div *ngIf="!workPackage.objectives.length">
       <h5>{{ 'NO_OBJECTIVES' | translate}}</h5>
     </div>
-    <div class="add-objective">
+    <div *ngIf="permission !== AccessType.Visitor" class="add-objective">
       <i class="icon-plus2"></i>
       <span>{{ 'ADD_OBJECTIVES' | translate}}</span>
     </div>
@@ -251,9 +253,11 @@
           *ngIf="member.isGroup"
           [id]="member.recordId"
         ></app-group-info>
-        <app-access-list [(access)]="member.access"></app-access-list>
+        <app-access-list *ngIf="member.access !== AccessType.Owner"
+                         [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)" [(access)]="member.access"></app-access-list>
       </div>
-      <h4 class="danger">{{ 'REMOVE_ACCESS' | translate}}</h4>
+      <h4 *ngIf="member.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
+          (click)="removeAccess(permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h4>
       <hr *ngIf="!lst">
     </ng-container>
   </div>
@@ -269,10 +273,12 @@
         *ngIf="currentMember.isGroup"
         [id]="currentMember.recordId"
       ></app-group-info>
-      <app-access-list [(access)]="currentMember.access"></app-access-list>
+      <app-access-list *ngIf="currentMember.access !== AccessType.Owner"
+                       [disabled]="currentMember.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)" [(access)]="currentMember.access"></app-access-list>
     </div>
     <hr>
     <h3>{{ 'VIEW_ACTIVITY' | translate}}</h3>
-    <h3 class="danger">{{ 'REMOVE_ACCESS' | translate}}</h3>
+    <h3 *ngIf="currentMember.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
+        (click)="removeAccess(permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h3>
   </div>
 </popper-content>

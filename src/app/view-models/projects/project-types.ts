@@ -72,6 +72,7 @@ export interface SubProjectViewModel extends BaseViewModel {
   order: number;
 }
 export interface WorkPackageViewModel extends BaseViewModel {
+  pending: PendingInvitationViewModel[];
   progress: number;
   userId: string;
   projectId: string;
@@ -106,6 +107,7 @@ export interface WorkPackageViewModel extends BaseViewModel {
   customFields: any[];
 }
 export interface WorkPackageMemberViewModel extends BaseViewModel {
+  waiting?: boolean;
   recordId: string;
   packageId: string;
   access: AccessType;

@@ -20,4 +20,11 @@ export class WorkPackageService {
       '/work-packages/lists/reposition/' + id, model
     );
   }
+
+  async addWorkPackageAccess(id: string, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/add-access`,
+      model,
+    );
+  }
 }

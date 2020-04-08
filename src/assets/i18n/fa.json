@@ -472,5 +472,12 @@
   "LEAVE_WORK_PACKAGE": "خروج از بسته کاری",
   "ARCHIVE_WORK_PACKAGE": "آرشیو بسته کاری",
   "GOOGLE_CALENDAR": "تقویم گوگل",
-  "GITLAB": "گیت لب"
+  "GITLAB": "گیت لب",
+  "MEMBER_EXISTS": "عضو مورد نظر از قبل متصل شده",
+  "NEW_TASK": "ایجاد کارت جدید",
+  "SORT_ORDER": "ترتیب نمایش",
+  "SHOW_CHART": "نمایش چارت",
+  "ACCESS_LEVEL": "سطح دسترسی",
+  "ARCHIVE": "آرشیو",
+  "LIST_COLOR": "رنگ لیست"
 }

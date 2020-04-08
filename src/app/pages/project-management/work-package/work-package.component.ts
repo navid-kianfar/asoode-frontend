@@ -12,6 +12,7 @@ import {PopperContent} from 'ngx-popper';
 import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
 import {ModalService} from '../../../services/core/modal.service';
 import {CultureService} from '../../../services/core/culture.service';
+import {AccessType} from '../../../library/app/enums';
 
 @Component({
   selector: 'app-work-package',
@@ -31,6 +32,9 @@ export class WorkPackageComponent implements OnInit {
   };
   currentMember: WorkPackageMemberViewModel;
   toggleSetting: boolean;
+  receiveNotification: number;
+  permission: AccessType;
+  AccessType = AccessType;
   constructor(
     readonly cultureService: CultureService,
     private readonly modalService: ModalService,
@@ -41,6 +45,7 @@ export class WorkPackageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.receiveNotification = 1;
     this.toggleSetting = false;
     this.filters = {
       mine: false,
@@ -66,7 +71,7 @@ export class WorkPackageComponent implements OnInit {
     if (this.workPackage.progress === undefined) {
       this.workPackage.progress = 0;
     }
-    console.log(this.project.members, this.workPackage.members);
+    this.permission = this.projectService.getWorkPackagePermission(this.project, this.workPackage);
     this.fetch();
   }
 
@@ -88,18 +93,23 @@ export class WorkPackageComponent implements OnInit {
 
   showMemberInfo(member: WorkPackageMemberViewModel, popper: PopperContent) {
     this.currentMember = member;
-    // setTimeout(() => {
-    //   if (!popper.state) {
-    //     debugger;
-    //     popper.toggleVisibility(true);
-    //   }
-    // }, 300);
   }
 
   prepareInvite() {
     this.modalService.show(InviteModalComponent, {
-
+      noProject: true,
+      existing: this.workPackage.members,
+      exclude: [
+        ...(this.workPackage.pending || []).map(p => p.identifier)
+      ],
+      handler: async access => {
+        return this.workPackageService.addWorkPackageAccess(this.workPackage.id, access);
+      },
     }).subscribe(() => {});
+  }
+
+  removeAccess(permission: AccessType) {
+
   }
 }
 export enum ViewMode {
