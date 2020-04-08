@@ -34,6 +34,7 @@
     "moment": "^2.24.0",
     "moment-hijri": "^2.1.2",
     "moment-timezone": "^0.5.28",
+    "ngx-color-picker": "^9.0.0",
     "ngx-cookie-service": "^2.3.0",
     "ngx-device-detector": "^1.4.1",
     "ngx-moment": "^3.5.0",

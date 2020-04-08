@@ -149,6 +149,7 @@ import { GroupSettingsComponent } from './components/app/group-settings/group-se
 import { WorkPackageWizardComponent } from './modals/work-package-wizard/work-package-wizard.component';
 import {DeviceDetectorModule} from 'ngx-device-detector';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {ColorPickerModule} from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -316,6 +317,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ContentLoaderModule,
     TrendModule,
     DragDropModule,
+    ColorPickerModule,
   ],
   providers: [
     // {

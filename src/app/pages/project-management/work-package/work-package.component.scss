@@ -123,6 +123,9 @@
             font-size: 0.8rem;
             display: flex;
             align-items: center;
+            width: 26px;
+            height: 26px;
+            justify-content: center;
           }
         }
       }
@@ -131,7 +134,7 @@
         //flex-grow: 1;
         align-items: center;
         position: relative;
-        width: 250px;
+        width: 200px;
 
         ::ng-deep .member-info {
           padding: 0;
@@ -185,6 +188,9 @@
           font-size: 0.8rem;
           display: flex;
           align-items: center;
+          width: 26px;
+          height: 26px;
+          justify-content: center;
         }
       }
       .settings-container {
@@ -198,5 +204,193 @@
     }
   }
   .inner-container {
+    position: relative;
+    .setting-container {
+      flex-direction: column;
+      display: flex;
+      width: 300px;
+      height: calc(100vh - 130px);
+      background: #ffffff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-shadow: 0 1px 3px 0px rgba(0, 0, 0, 0.2);
+      z-index: 21;
+
+      .setting-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        border-bottom: 1px solid #ddd;
+        color: #757575;
+        font-size: 0.7rem;
+        i {
+          display: flex;
+          width: 40px;
+          height: 40px;
+          justify-content: center;
+          align-items: center;
+        }
+        span {
+          display: flex;
+          flex-grow: 1;
+          justify-content: center;
+        }
+      }
+      .setting-content {
+        padding: 20px;
+        height: calc(100vh - 180px);
+        overflow-y: auto;
+
+        .box {
+          .title {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #999;
+          }
+          .cnt {
+            padding: 20px 0;
+            font-size: 0.8rem;
+
+            h6 {
+              font-size: 0.8rem;
+              font-weight: 500;
+              cursor: pointer;
+            }
+          }
+
+          .custom-box {
+            background: #fffbd3;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #5b5b5b;
+            text-align: justify;
+            button {
+              max-height: 30px;
+              margin: 10px auto;
+            }
+            ::ng-deep .mat-button-wrapper {
+              font-size: 0.7rem;
+              position: relative;
+              top: -3px;
+            }
+          }
+        }
+
+        //::ng-deep .acha-color-picker .input-container {
+        //  border: none;
+        //  width: 30px;
+        //  input {
+        //    max-width: 100%;
+        //  }
+        //}
+      }
+    }
+    .wrapper-container {
+
+    }
+  }
+}
+.filters-popper {
+  width: 200px;
+  height: 120px;
+  background: #ffffff;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+  0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  font-size: 0.7rem;
+}
+
+.objectives-popper {
+  width: 300px;
+  min-height: 120px;
+  max-height: 350px;
+  background: #ffffff;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+  0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  font-size: 0.8rem;
+  color: #777;
+  display: flex;
+  flex-direction: column;
+  h5 {
+    font-size: 0.8rem;
+    margin: 20px 0;
+  }
+  .add-objective {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    i {
+      display: flex;
+      width: 20px;
+      height: 20px;
+      border: 1px dashed #cccccc;
+      color: #777;
+      border-radius: 20px;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.5rem;
+    }
+    span {
+      margin-inline-start: 5px;
+      color: #777;
+    }
+  }
+}
+
+.member-info-popper {
+  min-width: 300px;
+  min-height: 120px;
+  max-height: 350px;
+  background: #ffffff;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+  0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  font-size: 0.8rem;
+  color: #777;
+
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    ::ng-deep .group-info {
+      border: none;
+    }
+    ::ng-deep .member-info {
+      border: none;
+      width: 200px !important;
+    }
+    ::ng-deep .af-dropdown {
+      border: none;
+
+      button {
+        border: none;
+        width: 120px !important;
+      }
+    }
+  }
+  h3 {
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #5b5b5b;
+
+    &.danger {
+      color: #ca112a;
+    }
+  }
+  h4 {
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #5b5b5b;
+    margin-inline-start: 45px;
+
+    &.danger {
+      color: #ca112a;
+    }
   }
 }

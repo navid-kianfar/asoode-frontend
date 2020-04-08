@@ -103,6 +103,7 @@ export interface WorkPackageViewModel extends BaseViewModel {
   lists: WorkPackageListViewModel[];
   tasks: WorkPackageTaskViewModel[];
   objectives: WorkPackageObjectiveViewModel[];
+  customFields: any[];
 }
 export interface WorkPackageMemberViewModel extends BaseViewModel {
   recordId: string;

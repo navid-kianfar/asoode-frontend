@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  ProjectViewModel,
+  ProjectViewModel, WorkPackageMemberViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
 import { ProjectService } from '../../../services/projects/project.service';
@@ -8,6 +8,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WorkPackageService } from '../../../services/projects/work-package.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
+import {PopperContent} from 'ngx-popper';
+import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
+import {ModalService} from '../../../services/core/modal.service';
+import {CultureService} from '../../../services/core/culture.service';
 
 @Component({
   selector: 'app-work-package',
@@ -20,7 +24,16 @@ export class WorkPackageComponent implements OnInit {
   project: ProjectViewModel;
   workPackage: WorkPackageViewModel;
   waiting: boolean;
+  filters: {
+    mine: boolean,
+    archived: boolean,
+    active: boolean
+  };
+  currentMember: WorkPackageMemberViewModel;
+  toggleSetting: boolean;
   constructor(
+    readonly cultureService: CultureService,
+    private readonly modalService: ModalService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly projectService: ProjectService,
@@ -28,6 +41,12 @@ export class WorkPackageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.toggleSetting = false;
+    this.filters = {
+      mine: false,
+      archived: false,
+      active: false
+    };
     this.mode = ViewMode.Board;
     const id = this.activatedRoute.snapshot.params.id;
     // tslint:disable-next-line:prefer-for-of
@@ -65,6 +84,22 @@ export class WorkPackageComponent implements OnInit {
   findMember(recordId: string): MemberInfoViewModel {
     const access = this.project.members.find(m => m.recordId === recordId);
     return access.member;
+  }
+
+  showMemberInfo(member: WorkPackageMemberViewModel, popper: PopperContent) {
+    this.currentMember = member;
+    // setTimeout(() => {
+    //   if (!popper.state) {
+    //     debugger;
+    //     popper.toggleVisibility(true);
+    //   }
+    // }, 300);
+  }
+
+  prepareInvite() {
+    this.modalService.show(InviteModalComponent, {
+
+    }).subscribe(() => {});
   }
 }
 export enum ViewMode {

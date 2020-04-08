@@ -29,6 +29,7 @@
     align-items: baseline;
     display: flex;
     justify-content: center;
+    margin-inline-end: 5px;
 
     .initials {
       width: 30px;
@@ -52,9 +53,9 @@
     .name {
       display: flex;
       flex: 0 0 100%;
-      font-weight: 400;
+      color: #4d4d4d;
+      font-weight: 500;
       font-size: 0.9rem;
-      color: #666666;
     }
     .email,
     .bio {

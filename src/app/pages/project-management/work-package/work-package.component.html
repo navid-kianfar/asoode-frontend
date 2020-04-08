@@ -66,67 +66,213 @@
         </div>
       </div>
       <div class="objectives-container">
-        <div class="info">
+        <div class="info"
+             [popper]="popperObjectives"
+             [popperTrigger]="'click'"
+             [popperHideOnClickOutside]="true"
+             [popperHideOnScroll]="true"
+             [popperPlacement]="'bottom'">
           <i class="icon-target"></i>&nbsp;
-          <span class="label">{{ 'OBJECTIVES' | translate }}</span
-          >&nbsp;
+          <span class="label">{{ 'OBJECTIVES' | translate }}</span>&nbsp;
           <span class="badge">{{ workPackage.objectives.length }}</span>
         </div>
       </div>
       <div class="members-container">
-
-        <ng-container *ngFor="let member of workPackage.members | slice: 0:5">
+        <ng-container *ngFor="let member of workPackage.members | slice: 0:3">
           <app-member-info
+            [popper]="popperMemberInfo"
+            [popperTrigger]="'click'"
+            [popperHideOnClickOutside]="true"
+            [popperHideOnScroll]="true"
+            [popperPlacement]="'bottom'"
+            (click)="showMemberInfo(member, popperMemberInfo)"
+
             *ngIf="!member.isGroup"
             [model]="findMember(member.recordId)"
             small="true"
           ></app-member-info>
           <app-group-info
+            [popper]="popperMemberInfo"
+            [popperTrigger]="'click'"
+            [popperHideOnClickOutside]="true"
+            [popperHideOnScroll]="true"
+            [popperPlacement]="'bottom'"
+            (click)="showMemberInfo(member, popperMemberInfo)"
+
             *ngIf="member.isGroup"
             [id]="member.recordId"
             small="true"
           ></app-group-info>
         </ng-container>
-
-
         &nbsp;
-        <div *ngIf="project.members.length > 5" class="add more">
+        <div *ngIf="workPackage.members.length > 3"
+             class="add more"
+             [popper]="popperAllMembers"
+             [popperTrigger]="'click'"
+             [popperHideOnClickOutside]="true"
+             [popperHideOnScroll]="true"
+             [popperPlacement]="'bottom'">
           <i class="icon-menu"></i>
         </div>
         &nbsp;
-        <div class="add">
+        <div (click)="prepareInvite()" class="add">
           <i class="icon-plus2"></i>
         </div>
       </div>
-      <div class="filters-container">
+      <div class="filters-container"
+           [popper]="popperFilters"
+           [popperTrigger]="'click'"
+           [popperHideOnClickOutside]="true"
+           [popperHideOnScroll]="true"
+           [popperPlacement]="'bottom'">
         <i class="icon-filters"></i>&nbsp;
-        <span>1</span>
+        <span>{{ (filters.mine ? 1 : 0) + (filters.archived ? 1 : 0) + (filters.active ? 1 : 0) }}</span>
       </div>
-      <div class="settings-container">
+      <div (click)="toggleSetting = !toggleSetting" class="settings-container">
         <i class="icon-cog2"></i>
       </div>
     </div>
   </div>
-  <div class="inner-container">
-    <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
-    <ng-container *ngIf="!waiting">
-      <ng-container *ngIf="mode === ViewMode.Board">
-        <app-work-package-board [model]="workPackage"></app-work-package-board>
+  <div class="inner-container" [class.toggleSetting]="toggleSetting">
+    <div class="wrapper-container">
+      <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
+      <ng-container *ngIf="!waiting">
+        <ng-container *ngIf="mode === ViewMode.Board">
+          <app-work-package-board [model]="workPackage"></app-work-package-board>
+        </ng-container>
+        <ng-container *ngIf="mode === ViewMode.List">
+          <app-work-package-list [model]="workPackage"></app-work-package-list>
+        </ng-container>
+        <ng-container *ngIf="mode === ViewMode.TimeSpan">
+          <app-work-package-time-span
+            [model]="workPackage"
+          ></app-work-package-time-span>
+        </ng-container>
+        <ng-container *ngIf="mode === ViewMode.Calendar">
+          <app-work-package-calendar
+            [model]="workPackage"
+          ></app-work-package-calendar>
+        </ng-container>
       </ng-container>
-      <ng-container *ngIf="mode === ViewMode.List">
-        <app-work-package-list [model]="workPackage"></app-work-package-list>
-      </ng-container>
-      <ng-container *ngIf="mode === ViewMode.TimeSpan">
-        <app-work-package-time-span
-          [model]="workPackage"
-        ></app-work-package-time-span>
-      </ng-container>
-      <ng-container *ngIf="mode === ViewMode.Calendar">
-        <app-work-package-calendar
-          [model]="workPackage"
-        ></app-work-package-calendar>
-      </ng-container>
-    </ng-container>
+    </div>
+    <div *ngIf="toggleSetting" class="setting-container">
+      <div class="setting-header">
+        <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
+        <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
+        <span>{{ 'WORK_PACKAGE_SETTING' | translate}}</span>
+        <i (click)="toggleSetting = !toggleSetting" class="icon-cross close"></i>
+      </div>
+      <div class="setting-content">
+        <div class="box">
+          <div class="title">{{ 'RECEIVE_NOTIFICATION' | translate}}</div>
+          <div class="cnt">
+            <mat-radio-group>
+              <mat-radio-button color="primary" value="1">{{ 'RECEIVE_ALL_NOTIFICATION' | translate}}</mat-radio-button>
+              <mat-radio-button color="primary" value="2">{{ 'RECEIVE_MINE_NOTIFICATION' | translate}}</mat-radio-button>
+              <mat-radio-button color="primary" value="3">{{ 'RECEIVE_NONE_NOTIFICATION' | translate}}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div class="box">
+          <div class="title">{{ 'APPEARANCE' | translate}}</div>
+          <div class="cnt">
+            <h6>{{ 'CHANGE_WORK_PACKAGE_COLOR' | translate}}</h6>
+            <app-color-picker></app-color-picker>
+            <app-checkbox label="SHOW_LIST_TOTAL_CARDS"></app-checkbox>
+          </div>
+        </div>
+        <div class="box">
+          <div class="title">{{ 'TASKS_SETTING' | translate}}</div>
+          <div class="cnt">
+            <h6>{{ 'CHANGE_WORK_PACKAGE_FIELDS' | translate}}</h6>
+            <h6>{{ 'CHANGE_WORK_PACKAGE_LABELS' | translate}}</h6>
+            <h6>{{ 'SHOW_WORK_PACKAGE_ATTACHMENTS' | translate}}</h6>
+          </div>
+        </div>
+        <div class="box">
+          <div class="title">{{ 'CUSTOM_FIELDS' | translate}}</div>
+          <div class="cnt">
+            <div class="custom-box">
+              <ng-container *ngIf="!workPackage.customFields.length">
+                {{ 'CUSTOM_FIELDS_DETAIL' | translate}}
+                <button mat-stroked-button>{{ 'ACTIVATE' | translate}}</button>
+              </ng-container>
+              <ng-container *ngIf="workPackage.customFields.length"></ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="title">{{ 'INTEGRATION' | translate}}</div>
+          <div class="cnt">
+            <h6>{{ 'GOOGLE_CALENDAR' | translate}}</h6>
+            <h6>{{ 'GITLAB' | translate}}</h6>
+          </div>
+        </div>
+        <hr>
+        <div class="box">
+          <div class="cnt">
+            <button mat-flat-button color="accent">{{ 'LEAVE_WORK_PACKAGE' | translate}}</button>&nbsp;
+            <button mat-flat-button color="warn">{{ 'ARCHIVE_WORK_PACKAGE' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <app-messenger-shortcut></app-messenger-shortcut>
+<popper-content #popperObjectives>
+  <div class="objectives-popper">
+    <div *ngIf="!workPackage.objectives.length">
+      <h5>{{ 'NO_OBJECTIVES' | translate}}</h5>
+    </div>
+    <div class="add-objective">
+      <i class="icon-plus2"></i>
+      <span>{{ 'ADD_OBJECTIVES' | translate}}</span>
+    </div>
+  </div>
+</popper-content>
+<popper-content #popperFilters>
+  <div class="filters-popper">
+    <app-checkbox [(model)]="filters.mine" [label]="'FILTERS_TASKS_MINE'"></app-checkbox>
+    <hr>
+    <app-checkbox [(model)]="filters.active" [label]="'FILTERS_TASKS_ACTIVE'"></app-checkbox>
+    <app-checkbox [(model)]="filters.archived" [label]="'FILTERS_TASKS_ARCHIVED'"></app-checkbox>
+  </div>
+</popper-content>
+<popper-content #popperAllMembers>
+  <div class="member-info-popper">
+    <ng-container *ngFor="let member of workPackage.members; let lst = last">
+      <div class="wrapper">
+        <app-member-info
+          *ngIf="!member.isGroup"
+          [model]="findMember(member.recordId)"
+        ></app-member-info>
+        <app-group-info
+          *ngIf="member.isGroup"
+          [id]="member.recordId"
+        ></app-group-info>
+        <app-access-list [(access)]="member.access"></app-access-list>
+      </div>
+      <h4 class="danger">{{ 'REMOVE_ACCESS' | translate}}</h4>
+      <hr *ngIf="!lst">
+    </ng-container>
+  </div>
+</popper-content>
+<popper-content #popperMemberInfo>
+  <div *ngIf="currentMember" class="member-info-popper">
+    <div class="wrapper">
+      <app-member-info
+        *ngIf="!currentMember.isGroup"
+        [model]="findMember(currentMember.recordId)"
+      ></app-member-info>
+      <app-group-info
+        *ngIf="currentMember.isGroup"
+        [id]="currentMember.recordId"
+      ></app-group-info>
+      <app-access-list [(access)]="currentMember.access"></app-access-list>
+    </div>
+    <hr>
+    <h3>{{ 'VIEW_ACTIVITY' | translate}}</h3>
+    <h3 class="danger">{{ 'REMOVE_ACCESS' | translate}}</h3>
+  </div>
+</popper-content>

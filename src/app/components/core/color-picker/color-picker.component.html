@@ -1,1 +1,25 @@
-<p>color-picker works!</p>
+<div
+  class="acha-color-picker af-component {{ disabled ? 'disabled' : '' }} {{
+    readonly ? 'readonly' : ''
+  }} form-group {{ cssClass }}"
+>
+  <label *ngIf="label">{{ label | translate: true }}</label>
+  <div class="input-container {{ focusState }}">
+    <input
+      [(colorPicker)]="model"
+      [ngModel]="model"
+      (colorPickerChange)="onModelChange($event)"
+      [cpDisabled]="disabled"
+      [cpPosition]="'bottom'"
+      [autofocus]="autofocus"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      (keydown.enter)="onEnter.emit()"
+      [placeholder]="placeHolder | translate: true"
+      [readonly]="readonly"
+      autocomplete="off"
+      class="form-control input-lg"
+    />
+    <span [style.background-color]="model" class="color"> </span>
+  </div>
+</div>
