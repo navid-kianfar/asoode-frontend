@@ -254,6 +254,11 @@ body {
       margin-inline-end: 5px;
       display: flex;
       align-items: center;
+      color: #50a9dd;
+
+      &.x2 {
+        font-size: 1.3rem;
+      }
     }
     span {
       font-size: 0.8rem;

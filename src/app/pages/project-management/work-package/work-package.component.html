@@ -227,7 +227,7 @@
     <div *ngIf="!workPackage.objectives.length">
       <h5>{{ 'NO_OBJECTIVES' | translate}}</h5>
     </div>
-    <div *ngIf="permission !== AccessType.Visitor" class="add-objective">
+    <div (click)="addObjective()" *ngIf="permission !== AccessType.Visitor" class="add-objective">
       <i class="icon-plus2"></i>
       <span>{{ 'ADD_OBJECTIVES' | translate}}</span>
     </div>
@@ -235,10 +235,10 @@
 </popper-content>
 <popper-content #popperFilters>
   <div class="filters-popper">
-    <app-checkbox [(model)]="filters.mine" [label]="'FILTERS_TASKS_MINE'"></app-checkbox>
+    <app-checkbox [(model)]="filters.mine" (modelChange)="fetch()" [label]="'FILTERS_TASKS_MINE'"></app-checkbox>
     <hr>
-    <app-checkbox [(model)]="filters.active" [label]="'FILTERS_TASKS_ACTIVE'"></app-checkbox>
-    <app-checkbox [(model)]="filters.archived" [label]="'FILTERS_TASKS_ARCHIVED'"></app-checkbox>
+    <app-checkbox [(model)]="filters.active" (modelChange)="fetch()" [label]="'FILTERS_TASKS_ACTIVE'"></app-checkbox>
+    <app-checkbox [(model)]="filters.archived" (modelChange)="fetch()" [label]="'FILTERS_TASKS_ARCHIVED'"></app-checkbox>
   </div>
 </popper-content>
 <popper-content #popperAllMembers>

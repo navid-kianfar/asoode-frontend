@@ -10,10 +10,26 @@
          [cdkDragData]="list"
          [cdkDragDisabled]="list.editing || list.adding || permission === AccessType.Visitor"
          cdkDrag>
-      <div cdkDragHandle class="header">
+      <div [hidden]="list.renaming" cdkDragHandle class="header">
         <span>{{ list.title | truncate: 30 }}</span
         >&nbsp; <i *ngIf="permission !== AccessType.Visitor" (click)="createNewTask(list)" class="icon-plus2"></i>&nbsp;
         <i [matMenuTriggerFor]="menu" *ngIf="permission !== AccessType.Visitor" class="icon-menu"></i>
+      </div>
+      <div *ngIf="list.renaming" class="new-task">
+        <div class="wrapper">
+          <input (keydown.enter)="renameList(list)" [placeholder]="'ENTER_LIST_NEW_NAME' | translate"
+                 [readOnly]="list.renameWaiting" [(ngModel)]="list.tempName" />
+          <br>
+          <div class="buttons">
+            <button [disabled]="list.renameWaiting" (click)="renameList(list)" mat-stroked-button>
+              <i *ngIf="list.renameWaiting" class="icon-spin icon-spinner2"></i>
+              {{ 'RENAME' | translate }}
+            </button>&nbsp;
+            <button [disabled]="list.renameWaiting" (click)="cancelRenameList(list)" mat-stroked-button>
+              {{ 'CANCEL' | translate }}
+            </button>
+          </div>
+        </div>
       </div>
       <div *ngIf="list.expanded" class="new-task">
         <div class="wrapper">
@@ -33,6 +49,12 @@
             <span>{{ 'NEW_TASK' | translate }}</span>
           </span>
         </button>
+        <button class="action-btn" (click)="prepareRenameTask(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="icon-pencil"></i>
+            <span>{{ 'RENAME' | translate }}</span>
+          </span>
+        </button>
         <button class="action-btn" (click)="changeSort(list)" mat-menu-item>
           <span class="cnt">
             <i class="icon-arrow-down8"></i>
@@ -47,35 +69,39 @@
         </button>
         <button class="action-btn" (click)="showChart(list)" mat-menu-item>
           <span class="cnt">
-            <i class="icon-filters"></i>
+            <i class="icon-filters x2"></i>
             <span>{{ 'LIST_COLOR' | translate }}</span>
           </span>
         </button>
         <button class="action-btn" (click)="showChart(list)" mat-menu-item>
           <span class="cnt">
-            <i class="icon-stop"></i>
+            <i class="icon-stop x2"></i>
             <span>{{ 'ACCESS_LEVEL' | translate }}</span>
           </span>
         </button>
         <button class="action-btn" (click)="showChart(list)" mat-menu-item>
           <span class="cnt">
-            <i class="icon-archive"></i>
+            <i class="icon-archive x2"></i>
             <span>{{ 'ARCHIVE' | translate }}</span>
           </span>
         </button>
       </mat-menu>
     </div>
     <div class="board-list add-new">
-      <div *ngIf="!expanded" (click)="createNewList()" class="header">
+      <div *ngIf="!expanded" (click)="prepareNewList()" class="header">
         <i class="icon-plus2"></i>&nbsp;
         <span>{{ 'CREATE_NEW_LIST' | translate }}</span>
       </div>
       <div *ngIf="expanded" class="new-task">
         <div class="wrapper">
-          <textarea rows="2"></textarea>
+          <input (keydown.enter)="createNewList()" [placeholder]="'ENTER_NEW_LIST_NAME' | translate" [readOnly]="creatingNewList" [(ngModel)]="newListName" />
+          <br>
           <div class="buttons">
-            <button mat-stroked-button>{{ 'CREATE' | translate }}</button>&nbsp;
-            <button (click)="cancelNewList()" mat-stroked-button>
+            <button [disabled]="creatingNewList" (click)="createNewList()" mat-stroked-button>
+              <i *ngIf="creatingNewList" class="icon-spin icon-spinner2"></i>
+              {{ 'CREATE' | translate }}
+            </button>&nbsp;
+            <button [disabled]="creatingNewList" (click)="cancelNewList()" mat-stroked-button>
               {{ 'CANCEL' | translate }}
             </button>
           </div>

@@ -333,7 +333,7 @@
   "REMOVE_ACCESS": "Remove access",
   "REMOVE_MEMBER_CONFIRM": "If approved,Their access will be terminated but you will access to the tasks done by them in this group",
   "REMOVE_MEMBER_CONFIRM_HEADING": "Are you sure you want to delete {0}?",
-  "RENAME": "Rename",
+  "RENAME_SHORT": "Rename",
   "REPORTS": "Reports",
   "REQUESTED_AT": "Requested at",
   "REQUEST_TIME_OFF": "Request for taking time off",

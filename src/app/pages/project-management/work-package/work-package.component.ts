@@ -77,7 +77,7 @@ export class WorkPackageComponent implements OnInit {
 
   async fetch() {
     this.waiting = true;
-    const op = await this.workPackageService.fetch(this.workPackage.id);
+    const op = await this.workPackageService.fetch(this.workPackage.id, this.filters);
     if (op.status !== OperationResultStatus.Success) {
       this.router.navigateByUrl('dashboard');
       return;
@@ -109,6 +109,10 @@ export class WorkPackageComponent implements OnInit {
   }
 
   removeAccess(permission: AccessType) {
+
+  }
+
+  addObjective() {
 
   }
 }

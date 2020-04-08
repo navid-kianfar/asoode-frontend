@@ -46,6 +46,13 @@
         .wrapper {
           display: flex;
           flex-direction: column;
+          input {
+            border: 1px dashed #cccccc;
+            border-radius: 5px;
+            padding: 5px;
+            font-size: 0.9rem;
+            font-weight: 400;
+          }
           textarea {
             resize: none;
             margin-bottom: 5px;
@@ -56,9 +63,9 @@
           .buttons {
             display: flex;
             flex-direction: row;
-            button {
-              max-width: 70px;
-            }
+            //button {
+            //  max-width: 70px;
+            //}
           }
         }
       }

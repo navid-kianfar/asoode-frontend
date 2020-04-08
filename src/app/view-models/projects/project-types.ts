@@ -121,6 +121,9 @@ export interface BoardTemplateViewModel {
   lists: string[];
 }
 export interface WorkPackageListViewModel extends BaseViewModel {
+  tempName: string;
+  renameWaiting?: boolean;
+  renaming?: boolean;
   adding?: any;
   editing?: any;
   packageId: string;

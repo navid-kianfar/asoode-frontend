@@ -333,7 +333,7 @@
   "REMOVE_ACCESS": "حذف دسترسی",
   "REMOVE_MEMBER_CONFIRM": "در صورت تایید، دسترسی ایشان قطع می‌شود اما شما به کارهای انجام شده توسط ایشان در این مجموعه دسترسی خواهید داشت.",
   "REMOVE_MEMBER_CONFIRM_HEADING": "آیا از حذف {0} اطمینان دارید؟",
-  "RENAME": "نام",
+  "RENAME_SHORT": "نام",
   "REPORTS": "گزارشات",
   "REQUESTED_AT": "تاریخ درخواست",
   "REQUEST_TIME_OFF": "درخواست مرخصی جدید",
@@ -410,16 +410,16 @@
 
 
 
-  "PLANS_COMPANY_TITLE": "شرکتی",
-  "PLANS_ECONOMY_TITLE": "اقتصادی",
-  "PLANS_FREE_TITLE": "پایه",
-  "PLANS_ORGANIZATION_TITLE": "سازمانی",
-  "PLANS_PERSONAL_TITLE": "شخصی",
   "PLANS_FREE_DESCRIPTION": "",
   "PLANS_PERSONAL_DESCRIPTION": "",
   "PLANS_ECONOMY_DESCRIPTION": "",
   "PLANS_COMPANY_DESCRIPTION": "",
   "PLANS_ORGANIZATION_DESCRIPTION": "",
+  "PLANS_COMPANY_TITLE": "شرکتی",
+  "PLANS_ECONOMY_TITLE": "اقتصادی",
+  "PLANS_FREE_TITLE": "پایه",
+  "PLANS_ORGANIZATION_TITLE": "سازمانی",
+  "PLANS_PERSONAL_TITLE": "شخصی",
   "USER_USAGE": "مصرف کاربر",
   "GROUP_USAGE": "مصرف گروه",
   "BUY_MORE_GROUP": "خرید گروه بیشتر",
@@ -427,9 +427,6 @@
   "PROJECT_USAGE": "مصرف پروژه",
   "BUY_MORE_PROJECT": "خرید پروژه بیشتر",
   "PROJECT_USAGE_DETAIL": "{0} پروژه از {1} پروژه این پلان فعال شده\u200Cاند.",
-
-
-
   "REMOVE_SUB": "حذف شکست پروژه",
   "REMOVE_SUB_CONFIRM_HEADING": "آیا از حذف شکست پروژه '{0}' اطمینان دارید؟",
   "REMOVE_SUB_CONFIRM": "در صورت تایید تمامی فرزندان به یک پله بالاتر انتقال خواهند یافت، و تمامی اطلاعاتی که به این قسمت از شکست پروژه مربوط میشود از بین خواهد رفت!",
@@ -479,5 +476,8 @@
   "SHOW_CHART": "نمایش چارت",
   "ACCESS_LEVEL": "سطح دسترسی",
   "ARCHIVE": "آرشیو",
-  "LIST_COLOR": "رنگ لیست"
+  "LIST_COLOR": "رنگ لیست",
+  "ENTER_NEW_LIST_NAME": "نام لیست جدید را وارد کنید",
+  "ENTER_LIST_NEW_NAME": "نام جدید لیست را وارد کنید",
+  "RENAME": "تغییر عنوان"
 }

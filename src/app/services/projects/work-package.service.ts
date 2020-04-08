@@ -9,9 +9,16 @@ import { HttpService } from '../core/http.service';
 export class WorkPackageService {
   constructor(private readonly httpService: HttpService) {}
 
-  async fetch(id: string): Promise<OperationResult<WorkPackageViewModel>> {
+  async fetch(id: string, model): Promise<OperationResult<WorkPackageViewModel>> {
     return await this.httpService.post<WorkPackageViewModel>(
-      '/work-packages/get/' + id,
+      '/work-packages/get/' + id, model
+    );
+  }
+
+  async addWorkPackageAccess(id: string, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/add-access`,
+      model,
     );
   }
 
@@ -21,9 +28,16 @@ export class WorkPackageService {
     );
   }
 
-  async addWorkPackageAccess(id: string, model: any): Promise<OperationResult<boolean>> {
+  async createList(id: string, model: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/work-packages/${id}/add-access`,
+      `/work-packages/${id}/lists/create`,
+      model,
+    );
+  }
+
+  async renameList(id: string, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/lists/${id}/rename`,
       model,
     );
   }
