@@ -231,6 +231,21 @@
       <i class="icon-plus2"></i>
       <span>{{ 'ADD_OBJECTIVES' | translate}}</span>
     </div>
+    <br>
+    <div *ngFor="let obj of workPackage.objectives" class="objective">
+      <div class="ico">
+        <i class="icon-target"></i>
+      </div>
+      <div class="info">
+        <h3>{{obj.title}}</h3>
+        <h4>{{obj.description}}</h4>
+        <div class="rate"></div>
+      </div>
+      <div class="act">
+        <i (click)="editObjective(obj)" class="icon-pencil"></i>
+        <i (click)="removeObjective(obj)" class="icon-delete"></i>
+      </div>
+    </div>
   </div>
 </popper-content>
 <popper-content #popperFilters>

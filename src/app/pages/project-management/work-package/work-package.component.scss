@@ -316,6 +316,7 @@
   color: #777;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
   h5 {
     font-size: 0.8rem;
     margin: 20px 0;
@@ -338,6 +339,53 @@
     span {
       margin-inline-start: 5px;
       color: #777;
+    }
+  }
+
+  .objective {
+    margin: 10px 0;
+    display: flex;
+    border-bottom: 1px solid #ddd;
+
+    &:last-child {
+      border-bottom: none;
+    }
+    .ico {
+      display: flex;
+      width: 20px;
+      i {
+        color: #50a9dd;
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-grow: 1;
+      flex-direction: column;
+      h3 {
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      h4 {
+        font-size: 0.7rem;
+        font-weight: 400;
+      }
+
+      .rate {
+
+      }
+    }
+    .act {
+      display: flex;
+      justify-content: space-around;
+      width: 40px;
+      align-items: baseline;
+      i {
+        font-size: 0.9rem;
+        color: #666666;
+        cursor: pointer;
+      }
     }
   }
 }

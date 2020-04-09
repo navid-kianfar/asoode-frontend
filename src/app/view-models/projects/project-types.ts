@@ -2,7 +2,7 @@ import { BaseViewModel } from '../core/general-types';
 import {
   AccessType,
   BoardTemplate,
-  WorkPackageCommentPermission,
+  WorkPackageCommentPermission, WorkPackageObjectiveType,
 } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
 import {PendingInvitationViewModel} from '../groups/group-types';
@@ -15,6 +15,7 @@ export interface ProjectObjectiveEstimatedPriceViewModel {
   group: string;
 }
 export interface WorkPackageObjectiveViewModel extends BaseViewModel {
+  type: WorkPackageObjectiveType;
   title: string;
   description: string;
   workPackage: string;

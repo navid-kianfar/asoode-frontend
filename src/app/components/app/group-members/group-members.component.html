@@ -17,14 +17,7 @@
     <div class="members">
       <div *ngFor="let member of group.members" class="member">
         <div class="info">
-          <app-member-info
-            *ngIf="!member.isGroup"
-            [model]="member.member"
-          ></app-member-info>
-          <app-group-info
-            *ngIf="member.isGroup"
-            [id]="member.userId"
-          ></app-group-info>
+          <app-member-info [model]="member.member"></app-member-info>
         </div>
         <div class="status"></div>
         <div class="actions">

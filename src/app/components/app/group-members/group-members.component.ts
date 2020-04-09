@@ -34,10 +34,11 @@ export class GroupMembersComponent implements OnInit {
     this.modalService
       .show(InviteModalComponent, {
         noGroup: true,
-        existing: this.group.members,
+        existing: [],
         exclude: [
           this.group.userId,
           this.group.id,
+          ...this.group.members.map(m => m.userId),
           ...this.group.pending.map(p => p.identifier)
         ],
         handler: async access => {

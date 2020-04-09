@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  ProjectViewModel, WorkPackageMemberViewModel,
+  ProjectViewModel, WorkPackageMemberViewModel, WorkPackageObjectiveViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
 import { ProjectService } from '../../../services/projects/project.service';
@@ -15,6 +15,8 @@ import {CultureService} from '../../../services/core/culture.service';
 import {AccessType, WorkPackageObjectiveType} from '../../../library/app/enums';
 import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
 import { FormService } from 'src/app/services/core/form.service';
+import {StringHelpers} from '../../../helpers/string.helpers';
+import {TranslateService} from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-work-package',
@@ -43,6 +45,7 @@ export class WorkPackageComponent implements OnInit {
     private readonly formService: FormService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
+    private readonly translateService: TranslateService,
     private readonly projectService: ProjectService,
     private readonly workPackageService: WorkPackageService,
   ) {}
@@ -156,6 +159,67 @@ export class WorkPackageComponent implements OnInit {
         title: 'CREATE_OBJECTIVE',
       })
       .subscribe(() => {});
+  }
+
+  editObjective(obj: WorkPackageObjectiveViewModel) {
+    this.modalService
+      .show(PromptComponent, {
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'title' },
+                params: {
+                  model: obj.title,
+                  placeHolder: 'TITLE',
+                },
+                validation: {
+                  required: { value: true, message: 'TITLE_REQUIRED' },
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'description' },
+                params: {
+                  model: obj.description,
+                  placeHolder: 'DESCRIPTION',
+                },
+              }),
+              this.formService.createDropDown({
+                config: { field: 'type' },
+                params: {
+                  items: [],
+                  model: obj.type,
+                  enum: 'WorkPackageObjectiveType',
+                  chooseLabel: 'OBJECTIVE_TYPE'
+                }
+              })
+            ],
+          },
+        ],
+        actionLabel: 'SAVE_CHANGES',
+        action: (model, form) => this.workPackageService.editObjective(obj.id, model),
+        actionColor: 'primary',
+        title: 'EDIT_OBJECTIVE',
+      })
+      .subscribe(() => {});
+  }
+
+  removeObjective(obj: WorkPackageObjectiveViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_OBJECTIVE_CONFIRM_HEADING'),
+      [obj.title]
+    );
+
+    this.modalService.confirm({
+      title: 'REMOVE_OBJECTIVE',
+      message: 'REMOVE_OBJECTIVE_CONFIRM',
+      heading,
+      actionLabel: 'REMOVE_OBJECTIVE',
+      cancelLabel: 'CANCEL',
+      action: async () => {
+        return await this.workPackageService.deleteObjective(obj.id);
+      },
+    }).subscribe((confirmed) => { });
   }
 }
 export enum ViewMode {

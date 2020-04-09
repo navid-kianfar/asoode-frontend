@@ -24,7 +24,7 @@ export class WorkPackageService {
 
   async repositionList(id: any, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      '/work-packages/lists/reposition/' + id, model
+      `/work-packages/lists/${id}/reposition`, model
     );
   }
 

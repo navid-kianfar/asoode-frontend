@@ -484,5 +484,9 @@
   "OBJECTIVE_TYPE":"میزان اهمیت دستیابی به هدف",
   "ENUMS_WORK_PACKAGE_OBJECTIVE_TYPE_MUST_HAVE":"حتما باید به هدف دست یافت",
   "ENUMS_WORK_PACKAGE_OBJECTIVE_TYPE_SHOULD_HAVE":"دست یابی به هدف مزیت است",
-  "ENUMS_WORK_PACKAGE_OBJECTIVE_TYPE_NICE_TO_HAVE":"دست یابی به هدف خوب است"
+  "ENUMS_WORK_PACKAGE_OBJECTIVE_TYPE_NICE_TO_HAVE":"دست یابی به هدف خوب است",
+  "EDIT_OBJECTIVE": "ویرایش هدف",
+  "REMOVE_OBJECTIVE": "حذف هدف",
+  "REMOVE_OBJECTIVE_CONFIRM_HEADING": "آیا از حذف {0} اطمینان دارید؟",
+  "REMOVE_OBJECTIVE_CONFIRM": "در صورت تایید کلیه اطلاعات مربوط به این هدف (از جمله هزینه تمام شده این هدف) حذف خواهد شد"
 }
