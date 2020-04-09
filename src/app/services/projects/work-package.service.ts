@@ -41,4 +41,21 @@ export class WorkPackageService {
       model,
     );
   }
+  async createObjective(id: string, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/objectives/create`,
+      model,
+    );
+  }
+  async editObjective(id: string, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/objectives/${id}/edit`,
+      model,
+    );
+  }
+  async deleteObjective(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/objectives/${id}/delete`,
+    );
+  }
 }

@@ -12,7 +12,9 @@ import {PopperContent} from 'ngx-popper';
 import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
 import {ModalService} from '../../../services/core/modal.service';
 import {CultureService} from '../../../services/core/culture.service';
-import {AccessType} from '../../../library/app/enums';
+import {AccessType, WorkPackageObjectiveType} from '../../../library/app/enums';
+import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
+import { FormService } from 'src/app/services/core/form.service';
 
 @Component({
   selector: 'app-work-package',
@@ -38,6 +40,7 @@ export class WorkPackageComponent implements OnInit {
   constructor(
     readonly cultureService: CultureService,
     private readonly modalService: ModalService,
+    private readonly formService: FormService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly projectService: ProjectService,
@@ -50,7 +53,7 @@ export class WorkPackageComponent implements OnInit {
     this.filters = {
       mine: false,
       archived: false,
-      active: false
+      active: true
     };
     this.mode = ViewMode.Board;
     const id = this.activatedRoute.snapshot.params.id;
@@ -113,7 +116,46 @@ export class WorkPackageComponent implements OnInit {
   }
 
   addObjective() {
-
+    this.modalService
+      .show(PromptComponent, {
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'title' },
+                params: {
+                  model: '',
+                  placeHolder: 'TITLE',
+                },
+                validation: {
+                  required: { value: true, message: 'TITLE_REQUIRED' },
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'description' },
+                params: {
+                  model: '',
+                  placeHolder: 'DESCRIPTION',
+                },
+              }),
+              this.formService.createDropDown({
+                config: { field: 'type' },
+                params: {
+                  items: [],
+                  model: WorkPackageObjectiveType.MustHave,
+                  enum: 'WorkPackageObjectiveType',
+                  chooseLabel: 'OBJECTIVE_TYPE'
+                }
+              })
+            ],
+          },
+        ],
+        actionLabel: 'CREATE_OBJECTIVE',
+        action: (model, form) => this.workPackageService.createObjective(this.workPackage.id, model),
+        actionColor: 'primary',
+        title: 'CREATE_OBJECTIVE',
+      })
+      .subscribe(() => {});
   }
 }
 export enum ViewMode {

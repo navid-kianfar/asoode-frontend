@@ -479,5 +479,10 @@
   "LIST_COLOR": "رنگ لیست",
   "ENTER_NEW_LIST_NAME": "نام لیست جدید را وارد کنید",
   "ENTER_LIST_NEW_NAME": "نام جدید لیست را وارد کنید",
-  "RENAME": "تغییر عنوان"
+  "RENAME": "تغییر عنوان",
+  "CREATE_OBJECTIVE":"ایجاد هدف",
+  "OBJECTIVE_TYPE":"میزان اهمیت دستیابی به هدف",
+  "ENUMS_WORK_PACKAGE_OBJECTIVE_TYPE_MUST_HAVE":"حتما باید به هدف دست یافت",
+  "ENUMS_WORK_PACKAGE_OBJECTIVE_TYPE_SHOULD_HAVE":"دست یابی به هدف مزیت است",
+  "ENUMS_WORK_PACKAGE_OBJECTIVE_TYPE_NICE_TO_HAVE":"دست یابی به هدف خوب است"
 }

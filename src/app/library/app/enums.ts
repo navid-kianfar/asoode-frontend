@@ -137,3 +137,8 @@ export enum PlanType {
 export enum CostUnit {
   Toman = 1
 }
+export enum WorkPackageObjectiveType {
+  MustHave = 1,
+  ShouldHave = 2,
+  NiceToHave = 3
+}
