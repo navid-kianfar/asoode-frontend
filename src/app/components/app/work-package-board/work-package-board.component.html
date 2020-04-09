@@ -12,7 +12,7 @@
          cdkDrag>
       <div [hidden]="list.renaming" cdkDragHandle class="header">
         <span>{{ list.title | truncate: 30 }}</span
-        >&nbsp; <i *ngIf="permission !== AccessType.Visitor" (click)="createNewTask(list)" class="icon-plus2"></i>&nbsp;
+        >&nbsp; <i *ngIf="permission !== AccessType.Visitor" (click)="prepareNewTask(list)" class="icon-plus2"></i>&nbsp;
         <i [matMenuTriggerFor]="menu" *ngIf="permission !== AccessType.Visitor" class="icon-menu"></i>
       </div>
       <div *ngIf="list.renaming" class="new-task">
@@ -33,17 +33,25 @@
       </div>
       <div *ngIf="list.expanded" class="new-task">
         <div class="wrapper">
-          <textarea rows="4"></textarea>
+          <textarea [readOnly]="creatingNewTask" [(ngModel)]="newTaskTitle" rows="2"></textarea>
           <div class="buttons">
-            <button mat-stroked-button>{{ 'CREATE' | translate }}</button>&nbsp;
+            <button [disabled]="creatingNewTask" (click)="createNewTask(list)" mat-stroked-button>
+              <i *ngIf="creatingNewTask" class="icon-spin icon-spinner2"></i>
+              {{ 'CREATE' | translate }}
+            </button>&nbsp;&nbsp;
             <button (click)="cancelNewTask(list)" mat-stroked-button>
               {{ 'CANCEL' | translate }}
             </button>
           </div>
         </div>
       </div>
+      <div [class.cards]="list.tasks.length > 0">
+        <app-work-package-task [workPackage]="model"
+                               [list]="list"
+                               [model]="task" *ngFor="let task of list.tasks"></app-work-package-task>
+      </div>
       <mat-menu #menu="matMenu">
-        <button class="action-btn" (click)="createNewTask(list)" mat-menu-item>
+        <button class="action-btn" (click)="prepareNewTask(list)" mat-menu-item>
           <span class="cnt">
             <i class="icon-task"></i>
             <span>{{ 'NEW_TASK' | translate }}</span>

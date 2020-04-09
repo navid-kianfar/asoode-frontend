@@ -57,5 +57,11 @@
         }
       }
     }
+
+    .cards {
+      padding: 10px;
+      max-height: calc(100vh - 205px);
+      overflow-y: auto;
+    }
   }
 }

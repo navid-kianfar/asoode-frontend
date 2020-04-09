@@ -21,6 +21,8 @@
         padding: 10px 10px;
         align-items: center;
         cursor: pointer;
+        border-bottom: 1px solid #efefef;
+
         i {
           display: flex;
           min-width: 20px;
@@ -69,8 +71,13 @@
           }
         }
       }
-    }
 
+      .cards {
+        padding: 10px;
+        max-height: calc(100vh - 205px);
+        overflow-y: auto;
+      }
+    }
   }
 }
 

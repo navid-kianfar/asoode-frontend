@@ -150,6 +150,7 @@ import { WorkPackageWizardComponent } from './modals/work-package-wizard/work-pa
 import {DeviceDetectorModule} from 'ngx-device-detector';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ColorPickerModule} from 'ngx-color-picker';
+import { WorkPackageTaskComponent } from './components/app/work-package-task/work-package-task.component';
 
 @NgModule({
   declarations: [
@@ -264,6 +265,7 @@ import {ColorPickerModule} from 'ngx-color-picker';
     GroupNamePipe,
     GroupSettingsComponent,
     WorkPackageWizardComponent,
+    WorkPackageTaskComponent,
   ],
   entryComponents: [
     WorkPackageWizardComponent,

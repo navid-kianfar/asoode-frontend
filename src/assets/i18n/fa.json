@@ -488,5 +488,13 @@
   "EDIT_OBJECTIVE": "ویرایش هدف",
   "REMOVE_OBJECTIVE": "حذف هدف",
   "REMOVE_OBJECTIVE_CONFIRM_HEADING": "آیا از حذف {0} اطمینان دارید؟",
-  "REMOVE_OBJECTIVE_CONFIRM": "در صورت تایید کلیه اطلاعات مربوط به این هدف (از جمله هزینه تمام شده این هدف) حذف خواهد شد"
+  "REMOVE_OBJECTIVE_CONFIRM": "در صورت تایید کلیه اطلاعات مربوط به این هدف (از جمله هزینه تمام شده این هدف) حذف خواهد شد",
+  "ENUMS_WORK_PACKAGE_TASK_STATE_TO_DO": "برای انجام",
+  "ENUMS_WORK_PACKAGE_TASK_STATE_IN_PROGRESS": "در حال انجام",
+  "ENUMS_WORK_PACKAGE_TASK_STATE_DONE": "انجام شده",
+  "ENUMS_WORK_PACKAGE_TASK_STATE_PAUSE": "متوقف شده",
+  "ENUMS_WORK_PACKAGE_TASK_STATE_BLOCKED": "مسدود شده",
+  "ENUMS_WORK_PACKAGE_TASK_STATE_CANCELED": "کنسل شده",
+  "ENUMS_WORK_PACKAGE_TASK_STATE_DUPLICATE": "تکراری",
+  "ENUMS_WORK_PACKAGE_TASK_STATE_IN_COMPLETE": "ناقص"
 }

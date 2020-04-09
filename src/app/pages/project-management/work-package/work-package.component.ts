@@ -17,6 +17,9 @@ import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
 import { FormService } from 'src/app/services/core/form.service';
 import {StringHelpers} from '../../../helpers/string.helpers';
 import {TranslateService} from '../../../services/core/translate.service';
+import {OperationResult} from '../../../library/core/operation-result';
+import {GroupService} from '../../../services/groups/group.service';
+import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
 
 @Component({
   selector: 'app-work-package',
@@ -43,6 +46,7 @@ export class WorkPackageComponent implements OnInit {
     readonly cultureService: CultureService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
+    private readonly groupService: GroupService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly translateService: TranslateService,
@@ -88,8 +92,16 @@ export class WorkPackageComponent implements OnInit {
       this.router.navigateByUrl('dashboard');
       return;
     }
-    this.workPackage = op.data;
+    this.workPackage = this.mapData(op.data);
     this.waiting = false;
+  }
+
+  mapData(model: WorkPackageViewModel): WorkPackageViewModel {
+    model.lists.forEach(list => {
+      list.tasks = model.tasks.filter(t => t.listId === list.id)
+        .sort((a, b) => (a.order > b.order) ? 1 : -1);
+    });
+    return model;
   }
 
   findMember(recordId: string): MemberInfoViewModel {
@@ -114,8 +126,38 @@ export class WorkPackageComponent implements OnInit {
     }).subscribe(() => {});
   }
 
-  removeAccess(permission: AccessType) {
-
+  removeAccess(member: WorkPackageMemberViewModel, permission: AccessType, pending: PendingInvitationViewModel = null) {
+    {
+      const heading = StringHelpers.format(
+        this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
+        [
+          member.isGroup
+            ? this.groupService.groups.find(g => g.id === member.recordId).title
+            : (pending ? pending.identifier : this.findMember(member.recordId).fullName)
+        ],
+      );
+      this.modalService
+        .confirm({
+          title: 'REMOVE_ACCESS',
+          message: 'REMOVE_MEMBER_CONFIRM',
+          heading,
+          actionLabel: 'REMOVE_ACCESS',
+          cancelLabel: 'CANCEL',
+          action: async () => OperationResult.Success(true),
+        })
+        .subscribe(async confirmed => {
+          if (!confirmed) {
+            return;
+          }
+          member.waiting = true;
+          const op = await this.workPackageService.removeAccess(member.id);
+          member.waiting = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+        });
+    }
   }
 
   addObjective() {
@@ -220,6 +262,56 @@ export class WorkPackageComponent implements OnInit {
         return await this.workPackageService.deleteObjective(obj.id);
       },
     }).subscribe((confirmed) => { });
+  }
+
+  async changePermission(member: WorkPackageMemberViewModel, access: AccessType) {
+    member.access = access;
+    member.waiting = true;
+    const op = await this.workPackageService.changeAccess(member.id, { access });
+    member.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async changePendingPermission(member: PendingInvitationViewModel, access: AccessType) {
+    member.access = access;
+    member.waiting = true;
+    const op = await this.workPackageService.changePendingAccess(member.id, { access });
+    member.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async removePendingAccess(member: PendingInvitationViewModel, permission: AccessType) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
+      [member.identifier],
+    );
+    this.modalService
+      .confirm({
+        title: 'REMOVE_ACCESS',
+        message: 'REMOVE_MEMBER_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_ACCESS',
+        cancelLabel: 'CANCEL',
+        action: async () => OperationResult.Success(true),
+      })
+      .subscribe(async confirmed => {
+        if (!confirmed) {
+          return;
+        }
+        member.deleting = true;
+        const op = await this.workPackageService.removePendingAccess(member.id);
+        member.deleting = false;
+        if (op.status !== OperationResultStatus.Success) {
+          // TODO: handle error
+          return;
+        }
+      });
   }
 }
 export enum ViewMode {

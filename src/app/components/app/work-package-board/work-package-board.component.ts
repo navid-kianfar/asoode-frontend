@@ -4,6 +4,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {WorkPackageService} from '../../../services/projects/work-package.service';
 import {AccessType} from '../../../library/app/enums';
 import {OperationResultStatus} from '../../../library/core/enums';
+import {TaskService} from '../../../services/projects/task.service';
 
 @Component({
   selector: 'app-work-package-board',
@@ -17,8 +18,13 @@ export class WorkPackageBoardComponent implements OnInit {
   expanded: boolean;
   dragDelay: number;
   creatingNewList: boolean;
+  creatingNewTask: boolean;
   newListName: string;
-  constructor(private readonly workPackageService: WorkPackageService) {}
+  newTaskTitle: string;
+  constructor(
+    private readonly workPackageService: WorkPackageService,
+    private readonly taskService: TaskService,
+  ) {}
 
   ngOnInit() {
     this.dragDelay = 0;
@@ -42,9 +48,10 @@ export class WorkPackageBoardComponent implements OnInit {
     this.expanded = true;
   }
 
-  createNewTask(list: WorkPackageListViewModel) {
+  prepareNewTask(list: WorkPackageListViewModel) {
     this.model.lists.forEach(l => l.expanded = false);
     list.expanded = true;
+    this.newTaskTitle = '';
   }
   cancelNewTask(list: WorkPackageListViewModel) {
     list.expanded = false;
@@ -97,5 +104,23 @@ export class WorkPackageBoardComponent implements OnInit {
       return;
     }
     this.cancelRenameList(list);
+  }
+
+  async createNewTask(list: WorkPackageListViewModel) {
+    const name = this.newTaskTitle.trim();
+    if (!name) { return; }
+    this.creatingNewTask = true;
+    const op = await this.taskService.create(this.model.id, {
+      listId: list.id,
+      title: name,
+      parentId: undefined
+    });
+    this.creatingNewTask = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.newTaskTitle = '';
+    list.expanded = false;
   }
 }

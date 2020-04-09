@@ -25,6 +25,7 @@
   }
   .initials-holder {
     width: 40px;
+    min-width: 40px;
     height: 40px;
     align-items: baseline;
     display: flex;
@@ -35,7 +36,7 @@
       width: 30px;
       height: 30px;
       border-radius: 50px;
-      border: 2px solid #666666;
+      border: 1px solid #666666;
       background-color: #e6e6e6;
       padding-top: 3px;
       text-align: center;
@@ -71,6 +72,7 @@
 
     .initials-holder {
       width: 30px;
+      min-width: 30px;
       height: 30px;
     }
     .info {

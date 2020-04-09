@@ -2,7 +2,11 @@ import { BaseViewModel } from '../core/general-types';
 import {
   AccessType,
   BoardTemplate,
-  WorkPackageCommentPermission, WorkPackageObjectiveType,
+  WorkPackageCommentPermission,
+  WorkPackageObjectiveType,
+  WorkPackageTaskObjectiveValue,
+  WorkPackageTaskReminderType, WorkPackageTaskState,
+  WorkPackageTaskVoteNecessity,
 } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
 import {PendingInvitationViewModel} from '../groups/group-types';
@@ -101,6 +105,7 @@ export interface WorkPackageViewModel extends BaseViewModel {
   allowSegments: boolean;
   allowState: boolean;
   allowTimeSpent: boolean;
+  labels: WorkPackageLabelViewModel[];
   members: WorkPackageMemberViewModel[];
   lists: WorkPackageListViewModel[];
   tasks: WorkPackageTaskViewModel[];
@@ -115,6 +120,12 @@ export interface WorkPackageMemberViewModel extends BaseViewModel {
   blockNotification: boolean;
   showStats: boolean;
   isGroup: boolean;
+}
+export interface WorkPackageLabelViewModel extends BaseViewModel {
+  packageId: string;
+  title: string;
+  color: string;
+  darkColor: boolean;
 }
 export interface BoardTemplateViewModel {
   type: BoardTemplate;
@@ -133,5 +144,50 @@ export interface WorkPackageListViewModel extends BaseViewModel {
   darkColor: boolean;
   expanded?: boolean;
   order: number;
+  tasks: WorkPackageTaskViewModel[];
 }
-export interface WorkPackageTaskViewModel extends BaseViewModel {}
+export interface WorkPackageTaskViewModel extends BaseViewModel {
+  state: WorkPackageTaskState;
+  userId: string;
+  listId: string;
+  packageId: string;
+  projectId: string;
+  subProjectId: string;
+  seasonId: string;
+  coverId: string;
+  doneUserId: string;
+  parentId: string;
+  estimatedTime?: Date;
+  archivedAt?: Date;
+  dueAt?: Date;
+  beginAt?: Date;
+  endAt?: Date;
+  doneAt?: Date;
+  title: string;
+  description: string;
+  geoLocation: string;
+  order: string;
+  restricted: boolean;
+  votePaused: boolean;
+  votePrivate: boolean;
+  beginReminder: WorkPackageTaskReminderType;
+  EndReminder: WorkPackageTaskReminderType;
+  State: WorkPackageTaskState;
+  voteNecessity: WorkPackageTaskVoteNecessity;
+  objectiveValue: WorkPackageTaskObjectiveValue;
+  members: WorkPackageTaskMemberViewModel[];
+  labels: WorkPackageTaskLabelViewModel[];
+}
+export interface WorkPackageTaskMemberViewModel extends BaseViewModel{
+  taskId: string;
+  userId: string;
+  packageId: string;
+  lastView?: Date;
+  watching?: boolean;
+  vote?: boolean;
+}
+export interface WorkPackageTaskLabelViewModel extends BaseViewModel {
+  taskId: string;
+  labelId: string;
+  packageId: string;
+}

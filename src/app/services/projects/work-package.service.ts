@@ -58,4 +58,28 @@ export class WorkPackageService {
       `/work-packages/objectives/${id}/delete`,
     );
   }
+
+  async changeAccess(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/change-access/${id}`,
+      model,
+    );
+  }
+
+  async removeAccess(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/remove-access/${id}`,
+    );
+  }
+
+  async changePendingAccess(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/change-pending-access/${id}`,
+      model,
+    );
+  }
+
+  async removePendingAccess(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/work-packages/remove-pending-access/${id}`);
+  }
 }
