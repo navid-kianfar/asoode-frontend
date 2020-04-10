@@ -497,5 +497,15 @@
   "ENUMS_WORK_PACKAGE_TASK_STATE_CANCELED": "کنسل شده",
   "ENUMS_WORK_PACKAGE_TASK_STATE_DUPLICATE": "تکراری",
   "ENUMS_WORK_PACKAGE_TASK_STATE_INCOMPLETE": "ناقص",
-  "ENUMS_WORK_PACKAGE_TASK_STATE_BLOCKER": "متوقف کننده"
+  "ENUMS_WORK_PACKAGE_TASK_STATE_BLOCKER": "متوقف کننده",
+  "TASK_ARCHIVED_AT": "کارت در تاریخ {0} آرشیو شد",
+  "TASK_DETAILS": "جزئیات",
+  "TASK_TIME_SPENT": "زمان\u200Cهای صرف شده",
+  "TASK_RELATED": "کارت\u200Cهای وابسته",
+  "TASK_CUSTOM_FIELD": "فیلد\u200Cهای سفارشی",
+  "TASK_ACTIVITY": "فعالیت ها",
+  "WATCH": "نظاره",
+  "TASK_IN_LIST": "در لیست",
+  "COMMENTS": "نظرات",
+  "ENTER_YOUR_COMMENT": "نظرتان را اینجا وارد کنید"
 }

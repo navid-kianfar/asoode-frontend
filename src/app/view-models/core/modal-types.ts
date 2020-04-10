@@ -1,9 +1,9 @@
 import { FormViewModel } from '../../components/core/form/contracts';
-
-
+import {WorkPackageTaskViewModel} from '../projects/project-types';
 
 export interface TaskModalParameters {
   id: string;
+  model: WorkPackageTaskViewModel;
 }
 export interface ModalParameters {
   cancel?: () => Promise<any>;

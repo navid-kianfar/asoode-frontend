@@ -162,7 +162,8 @@ export class WorkPackageBoardComponent implements OnInit {
 
   openTask(task: WorkPackageTaskViewModel) {
     this.modalService.show(TaskModalComponent, {
-      id: task.id
+      id: task.id,
+      model: task
     }).subscribe(() => {});
   }
 }

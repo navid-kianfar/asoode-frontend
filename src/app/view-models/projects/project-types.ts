@@ -147,6 +147,7 @@ export interface WorkPackageListViewModel extends BaseViewModel {
   tasks: WorkPackageTaskViewModel[];
 }
 export interface WorkPackageTaskViewModel extends BaseViewModel {
+  listName: string;
   attachmentCount: number;
   commentCount: number;
   hasDescription: boolean;

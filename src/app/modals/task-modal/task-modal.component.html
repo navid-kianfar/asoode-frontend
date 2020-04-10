@@ -1,1 +1,94 @@
-<p>task-modal works!</p>
+<div class="task-wrapper" [class.hasBackground]="false" [class.archived]="false">
+<!--  <div class="header" [style.backgroundImage]="'url(https://i.picsum.photos/id/999/700/250.jpg)'">-->
+  <div class="header">
+    <div class="actions">
+      <button mat-mini-fab>
+          <span class="btn-inner">
+            <i class="icon-eye2"></i>
+            <span class="sub-title">{{ 'WATCH' | translate }}</span>
+          </span>
+      </button>
+<!--      <button mat-mini-fab>-->
+<!--          <span class="btn-inner">-->
+<!--            <i class="icon-download4"></i>-->
+<!--            <span class="sub-title">{{ 'MOVE' | translate }}</span>-->
+<!--          </span>-->
+<!--      </button>-->
+<!--      <button mat-mini-fab>-->
+<!--          <span class="btn-inner">-->
+<!--            <i class="icon-download4"></i>-->
+<!--            <span class="sub-title">{{ 'COPY' | translate }}</span>-->
+<!--          </span>-->
+<!--      </button>-->
+      <button mat-mini-fab>
+          <span class="btn-inner">
+            <i class="icon-archive"></i>
+            <span class="sub-title">{{ 'ARCHIVE' | translate }}</span>
+          </span>
+      </button>
+
+    </div>
+    <div *ngIf="false" class="archived">
+      <h4>{{ 'TASK_ARCHIVED_AT' | translate|stringFormat:(model.dueAt | culturedDate)}}</h4>
+    </div>
+  </div>
+  <div class="content">
+    <div class="info">
+      <div class="box">
+        <div class="status-wrapper">
+          <div class="status-container">
+            <div class="circle color-{{model.state}}"></div>
+            <div class="text">
+              {{model.state | enum:'WorkPackageTaskState'}}&nbsp;
+              <i class="icon-arrow-down2"></i>
+            </div>
+          </div>
+        </div>
+        <div class="date">
+          <ng-container *ngIf="model.dueAt || model.endAt || model.beginAt">
+            <i class="icon-calendar"></i>&nbsp;
+            <span>{{ (model.dueAt || model.endAt || model.beginAt) | culturedDate }}</span>
+          </ng-container>
+        </div>
+        <div class="title">{{model.title}}</div>
+        <div class="list-name">
+          {{ 'TASK_IN_LIST' | translate}}&nbsp;
+          {{model.listName}}
+        </div>
+        <div class="description">{{model.description}}</div>
+      </div>
+      <div class="box">
+        <h3>{{ 'COMMENTS' | translate}}</h3>
+        <div class="comment-container">
+          <div class="send">
+            <div class="avatar">
+              <app-member-info [small]="true" [me]="true"></app-member-info>
+            </div>
+            <div class="text">
+              <textarea [readOnly]="commenting" [(ngModel)]="comment" [placeholder]="'ENTER_YOUR_COMMENT' | translate" rows="3"></textarea>
+              <button [disabled]="commenting || !comment || !comment.trim().length">
+                <i [class]="commenting ? 'icon-spin icon-spinner2' : 'icon-paperplane'"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="detail">
+      <ul class="tabs">
+        <li [class.active]="mode === ViewMode.Detail" (click)="switchMode(ViewMode.Detail)">{{'TASK_DETAILS' | translate}}</li>
+        <li [class.active]="mode === ViewMode.TimeSpent" (click)="switchMode(ViewMode.TimeSpent)">{{'TASK_TIME_SPENT' | translate}}</li>
+        <li [class.active]="mode === ViewMode.Related" (click)="switchMode(ViewMode.Related)">{{'TASK_RELATED' | translate}}</li>
+        <li [class.active]="mode === ViewMode.CustomField" (click)="switchMode(ViewMode.CustomField)">{{'TASK_CUSTOM_FIELD' | translate}}</li>
+        <li [class.active]="mode === ViewMode.Activity" (click)="switchMode(ViewMode.Activity)">{{'TASK_ACTIVITY' | translate}}</li>
+      </ul>
+      <div class="tab-content">
+        <ng-container *ngIf="mode === ViewMode.Detail">1</ng-container>
+        <ng-container *ngIf="mode === ViewMode.TimeSpent">2</ng-container>
+        <ng-container *ngIf="mode === ViewMode.Related">3</ng-container>
+        <ng-container *ngIf="mode === ViewMode.CustomField">4</ng-container>
+        <ng-container *ngIf="mode === ViewMode.Activity">5</ng-container>
+      </div>
+    </div>
+  </div>
+</div>
