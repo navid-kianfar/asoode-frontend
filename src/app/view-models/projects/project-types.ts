@@ -146,7 +146,15 @@ export interface WorkPackageListViewModel extends BaseViewModel {
   order: number;
   tasks: WorkPackageTaskViewModel[];
 }
+export interface WorkPackageTaskCommentViewModel extends BaseViewModel {
+  taskId: string;
+  userId: string;
+  replyId?: string;
+  private: boolean;
+  message: string;
+}
 export interface WorkPackageTaskViewModel extends BaseViewModel {
+  comments: WorkPackageTaskCommentViewModel[];
   listName: string;
   attachmentCount: number;
   commentCount: number;
