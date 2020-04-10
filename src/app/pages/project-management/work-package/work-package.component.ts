@@ -114,6 +114,7 @@ export class WorkPackageComponent implements OnInit {
   }
 
   prepareInvite() {
+    if (this.waiting) { return; }
     this.modalService.show(InviteModalComponent, {
       noProject: true,
       existing: this.workPackage.members,
@@ -312,6 +313,11 @@ export class WorkPackageComponent implements OnInit {
           return;
         }
       });
+  }
+
+  settingMenuToggle() {
+    if (this.waiting) { return; }
+    this.toggleSetting = !this.toggleSetting;
   }
 }
 export enum ViewMode {

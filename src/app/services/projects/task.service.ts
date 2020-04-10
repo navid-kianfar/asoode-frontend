@@ -12,4 +12,12 @@ export class TaskService {
   async create(id: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/tasks/${id}/create`, model);
   }
+
+  async reposition(id: any, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${id}/reposition`, model);
+  }
+
+  async move(id: any, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${id}/move`, model);
+  }
 }

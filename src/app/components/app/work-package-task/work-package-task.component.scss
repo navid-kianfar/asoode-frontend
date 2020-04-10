@@ -58,6 +58,7 @@
   .labels {
     display: flex;
     flex-wrap: wrap;
+    margin-top: 5px;
     .label {
       display: flex;
       margin-inline-end: 5px;
@@ -74,8 +75,10 @@
     font-size: 0.8rem;
     font-weight: 400;
     text-align: justify;
+    margin-top: 5px;
   }
   .progress {
+    margin-top: 5px;
     display: flex;
     align-items: baseline;
     font-size: 0.8rem;
@@ -102,6 +105,7 @@
   }
   .detail {
     display: flex;
+    margin-top: 5px;
     .box {
       display: flex;
       .inf {
@@ -145,17 +149,16 @@
       }
     }
   }
-
   .interactions {
     display: flex;
-    margin: 2px 0;
+    margin-top: 5px;
     .box {
       display: flex;
       &.box-1 {
         flex-grow: 1;
         .vote {
           display: flex;
-          background: #e6e6e6;
+          background: #f2f2f2;
           border-radius: 15px;
           align-items: center;
           width: 80px;
@@ -199,7 +202,7 @@
       }
       &.box-2 {
         .target {
-          background: #e6e6e6;
+          background: #f2f2f2;
           border-radius: 15px;
           align-items: center;
           display: flex;
@@ -217,7 +220,7 @@
           }
         }
         .time {
-          background: #e6e6e6;
+          background: #f2f2f2;
           border-radius: 15px;
           align-items: center;
           display: flex;

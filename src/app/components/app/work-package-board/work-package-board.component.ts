@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WorkPackageListViewModel, WorkPackageViewModel,} from '../../../view-models/projects/project-types';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {WorkPackageListViewModel, WorkPackageTaskViewModel, WorkPackageViewModel,} from '../../../view-models/projects/project-types';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {WorkPackageService} from '../../../services/projects/work-package.service';
 import {AccessType} from '../../../library/app/enums';
 import {OperationResultStatus} from '../../../library/core/enums';
@@ -28,16 +28,6 @@ export class WorkPackageBoardComponent implements OnInit {
 
   ngOnInit() {
     this.dragDelay = 0;
-  }
-
-  drop(event: CdkDragDrop<any[]>) {
-    const id = event.item.data.id;
-    moveItemInArray(
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex,
-    );
-    this.workPackageService.repositionList(id, { order: event.currentIndex + 1 });
   }
 
   cancelNewList() {
@@ -122,5 +112,43 @@ export class WorkPackageBoardComponent implements OnInit {
     }
     this.newTaskTitle = '';
     list.expanded = false;
+  }
+
+  getConnectedList() {
+    return this.model.lists.map(l => l.id);
+  }
+
+  dropTask(event: CdkDragDrop<WorkPackageTaskViewModel[], any>, listId) {
+    const id = event.item.data.id;
+    if (event.previousContainer === event.container) {
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      this.taskService.reposition(id, { order: event.currentIndex + 1 });
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+      this.taskService.move(id, {
+        listId,
+        packageId: this.model.id,
+        order: event.currentIndex + 1,
+      });
+    }
+  }
+
+  drop(event: CdkDragDrop<WorkPackageListViewModel[]>) {
+    const id = event.item.data.id;
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+    this.workPackageService.repositionList(id, { order: event.currentIndex + 1 });
   }
 }

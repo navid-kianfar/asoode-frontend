@@ -68,6 +68,7 @@
       <div class="objectives-container">
         <div class="info"
              [popper]="popperObjectives"
+             [popperDisabled]="waiting"
              [popperTrigger]="'click'"
              [popperHideOnClickOutside]="true"
              [popperHideOnScroll]="true"
@@ -80,6 +81,7 @@
       <div class="members-container">
         <ng-container *ngFor="let member of workPackage.members | slice: 0:3">
           <app-member-info
+            [popperDisabled]="waiting"
             [popper]="popperMemberInfo"
             [popperTrigger]="'click'"
             [popperHideOnClickOutside]="true"
@@ -92,6 +94,7 @@
             small="true"
           ></app-member-info>
           <app-group-info
+            [popperDisabled]="waiting"
             [popper]="popperMemberInfo"
             [popperTrigger]="'click'"
             [popperHideOnClickOutside]="true"
@@ -107,6 +110,7 @@
         &nbsp;
         <div *ngIf="(workPackage.members.length > 3) || workPackage.pending.length"
              class="add more"
+             [popperDisabled]="waiting"
              [popper]="popperAllMembers"
              [popperTrigger]="'click'"
              [popperHideOnClickOutside]="true"
@@ -120,6 +124,7 @@
         </div>
       </div>
       <div class="filters-container"
+           [popperDisabled]="waiting"
            [popper]="popperFilters"
            [popperTrigger]="'click'"
            [popperHideOnClickOutside]="true"
@@ -129,7 +134,7 @@
         <span>{{ (filters.mine ? 1 : 0) + (filters.archived ? 1 : 0) + (filters.active ? 1 : 0) }}</span>
       </div>
       <div *ngIf="(permission === AccessType.Admin || permission === AccessType.Owner)"
-           (click)="toggleSetting = !toggleSetting" class="settings-container">
+           (click)="settingMenuToggle()" class="settings-container">
         <i class="icon-cog2"></i>
       </div>
     </div>
