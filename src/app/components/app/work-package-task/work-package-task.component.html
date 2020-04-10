@@ -1,74 +1,76 @@
 <div class="task no-select">
   <div class="status">
     <div class="date">
-      <i class="icon-calendar"></i>&nbsp;
-      <span>{{ date | culturedDate }}</span>
+      <ng-container *ngIf="model.dueAt || model.endAt || model.beginAt">
+        <i class="icon-calendar"></i>&nbsp;
+        <span>{{ (model.dueAt || model.endAt || model.beginAt) | culturedDate }}</span>
+      </ng-container>
     </div>
     <div class="more">
-      <i class="icon-eye2"></i>
+      <i *ngIf="allWatching.indexOf(model.id) !== -1" class="icon-eye2"></i>
     </div>
     <div class="status-wrapper">
       <div class="status-container">
-        <div class="circle"></div>
+        <div class="circle color-{{model.state}}"></div>
         <div class="text">{{model.state | enum:'WorkPackageTaskState'}}</div>
       </div>
     </div>
   </div>
   <div class="labels">
-<!--    <div class="label" [style.backgroundColor]="label.color"-->
-<!--         *ngFor="let label of workPackage.labels">-->
-<!--      {{label.title}}-->
-<!--    </div>-->
+    <div class="label" [style.backgroundColor]="label.color"
+         *ngFor="let label of allLabels">
+      {{label.title}}
+    </div>
   </div>
   <div class="title">
     {{model.title}}
   </div>
-  <div class="progress">
+  <div *ngIf="model.subTasks" class="progress">
     <div class="wrapper">
-      <mat-progress-bar mode="determinate" [value]="10" [bufferValue]="5"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [value]="model.subTasks" [bufferValue]="model.subTasksDone"></mat-progress-bar>
     </div>
-    <span>5/10</span>
+    <span>{{model.subTasksDone}}/{{model.subTasks}}</span>
   </div>
-  <div class="interactions">
+  <div *ngIf="model.targetCounts || model.targetCounts || (model.voteNecessity !== WorkPackageTaskVoteNecessity.None || (model.upVotes || model.downVotes))" class="interactions">
     <div class="box box-1">
-      <div class="vote">
+      <div *ngIf="model.voteNecessity !== WorkPackageTaskVoteNecessity.None || (model.upVotes || model.downVotes)" class="vote">
         <div class="sep up">
-          <span>1</span>
+          <span>{{model.upVotes || 0}}</span>
           <i class="icon-thumbs-up2"></i>
         </div>
         <div class="sep down">
           <i class="icon-thumbs-down2"></i>
-          <span>1</span>
+          <span>{{model.downVotes || 0}}</span>
         </div>
       </div>
     </div>
     <div class="box box-2">
-      <div class="target">
+      <div *ngIf="model.targetCounts" class="target">
         <i class="icon-target"></i>
-        <span>2</span>
+        <span>{{model.targetCounts}}</span>
       </div>
-      <div class="time">
+      <div *ngIf="model.timeSpent" class="time">
         <i class="icon-timer"></i>
-        <span>2:12:13</span>
+        <span>{{model.timeSpent | msToDuration}}</span>
       </div>
     </div>
   </div>
-  <div class="detail">
+  <div *ngIf="model.commentCount || model.attachmentCount || model.attachmentCount || allMembers.length" class="detail">
     <div class="box box-1">
-      <div class="inf">
+      <div *ngIf="model.hasDescription" class="inf">
         <i class="icon-paragraph-right3"></i>
       </div>
-      <div class="inf">
+      <div *ngIf="model.commentCount" class="inf">
         <i class="icon-bubble-dots2"></i>
-        <span>1</span>
+        <span>{{model.commentCount}}</span>
       </div>
-      <div class="inf">
+      <div *ngIf="model.attachmentCount" class="inf">
         <i class="icon-attachment"></i>
-        <span>1</span>
+        <span>{{model.attachmentCount}}</span>
       </div>
     </div>
     <div class="box box-2">
-      <app-member-info [model]="member" [small]="true" *ngFor="let member of workPackage.members"></app-member-info>
+      <app-member-info [model]="member" [small]="true" *ngFor="let member of allMembers"></app-member-info>
     </div>
   </div>
 </div>

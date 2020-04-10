@@ -1,5 +1,10 @@
 import { FormViewModel } from '../../components/core/form/contracts';
 
+
+
+export interface TaskModalParameters {
+  id: string;
+}
 export interface ModalParameters {
   cancel?: () => Promise<any>;
   action: () => Promise<any>;

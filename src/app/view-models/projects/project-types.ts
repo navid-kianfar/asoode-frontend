@@ -147,6 +147,15 @@ export interface WorkPackageListViewModel extends BaseViewModel {
   tasks: WorkPackageTaskViewModel[];
 }
 export interface WorkPackageTaskViewModel extends BaseViewModel {
+  attachmentCount: number;
+  commentCount: number;
+  hasDescription: boolean;
+  timeSpent: number;
+  targetCounts: number;
+  downVotes: number;
+  upVotes: number;
+  subTasksDone: number;
+  subTasks: number;
   state: WorkPackageTaskState;
   userId: string;
   listId: string;
@@ -190,4 +199,7 @@ export interface WorkPackageTaskLabelViewModel extends BaseViewModel {
   taskId: string;
   labelId: string;
   packageId: string;
+  color: string;
+  title: string;
+  dark: boolean;
 }

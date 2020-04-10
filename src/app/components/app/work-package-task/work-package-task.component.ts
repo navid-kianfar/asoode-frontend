@@ -1,5 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WorkPackageListViewModel, WorkPackageTaskViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
+import {
+  WorkPackageListViewModel, WorkPackageMemberViewModel,
+  WorkPackageTaskLabelViewModel,
+  WorkPackageTaskViewModel,
+  WorkPackageViewModel
+} from '../../../view-models/projects/project-types';
+import {IdentityService} from '../../../services/auth/identity.service';
+import {WorkPackageTaskVoteNecessity} from '../../../library/app/enums';
+import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-work-package-task',
@@ -10,10 +18,35 @@ export class WorkPackageTaskComponent implements OnInit {
   @Input() workPackage: WorkPackageViewModel;
   @Input() model: WorkPackageTaskViewModel;
   @Input() list: WorkPackageListViewModel;
-  date: Date = new Date();
-  constructor() { }
+
+  allWatching: string[];
+  allLabels: WorkPackageTaskLabelViewModel[];
+  WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
+  allMembers: WorkPackageMemberViewModel[];
+  constructor(private readonly identityService: IdentityService) { }
 
   ngOnInit() {
+    this.allWatching = this.model.members
+      .filter(m => m.userId === this.identityService.identity.userId && m.watching)
+      .map(m => m.taskId);
+    this.allLabels = this.model.labels
+      .filter(m => m.taskId === this.model.id)
+      .map(m => {
+        const color = this.workPackage.labels.find(l => l.id === m.labelId);
+        return {
+          labelId: m.labelId,
+          id: m.id,
+          taskId: m.taskId,
+          packageId: m.packageId,
+          color: color.color,
+          title: color.title,
+          dark: color.darkColor
+        } as WorkPackageTaskLabelViewModel;
+      });
+    this.allMembers = this.model.members
+      .filter(m => m.taskId === this.model.id)
+      .map(m => this.workPackage.members.find(l => l.id === m.userId))
+      .filter(i => i !== undefined);
   }
 
 }

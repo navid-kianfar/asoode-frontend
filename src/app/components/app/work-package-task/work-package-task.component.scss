@@ -42,9 +42,18 @@
         .circle {
           width: 15px;
           height: 15px;
-          background: #cccccc;
           border-radius: 50px;
           margin: 0 3px;
+
+          &.color-1{ background: #cccccc; }
+          &.color-2{ background: #59a8ef; }
+          &.color-3{ background: #5eb258; }
+          &.color-4{ background: #666666; }
+          &.color-5{ background: #b33634; }
+          &.color-6{ background: #666666; }
+          &.color-7{ background: #808080; }
+          &.color-8{ background: #b3b3b3; }
+          &.color-9{ background: #eb973e; }
         }
         .text {
           color: #4d4d4d;
@@ -152,6 +161,7 @@
   .interactions {
     display: flex;
     margin-top: 5px;
+    min-height: 23px;
     .box {
       display: flex;
       &.box-1 {

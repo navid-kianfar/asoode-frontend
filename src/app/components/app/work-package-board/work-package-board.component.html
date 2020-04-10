@@ -57,6 +57,7 @@
              cdkDrag
              class="list-handler">
           <app-work-package-task [workPackage]="model"
+                                 (click)="openTask(task)"
                                  [list]="list"
                                  [model]="task"></app-work-package-task>
         </div>

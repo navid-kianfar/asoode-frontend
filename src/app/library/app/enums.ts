@@ -156,7 +156,8 @@ export enum WorkPackageTaskState {
   Blocked = 5,
   Cancelled = 6,
   Duplicate = 7,
-  Incomplete = 8
+  Incomplete = 8,
+  Blocker = 9,
 }
 export enum WorkPackageTaskVoteNecessity {
   None = 1,

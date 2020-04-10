@@ -5,6 +5,8 @@ import {WorkPackageService} from '../../../services/projects/work-package.servic
 import {AccessType} from '../../../library/app/enums';
 import {OperationResultStatus} from '../../../library/core/enums';
 import {TaskService} from '../../../services/projects/task.service';
+import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
+import {ModalService} from '../../../services/core/modal.service';
 
 @Component({
   selector: 'app-work-package-board',
@@ -24,6 +26,7 @@ export class WorkPackageBoardComponent implements OnInit {
   constructor(
     private readonly workPackageService: WorkPackageService,
     private readonly taskService: TaskService,
+    private readonly modalService: ModalService,
   ) {}
 
   ngOnInit() {
@@ -136,7 +139,6 @@ export class WorkPackageBoardComponent implements OnInit {
       );
       this.taskService.move(id, {
         listId,
-        packageId: this.model.id,
         order: event.currentIndex + 1,
       });
     }
@@ -150,5 +152,11 @@ export class WorkPackageBoardComponent implements OnInit {
       event.currentIndex,
     );
     this.workPackageService.repositionList(id, { order: event.currentIndex + 1 });
+  }
+
+  openTask(task: WorkPackageTaskViewModel) {
+    this.modalService.show(TaskModalComponent, {
+      id: task.id
+    }).subscribe(() => {});
   }
 }

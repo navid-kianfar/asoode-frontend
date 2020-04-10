@@ -151,6 +151,7 @@ import {DeviceDetectorModule} from 'ngx-device-detector';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ColorPickerModule} from 'ngx-color-picker';
 import { WorkPackageTaskComponent } from './components/app/work-package-task/work-package-task.component';
+import { TaskModalComponent } from './modals/task-modal/task-modal.component';
 
 @NgModule({
   declarations: [
@@ -266,6 +267,7 @@ import { WorkPackageTaskComponent } from './components/app/work-package-task/wor
     GroupSettingsComponent,
     WorkPackageWizardComponent,
     WorkPackageTaskComponent,
+    TaskModalComponent,
   ],
   entryComponents: [
     WorkPackageWizardComponent,
@@ -277,6 +279,7 @@ import { WorkPackageTaskComponent } from './components/app/work-package-task/wor
     ChangeEmailComponent,
     GroupDetailComponent,
     InviteModalComponent,
+    TaskModalComponent
   ],
   imports: [
     BrowserModule,
