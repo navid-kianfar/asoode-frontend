@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {
+  ProjectViewModel,
   WorkPackageListViewModel, WorkPackageMemberViewModel,
   WorkPackageTaskLabelViewModel,
   WorkPackageTaskViewModel,
@@ -15,6 +16,7 @@ import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
   styleUrls: ['./work-package-task.component.scss']
 })
 export class WorkPackageTaskComponent implements OnInit {
+  @Input() project: ProjectViewModel;
   @Input() workPackage: WorkPackageViewModel;
   @Input() model: WorkPackageTaskViewModel;
   @Input() list: WorkPackageListViewModel;
@@ -22,7 +24,7 @@ export class WorkPackageTaskComponent implements OnInit {
   allWatching: string[];
   allLabels: WorkPackageTaskLabelViewModel[];
   WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
-  allMembers: WorkPackageMemberViewModel[];
+  allMembers: MemberInfoViewModel[];
   constructor(private readonly identityService: IdentityService) { }
 
   ngOnInit() {
@@ -44,8 +46,11 @@ export class WorkPackageTaskComponent implements OnInit {
         } as WorkPackageTaskLabelViewModel;
       });
     this.allMembers = this.model.members
-      .filter(m => m.taskId === this.model.id)
-      .map(m => this.workPackage.members.find(l => l.id === m.userId))
+      .map(m => {
+        const memeber = this.project.members.find(l => l.recordId === m.userId);
+        if (memeber) { return memeber.member; }
+        return undefined;
+      })
       .filter(i => i !== undefined);
   }
 

@@ -1,5 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {WorkPackageListViewModel, WorkPackageTaskViewModel, WorkPackageViewModel,} from '../../../view-models/projects/project-types';
+import {
+  ProjectViewModel,
+  WorkPackageListViewModel,
+  WorkPackageTaskViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {WorkPackageService} from '../../../services/projects/work-package.service';
 import {AccessType} from '../../../library/app/enums';
@@ -14,6 +19,7 @@ import {ModalService} from '../../../services/core/modal.service';
   styleUrls: ['./work-package-board.component.scss'],
 })
 export class WorkPackageBoardComponent implements OnInit {
+  @Input() project: ProjectViewModel;
   @Input() model: WorkPackageViewModel;
   @Input() permission: AccessType;
   AccessType = AccessType;

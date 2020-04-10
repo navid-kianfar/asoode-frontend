@@ -144,7 +144,7 @@
       <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
       <ng-container *ngIf="!waiting">
         <ng-container *ngIf="mode === ViewMode.Board">
-          <app-work-package-board [permission]="permission" [model]="workPackage"></app-work-package-board>
+          <app-work-package-board [project]="project" [permission]="permission" [model]="workPackage"></app-work-package-board>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.List">
           <app-work-package-list [permission]="permission" [model]="workPackage"></app-work-package-list>
