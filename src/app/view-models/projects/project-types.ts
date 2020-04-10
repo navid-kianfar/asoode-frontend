@@ -152,6 +152,7 @@ export interface WorkPackageTaskCommentViewModel extends BaseViewModel {
   replyId?: string;
   private: boolean;
   message: string;
+  member: MemberInfoViewModel;
 }
 export interface WorkPackageTaskViewModel extends BaseViewModel {
   comments: WorkPackageTaskCommentViewModel[];

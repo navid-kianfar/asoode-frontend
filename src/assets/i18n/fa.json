@@ -507,5 +507,8 @@
   "WATCH": "نظاره",
   "TASK_IN_LIST": "در لیست",
   "COMMENTS": "نظرات",
-  "ENTER_YOUR_COMMENT": "نظرتان را اینجا وارد کنید"
+  "ENTER_YOUR_COMMENT": "نظرتان را اینجا وارد کنید",
+  "NO_DESCRIPTION_YET": "توضیحی درج نشده",
+  "TASK_NEW_TITLE": "عنوانی مناسب تر برای این کارت انتخاب کنید",
+  "TASK_NEW_DESCRIPTION": "توضیحی تکمیلی در مورد این کارت وارد کنید"
 }

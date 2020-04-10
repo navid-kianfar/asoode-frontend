@@ -29,7 +29,12 @@
     <div class="content">
       <div class="info">
         <div class="box">
-          <div class="status-wrapper">
+          <div class="status-wrapper"
+               [popper]="popperStatus"
+               [popperTrigger]="'click'"
+               [popperHideOnClickOutside]="true"
+               [popperHideOnScroll]="true"
+               [popperPlacement]="'bottom'">
             <div class="status-container">
               <div class="circle color-{{model.state}}"></div>
               <div class="text">
@@ -44,12 +49,37 @@
               <span>{{ (model.dueAt || model.endAt || model.beginAt) | culturedDate }}</span>
             </ng-container>
           </div>
-          <div class="title">{{model.title}}</div>
+          <div class="title">
+            <ng-container *ngIf="!changingTitle">
+              <i (click)="prepareChangeTitle()" class="icon-pencil"></i>
+              <div>{{model.title}}</div>
+            </ng-container>
+            <ng-container *ngIf="changingTitle">
+              <i *ngIf="!savingTitle" (click)="changeTitle()" class="icon-checkmark3"></i>
+              <i *ngIf="savingTitle" class="icon-spin icon-spinner2"></i>
+              <input [readOnly]="savingTitle" *ngIf="changingTitle" [placeholder]="'TASK_NEW_TITLE' | translate"
+                     [(ngModel)]="newTitle" (keydown.enter)="changeTitle()" type="text">
+            </ng-container>
+          </div>
           <div class="list-name">
             {{ 'TASK_IN_LIST' | translate}}&nbsp;
             {{model.listName}}
           </div>
-          <div class="description">{{model.description}}</div>
+          <div class="description">
+            <ng-container *ngIf="!changingDescription">
+              <i (click)="prepareChangeDescription()" class="icon-pencil"></i>
+              <div *ngIf="model.description" class="has-description">{{model.description}}</div>
+              <div *ngIf="!model.description" class="no-description">{{'NO_DESCRIPTION_YET' | translate}}</div>
+            </ng-container>
+            <ng-container *ngIf="changingDescription">
+              <i *ngIf="!savingDescription" (click)="changeDescription()" class="icon-checkmark3"></i>
+              <i *ngIf="savingDescription" class="icon-spin icon-spinner2"></i>
+              <textarea [readOnly]="savingDescription"
+                        rows="2" [placeholder]="'TASK_NEW_DESCRIPTION' | translate"
+                        [(ngModel)]="newDescription" type="text"></textarea>
+            </ng-container>
+
+          </div>
         </div>
         <div class="box">
           <h3>{{ 'COMMENTS' | translate}}</h3>
@@ -67,11 +97,13 @@
             </div>
             <div class="comments">
               <div *ngFor="let comment of model.comments" class="comment">
-                <div class="avatar"></div>
+                <div class="avatar">
+                  <app-member-info [small]="true" [model]="comment.member"></app-member-info>
+                </div>
                 <div class="more">
                   <div class="full-name">
-                    <span>Navid Kianfar</span>
-                    <span>{{comment.createdAt | culturedDate}}</span>
+                    <span class="name">{{comment.member.fullName}}</span>
+                    <span class="when">{{comment.createdAt | culturedDate}}</span>
                   </div>
                   <div class="message">{{comment.message}}</div>
                 </div>
@@ -99,3 +131,15 @@
     </div>
   </ng-container>
 </div>
+<popper-content #popperStatus>
+  <div class="status-popper">
+    <ul class="status-wrapper">
+      <li *ngFor="let state of allStates" class="status-container">
+        <div class="circle color-{{state}}"></div>
+        <div class="text">
+          {{state | enum:'WorkPackageTaskState'}}
+        </div>
+      </li>
+    </ul>
+  </div>
+</popper-content>

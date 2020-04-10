@@ -29,4 +29,11 @@ export class TaskService {
   async fetch(id: string): Promise<OperationResult<WorkPackageTaskViewModel>> {
     return await this.httpService.post<WorkPackageTaskViewModel>(`/tasks/${id}/detail`);
   }
+
+  async changeTitle(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${id}/change-title`, model);
+  }
+  async changeDescription(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${id}/change-description`, model);
+  }
 }
