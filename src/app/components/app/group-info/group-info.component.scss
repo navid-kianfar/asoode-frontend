@@ -1,10 +1,15 @@
 .group-info {
-  border: 1px solid #e6e6e6;
   padding: 5px;
   border-radius: 5px;
   background: #ffffff;
   max-width: 300px;
   display: flex;
+  border: 1px solid transparent;
+
+  &.selected {
+    border: 1px solid #59a8ef;
+    background-color: rgba(89, 168, 239, 0.16);
+  }
 
   .info {
     min-width: 100px;

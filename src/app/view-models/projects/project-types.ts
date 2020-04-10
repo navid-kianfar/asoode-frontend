@@ -53,6 +53,7 @@ export interface ProjectViewModel extends BaseViewModel {
   workPackages: WorkPackageViewModel[];
 }
 export interface ProjectMemberViewModel extends BaseViewModel {
+  selected: boolean;
   isGroup: boolean;
   recordId: string;
   projectId: string;
@@ -122,6 +123,7 @@ export interface WorkPackageMemberViewModel extends BaseViewModel {
   isGroup: boolean;
 }
 export interface WorkPackageLabelViewModel extends BaseViewModel {
+  waiting: boolean;
   packageId: string;
   title: string;
   color: string;

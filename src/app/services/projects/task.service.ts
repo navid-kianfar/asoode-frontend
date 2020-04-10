@@ -36,4 +36,8 @@ export class TaskService {
   async changeDescription(id: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/tasks/${id}/change-description`, model);
   }
+
+  async changeState(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${id}/change-state`, model);
+  }
 }

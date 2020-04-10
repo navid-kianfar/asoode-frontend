@@ -68,6 +68,8 @@
           flex-grow: 1;
           margin: 0 0 5px;
           cursor: pointer;
+          background: no-repeat;
+          border: none;
           .status-container {
             background: #f2f2f2;
             border-radius: 20px;
@@ -283,6 +285,94 @@
       }
     }
   }
+
+  .box-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    .header {
+      display: flex;
+      height: 30px;
+      align-items: center;
+      .title {
+        display: flex;
+        flex-grow: 1;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .action {}
+    }
+
+    .box {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      .box-header {
+        display: flex;
+        align-items: center;
+        i {
+          font-size: 1rem;
+          margin-inline-end: 5px;
+
+          &.add {
+            color: #aaa;
+            font-size: 0.7rem;
+            display: flex;
+            width: 20px;
+            height: 20px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            border: 1px dashed #bbb;
+            margin-inline-start: 5px;
+          }
+        }
+        span {
+          font-size: 0.8rem;
+          font-weight: 500;
+        }
+      }
+      .box-content {
+        min-height: 50px;
+
+        .no-item {
+          background: #f2f2f2;
+          color: #999999;
+          text-align: center;
+          padding: 10px;
+          margin: 20px 0;
+          border-radius: 5px;
+
+          h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+          }
+        }
+
+        .members {
+          display: flex;
+          padding-top: 10px;
+        }
+
+        .labels {
+          display: flex;
+          padding-top: 10px;
+
+          span {
+            font-size: 0.7rem;
+            color: #fff;
+            font-weight: 400;
+            padding: 2px 5px;
+            border-radius: 5px;
+            margin-inline-end: 10px;
+          }
+        }
+      }
+    }
+  }
+
+
 
   &.archived {
     .actions {

@@ -1,11 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {SimpleModalComponent} from 'ngx-simple-modal';
 import {TaskModalParameters} from '../../view-models/core/modal-types';
-import {WorkPackageTaskViewModel} from '../../view-models/projects/project-types';
+import {
+  ProjectMemberViewModel,
+  ProjectViewModel, WorkPackageLabelViewModel,
+  WorkPackageTaskViewModel,
+  WorkPackageViewModel
+} from '../../view-models/projects/project-types';
 import {TaskService} from '../../services/projects/task.service';
 import {OperationResultStatus} from '../../library/core/enums';
 import {environment} from '../../../environments/environment';
 import {ProjectService} from '../../services/projects/project.service';
+import {AccessType, WorkPackageTaskState} from '../../library/app/enums';
+import {IdentityService} from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -29,10 +36,18 @@ export class TaskModalComponent
   savingDescription: boolean;
   newDescription: string;
   allStates: number[];
+  permission: AccessType;
+  AccessType = AccessType;
+  changingState: boolean;
+  project: ProjectViewModel;
+  workPackage: WorkPackageViewModel;
+  selectedMembers: string[];
+  selectedLabels: string[];
 
   constructor(
     private readonly taskService: TaskService,
     private readonly projectService: ProjectService,
+    private readonly identityService: IdentityService,
   ) { super(); }
 
   ngOnInit() {
@@ -55,7 +70,7 @@ export class TaskModalComponent
   }
 
   switchMode(mode: ViewMode) {
-    this.mode = mode;
+    // this.mode = mode;
   }
 
   async sendComment() {
@@ -78,10 +93,13 @@ export class TaskModalComponent
   }
 
   private postProcess() {
-    const project = this.projectService.projects.find(p => p.id === this.model.projectId);
+    const permission = this.project.members.find(m => m.recordId === this.identityService.identity.userId);
+    this.permission = permission ? permission.access : AccessType.Visitor;
     this.model.comments.forEach(c => {
-      c.member = project.members.find(m => m.recordId === c.userId).member;
+      c.member = this.project.members.find(m => m.recordId === c.userId).member;
     });
+    this.selectedMembers = this.model.members.map(m => m.userId);
+    this.selectedLabels = this.model.labels.map(m => m.id);
   }
 
   prepareChangeTitle() {
@@ -130,6 +148,35 @@ export class TaskModalComponent
     }
     this.changingDescription = false;
     this.savingDescription = false;
+  }
+
+  async changeState(state: WorkPackageTaskState) {
+    this.model.state = state;
+    this.changingState = true;
+    const op = await this.taskService.changeState(this.id, {state});
+    this.changingState = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+    }
+  }
+
+  toggleMember(member: ProjectMemberViewModel) {
+    if (member.waiting) {return;  }
+    if (this.selectedMembers.indexOf(member.recordId) === -1) {
+      this.selectedMembers.push(member.recordId);
+    } else {
+      this.selectedMembers = this.selectedMembers.filter(i => i !== member.recordId);
+    }
+
+  }
+
+  toggleLabel(label: WorkPackageLabelViewModel) {
+    if (label.waiting) {return;  }
+    if (this.selectedLabels.indexOf(label.id) === -1) {
+      this.selectedLabels.push(label.id);
+    } else {
+      this.selectedLabels = this.selectedLabels.filter(i => i !== label.id);
+    }
   }
 }
 export enum ViewMode {

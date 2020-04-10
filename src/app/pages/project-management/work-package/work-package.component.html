@@ -20,25 +20,25 @@
     <div class="sections-container">
       <ul *ngIf="!waiting">
         <li
-          (click)="mode = ViewMode.Board"
+          (click)="switchMode(ViewMode.Board)"
           [class.selected]="mode === ViewMode.Board"
         >
           {{ 'BOARD' | translate }}
         </li>
         <li
-          (click)="mode = ViewMode.List"
+          (click)="switchMode(ViewMode.List)"
           [class.selected]="mode === ViewMode.List"
         >
           {{ 'LIST' | translate }}
         </li>
         <li
-          (click)="mode = ViewMode.TimeSpan"
+          (click)="switchMode(ViewMode.TimeSpan)"
           [class.selected]="mode === ViewMode.TimeSpan"
         >
           {{ 'TIME_SPAN' | translate }}
         </li>
         <li
-          (click)="mode = ViewMode.Calendar"
+          (click)="switchMode(ViewMode.Calendar)"
           [class.selected]="mode === ViewMode.Calendar"
         >
           {{ 'CALENDAR' | translate }}
@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="objectives-container">
-        <div class="info"
+        <button class="info" disabled
              [popper]="popperObjectives"
              [popperDisabled]="waiting"
              [popperTrigger]="'click'"
@@ -76,46 +76,48 @@
           <i class="icon-target"></i>&nbsp;
           <span class="label">{{ 'OBJECTIVES' | translate }}</span>&nbsp;
           <span class="badge">{{ workPackage.objectives.length }}</span>
-        </div>
+        </button>
       </div>
       <div class="members-container">
         <ng-container *ngFor="let member of workPackage.members | slice: 0:3">
-          <app-member-info
-            [popperDisabled]="waiting"
-            [popper]="popperMemberInfo"
-            [popperTrigger]="'click'"
-            [popperHideOnClickOutside]="true"
-            [popperHideOnScroll]="true"
-            [popperPlacement]="'bottom'"
-            (click)="showMemberInfo(member, popperMemberInfo)"
-
+          <app-member-info [matMenuTriggerFor]="currentMemberMenu"
             *ngIf="!member.isGroup"
             [model]="findMember(member.recordId)"
             small="true"
           ></app-member-info>
-          <app-group-info
-            [popperDisabled]="waiting"
-            [popper]="popperMemberInfo"
-            [popperTrigger]="'click'"
-            [popperHideOnClickOutside]="true"
-            [popperHideOnScroll]="true"
-            [popperPlacement]="'bottom'"
-            (click)="showMemberInfo(member, popperMemberInfo)"
-
+          <app-group-info [matMenuTriggerFor]="currentMemberMenu"
             *ngIf="member.isGroup"
             [id]="member.recordId"
             small="true"
           ></app-group-info>
+          <mat-menu #currentMemberMenu="matMenu">
+            <div class="member-info-popper">
+              <div class="wrapper">
+                <app-member-info
+                  *ngIf="!member.isGroup"
+                  [model]="findMember(member.recordId)"
+                ></app-member-info>
+                <app-group-info
+                  *ngIf="member.isGroup"
+                  [id]="member.recordId"
+                ></app-group-info>
+               <div (click)="$event.preventDefault();$event.stopPropagation()">
+                 <app-access-list *ngIf="member.access !== AccessType.Owner"
+                                  (accessChange)="changePermission(member, $event)"
+                                  [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
+                                  [(access)]="member.access"></app-access-list>
+               </div>
+              </div>
+              <hr>
+              <h3>{{ 'VIEW_ACTIVITY' | translate}}</h3>
+              <h3 *ngIf="member.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
+                  (click)="removeAccess(member, permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h3>
+            </div>
+          </mat-menu>
         </ng-container>
         &nbsp;
         <div *ngIf="(workPackage.members.length > 3) || workPackage.pending.length"
-             class="add more"
-             [popperDisabled]="waiting"
-             [popper]="popperAllMembers"
-             [popperTrigger]="'click'"
-             [popperHideOnClickOutside]="true"
-             [popperHideOnScroll]="true"
-             [popperPlacement]="'bottom'">
+             class="add more" [matMenuTriggerFor]="allMemberMenu">
           <i class="icon-menu"></i>
         </div>
         &nbsp;
@@ -261,7 +263,7 @@
     <app-checkbox [(model)]="filters.archived" (modelChange)="fetch()" [label]="'FILTERS_TASKS_ARCHIVED'"></app-checkbox>
   </div>
 </popper-content>
-<popper-content #popperAllMembers>
+<mat-menu #allMemberMenu="matMenu" class="popper-all-users">
   <div class="member-info-popper">
     <ng-container *ngFor="let member of workPackage.members; let lst = last">
       <div class="wrapper">
@@ -273,9 +275,11 @@
           *ngIf="member.isGroup"
           [id]="member.recordId"
         ></app-group-info>
-        <app-access-list *ngIf="member.access !== AccessType.Owner"
-                         (accessChange)="changePermission(member, $event)"
-                         [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)" [(access)]="member.access"></app-access-list>
+        <div (click)="$event.preventDefault();$event.stopPropagation()">
+          <app-access-list *ngIf="member.access !== AccessType.Owner"
+                           (accessChange)="changePermission(member, $event)"
+                           [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)" [(access)]="member.access"></app-access-list>
+        </div>
       </div>
       <h4 *ngIf="member.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
           (click)="removeAccess(member, permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h4>
@@ -293,25 +297,5 @@
       <hr *ngIf="!lst">
     </ng-container>
   </div>
-</popper-content>
-<popper-content #popperMemberInfo>
-  <div *ngIf="currentMember" class="member-info-popper">
-    <div class="wrapper">
-      <app-member-info
-        *ngIf="!currentMember.isGroup"
-        [model]="findMember(currentMember.recordId)"
-      ></app-member-info>
-      <app-group-info
-        *ngIf="currentMember.isGroup"
-        [id]="currentMember.recordId"
-      ></app-group-info>
-      <app-access-list *ngIf="currentMember.access !== AccessType.Owner"
-                       (accessChange)="changePermission(currentMember, $event)"
-                       [disabled]="currentMember.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)" [(access)]="currentMember.access"></app-access-list>
-    </div>
-    <hr>
-    <h3>{{ 'VIEW_ACTIVITY' | translate}}</h3>
-    <h3 *ngIf="currentMember.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
-        (click)="removeAccess(currentMember, permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h3>
-  </div>
-</popper-content>
+</mat-menu>
+

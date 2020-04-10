@@ -11,6 +11,7 @@ export class GroupInfoComponent implements OnInit {
   @Input() id: string;
   @Input() cssClass: string;
   @Input() small: boolean;
+  @Input() selected: boolean;
   @Input() model: GroupViewModel;
   constructor(private readonly groupService: GroupService) {}
 

@@ -317,7 +317,11 @@ export class WorkPackageComponent implements OnInit {
 
   settingMenuToggle() {
     if (this.waiting) { return; }
-    this.toggleSetting = !this.toggleSetting;
+    // this.toggleSetting = !this.toggleSetting;
+  }
+
+  switchMode(mode: ViewMode) {
+    // this.mode = mode;
   }
 }
 export enum ViewMode {

@@ -15,34 +15,29 @@
             <span class="sub-title">{{ 'WATCH' | translate }}</span>
           </span>
         </button>
-        <button mat-mini-fab>
+        <button *ngIf="permission !== AccessType.Visitor" mat-mini-fab>
           <span class="btn-inner">
             <i class="icon-archive"></i>
             <span class="sub-title">{{ 'ARCHIVE' | translate }}</span>
           </span>
         </button>
       </div>
-      <div *ngIf="false" class="archived">
-        <h4>{{ 'TASK_ARCHIVED_AT' | translate|stringFormat:(model.dueAt | culturedDate)}}</h4>
+      <div *ngIf="model.archivedAt" class="archived">
+        <h4>{{ 'TASK_ARCHIVED_AT' | translate|stringFormat:(model.archivedAt | culturedDate)}}</h4>
       </div>
     </div>
     <div class="content">
       <div class="info">
         <div class="box">
-          <div class="status-wrapper"
-               [popper]="popperStatus"
-               [popperTrigger]="'click'"
-               [popperHideOnClickOutside]="true"
-               [popperHideOnScroll]="true"
-               [popperPlacement]="'bottom'">
-            <div class="status-container">
-              <div class="circle color-{{model.state}}"></div>
-              <div class="text">
+          <button class="status-wrapper no-select" [disabled]="changingState || permission === AccessType.Visitor" [matMenuTriggerFor]="statusMenu">
+            <span class="status-container">
+              <span class="circle color-{{model.state}}"></span>
+              <span class="text">
                 {{model.state | enum:'WorkPackageTaskState'}}&nbsp;
                 <i class="icon-arrow-down2"></i>
-              </div>
-            </div>
-          </div>
+              </span>
+            </span>
+          </button>
           <div class="date">
             <ng-container *ngIf="model.dueAt || model.endAt || model.beginAt">
               <i class="icon-calendar"></i>&nbsp;
@@ -51,7 +46,7 @@
           </div>
           <div class="title">
             <ng-container *ngIf="!changingTitle">
-              <i (click)="prepareChangeTitle()" class="icon-pencil"></i>
+              <i *ngIf="permission !== AccessType.Visitor" (click)="prepareChangeTitle()" class="icon-pencil"></i>
               <div>{{model.title}}</div>
             </ng-container>
             <ng-container *ngIf="changingTitle">
@@ -67,7 +62,7 @@
           </div>
           <div class="description">
             <ng-container *ngIf="!changingDescription">
-              <i (click)="prepareChangeDescription()" class="icon-pencil"></i>
+              <i *ngIf="permission !== AccessType.Visitor" (click)="prepareChangeDescription()" class="icon-pencil"></i>
               <div *ngIf="model.description" class="has-description">{{model.description}}</div>
               <div *ngIf="!model.description" class="no-description">{{'NO_DESCRIPTION_YET' | translate}}</div>
             </ng-container>
@@ -84,7 +79,7 @@
         <div class="box">
           <h3>{{ 'COMMENTS' | translate}}</h3>
           <div class="comment-container">
-            <div class="send">
+            <div *ngIf="permission !== AccessType.Visitor" class="send">
               <div class="avatar">
                 <app-member-info [small]="true" [me]="true"></app-member-info>
               </div>
@@ -121,7 +116,110 @@
           <li [class.active]="mode === ViewMode.Activity" (click)="switchMode(ViewMode.Activity)">{{'TASK_ACTIVITY' | translate}}</li>
         </ul>
         <div class="tab-content">
-          <ng-container *ngIf="mode === ViewMode.Detail">1</ng-container>
+          <ng-container *ngIf="mode === ViewMode.Detail">
+            <div class="box-container">
+              <div class="header">
+                <div class="title">{{'TASK_DETAILS' | translate}}</div>
+                <div class="action">
+                  <button mat-mini-fab color="primary"><i class="icon-plus2"></i></button>
+                </div>
+              </div>
+              <div class="box">
+                <div class="box-header">
+                  <i class="icon-price-tags4"></i>
+                  <span>{{ 'TASK_LABELS' | translate}}</span>
+                  <i [matMenuTriggerFor]="labelMenu" class="add icon-plus2"></i>
+                </div>
+                <div class="box-content">
+                  <div *ngIf="!selectedLabels.length" class="no-item">
+                    <h3>{{ 'TASK_NO_LABELS' | translate}}</h3>
+                  </div>
+                  <div class="labels">
+                    <ng-container *ngFor="let label of workPackage.labels">
+                      <span *ngIf="selectedLabels.indexOf(label.id) !== -1"
+                            [style.background]="label.color">{{label.title}}</span>
+                    </ng-container>
+                  </div>
+                </div>
+                <mat-menu #labelMenu="matMenu" class="popper-task-labels">
+                  <div class="task-modal-labels-menu" (click)="$event.preventDefault();$event.stopPropagation()">
+                    <ul>
+                      <li (click)="toggleLabel(label)" *ngFor="let label of workPackage.labels">
+                        <div class="label" [class.selected]="selectedLabels.indexOf(label.id) !== -1">
+                          <div class="title">
+                            <span [style.background]="label.color">{{label.title}}</span>
+                          </div>
+                          <i class="icon-pencil"></i>
+                          <i class="icon-delete"></i>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </mat-menu>
+              </div>
+              <div class="box">
+                <div class="box-header">
+                  <i class="icon-users2"></i>
+                  <span>{{ 'TASK_MEMBERS' | translate}}</span>
+                  <i [matMenuTriggerFor]="memberMenu" class="add icon-plus2"></i>
+                </div>
+                <div class="box-content">
+                  <div *ngIf="!selectedMembers.length" class="no-item">
+                    <h3>{{ 'TASK_NO_MEMBERS' | translate}}</h3>
+                  </div>
+                  <div class="members">
+                    <ng-container *ngFor="let member of project.members;">
+                      <app-member-info *ngIf="!member.isGroup && selectedMembers.indexOf(member.recordId) !== -1" [small]="true"
+                                       [model]="member.member"
+                      ></app-member-info>
+                      <app-group-info *ngIf="member.isGroup && selectedMembers.indexOf(member.recordId) !== -1" [small]="true"
+                                      [id]="member.recordId"
+                      ></app-group-info>
+                    </ng-container>
+                  </div>
+                </div>
+
+                <mat-menu #memberMenu="matMenu">
+                  <div class="task-modal-members-menu" (click)="$event.preventDefault();$event.stopPropagation()">
+                    <ul>
+                      <li (click)="toggleMember(member)"
+                          *ngFor="let member of project.members;">
+                        <app-member-info [selected]="selectedMembers.indexOf(member.recordId) !== -1"
+                          *ngIf="!member.isGroup"
+                          [model]="member.member"
+                        ></app-member-info>
+                        <app-group-info [selected]="selectedMembers.indexOf(member.recordId) !== -1"
+                          *ngIf="member.isGroup"
+                          [id]="member.recordId"
+                        ></app-group-info>
+                      </li>
+                    </ul>
+                  </div>
+                </mat-menu>
+              </div>
+<!--              <div class="box">-->
+<!--                <div class="box-header">-->
+<!--                  <i class="icon-task"></i>-->
+<!--                  <span>{{ 'TASK_SUB_TASK' | translate}}</span>-->
+<!--                  <i class="add icon-plus2"></i>-->
+<!--                </div>-->
+<!--                <div class="box-content"></div>-->
+<!--              </div>-->
+              <div class="box">
+                <div class="box-header">
+                  <i class="icon-attachment"></i>
+                  <span>{{ 'TASK_ATTACHMENTS' | translate}}</span>
+                  <i [matMenuTriggerFor]="attachmentMenu" class="add icon-plus2"></i>
+                </div>
+                <div class="box-content">
+                  <div *ngIf="!model.attachmentCount" class="no-item">
+                    <h3>{{ 'TASK_NO_ATTACHMENTS' | translate}}</h3>
+                  </div>
+                </div>
+                <mat-menu #attachmentMenu="matMenu"></mat-menu>
+              </div>
+            </div>
+          </ng-container>
           <ng-container *ngIf="mode === ViewMode.TimeSpent">2</ng-container>
           <ng-container *ngIf="mode === ViewMode.Related">3</ng-container>
           <ng-container *ngIf="mode === ViewMode.CustomField">4</ng-container>
@@ -131,15 +229,15 @@
     </div>
   </ng-container>
 </div>
-<popper-content #popperStatus>
-  <div class="status-popper">
-    <ul class="status-wrapper">
-      <li *ngFor="let state of allStates" class="status-container">
-        <div class="circle color-{{state}}"></div>
-        <div class="text">
-          {{state | enum:'WorkPackageTaskState'}}
-        </div>
-      </li>
-    </ul>
-  </div>
-</popper-content>
+<mat-menu #statusMenu="matMenu">
+    <div class="status-popper">
+      <ul class="status-wrapper">
+        <li (click)="changeState(state)" *ngFor="let state of allStates" class="status-container">
+          <div class="circle color-{{state}}"></div>
+          <div class="text">
+            {{state | enum:'WorkPackageTaskState'}}
+          </div>
+        </li>
+      </ul>
+    </div>
+</mat-menu>

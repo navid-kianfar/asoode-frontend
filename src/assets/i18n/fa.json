@@ -510,5 +510,12 @@
   "ENTER_YOUR_COMMENT": "نظرتان را اینجا وارد کنید",
   "NO_DESCRIPTION_YET": "توضیحی درج نشده",
   "TASK_NEW_TITLE": "عنوانی مناسب تر برای این کارت انتخاب کنید",
-  "TASK_NEW_DESCRIPTION": "توضیحی تکمیلی در مورد این کارت وارد کنید"
+  "TASK_NEW_DESCRIPTION": "توضیحی تکمیلی در مورد این کارت وارد کنید",
+  "TASK_LABELS": "برچسب ها",
+  "TASK_MEMBERS": "اعضا",
+  "TASK_SUB_TASK": "زیر کارها",
+  "TASK_ATTACHMENTS": "پیوست ها",
+  "TASK_NO_LABELS": "برچسبی متصل نیست",
+  "TASK_NO_MEMBERS": "عضوی متصل نیست",
+  "TASK_NO_ATTACHMENTS": "پیوستی موجود نیست"
 }

@@ -21,10 +21,10 @@ export class MonthViewComponent implements OnInit {
       for (let j = 0; j < 7; j++) {
         days[i][j] = {
           day: k++,
-          past: k % 13 === 0,
-          inTime: k % 8 === 0,
-          upcoming: k % 16 === 0,
-          today: k === 23,
+          // past: k % 13 === 0,
+          // inTime: k % 8 === 0,
+          // upcoming: k % 16 === 0,
+          // today: k === 23,
         };
       }
     }

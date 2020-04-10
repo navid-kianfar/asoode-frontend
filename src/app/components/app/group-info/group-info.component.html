@@ -1,5 +1,6 @@
-<div class="group-info"
-     [class.small]="small || false">
+<div class="group-info no-select"
+     [class.selected]="selected"
+     [class.small]="small">
   <div *ngIf="model.avatar" class="avatar">
     <img [src]="model.avatar" />
   </div>

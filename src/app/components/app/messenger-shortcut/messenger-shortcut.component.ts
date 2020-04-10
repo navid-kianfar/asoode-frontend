@@ -15,6 +15,7 @@ export class MessengerShortcutComponent implements OnInit {
   @Input() dashboard: boolean;
   showMessages: boolean;
   current: ChannelViewModel;
+  unread: number;
 
   constructor(
     private readonly router: Router,
@@ -27,6 +28,7 @@ export class MessengerShortcutComponent implements OnInit {
   }
 
   open() {
+    return;
     if (this.dashboard) {
       this.showMessages = true;
       return;
@@ -40,7 +42,7 @@ export class MessengerShortcutComponent implements OnInit {
 
   goToMessenger() {
     this.showMessages = false;
-    this.router.navigateByUrl('/messenger');
+    // this.router.navigateByUrl('/messenger');
   }
 
   setting() {

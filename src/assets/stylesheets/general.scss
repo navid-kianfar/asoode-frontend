@@ -551,6 +551,72 @@ body {
 .ngxp__container {
   box-shadow: none !important;
 }
+.mat-menu-panel {
+  max-width: 300px !important;
+  &.popper-all-users,
+  &.popper-task-labels{
+    max-width: 350px !important;
+    width: 350px !important;
+  }
+}
+.task-modal-labels-menu {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      .label {
+        display: flex;
+        background: #f2f2f2;
+        align-items: center;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin: 0 5px 5px;
+        border: 1px solid transparent;
+        cursor: pointer;
+
+        &.selected {
+          border: 1px solid #59a8ef;
+        }
+
+        .title {
+          display: flex;
+          flex-grow: 1;
+          margin-inline-end: 10px;
+
+          span {
+            font-size: 0.7rem;
+            color: #fff;
+            font-weight: 400;
+            padding: 2px 5px;
+            border-radius: 5px;
+          }
+        }
+        i {
+          display: flex;
+          margin-inline-end: 10px;
+        }
+      }
+    }
+  }
+}
+.task-modal-members-menu {
+  ul {
+    margin: 0;
+    padding: 0 5px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+  }
+}
 
 
 @import "drag.scss";
