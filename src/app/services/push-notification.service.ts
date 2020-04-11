@@ -5,6 +5,7 @@ import {ProjectService} from './projects/project.service';
 import {ActivityType} from '../library/app/enums';
 import {Router} from '@angular/router';
 import {WindowService} from './window.service';
+import {WorkPackageViewModel} from '../view-models/projects/project-types';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class PushNotificationService {
   handleSocket(notification: any) {
     let find1: any = null;
     let find2: any = null;
-    // let find3: any = null;
+    let find3: any = null;
     console.log(notification);
     const url = (notification.push.url || '').replace('https://panel.asoode.com', '');
     switch (notification.type) {
@@ -102,6 +103,59 @@ export class PushNotificationService {
         find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
         if (find1) { find1.subProjects.push(notification.data); }
         break;
+
+      case ActivityType.WorkPackageMemberAdd:
+        find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+        if (!find1) {
+          this.projectService.load();
+          return ;
+        }
+        find2 = find1.workPackages.find(wp => wp.id === notification.data.id);
+        if (!find2) {
+          this.projectService.load();
+          return ;
+        }
+        find2.members = [...find2.members, ...notification.data.members];
+        find2.pending = [...find2.pending, ...notification.data.pending];
+
+        break;
+      case ActivityType.WorkPackageMemberPermission:
+        if (notification.data.packageId) {
+          find1 = this.findWorkPackage(notification.data.packageId);
+          if (!find1) { return; }
+          find2 = find1.members.find(m => m.id === notification.data.id);
+          if (find2) {
+            find2.access = notification.data.access;
+            return;
+          }
+        }
+        find1 = this.findWorkPackage(notification.data.recordId);
+        find2 = find1.pending.find(m => m.id === notification.data.id);
+        if (find2) {
+          find2.access = notification.data.access;
+          return;
+        }
+        break;
+      case ActivityType.WorkPackageMemberRemove:
+        if (notification.data.packageId) {
+          find1 = this.findWorkPackage(notification.data.packageId);
+          if (!find1) { return; }
+          find1.members = find1.members.filter(m => m.id !== notification.data.id);
+          return;
+        }
+        find1 = this.findWorkPackage(notification.data.recordId);
+        find1.pending = find1.pending.filter(m => m.id !== notification.data.id);
+        break;
+    }
+  }
+
+  private findWorkPackage(id: string): WorkPackageViewModel {
+    for (const proj of this.projectService.projects) {
+      for (const wp of proj.workPackages) {
+        if (wp.id === id) {
+          return wp;
+        }
+      }
     }
   }
 }

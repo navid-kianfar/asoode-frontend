@@ -93,6 +93,8 @@ export class WorkPackageComponent implements OnInit {
 
   bind() {
     this.socket.on('push-notification', (notification: any) => {
+      let find1 = null;
+      let find2 = null;
       switch (notification.type) {
 
         case ActivityType.WorkPackageListAdd:
@@ -121,11 +123,60 @@ export class WorkPackageComponent implements OnInit {
             });
           }
           break;
+        case ActivityType.WorkPackageListPermission:
+          break;
+        case ActivityType.WorkPackageListSetting:
+          break;
+        case ActivityType.WorkPackageListSort:
+          break;
+        case ActivityType.WorkPackageListRemove:
+        case ActivityType.WorkPackageListArchive:
+          break;
+
+        case ActivityType.WorkPackageMemberAdd:
+          if (this.workPackage.id === notification.data.id) {
+            this.workPackage.members = [...this.workPackage.members, ...notification.data.members || []];
+            this.workPackage.pending = [...this.workPackage.pending, ...notification.data.pending || []];
+          }
+          break;
+        case ActivityType.WorkPackageMemberPermission:
+          if (notification.data.packageId) {
+            if (notification.data.packageId !== this.workPackage.id) { return; }
+            find2 = this.workPackage.members.find(m => m.id === notification.data.id);
+            if (find2) {
+              find2.access = notification.data.access;
+              return;
+            }
+          }
+          if (notification.data.recordId !== this.workPackage.id) { return; }
+          find2 = this.workPackage.pending.find(m => m.id === notification.data.id);
+          if (find2) {
+            find2.access = notification.data.access;
+            return;
+          }
+          break;
+        case ActivityType.WorkPackageMemberRemove:
+          if (notification.data.packageId) {
+            if (notification.data.packageId !== this.workPackage.id) { return; }
+            this.workPackage.members = this.workPackage.members.filter(m => m.id !== notification.data.id);
+            return;
+          }
+          if (notification.data.recordId !== this.workPackage.id) { return; }
+          this.workPackage.pending = this.workPackage.pending.filter(m => m.id !== notification.data.id);
+          break;
+
+        case ActivityType.WorkPackageObjectiveAdd:
+          break;
+        case ActivityType.WorkPackageObjectiveEdit:
+          break;
+        case ActivityType.WorkPackageObjectiveRemove:
+          break;
 
         case ActivityType.WorkPackageTaskAdd:
           if (this.workPackage.id === notification.data.packageId) {
             const found = this.workPackage.lists.find(l => l.id === notification.data.listId);
             if (found) {
+              found.tasks = found.tasks || [];
               found.tasks.unshift(notification.data);
             }
           }
@@ -186,31 +237,34 @@ export class WorkPackageComponent implements OnInit {
             }
           }
           break;
-        case ActivityType.WorkPackageTaskLabelRemove: {
-          const task = this.findTask(notification.data.taskId);
-          if (task) {
-            task.members = task.members.filter(m => m.recordId !== notification.data.recordId);
+        case ActivityType.WorkPackageTaskLabelRemove:
+          {
+            const task = this.findTask(notification.data.taskId);
+            if (task) {
+              task.members = task.members.filter(m => m.recordId !== notification.data.recordId);
+            }
           }
-        }
           break;
-        case ActivityType.WorkPackageTaskMemberAdd: {
-          const task = this.findTask(notification.data.taskId);
-          if (!task) {
-            return;
+        case ActivityType.WorkPackageTaskMemberAdd:
+          {
+            const task = this.findTask(notification.data.taskId);
+            if (!task) {
+              return;
+            }
+            const already = task.members.find(i => i.recordId === notification.data.recordId);
+            if (!already) {
+              task.members.push(notification.data);
+            }
           }
-          const already = task.members.find(i => i.recordId === notification.data.recordId);
-          if (!already) {
-            task.members.push(notification.data);
-          }
-        }
           break;
-        case ActivityType.WorkPackageTaskMemberRemove: {
-          const task = this.findTask(notification.data.taskId);
-          if (!task) {
-            return;
+        case ActivityType.WorkPackageTaskMemberRemove:
+          {
+            const task = this.findTask(notification.data.taskId);
+            if (!task) {
+              return;
+            }
+            task.members = task.members.filter(i => i.recordId !== notification.data.recordId);
           }
-          task.members = task.members.filter(i => i.recordId !== notification.data.recordId);
-        }
           break;
         case ActivityType.WorkPackageTaskRemove:
         case ActivityType.WorkPackageTaskArchive:

@@ -66,7 +66,7 @@
         </div>
       </div>
       <div class="objectives-container">
-        <button class="info" disabled
+        <button class="info" [disabled]="(permission !== AccessType.Admin && permission !== AccessType.Owner)"
              [popper]="popperObjectives"
              [popperDisabled]="waiting"
              [popperTrigger]="'click'"
@@ -121,7 +121,7 @@
           <i class="icon-menu"></i>
         </div>
         &nbsp;
-        <div (click)="prepareInvite()" class="add">
+        <div *ngIf="(permission === AccessType.Admin || permission === AccessType.Owner)" (click)="prepareInvite()" class="add">
           <i class="icon-plus2"></i>
         </div>
       </div>
@@ -278,7 +278,8 @@
         <div (click)="$event.preventDefault();$event.stopPropagation()">
           <app-access-list *ngIf="member.access !== AccessType.Owner"
                            (accessChange)="changePermission(member, $event)"
-                           [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)" [(access)]="member.access"></app-access-list>
+                           [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
+                           [access]="member.access"></app-access-list>
         </div>
       </div>
       <h4 *ngIf="member.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
@@ -290,7 +291,8 @@
         <app-member-info [email]="member.identifier"></app-member-info>
         <app-access-list *ngIf="member.access !== AccessType.Owner"
                          (accessChange)="changePendingPermission(member, $event)"
-                         [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)" [(access)]="member.access"></app-access-list>
+                         [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
+                         [access]="member.access"></app-access-list>
       </div>
       <h4 *ngIf="member.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
           (click)="removePendingAccess(member, permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h4>

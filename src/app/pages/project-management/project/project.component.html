@@ -1,7 +1,10 @@
 <div class="project-detail" appReloadOnParamsChanged>
   <div class="header">
     <div class="info">
-      <h4>{{ project.title }}</h4>
+      <h4>
+        <i *ngIf="permission === AccessType.Owner || permission === AccessType.Admin" class="icon-pencil"></i>
+        <span>{{ project.title }}</span>
+      </h4>
       <h5>{{ project.description }}</h5>
       <div class="members">
         <div class="member">

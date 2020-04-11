@@ -1,76 +1,80 @@
-<div class="modal-content change-phone-modal">
-  <div class="modal-header">
-    <h4 class="modal-title">
-      {{ 'CHANGE_PHONE' | translate: true }}
-    </h4>
-    <button (click)="onCancel($event)">
-      <i class="icon-cross"></i>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div *ngIf="identityService.profile.phoneNumber" class="form-group current">
-      <label>{{ 'CURRENT_PHONE_NUMBER' | translate }}</label>
-      <span>{{ identityService.profile.phoneNumber }}</span>
+<div class="outer" (click)="close()">
+  <div class="modal-content change-phone-modal"
+       (click)="$event.stopPropagation();">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        {{ 'CHANGE_PHONE' | translate: true }}
+      </h4>
+      <button (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
     </div>
-    <div class="form-group new">
-      <label>{{ 'NEW_PHONE_NUMBER' | translate }}</label>
-      <div class="new-container">
-        <div class="input-container">
-          <app-input
-            [disabled]="sent"
-            [(model)]="newNumber"
-            [ltr]="true"
-            [numeric]="true"
-          ></app-input>
-          <app-validation [model]="[numberError]"></app-validation>
-        </div>
-        <div class="send">
-          <button
-            *ngIf="!sent"
-            [disabled]="sendWaiting"
-            (click)="sendVerificationCode()"
-            mat-stroked-button
-          >
-            <i *ngIf="sendWaiting" class="icon-spin icon-spinner2"></i>
-            {{ 'SEND_VERIFICATION_CODE' | translate }}
-          </button>
-
-          <div *ngIf="sent && remaining" class="count-down">
-            {{ remaining * 1000 | date: 'mm:ss':'UTC' }}
+    <div class="modal-body">
+      <div *ngIf="identityService.profile.phoneNumber" class="form-group current">
+        <label>{{ 'CURRENT_PHONE_NUMBER' | translate }}</label>
+        <span>{{ identityService.profile.phoneNumber }}</span>
+      </div>
+      <div class="form-group new">
+        <label>{{ 'NEW_PHONE_NUMBER' | translate }}</label>
+        <div class="new-container">
+          <div class="input-container">
+            <app-input
+              [disabled]="sent"
+              [(model)]="newNumber"
+              [ltr]="true"
+              [numeric]="true"
+            ></app-input>
+            <app-validation [model]="[numberError]"></app-validation>
           </div>
+          <div class="send">
+            <button
+              *ngIf="!sent"
+              [disabled]="sendWaiting"
+              (click)="sendVerificationCode()"
+              mat-stroked-button
+            >
+              <i *ngIf="sendWaiting" class="icon-spin icon-spinner2"></i>
+              {{ 'SEND_VERIFICATION_CODE' | translate }}
+            </button>
 
-          <a
-            (click)="sendAgain()"
-            *ngIf="sent && !remaining"
-            href="javascript:void(0)"
-          >
-            {{ 'SEND_AGAIN' | translate }}
-          </a>
+            <div *ngIf="sent && remaining" class="count-down">
+              {{ remaining * 1000 | date: 'mm:ss':'UTC' }}
+            </div>
+
+            <a
+              (click)="sendAgain()"
+              *ngIf="sent && !remaining"
+              href="javascript:void(0)"
+            >
+              {{ 'SEND_AGAIN' | translate }}
+            </a>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="sent" class="form-group enter">
+        <label>{{ 'ENTER_VERIFICATION_HERE' | translate }}</label>
+        <div class="verify">
+          <app-phone-verification
+            [(model)]="verificationCode"
+            [disabled]="actionWaiting"
+          ></app-phone-verification>
         </div>
       </div>
     </div>
-    <div *ngIf="sent" class="form-group enter">
-      <label>{{ 'ENTER_VERIFICATION_HERE' | translate }}</label>
-      <div class="verify">
-        <app-phone-verification
-          [(model)]="verificationCode"
-          [disabled]="actionWaiting"
-        ></app-phone-verification>
-      </div>
+    <div class="modal-footer">
+      <button
+        [disabled]="!sent || !ValidationService.validateToken(verificationCode)"
+        (click)="onAction($event)"
+        mat-flat-button
+        color="primary"
+      >
+        <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+        {{ 'CHANGE_PHONE' | translate: true }}</button
+      >&nbsp;
+      <button (click)="onCancel($event)" mat-button>
+        {{ 'CANCEL' | translate: true }}
+      </button>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button
-      [disabled]="!sent || !ValidationService.validateToken(verificationCode)"
-      (click)="onAction($event)"
-      mat-flat-button
-      color="primary"
-    >
-      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-      {{ 'CHANGE_PHONE' | translate: true }}</button
-    >&nbsp;
-    <button (click)="onCancel($event)" mat-button>
-      {{ 'CANCEL' | translate: true }}
-    </button>
   </div>
 </div>
+

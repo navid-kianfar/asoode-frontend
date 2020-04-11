@@ -1,125 +1,129 @@
-<div class="group-detail">
-  <div class="detail-header">
-    <div class="avatar-container">
-      <img *ngIf="group.avatar" src="" alt="" />
-      <div class="wrapper" *ngIf="!group.avatar">
-        <i class="icon-team"></i>
+<div class="outer" (click)="close()">
+  <div class="group-detail"
+       (click)="$event.stopPropagation();">
+    <div class="detail-header">
+      <div class="avatar-container">
+        <img *ngIf="group.avatar" src="" alt="" />
+        <div class="wrapper" *ngIf="!group.avatar">
+          <i class="icon-team"></i>
+        </div>
+      </div>
+      <div class="action-container">
+        <button
+          [disabled]="waiting"
+          *ngIf="canEdit && !editing"
+          (click)="editing = true"
+          color="primary"
+          mat-stroked-button
+        >
+          {{ 'EDIT' | translate }}</button
+        >&nbsp;
+        <button
+          [disabled]="waiting"
+          *ngIf="canEdit && editing"
+          (click)="save()"
+          color="primary"
+          mat-stroked-button
+        >
+          {{ 'SAVE_CHANGES' | translate }}</button
+        >&nbsp;
+        <button [disabled]="waiting" (click)="close()" mat-stroked-button>
+          {{ 'CLOSE' | translate }}
+        </button>
       </div>
     </div>
-    <div class="action-container">
-      <button
-        [disabled]="waiting"
-        *ngIf="canEdit && !editing"
-        (click)="editing = true"
-        color="primary"
-        mat-stroked-button
-      >
-        {{ 'EDIT' | translate }}</button
-      >&nbsp;
-      <button
-        [disabled]="waiting"
-        *ngIf="canEdit && editing"
-        (click)="save()"
-        color="primary"
-        mat-stroked-button
-      >
-        {{ 'SAVE_CHANGES' | translate }}</button
-      >&nbsp;
-      <button [disabled]="waiting" (click)="close()" mat-stroked-button>
-        {{ 'CLOSE' | translate }}
-      </button>
-    </div>
+
+    <ng-container *ngIf="!editing">
+      <h3>{{ group.title }}</h3>
+      <h4>{{ group.description }}</h4>
+      <!--  <div class="type">-->
+      <!--    <i class="icon-team">{{ group.type | enum:'GroupType' }}</i>-->
+      <!--  </div>-->
+      <div class="create-at">
+        <div class="label">{{ 'CREATED_AT' | translate }}</div>
+        &nbsp;
+        <div class="date">{{ group.createdAt | culturedDate }}</div>
+      </div>
+      <hr />
+      <div class="info">
+        <div class="item">
+          <div class="label">{{ 'BRAND_TITLE' | translate }}</div>
+          <div class="value">{{ group.brandTitle }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'SUPERVISOR_NAME' | translate }}</div>
+          <div class="value">{{ group.supervisorName }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'SUPERVISOR_NUMBER' | translate }}</div>
+          <div class="value ltr">{{ group.supervisorNumber }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'RESPONSIBLE_NAME' | translate }}</div>
+          <div class="value">{{ group.responsibleName }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'RESPONSIBLE_NUMBER' | translate }}</div>
+          <div class="value ltr">{{ group.responsibleNumber }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'EMAIL' | translate }}</div>
+          <div class="value ltr">{{ group.email }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'WEBSITE' | translate }}</div>
+          <div class="value ltr">{{ group.website }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'POSTAL_CODE' | translate }}</div>
+          <div class="value">{{ group.postalCode }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'ADDRESS' | translate }}</div>
+          <div class="value address">{{ group.address }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'TEL' | translate }}</div>
+          <div class="value ltr">{{ group.tel }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'FAX' | translate }}</div>
+          <div class="value ltr">{{ group.fax }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'LOCATION' | translate }}</div>
+          <div class="value">{{ group.geoLocation }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'NATIONAL_ID' | translate }}</div>
+          <div class="value ltr">{{ group.nationalId }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'REGISTRATION_ID' | translate }}</div>
+          <div class="value ltr">{{ group.registrationId }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'REGISTRATION_DATE' | translate }}</div>
+          <div class="value">{{ group.registeredAt | culturedDate }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'NO_OF_OFFICES' | translate }}</div>
+          <div class="value">{{ group.offices | number }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'NO_OF_EMPLOYEES' | translate }}</div>
+          <div class="value">{{ group.employees | number }}</div>
+        </div>
+        <div class="item">
+          <div class="label">{{ 'NO_OF_MEMBERS' | translate }}</div>
+          <div class="value">{{ group.members.length | number }}</div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="editing">
+      <app-form [elements]="form"></app-form>
+    </ng-container>
   </div>
-
-  <ng-container *ngIf="!editing">
-    <h3>{{ group.title }}</h3>
-    <h4>{{ group.description }}</h4>
-    <!--  <div class="type">-->
-    <!--    <i class="icon-team">{{ group.type | enum:'GroupType' }}</i>-->
-    <!--  </div>-->
-    <div class="create-at">
-      <div class="label">{{ 'CREATED_AT' | translate }}</div>
-      &nbsp;
-      <div class="date">{{ group.createdAt | culturedDate }}</div>
-    </div>
-    <hr />
-    <div class="info">
-      <div class="item">
-        <div class="label">{{ 'BRAND_TITLE' | translate }}</div>
-        <div class="value">{{ group.brandTitle }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'SUPERVISOR_NAME' | translate }}</div>
-        <div class="value">{{ group.supervisorName }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'SUPERVISOR_NUMBER' | translate }}</div>
-        <div class="value ltr">{{ group.supervisorNumber }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'RESPONSIBLE_NAME' | translate }}</div>
-        <div class="value">{{ group.responsibleName }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'RESPONSIBLE_NUMBER' | translate }}</div>
-        <div class="value ltr">{{ group.responsibleNumber }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'EMAIL' | translate }}</div>
-        <div class="value ltr">{{ group.email }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'WEBSITE' | translate }}</div>
-        <div class="value ltr">{{ group.website }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'POSTAL_CODE' | translate }}</div>
-        <div class="value">{{ group.postalCode }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'ADDRESS' | translate }}</div>
-        <div class="value address">{{ group.address }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'TEL' | translate }}</div>
-        <div class="value ltr">{{ group.tel }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'FAX' | translate }}</div>
-        <div class="value ltr">{{ group.fax }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'LOCATION' | translate }}</div>
-        <div class="value">{{ group.geoLocation }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'NATIONAL_ID' | translate }}</div>
-        <div class="value ltr">{{ group.nationalId }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'REGISTRATION_ID' | translate }}</div>
-        <div class="value ltr">{{ group.registrationId }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'REGISTRATION_DATE' | translate }}</div>
-        <div class="value">{{ group.registeredAt | culturedDate }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'NO_OF_OFFICES' | translate }}</div>
-        <div class="value">{{ group.offices | number }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'NO_OF_EMPLOYEES' | translate }}</div>
-        <div class="value">{{ group.employees | number }}</div>
-      </div>
-      <div class="item">
-        <div class="label">{{ 'NO_OF_MEMBERS' | translate }}</div>
-        <div class="value">{{ group.members.length | number }}</div>
-      </div>
-    </div>
-  </ng-container>
-
-  <ng-container *ngIf="editing">
-    <app-form [elements]="form"></app-form>
-  </ng-container>
 </div>
+

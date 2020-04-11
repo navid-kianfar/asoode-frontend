@@ -15,6 +15,7 @@ export class ProjectComponent implements OnInit {
   mode: ViewMode;
   project: ProjectViewModel;
   permission: AccessType;
+  AccessType = AccessType;
   report: any;
   constructor(
     private readonly activatedRoute: ActivatedRoute,

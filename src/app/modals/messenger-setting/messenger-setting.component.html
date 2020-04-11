@@ -1,75 +1,79 @@
-<div class="modal-content channel-setting-modal">
-  <div class="modal-header">
-    <h4 class="modal-title">
-      {{ 'CHANNEL_SETTING' | translate: true }}
-    </h4>
-    <button (click)="onCancel($event)">
-      <i class="icon-cross"></i>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div class="box">
-      <div class="title">{{ 'RECEIVE_MESSAGE_NOTIFICATIONS' | translate }}</div>
-      <div class="content">
-        <mat-radio-group [(ngModel)]="receiveMode">
-          <mat-radio-button
-            color="primary"
-            [value]="ChannelNotificationReceive.All"
-          >
-            <span class="title">{{ 'NOTIFY_FOR_ALL' | translate }} - </span>
-            <span class="description">{{
-              'NOTIFY_FOR_ALL_DESCRIPTION' | translate
-            }}</span>
-          </mat-radio-button>
-          <mat-radio-button
-            color="primary"
-            [value]="ChannelNotificationReceive.Mine"
-          >
-            <span class="title">{{ 'NOTIFY_FOR_MINE' | translate }} - </span>
-            <span class="description">{{
-              'NOTIFY_FOR_MINE_DESCRIPTION' | translate
-            }}</span>
-            <span class="at-me">@{{ identityService.profile.fullName }}</span>
-          </mat-radio-button>
-          <mat-radio-button
-            color="primary"
-            [value]="ChannelNotificationReceive.None"
-          >
-            <span class="title">{{ 'NOTIFY_FOR_NONE' | translate }} - </span>
-            <span class="description">{{
-              'NOTIFY_FOR_NONE_DESCRIPTION' | translate
-            }}</span>
-          </mat-radio-button>
-        </mat-radio-group>
-      </div>
+<div (click)="close()" class="outer">
+  <div class="modal-content channel-setting-modal"
+       (click)="$event.stopPropagation();">
+    <div class="modal-header">
+      <h4 class="modal-title">
+        {{ 'CHANNEL_SETTING' | translate: true }}
+      </h4>
+      <button (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
     </div>
-    <hr />
-    <div class="box sound">
-      <div class="title">{{ 'NOTIFICATION_SOUND_APPEARANCE' | translate }}</div>
-      <div class="content">
-        <mat-checkbox color="primary" [(ngModel)]="skipMobile">
+    <div class="modal-body">
+      <div class="box">
+        <div class="title">{{ 'RECEIVE_MESSAGE_NOTIFICATIONS' | translate }}</div>
+        <div class="content">
+          <mat-radio-group [(ngModel)]="receiveMode">
+            <mat-radio-button
+              color="primary"
+              [value]="ChannelNotificationReceive.All"
+            >
+              <span class="title">{{ 'NOTIFY_FOR_ALL' | translate }} - </span>
+              <span class="description">{{
+                'NOTIFY_FOR_ALL_DESCRIPTION' | translate
+                }}</span>
+            </mat-radio-button>
+            <mat-radio-button
+              color="primary"
+              [value]="ChannelNotificationReceive.Mine"
+            >
+              <span class="title">{{ 'NOTIFY_FOR_MINE' | translate }} - </span>
+              <span class="description">{{
+                'NOTIFY_FOR_MINE_DESCRIPTION' | translate
+                }}</span>
+              <span class="at-me">@{{ identityService.profile.fullName }}</span>
+            </mat-radio-button>
+            <mat-radio-button
+              color="primary"
+              [value]="ChannelNotificationReceive.None"
+            >
+              <span class="title">{{ 'NOTIFY_FOR_NONE' | translate }} - </span>
+              <span class="description">{{
+                'NOTIFY_FOR_NONE_DESCRIPTION' | translate
+                }}</span>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <hr />
+      <div class="box sound">
+        <div class="title">{{ 'NOTIFICATION_SOUND_APPEARANCE' | translate }}</div>
+        <div class="content">
+          <mat-checkbox color="primary" [(ngModel)]="skipMobile">
           <span class="title">{{
             'SKIP_MOBILE_NOTIFICATION' | translate
-          }}</span>
-        </mat-checkbox>
-        <mat-checkbox color="primary" [(ngModel)]="skipDesktop">
+            }}</span>
+          </mat-checkbox>
+          <mat-checkbox color="primary" [(ngModel)]="skipDesktop">
           <span class="title">{{
             'SKIP_DESKTOP_NOTIFICATION' | translate
-          }}</span>
-        </mat-checkbox>
-        <mat-checkbox color="primary" [(ngModel)]="showSummary">
+            }}</span>
+          </mat-checkbox>
+          <mat-checkbox color="primary" [(ngModel)]="showSummary">
           <span class="title">{{
             'SHOW_NOTIFICATION_SUMMARY' | translate
-          }}</span>
-        </mat-checkbox>
+            }}</span>
+          </mat-checkbox>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal-footer">
-    <button (click)="onAction($event)" mat-flat-button [color]="'primary'">
-      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-      {{ 'SAVE_CHANGES' | translate: true }}</button
-    >&nbsp;
+    <div class="modal-footer">
+      <button (click)="onAction($event)" mat-flat-button [color]="'primary'">
+        <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+        {{ 'SAVE_CHANGES' | translate: true }}</button
+      >&nbsp;
+    </div>
   </div>
 </div>
+
