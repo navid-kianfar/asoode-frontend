@@ -131,7 +131,7 @@ export class ProjectService {
   }
 
   async createSeasonProject(id: string, params: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/projects/${id}/season/add`, params);
+    return await this.httpService.post<boolean>(`/projects/${id}/season/create`, params);
   }
 
   async removeSeason(id: string): Promise<OperationResult<boolean>> {
@@ -142,4 +142,7 @@ export class ProjectService {
     return await this.httpService.post<boolean>(`/projects/season/${id}/edit`, params);
   }
 
+  async edit(id: string, params: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/projects/${id}/edit`, params);
+  }
 }

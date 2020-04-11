@@ -5,6 +5,7 @@ import {
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-project-tree-node',
@@ -27,7 +28,9 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   to?: Date;
   workPackages: WorkPackageViewModel[];
   subscribe: Subscription;
-  constructor() {}
+  constructor(
+    private readonly router: Router,
+  ) {}
 
   ngOnInit() {
     this.from = new Date();
@@ -41,6 +44,9 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
     this.subscribe.unsubscribe();
   }
 
+  openWorkPackage(workPackage: WorkPackageViewModel) {
+    this.router.navigateByUrl('/work-package/' + workPackage.id);
+  }
   createTree() {
     if (this.workPackage) {
       this.subProjects = [];

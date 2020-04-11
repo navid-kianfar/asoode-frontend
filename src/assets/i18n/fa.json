@@ -517,5 +517,7 @@
   "TASK_ATTACHMENTS": "پیوست ها",
   "TASK_NO_LABELS": "برچسبی متصل نیست",
   "TASK_NO_MEMBERS": "عضوی متصل نیست",
-  "TASK_NO_ATTACHMENTS": "پیوستی موجود نیست"
+  "TASK_NO_ATTACHMENTS": "پیوستی موجود نیست",
+  "EDIT_PROJECT": "ویرایش پروژه",
+  "PROJECT_EDITED": "پروژه به روز رسانی شد"
 }

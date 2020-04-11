@@ -126,7 +126,9 @@
     </div>
   </div>
 
-  <div class="box">
+  <div class="box"*ngIf="
+            permission === AccessType.Admin || permission === AccessType.Owner
+          ">
     <div class="header">
       <div class="ico">
         <i class="icon-upload41"></i>
@@ -146,7 +148,9 @@
     </div>
   </div>
 
-  <div class="box">
+  <div class="box"*ngIf="
+            permission === AccessType.Admin || permission === AccessType.Owner
+          ">
     <div class="header">
       <div class="ico">
         <i class="archive icon-archive"></i>

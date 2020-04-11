@@ -23,7 +23,7 @@ export class PushNotificationService {
   handleSocket(notification: any) {
     let find1: any = null;
     let find2: any = null;
-    let find3: any = null;
+    // let find3: any = null;
     console.log(notification);
     const url = (notification.push.url || '').replace('https://panel.asoode.com', '');
     switch (notification.type) {
@@ -99,9 +99,54 @@ export class PushNotificationService {
           this.router.navigateByUrl(url);
         }
         break;
+      case ActivityType.ProjectEdit:
+        find1 = this.projectService.projects.find(p => p.id === notification.data.id);
+        if (find1) {
+          find1.title = notification.data.title;
+          find1.description = notification.data.description;
+        }
+        break;
+
       case ActivityType.ProjectSubAdd:
         find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
         if (find1) { find1.subProjects.push(notification.data); }
+        break;
+      case ActivityType.ProjectSubEdit:
+        find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+        if (find1) {
+          find2 = find1.subProjects.find(s => s.id === notification.data.id);
+          if (find2) {
+            Object.assign(find2, notification.data);
+          }
+        }
+        break;
+      case ActivityType.ProjectSubRemove:
+        find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+        if (find1) {
+          find1.subProjects = find1.subProjects.filter(i => i.id !== notification.data.id);
+        }
+        break;
+
+      case ActivityType.ProjectSeasonAdd:
+        find1 = this.projectService.projects.find(i => i.id === notification.data.projectId);
+        if (find1) {
+          find1.seasons.push(notification.data);
+        }
+        break;
+      case ActivityType.ProjectSeasonEdit:
+        find1 = this.projectService.projects.find(i => i.id === notification.data.projectId);
+        if (find1) {
+          find2 = find1.seasons.find(s => s.id === notification.data.id);
+          if (find2) {
+            Object.assign(find2, notification.data);
+          }
+        }
+        break;
+      case ActivityType.ProjectSeasonRemove:
+        find1 = this.projectService.projects.find(i => i.id === notification.data.projectId);
+        if (find1) {
+          find1.seasons = find1.seasons.filter(s => s.id !== notification.data.id);
+        }
         break;
 
       case ActivityType.WorkPackageMemberAdd:

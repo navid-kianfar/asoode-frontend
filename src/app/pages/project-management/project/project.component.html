@@ -2,7 +2,9 @@
   <div class="header">
     <div class="info">
       <h4>
-        <i *ngIf="permission === AccessType.Owner || permission === AccessType.Admin" class="icon-pencil"></i>
+        <i *ngIf="permission === AccessType.Owner || permission === AccessType.Admin"
+           (click)="prepareEdit()"
+           class="icon-pencil"></i>
         <span>{{ project.title }}</span>
       </h4>
       <h5>{{ project.description }}</h5>

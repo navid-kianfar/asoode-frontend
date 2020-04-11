@@ -17,6 +17,7 @@ import {Socket} from 'ngx-socket-io';
 import {OperationResult} from '../../../library/core/operation-result';
 import {StringHelpers} from '../../../helpers/string.helpers';
 import {TranslateService} from '../../../services/core/translate.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-project-tree',
@@ -31,6 +32,7 @@ export class ProjectTreeComponent implements OnInit {
   reCreate = new EventEmitter<string>();
   constructor(
     private readonly socket: Socket,
+    private readonly router: Router,
     private readonly projectService: ProjectService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
@@ -46,7 +48,10 @@ export class ProjectTreeComponent implements OnInit {
   bind() {
     this.socket.on('push-notification', (notification: any) => {
       switch (notification.type) {
+        case ActivityType.WorkPackageAdd:
+        case ActivityType.ProjectAdd:
         case ActivityType.ProjectSubAdd:
+        case ActivityType.ProjectSubRemove:
           setTimeout(() => {
             if (notification.data.projectId === this.model.id) {
               this.createTree();
@@ -183,5 +188,9 @@ export class ProjectTreeComponent implements OnInit {
         actionColor: 'primary',
       } as PromptModalParameters)
       .subscribe(() => {});
+  }
+
+  openWorkPackage(workPackage: WorkPackageViewModel) {
+    this.router.navigateByUrl('/work-package/' + workPackage.id);
   }
 }
