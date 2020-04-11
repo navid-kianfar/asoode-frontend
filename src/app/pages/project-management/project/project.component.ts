@@ -15,6 +15,7 @@ export class ProjectComponent implements OnInit {
   mode: ViewMode;
   project: ProjectViewModel;
   permission: AccessType;
+  report: any;
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
@@ -23,6 +24,11 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit() {
     this.mode = ViewMode.RoadMap;
+    this.report = {
+      percent: 0,
+      progress: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      total: 0
+    };
     const id = this.activatedRoute.snapshot.params.id;
     this.project = this.projectService.projects.find(g => g.id === id);
     if (!this.project) {

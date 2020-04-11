@@ -170,7 +170,7 @@ export class ProjectTreeComponent implements OnInit {
         ],
         action: async (params, form) => {
           const op = await this.projectService.editSubProject(
-            this.model.id,
+            id,
             params,
           );
           if (op.status !== OperationResultStatus.Success) {

@@ -128,7 +128,7 @@ export class ProjectSeasonComponent implements OnInit {
         ],
         action: async (params, form) => {
           const op = await this.projectService.editSeason(
-            this.model.id,
+            season.id,
             params,
           );
           if (op.status !== OperationResultStatus.Success) {

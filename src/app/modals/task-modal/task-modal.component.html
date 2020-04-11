@@ -147,7 +147,12 @@
                       <li (click)="toggleLabel(label)" *ngFor="let label of workPackage.labels">
                         <div class="label" [class.selected]="selectedLabels.indexOf(label.id) !== -1">
                           <div class="title">
-                            <span [style.background]="label.color">{{label.title}}</span>
+                            <span [style.background]="label.color">
+                              {{label.title}}
+                              <ng-container *ngIf="!label.title">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              </ng-container>
+                            </span>
                           </div>
                           <i class="icon-pencil"></i>
                           <i class="icon-delete"></i>

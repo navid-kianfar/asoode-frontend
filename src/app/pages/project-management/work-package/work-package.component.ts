@@ -12,7 +12,7 @@ import {PopperContent} from 'ngx-popper';
 import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
 import {ModalService} from '../../../services/core/modal.service';
 import {CultureService} from '../../../services/core/culture.service';
-import {AccessType, WorkPackageObjectiveType} from '../../../library/app/enums';
+import {AccessType, ActivityType, WorkPackageObjectiveType} from '../../../library/app/enums';
 import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
 import { FormService } from 'src/app/services/core/form.service';
 import {StringHelpers} from '../../../helpers/string.helpers';
@@ -20,6 +20,8 @@ import {TranslateService} from '../../../services/core/translate.service';
 import {OperationResult} from '../../../library/core/operation-result';
 import {GroupService} from '../../../services/groups/group.service';
 import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
+import {Socket} from 'ngx-socket-io';
+import {moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-work-package',
@@ -44,6 +46,7 @@ export class WorkPackageComponent implements OnInit {
   AccessType = AccessType;
   constructor(
     readonly cultureService: CultureService,
+    private readonly socket: Socket,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
     private readonly groupService: GroupService,
@@ -83,8 +86,52 @@ export class WorkPackageComponent implements OnInit {
     }
     this.permission = this.projectService.getWorkPackagePermission(this.project, this.workPackage);
     this.fetch();
+    this.bind();
   }
 
+  bind() {
+    this.socket.on('push-notification', (notification: any) => {
+      switch (notification.type) {
+
+        case ActivityType.WorkPackageListAdd:
+          if (this.workPackage.id === notification.data.packageId) {
+            this.workPackage.lists.push(notification.data);
+          }
+          break;
+        case ActivityType.WorkPackageListEdit:
+          if (this.workPackage.id === notification.data.packageId) {
+            const found = this.workPackage.lists.find(l => l.id === notification.data.id);
+            Object.assign(found, notification.data);
+          }
+          break;
+        case ActivityType.WorkPackageListOrder:
+          if (this.workPackage.id === notification.data.packageId) {
+            const found = this.workPackage.lists.find(l => l.id === notification.data.id);
+            if (found.order === notification.data.order) { return; }
+            moveItemInArray(this.workPackage.lists, found.order - 1, notification.data.order - 1);
+            let index = 1;
+            this.workPackage.lists.forEach((l) => { l.order = index++; });
+          }
+          break;
+
+        case ActivityType.WorkPackageTaskAdd:
+          if (this.workPackage.id === notification.data.packageId) {
+            const found = this.workPackage.lists.find(l => l.id === notification.data.listId);
+            found.tasks.unshift(notification.data);
+          }
+          break;
+        case ActivityType.WorkPackageTaskEdit:
+          if (this.workPackage.id === notification.data.packageId) {
+            const list = this.workPackage.lists.find(l => l.id === notification.data.listId);
+            const task = list.tasks.find(t => t.id === notification.data.id);
+            delete notification.data.members;
+            delete notification.data.labels;
+            Object.assign(task, notification.data);
+          }
+          break;
+      }
+    });
+  }
   async fetch() {
     this.waiting = true;
     const op = await this.workPackageService.fetch(this.workPackage.id, this.filters);

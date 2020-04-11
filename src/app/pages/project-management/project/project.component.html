@@ -7,7 +7,7 @@
         <div class="member">
           <i class="icon-users"></i>&nbsp;
           <span>
-            {{ (project.members | search: ['isGroup']:false).length }}&nbsp;
+            {{ (project.members | search: ['isGroup']:false).length + project.pending.length }}&nbsp;
             {{ 'INDIVIDUAL_USERS' | translate }}
           </span>
         </div>
@@ -23,28 +23,9 @@
       <h5>{{ 'PROJECT_PROGRESS' | translate }}</h5>
 
       <div class="report">
-        <div class="change"><i class="up icon-arrow-up2"></i>&nbsp;10%</div>
+        <div class="change"><i class="up icon-arrow-up2"></i>&nbsp;{{report.percent}}%</div>
         <ngx-trend
-          [data]="[
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11,
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11,
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11
-          ]"
+          [data]="report.progress"
           stroke="#558c97"
           strokeWidth="2"
           width="170"
@@ -53,39 +34,12 @@
           autoDrawDuration="1500"
           autoDrawEasing="ease-in"
         ></ngx-trend>
-        <div class="total">600</div>
+        <div class="total">{{report.total}}</div>
       </div>
       <div class="report">
-        <div class="change"><i class="down icon-arrow-down2"></i>&nbsp;70%</div>
+        <div class="change"><i class="down icon-arrow-down2"></i>&nbsp;{{report.percent}}%</div>
         <ngx-trend
-          [data]="[
-            0,
-            10,
-            3.6,
-            11,
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11,
-            0,
-            10,
-            3.6,
-            11,
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11,
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11
-          ]"
+          [data]="report.progress"
           stroke="#ee5a60"
           strokeWidth="2"
           width="170"
@@ -94,35 +48,12 @@
           autoDrawDuration="1500"
           autoDrawEasing="ease-in"
         ></ngx-trend>
-        <div class="total">150</div>
+        <div class="total">{{report.total}}</div>
       </div>
       <div class="report">
-        <div class="change"><i class="up icon-arrow-up2"></i>&nbsp;30%</div>
+        <div class="change"><i class="up icon-arrow-up2"></i>&nbsp;{{report.percent}}%</div>
         <ngx-trend
-          [data]="[
-            3.6,
-            11,
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11,
-            3.6,
-            11,
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11,
-            0,
-            10,
-            5,
-            22,
-            3.6,
-            11
-          ]"
+          [data]="report.progress"
           stroke="#7f33ef"
           strokeWidth="2"
           width="170"
@@ -131,7 +62,7 @@
           autoDrawDuration="1500"
           autoDrawEasing="ease-in"
         ></ngx-trend>
-        <div class="total">400</div>
+        <div class="total">{{report.total}}</div>
       </div>
     </div>
   </div>

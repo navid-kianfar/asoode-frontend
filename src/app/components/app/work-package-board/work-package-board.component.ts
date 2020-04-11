@@ -157,7 +157,8 @@ export class WorkPackageBoardComponent implements OnInit {
       event.previousIndex,
       event.currentIndex,
     );
-    this.workPackageService.repositionList(id, { order: event.currentIndex + 1 });
+    event.item.data.order = event.currentIndex + 1;
+    this.workPackageService.repositionList(id, { order: event.item.data.order });
   }
 
   openTask(task: WorkPackageTaskViewModel) {

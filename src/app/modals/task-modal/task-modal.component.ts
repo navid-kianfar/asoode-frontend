@@ -11,8 +11,10 @@ import {TaskService} from '../../services/projects/task.service';
 import {OperationResultStatus} from '../../library/core/enums';
 import {environment} from '../../../environments/environment';
 import {ProjectService} from '../../services/projects/project.service';
-import {AccessType, WorkPackageTaskState} from '../../library/app/enums';
+import {AccessType, ActivityType, WorkPackageTaskState} from '../../library/app/enums';
 import {IdentityService} from '../../services/auth/identity.service';
+import {moveItemInArray} from '@angular/cdk/drag-drop';
+import {Socket} from 'ngx-socket-io';
 
 @Component({
   selector: 'app-task-modal',
@@ -45,6 +47,7 @@ export class TaskModalComponent
   selectedLabels: string[];
 
   constructor(
+    private readonly socket: Socket,
     private readonly taskService: TaskService,
     private readonly projectService: ProjectService,
     private readonly identityService: IdentityService,
@@ -53,8 +56,22 @@ export class TaskModalComponent
   ngOnInit() {
     this.allStates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.mode = ViewMode.Detail;
+    this.bind();
     if (this.model) { return; }
     this.fetch();
+  }
+  bind() {
+    this.socket.on('push-notification', (notification: any) => {
+      switch (notification.type) {
+        case ActivityType.WorkPackageTaskEdit:
+          if (this.id === notification.data.id) {
+            delete notification.data.members;
+            delete notification.data.labels;
+            Object.assign(this.model, notification.data);
+          }
+          break;
+      }
+    });
   }
 
   async fetch() {

@@ -23,6 +23,7 @@ export class PushNotificationService {
     let find1: any = null;
     let find2: any = null;
     // let find3: any = null;
+    console.log(notification);
     const url = (notification.push.url || '').replace('https://panel.asoode.com', '');
     switch (notification.type) {
       case ActivityType.AccountEdit:
