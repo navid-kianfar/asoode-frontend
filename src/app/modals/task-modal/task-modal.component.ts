@@ -43,8 +43,6 @@ export class TaskModalComponent
   changingState: boolean;
   project: ProjectViewModel;
   workPackage: WorkPackageViewModel;
-  selectedMembers: string[];
-  selectedLabels: string[];
 
   constructor(
     private readonly socket: Socket,
@@ -68,6 +66,33 @@ export class TaskModalComponent
             delete notification.data.members;
             delete notification.data.labels;
             Object.assign(this.model, notification.data);
+          }
+          break;
+        case ActivityType.WorkPackageTaskComment:
+          if (this.id === notification.data.taskId) {
+            this.model.comments.unshift(notification.data);
+          }
+          break;
+        case ActivityType.WorkPackageTaskLabelAdd:
+          if (this.id === notification.data.taskId) {
+            const already = this.model.labels.find(i => i.id === notification.data.labelId);
+            if (!already) { this.model.labels.push(notification.data); }
+          }
+          break;
+        case ActivityType.WorkPackageTaskLabelRemove:
+          if (this.id === notification.data.taskId) {
+            this.model.labels = this.model.labels.filter(i => i.labelId !== notification.data.labelId);
+          }
+          break;
+        case ActivityType.WorkPackageTaskMemberAdd:
+          if (this.id === notification.data.taskId) {
+            const already = this.model.members.find(i => i.recordId === notification.data.recordId);
+            if (!already) { this.model.members.push(notification.data); }
+          }
+          break;
+        case ActivityType.WorkPackageTaskMemberRemove:
+          if (this.id === notification.data.taskId) {
+            this.model.members = this.model.members.filter(i => i.recordId !== notification.data.recordId);
           }
           break;
       }
@@ -115,8 +140,6 @@ export class TaskModalComponent
     this.model.comments.forEach(c => {
       c.member = this.project.members.find(m => m.recordId === c.userId).member;
     });
-    this.selectedMembers = this.model.members.map(m => m.recordId);
-    this.selectedLabels = this.model.labels.map(m => m.labelId);
   }
 
   prepareChangeTitle() {
@@ -179,27 +202,31 @@ export class TaskModalComponent
 
   toggleMember(member: ProjectMemberViewModel) {
     if (member.waiting) {return;  }
-    if (this.selectedMembers.indexOf(member.recordId) === -1) {
-      this.selectedMembers.push(member.recordId);
+    if (this.model.members.findIndex(i => i.recordId === member.recordId) === -1) {
       this.taskService.addMember(this.id, {
         isGroup: member.isGroup,
         recordId: member.recordId
       });
     } else {
-      this.selectedMembers = this.selectedMembers.filter(i => i !== member.recordId);
-      this.taskService.removeMember(member.id);
+      this.taskService.removeMember(this.id, member.recordId);
     }
   }
 
   toggleLabel(label: WorkPackageLabelViewModel) {
     if (label.waiting) {return;  }
-    if (this.selectedLabels.indexOf(label.id) === -1) {
-      this.selectedLabels.push(label.id);
+    if (this.model.labels.findIndex(i => i.labelId === label.id) === -1) {
       this.taskService.addLabel(this.id, label.id);
     } else {
-      this.selectedLabels = this.selectedLabels.filter(i => i !== label.id);
-      this.taskService.removeLabel(label.id);
+      this.taskService.removeLabel(this.id, label.id);
     }
+  }
+
+  isMemberSelected(member: ProjectMemberViewModel): boolean {
+    return this.model.members.findIndex(m => m.recordId === member.recordId) !== -1;
+  }
+
+  isLabelSelected(label: WorkPackageLabelViewModel) {
+    return this.model.labels.findIndex(m => m.labelId === label.id) !== -1;
   }
 }
 export enum ViewMode {

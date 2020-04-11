@@ -137,6 +137,7 @@ export class WorkPackageBoardComponent implements OnInit {
       );
       this.taskService.reposition(id, { order: event.currentIndex + 1 });
     } else {
+      event.item.data.listId = listId;
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

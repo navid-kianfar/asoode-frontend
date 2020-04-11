@@ -1,27 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
-  ProjectViewModel, WorkPackageMemberViewModel, WorkPackageObjectiveViewModel,
+  ProjectViewModel, WorkPackageMemberViewModel, WorkPackageObjectiveViewModel, WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import { ProjectService } from '../../../services/projects/project.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { WorkPackageService } from '../../../services/projects/work-package.service';
-import { OperationResultStatus } from '../../../library/core/enums';
+import {ProjectService} from '../../../services/projects/project.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {WorkPackageService} from '../../../services/projects/work-package.service';
+import {OperationResultStatus} from '../../../library/core/enums';
 import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
 import {PopperContent} from 'ngx-popper';
 import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
 import {ModalService} from '../../../services/core/modal.service';
 import {CultureService} from '../../../services/core/culture.service';
 import {AccessType, ActivityType, WorkPackageObjectiveType} from '../../../library/app/enums';
-import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
-import { FormService } from 'src/app/services/core/form.service';
+import {PromptComponent} from 'src/app/modals/prompt/prompt.component';
+import {FormService} from 'src/app/services/core/form.service';
 import {StringHelpers} from '../../../helpers/string.helpers';
 import {TranslateService} from '../../../services/core/translate.service';
 import {OperationResult} from '../../../library/core/operation-result';
 import {GroupService} from '../../../services/groups/group.service';
 import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
 import {Socket} from 'ngx-socket-io';
-import {moveItemInArray} from '@angular/cdk/drag-drop';
+import {moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-work-package',
@@ -44,6 +44,7 @@ export class WorkPackageComponent implements OnInit {
   receiveNotification: number;
   permission: AccessType;
   AccessType = AccessType;
+
   constructor(
     readonly cultureService: CultureService,
     private readonly socket: Socket,
@@ -55,7 +56,8 @@ export class WorkPackageComponent implements OnInit {
     private readonly translateService: TranslateService,
     private readonly projectService: ProjectService,
     private readonly workPackageService: WorkPackageService,
-  ) {}
+  ) {
+  }
 
   ngOnInit() {
     this.receiveNotification = 1;
@@ -101,37 +103,132 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageListEdit:
           if (this.workPackage.id === notification.data.packageId) {
             const found = this.workPackage.lists.find(l => l.id === notification.data.id);
-            Object.assign(found, notification.data);
+            if (found) {
+              Object.assign(found, notification.data);
+            }
           }
           break;
         case ActivityType.WorkPackageListOrder:
           if (this.workPackage.id === notification.data.packageId) {
             const found = this.workPackage.lists.find(l => l.id === notification.data.id);
-            if (found.order === notification.data.order) { return; }
+            if (!found || found.order === notification.data.order) {
+              return;
+            }
             moveItemInArray(this.workPackage.lists, found.order - 1, notification.data.order - 1);
             let index = 1;
-            this.workPackage.lists.forEach((l) => { l.order = index++; });
+            this.workPackage.lists.forEach((l) => {
+              l.order = index++;
+            });
           }
           break;
 
         case ActivityType.WorkPackageTaskAdd:
           if (this.workPackage.id === notification.data.packageId) {
             const found = this.workPackage.lists.find(l => l.id === notification.data.listId);
-            found.tasks.unshift(notification.data);
+            if (found) {
+              found.tasks.unshift(notification.data);
+            }
           }
           break;
         case ActivityType.WorkPackageTaskEdit:
           if (this.workPackage.id === notification.data.packageId) {
-            const list = this.workPackage.lists.find(l => l.id === notification.data.listId);
-            const task = list.tasks.find(t => t.id === notification.data.id);
-            delete notification.data.members;
-            delete notification.data.labels;
-            Object.assign(task, notification.data);
+            const task = this.findTask(notification.data.id);
+            if (task) {
+              delete notification.data.members;
+              delete notification.data.labels;
+              Object.assign(task, notification.data);
+              task.hasDescription = (task.description && task.description.length > 0);
+            }
           }
+          break;
+        case ActivityType.WorkPackageTaskComment:
+          if (this.workPackage.id === notification.data.packageId) {
+            const task = this.findTask(notification.data.taskId);
+            if (task) {
+              task.commentCount++;
+            }
+          }
+          break;
+        case ActivityType.WorkPackageTaskMove:
+          if (this.workPackage.id === notification.data.packageId) {
+            const found = this.findTask(notification.data.id);
+            if (!found || found.listId === notification.data.listId) {
+              return;
+            }
+            const list = this.workPackage.lists.find(l => l.id === found.listId);
+            const destination = this.workPackage.lists.find(l => l.id === notification.data.listId);
+            transferArrayItem(
+              list.tasks,
+              destination.tasks,
+              list.tasks.indexOf(found),
+              notification.data.order - 1
+            );
+          }
+          break;
+        case ActivityType.WorkPackageTaskReposition:
+          if (this.workPackage.id === notification.data.packageId) {
+            const found = this.findTask(notification.data.id);
+            if (!found || found.order === notification.data.order) {
+              return;
+            }
+            const list = this.workPackage.lists.find(l => l.id === found.listId);
+            moveItemInArray(list.tasks, list.tasks.indexOf(found), notification.data.order - 1);
+          }
+          break;
+        case ActivityType.WorkPackageTaskLabelAdd:
+          if (this.workPackage.id === notification.data.packageId) {
+            const task = this.findTask(notification.data.taskId);
+            if (task) {
+              const already = task.labels.find(l => l.labelId === notification.data.labelId);
+              if (!already) {
+                task.labels.push(notification.data);
+              }
+            }
+          }
+          break;
+        case ActivityType.WorkPackageTaskLabelRemove: {
+          const task = this.findTask(notification.data.taskId);
+          if (task) {
+            task.members = task.members.filter(m => m.recordId !== notification.data.recordId);
+          }
+        }
+          break;
+        case ActivityType.WorkPackageTaskMemberAdd: {
+          const task = this.findTask(notification.data.taskId);
+          if (!task) {
+            return;
+          }
+          const already = task.members.find(i => i.recordId === notification.data.recordId);
+          if (!already) {
+            task.members.push(notification.data);
+          }
+        }
+          break;
+        case ActivityType.WorkPackageTaskMemberRemove: {
+          const task = this.findTask(notification.data.taskId);
+          if (!task) {
+            return;
+          }
+          task.members = task.members.filter(i => i.recordId !== notification.data.recordId);
+        }
+          break;
+        case ActivityType.WorkPackageTaskRemove:
+        case ActivityType.WorkPackageTaskArchive:
           break;
       }
     });
   }
+
+  findTask(id: string): WorkPackageTaskViewModel {
+    for (const list of this.workPackage.lists) {
+      for (const task of list.tasks) {
+        if (task.id === id) {
+          return task;
+        }
+      }
+    }
+  }
+
   async fetch() {
     this.waiting = true;
     const op = await this.workPackageService.fetch(this.workPackage.id, this.filters);
@@ -161,7 +258,9 @@ export class WorkPackageComponent implements OnInit {
   }
 
   prepareInvite() {
-    if (this.waiting) { return; }
+    if (this.waiting) {
+      return;
+    }
     this.modalService.show(InviteModalComponent, {
       noProject: true,
       existing: this.workPackage.members,
@@ -171,7 +270,8 @@ export class WorkPackageComponent implements OnInit {
       handler: async access => {
         return this.workPackageService.addWorkPackageAccess(this.workPackage.id, access);
       },
-    }).subscribe(() => {});
+    }).subscribe(() => {
+    });
   }
 
   removeAccess(member: WorkPackageMemberViewModel, permission: AccessType, pending: PendingInvitationViewModel = null) {
@@ -215,24 +315,24 @@ export class WorkPackageComponent implements OnInit {
           {
             elements: [
               this.formService.createInput({
-                config: { field: 'title' },
+                config: {field: 'title'},
                 params: {
                   model: '',
                   placeHolder: 'TITLE',
                 },
                 validation: {
-                  required: { value: true, message: 'TITLE_REQUIRED' },
+                  required: {value: true, message: 'TITLE_REQUIRED'},
                 },
               }),
               this.formService.createInput({
-                config: { field: 'description' },
+                config: {field: 'description'},
                 params: {
                   model: '',
                   placeHolder: 'DESCRIPTION',
                 },
               }),
               this.formService.createDropDown({
-                config: { field: 'type' },
+                config: {field: 'type'},
                 params: {
                   items: [],
                   model: WorkPackageObjectiveType.MustHave,
@@ -248,7 +348,8 @@ export class WorkPackageComponent implements OnInit {
         actionColor: 'primary',
         title: 'CREATE_OBJECTIVE',
       })
-      .subscribe(() => {});
+      .subscribe(() => {
+      });
   }
 
   editObjective(obj: WorkPackageObjectiveViewModel) {
@@ -258,24 +359,24 @@ export class WorkPackageComponent implements OnInit {
           {
             elements: [
               this.formService.createInput({
-                config: { field: 'title' },
+                config: {field: 'title'},
                 params: {
                   model: obj.title,
                   placeHolder: 'TITLE',
                 },
                 validation: {
-                  required: { value: true, message: 'TITLE_REQUIRED' },
+                  required: {value: true, message: 'TITLE_REQUIRED'},
                 },
               }),
               this.formService.createInput({
-                config: { field: 'description' },
+                config: {field: 'description'},
                 params: {
                   model: obj.description,
                   placeHolder: 'DESCRIPTION',
                 },
               }),
               this.formService.createDropDown({
-                config: { field: 'type' },
+                config: {field: 'type'},
                 params: {
                   items: [],
                   model: obj.type,
@@ -291,7 +392,8 @@ export class WorkPackageComponent implements OnInit {
         actionColor: 'primary',
         title: 'EDIT_OBJECTIVE',
       })
-      .subscribe(() => {});
+      .subscribe(() => {
+      });
   }
 
   removeObjective(obj: WorkPackageObjectiveViewModel) {
@@ -309,13 +411,14 @@ export class WorkPackageComponent implements OnInit {
       action: async () => {
         return await this.workPackageService.deleteObjective(obj.id);
       },
-    }).subscribe((confirmed) => { });
+    }).subscribe((confirmed) => {
+    });
   }
 
   async changePermission(member: WorkPackageMemberViewModel, access: AccessType) {
     member.access = access;
     member.waiting = true;
-    const op = await this.workPackageService.changeAccess(member.id, { access });
+    const op = await this.workPackageService.changeAccess(member.id, {access});
     member.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -326,7 +429,7 @@ export class WorkPackageComponent implements OnInit {
   async changePendingPermission(member: PendingInvitationViewModel, access: AccessType) {
     member.access = access;
     member.waiting = true;
-    const op = await this.workPackageService.changePendingAccess(member.id, { access });
+    const op = await this.workPackageService.changePendingAccess(member.id, {access});
     member.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -363,7 +466,9 @@ export class WorkPackageComponent implements OnInit {
   }
 
   settingMenuToggle() {
-    if (this.waiting) { return; }
+    if (this.waiting) {
+      return;
+    }
     // this.toggleSetting = !this.toggleSetting;
   }
 
@@ -371,6 +476,7 @@ export class WorkPackageComponent implements OnInit {
     // this.mode = mode;
   }
 }
+
 export enum ViewMode {
   Board = 1,
   List = 2,

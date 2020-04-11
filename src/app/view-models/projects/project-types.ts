@@ -187,7 +187,7 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   title: string;
   description: string;
   geoLocation: string;
-  order: string;
+  order: number;
   restricted: boolean;
   votePaused: boolean;
   votePrivate: boolean;

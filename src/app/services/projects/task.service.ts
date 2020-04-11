@@ -45,15 +45,15 @@ export class TaskService {
     return await this.httpService.post<boolean>(`/tasks/${taskId}/member/add`, model);
   }
 
-  async removeMember(id: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/tasks/member/${id}/remove`);
+  async removeMember(taskId: string, id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/member/${id}/remove`);
   }
 
   async addLabel(taskId: string, labelId: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/tasks/${taskId}/label/add/${labelId}`);
   }
 
-  async removeLabel(labelId: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/tasks/label/remove/${labelId}`);
+  async removeLabel(taskId: string, labelId: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/label/${labelId}/remove`);
   }
 }

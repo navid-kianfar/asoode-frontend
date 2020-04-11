@@ -17,10 +17,11 @@
     </div>
   </div>
   <div class="labels">
-    <div class="label" [style.backgroundColor]="label.color"
-         *ngFor="let label of allLabels">
-      {{label.title}}
-    </div>
+    <ng-container *ngFor="let label of workPackage.labels">
+      <div class="label" *ngIf="isLabelSelected(label)" [style.backgroundColor]="label.color">
+        {{label.title}}
+      </div>
+    </ng-container>
   </div>
   <div class="title">
     {{model.title}}
@@ -55,7 +56,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="model.commentCount || model.attachmentCount || model.attachmentCount || allMembers.length" class="detail">
+  <div *ngIf="model.commentCount || model.hasDescription || model.attachmentCount || model.attachmentCount || model.members.length" class="detail">
     <div class="box box-1">
       <div *ngIf="model.hasDescription" class="inf">
         <i class="icon-paragraph-right3"></i>
@@ -70,13 +71,12 @@
       </div>
     </div>
     <div class="box box-2">
-      <ng-container *ngFor="let member of project.members">
-        <app-member-info [model]="member.member" [small]="true"
-                         *ngIf="!member.isGroup && allMembers.indexOf(member.recordId) !== -1"></app-member-info>
+      <ng-container *ngFor="let member of model.members">
+        <app-member-info [id]="member.recordId" [small]="true"
+                         *ngIf="!member.isGroup"></app-member-info>
         <app-group-info [id]="member.recordId" [small]="true"
-                        *ngIf="member.isGroup && allMembers.indexOf(member.recordId) !== -1"></app-group-info>
+                        *ngIf="member.isGroup"></app-group-info>
       </ng-container>
-
     </div>
   </div>
 </div>

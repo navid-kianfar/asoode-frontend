@@ -82,7 +82,7 @@
         <ng-container *ngFor="let member of workPackage.members | slice: 0:3">
           <app-member-info [matMenuTriggerFor]="currentMemberMenu"
             *ngIf="!member.isGroup"
-            [model]="findMember(member.recordId)"
+            [id]="member.recordId"
             small="true"
           ></app-member-info>
           <app-group-info [matMenuTriggerFor]="currentMemberMenu"
@@ -95,7 +95,7 @@
               <div class="wrapper">
                 <app-member-info
                   *ngIf="!member.isGroup"
-                  [model]="findMember(member.recordId)"
+                  [id]="member.recordId"
                 ></app-member-info>
                 <app-group-info
                   *ngIf="member.isGroup"
@@ -269,7 +269,7 @@
       <div class="wrapper">
         <app-member-info
           *ngIf="!member.isGroup"
-          [model]="findMember(member.recordId)"
+          [id]="member.recordId"
         ></app-member-info>
         <app-group-info
           *ngIf="member.isGroup"

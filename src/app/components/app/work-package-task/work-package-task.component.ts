@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {
-  ProjectViewModel,
+  ProjectViewModel, WorkPackageLabelViewModel,
   WorkPackageListViewModel, WorkPackageMemberViewModel,
   WorkPackageTaskLabelViewModel,
   WorkPackageTaskViewModel,
@@ -22,30 +22,16 @@ export class WorkPackageTaskComponent implements OnInit {
   @Input() list: WorkPackageListViewModel;
 
   allWatching: string[];
-  allLabels: WorkPackageTaskLabelViewModel[];
   WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
-  allMembers: string[];
   constructor(private readonly identityService: IdentityService) { }
 
   ngOnInit() {
     this.allWatching = this.model.members
       .filter(m => m.recordId === this.identityService.identity.userId && m.watching)
       .map(m => m.taskId);
-    this.allLabels = this.model.labels
-      .filter(m => m.taskId === this.model.id)
-      .map(m => {
-        const color = this.workPackage.labels.find(l => l.id === m.labelId);
-        return {
-          labelId: m.labelId,
-          id: m.id,
-          taskId: m.taskId,
-          packageId: m.packageId,
-          color: color.color,
-          title: color.title,
-          dark: color.darkColor
-        } as WorkPackageTaskLabelViewModel;
-      });
-    this.allMembers = this.model.members.map(m => m.recordId);
   }
 
+  isLabelSelected(label: WorkPackageLabelViewModel): boolean {
+    return this.model.labels.findIndex(i => i.labelId === label.id) !== -1;
+  }
 }
