@@ -164,18 +164,24 @@ export class TaskModalComponent
     if (member.waiting) {return;  }
     if (this.selectedMembers.indexOf(member.recordId) === -1) {
       this.selectedMembers.push(member.recordId);
+      this.taskService.addMember(this.id, {
+        isGroup: member.isGroup,
+        recordId: member.recordId
+      });
     } else {
       this.selectedMembers = this.selectedMembers.filter(i => i !== member.recordId);
+      this.taskService.removeMember(member.id);
     }
-
   }
 
   toggleLabel(label: WorkPackageLabelViewModel) {
     if (label.waiting) {return;  }
     if (this.selectedLabels.indexOf(label.id) === -1) {
       this.selectedLabels.push(label.id);
+      this.taskService.addLabel(this.id, label.id);
     } else {
       this.selectedLabels = this.selectedLabels.filter(i => i !== label.id);
+      this.taskService.removeLabel(label.id);
     }
   }
 }

@@ -40,4 +40,20 @@ export class TaskService {
   async changeState(id: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/tasks/${id}/change-state`, model);
   }
+
+  async addMember(taskId: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/member/add`, model);
+  }
+
+  async removeMember(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/member/${id}/remove`);
+  }
+
+  async addLabel(taskId: string, labelId: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/label/add/${labelId}`);
+  }
+
+  async removeLabel(labelId: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/label/remove/${labelId}`);
+  }
 }
