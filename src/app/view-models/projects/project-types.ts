@@ -199,9 +199,10 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   members: WorkPackageTaskMemberViewModel[];
   labels: WorkPackageTaskLabelViewModel[];
 }
-export interface WorkPackageTaskMemberViewModel extends BaseViewModel{
+export interface WorkPackageTaskMemberViewModel extends BaseViewModel {
   taskId: string;
-  userId: string;
+  recordId: string;
+  isGroup: boolean;
   packageId: string;
   lastView?: Date;
   watching?: boolean;

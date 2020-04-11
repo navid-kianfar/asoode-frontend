@@ -29,7 +29,7 @@ export class WorkPackageTaskComponent implements OnInit {
 
   ngOnInit() {
     this.allWatching = this.model.members
-      .filter(m => m.userId === this.identityService.identity.userId && m.watching)
+      .filter(m => m.recordId === this.identityService.identity.userId && m.watching)
       .map(m => m.taskId);
     this.allLabels = this.model.labels
       .filter(m => m.taskId === this.model.id)
@@ -47,7 +47,7 @@ export class WorkPackageTaskComponent implements OnInit {
       });
     this.allMembers = this.model.members
       .map(m => {
-        const memeber = this.project.members.find(l => l.recordId === m.userId);
+        const memeber = this.project.members.find(l => l.recordId === m.recordId);
         if (memeber) { return memeber.member; }
         return undefined;
       })

@@ -98,8 +98,8 @@ export class TaskModalComponent
     this.model.comments.forEach(c => {
       c.member = this.project.members.find(m => m.recordId === c.userId).member;
     });
-    this.selectedMembers = this.model.members.map(m => m.userId);
-    this.selectedLabels = this.model.labels.map(m => m.id);
+    this.selectedMembers = this.model.members.map(m => m.recordId);
+    this.selectedLabels = this.model.labels.map(m => m.labelId);
   }
 
   prepareChangeTitle() {
