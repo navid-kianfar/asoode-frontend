@@ -24,7 +24,7 @@ export class WorkPackageTaskComponent implements OnInit {
   allWatching: string[];
   allLabels: WorkPackageTaskLabelViewModel[];
   WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
-  allMembers: MemberInfoViewModel[];
+  allMembers: string[];
   constructor(private readonly identityService: IdentityService) { }
 
   ngOnInit() {
@@ -45,13 +45,7 @@ export class WorkPackageTaskComponent implements OnInit {
           dark: color.darkColor
         } as WorkPackageTaskLabelViewModel;
       });
-    this.allMembers = this.model.members
-      .map(m => {
-        const memeber = this.project.members.find(l => l.recordId === m.recordId);
-        if (memeber) { return memeber.member; }
-        return undefined;
-      })
-      .filter(i => i !== undefined);
+    this.allMembers = this.model.members.map(m => m.recordId);
   }
 
 }

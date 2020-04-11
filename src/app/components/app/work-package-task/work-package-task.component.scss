@@ -141,7 +141,8 @@
       }
     }
 
-    ::ng-deep .member-info {
+    ::ng-deep .member-info,
+    ::ng-deep .group-info, {
       width: 25px;
       height: 25px;
 

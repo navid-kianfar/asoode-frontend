@@ -70,7 +70,13 @@
       </div>
     </div>
     <div class="box box-2">
-      <app-member-info [model]="member" [small]="true" *ngFor="let member of allMembers"></app-member-info>
+      <ng-container *ngFor="let member of project.members">
+        <app-member-info [model]="member.member" [small]="true"
+                         *ngIf="!member.isGroup && allMembers.indexOf(member.recordId) !== -1"></app-member-info>
+        <app-group-info [id]="member.recordId" [small]="true"
+                        *ngIf="member.isGroup && allMembers.indexOf(member.recordId) !== -1"></app-group-info>
+      </ng-container>
+
     </div>
   </div>
 </div>
