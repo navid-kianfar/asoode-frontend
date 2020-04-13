@@ -18,6 +18,7 @@ import { PopperContent } from 'ngx-popper';
 import { OperationResult } from '../../../library/core/operation-result';
 import {Socket} from 'ngx-socket-io';
 import {PushNotificationService} from '../../../services/push-notification.service';
+import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
 
 const EMPTY = {
   members: [],
@@ -89,6 +90,15 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   }
 
   prepareCreate() {
+    const plan = this.identityService.profile.plan;
+    if ((plan.totalUsedProjects >= plan.totalProjects) &&
+      (plan.totalUsedGroups >= plan.totalGroups)) {
+      this.modalService
+        .show(UpgradeComponent, {} as CreateModalParameters)
+        .subscribe(() => {});
+      return;
+    }
+
     this.modalService
       .show(CreateWizardComponent, {} as CreateModalParameters)
       .subscribe(() => {});

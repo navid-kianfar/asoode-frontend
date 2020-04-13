@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class QuickAccessComponent implements OnInit {
   @Output() hide = new EventEmitter<any>();
+  showMoreProjects: boolean;
+  showMoreGroups: boolean;
 
   constructor(
     readonly projectService: ProjectService,
@@ -35,5 +37,13 @@ export class QuickAccessComponent implements OnInit {
     }
     this.router.navigateByUrl('work-package/' + project.workPackages[0].id);
     this.hide.emit();
+  }
+
+  moreProjects() {
+    this.showMoreProjects = true;
+  }
+
+  moreGroups() {
+    this.showMoreGroups = true;
   }
 }

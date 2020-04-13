@@ -526,5 +526,14 @@
   "ASOODE_BOT_CHANNEL_WELCOME_MESSAGE_3": "یک پروژه جدید درست کنی",
   "ASOODE_BOT_CHANNEL_WELCOME_MESSAGE_4": "تیمت رو به آسوده دعوت کنی",
   "UPLOAD_FILE": "آپلود فایل",
-  "CHOOSE_FILE": "انتخاب از مدیریت فایل ها"
+  "CHOOSE_FILE": "انتخاب از مدیریت فایل ها",
+  "YOUR_PLAN_NEEDS_UPGRADE": "شما به سقف تعیین شده برای پلان خود رسیدید، برای استفاده بیشتر؛ لطفا پلان خود را به میزان دلخواه ارتقا دهید",
+  "YOU_HAVE_REACHED_PLAN_LIMIT": "پلان فعلی شما نیاز به ارتقا دارد!",
+  "CURRENT_PLAN": "پلان فعلی",
+  "NEXT_PLAN": "پلان بعدی",
+  "SIMPLE_GROUP": "گروه ساده",
+  "COMPLEX_GROUP": "گروه ساختار دار",
+  "DAYS": "روز",
+  "FOREVER": "برای همیشه",
+  "FREE": "رایگان"
 }

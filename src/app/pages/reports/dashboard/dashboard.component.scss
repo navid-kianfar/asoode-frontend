@@ -6,6 +6,10 @@
       font-weight: 500;
       margin-bottom: 0;
       padding: 10px;
+      min-width: 150px;
+    }
+    ::ng-deep .mat-tab-group {
+      max-width: calc(100% - 150px);
     }
     ::ng-deep .mat-tab-label-content {
       i {
