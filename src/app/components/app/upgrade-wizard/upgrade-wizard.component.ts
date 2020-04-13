@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CultureService} from '../../../services/core/culture.service';
 import {ProjectService} from '../../../services/projects/project.service';
 import {IdentityService} from '../../../services/auth/identity.service';
@@ -14,6 +14,7 @@ export class UpgradeWizardComponent implements OnInit {
   ViewMode = ViewMode;
   mode: ViewMode;
   actionWaiting: boolean;
+  @Input() showBack: boolean;
   @Output() exit = new EventEmitter();
   @Output() back = new EventEmitter();
   constructor(

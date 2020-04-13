@@ -1,7 +1,7 @@
 <div class="modal-content create-modal">
   <div class="modal-alt-header">
     <div class="btn">
-      <ng-container *ngIf="mode !== ViewMode.Init">
+      <ng-container *ngIf="showBack || mode !== ViewMode.Init">
         <button [disabled]="actionWaiting" (click)="onBack($event)">
           <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
           <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { CreateModalParameters } from '../../view-models/modals/modals-types';
 import { CultureService } from '../../services/core/culture.service';
+import {IdentityService} from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-create-wizard',
@@ -21,12 +22,23 @@ export class CreateWizardComponent
   simpleGroup?: boolean;
   complexProject?: boolean;
   complexGroup?: boolean;
+  canCreateGroup: boolean;
+  canCreateWorkPackage: boolean;
+  canCreateProject: boolean;
 
-  constructor(readonly cultureService: CultureService) {
+  constructor(
+    readonly cultureService: CultureService,
+    readonly identityService: IdentityService,
+  ) {
     super();
   }
 
   ngOnInit() {
+    const plan = this.identityService.profile.plan;
+    this.canCreateGroup = plan.totalUsedGroups < plan.totalGroups;
+    this.canCreateWorkPackage = plan.usedWorkPackage < plan.totalWorkPackages;
+    this.canCreateProject = plan.totalUsedProjects < plan.totalProjects;
+
     this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
 

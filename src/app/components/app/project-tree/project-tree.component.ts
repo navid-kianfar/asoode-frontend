@@ -18,6 +18,9 @@ import {OperationResult} from '../../../library/core/operation-result';
 import {StringHelpers} from '../../../helpers/string.helpers';
 import {TranslateService} from '../../../services/core/translate.service';
 import {Router} from '@angular/router';
+import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
+import {CreateModalParameters} from '../../../view-models/modals/modals-types';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-project-tree',
@@ -33,6 +36,7 @@ export class ProjectTreeComponent implements OnInit {
   constructor(
     private readonly socket: Socket,
     private readonly router: Router,
+    private readonly identityService: IdentityService,
     private readonly projectService: ProjectService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
@@ -118,6 +122,14 @@ export class ProjectTreeComponent implements OnInit {
   }
 
   newWorkPackage(parentId?: string) {
+    const plan = this.identityService.profile.plan;
+    if (plan.usedWorkPackage >= plan.totalWorkPackages) {
+      this.modalService
+        .show(UpgradeComponent, {} as CreateModalParameters)
+        .subscribe(() => {});
+      return;
+    }
+
     this.modalService
       .show(WorkPackageWizardComponent, {
         projectId: this.model.id,

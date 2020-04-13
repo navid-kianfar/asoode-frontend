@@ -152,6 +152,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ColorPickerModule} from 'ngx-color-picker';
 import { WorkPackageTaskComponent } from './components/app/work-package-task/work-package-task.component';
 import { TaskModalComponent } from './modals/task-modal/task-modal.component';
+import { UpgradeComponent } from './modals/upgrade/upgrade.component';
+import { UpgradeWizardComponent } from './components/app/upgrade-wizard/upgrade-wizard.component';
 
 @NgModule({
   declarations: [
@@ -268,6 +270,8 @@ import { TaskModalComponent } from './modals/task-modal/task-modal.component';
     WorkPackageWizardComponent,
     WorkPackageTaskComponent,
     TaskModalComponent,
+    UpgradeComponent,
+    UpgradeWizardComponent,
   ],
   entryComponents: [
     WorkPackageWizardComponent,
@@ -279,7 +283,8 @@ import { TaskModalComponent } from './modals/task-modal/task-modal.component';
     ChangeEmailComponent,
     GroupDetailComponent,
     InviteModalComponent,
-    TaskModalComponent
+    TaskModalComponent,
+    UpgradeComponent
   ],
   imports: [
     BrowserModule,
