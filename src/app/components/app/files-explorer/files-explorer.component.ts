@@ -8,7 +8,6 @@ import {
   UploadViewModel,
 } from '../../../view-models/storage/files-types';
 import {OperationResult} from '../../../library/core/operation-result';
-import {MockService} from '../../../services/mock.service';
 import {ModalService} from '../../../services/core/modal.service';
 import {PromptComponent} from '../../../modals/prompt/prompt.component';
 import {PromptModalParameters} from '../../../view-models/core/modal-types';
@@ -28,8 +27,6 @@ export class FilesExplorerComponent implements OnInit {
   path: string;
   data: ExplorerViewModel;
   clipBoard: ExplorerViewModel;
-  private timer: number;
-  private preventSimpleClick: boolean;
   atLeastOneSelected: boolean;
   inClipboard: boolean;
   onlyOneSelected: boolean;
@@ -38,13 +35,14 @@ export class FilesExplorerComponent implements OnInit {
   allowedTypes: string;
   parent: ExplorerFolderViewModel[];
   sort: SortType;
+  private timer: number;
+  private preventSimpleClick: boolean;
 
   @ViewChild('filePicker', { static: false }) filePicker;
   constructor(
     private readonly filesService: FilesService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
-    private readonly mockService: MockService,
   ) {}
 
   ngOnInit() {
@@ -58,7 +56,7 @@ export class FilesExplorerComponent implements OnInit {
       '.xls,.xlsx',
       '.zip,.rar,.7z,.tar,.gz',
       '.pdf',
-      '.doc,.docx,.rtf',
+      '.doc,.docx,.rtf,.txt',
     ].join(',');
     this.fetch('/');
   }
@@ -148,8 +146,8 @@ export class FilesExplorerComponent implements OnInit {
     }
     const selectedFolders = this.data.folders.filter(i => i.selected).length;
     const selectedFiles = this.data.files.filter(i => i.selected);
-    this.atLeastOneSelected = selectedFolders + selectedFiles.length > 0;
-    this.onlyOneSelected = selectedFolders + selectedFiles.length === 0;
+    this.atLeastOneSelected = (selectedFolders + selectedFiles.length) > 0;
+    this.onlyOneSelected = (selectedFolders + selectedFiles.length) === 1;
     this.oneFileSelected = selectedFiles.length === 1;
     this.canOpen = this.oneFileSelected && this.canOpenFile(selectedFiles[0]);
   }
@@ -215,13 +213,7 @@ export class FilesExplorerComponent implements OnInit {
             this.formService.setErrors(form, 'title', ['DIRECTORY_EXISTS']);
             throw new Error('DUPLICATE');
           }
-          this.data.folders.push({
-            createdAt: new Date(),
-            name: params.title,
-            selected: false,
-            path: `${this.path}/${params.title}`,
-            parent: this.path
-          });
+          this.fetch(this.path);
         },
       } as PromptModalParameters)
       .subscribe(() => {});
@@ -241,7 +233,48 @@ export class FilesExplorerComponent implements OnInit {
     this.filePicker.nativeElement.click();
   }
 
-  actionRename() {}
+  actionRename() {
+    const file = this.data.files.find(i => i.selected);
+    const folder = this.data.folders.find(i => i.selected);
+    const title = file ? file.extensionLessName : folder.name;
+    this.modalService
+      .show(PromptComponent, {
+        title: 'RENAME',
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'title' },
+                params: { model: title, placeHolder: 'TITLE' },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'TITLE_REQUIRED',
+                  },
+                },
+              }),
+            ],
+          },
+        ],
+        actionLabel: 'SAVE_CHANGES',
+        actionColor: 'primary',
+        width: 300,
+        action: async (params, form) => {
+          const op = await this.filesService.rename({
+            path: this.path,
+            name: title,
+            file: file ? file.url : undefined,
+            folder: folder ? folder.path : undefined
+          });
+          if (op.status === OperationResultStatus.Duplicate) {
+            this.formService.setErrors(form, 'title', [file ? 'FILE_EXISTS' : 'DIRECTORY_EXISTS']);
+            throw new Error('DUPLICATE');
+          }
+          this.fetch(this.path);
+        },
+      } as PromptModalParameters)
+      .subscribe(() => {});
+  }
 
   clearInputFile(f) {
     if (f.value) {
@@ -280,6 +313,7 @@ export class FilesExplorerComponent implements OnInit {
     this.clearInputFile(target);
     this.filesService.uploading = [...this.filesService.uploading, ...upload];
     this.filesService.upload(upload, this.path);
+    upload.forEach(u => u.promise.then(() => this.fetch(this.path)));
   }
 
   async goTo(p: ExplorerFolderViewModel) {

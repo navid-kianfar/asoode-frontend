@@ -12,11 +12,14 @@
         <mat-tab [label]="'PROJECTS' | translate">
           <ng-template matTabContent>
             <div class="aside-item">
+              <div *ngIf="!projectService.projects.length" class="no-item">
+                {{ 'NO_PROJECTS' | translate }}
+              </div>
               <ng-container *ngFor=" let project of projectService.projects">
                 <ng-container *ngIf="project.complex">
                   <div
                     matRipple
-                    [class.selected]="current?.recordId === project.id"
+                    [class.selected]="current?.id === project.id"
                     (click)="openProject(project)"
                     class="item"
                   >
@@ -24,7 +27,7 @@
                   </div>
                   <div
                     matRipple
-                    [class.selected]="current?.recordId === wp.id"
+                    [class.selected]="current?.id === wp.id"
                     (click)="openWorkPackage(project, wp)"
                     *ngFor="let wp of project.workPackages"
                     class="item"
@@ -34,7 +37,7 @@
                 </ng-container>
                 <div
                   matRipple
-                  [class.selected]="current?.recordId === project.workPackages[0].id"
+                  [class.selected]="current?.id === project.workPackages[0].id"
                   (click)="openWorkPackage(project, project.workPackages[0])"
                   *ngIf="!project.complex"
                   class="item"
@@ -48,9 +51,12 @@
         <mat-tab [label]="'GROUPS' | translate">
           <ng-template matTabContent>
             <div class="aside-item">
+              <div *ngIf="!groupService.groups.length" class="no-item">
+                {{ 'NO_GROUPS' | translate }}
+              </div>
               <div
                 matRipple
-                [class.selected]="current?.recordId === group.id"
+                [class.selected]="current?.id === group.id"
                 (click)="openGroup(group)"
                 *ngFor=" let group of groupService.groups"
                 class="item"
@@ -123,7 +129,7 @@
             </div>
             <a
               *ngIf="current.type === ChannelType.Project"
-              [routerLink]="'/project/' + current.recordId"
+              [routerLink]="'/project/' + current.id"
               class="go-to"
             >
               <i class="icon-new-window"></i>
@@ -131,7 +137,7 @@
             </a>
             <a
               *ngIf="current.type === ChannelType.WorkPackage"
-              [routerLink]="'/work-package/' + current.recordId"
+              [routerLink]="'/work-package/' + current.id"
               class="go-to"
             >
               <i class="icon-new-window"></i>
@@ -139,7 +145,7 @@
             </a>
             <a
               *ngIf="current.type === ChannelType.Group"
-              [routerLink]="'/group/' + current.recordId"
+              [routerLink]="'/group/' + current.id"
               class="go-to"
             >
               <i class="icon-new-window"></i>
@@ -162,7 +168,7 @@
         </div>
       </div>
       <div class="channel-content">
-        <app-conversation [recordId]="current.recordId" [members]="currentMembers"></app-conversation>
+        <app-conversation [recordId]="current.id" [members]="currentMembers"></app-conversation>
       </div>
     </div>
     <div *ngIf="showFiles" class="channel-aside">

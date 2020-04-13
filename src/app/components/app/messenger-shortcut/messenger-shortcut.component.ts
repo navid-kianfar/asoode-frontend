@@ -3,7 +3,11 @@ import { Router } from '@angular/router';
 import { ModalService } from '../../../services/core/modal.service';
 import { MessengerSettingComponent } from '../../../modals/messenger-setting/messenger-setting.component';
 import { ChannelViewModel } from '../../../view-models/communication/messenger-types';
-import { MockService } from '../../../services/mock.service';
+import {MessengerService} from '../../../services/communication/messenger.service';
+import {ProjectService} from '../../../services/projects/project.service';
+import {GroupService} from '../../../services/groups/group.service';
+
+const STORAGE_KEY = 'dashboard_bot_visible';
 
 @Component({
   selector: 'app-messenger-shortcut',
@@ -20,15 +24,21 @@ export class MessengerShortcutComponent implements OnInit {
   constructor(
     private readonly router: Router,
     readonly modalService: ModalService,
-    readonly mockService: MockService,
+    readonly messengerService: MessengerService,
+    readonly projectService: ProjectService,
+    readonly groupService: GroupService,
   ) {}
 
   ngOnInit() {
-    this.current = this.mockService.channels[0];
+    this.current = this.messengerService.channels.directs[0];
+    const closed = localStorage.getItem(STORAGE_KEY);
+    if (!closed && this.dashboard) { this.showMessages = true; }
+    if (!this.projectService.projects.length && !this.groupService.groups.length) {
+      this.dashboard = true;
+    }
   }
 
   open() {
-    return;
     if (this.dashboard) {
       this.showMessages = true;
       return;
@@ -37,12 +47,13 @@ export class MessengerShortcutComponent implements OnInit {
   }
 
   hide() {
+    if (this.dashboard) { localStorage.setItem(STORAGE_KEY, '1'); }
     this.showMessages = false;
   }
 
   goToMessenger() {
     this.showMessages = false;
-    // this.router.navigateByUrl('/messenger');
+    this.router.navigateByUrl('/messenger');
   }
 
   setting() {

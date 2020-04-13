@@ -49,7 +49,7 @@ export class MessengerComponent implements OnInit {
 
   openGroup(group: GroupViewModel) {
     this.current = {
-      recordId: group.id,
+      id: group.id,
       messages: [],
       members: [],
       title: group.title,
@@ -59,7 +59,7 @@ export class MessengerComponent implements OnInit {
   }
   openProject(project: ProjectViewModel) {
     this.current = {
-      recordId: project.id,
+      id: project.id,
       messages: [],
       members: [],
       title: project.title,
@@ -70,7 +70,7 @@ export class MessengerComponent implements OnInit {
 
   openWorkPackage(project: ProjectViewModel, workPackageViewModel: WorkPackageViewModel) {
     this.current = {
-      recordId: workPackageViewModel.id,
+      id: workPackageViewModel.id,
       messages: [],
       members: [],
       title: workPackageViewModel.title,

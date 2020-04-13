@@ -1,9 +1,13 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {MappedConversationViewModel} from '../../../view-models/communication/messenger-types';
-import {ConversationType} from 'src/app/library/app/enums';
+import {Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ConversationViewModel, MappedConversationViewModel} from '../../../view-models/communication/messenger-types';
+import {ActivityType, ConversationType} from 'src/app/library/app/enums';
 import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
 import {MessengerService} from '../../../services/communication/messenger.service';
 import {OperationResultStatus} from '../../../library/core/enums';
+import {ModalService} from '../../../services/core/modal.service';
+import {CreateWizardComponent} from '../../../modals/create-wizard/create-wizard.component';
+import {Socket} from 'ngx-socket-io';
+import {CulturedDateService} from '../../../services/core/cultured-date.service';
 
 @Component({
   selector: 'app-conversation',
@@ -15,14 +19,37 @@ export class ConversationComponent implements OnInit, OnChanges {
   @Input() dashboard: boolean;
   @Input() members: MemberInfoViewModel[];
   waiting: boolean;
+  sending: boolean;
+  clearEditor = new EventEmitter();
   mappedConversations: MappedConversationViewModel[] = [];
-
   ConversationType = ConversationType;
-  constructor(private readonly messengerService: MessengerService) {}
+
+  constructor(
+    private readonly messengerService: MessengerService,
+    private readonly modalService: ModalService,
+    private readonly culturedDateService: CulturedDateService,
+    private readonly socket: Socket,
+  ) {}
 
   ngOnInit() {
     this.mappedConversations = [];
+    this.bind();
     this.fetch();
+  }
+
+  bind() {
+    this.socket.on('push-notification', (notification: any) => {
+      switch (notification.type) {
+        case ActivityType.ChannelMessage:
+          if (this.recordId === notification.data.channelId) {
+            this.push(notification.data);
+          }
+          break;
+        case ActivityType.ChannelUpload:
+
+          break;
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,6 +66,58 @@ export class ConversationComponent implements OnInit, OnChanges {
       return;
     }
     this.waiting = false;
-    // TODO: map messages
+    const dictionary = {};
+    op.data.forEach(m => {
+      const date = this.culturedDateService.toString(m.createdAt);
+      dictionary[date] = dictionary[date] || [];
+      dictionary[date].push(m);
+    });
+    this.mappedConversations = Object.keys(dictionary).map(k => {
+      return { date: k, messages: dictionary[k] };
+    });
   }
+  private push(data: any) {
+    const date = this.culturedDateService.toString(data.createdAt);
+    let section = this.mappedConversations.find(c => c.date === date);
+    if (!section) {
+      section = { date, messages: [] };
+      this.mappedConversations.push(section);
+    }
+    section.messages.push(data);
+  }
+
+  openLink(message: ConversationViewModel) {
+    switch (message.path) {
+      case 'COMMAND_NEW_GROUP':
+        this.modalService.show(CreateWizardComponent, { simpleGroup: true }).subscribe(() => {});
+        break;
+      case 'COMMAND_NEW_PROJECT':
+        this.modalService.show(CreateWizardComponent, { simpleProject: true }).subscribe(() => {});
+        break;
+      default:
+        window.open(message.path, '_blank');
+        break;
+    }
+  }
+
+  async sendMessage(message: string) {
+    message = message.trim();
+    if (!message) { return; }
+    this.sending = true;
+    const op = await this.messengerService.send(this.recordId, { message });
+    this.sending = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+    }
+    this.clearEditor.emit();
+  }
+
+  uploadFile() {
+
+  }
+
+  pickFile() {
+
+  }
+
 }

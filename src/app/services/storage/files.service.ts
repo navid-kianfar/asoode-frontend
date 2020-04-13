@@ -8,6 +8,7 @@ import {OperationResultStatus} from '../../library/core/enums';
   providedIn: 'root',
 })
 export class FilesService {
+  hidePlate: boolean;
   uploading: UploadViewModel[] = [];
 
   getFileExtension(filename: string): string {
@@ -15,7 +16,9 @@ export class FilesService {
     return ext == null ? '' : '.' + ext[1];
   }
 
-  constructor(private readonly httpService: HttpService) {}
+  constructor(private readonly httpService: HttpService) {
+    this.hidePlate = false;
+  }
 
   async myFiles(path: string): Promise<OperationResult<ExplorerViewModel>> {
     return this.httpService.post<ExplorerViewModel>('/files/mine', { path });
@@ -43,6 +46,7 @@ export class FilesService {
   }
 
   upload(upload: UploadViewModel[], path: string) {
+    if (upload.length) { this.hidePlate = false; }
     upload.forEach(u => {
       u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
         this.httpService.formUpload(
@@ -66,5 +70,9 @@ export class FilesService {
           });
       });
     });
+  }
+
+  async rename(model): Promise<OperationResult<boolean>> {
+    return this.httpService.post<boolean>('/files/rename', model, false);
   }
 }

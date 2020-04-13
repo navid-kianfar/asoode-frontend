@@ -519,5 +519,12 @@
   "TASK_NO_MEMBERS": "عضوی متصل نیست",
   "TASK_NO_ATTACHMENTS": "پیوستی موجود نیست",
   "EDIT_PROJECT": "ویرایش پروژه",
-  "PROJECT_EDITED": "پروژه به روز رسانی شد"
+  "PROJECT_EDITED": "پروژه به روز رسانی شد",
+  "ASOODE_BOT_CHANNEL": "",
+  "ASOODE_BOT_CHANNEL_WELCOME_MESSAGE_1": "سلام!",
+  "ASOODE_BOT_CHANNEL_WELCOME_MESSAGE_2": "من ربات سخنگوی آسوده هستم به شما کمک می\u200Cکنم که از آسوده استفاده کنی. خبر\u200Cهای جدید رو هم بهت میدم. برای شروع میتونی",
+  "ASOODE_BOT_CHANNEL_WELCOME_MESSAGE_3": "یک پروژه جدید درست کنی",
+  "ASOODE_BOT_CHANNEL_WELCOME_MESSAGE_4": "تیمت رو به آسوده دعوت کنی",
+  "UPLOAD_FILE": "آپلود فایل",
+  "CHOOSE_FILE": "انتخاب از مدیریت فایل ها"
 }

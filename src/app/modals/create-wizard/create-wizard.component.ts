@@ -16,6 +16,11 @@ export class CreateWizardComponent
   continueAs: WizardMode;
   actionWaiting: boolean;
   uploading: boolean;
+  premium?: boolean;
+  simpleProject?: boolean;
+  simpleGroup?: boolean;
+  complexProject?: boolean;
+  complexGroup?: boolean;
 
   constructor(readonly cultureService: CultureService) {
     super();
@@ -24,6 +29,15 @@ export class CreateWizardComponent
   ngOnInit() {
     this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
+
+    if (this.simpleGroup) {
+      this.mode = WizardMode.Group;
+      this.continueAs = WizardMode.Group;
+    }
+    if (this.simpleProject) {
+      this.mode = WizardMode.SimpleProject;
+      this.continueAs = WizardMode.SimpleProject;
+    }
   }
   async onCancel($event: MouseEvent) {
     $event.stopPropagation();

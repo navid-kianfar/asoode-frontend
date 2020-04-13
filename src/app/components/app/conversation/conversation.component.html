@@ -5,38 +5,77 @@
     <div class="date-grouped" *ngFor="let conversation of mappedConversations">
       <div class="date">{{ conversation.date }}</div>
       <div *ngFor="let message of conversation.messages" class="message">
-        <div class="from">
-          <img
-            *ngIf="message.fromBot"
-            src="/assets/images/messenger/asoode-bot-icon.svg"
-            alt="bot"
-          />
-          <app-member-info
-            *ngIf="!message.fromBot"
-            [small]="true"
-            [model]="message.member"
-          ></app-member-info>
-        </div>
-        <div class="text">
-          <div class="wrapper">
-            <div *ngIf="message.fromBot" class="name">
-              {{ 'ASOODE_BOT' | translate }}
+
+        <ng-container *ngIf="message.fromBot">
+          <div class="from">
+            <img
+              src="/assets/images/messenger/asoode-bot-icon.svg"
+              alt="bot"
+            />
+          </div>
+          <div class="text">
+            <div class="wrapper">
+              <div class="name">
+                {{ 'ASOODE_BOT' | translate }}
+              </div>
+              <div class="hour">{{ message.createdAt | amDateFormat:'HH:mm' }}</div>
             </div>
-            <div class="hour">12:12</div>
-            <!--            <div class="hour">{{ message.createdAt | amTimeAgo }}</div>-->
+            <div
+              *ngIf="message.type === ConversationType.Text"
+              class="text-message"
+            >
+              {{ message.message | translate:true }}
+            </div>
+            <div
+              *ngIf="message.type === ConversationType.Link"
+              class="text-message"
+            >
+              <a href="javascript:void(0)" (click)="openLink(message)">
+                {{ message.message | translate:true  }}
+              </a>
+            </div>
           </div>
-          <div
-            *ngIf="message.type === ConversationType.Text"
-            class="text-message"
-          >
-            {{ message.message }}
+        </ng-container>
+        <ng-container *ngIf="!message.fromBot">
+          <div class="from">
+            <app-member-info
+              [small]="true"
+              [(model)]="message.member"
+              [id]="message.userId"
+            ></app-member-info>
           </div>
-        </div>
+          <div class="text">
+            <div class="wrapper">
+              <div class="name">
+                {{ message.member?.fullName }}
+              </div>
+              <div class="hour">{{ message.createdAt | amDateFormat:'HH:mm' }}</div>
+            </div>
+            <div
+              *ngIf="message.type === ConversationType.Text"
+              class="text-message"
+              [innerHTML]="message.message"></div>
+            <div
+              *ngIf="message.type === ConversationType.Link"
+              class="text-message"
+            >
+              <a href="javascript:void(0)" (click)="openLink(message)"
+                 [innerHTML]="message.message"></a>
+            </div>
+          </div>
+        </ng-container>
+
       </div>
     </div>
   </div>
 
   <div *ngIf="!dashboard && !waiting" class="send-message">
-    <app-editor [members]="members" [messenger]="true"></app-editor>
+    <app-editor [disabled]="sending"
+                (send)="sendMessage($event)"
+                (fileUpload)="uploadFile()"
+                (filePick)="pickFile()"
+                [clear]="clearEditor"
+                [members]="[]"
+                [messenger]="true"></app-editor>
   </div>
 </div>

@@ -50,15 +50,18 @@ export class MemberInfoComponent implements OnInit {
       this.update();
     }
     if (this.id && !this.model) {
-      let found;
-      for (const project of this.projectService.projects) {
-        for (const member of project.members) {
-          if (this.id === member.recordId) {
-            found = member.member;
-            break;
+      let found: any = this.identityService.identity.userId === this.id ?
+        this.identityService.profile : undefined;
+      if (!found) {
+        for (const project of this.projectService.projects) {
+          for (const member of project.members) {
+            if (this.id === member.recordId) {
+              found = member.member;
+              break;
+            }
           }
+          if (found) { break; }
         }
-        if (found) { break; }
       }
       if (!found) {
         for (const group of this.groupService.groups) {

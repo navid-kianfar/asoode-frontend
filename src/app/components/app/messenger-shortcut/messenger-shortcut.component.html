@@ -35,10 +35,9 @@
       <h3>{{ 'WELCOME_TO_ASOODE' | translate }}</h3>
       <img src="/assets/images/messenger/asoode-welcome.svg" alt="welcome" />
     </div>
-
     <app-conversation
       [dashboard]="dashboard"
-      [recordId]="current?.recordId"
+      [recordId]="current.id"
     ></app-conversation>
   </div>
 </div>

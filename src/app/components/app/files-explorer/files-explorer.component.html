@@ -98,9 +98,12 @@
     <i class="icon-arrow-down8"></i>&nbsp;
     <span class="label">{{ 'SORT_BY' | translate }}</span
     >&nbsp;
-    <app-dropdown [disabled]="waiting" enum="SortType" [model]="sort"></app-dropdown>
+    <app-dropdown [disabled]="waiting || true" enum="SortType" [model]="sort"></app-dropdown>
   </div>
   <ul>
+    <li class="refresh" (click)="fetch(path)">
+      <i class="icon-reset"></i>
+    </li>
     <ng-container *ngFor="let p of parent.reverse();">
       <li (click)="goTo(p)">
         <span>{{p.name || '/'}}</span>

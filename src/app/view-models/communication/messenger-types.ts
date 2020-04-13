@@ -9,8 +9,10 @@ export interface ChannelRepository {
 }
 export interface ChannelViewModel {
   title: string;
-  recordId: string;
+  id: string;
   type: ChannelType;
+  userId?: string;
+  rootId?: string;
 
   members: MemberInfoViewModel[];
   messages: ConversationViewModel[];
@@ -24,7 +26,6 @@ export interface ConversationViewModel extends BaseViewModel {
   message: string;
   path?: string;
   replyId?: string;
-  title?: string;
   type: ConversationType;
   userId: string;
   fromBot: boolean;

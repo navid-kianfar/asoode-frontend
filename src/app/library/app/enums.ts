@@ -28,13 +28,13 @@ export enum ChannelType {
   Direct = 1,
   Project = 2,
   Group = 3,
-  WorkPackage = 4
+  WorkPackage = 4,
+  Bot = 5
 }
 export enum ConversationType {
   Text = 1,
   Upload = 2,
-  Task = 3,
-  Link = 4,
+  Link = 3,
 }
 export enum ChannelNotificationReceive {
   All = 1,
@@ -136,6 +136,9 @@ export enum ActivityType {
   WorkPackageObjectiveAdd = 700,
   WorkPackageObjectiveEdit = 701,
   WorkPackageObjectiveRemove = 702,
+
+  ChannelMessage = 800,
+  ChannelUpload = 801,
 }
 export enum PlanType {
   Free = 1,

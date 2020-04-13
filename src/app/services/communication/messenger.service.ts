@@ -31,4 +31,10 @@ export class MessengerService {
       `/messenger/channel/${recordId}/fetch`,
     );
   }
+
+  async send(recordId: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/messenger/channel/${recordId}/send`, model
+    );
+  }
 }

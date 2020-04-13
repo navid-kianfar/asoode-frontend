@@ -10,12 +10,12 @@
             <mat-tab [label]="'MY_FILES' | translate"
               ><ng-template matTabContent></ng-template
             ></mat-tab>
-            <mat-tab
+            <mat-tab [disabled]="true"
               *ngIf="sharedAnyThing"
               [label]="'MY_SHARED_FILES' | translate"
               ><ng-template matTabContent></ng-template
             ></mat-tab>
-            <mat-tab
+            <mat-tab [disabled]="true"
               *ngIf="sharedAnyThing"
               [label]="'SHARED_FILES_WITH_ME' | translate"
               ><ng-template matTabContent></ng-template></mat-tab
@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="filesService.uploading.length" class="upload-container">
+    <div *ngIf="filesService.uploading.length && !filesService.hidePlate" class="upload-container">
       <div class="header">
         <div class="title">
           {{

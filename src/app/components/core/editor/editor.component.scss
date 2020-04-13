@@ -9,4 +9,17 @@
       opacity: 0.9;
     }
   }
+
+  ::ng-deep .ql-formats {
+    display: flex;
+    .send-wrapper {
+      display: flex;
+      flex-grow: 1;
+      justify-content: flex-end;
+
+      i {
+        color: #6b3d8d;
+      }
+    }
+  }
 }

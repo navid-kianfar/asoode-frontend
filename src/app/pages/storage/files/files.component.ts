@@ -28,7 +28,9 @@ export class FilesComponent implements OnInit {
       true;
   }
 
-  hide() {}
+  hide() {
+    this.filesService.hidePlate = true;
+  }
 }
 export enum ViewMode {
   Mine = 0,

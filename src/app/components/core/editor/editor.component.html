@@ -1,11 +1,13 @@
 <div class="asoode-editor">
   <quill-editor
+    [disabled]="disabled"
     [placeholder]="placeHolder | translate"
     [dir]="cultureService.dir"
     [(ngModel)]="model"
     trackChanges="all"
     [customToolbarPosition]="'bottom'"
     [modules]="modules"
+    [sanitize]="true"
   >
     <div quill-editor-toolbar>
       <span class="ql-formats action-buttons">
@@ -29,10 +31,27 @@
         <button class="ql-italic"></button>
         <button class="ql-bold"></button>
         <button class="ql-emoji" [title]="'INSERT_EMOJI' | translate"></button>
-        <button class="action-btn" [title]="'ATTACHMENT' | translate">
+        <button [matMenuTriggerFor]="attachment" class="action-btn" [title]="'ATTACHMENT' | translate">
           <i class="icon-attachment"></i>
         </button>
+        <span class="send-wrapper">
+          <button [disabled]="!(model || '').trim()"
+                  (click)="send.emit(model)"
+                  class="action-btn" [title]="'SEND' | translate">
+            <i [class]="disabled ? 'icon-spin icon-spinner2' : 'icon-paperplane'"></i>
+          </button>
+        </span>
       </span>
     </div>
   </quill-editor>
+  <mat-menu #attachment="matMenu">
+    <button (click)="fileUpload.emit()" mat-menu-item>
+      <i class="icon-file-pdf"></i>
+      {{ 'UPLOAD_FILE' | translate }}
+    </button>
+    <button (click)="filePick.emit()" mat-menu-item>
+      <i class="icon-link2"></i>
+      {{ 'CHOOSE_FILE' | translate }}
+    </button>
+  </mat-menu>
 </div>
