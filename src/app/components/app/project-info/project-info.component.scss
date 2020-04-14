@@ -12,6 +12,8 @@
     display: flex;
     align-items: center;
     min-width: 200px;
+    max-width: 300px;
+    width: 300px;
     margin-bottom: 10px;
 
     i {
@@ -22,6 +24,7 @@
   }
 
   .description {
+    min-width: 300px;
     width: 300px;
     margin-bottom: 10px;
     display: flex;
@@ -31,6 +34,7 @@
   }
   .details {
     display: flex;
+    width: 300px;
     min-width: 300px;
     flex-wrap: wrap;
 
@@ -50,6 +54,7 @@
   .members {
     color: #ffffff;
     display: flex;
+    width: 300px;
 
     .item {
       display: flex;
@@ -59,6 +64,8 @@
       border-radius: 15px;
       align-items: center;
       max-height: 33px;
+      min-width: 130px;
+
       i {
         font-size: 0.9rem;
       }
@@ -68,6 +75,14 @@
     }
   }
 
+  &.simple {
+    .title{
+      min-width: 300px;
+      width: 300px;
+      flex-grow: 1;
+      max-width: unset;
+    }
+  }
   &.template {
     background: #cfaf4e;
     color: #ffffff;

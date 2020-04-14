@@ -1,39 +1,37 @@
-<div class="project-info" [class.template]="template" (click)="openProject()">
+<div class="project-info" [class.simple]="!project.complex" [class.template]="template" (click)="openProject()">
   <div class="title">
     <i *ngIf="project.complex" class="icon-project"></i>
     <i *ngIf="!project.complex" class="icon-workpackage"></i>
     &nbsp;<span>{{ project.title }}</span>
   </div>
   <div class="description">{{ project.description | truncate: 200 }}</div>
-  <div class="details">
-    <ng-container *ngIf="project.complex">
-      <div class="item">
-        <i class="icon-flag7"></i>&nbsp;
-        <span>{{
-          'N_SEASONS' | translate | stringFormat: project.seasons.length
+  <div class="details" *ngIf="project.complex">
+    <div class="item">
+      <i class="icon-flag7"></i>&nbsp;
+      <span>{{
+        'N_SEASONS' | translate | stringFormat: project.seasons.length
         }}</span>
-      </div>
-      <div class="item">
-        <i class="icon-tree7"></i>&nbsp;
-        <span>{{
-          'N_SUB_PROJECT' | translate | stringFormat: project.subProjects.length
+    </div>
+    <div class="item">
+      <i class="icon-tree7"></i>&nbsp;
+      <span>{{
+        'N_SUB_PROJECT' | translate | stringFormat: project.subProjects.length
         }}</span>
-      </div>
-      <div class="item">
-        <i class="icon-workpackage"></i>&nbsp;
-        <span>{{
-          'N_WORK_PACKAGE'
-            | translate
-            | stringFormat: project.workPackages.length
+    </div>
+    <div class="item">
+      <i class="icon-workpackage"></i>&nbsp;
+      <span>{{
+        'N_WORK_PACKAGE'
+          | translate
+          | stringFormat: project.workPackages.length
         }}</span>
-      </div>
-      <div class="item">
-        <i class="icon-task"></i>&nbsp;
-        <span>{{
-          'N_CARDS' | translate | stringFormat: project.tasks || 0
+    </div>
+    <div class="item">
+      <i class="icon-task"></i>&nbsp;
+      <span>{{
+        'N_CARDS' | translate | stringFormat: project.tasks || 0
         }}</span>
-      </div>
-    </ng-container>
+    </div>
   </div>
   <div class="members">
     <div class="item">
@@ -45,10 +43,6 @@
       >
     </div>
     &nbsp;
-    <!--    <div class="item">-->
-    <!--      <i class="icon-team"></i>&nbsp;-->
-    <!--      <span>{{ (project.members | search: ['isGroup']:true).length }}&nbsp;{{ 'GROUP' | translate }}</span>-->
-    <!--    </div>-->
     <ng-container *ngFor="let m of project.members">
       <div *ngIf="m.isGroup" class="item">
         <i class="icon-team"></i>&nbsp;

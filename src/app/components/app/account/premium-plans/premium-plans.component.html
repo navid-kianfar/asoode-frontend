@@ -20,8 +20,7 @@
       </div>
       <div class="body">
         <mat-progress-bar
-          [value]="identityService.profile.plan.usedSpace / 1024 / 1024"
-          [bufferValue]="identityService.profile.plan.totalSpace / 1024 / 1024"
+          [value]="calculateDiskSpace()"
         ></mat-progress-bar>
         <h5 *ngIf="identityService.profile.plan.type === PlanType.Free">
           {{
@@ -60,8 +59,7 @@
       </div>
       <div class="body">
         <mat-progress-bar
-          [value]="identityService.profile.plan.usedUser"
-          [bufferValue]="identityService.profile.plan.users"
+          [value]="identityService.profile.plan.usedUser * 100 / identityService.profile.plan.users"
         ></mat-progress-bar>
         <h5>
           {{
@@ -91,8 +89,7 @@
       </div>
       <div class="body">
         <mat-progress-bar
-          [value]="identityService.profile.plan.totalUsedGroups"
-          [bufferValue]="identityService.profile.plan.totalGroups"
+          [value]="identityService.profile.plan.totalUsedGroups * 100 / identityService.profile.plan.totalGroups"
         ></mat-progress-bar>
         <h5>
           {{
@@ -122,8 +119,7 @@
       </div>
       <div class="body">
         <mat-progress-bar
-          [value]="identityService.profile.plan.totalUsedProjects"
-          [bufferValue]="identityService.profile.plan.totalProjects"
+          [value]="identityService.profile.plan.totalUsedProjects * 100 / identityService.profile.plan.totalProjects"
         ></mat-progress-bar>
         <h5>
           {{

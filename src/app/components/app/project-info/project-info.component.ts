@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { Router } from '@angular/router';
-import { ProjectFilter } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-info',

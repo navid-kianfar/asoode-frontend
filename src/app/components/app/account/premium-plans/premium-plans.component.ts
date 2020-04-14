@@ -11,4 +11,9 @@ export class PremiumPlansComponent implements OnInit {
   constructor(readonly identityService: IdentityService) {}
   PlanType = PlanType;
   ngOnInit() {}
+
+  calculateDiskSpace() {
+    return (this.identityService.profile.plan.usedSpace / 1024 / 1024) * 100 /
+      (this.identityService.profile.plan.totalSpace / 1024 / 1024);
+  }
 }

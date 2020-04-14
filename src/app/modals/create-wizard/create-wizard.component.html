@@ -97,7 +97,7 @@
         (click)="$event.stopPropagation();"
         (exit)="close()"
         (back)="mode = WizardMode.Choose"
-        [complex]="mode === WizardMode.ComplexProject"
+        [complex]="false"
       ></app-project-wizard>
     </ng-container>
     <ng-container *ngIf="!canCreateWorkPackage">
@@ -115,7 +115,7 @@
         (click)="$event.stopPropagation();"
         (exit)="close()"
         (back)="mode = WizardMode.Choose"
-        [complex]="mode === WizardMode.ComplexProject"
+        [complex]="true"
       ></app-project-wizard>
     </ng-container>
     <ng-container *ngIf="!canCreateProject">

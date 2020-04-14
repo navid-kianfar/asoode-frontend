@@ -28,7 +28,7 @@
   </div>
   <div *ngIf="model.subTasks" class="progress">
     <div class="wrapper">
-      <mat-progress-bar mode="determinate" [value]="model.subTasks" [bufferValue]="model.subTasksDone"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [value]="model.subTasks * 100 / model.subTasksDone"></mat-progress-bar>
     </div>
     <span>{{model.subTasksDone}}/{{model.subTasks}}</span>
   </div>
