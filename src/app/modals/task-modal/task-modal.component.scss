@@ -416,6 +416,19 @@
         color: #808080
       }
 
+      input {
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 2px 5px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        margin-inline-end: 5px;
+      }
+
+      i.rename {
+
+      }
+
       ::ng-deep .mat-progress-bar-fill::after {
         background-color: #50a9dd;
       }

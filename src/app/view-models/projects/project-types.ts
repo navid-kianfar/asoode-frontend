@@ -123,6 +123,8 @@ export interface WorkPackageMemberViewModel extends BaseViewModel {
   isGroup: boolean;
 }
 export interface WorkPackageLabelViewModel extends BaseViewModel {
+  tempName?: string;
+  editting?: boolean;
   waiting: boolean;
   packageId: string;
   title: string;
@@ -220,6 +222,10 @@ export interface WorkPackageTaskLabelViewModel extends BaseViewModel {
   dark: boolean;
 }
 export interface WorkPackageTaskAttachmentViewModel extends  BaseViewModel {
+  covering?: boolean;
+  tempName?: string;
+  waiting?: boolean;
+  renaming?: boolean;
   description: string;
   id: string;
   path: string;

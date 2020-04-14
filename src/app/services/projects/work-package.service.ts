@@ -1,13 +1,22 @@
 import { Injectable } from '@angular/core';
 import { OperationResult } from '../../library/core/operation-result';
-import { WorkPackageViewModel } from '../../view-models/projects/project-types';
+import {ProjectViewModel, WorkPackageViewModel} from '../../view-models/projects/project-types';
 import { HttpService } from '../core/http.service';
+import {AccessType} from '../../library/app/enums';
+import {ProjectService} from './project.service';
+import {IdentityService} from '../auth/identity.service';
+import {GroupService} from '../groups/group.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkPackageService {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly projectService: ProjectService,
+    private readonly groupService: GroupService,
+    private readonly identityService: IdentityService,
+  ) {}
 
   async fetch(id: string, model): Promise<OperationResult<WorkPackageViewModel>> {
     return await this.httpService.post<WorkPackageViewModel>(
@@ -81,5 +90,31 @@ export class WorkPackageService {
 
   async removePendingAccess(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/work-packages/remove-pending-access/${id}`);
+  }
+
+  getPermission(projectId, packageId: string): AccessType {
+    const project = this.projectService.projects.find(g => g.id === projectId);
+    const pkg = project.workPackages.find(w => w.id === packageId);
+    const access = pkg.members.find(m => m.recordId === this.identityService.identity.userId);
+    const multiple = [];
+    if (access) {
+      multiple.push(access.access);
+    }
+
+    for (const ga of pkg.members.filter(m => m.isGroup)) {
+      const found = this.groupService.groups.find(k => k.id === ga.recordId);
+      if (found) {
+        multiple.push(found.access);
+      }
+    }
+    return multiple.sort()[0];
+  }
+
+  async renameLabel(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/work-packages/labels/${id}/rename`, model);
+  }
+
+  async removeLabel(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/work-packages/labels/${id}/remove`);
   }
 }

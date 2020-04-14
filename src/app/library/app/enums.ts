@@ -132,6 +132,10 @@ export enum ActivityType {
   WorkPackageTaskMemberAdd = 611,
   WorkPackageTaskLabelRemove = 612,
   WorkPackageTaskLabelAdd = 613,
+  WorkPackageTaskAttachmentRemove = 614,
+  WorkPackageTaskAttachmentAdd = 615,
+  WorkPackageTaskAttachmentCover = 616,
+  WorkPackageTaskAttachmentRename = 617,
 
   WorkPackageObjectiveAdd = 700,
   WorkPackageObjectiveEdit = 701,

@@ -3,23 +3,25 @@ import {SimpleModalComponent} from 'ngx-simple-modal';
 import {TaskModalParameters} from '../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
-  ProjectViewModel, WorkPackageLabelViewModel, WorkPackageTaskAttachmentViewModel,
+  ProjectViewModel,
+  WorkPackageLabelViewModel,
+  WorkPackageTaskAttachmentViewModel,
   WorkPackageTaskViewModel,
   WorkPackageViewModel
 } from '../../view-models/projects/project-types';
 import {TaskService} from '../../services/projects/task.service';
 import {OperationResultStatus} from '../../library/core/enums';
-import {environment} from '../../../environments/environment';
 import {ProjectService} from '../../services/projects/project.service';
 import {AccessType, ActivityType, WorkPackageTaskState} from '../../library/app/enums';
 import {IdentityService} from '../../services/auth/identity.service';
-import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {Socket} from 'ngx-socket-io';
 import {UploadViewModel} from '../../view-models/storage/files-types';
 import {FilesService} from '../../services/storage/files.service';
-import {MemberInfoViewModel} from '../../view-models/auth/identity-types';
-import {GroupService} from '../../services/groups/group.service';
 import {UsersService} from '../../services/general/users.service';
+import {ModalService} from '../../services/core/modal.service';
+import {StringHelpers} from '../../helpers/string.helpers';
+import {TranslateService} from '../../services/core/translate.service';
+import {WorkPackageService} from '../../services/projects/work-package.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -50,17 +52,27 @@ export class TaskModalComponent
   workPackage: WorkPackageViewModel;
   allowedTypes: string;
 
+  @ViewChild('labelMenu', { static: false }) labelMenu;
   @ViewChild('filePicker', { static: false }) filePicker;
+  togglingWatch: boolean;
+  togglingArchive: boolean;
   constructor(
     private readonly socket: Socket,
     private readonly taskService: TaskService,
     private readonly projectService: ProjectService,
+    readonly translateService: TranslateService,
     readonly usersService: UsersService,
+    readonly modalService: ModalService,
     readonly filesService: FilesService,
     private readonly identityService: IdentityService,
+    private readonly workPackageService: WorkPackageService,
   ) { super(); }
 
   ngOnInit() {
+    this.filesService.attaching = this.filesService.attaching.filter((a) => {
+      if (a.recordId !== this.id) { return true; }
+      return a.uploading;
+    });
     this.allStates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     this.allowedTypes = [
       'image/*',
@@ -115,13 +127,6 @@ export class TaskModalComponent
     this.clearInputFile(target);
     this.filesService.attaching = [...this.filesService.attaching, ...upload];
     this.filesService.attach(upload, this.id);
-    upload.forEach(u => {
-      u.promise.then(() => {
-        this.filesService.attaching = this.filesService.attaching.filter(a => a !== u);
-      }, () => {
-        this.filesService.attaching = this.filesService.attaching.filter(a => a !== u);
-      });
-    });
   }
 
   bind() {
@@ -161,6 +166,33 @@ export class TaskModalComponent
             this.model.members = this.model.members.filter(i => i.recordId !== notification.data.recordId);
           }
           break;
+        case ActivityType.WorkPackageTaskAttachmentAdd:
+          if (this.id === notification.data.taskId) {
+            this.model.attachments.unshift(notification.data);
+          }
+          break;
+        case ActivityType.WorkPackageTaskAttachmentRemove:
+          if (this.id === notification.data.taskId) {
+            this.model.attachments = this.model.attachments.filter(a => a.id !== notification.data.id);
+          }
+          break;
+        case ActivityType.WorkPackageTaskAttachmentRename:
+          if (this.id === notification.data.taskId) {
+            const found = this.model.attachments.find(a => a.id === notification.data.id);
+            if (found) {
+              Object.assign(found, notification.data);
+            }
+          }
+          break;
+        case ActivityType.WorkPackageTaskAttachmentCover:
+          if (this.id === notification.data.taskId) {
+            const found = this.model.attachments.find(a => a.id === notification.data.id);
+            if (found) {
+              found.isCover = notification.data.isCover;
+              this.model.coverId = notification.data.isCover ? notification.data.path : '';
+            }
+          }
+          break;
       }
     });
   }
@@ -174,6 +206,7 @@ export class TaskModalComponent
     }
     this.waiting = false;
     this.model = op.data;
+    this.permission = this.workPackageService.getPermission(op.data.projectId, op.data.packageId);
     this.postProcess();
   }
 
@@ -197,7 +230,9 @@ export class TaskModalComponent
 
   getBackgroundUrl(coverId: string): string {
     if (!coverId) { return ''; }
-    return `${environment.api_endpoint}/attachments/${coverId}/download`;
+    const attachment = this.model.attachments.find(a => a.id === coverId);
+    if (!attachment) { return ''; }
+    return attachment.path;
   }
 
   private postProcess() {
@@ -279,7 +314,7 @@ export class TaskModalComponent
   }
 
   toggleLabel(label: WorkPackageLabelViewModel) {
-    if (label.waiting) {return;  }
+    if (label.waiting || label.editting) {return;  }
     if (this.model.labels.findIndex(i => i.labelId === label.id) === -1) {
       this.taskService.addLabel(this.id, label.id);
     } else {
@@ -310,24 +345,133 @@ export class TaskModalComponent
     return attachment.path;
   }
 
-  coverToggle(attachment: WorkPackageTaskAttachmentViewModel) {
-
-  }
-
   openAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
     window.open(this.getPath(attachment), '_blank');
   }
 
   downloadAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
-
+    this.filesService.download(attachment.path, null);
   }
 
   editAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
+    attachment.tempName = this.filesService.getExtensionLessFileName(attachment.title);
+    attachment.renaming = true;
+    attachment.waiting = false;
+  }
 
+  async coverToggle(attachment: WorkPackageTaskAttachmentViewModel) {
+    if (attachment.covering) { return; }
+    attachment.covering = true;
+    const op = await this.taskService.coverAttachment(attachment.id);
+    attachment.covering = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO:handle error
+      return;
+    }
+  }
+
+  async renameAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
+    const old = this.filesService.getExtensionLessFileName(attachment.title);
+    const title = attachment.tempName.trim();
+    if (old === title) {
+      attachment.renaming = false;
+      return;
+    }
+    attachment.waiting = true;
+    const op = await this.taskService.renameAttachment(attachment.id, { title });
+    attachment.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    attachment.renaming = false;
+    attachment.waiting = false;
   }
 
   deleteAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_ATTACHMENT_CONFIRM_HEADING'),
+      [attachment.title]
+    );
+    this.modalService.confirm({
+      title: 'REMOVE_ATTACHMENT',
+      message: 'REMOVE_ATTACHMENT_CONFIRM',
+      heading,
+      actionLabel: 'REMOVE_ATTACHMENT',
+      cancelLabel: 'CANCEL',
+      action: async () => {
+        return await this.taskService.removeAttachment(attachment.id);
+      },
+    }).subscribe(() => {});
+  }
 
+  async toggleWatch() {
+    this.togglingWatch = true;
+    const op = await this.taskService.toggleWatch(this.id);
+    this.togglingWatch = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async toggleArchive() {
+    this.togglingArchive = true;
+    const op = await this.taskService.toggleArchive(this.id);
+    this.togglingArchive = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  prepareRenameLabel(label: WorkPackageLabelViewModel, $event: MouseEvent) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.workPackage.labels.forEach(l => {
+      if (l.waiting) { return; }
+      if (l.editting) {
+        l.editting = false;
+      }
+    });
+    label.editting = true;
+    label.tempName = label.title;
+  }
+
+  deleteLabel(label: WorkPackageLabelViewModel, $event: MouseEvent) {
+    $event.preventDefault();
+    $event.stopPropagation();
+    this.labelMenu.close.emit();
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_LABEL_CONFIRM_HEADING'),
+      [label.title]
+    );
+    this.modalService.confirm({
+      title: 'REMOVE_LABEL',
+      message: 'REMOVE_LABEL_CONFIRM',
+      heading,
+      actionLabel: 'REMOVE_LABEL',
+      cancelLabel: 'CANCEL',
+      action: async () => {
+        return await this.workPackageService.removeLabel(label.id);
+      },
+    }).subscribe(() => {});
+  }
+
+  async saveLabelName(label: WorkPackageLabelViewModel) {
+    const title = label.tempName.trim();
+    if (title === label.title) {
+      label.editting = false;
+      return;
+    }
+    label.waiting = true;
+    const op = await this.workPackageService.renameLabel(label.id, { title });
+    label.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    label.title = label.tempName;
   }
 }
 export enum ViewMode {

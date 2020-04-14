@@ -11,17 +11,19 @@
     <ng-container *ngIf="!waiting">
       <div class="header" [style.backgroundImage]="getBackgroundUrl(model.coverId)">
         <div class="actions">
-          <button mat-mini-fab>
-          <span class="btn-inner">
-            <i class="icon-eye2"></i>
-            <span class="sub-title">{{ 'WATCH' | translate }}</span>
-          </span>
+          <button [disabled]="togglingWatch" (click)="toggleWatch()" mat-mini-fab>
+            <span class="btn-inner">
+              <i *ngIf="!togglingWatch" class="icon-eye2"></i>
+              <i *ngIf="togglingWatch" class="icon-spinner2 icon-spin"></i>
+              <span class="sub-title">{{ 'WATCH' | translate }}</span>
+            </span>
           </button>
-          <button *ngIf="permission !== AccessType.Visitor" mat-mini-fab>
-          <span class="btn-inner">
-            <i class="icon-archive"></i>
-            <span class="sub-title">{{ 'ARCHIVE' | translate }}</span>
-          </span>
+          <button [disabled]="togglingArchive" (click)="toggleArchive()" *ngIf="permission !== AccessType.Visitor" mat-mini-fab>
+            <span class="btn-inner">
+              <i *ngIf="!togglingArchive" class="icon-archive"></i>
+              <i *ngIf="togglingArchive" class="icon-spinner2 icon-spin"></i>
+              <span class="sub-title">{{ 'ARCHIVE' | translate }}</span>
+            </span>
           </button>
         </div>
         <div *ngIf="model.archivedAt" class="archived">
@@ -123,14 +125,14 @@
                 <div class="header">
                   <div class="title">{{'TASK_DETAILS' | translate}}</div>
                   <div class="action">
-                    <button mat-mini-fab color="primary"><i class="icon-plus2"></i></button>
+                    <button *ngIf="permission !== AccessType.Visitor" mat-mini-fab color="primary"><i class="icon-plus2"></i></button>
                   </div>
                 </div>
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-price-tags4"></i>
                     <span>{{ 'TASK_LABELS' | translate}}</span>
-                    <i [matMenuTriggerFor]="labelMenu" class="add icon-plus2"></i>
+                    <i *ngIf="permission !== AccessType.Visitor" [matMenuTriggerFor]="labelMenu" class="add icon-plus2"></i>
                   </div>
                   <div class="box-content">
                     <div *ngIf="!model.labels.length" class="no-item">
@@ -149,15 +151,22 @@
                         <li (click)="toggleLabel(label)" *ngFor="let label of workPackage.labels">
                           <div class="label" [class.selected]="isLabelSelected(label)">
                             <div class="title">
-                            <span [style.background]="label.color">
-                              {{label.title}}
-                              <ng-container *ngIf="!label.title">
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <span *ngIf="!label.editting" [style.background]="label.color">
+                                {{label.title}}
+                                <ng-container *ngIf="!label.title">
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </ng-container>
+                              </span>
+                              <ng-container *ngIf="label.editting">
+                                <input [disabled]="label.waiting" type="text" [(ngModel)]="label.tempName">
+                                <i *ngIf="!label.waiting" (click)="saveLabelName(label)"
+                                   class="icon-checkmark3"></i>
+                                <i *ngIf="label.waiting" class="icon-spinner2 icon-spin"></i>
                               </ng-container>
-                            </span>
                             </div>
-                            <i class="icon-pencil"></i>
-                            <i class="icon-delete"></i>
+<!--                            <i *ngIf="label.waiting" class="icon-spin icon-spinner2"></i>-->
+                            <i *ngIf="!label.waiting && !label.editting" (click)="prepareRenameLabel(label, $event)" class="icon-pencil"></i>
+                            <i *ngIf="!label.waiting && !label.editting" (click)="deleteLabel(label, $event)" class="icon-delete"></i>
                           </div>
                         </li>
                       </ul>
@@ -168,7 +177,7 @@
                   <div class="box-header">
                     <i class="icon-users2"></i>
                     <span>{{ 'TASK_MEMBERS' | translate}}</span>
-                    <i [matMenuTriggerFor]="memberMenu" class="add icon-plus2"></i>
+                    <i *ngIf="permission !== AccessType.Visitor" [matMenuTriggerFor]="memberMenu" class="add icon-plus2"></i>
                   </div>
                   <div class="box-content">
                     <div *ngIf="!model.members.length" class="no-item">
@@ -217,7 +226,7 @@
                   <div class="box-header">
                     <i class="icon-attachment"></i>
                     <span>{{ 'TASK_ATTACHMENTS' | translate}}</span>
-                    <i [matMenuTriggerFor]="attachmentMenu" class="add icon-plus2"></i>
+                    <i *ngIf="permission !== AccessType.Visitor" [matMenuTriggerFor]="attachmentMenu" class="add icon-plus2"></i>
                   </div>
                   <div class="box-content">
                     <div *ngIf="!model.attachments.length" class="no-item">
@@ -248,7 +257,12 @@
                         <i [class]="filesService.icon(attachment.path)"></i>
                       </div>
                       <div class="info">
-                        <h4>{{ attachment.title}}</h4>
+                        <h4 *ngIf="!attachment.renaming">{{ attachment.title}}</h4>
+                        <div *ngIf="attachment.renaming">
+                          <input [readOnly]="attachment.waiting" type="text" [(ngModel)]="attachment.tempName">
+                          <i (click)="renameAttachment(attachment)" *ngIf="!attachment.waiting" class="rename icon-checkmark3"></i>
+                          <i *ngIf="attachment.waiting" class="rename icon-spinner2 icon-spin"></i>
+                        </div>
                         <h5>{{ attachment.createdAt | culturedDate:true }}</h5>
                         <h5>
                           <span>{{ 'UPLOADED_BY' | translate}}&nbsp;</span>
@@ -259,11 +273,14 @@
                         <div class="btns">
                           <i class="icon-new-window" (click)="openAttachment(attachment)"></i>
                           <i class="icon-download41" (click)="downloadAttachment(attachment)"></i>
-                          <i class="icon-pencil" (click)="editAttachment(attachment)"></i>
-                          <i class="icon-delete" (click)="deleteAttachment(attachment)"></i>
+                          <i *ngIf="permission !== AccessType.Visitor" class="icon-pencil" (click)="editAttachment(attachment)"></i>
+                          <i *ngIf="permission !== AccessType.Visitor" class="icon-delete" (click)="deleteAttachment(attachment)"></i>
                         </div>
-                        <div class="cover">
+                        <div *ngIf="permission !== AccessType.Visitor" class="cover">
                           <a (click)="coverToggle(attachment)" href="javascript:void(0)">
+                            <ng-container *ngIf="attachment.covering">
+                              <i class="icon-spin icon-spinner2"></i>&nbsp;
+                            </ng-container>
                             {{ (attachment.isCover ? 'REMOVE_COVER' : 'MAKE_COVER') | translate}}
                           </a>
                         </div>

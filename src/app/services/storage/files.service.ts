@@ -77,17 +77,19 @@ export class FilesService {
     reader.readAsDataURL(file);
   }
 
-  download(path: string, params: StringDictionary<any>) {
+  download(path: string, params: StringDictionary<any> = null) {
     const form = document.createElement('form');
     form.setAttribute('method', 'post');
     form.setAttribute('action', path);
     form.setAttribute('target', '_blank');
-    params.Keys().forEach(key => {
-      const hiddenField = document.createElement('input');
-      hiddenField.setAttribute('name', key);
-      hiddenField.setAttribute('value', params[key]);
-      form.appendChild(hiddenField);
-    });
+    if (params) {
+      params.Keys().forEach(key => {
+        const hiddenField = document.createElement('input');
+        hiddenField.setAttribute('name', key);
+        hiddenField.setAttribute('value', params[key]);
+        form.appendChild(hiddenField);
+      });
+    }
     document.body.appendChild(form);
     form.submit();
     document.body.removeChild(form);
@@ -152,6 +154,11 @@ export class FilesService {
   async attach(upload: UploadViewModel[], taskId: string) {
     if (upload.length) { this.hidePlate = false; }
     upload.forEach(u => {
+      const removeFromList = () => {
+        const index = this.attaching.indexOf(u);
+        const removed = this.attaching.splice(index, 1);
+        console.log(index, removed, u);
+      };
       u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
         this.httpService.formUpload(
           `/tasks/${taskId}/attach`,
@@ -159,6 +166,7 @@ export class FilesService {
           (percent) => { u.progress = percent; }
         )
           .then((op) => {
+            removeFromList();
             if (op.status !== OperationResultStatus.Success) {
               u.uploading = false;
               u.failed = true;

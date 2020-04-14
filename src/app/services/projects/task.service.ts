@@ -56,4 +56,23 @@ export class TaskService {
   async removeLabel(taskId: string, labelId: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/tasks/${taskId}/label/${labelId}/remove`);
   }
+
+  async renameAttachment(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/attachment/${id}/rename`, model);
+  }
+  async removeAttachment(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/attachment/${id}/remove`);
+  }
+
+  async coverAttachment(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/attachment/${id}/cover`);
+  }
+
+  async toggleWatch(taskId: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/watch`);
+  }
+
+  async toggleArchive(taskId: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/archive`);
+  }
 }
