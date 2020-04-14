@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { IdentityService } from './auth/identity.service';
-import { environment } from '../../environments/environment';
+import { IdentityService } from '../auth/identity.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class PanelSocketProvider extends Socket {

@@ -193,3 +193,7 @@ export enum WorkPackageTaskObjectiveValue {
   VeryValuable = 4,
   ExtremelyValuable = 5
 }
+export enum WorkPackageTaskAttachmentType {
+  Link = 1,
+  Upload = 2,
+}

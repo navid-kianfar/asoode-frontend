@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {IdentityService} from './auth/identity.service';
-import {GroupService} from './groups/group.service';
-import {ProjectService} from './projects/project.service';
-import {ActivityType} from '../library/app/enums';
+import {IdentityService} from '../auth/identity.service';
+import {GroupService} from '../groups/group.service';
+import {ProjectService} from '../projects/project.service';
+import {ActivityType} from '../../library/app/enums';
 import {Router} from '@angular/router';
 import {WindowService} from './window.service';
-import {WorkPackageViewModel} from '../view-models/projects/project-types';
+import {WorkPackageViewModel} from '../../view-models/projects/project-types';
 
 @Injectable({
   providedIn: 'root'

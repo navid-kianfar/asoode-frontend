@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../../../services/projects/project.service';
 import { GroupService } from '../../../services/groups/group.service';
-import { MockService } from '../../../services/mock.service';
+import { MockService } from '../../../services/general/mock.service';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { Router } from '@angular/router';

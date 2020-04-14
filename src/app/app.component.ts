@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppInitializerProvider } from './services/app.initializer';
+import { AppInitializerProvider } from './services/general/app.initializer';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import {Socket} from 'ngx-socket-io';
 

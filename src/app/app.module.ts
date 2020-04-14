@@ -28,12 +28,12 @@ import { MomentModule } from 'ngx-moment';
 import { QuillModule } from 'ngx-quill';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpInterceptor } from './services/http.interceptor';
-import { PanelSocketProvider } from './services/socket.provider';
+import { HttpInterceptor } from './services/general/http.interceptor';
+import { PanelSocketProvider } from './services/general/socket.provider';
 import {
   AppInitializerFactory,
   AppInitializerProvider,
-} from './services/app.initializer';
+} from './services/general/app.initializer';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { DashboardComponent } from './pages/reports/dashboard/dashboard.component';

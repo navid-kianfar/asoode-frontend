@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { IdentityService } from './auth/identity.service';
+import { IdentityService } from '../auth/identity.service';
 
 @Injectable({
   providedIn: 'root',

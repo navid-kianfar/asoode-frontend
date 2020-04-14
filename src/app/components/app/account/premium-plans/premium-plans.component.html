@@ -13,7 +13,7 @@
           <h4>{{ 'DISK_USAGE' | translate }}</h4>
         </div>
         <div class="action">
-          <button mat-stroked-button>
+          <button (click)="upgrade()" mat-stroked-button>
             {{ 'BUY_MORE_SPACE' | translate }}
           </button>
         </div>
@@ -52,7 +52,7 @@
           <h4>{{ 'USER_USAGE' | translate }}</h4>
         </div>
         <div class="action">
-          <button mat-stroked-button>
+          <button (click)="upgrade()" mat-stroked-button>
             {{ 'BUY_MORE_USER' | translate }}
           </button>
         </div>
@@ -82,7 +82,7 @@
           <h4>{{ 'GROUP_USAGE' | translate }}</h4>
         </div>
         <div class="action">
-          <button mat-stroked-button>
+          <button (click)="upgrade()" mat-stroked-button>
             {{ 'BUY_MORE_GROUP' | translate }}
           </button>
         </div>
@@ -112,7 +112,7 @@
           <h4>{{ 'PROJECT_USAGE' | translate }}</h4>
         </div>
         <div class="action">
-          <button mat-stroked-button>
+          <button (click)="upgrade()" mat-stroked-button>
             {{ 'BUY_MORE_PROJECT' | translate }}
           </button>
         </div>

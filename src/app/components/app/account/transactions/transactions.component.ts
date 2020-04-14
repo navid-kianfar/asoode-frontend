@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MockService } from '../../../../services/mock.service';
+import { MockService } from '../../../../services/general/mock.service';
 
 @Component({
   selector: 'app-transactions',

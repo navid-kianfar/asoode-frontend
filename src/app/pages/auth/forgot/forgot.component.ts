@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormViewModel } from '../../../components/core/form/contracts';
 import { Router } from '@angular/router';
-import { AppInitializerProvider } from '../../../services/app.initializer';
+import { AppInitializerProvider } from '../../../services/general/app.initializer';
 import { FormService } from '../../../services/core/form.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';

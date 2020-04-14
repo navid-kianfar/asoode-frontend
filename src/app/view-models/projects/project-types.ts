@@ -3,7 +3,7 @@ import {
   AccessType,
   BoardTemplate,
   WorkPackageCommentPermission,
-  WorkPackageObjectiveType,
+  WorkPackageObjectiveType, WorkPackageTaskAttachmentType,
   WorkPackageTaskObjectiveValue,
   WorkPackageTaskReminderType, WorkPackageTaskState,
   WorkPackageTaskVoteNecessity,
@@ -198,6 +198,9 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   objectiveValue: WorkPackageTaskObjectiveValue;
   members: WorkPackageTaskMemberViewModel[];
   labels: WorkPackageTaskLabelViewModel[];
+  attachments: WorkPackageTaskAttachmentViewModel[];
+  votes: WorkPackageTaskVoteViewModel[];
+  timeSpents: WorkPackageTaskTimeViewModel[];
 }
 export interface WorkPackageTaskMemberViewModel extends BaseViewModel {
   taskId: string;
@@ -215,4 +218,44 @@ export interface WorkPackageTaskLabelViewModel extends BaseViewModel {
   color: string;
   title: string;
   dark: boolean;
+}
+export interface WorkPackageTaskAttachmentViewModel extends  BaseViewModel {
+  description: string;
+  id: string;
+  path: string;
+  title: string;
+  type: WorkPackageTaskAttachmentType;
+  createdAt: Date;
+  isCover: boolean;
+  packageId: string;
+  projectId: string;
+  taskId: string;
+  updatedAt: Date;
+  uploadId: string;
+  userId: string;
+  subProjectId: string;
+}
+export interface WorkPackageTaskVoteViewModel extends  BaseViewModel {
+  id: string;
+  vote: boolean;
+  createdAt: Date;
+  packageId: string;
+  projectId: string;
+  taskId: string;
+  updatedAt: Date;
+  userId: string;
+  subProjectId: string;
+}
+export interface WorkPackageTaskTimeViewModel extends  BaseViewModel {
+  begin: Date;
+  end?: Date;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  manual: boolean;
+  userId: string;
+  packageId: string;
+  projectId: string;
+  taskId: string;
+  subProjectId: string;
 }

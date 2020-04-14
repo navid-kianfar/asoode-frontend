@@ -17,7 +17,7 @@ import { HttpService } from '../../../services/core/http.service';
 import { PopperContent } from 'ngx-popper';
 import { OperationResult } from '../../../library/core/operation-result';
 import {Socket} from 'ngx-socket-io';
-import {PushNotificationService} from '../../../services/push-notification.service';
+import {PushNotificationService} from '../../../services/general/push-notification.service';
 import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
 
 const EMPTY = {

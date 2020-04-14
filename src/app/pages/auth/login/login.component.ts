@@ -4,7 +4,7 @@ import { FormService } from '../../../services/core/form.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppInitializerProvider } from '../../../services/app.initializer';
+import { AppInitializerProvider } from '../../../services/general/app.initializer';
 import { environment } from '../../../../environments/environment';
 
 @Component({

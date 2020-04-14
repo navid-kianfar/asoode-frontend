@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CultureService } from '../../../services/core/culture.service';
 import { FormService } from '../../../services/core/form.service';
 import { FormViewModel } from '../../core/form/contracts';
-import { MockService } from '../../../services/mock.service';
+import { MockService } from '../../../services/general/mock.service';
 import {
   BoardTemplateViewModel,
   ProjectTemplateViewModel,

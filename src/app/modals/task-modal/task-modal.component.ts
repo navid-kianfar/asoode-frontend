@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SimpleModalComponent} from 'ngx-simple-modal';
 import {TaskModalParameters} from '../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
-  ProjectViewModel, WorkPackageLabelViewModel,
+  ProjectViewModel, WorkPackageLabelViewModel, WorkPackageTaskAttachmentViewModel,
   WorkPackageTaskViewModel,
   WorkPackageViewModel
 } from '../../view-models/projects/project-types';
@@ -15,6 +15,11 @@ import {AccessType, ActivityType, WorkPackageTaskState} from '../../library/app/
 import {IdentityService} from '../../services/auth/identity.service';
 import {moveItemInArray} from '@angular/cdk/drag-drop';
 import {Socket} from 'ngx-socket-io';
+import {UploadViewModel} from '../../view-models/storage/files-types';
+import {FilesService} from '../../services/storage/files.service';
+import {MemberInfoViewModel} from '../../view-models/auth/identity-types';
+import {GroupService} from '../../services/groups/group.service';
+import {UsersService} from '../../services/general/users.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -43,21 +48,82 @@ export class TaskModalComponent
   changingState: boolean;
   project: ProjectViewModel;
   workPackage: WorkPackageViewModel;
+  allowedTypes: string;
 
+  @ViewChild('filePicker', { static: false }) filePicker;
   constructor(
     private readonly socket: Socket,
     private readonly taskService: TaskService,
     private readonly projectService: ProjectService,
+    readonly usersService: UsersService,
+    readonly filesService: FilesService,
     private readonly identityService: IdentityService,
   ) { super(); }
 
   ngOnInit() {
     this.allStates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    this.allowedTypes = [
+      'image/*',
+      'audio/*',
+      'video/*',
+      '.xls,.xlsx,.csv',
+      '.zip,.rar,.7z,.tar,.gz',
+      '.pdf',
+      '.ppt,.pptx',
+      '.doc,.docx,.rtf,.txt',
+    ].join(',');
     this.mode = ViewMode.Detail;
     this.bind();
     if (this.model) { return; }
     this.fetch();
   }
+  clearInputFile(f) {
+    if (f.value) {
+      try {
+        f.value = '';
+      } catch (err) { }
+      if (f.value) {
+        const form = document.createElement('form');
+        const parentNode = f.parentNode;
+        const ref = f.nextSibling;
+        form.appendChild(f);
+        form.reset();
+        parentNode.insertBefore(f, ref);
+      }
+    }
+  }
+
+  onChange(target: any) {
+    if (!target.files || !target.files.length) { return; }
+    const upload: UploadViewModel[] = [];
+    for (let i = 0; i < target.files.length; i++) {
+      const f = target.files.item(i);
+      upload.push({
+        uploading: false,
+        success: false,
+        failed: false,
+        progress: 0,
+        name: f.name,
+        size: f.size,
+        file: f,
+        extensionLessName: this.filesService.getExtensionLessFileName(f.name),
+        extension: this.filesService.getFileExtension(f.name),
+        promise: undefined,
+        recordId: this.id
+      });
+    }
+    this.clearInputFile(target);
+    this.filesService.attaching = [...this.filesService.attaching, ...upload];
+    this.filesService.attach(upload, this.id);
+    upload.forEach(u => {
+      u.promise.then(() => {
+        this.filesService.attaching = this.filesService.attaching.filter(a => a !== u);
+      }, () => {
+        this.filesService.attaching = this.filesService.attaching.filter(a => a !== u);
+      });
+    });
+  }
+
   bind() {
     this.socket.on('push-notification', (notification: any) => {
       switch (notification.type) {
@@ -227,6 +293,41 @@ export class TaskModalComponent
 
   isLabelSelected(label: WorkPackageLabelViewModel) {
     return this.model.labels.findIndex(m => m.labelId === label.id) !== -1;
+  }
+
+  prepareUpload() {
+    this.filePicker.nativeElement.click();
+  }
+
+  prepareChoose() {
+
+  }
+
+  getPath(attachment: WorkPackageTaskAttachmentViewModel) {
+    if (attachment.path.indexOf('https://') === -1) {
+      return 'https://storage.asoode.com' + attachment.path;
+    }
+    return attachment.path;
+  }
+
+  coverToggle(attachment: WorkPackageTaskAttachmentViewModel) {
+
+  }
+
+  openAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
+    window.open(this.getPath(attachment), '_blank');
+  }
+
+  downloadAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
+
+  }
+
+  editAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
+
+  }
+
+  deleteAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
+
   }
 }
 export enum ViewMode {

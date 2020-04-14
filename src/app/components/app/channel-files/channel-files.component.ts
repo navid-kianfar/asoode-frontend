@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MockService } from '../../../services/mock.service';
+import { MockService } from '../../../services/general/mock.service';
 
 @Component({
   selector: 'app-channel-files',

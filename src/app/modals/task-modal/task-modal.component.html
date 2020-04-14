@@ -220,11 +220,74 @@
                     <i [matMenuTriggerFor]="attachmentMenu" class="add icon-plus2"></i>
                   </div>
                   <div class="box-content">
-                    <div *ngIf="!model.attachmentCount" class="no-item">
+                    <div *ngIf="!model.attachments.length" class="no-item">
                       <h3>{{ 'TASK_NO_ATTACHMENTS' | translate}}</h3>
                     </div>
+                    <ng-container *ngFor="let upload of filesService.attaching">
+                      <div class="attachment-item" *ngIf="upload.recordId === id">
+                        <div class="preview">
+                          <i [class]="filesService.icon(upload.name)"></i>
+                        </div>
+                        <div class="info">
+                          <h4>{{ upload.name}}</h4>
+                          <h5 [class.success]="upload.success"
+                              [class.failed]="upload.failed">
+                            <mat-progress-bar [value]="upload.progress"></mat-progress-bar>
+                          </h5>
+                          <h5>
+                            <span>{{ 'UPLOADING' | translate}}&nbsp;</span>
+                          </h5>
+                        </div>
+                        <div class="actions">
+
+                        </div>
+                      </div>
+                    </ng-container>
+                    <div class="attachment-item" *ngFor="let attachment of model.attachments">
+                      <div class="preview">
+                        <i [class]="filesService.icon(attachment.path)"></i>
+                      </div>
+                      <div class="info">
+                        <h4>{{ attachment.title}}</h4>
+                        <h5>{{ attachment.createdAt | culturedDate:true }}</h5>
+                        <h5>
+                          <span>{{ 'UPLOADED_BY' | translate}}&nbsp;</span>
+                          {{usersService.findUser(attachment.userId)?.fullName}}
+                        </h5>
+                      </div>
+                      <div class="actions">
+                        <div class="btns">
+                          <i class="icon-new-window" (click)="openAttachment(attachment)"></i>
+                          <i class="icon-download41" (click)="downloadAttachment(attachment)"></i>
+                          <i class="icon-pencil" (click)="editAttachment(attachment)"></i>
+                          <i class="icon-delete" (click)="deleteAttachment(attachment)"></i>
+                        </div>
+                        <div class="cover">
+                          <a (click)="coverToggle(attachment)" href="javascript:void(0)">
+                            {{ (attachment.isCover ? 'REMOVE_COVER' : 'MAKE_COVER') | translate}}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <mat-menu #attachmentMenu="matMenu"></mat-menu>
+                  <input
+                    #filePicker
+                    (change)="onChange($event.target)"
+                    [accept]="allowedTypes"
+                    multiple
+                    hidden
+                    type="file"
+                  />
+                  <mat-menu #attachmentMenu="matMenu">
+                    <button (click)="prepareUpload()" mat-menu-item>
+                      <i class="icon-file-pdf"></i>
+                      {{ 'UPLOAD_FILE' | translate }}
+                    </button>
+                    <button (click)="prepareChoose()" mat-menu-item>
+                      <i class="icon-link2"></i>
+                      {{ 'CHOOSE_FILE' | translate }}
+                    </button>
+                  </mat-menu>
                 </div>
               </div>
             </ng-container>

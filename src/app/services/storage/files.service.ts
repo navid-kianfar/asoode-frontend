@@ -3,6 +3,7 @@ import {HttpService} from '../core/http.service';
 import {OperationResult} from '../../library/core/operation-result';
 import {ExplorerViewModel, UploadViewModel,} from '../../view-models/storage/files-types';
 import {OperationResultStatus} from '../../library/core/enums';
+import {StringDictionary} from '../../library/core/dictionary';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,86 @@ import {OperationResultStatus} from '../../library/core/enums';
 export class FilesService {
   hidePlate: boolean;
   uploading: UploadViewModel[] = [];
+  attaching: UploadViewModel[] = [];
+  private readonly imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
 
   getFileExtension(filename: string): string {
     const ext = /^.+\.([^.]+)$/.exec(filename);
-    return ext == null ? '' : '.' + ext[1];
+    return (ext == null ? '' : '.' + ext[1]).toLowerCase();
+  }
+
+  getExtensionLessFileName(name: any) {
+    return (name || '').replace(/\.[^/.]+$/, '');
+  }
+
+  isImage(file: string | File): boolean {
+    const name = file instanceof File ? file.name : file;
+    const ext = this.getFileExtension(name);
+    return this.imageExtensions.indexOf(ext) !== -1;
+  }
+
+  icon(input: string): string {
+    switch (this.getFileExtension(input)) {
+      case '.jpg':
+      case '.jpeg':
+      case '.png':
+      case '.gif':
+      case '.bmp':
+        return 'icon-image2';
+      case '.mp3':
+      case '.wave':
+        return 'icon-play4';
+      case '.mp4':
+      case '.mkv':
+      case '.flv':
+      case '.web':
+      case '.ogg':
+        return 'icon-play';
+      case '.zip':
+      case '.rar':
+      case '.7z':
+      case '.tar':
+      case '.gz':
+        return 'icon-file-zip';
+      case '.pdf':
+        return 'icon-file-pdf';
+      case '.doc':
+      case '.docx':
+      case '.rtf':
+      case '.txt':
+        return 'icon-file-word';
+      case '.xls':
+      case '.xlsx':
+      case '.csv':
+        return 'icon-file-word';
+      case '.ppt':
+      case '.pptx':
+        return 'icon-file-presentation';
+      default:
+        return 'icon-files-empty';
+    }
+  }
+
+  blob(element: HTMLImageElement, file: File) {
+    const reader = new FileReader();
+    reader.onload = e => (element.src = reader.result.toString());
+    reader.readAsDataURL(file);
+  }
+
+  download(path: string, params: StringDictionary<any>) {
+    const form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', path);
+    form.setAttribute('target', '_blank');
+    params.Keys().forEach(key => {
+      const hiddenField = document.createElement('input');
+      hiddenField.setAttribute('name', key);
+      hiddenField.setAttribute('value', params[key]);
+      form.appendChild(hiddenField);
+    });
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
   }
 
   constructor(private readonly httpService: HttpService) {
@@ -39,10 +116,6 @@ export class FilesService {
 
   async newFolder(param: any): Promise<OperationResult<boolean>> {
     return this.httpService.post<boolean>('/files/new-folder', param, false);
-  }
-
-  getExtensionLessFileName(name: any) {
-    return (name || '').replace(/\.[^/.]+$/, '');
   }
 
   upload(upload: UploadViewModel[], path: string) {
@@ -74,5 +147,32 @@ export class FilesService {
 
   async rename(model): Promise<OperationResult<boolean>> {
     return this.httpService.post<boolean>('/files/rename', model, false);
+  }
+
+  async attach(upload: UploadViewModel[], taskId: string) {
+    if (upload.length) { this.hidePlate = false; }
+    upload.forEach(u => {
+      u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
+        this.httpService.formUpload(
+          `/tasks/${taskId}/attach`,
+          { file: u.file },
+          (percent) => { u.progress = percent; }
+        )
+          .then((op) => {
+            if (op.status !== OperationResultStatus.Success) {
+              u.uploading = false;
+              u.failed = true;
+              return;
+            }
+            u.progress = 100;
+            u.success = true;
+            u.uploading = false;
+          }, (err) => {
+            reject(err);
+            u.uploading = false;
+            u.failed = true;
+          });
+      });
+    });
   }
 }

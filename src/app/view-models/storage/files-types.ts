@@ -32,6 +32,7 @@ export interface ExplorerFileViewModel {
   isOther: boolean;
 }
 export interface UploadViewModel {
+  recordId?: string;
   name: string;
   extensionLessName: string;
   extension: string;

@@ -4,7 +4,7 @@ import {
   WorkPackageObjectiveViewModel,
   ProjectViewModel,
 } from '../../../view-models/projects/project-types';
-import { MockService } from '../../../services/mock.service';
+import { MockService } from '../../../services/general/mock.service';
 import { AccessType } from '../../../library/app/enums';
 
 @Component({

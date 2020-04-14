@@ -53,9 +53,10 @@ export class FilesExplorerComponent implements OnInit {
       'image/*',
       'audio/*',
       'video/*',
-      '.xls,.xlsx',
+      '.xls,.xlsx,.csv',
       '.zip,.rar,.7z,.tar,.gz',
       '.pdf',
+      '.ppt,.pptx',
       '.doc,.docx,.rtf,.txt',
     ].join(',');
     this.fetch('/');
