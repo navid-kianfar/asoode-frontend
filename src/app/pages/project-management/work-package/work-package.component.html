@@ -49,7 +49,7 @@
       <div class="progress-container">
         <div class="progress-wrapper">
           <round-progress
-            [current]="workPackage.progress"
+            [current]="workPackage.progress?.percent"
             [max]="100"
             [color]="'#50a9dd'"
             [background]="'#f2f2f2'"
@@ -62,7 +62,23 @@
             [animation]="'easeInOutQuart'"
             [animationDelay]="0"
           ></round-progress>
-          <div class="percent">{{ workPackage.progress }}%</div>
+          <div [matMenuTriggerFor]="progressMenu" class="percent">{{ workPackage.progress?.percent || 0 }}%</div>
+          <mat-menu #progressMenu="matMenu">
+            <div class="progress-report">
+              <div class="item">
+                <div class="title">{{ 'CREATED_CARDS' | translate}}</div>
+                <div class="value">{{ workPackage.progress?.total || 0 }}</div>
+              </div>
+              <div class="item done">
+                <div class="title">{{ 'DONE_CARDS' | translate}}</div>
+                <div class="value">{{ workPackage.progress?.done || 0 }}</div>
+              </div>
+              <div class="item cancel">
+                <div class="title">{{ 'CANCELED_OR_DUPLICATE_CARDS' | translate}}</div>
+                <div class="value">{{ workPackage.progress?.canceledOrDuplicate || 0 }}</div>
+              </div>
+            </div>
+          </mat-menu>
         </div>
       </div>
       <div class="objectives-container">

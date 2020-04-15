@@ -77,9 +77,15 @@ export interface SubProjectViewModel extends BaseViewModel {
   level: number;
   order: number;
 }
+export interface WorkPackageProgressViewModel {
+  percent: number;
+  total: number;
+  done: number;
+  canceledOrDuplicate: number;
+}
 export interface WorkPackageViewModel extends BaseViewModel {
   pending: PendingInvitationViewModel[];
-  progress: number;
+  progress: WorkPackageProgressViewModel;
   userId: string;
   projectId: string;
   subProjectId: string;
@@ -169,7 +175,8 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   downVotes: number;
   upVotes: number;
   subTasksDone: number;
-  subTasks: number;
+  subTasksCount: number;
+  subTasks: WorkPackageTaskViewModel[];
   state: WorkPackageTaskState;
   userId: string;
   listId: string;

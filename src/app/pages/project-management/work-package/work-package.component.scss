@@ -389,6 +389,37 @@
     }
   }
 }
+.progress-report {
+  width: 250px;
+  background: #ffffff;
+  padding: 10px;
+  color: #777;
+
+  .item {
+    display: flex;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 1px solid #eee;
+    .title {
+      font-size: 0.7rem;
+      font-weight: 400;
+    }
+    .value {
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      flex-grow: 1;
+      justify-content: flex-end;
+    }
+
+    &.done {
+      color: #5eb258
+    }
+    &.cancel {
+      color: #b33634
+    }
+  }
+}
 .member-info-popper {
   min-width: 280px;
   min-height: 120px;

@@ -65,7 +65,7 @@ export class WorkPackageComponent implements OnInit {
     this.filters = {
       mine: false,
       archived: false,
-      active: true
+      active: false
     };
     this.mode = ViewMode.Board;
     const id = this.activatedRoute.snapshot.params.id;

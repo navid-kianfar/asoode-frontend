@@ -488,6 +488,19 @@
     }
   }
 
+  .sub-tasks-wrapper {
+    width: 420px;
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+
+    ::ng-deep .task {
+      min-width: 300px;
+      width: 300px;
+      margin-inline-end: 20px;
+    }
+  }
+
   &.archived {
     .actions {
       top: 10px;

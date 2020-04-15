@@ -214,14 +214,19 @@
                     </div>
                   </mat-menu>
                 </div>
-                <!--              <div class="box">-->
-                <!--                <div class="box-header">-->
-                <!--                  <i class="icon-task"></i>-->
-                <!--                  <span>{{ 'TASK_SUB_TASK' | translate}}</span>-->
-                <!--                  <i class="add icon-plus2"></i>-->
-                <!--                </div>-->
-                <!--                <div class="box-content"></div>-->
-                <!--              </div>-->
+                <div class="box" *ngIf="showSubTasks || model.subTasks.length">
+                  <div class="box-header">
+                    <i class="icon-tree7"></i>
+                    <span>{{ 'TASK_SUB_TASK' | translate}}</span>
+                    <i (click)="prepareSubTask()" class="add icon-plus2"></i>
+                  </div>
+                  <div class="box-content sub-tasks-wrapper">
+                    <app-work-package-task *ngFor="let sub of model.subTasks"
+                                           [model]="sub"
+                                           [project]="project"
+                                           [workPackage]="workPackage"></app-work-package-task>
+                  </div>
+                </div>
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-attachment"></i>

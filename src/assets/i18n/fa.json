@@ -547,5 +547,6 @@
   "REMOVE_LABEL_CONFIRM_HEADING": "آیا از حذف برچسب {0} اطمینان دارید؟",
   "REMOVE_LABEL": "حذف برچسب",
   "REMOVE_LABEL_CONFIRM": "این تغییر بر روی تمامی کارت هایی که این برچسب را دارند تاثیر خواهد گذشت",
-  "PICK_AND_CLOSE": "انتخاب و بستن"
+  "PICK_AND_CLOSE": "انتخاب و بستن",
+  "CANCELED_OR_DUPLICATE_CARDS": "کارت\u200Cهای کنسل شده یا تکراری"
 }

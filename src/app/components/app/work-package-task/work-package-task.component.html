@@ -26,11 +26,11 @@
   <div class="title">
     {{model.title}}
   </div>
-  <div *ngIf="model.subTasks" class="progress">
+  <div *ngIf="model.subTasksCount" class="progress">
     <div class="wrapper">
-      <mat-progress-bar mode="determinate" [value]="model.subTasksDone * 100 / model.subTasks"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [value]="model.subTasksDone * 100 / model.subTasksCount"></mat-progress-bar>
     </div>
-    <span>{{model.subTasksDone}}/{{model.subTasks}}</span>
+    <span>{{model.subTasksDone}}/{{model.subTasksCount}}</span>
   </div>
   <div *ngIf="model.targetCounts || model.targetCounts || (model.voteNecessity !== WorkPackageTaskVoteNecessity.None || (model.upVotes || model.downVotes))" class="interactions">
     <div class="box box-1">

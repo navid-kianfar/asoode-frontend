@@ -56,6 +56,7 @@ export class TaskModalComponent
   @ViewChild('filePicker', { static: false }) filePicker;
   togglingWatch: boolean;
   togglingArchive: boolean;
+  showSubTasks: boolean;
   constructor(
     private readonly socket: Socket,
     private readonly taskService: TaskService,
@@ -472,6 +473,10 @@ export class TaskModalComponent
       return;
     }
     label.title = label.tempName;
+  }
+
+  prepareSubTask() {
+
   }
 }
 export enum ViewMode {
