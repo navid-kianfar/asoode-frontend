@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CultureService } from '../../../services/core/culture.service';
+import { IDateEvent } from '../../../library/core/date-time/date-contracts';
 
 @Component({
   selector: 'app-month-view',
@@ -7,27 +8,15 @@ import { CultureService } from '../../../services/core/culture.service';
   styleUrls: ['./month-view.component.scss'],
 })
 export class MonthViewComponent implements OnInit {
+  @Input() culture: string;
+  @Input() model: IDateEvent[];
   dayNames: string[];
   days: any[][];
 
-  constructor(private readonly cultureService: CultureService) {}
+  constructor(
+    private readonly cultureService: CultureService,
+  ) {}
 
   ngOnInit() {
-    this.dayNames = this.cultureService.cultures.Item('fa').dayNamesShort;
-    const days = [];
-    let k = 1;
-    for (let i = 0; i < 5; i++) {
-      days[i] = days[i] || [];
-      for (let j = 0; j < 7; j++) {
-        days[i][j] = {
-          day: k++,
-          // past: k % 13 === 0,
-          // inTime: k % 8 === 0,
-          // upcoming: k % 16 === 0,
-          // today: k === 23,
-        };
-      }
-    }
-    this.days = days;
   }
 }

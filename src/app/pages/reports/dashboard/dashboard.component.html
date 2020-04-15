@@ -1,92 +1,97 @@
-<div class="dashboard">
-  <div class="section report-container">
-    <div class="header">
-      <h3>{{ 'REPORTS' | translate }}</h3>
-    </div>
-    <div class="content reports">
-      <div class="">
-        <div class="reports-holder">
-          <div class="events-holder">
-            <div class="wrapper">
-              <h4>{{ 'THIS_MONTH_EVENTS' | translate }}</h4>
-              <app-month-view></app-month-view>
+<ng-container *ngIf="waiting">
+  <app-waiting></app-waiting>
+</ng-container>
+<ng-container *ngIf="!waiting">
+  <div class="dashboard">
+    <div class="section report-container">
+      <div class="header">
+        <h3>{{ 'REPORTS' | translate }}</h3>
+      </div>
+      <div class="content reports">
+        <div class="">
+          <div class="reports-holder">
+            <div class="events-holder">
+              <div class="wrapper">
+                <h4>{{ 'THIS_MONTH_EVENTS' | translate }}</h4>
+                <app-month-view [model]="data.events"></app-month-view>
+              </div>
             </div>
-          </div>
-          <div class="overall-holder">
-            <div class="wrapper">
-              <h4>{{ 'OVERALL_REPORT' | translate }}</h4>
-              <app-dashboard-overall></app-dashboard-overall>
+            <div class="overall-holder">
+              <div class="wrapper">
+                <h4>{{ 'OVERALL_REPORT' | translate }}</h4>
+                <app-dashboard-overall [model]="data.overall"></app-dashboard-overall>
+              </div>
             </div>
-          </div>
-          <div class="progress-holder">
-            <div class="wrapper">
-              <h4>{{ 'PROGRESS_REPORT' | translate }}</h4>
-              <app-dashboard-progress></app-dashboard-progress>
+            <div class="progress-holder">
+              <div class="wrapper">
+                <h4>{{ 'PROGRESS_REPORT' | translate }}</h4>
+                <app-dashboard-progress [model]="data.progress"></app-dashboard-progress>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="section activities-container">
-    <div class="header">
-      <h3>{{ 'LATEST_ACTIVITIES' | translate }}</h3>
-      <mat-tab-group animationDuration="0ms">
-        <mat-tab
-          *ngFor="let group of groupService.groups"
-          [label]="group.title"
+    <div class="section activities-container">
+      <div class="header">
+        <h3>{{ 'LATEST_ACTIVITIES' | translate }}</h3>
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab
+            *ngFor="let group of groupService.groups"
+            [label]="group.title"
+          >
+            <ng-template matTabContent></ng-template>
+          </mat-tab>
+          <mat-tab [label]="'MY_ACTIVITIES' | translate">
+            <ng-template matTabContent></ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="content">
+        <app-dashboard-activity></app-dashboard-activity>
+      </div>
+    </div>
+    <div class="section projects-container">
+      <div class="header">
+        <h3>{{ 'PROJECTS' | translate }}</h3>
+        <mat-tab-group
+          animationDuration="0ms"
+          (selectedIndexChange)="filter = $event"
         >
-          <ng-template matTabContent></ng-template>
-        </mat-tab>
-        <mat-tab [label]="'MY_ACTIVITIES' | translate">
-          <ng-template matTabContent></ng-template>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-    <div class="content">
-      <app-dashboard-activity></app-dashboard-activity>
-    </div>
-  </div>
-  <div class="section projects-container">
-    <div class="header">
-      <h3>{{ 'PROJECTS' | translate }}</h3>
-      <mat-tab-group
-        animationDuration="0ms"
-        (selectedIndexChange)="filter = $event"
-      >
-        <mat-tab>
-          <ng-template mat-tab-label>
-            {{ 'ALL' | translate }}
-          </ng-template>
-          <ng-template matTabContent></ng-template>
-        </mat-tab>
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <i class="icon-workpackage"></i>&nbsp;
-            {{ 'SIMPLE_PROJECTS' | translate }}
-          </ng-template>
-          <ng-template matTabContent></ng-template>
-        </mat-tab>
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <i class="icon-project"></i>&nbsp;
-            {{ 'WBS_PROJECTS' | translate }}&nbsp;
-            <i class="premium icon-trophy4"></i>
-          </ng-template>
-          <ng-template matTabContent></ng-template>
-        </mat-tab>
-        <mat-tab>
-          <ng-template mat-tab-label>
-            <i class="icon-www"></i>&nbsp;
-            {{ 'PUBLIC' | translate }}
-          </ng-template>
-          <ng-template matTabContent></ng-template>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-    <div class="content">
-      <app-dashboard-project [filter]="filter"></app-dashboard-project>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              {{ 'ALL' | translate }}
+            </ng-template>
+            <ng-template matTabContent></ng-template>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <i class="icon-workpackage"></i>&nbsp;
+              {{ 'SIMPLE_PROJECTS' | translate }}
+            </ng-template>
+            <ng-template matTabContent></ng-template>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <i class="icon-project"></i>&nbsp;
+              {{ 'WBS_PROJECTS' | translate }}&nbsp;
+              <i class="premium icon-trophy4"></i>
+            </ng-template>
+            <ng-template matTabContent></ng-template>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <i class="icon-www"></i>&nbsp;
+              {{ 'PUBLIC' | translate }}
+            </ng-template>
+            <ng-template matTabContent></ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="content">
+        <app-dashboard-project [filter]="filter"></app-dashboard-project>
+      </div>
     </div>
   </div>
-</div>
-<app-messenger-shortcut [dashboard]="true"></app-messenger-shortcut>
+  <app-messenger-shortcut [dashboard]="true"></app-messenger-shortcut>
+</ng-container>

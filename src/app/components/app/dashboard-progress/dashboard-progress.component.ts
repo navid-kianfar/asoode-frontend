@@ -1,4 +1,5 @@
-import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { DayReportViewModel, OverallViewModel } from '../../../view-models/general/report-types';
 
 const data = [
   {
@@ -128,6 +129,7 @@ const data = [
   styleUrls: ['./dashboard-progress.component.scss'],
 })
 export class DashboardProgressComponent implements OnInit, AfterViewInit {
+  @Input() model: DayReportViewModel[];
   chartData: any;
   view: number[];
   timer: number;

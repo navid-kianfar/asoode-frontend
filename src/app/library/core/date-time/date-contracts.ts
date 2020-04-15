@@ -24,3 +24,9 @@ export interface IDateConverter {
   Format(date: Date, format: string): string;
   IsValid(date: string | IDateTimeProperties): boolean;
 }
+export interface IDateEvent {
+  date: Date;
+  title: Date;
+  color?: string;
+  cssClass?: string;
+}

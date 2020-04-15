@@ -1,1 +1,169 @@
-<p>calendar works!</p>
+<div
+  class="af-calendar af-component lang-{{ culture }} {{ state.rtl ? 'rtl' : 'ltr'}} {{ cssClass }}
+    datepicker datepicker-orient-left datepicker-orient-top {{ monthView ? 'month-view-only' : ''}}"
+>
+  <div
+    *ngIf="state.mode === 'months'"
+    class="datepicker-inner datepicker-months"
+  >
+    <div class="calendar-header">
+      <div class="datepicker-switch">
+        <span (click)="switch('years')">
+          {{ temp.year }}
+        </span>
+      </div>
+      <div class="btn-group">
+        <button (click)="backwardYears(1)" class="btn btn-light">
+          <i class="icon-arrow-{{ state.rtl ? 'right2' : 'left2' }}"></i>
+        </button>
+        <button (click)="forwardYears(1)" class="btn btn-light">
+          <i class="icon-arrow-{{ state.rtl ? 'left2' : 'right2' }}"></i>
+        </button>
+      </div>
+    </div>
+    <table class="table-condensed">
+      <tbody>
+      <tr>
+        <td colspan="7">
+            <span
+              (click)="updateMonth(idx + 1)"
+              *ngFor="let name of calendar.monthNames; let idx = index"
+              class="month {{ idx + 1 === temp.month ? 'active' : '' }}"
+            >
+              {{ name }}
+            </span>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <th colspan="7">
+          <div class="d-flex">
+            <div (click)="setToday()" class="today">
+              {{ 'TODAY' | translate }}
+            </div>
+          </div>
+        </th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div *ngIf="state.mode === 'years'" class="datepicker-inner datepicker-years">
+    <div class="calendar-header">
+      <div class="datepicker-switch">
+        <span (click)="switch('days')">
+          {{ state.tempYears[0] }}-{{
+          state.tempYears[state.tempYears.length - 1]
+          }}
+        </span>
+      </div>
+      <div class="btn-group">
+        <button (click)="backwardYears(12)" class="btn btn-light">
+          <i class="icon-arrow-{{ state.rtl ? 'right2' : 'left2' }}"></i>
+        </button>
+        <button (click)="forwardYears(12)" class="btn btn-light">
+          <i class="icon-arrow-{{ state.rtl ? 'left2' : 'right2' }}"></i>
+        </button>
+      </div>
+    </div>
+    <table class="table-condensed">
+      <tbody>
+      <tr>
+        <td colspan="7">
+            <span
+              (click)="updateYear(year)"
+              *ngFor="let year of state.tempYears; let idx = index"
+              class="year {{ year === temp.year ? 'active' : '' }} {{
+                idx === 0 ? 'old' : ''
+              }} {{ idx === state.tempYears.length - 1 ? 'new' : '' }}"
+            >
+              {{ year }}
+            </span>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <th colspan="7">
+          <div class="d-flex">
+            <div (click)="setToday()" class="today">
+              {{ 'TODAY' | translate }}
+            </div>
+          </div>
+        </th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+  <div *ngIf="state.mode === 'days'" class="datepicker-inner datepicker-days">
+    <div *ngIf="!monthView" class="calendar-header">
+      <div class="datepicker-switch">
+        <span (click)="switch('months')">{{ monthName }}</span>
+        <span (click)="switch('years')" class="ml-3 silent">{{
+          temp.year
+          }}</span>
+      </div>
+      <div class="btn-group">
+        <button (click)="backwardMonth()" class="btn btn-light">
+          <i class="icon-arrow-{{ state.rtl ? 'right2' : 'left2' }}"></i>
+        </button>
+        <button (click)="forwardMonth()" class="btn btn-light">
+          <i class="icon-arrow-{{ state.rtl ? 'left2' : 'right2' }}"></i>
+        </button>
+      </div>
+    </div>
+    <table class="table-condensed">
+      <thead>
+      <tr>
+        <th *ngFor="let title of calendar.dayNamesShort" class="dow">
+          {{ title }}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let week of state.days">
+        <td
+          (click)="pick(day)"
+          *ngFor="let day of week"
+          [class]="calculateClass(day)"
+        >
+          <div class="square-wrapper">
+            <div class="square-inner">
+              <span>{{ (!day.old || !monthView) ? day.day : '' }}</span>
+<!--              <span *ngIf="day.events.length" class="labels">-->
+<!--                  <span-->
+<!--                    *ngFor="let evt of day.events"-->
+<!--                    class="label"-->
+<!--                    [style.backgroundColor]="-->
+<!--                      evt.labels && evt.labels.length-->
+<!--                        ? evt.labels[0].value-->
+<!--                        : '#344563'-->
+<!--                    "-->
+<!--                  ></span>-->
+<!--                </span>-->
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot *ngIf="!monthView">
+      <tr>
+        <th colspan="7">
+          <div class="d-flex">
+            <button (click)="setToday()" class="btn btn-light today">
+              {{ 'TODAY' | translate }}
+            </button>
+            <button
+              *ngIf="pickButton"
+              (click)="pickAndClose()"
+              class="btn btn-primary"
+            >
+              {{ 'PICK_AND_CLOSE' | translate }}
+            </button>
+          </div>
+        </th>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

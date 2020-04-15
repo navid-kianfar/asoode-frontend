@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { OverallViewModel } from '../../../view-models/general/report-types';
 
 @Component({
   selector: 'app-dashboard-overall',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-overall.component.scss'],
 })
 export class DashboardOverallComponent implements OnInit {
+  @Input() model: OverallViewModel;
   constructor() {}
 
   ngOnInit() {}
