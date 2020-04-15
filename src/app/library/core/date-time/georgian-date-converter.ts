@@ -35,9 +35,9 @@ export default class GeorgianDateConverter implements IDateConverter {
     const gregorian = new PersianDate(temp)
       .toCalendar('gregorian')
       .toLocale('en');
-    gregorian.hour(date.Hours);
-    gregorian.minutes(date.Minutes);
-    gregorian.seconds(date.Seconds);
+    if (date.Hours !== undefined) { gregorian.hour(date.Hours); }
+    if (date.Minutes !== undefined) { gregorian.minutes(date.Minutes); }
+    if (date.Seconds !== undefined) { gregorian.seconds(date.Seconds); }
     return gregorian;
   }
 

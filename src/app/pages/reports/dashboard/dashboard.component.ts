@@ -5,6 +5,7 @@ import { ProjectFilter } from '../../../library/app/enums';
 import { ReportService } from '../../../services/general/report.service';
 import { DashboardViewModel } from '../../../view-models/general/report-types';
 import { OperationResultStatus } from '../../../library/core/enums';
+import {CulturedDateService} from '../../../services/core/cultured-date.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,9 @@ export class DashboardComponent implements OnInit {
   filter: ProjectFilter;
   waiting: boolean;
   data: DashboardViewModel;
+  begin: Date;
+  end: Date;
+
   constructor(
     readonly groupService: GroupService,
     readonly projectService: ProjectService,
@@ -29,8 +33,15 @@ export class DashboardComponent implements OnInit {
   }
 
   async fetch() {
+    this.begin = new Date();
+    this.begin.setDate(this.begin.getDate() - 6);
+    this.end = new Date();
+    this.end.setDate(this.end.getDate() + 1);
     this.waiting = true;
-    const op = await this.reportService.dashboard();
+    const op = await this.reportService.dashboard({
+      begin: this.begin,
+      end: this.end
+    });
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
       return;

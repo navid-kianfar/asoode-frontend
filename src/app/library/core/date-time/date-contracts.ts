@@ -27,6 +27,7 @@ export interface IDateConverter {
 export interface IDateEvent {
   date: Date;
   title: Date;
+  recordId: string;
   color?: string;
   cssClass?: string;
 }

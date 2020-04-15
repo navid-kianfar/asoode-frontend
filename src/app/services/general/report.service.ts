@@ -10,7 +10,7 @@ export class ReportService {
 
   constructor(private readonly httpService: HttpService) { }
 
-  async dashboard(): Promise<OperationResult<DashboardViewModel>> {
-    return await this.httpService.post<DashboardViewModel>('/reports/dashboard');
+  async dashboard(model): Promise<OperationResult<DashboardViewModel>> {
+    return await this.httpService.post<DashboardViewModel>('/reports/dashboard', model);
   }
 }

@@ -6,6 +6,7 @@ import PersianDateConverter from '../../../library/core/date-time/persian-date-c
 import HijriDateConverter from '../../../library/core/date-time/hijri-date-converter';
 import GeorgianDateConverter from '../../../library/core/date-time/georgian-date-converter';
 import { DateHelpers } from '../../../helpers/date.helpers';
+import {CulturedDateService} from '../../../services/core/cultured-date.service';
 
 @Component({
   selector: 'app-calendar',
@@ -35,31 +36,17 @@ export class CalendarComponent implements  OnInit, OnChanges {
   @Output() hourChange = new EventEmitter<number>();
   @Output() minuteChange = new EventEmitter<number>();
   @Output() modelChange = new EventEmitter<Date>();
-  constructor(readonly cultureService: CultureService) {
+  constructor(
+    readonly culturedDateService: CulturedDateService,
+  ) {
     this.reset();
   }
   ngOnInit(skip?: boolean) {
     const now = new Date();
-    if (this.culture) {
-      this.calendar =
-        this.cultureService.cultures.Item(this.culture) ||
-        this.cultureService.current;
-    } else {
-      this.calendar = this.cultureService.current;
-    }
+    this.calendar = this.culturedDateService.Calendar();
+    this.converter = this.culturedDateService.Converter();
     this.culture = this.calendar.lang;
     this.state.rtl = this.calendar.rtl;
-    switch (this.culture) {
-      case 'fa':
-        this.converter = new PersianDateConverter();
-        break;
-      case 'ar':
-        this.converter = new HijriDateConverter();
-        break;
-      default:
-        this.converter = new GeorgianDateConverter();
-        break;
-    }
     this.today = this.parseFormDate(now);
     const start = new Date(this.model || this.from || this.to || now);
     this.current = this.parseFormDate(start);

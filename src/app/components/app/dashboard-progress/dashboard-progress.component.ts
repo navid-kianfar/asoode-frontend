@@ -1,127 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
 import { DayReportViewModel, OverallViewModel } from '../../../view-models/general/report-types';
-
-const data = [
-  {
-    name: '1 دی',
-    series: [
-      {
-        name: 'A',
-        value: 100,
-      },
-      {
-        name: 'B',
-        value: 70,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-    ],
-  },
-  {
-    name: '2 دی',
-    series: [
-      {
-        name: 'A',
-        value: 100,
-      },
-      {
-        name: 'B',
-        value: 70,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-    ],
-  },
-  {
-    name: '3 دی',
-    series: [
-      {
-        name: 'A',
-        value: 100,
-      },
-      {
-        name: 'B',
-        value: 70,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-    ],
-  },
-  {
-    name: '4 دی',
-    series: [
-      {
-        name: 'A',
-        value: 100,
-      },
-      {
-        name: 'B',
-        value: 70,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-    ],
-  },
-  {
-    name: '5 دی',
-    series: [
-      {
-        name: 'A',
-        value: 100,
-      },
-      {
-        name: 'B',
-        value: 70,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-    ],
-  },
-  {
-    name: '6 دی',
-    series: [
-      {
-        name: 'A',
-        value: 100,
-      },
-      {
-        name: 'B',
-        value: 70,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-    ],
-  },
-  {
-    name: '7 دی',
-    series: [
-      {
-        name: 'A',
-        value: 100,
-      },
-      {
-        name: 'B',
-        value: 70,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-    ],
-  },
-];
+import {CulturedDateService} from '../../../services/core/cultured-date.service';
+import {TranslateService} from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-dashboard-progress',
@@ -130,12 +10,18 @@ const data = [
 })
 export class DashboardProgressComponent implements OnInit, AfterViewInit {
   @Input() model: DayReportViewModel[];
+  @Input() begin: Date;
+  @Input() end: Date;
   chartData: any;
   view: number[];
   timer: number;
   hidden: any;
 
-  constructor(private element: ElementRef) {}
+  constructor(
+    private element: ElementRef,
+    private readonly culturedDateService: CulturedDateService,
+    private readonly translateService: TranslateService,
+  ) {}
 
   onResize(event?: any) {
     if (this.timer) {
@@ -161,8 +47,58 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.hidden = true;
-    this.chartData = data;
+
+    const totalLabel = this.translateService.fromKey('CREATED_CARDS');
+    const doneLabel = this.translateService.fromKey('DONE_CARDS');
+    const blockedLabel = this.translateService.fromKey('BLOCKED_CARDS');
+
+    const data = {};
+    const begin = new Date(this.begin.getTime());
+    const converter = this.culturedDateService.Converter();
+    let condition = true;
+    do {
+      const date = converter.FromDateTime(begin);
+      const key = `${date.Month}/${date.Day}`;
+      const info = this.model.find(i => this.sameDay(i.date, begin)) || {
+        total: 0,
+        done: 0,
+        blocked: 0,
+        date: undefined
+      };
+      data[key] = data[key] || [
+        {
+          name: blockedLabel,
+          value: info.blocked,
+        },
+        {
+          name: doneLabel,
+          value: info.done,
+        },
+        {
+          name: totalLabel,
+          value: info.total,
+        }
+      ];
+
+      begin.setDate(begin.getDate() + 1);
+      condition = this.sameDay(begin, this.end);
+    } while (!condition);
+
+    this.chartData = Object.keys(data).map(k => {
+      return {
+        name: k,
+        series: data[k]
+      };
+    });
     this.onResize();
+  }
+
+  sameDay(begin: Date | string, end: Date | string): boolean {
+    if (typeof begin === 'string') { begin = new Date(begin); }
+    if (typeof end === 'string') { end = new Date(end); }
+    return (begin.getDate() === end.getDate()
+      && begin.getMonth() === end.getMonth()
+      && begin.getFullYear() === end.getFullYear());
   }
 
   ngAfterViewInit(): void {

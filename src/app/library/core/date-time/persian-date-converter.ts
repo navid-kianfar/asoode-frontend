@@ -9,9 +9,9 @@ export default class PersianDateConverter implements IDateConverter {
 
   private innerParse(date: IDateTimeProperties): PersianDate {
     const persian = new PersianDate([date.Year, date.Month, date.Day]);
-    persian.hour(date.Hours);
-    persian.minutes(date.Minutes);
-    persian.seconds(date.Seconds);
+    if (date.Hours !== undefined) { persian.hour(date.Hours); }
+    if (date.Minutes !== undefined) { persian.minutes(date.Minutes); }
+    if (date.Seconds !== undefined) { persian.seconds(date.Seconds); }
     return persian;
   }
 
