@@ -83,9 +83,9 @@ export class WorkPackageComponent implements OnInit {
       this.router.navigateByUrl('dashboard');
       return;
     }
-    if (this.workPackage.progress === undefined) {
-      this.workPackage.progress = 0;
-    }
+    // if (this.workPackage.progress === undefined) {
+    //   this.workPackage.progress = 0;
+    // }
     this.permission = this.projectService.getWorkPackagePermission(this.project, this.workPackage);
     this.fetch();
     this.bind();
@@ -173,7 +173,7 @@ export class WorkPackageComponent implements OnInit {
           break;
 
         case ActivityType.WorkPackageTaskAdd:
-          if (this.workPackage.id === notification.data.packageId) {
+          if (this.workPackage.id === notification.data.packageId && !notification.data.parentId) {
             const found = this.workPackage.lists.find(l => l.id === notification.data.listId);
             if (found) {
               found.tasks = found.tasks || [];

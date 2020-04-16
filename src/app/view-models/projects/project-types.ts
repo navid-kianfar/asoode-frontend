@@ -187,7 +187,7 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   coverId: string;
   doneUserId: string;
   parentId: string;
-  estimatedTime?: Date;
+  estimatedTime?: number;
   archivedAt?: Date;
   dueAt?: Date;
   beginAt?: Date;

@@ -1,1 +1,24 @@
-<p>map works!</p>
+<div class="af-open-street-maps af-component {{ cssClass }}">
+  <button
+    *ngIf="locationService.support && !disabled"
+    (click)="setCurrentLocation()"
+    [disabled]="currentWaiting || !initialized"
+    class="location-btn"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1.5em"
+      height="1.5em"
+      viewBox="0 0 24 24"
+      version="1.1"
+    >
+      <g id="surface1">
+        <path
+          style=" stroke:none;fill-rule:nonzero;fill:currentColor;fill-opacity:1;"
+          d="M 21 3 L 3 10 L 3 11 L 10 14 L 13 21 L 14 21 Z "
+        ></path>
+      </g>
+    </svg>
+  </button>
+  <div #container class="open-street-map"></div>
+</div>

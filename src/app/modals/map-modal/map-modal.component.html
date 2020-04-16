@@ -1,0 +1,32 @@
+<div class="modal-content map-modal {{ cssClass }}">
+  <div class="modal-header">
+    <h4>{{ title | translate: true:'CHOOSE_LOCATION' }}</h4>
+    <button (click)="close()" class="close">
+      <i class="icon-cross"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-map
+      [model]="mapLocation"
+      [(markers)]="markers"
+    ></app-map>
+  </div>
+  <div class="modal-footer">
+<!--    <button (click)="share()" class="btn btn-light mr-auto">-->
+<!--      {{ 'SHARE' | translate }}-->
+<!--    </button> -->
+    <button mat-flat-button class="btn btn-light" (click)="close()">
+      {{ cancelTitle || 'CANCEL' | translate }}
+    </button>
+    <button mat-flat-button color="primary"
+      [disabled]="!markers || !markers.length"
+      class="btn btn-primary"
+      (click)="confirm()"
+    >
+      {{ confirmTitle || 'PICK_AND_CLOSE' | translate }}
+    </button>&nbsp;
+    <button mat-flat-button color="warn" *ngIf="mapLocation" class="btn btn-danger" (click)="remove()">
+      {{ removeTitle || 'REMOVE' | translate }}
+    </button>
+  </div>
+</div>

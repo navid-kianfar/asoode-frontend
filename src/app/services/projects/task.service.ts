@@ -75,4 +75,15 @@ export class TaskService {
   async toggleArchive(taskId: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/tasks/${taskId}/archive`);
   }
+
+  async setLocation(taskId: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/location`, model);
+  }
+  async removeLocation(taskId: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/location`, {});
+  }
+
+  async vote(taskId: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/tasks/${taskId}/vote`, model);
+  }
 }

@@ -548,5 +548,16 @@
   "REMOVE_LABEL": "حذف برچسب",
   "REMOVE_LABEL_CONFIRM": "این تغییر بر روی تمامی کارت هایی که این برچسب را دارند تاثیر خواهد گذشت",
   "PICK_AND_CLOSE": "انتخاب و بستن",
-  "CANCELED_OR_DUPLICATE_CARDS": "کارت\u200Cهای کنسل شده یا تکراری"
+  "CANCELED_OR_DUPLICATE_CARDS": "کارت\u200Cهای کنسل شده یا تکراری",
+  "SHOW_DETAILS": "مشاهده جزئیات",
+  "TASK_VOTE": "نظرسنجی",
+  "TASK_GEO_LOCATION": "موقعیت جغرافیایی",
+  "CHOOSE_LOCATION": "موقعیت مورد نظر خود را انتخاب کنید",
+  "TASK_ESTIMATED_TIME": "زمان تخمینی",
+  "ONE_DAY_8_HOURS": "یک روز کاری ۸ ساعت حساب میشود",
+  "RECORD_TIME_SPENT": "ثبت زمان صرف شده",
+  "ADD_TIME_MANUALLY": "افزودن دستی زمان",
+  "HOURS": "ساعت",
+  "MINUTES": "دقیقه",
+  "TIME_LOGS_HERE": "زمان\u200Cهای ثبت شده یا وارد شده اینجا نمایش داده میشوند"
 }

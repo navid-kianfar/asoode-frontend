@@ -332,6 +332,20 @@
           font-size: 0.8rem;
           font-weight: 500;
         }
+
+        ::ng-deep .mat-progress-bar {
+          max-width: 250px;
+          margin-inline-start: 10px;
+          margin-inline-end: 10px;
+          border-radius: 2px;
+        }
+        ::ng-deep .mat-progress-bar-fill::after {
+          background-color: #50a9dd;
+        }
+
+        ::ng-deep .mat-progress-bar-buffer {
+          background: #e6e6e6;
+        }
       }
       .box-content {
         min-height: 50px;
@@ -372,6 +386,20 @@
         }
       }
     }
+  }
+
+  .map-actions {
+    display: flex;
+    flex-grow: 1;
+    justify-content: flex-end;
+
+    i {
+      margin-inline-end: 5px;
+    }
+  }
+
+  ::ng-deep .af-open-street-maps {
+    padding-top: 10px;
   }
 
   .attachment-item {
@@ -498,6 +526,174 @@
       min-width: 300px;
       width: 300px;
       margin-inline-end: 20px;
+    }
+
+    .add-sub {
+      margin-inline-end: 10px;
+      textarea {
+        display: block;
+        width: 300px;
+        border: 1px solid #eee;
+        resize: none;
+        margin-bottom: 10px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .time-spent-container {
+    .header {
+      margin-bottom: 10px;
+    }
+    i.x2 {
+      font-size: 1.5rem !important;
+    }
+
+    .time-log {
+      border-top: 2px solid #e6e6e6;
+      padding-top: 20px;
+      .box-header {
+        .action {
+          display: flex;
+          justify-content: flex-end;
+          flex-grow: 1;
+          cursor: pointer;
+
+          span {
+            font-size: 0.7rem;
+            font-weight: 300;
+          }
+        }
+      }
+
+      .recorder {
+        margin-top: 10px;
+        background: #f2f2f2;
+        border-radius: 5px;
+        padding: 20px;
+        display: flex;
+        justify-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+
+        .time {
+          display: flex;
+          justify-content: center;
+        }
+        .item {
+          display: flex;
+          flex-direction: column;
+          width: 40px;
+          text-align: center;
+          .value {
+            font-size: 30px;
+            color: #999999;
+          }
+          .label {
+            font-size: 0.7rem;
+            font-weight: 400;
+          }
+        }
+        .sep {
+          display: flex;
+          font-size: 30px;
+          color: #999999;
+        }
+        .btn {
+          position: absolute;
+          top: 85px;
+          margin: 0 auto;
+          left: calc(50% - 20px);
+
+          ::ng-deep .mat-mini-fab {
+            background: #ffffff !important;
+
+            i {
+              color: #333333;
+              font-size: 1.6rem;
+              position: relative;
+              right: -3px;
+            }
+          }
+        }
+      }
+      .no-records {
+        background: #f2f2f2;
+        font-size: 0.7rem;
+        color: #999;
+        font-weight: 400;
+        text-align: center;
+        padding: 15px;
+        margin-top: 50px;
+        border-radius: 5px;
+      }
+    }
+  }
+
+
+  .vote-box {
+    flex-direction: row !important;
+    .box-header {
+      width: 100px !important;
+    }
+    .box-content {
+      flex-grow: 1 !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+
+    a {
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: #999;
+      margin-inline-start: 10px;
+      text-decoration: underline;
+    }
+  }
+  .vote {
+    margin-inline-start: 10px;
+    display: flex;
+    background: #f2f2f2;
+    border-radius: 15px;
+    align-items: center;
+    width: 100px;
+    height: 25px;
+    justify-content: space-around;
+    .sep {
+      display: flex;
+      align-items: center;
+      span {
+        background: #ffffff;
+        display: flex;
+        width: 18px;
+        height: 18px;
+        border-radius: 20px;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 400;
+      }
+      i {
+        color: #4d4d4d;
+        font-size: 0.7rem;
+      }
+      &.up {
+        span {
+          color: #3d8f4d;
+        }
+        i {
+          margin-inline-start: 5px;
+        }
+      }
+      &.down {
+        span {
+          color: #b33634;
+        }
+        i {
+          margin-inline-end: 5px;
+        }
+      }
     }
   }
 

@@ -22,6 +22,10 @@ import {ModalService} from '../../services/core/modal.service';
 import {StringHelpers} from '../../helpers/string.helpers';
 import {TranslateService} from '../../services/core/translate.service';
 import {WorkPackageService} from '../../services/projects/work-package.service';
+import {MapModalComponent} from '../map-modal/map-modal.component';
+import {OperationResult} from '../../library/core/operation-result';
+import {MapMarker, MapModalParameters} from '../../view-models/general/map-types';
+import { NumberHelpers } from 'src/app/helpers/number.helpers';
 
 @Component({
   selector: 'app-task-modal',
@@ -57,6 +61,13 @@ export class TaskModalComponent
   togglingWatch: boolean;
   togglingArchive: boolean;
   showSubTasks: boolean;
+  showVotes: boolean;
+  showMap: boolean;
+  voting: boolean;
+  addingSub: boolean;
+  subTaskTitle: string;
+  savingSub: boolean;
+  NumberHelpers = NumberHelpers;
   constructor(
     private readonly socket: Socket,
     private readonly taskService: TaskService,
@@ -133,6 +144,15 @@ export class TaskModalComponent
   bind() {
     this.socket.on('push-notification', (notification: any) => {
       switch (notification.type) {
+        case ActivityType.WorkPackageTaskAdd:
+          if (this.workPackage.id === notification.data.packageId &&
+            notification.data.parentId === this.model.id) {
+            const found = this.model.subTasks.find(l => l.id === notification.data.id);
+            if (!found) {
+              this.model.subTasks.unshift(notification.data);
+            }
+          }
+          break;
         case ActivityType.WorkPackageTaskEdit:
           if (this.id === notification.data.id) {
             delete notification.data.members;
@@ -212,7 +232,7 @@ export class TaskModalComponent
   }
 
   switchMode(mode: ViewMode) {
-    // this.mode = mode;
+    this.mode = mode;
   }
 
   async sendComment() {
@@ -242,6 +262,7 @@ export class TaskModalComponent
     this.model.comments.forEach(c => {
       c.member = this.project.members.find(m => m.recordId === c.userId).member;
     });
+    this.model.subTasksDone = this.model.subTasks.filter(i => i.doneAt).length;
   }
 
   prepareChangeTitle() {
@@ -476,7 +497,83 @@ export class TaskModalComponent
   }
 
   prepareSubTask() {
+    this.subTaskTitle = '';
+    this.addingSub = true;
+  }
 
+  openSubTask(sub: WorkPackageTaskViewModel, $event: MouseEvent) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.modalService.show(TaskModalComponent, {
+      id: sub.id,
+      project: this.project,
+      workPackage: this.workPackage
+    }).subscribe(() => {});
+  }
+
+  prepareMap() {
+    this.modalService.show<MapModalParameters, MapMarker[]>(MapModalComponent, {
+      mapLocation: this.model.geoLocation
+    })
+      .subscribe(async (markers) => {
+        let op: OperationResult<boolean>;
+        if (!markers.length) {
+          if (this.model.geoLocation) {
+            op = await this.taskService.removeLocation(this.model.id);
+            if (op.status !== OperationResultStatus.Success) {
+              // TODO: handle error
+              return;
+            }
+          }
+          return;
+        }
+        const location = markers[0].location.latitude + ',' + markers[0].location.longitude;
+        op = await this.taskService.setLocation(this.model.id, {location});
+        if (op.status !== OperationResultStatus.Success) {
+          // TODO: handle error
+          return;
+        }
+      });
+  }
+
+  async removeLocation() {
+    const op = await this.taskService.removeLocation(this.model.id);
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async vote(vote: boolean) {
+    if (this.voting || this.model.votes.find(v =>
+      v.userId === this.identityService.identity.userId)) {
+      return;
+    }
+    this.voting = true;
+    const op = await this.taskService.vote(this.model.id, { vote });
+    this.voting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async createSub() {
+    const title = this.subTaskTitle.trim();
+    if (!title) { return; }
+    this.savingSub = true;
+    const op = await this.taskService.create(this.model.packageId, {
+      listId: this.model.listId,
+      title,
+      parentId: this.model.id
+    });
+    this.savingSub = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error;
+      return;
+    }
+    this.subTaskTitle = '';
+    this.addingSub = false;
   }
 }
 export enum ViewMode {

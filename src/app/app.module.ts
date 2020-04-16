@@ -154,6 +154,8 @@ import { WorkPackageTaskComponent } from './components/app/work-package-task/wor
 import { TaskModalComponent } from './modals/task-modal/task-modal.component';
 import { UpgradeComponent } from './modals/upgrade/upgrade.component';
 import { UpgradeWizardComponent } from './components/app/upgrade-wizard/upgrade-wizard.component';
+import { MapModalComponent } from './modals/map-modal/map-modal.component';
+import { EstimatedTimePipe } from './pipes/app/estimated-time.pipe';
 
 @NgModule({
   declarations: [
@@ -272,8 +274,11 @@ import { UpgradeWizardComponent } from './components/app/upgrade-wizard/upgrade-
     TaskModalComponent,
     UpgradeComponent,
     UpgradeWizardComponent,
+    MapModalComponent,
+    EstimatedTimePipe,
   ],
   entryComponents: [
+    MapModalComponent,
     WorkPackageWizardComponent,
     ConfirmComponent,
     PromptComponent,
