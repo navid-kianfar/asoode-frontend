@@ -1,6 +1,8 @@
 <div class="outer" (click)="close()">
-  <div class="modal-content change-phone-modal"
-       (click)="$event.stopPropagation();">
+  <div
+    class="modal-content change-phone-modal"
+    (click)="$event.stopPropagation()"
+  >
     <div class="modal-header">
       <h4 class="modal-title">
         {{ 'CHANGE_PHONE' | translate: true }}
@@ -10,7 +12,10 @@
       </button>
     </div>
     <div class="modal-body">
-      <div *ngIf="identityService.profile.phoneNumber" class="form-group current">
+      <div
+        *ngIf="identityService.profile.phoneNumber"
+        class="form-group current"
+      >
         <label>{{ 'CURRENT_PHONE_NUMBER' | translate }}</label>
         <span>{{ identityService.profile.phoneNumber }}</span>
       </div>
@@ -77,4 +82,3 @@
     </div>
   </div>
 </div>
-

@@ -1,13 +1,23 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ConversationViewModel, MappedConversationViewModel} from '../../../view-models/communication/messenger-types';
-import {ActivityType, ConversationType} from 'src/app/library/app/enums';
-import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
-import {MessengerService} from '../../../services/communication/messenger.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {ModalService} from '../../../services/core/modal.service';
-import {CreateWizardComponent} from '../../../modals/create-wizard/create-wizard.component';
-import {Socket} from 'ngx-socket-io';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  ConversationViewModel,
+  MappedConversationViewModel,
+} from '../../../view-models/communication/messenger-types';
+import { ActivityType, ConversationType } from 'src/app/library/app/enums';
+import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
+import { MessengerService } from '../../../services/communication/messenger.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { ModalService } from '../../../services/core/modal.service';
+import { CreateWizardComponent } from '../../../modals/create-wizard/create-wizard.component';
+import { Socket } from 'ngx-socket-io';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
 
 @Component({
   selector: 'app-conversation',
@@ -46,7 +56,6 @@ export class ConversationComponent implements OnInit, OnChanges {
           }
           break;
         case ActivityType.ChannelUpload:
-
           break;
       }
     });
@@ -89,10 +98,14 @@ export class ConversationComponent implements OnInit, OnChanges {
   openLink(message: ConversationViewModel) {
     switch (message.path) {
       case 'COMMAND_NEW_GROUP':
-        this.modalService.show(CreateWizardComponent, { simpleGroup: true }).subscribe(() => {});
+        this.modalService
+          .show(CreateWizardComponent, { simpleGroup: true })
+          .subscribe(() => {});
         break;
       case 'COMMAND_NEW_PROJECT':
-        this.modalService.show(CreateWizardComponent, { simpleProject: true }).subscribe(() => {});
+        this.modalService
+          .show(CreateWizardComponent, { simpleProject: true })
+          .subscribe(() => {});
         break;
       default:
         window.open(message.path, '_blank');
@@ -102,7 +115,9 @@ export class ConversationComponent implements OnInit, OnChanges {
 
   async sendMessage(message: string) {
     message = message.trim();
-    if (!message) { return; }
+    if (!message) {
+      return;
+    }
     this.sending = true;
     const op = await this.messengerService.send(this.recordId, { message });
     this.sending = false;
@@ -112,12 +127,7 @@ export class ConversationComponent implements OnInit, OnChanges {
     this.clearEditor.emit();
   }
 
-  uploadFile() {
+  uploadFile() {}
 
-  }
-
-  pickFile() {
-
-  }
-
+  pickFile() {}
 }

@@ -1,20 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {TaskService} from '../../../services/projects/task.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {ActivityLogViewModel} from '../../../view-models/projects/project-types';
-import {ActivityType} from '../../../library/app/enums';
+import { Component, Input, OnInit } from '@angular/core';
+import { TaskService } from '../../../services/projects/task.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { ActivityLogViewModel } from '../../../view-models/projects/project-types';
+import { ActivityType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-activity-log',
   templateUrl: './activity-log.component.html',
-  styleUrls: ['./activity-log.component.scss']
+  styleUrls: ['./activity-log.component.scss'],
 })
 export class ActivityLogComponent implements OnInit {
-
   @Input() taskId: string;
   waiting: boolean;
   model: ActivityLogViewModel[];
-  constructor(private readonly taskService: TaskService) { }
+  constructor(private readonly taskService: TaskService) {}
 
   ngOnInit() {
     this.fetch();

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {IdentityService} from '../../../../services/auth/identity.service';
+import { IdentityService } from '../../../../services/auth/identity.service';
 import { PlanType } from 'src/app/library/app/enums';
-import {UpgradeComponent} from '../../../../modals/upgrade/upgrade.component';
-import {ModalService} from '../../../../services/core/modal.service';
+import { UpgradeComponent } from '../../../../modals/upgrade/upgrade.component';
+import { ModalService } from '../../../../services/core/modal.service';
 
 @Component({
   selector: 'app-premium-plans',
@@ -18,8 +18,10 @@ export class PremiumPlansComponent implements OnInit {
   ngOnInit() {}
 
   calculateDiskSpace() {
-    return (this.identityService.profile.plan.usedSpace / 1024 / 1024) * 100 /
-      (this.identityService.profile.plan.totalSpace / 1024 / 1024);
+    return (
+      ((this.identityService.profile.plan.usedSpace / 1024 / 1024) * 100) /
+      (this.identityService.profile.plan.totalSpace / 1024 / 1024)
+    );
   }
 
   upgrade() {

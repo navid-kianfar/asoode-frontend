@@ -563,5 +563,8 @@
   "TASK_RELATED_BEFORE": "کارتهای قبلی",
   "TASK_RELATED_AFTER": "کارتهای بعدی",
   "TASK_BLOCKING": "کارتهای مسدود کنند",
-  "NEW_TASK_PLACEHOLDER": "کاری که باید انجام بشه رو تعریف کن!"
+  "NEW_TASK_PLACEHOLDER": "کاری که باید انجام بشه رو تعریف کن!",
+  "TIME_SPAN_DURATION": "{0} روز و {1} ساعت و {2} دقیقه",
+  "HOW_LONG_WILL_TAKE": "انجام این کار چه قدر زمان میبرد؟",
+  "CURRENTLY_WORKING": "در حال انجام"
 }

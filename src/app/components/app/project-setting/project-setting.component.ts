@@ -10,7 +10,10 @@ import { ModalService } from '../../../services/core/modal.service';
 import { TranslateService } from '../../../services/core/translate.service';
 import { ProjectService } from '../../../services/projects/project.service';
 import { GroupService } from '../../../services/groups/group.service';
-import {GroupMemberViewModel, PendingInvitationViewModel} from '../../../view-models/groups/group-types';
+import {
+  GroupMemberViewModel,
+  PendingInvitationViewModel,
+} from '../../../view-models/groups/group-types';
 
 @Component({
   selector: 'app-project-setting',
@@ -37,7 +40,7 @@ export class ProjectSettingComponent implements OnInit {
         exclude: [
           this.model.userId,
           this.model.id,
-          ...this.model.pending.map(p => p.identifier)
+          ...this.model.pending.map(p => p.identifier),
         ],
         handler: async access => {
           return this.projectService.addAccess(this.model.id, access);
@@ -110,10 +113,15 @@ export class ProjectSettingComponent implements OnInit {
     );
   }
 
-  async accessPendingChange(member: PendingInvitationViewModel, access: AccessType) {
+  async accessPendingChange(
+    member: PendingInvitationViewModel,
+    access: AccessType,
+  ) {
     member.access = access;
     member.waiting = true;
-    const op = await this.projectService.changePendingAccess(member.id, { access });
+    const op = await this.projectService.changePendingAccess(member.id, {
+      access,
+    });
     member.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error

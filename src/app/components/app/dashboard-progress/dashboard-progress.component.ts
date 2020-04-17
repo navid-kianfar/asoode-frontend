@@ -1,7 +1,16 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
-import { DayReportViewModel, OverallViewModel } from '../../../view-models/general/report-types';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {TranslateService} from '../../../services/core/translate.service';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
+import {
+  DayReportViewModel,
+  OverallViewModel,
+} from '../../../view-models/general/report-types';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-dashboard-progress',
@@ -63,7 +72,7 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
         total: 0,
         done: 0,
         blocked: 0,
-        date: undefined
+        date: undefined,
       };
       data[key] = data[key] || [
         {
@@ -77,7 +86,7 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
         {
           name: totalLabel,
           value: info.total,
-        }
+        },
       ];
 
       begin.setDate(begin.getDate() + 1);
@@ -87,20 +96,25 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
     this.chartData = Object.keys(data).map(k => {
       return {
         name: k,
-        series: data[k]
+        series: data[k],
       };
     });
     this.onResize();
   }
 
   sameDay(begin: Date | string, end: Date | string): boolean {
-    if (typeof begin === 'string') { begin = new Date(begin); }
-    if (typeof end === 'string') { end = new Date(end); }
-    return (begin.getDate() === end.getDate()
-      && begin.getMonth() === end.getMonth()
-      && begin.getFullYear() === end.getFullYear());
+    if (typeof begin === 'string') {
+      begin = new Date(begin);
+    }
+    if (typeof end === 'string') {
+      end = new Date(end);
+    }
+    return (
+      begin.getDate() === end.getDate() &&
+      begin.getMonth() === end.getMonth() &&
+      begin.getFullYear() === end.getFullYear()
+    );
   }
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 }

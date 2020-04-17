@@ -1,36 +1,36 @@
 <div class="project-setting">
   <h3>{{ 'SETTINGS' | translate }}</h3>
 
-<!--  <div class="box disk">-->
-<!--    <div class="header">-->
-<!--      <div class="ico">-->
-<!--        <i class="icon-server"></i>-->
-<!--      </div>-->
-<!--      <div class="title">-->
-<!--        <h4>{{ 'DISK_USAGE' | translate }}</h4>-->
-<!--      </div>-->
-<!--      <div class="action">-->
-<!--        <button mat-stroked-button>-->
-<!--          {{ 'BUY_MORE_SPACE' | translate }}-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="body">-->
-<!--      <mat-progress-bar-->
-<!--        [value]="model.diskSpaceUsed"-->
-<!--        [bufferValue]="model.diskSpaceCapacity"-->
-<!--      ></mat-progress-bar>-->
-<!--      <h5>-->
-<!--        {{-->
-<!--          'DISK_USAGE_DETAIL'-->
-<!--            | translate-->
-<!--            | stringFormat-->
-<!--              : model.diskSpaceUsed / 1024-->
-<!--              : model.diskSpaceCapacity / 1024-->
-<!--        }}-->
-<!--      </h5>-->
-<!--    </div>-->
-<!--  </div>-->
+  <!--  <div class="box disk">-->
+  <!--    <div class="header">-->
+  <!--      <div class="ico">-->
+  <!--        <i class="icon-server"></i>-->
+  <!--      </div>-->
+  <!--      <div class="title">-->
+  <!--        <h4>{{ 'DISK_USAGE' | translate }}</h4>-->
+  <!--      </div>-->
+  <!--      <div class="action">-->
+  <!--        <button mat-stroked-button>-->
+  <!--          {{ 'BUY_MORE_SPACE' | translate }}-->
+  <!--        </button>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <div class="body">-->
+  <!--      <mat-progress-bar-->
+  <!--        [value]="model.diskSpaceUsed"-->
+  <!--        [bufferValue]="model.diskSpaceCapacity"-->
+  <!--      ></mat-progress-bar>-->
+  <!--      <h5>-->
+  <!--        {{-->
+  <!--          'DISK_USAGE_DETAIL'-->
+  <!--            | translate-->
+  <!--            | stringFormat-->
+  <!--              : model.diskSpaceUsed / 1024-->
+  <!--              : model.diskSpaceCapacity / 1024-->
+  <!--        }}-->
+  <!--      </h5>-->
+  <!--    </div>-->
+  <!--  </div>-->
 
   <div class="box">
     <div class="header">
@@ -70,7 +70,8 @@
               [disabled]="member.waiting || !canRemoveAccess(member)"
               [access]="member.access"
               (accessChange)="accessChange(member, $event)"
-            ></app-access-list>&nbsp;
+            ></app-access-list
+            >&nbsp;
           </div>
           <div class="action">
             <button
@@ -104,10 +105,15 @@
           </div>
           <div class="access">
             <app-access-list
-              [disabled]="member.waiting || member.deleting || !canRemovePendingAccess(member)"
+              [disabled]="
+                member.waiting ||
+                member.deleting ||
+                !canRemovePendingAccess(member)
+              "
               [access]="member.access"
               (accessChange)="accessPendingChange(member, $event)"
-            ></app-access-list>&nbsp;
+            ></app-access-list
+            >&nbsp;
           </div>
           <div class="action">
             <button
@@ -126,9 +132,10 @@
     </div>
   </div>
 
-  <div class="box"*ngIf="
-            permission === AccessType.Admin || permission === AccessType.Owner
-          ">
+  <div
+    class="box"
+    *ngIf="permission === AccessType.Admin || permission === AccessType.Owner"
+  >
     <div class="header">
       <div class="ico">
         <i class="icon-upload41"></i>
@@ -148,9 +155,10 @@
     </div>
   </div>
 
-  <div class="box"*ngIf="
-            permission === AccessType.Admin || permission === AccessType.Owner
-          ">
+  <div
+    class="box"
+    *ngIf="permission === AccessType.Admin || permission === AccessType.Owner"
+  >
     <div class="header">
       <div class="ico">
         <i class="archive icon-archive"></i>

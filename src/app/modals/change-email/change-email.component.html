@@ -1,6 +1,8 @@
 <div class="outer" (click)="close()">
-  <div class="modal-content change-email-modal"
-       (click)="$event.stopPropagation();">
+  <div
+    class="modal-content change-email-modal"
+    (click)="$event.stopPropagation()"
+  >
     <div class="modal-header">
       <h4 class="modal-title">
         {{ 'CHANGE_EMAIL' | translate: true }}
@@ -76,4 +78,3 @@
     </div>
   </div>
 </div>
-

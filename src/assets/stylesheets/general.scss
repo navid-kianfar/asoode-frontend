@@ -250,7 +250,7 @@ body {
     align-content: baseline;
 
     i {
-      font-size: 1.0rem;
+      font-size: 1rem;
       margin-inline-end: 5px;
       display: flex;
       align-items: center;
@@ -554,7 +554,7 @@ body {
 .mat-menu-panel {
   max-width: 300px !important;
   &.popper-all-users,
-  &.popper-task-labels{
+  &.popper-task-labels {
     max-width: 350px !important;
     width: 350px !important;
   }
@@ -634,5 +634,4 @@ body {
   }
 }
 
-
-@import "drag.scss";
+@import 'drag.scss';

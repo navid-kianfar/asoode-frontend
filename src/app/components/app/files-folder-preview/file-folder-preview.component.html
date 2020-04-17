@@ -22,13 +22,20 @@
   </div>
   <div class="selected"></div>
 </div>
-<div *ngIf="folder" class="folder-item" [class.selected]="folder.selected" [class.up]="up">
+<div
+  *ngIf="folder"
+  class="folder-item"
+  [class.selected]="folder.selected"
+  [class.up]="up"
+>
   <div class="avatar">
     <i class="icon-foledr"></i>
   </div>
   <div class="info">
     <div class="title">{{ folder.name }}</div>
-    <div *ngIf="!up" class="created-at">{{ folder.createdAt | culturedDate: true }}</div>
+    <div *ngIf="!up" class="created-at">
+      {{ folder.createdAt | culturedDate: true }}
+    </div>
   </div>
   <div class="selected"></div>
 </div>

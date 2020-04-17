@@ -13,6 +13,12 @@ export class NumberHelpers {
     }
     return s;
   }
+  static prefix(parsed: TimeViewModel): string {
+    const dd = this.pad(parsed.day, 2);
+    const hh = this.pad(parsed.hour, 2);
+    const mm = this.pad(parsed.minute, 2);
+    return `${dd}:${hh}:${mm}`;
+  }
   static humanFileSize(source: number, si): string {
     const thresh = si ? 1000 : 1024;
     if (Math.abs(source) < thresh) {
@@ -28,51 +34,41 @@ export class NumberHelpers {
     } while (Math.abs(source) >= thresh && u < units.length - 1);
     return source.toFixed(1) + ' ' + units[u];
   }
-  static prefix(parsed: TimeViewModel, showDays: boolean = false): string {
-    const hh = this.pad(parsed.hour, 2);
-    const mm = this.pad(parsed.minute, 2);
-    const ss = this.pad(parsed.second, 2);
-    return `${hh}:${mm}:${ss}`;
+  static ticksToDurationString(model: number): string {
+    const parsed = NumberHelpers.ticksToTimeSpan(model);
+    return this.prefix(parsed);
   }
-  static ticksToDurationString(
-    model: number,
-    showDays: boolean = false,
-  ): string {
-    const parsed = NumberHelpers.ticksToDuration(model);
-    return this.prefix(parsed, showDays);
-  }
+
   static ticksToDuration(model: number): TimeViewModel {
-    const days = Math.floor(model / dayTicks);
     return {
-      hour: days + Math.round((model / hourTicks) % 24),
+      day: Math.floor(model / dayTicks),
+      hour: Math.round((model / hourTicks) % 24),
       minute: Math.round((model / minuteTicks) % 60),
-      second: Math.round((model / secondTicks) % 60),
     };
   }
   static durationToTicks(duration: TimeViewModel): number {
     return (
+      duration.day * dayTicks +
       duration.hour * hourTicks +
-      duration.minute * minuteTicks +
-      duration.second * secondTicks
+      duration.minute * minuteTicks
     );
   }
-  static msToDurationString(model: number, showDays: boolean = false): string {
-    const parsed = NumberHelpers.msToDuration(model);
-    return this.prefix(parsed, showDays);
-  }
-  static msToDuration(milliseconds: number): TimeViewModel {
-    const hh = Math.floor(milliseconds / (1000 * 60 * 60));
-    const mm = Math.floor((milliseconds - hh * 1000 * 60 * 60) / (1000 * 60));
-    const ss = Math.floor(
-      (milliseconds - hh * 1000 * 60 * 60 - mm * 1000 * 60) / 1000,
-    );
+
+  static ticksToTimeSpan(model: number): TimeViewModel {
+    const duration = this.ticksToDuration(model);
+    const total = duration.day * 24 + duration.hour;
     return {
-      hour: hh,
-      minute: mm,
-      second: ss,
+      day: Math.floor(total / 8),
+      hour: total % 8,
+      minute: duration.minute,
     };
   }
-  static durationToMs(duration: TimeViewModel): number {
-    return -1;
+  static timespanToTicks(model: TimeViewModel): number {
+    const total = model.day * 8 + model.hour;
+    return this.durationToTicks({
+      day: 0,
+      hour: total,
+      minute: model.minute,
+    });
   }
 }

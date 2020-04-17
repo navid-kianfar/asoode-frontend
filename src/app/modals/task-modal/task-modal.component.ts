@@ -1,46 +1,49 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {TaskModalParameters} from '../../view-models/core/modal-types';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { TaskModalParameters } from '../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
   ProjectViewModel,
   WorkPackageLabelViewModel,
   WorkPackageTaskAttachmentViewModel,
+  WorkPackageTaskTimeViewModel,
   WorkPackageTaskViewModel,
-  WorkPackageViewModel
+  WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
-import {TaskService} from '../../services/projects/task.service';
-import {OperationResultStatus} from '../../library/core/enums';
-import {ProjectService} from '../../services/projects/project.service';
+import { TaskService } from '../../services/projects/task.service';
+import { OperationResultStatus } from '../../library/core/enums';
+import { ProjectService } from '../../services/projects/project.service';
 import {
   AccessType,
-  ActivityType, WorkPackageTaskObjectiveValue,
-  WorkPackageTaskReminderType,
+  ActivityType,
   WorkPackageTaskState,
-  WorkPackageTaskVoteNecessity
 } from '../../library/app/enums';
-import {IdentityService} from '../../services/auth/identity.service';
-import {Socket} from 'ngx-socket-io';
-import {UploadViewModel} from '../../view-models/storage/files-types';
-import {FilesService} from '../../services/storage/files.service';
-import {UsersService} from '../../services/general/users.service';
-import {ModalService} from '../../services/core/modal.service';
-import {StringHelpers} from '../../helpers/string.helpers';
-import {TranslateService} from '../../services/core/translate.service';
-import {WorkPackageService} from '../../services/projects/work-package.service';
-import {MapModalComponent} from '../map-modal/map-modal.component';
-import {OperationResult} from '../../library/core/operation-result';
-import {MapMarker, MapModalParameters} from '../../view-models/general/map-types';
+import { IdentityService } from '../../services/auth/identity.service';
+import { Socket } from 'ngx-socket-io';
+import { UploadViewModel } from '../../view-models/storage/files-types';
+import { FilesService } from '../../services/storage/files.service';
+import { UsersService } from '../../services/general/users.service';
+import { ModalService } from '../../services/core/modal.service';
+import { StringHelpers } from '../../helpers/string.helpers';
+import { TranslateService } from '../../services/core/translate.service';
+import { WorkPackageService } from '../../services/projects/work-package.service';
+import { MapModalComponent } from '../map-modal/map-modal.component';
+import { OperationResult } from '../../library/core/operation-result';
+import {
+  MapMarker,
+  MapModalParameters,
+} from '../../view-models/general/map-types';
 import { NumberHelpers } from 'src/app/helpers/number.helpers';
+import { TimeViewModel } from '../../view-models/core/general-types';
 
 @Component({
   selector: 'app-task-modal',
   templateUrl: './task-modal.component.html',
-  styleUrls: ['./task-modal.component.scss']
+  styleUrls: ['./task-modal.component.scss'],
 })
 export class TaskModalComponent
   extends SimpleModalComponent<TaskModalParameters, void>
-  implements OnInit {
+  implements OnInit, OnDestroy {
   ViewMode = ViewMode;
   id: string;
   mode: ViewMode;
@@ -75,6 +78,12 @@ export class TaskModalComponent
   bg: string;
   savingSub: boolean;
   NumberHelpers = NumberHelpers;
+  tempEstimatedTime: number;
+  savingEstimated: boolean;
+  recording: boolean;
+  intervalInstance: number;
+  totalTimeSpent: TimeViewModel;
+
   constructor(
     private readonly socket: Socket,
     private readonly taskService: TaskService,
@@ -85,11 +94,16 @@ export class TaskModalComponent
     readonly filesService: FilesService,
     private readonly identityService: IdentityService,
     private readonly workPackageService: WorkPackageService,
-  ) { super(); }
+  ) {
+    super();
+  }
 
   ngOnInit() {
-    this.filesService.attaching = this.filesService.attaching.filter((a) => {
-      if (a.recordId !== this.id) { return true; }
+    this.totalTimeSpent = { day: 0, hour: 0, minute: 0 };
+    this.filesService.attaching = this.filesService.attaching.filter(a => {
+      if (a.recordId !== this.id) {
+        return true;
+      }
       return a.uploading;
     });
     this.allStates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -105,14 +119,24 @@ export class TaskModalComponent
     ].join(',');
     this.mode = ViewMode.Detail;
     this.bind();
-    if (this.model) { return; }
+    if (this.model) {
+      return;
+    }
     this.fetch();
   }
+
+  ngOnDestroy(): void {
+    if (this.intervalInstance) {
+      clearInterval(this.intervalInstance);
+    }
+    super.ngOnDestroy();
+  }
+
   clearInputFile(f) {
     if (f.value) {
       try {
         f.value = '';
-      } catch (err) { }
+      } catch (err) {}
       if (f.value) {
         const form = document.createElement('form');
         const parentNode = f.parentNode;
@@ -125,7 +149,9 @@ export class TaskModalComponent
   }
 
   onChange(target: any) {
-    if (!target.files || !target.files.length) { return; }
+    if (!target.files || !target.files.length) {
+      return;
+    }
     const upload: UploadViewModel[] = [];
     for (let i = 0; i < target.files.length; i++) {
       const f = target.files.item(i);
@@ -140,7 +166,7 @@ export class TaskModalComponent
         extensionLessName: this.filesService.getExtensionLessFileName(f.name),
         extension: this.filesService.getFileExtension(f.name),
         promise: undefined,
-        recordId: this.id
+        recordId: this.id,
       });
     }
     this.clearInputFile(target);
@@ -152,9 +178,13 @@ export class TaskModalComponent
     this.socket.on('push-notification', (notification: any) => {
       switch (notification.type) {
         case ActivityType.WorkPackageTaskAdd:
-          if (this.workPackage.id === notification.data.packageId &&
-            notification.data.parentId === this.model.id) {
-            const found = this.model.subTasks.find(l => l.id === notification.data.id);
+          if (
+            this.workPackage.id === notification.data.packageId &&
+            notification.data.parentId === this.model.id
+          ) {
+            const found = this.model.subTasks.find(
+              l => l.id === notification.data.id,
+            );
             if (!found) {
               this.model.subTasks.unshift(notification.data);
             }
@@ -181,6 +211,7 @@ export class TaskModalComponent
             this.model.title = notification.data.title;
             this.model.description = notification.data.description;
             this.model.geoLocation = notification.data.geoLocation;
+            this.tempEstimatedTime = this.model.estimatedTime;
             this.postProcess();
           }
           break;
@@ -191,24 +222,36 @@ export class TaskModalComponent
           break;
         case ActivityType.WorkPackageTaskLabelAdd:
           if (this.id === notification.data.taskId) {
-            const already = this.model.labels.find(i => i.id === notification.data.labelId);
-            if (!already) { this.model.labels.push(notification.data); }
+            const already = this.model.labels.find(
+              i => i.id === notification.data.labelId,
+            );
+            if (!already) {
+              this.model.labels.push(notification.data);
+            }
           }
           break;
         case ActivityType.WorkPackageTaskLabelRemove:
           if (this.id === notification.data.taskId) {
-            this.model.labels = this.model.labels.filter(i => i.labelId !== notification.data.labelId);
+            this.model.labels = this.model.labels.filter(
+              i => i.labelId !== notification.data.labelId,
+            );
           }
           break;
         case ActivityType.WorkPackageTaskMemberAdd:
           if (this.id === notification.data.taskId) {
-            const already = this.model.members.find(i => i.recordId === notification.data.recordId);
-            if (!already) { this.model.members.push(notification.data); }
+            const already = this.model.members.find(
+              i => i.recordId === notification.data.recordId,
+            );
+            if (!already) {
+              this.model.members.push(notification.data);
+            }
           }
           break;
         case ActivityType.WorkPackageTaskMemberRemove:
           if (this.id === notification.data.taskId) {
-            this.model.members = this.model.members.filter(i => i.recordId !== notification.data.recordId);
+            this.model.members = this.model.members.filter(
+              i => i.recordId !== notification.data.recordId,
+            );
           }
           break;
         case ActivityType.WorkPackageTaskAttachmentAdd:
@@ -218,12 +261,16 @@ export class TaskModalComponent
           break;
         case ActivityType.WorkPackageTaskAttachmentRemove:
           if (this.id === notification.data.taskId) {
-            this.model.attachments = this.model.attachments.filter(a => a.id !== notification.data.id);
+            this.model.attachments = this.model.attachments.filter(
+              a => a.id !== notification.data.id,
+            );
           }
           break;
         case ActivityType.WorkPackageTaskAttachmentRename:
           if (this.id === notification.data.taskId) {
-            const found = this.model.attachments.find(a => a.id === notification.data.id);
+            const found = this.model.attachments.find(
+              a => a.id === notification.data.id,
+            );
             if (found) {
               Object.assign(found, notification.data);
             }
@@ -231,10 +278,14 @@ export class TaskModalComponent
           break;
         case ActivityType.WorkPackageTaskAttachmentCover:
           if (this.id === notification.data.taskId) {
-            const found = this.model.attachments.find(a => a.id === notification.data.id);
+            const found = this.model.attachments.find(
+              a => a.id === notification.data.id,
+            );
             if (found) {
               found.isCover = notification.data.isCover;
-              this.model.coverId = notification.data.isCover ? notification.data.id : '';
+              this.model.coverId = notification.data.isCover
+                ? notification.data.id
+                : '';
               this.bg = this.getBackgroundUrl();
             }
           }
@@ -247,6 +298,18 @@ export class TaskModalComponent
         case ActivityType.WorkPackageTaskArchive:
           if (this.id === notification.data.id) {
             this.model.archivedAt = notification.data.archivedAt;
+          }
+          break;
+        case ActivityType.WorkPackageTaskTime:
+          if (this.id === notification.data.taskId) {
+            const found = this.model.timeSpents.find(
+              t => t.id === notification.data.id,
+            );
+            if (!found) {
+              this.model.timeSpents.unshift(notification.data);
+            } else {
+              found.end = notification.data.end;
+            }
           }
           break;
       }
@@ -262,8 +325,23 @@ export class TaskModalComponent
     }
     this.waiting = false;
     this.model = op.data;
-    this.permission = this.workPackageService.getPermission(op.data.projectId, op.data.packageId);
+    this.permission = this.workPackageService.getPermission(
+      op.data.projectId,
+      op.data.packageId,
+    );
     this.postProcess();
+    this.calculateAll();
+    this.intervalInstance = setInterval(() => this.calculateAll(), 10000);
+  }
+
+  calculateAll() {
+    const total = this.model.timeSpents
+      .map(t => {
+        t.diff = this.calcDiff(t);
+        return t.diff;
+      })
+      .reduce((a, b) => a + b, 0);
+    this.totalTimeSpent = NumberHelpers.ticksToTimeSpan(total * 10000);
   }
 
   switchMode(mode: ViewMode) {
@@ -274,31 +352,40 @@ export class TaskModalComponent
     this.commenting = true;
     const op = await this.taskService.comment(this.id, {
       message: this.comment,
-      private: false
+      private: false,
     });
     this.commenting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
-      return ;
+      return;
     }
     this.comment = '';
   }
 
   getBackgroundUrl(): string {
-    if (!this.model.coverId) { return ''; }
-    const attachment = this.model.attachments.find(a => a.id === this.model.coverId);
-    if (!attachment) { return ''; }
+    if (!this.model.coverId) {
+      return '';
+    }
+    const attachment = this.model.attachments.find(
+      a => a.id === this.model.coverId,
+    );
+    if (!attachment) {
+      return '';
+    }
     return `url("${attachment.path}")`;
   }
 
   private postProcess() {
-    const permission = this.project.members.find(m => m.recordId === this.identityService.identity.userId);
+    const permission = this.project.members.find(
+      m => m.recordId === this.identityService.identity.userId,
+    );
     this.permission = permission ? permission.access : AccessType.Visitor;
     this.model.comments.forEach(c => {
       c.member = this.project.members.find(m => m.recordId === c.userId).member;
     });
     this.model.subTasksDone = this.model.subTasks.filter(i => i.doneAt).length;
     this.bg = this.getBackgroundUrl();
+    this.tempEstimatedTime = this.model.estimatedTime;
   }
 
   prepareChangeTitle() {
@@ -315,7 +402,9 @@ export class TaskModalComponent
 
   async changeTitle() {
     const title = this.newTitle.trim();
-    if (!title) { return; }
+    if (!title) {
+      return;
+    }
     if (title === this.model.title) {
       this.changingTitle = false;
       this.savingTitle = false;
@@ -338,7 +427,9 @@ export class TaskModalComponent
       this.savingDescription = false;
       return;
     }
-    if (!title) { return; }
+    if (!title) {
+      return;
+    }
     this.savingDescription = true;
     const op = await this.taskService.changeDescription(this.id, { title });
     if (op.status !== OperationResultStatus.Success) {
@@ -352,7 +443,7 @@ export class TaskModalComponent
   async changeState(state: WorkPackageTaskState) {
     this.model.state = state;
     this.changingState = true;
-    const op = await this.taskService.changeState(this.id, {state});
+    const op = await this.taskService.changeState(this.id, { state });
     this.changingState = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -360,11 +451,15 @@ export class TaskModalComponent
   }
 
   toggleMember(member: ProjectMemberViewModel) {
-    if (member.waiting) {return;  }
-    if (this.model.members.findIndex(i => i.recordId === member.recordId) === -1) {
+    if (member.waiting) {
+      return;
+    }
+    if (
+      this.model.members.findIndex(i => i.recordId === member.recordId) === -1
+    ) {
       this.taskService.addMember(this.id, {
         isGroup: member.isGroup,
-        recordId: member.recordId
+        recordId: member.recordId,
       });
     } else {
       this.taskService.removeMember(this.id, member.recordId);
@@ -372,7 +467,9 @@ export class TaskModalComponent
   }
 
   toggleLabel(label: WorkPackageLabelViewModel) {
-    if (label.waiting || label.editting) {return;  }
+    if (label.waiting || label.editting) {
+      return;
+    }
     if (this.model.labels.findIndex(i => i.labelId === label.id) === -1) {
       this.taskService.addLabel(this.id, label.id);
     } else {
@@ -381,7 +478,9 @@ export class TaskModalComponent
   }
 
   isMemberSelected(member: ProjectMemberViewModel): boolean {
-    return this.model.members.findIndex(m => m.recordId === member.recordId) !== -1;
+    return (
+      this.model.members.findIndex(m => m.recordId === member.recordId) !== -1
+    );
   }
 
   isLabelSelected(label: WorkPackageLabelViewModel) {
@@ -392,9 +491,7 @@ export class TaskModalComponent
     this.filePicker.nativeElement.click();
   }
 
-  prepareChoose() {
-
-  }
+  prepareChoose() {}
 
   getPath(attachment: WorkPackageTaskAttachmentViewModel) {
     if (attachment.path.indexOf('https://') === -1) {
@@ -412,13 +509,17 @@ export class TaskModalComponent
   }
 
   editAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
-    attachment.tempName = this.filesService.getExtensionLessFileName(attachment.title);
+    attachment.tempName = this.filesService.getExtensionLessFileName(
+      attachment.title,
+    );
     attachment.renaming = true;
     attachment.waiting = false;
   }
 
   async coverToggle(attachment: WorkPackageTaskAttachmentViewModel) {
-    if (attachment.covering) { return; }
+    if (attachment.covering) {
+      return;
+    }
     attachment.covering = true;
     const op = await this.taskService.coverAttachment(attachment.id);
     attachment.covering = false;
@@ -436,7 +537,9 @@ export class TaskModalComponent
       return;
     }
     attachment.waiting = true;
-    const op = await this.taskService.renameAttachment(attachment.id, { title });
+    const op = await this.taskService.renameAttachment(attachment.id, {
+      title,
+    });
     attachment.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -449,18 +552,20 @@ export class TaskModalComponent
   deleteAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_ATTACHMENT_CONFIRM_HEADING'),
-      [attachment.title]
+      [attachment.title],
     );
-    this.modalService.confirm({
-      title: 'REMOVE_ATTACHMENT',
-      message: 'REMOVE_ATTACHMENT_CONFIRM',
-      heading,
-      actionLabel: 'REMOVE_ATTACHMENT',
-      cancelLabel: 'CANCEL',
-      action: async () => {
-        return await this.taskService.removeAttachment(attachment.id);
-      },
-    }).subscribe(() => {});
+    this.modalService
+      .confirm({
+        title: 'REMOVE_ATTACHMENT',
+        message: 'REMOVE_ATTACHMENT_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_ATTACHMENT',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          return await this.taskService.removeAttachment(attachment.id);
+        },
+      })
+      .subscribe(() => {});
   }
 
   async toggleWatch() {
@@ -487,7 +592,9 @@ export class TaskModalComponent
     $event.stopPropagation();
     $event.preventDefault();
     this.workPackage.labels.forEach(l => {
-      if (l.waiting) { return; }
+      if (l.waiting) {
+        return;
+      }
       if (l.editting) {
         l.editting = false;
       }
@@ -502,18 +609,20 @@ export class TaskModalComponent
     this.labelMenu.close.emit();
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_LABEL_CONFIRM_HEADING'),
-      [label.title]
+      [label.title],
     );
-    this.modalService.confirm({
-      title: 'REMOVE_LABEL',
-      message: 'REMOVE_LABEL_CONFIRM',
-      heading,
-      actionLabel: 'REMOVE_LABEL',
-      cancelLabel: 'CANCEL',
-      action: async () => {
-        return await this.workPackageService.removeLabel(label.id);
-      },
-    }).subscribe(() => {});
+    this.modalService
+      .confirm({
+        title: 'REMOVE_LABEL',
+        message: 'REMOVE_LABEL_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_LABEL',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          return await this.workPackageService.removeLabel(label.id);
+        },
+      })
+      .subscribe(() => {});
   }
 
   async saveLabelName(label: WorkPackageLabelViewModel) {
@@ -541,18 +650,21 @@ export class TaskModalComponent
   openSubTask(sub: WorkPackageTaskViewModel, $event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.modalService.show(TaskModalComponent, {
-      id: sub.id,
-      project: this.project,
-      workPackage: this.workPackage
-    }).subscribe(() => {});
+    this.modalService
+      .show(TaskModalComponent, {
+        id: sub.id,
+        project: this.project,
+        workPackage: this.workPackage,
+      })
+      .subscribe(() => {});
   }
 
   prepareMap() {
-    this.modalService.show<MapModalParameters, MapMarker[]>(MapModalComponent, {
-      mapLocation: this.model.geoLocation
-    })
-      .subscribe(async (markers) => {
+    this.modalService
+      .show<MapModalParameters, MapMarker[]>(MapModalComponent, {
+        mapLocation: this.model.geoLocation,
+      })
+      .subscribe(async markers => {
         let op: OperationResult<boolean>;
         if (!markers.length) {
           if (this.model.geoLocation) {
@@ -564,8 +676,9 @@ export class TaskModalComponent
           }
           return;
         }
-        const location = markers[0].location.latitude + ',' + markers[0].location.longitude;
-        op = await this.taskService.setLocation(this.model.id, {location});
+        const location =
+          markers[0].location.latitude + ',' + markers[0].location.longitude;
+        op = await this.taskService.setLocation(this.model.id, { location });
         if (op.status !== OperationResultStatus.Success) {
           // TODO: handle error
           return;
@@ -582,8 +695,12 @@ export class TaskModalComponent
   }
 
   async vote(vote: boolean) {
-    if (this.voting || this.model.votes.find(v =>
-      v.userId === this.identityService.identity.userId)) {
+    if (
+      this.voting ||
+      this.model.votes.find(
+        v => v.userId === this.identityService.identity.userId,
+      )
+    ) {
       return;
     }
     this.voting = true;
@@ -597,12 +714,14 @@ export class TaskModalComponent
 
   async createSub() {
     const title = this.subTaskTitle.trim();
-    if (!title) { return; }
+    if (!title) {
+      return;
+    }
     this.savingSub = true;
     const op = await this.taskService.create(this.model.packageId, {
       listId: this.model.listId,
       title,
-      parentId: this.model.id
+      parentId: this.model.id,
     });
     this.savingSub = false;
     if (op.status !== OperationResultStatus.Success) {
@@ -612,7 +731,53 @@ export class TaskModalComponent
     this.subTaskTitle = '';
     this.addingSub = false;
   }
+
+  async saveEstimated() {
+    this.savingEstimated = true;
+    const op = await this.taskService.changeEstimated(this.model.id, {
+      duration: this.tempEstimatedTime,
+    });
+    this.savingEstimated = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async removeTimeSpan() {
+    this.savingEstimated = true;
+    const op = await this.taskService.changeEstimated(this.model.id, {
+      duration: 0,
+    });
+    this.savingEstimated = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.tempEstimatedTime = 0;
+  }
+
+  addManualTime() {}
+
+  async toggleWorking() {
+    this.recording = true;
+    const op = await this.taskService.spendTime(this.model.id, {});
+    this.recording = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async removeRecord(log: WorkPackageTaskTimeViewModel) {}
+
+  calcDiff(log: WorkPackageTaskTimeViewModel): number {
+    const begin = new Date(log.begin);
+    const end = log.end ? new Date(log.end) : new Date();
+    return end.getTime() - begin.getTime();
+  }
 }
+
 export enum ViewMode {
   Detail = 1,
   TimeSpent = 2,

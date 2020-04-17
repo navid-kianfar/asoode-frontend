@@ -3,7 +3,9 @@
     <div class="date">
       <ng-container *ngIf="model.dueAt || model.endAt || model.beginAt">
         <i class="icon-calendar"></i>&nbsp;
-        <span>{{ (model.dueAt || model.endAt || model.beginAt) | culturedDate }}</span>
+        <span>{{
+          model.dueAt || model.endAt || model.beginAt | culturedDate
+        }}</span>
       </ng-container>
     </div>
     <div class="more">
@@ -11,71 +13,107 @@
     </div>
     <div class="status-wrapper">
       <div class="status-container">
-        <div class="circle color-{{model.state}}"></div>
-        <div class="text">{{model.state | enum:'WorkPackageTaskState'}}</div>
+        <div class="circle color-{{ model.state }}"></div>
+        <div class="text">{{ model.state | enum: 'WorkPackageTaskState' }}</div>
       </div>
     </div>
   </div>
   <div class="labels">
     <ng-container *ngFor="let label of workPackage.labels">
-      <div class="label" *ngIf="isLabelSelected(label)" [style.backgroundColor]="label.color">
-        {{label.title}}
+      <div
+        class="label"
+        *ngIf="isLabelSelected(label)"
+        [style.backgroundColor]="label.color"
+      >
+        {{ label.title }}
       </div>
     </ng-container>
   </div>
   <div class="title">
-    {{model.title}}
+    {{ model.title }}
   </div>
   <div *ngIf="model.subTasksCount" class="progress">
     <div class="wrapper">
-      <mat-progress-bar mode="determinate" [value]="model.subTasksDone * 100 / model.subTasksCount"></mat-progress-bar>
+      <mat-progress-bar
+        mode="determinate"
+        [value]="(model.subTasksDone * 100) / model.subTasksCount"
+      ></mat-progress-bar>
     </div>
-    <span>{{model.subTasksDone}}/{{model.subTasksCount}}</span>
+    <span>{{ model.subTasksDone }}/{{ model.subTasksCount }}</span>
   </div>
-  <div *ngIf="model.targetCounts || model.targetCounts || (model.voteNecessity !== WorkPackageTaskVoteNecessity.None || (model.upVotes || model.downVotes))" class="interactions">
+  <div
+    *ngIf="
+      model.targetCounts ||
+      model.targetCounts ||
+      model.voteNecessity !== WorkPackageTaskVoteNecessity.None ||
+        model.upVotes || model.downVotes
+    "
+    class="interactions"
+  >
     <div class="box box-1">
-      <div *ngIf="model.voteNecessity !== WorkPackageTaskVoteNecessity.None || (model.upVotes || model.downVotes)" class="vote">
+      <div
+        *ngIf="
+          model.voteNecessity !== WorkPackageTaskVoteNecessity.None ||
+          model.upVotes || model.downVotes
+        "
+        class="vote"
+      >
         <div class="sep up">
-          <span>{{model.upVotes || 0}}</span>
+          <span>{{ model.upVotes || 0 }}</span>
           <i class="icon-thumbs-up2"></i>
         </div>
         <div class="sep down">
           <i class="icon-thumbs-down2"></i>
-          <span>{{model.downVotes || 0}}</span>
+          <span>{{ model.downVotes || 0 }}</span>
         </div>
       </div>
     </div>
     <div class="box box-2">
       <div *ngIf="model.targetCounts" class="target">
         <i class="icon-target"></i>
-        <span>{{model.targetCounts}}</span>
+        <span>{{ model.targetCounts }}</span>
       </div>
       <div *ngIf="model.timeSpent" class="time">
         <i class="icon-timer"></i>
-        <span>{{model.timeSpent | msToDuration}}</span>
+        <span>{{ model.timeSpent | msToDuration }}</span>
       </div>
     </div>
   </div>
-  <div *ngIf="model.commentCount || model.hasDescription || model.attachmentCount || model.attachmentCount || model.members.length" class="detail">
+  <div
+    *ngIf="
+      model.commentCount ||
+      model.hasDescription ||
+      model.attachmentCount ||
+      model.attachmentCount ||
+      model.members.length
+    "
+    class="detail"
+  >
     <div class="box box-1">
       <div *ngIf="model.hasDescription" class="inf">
         <i class="icon-paragraph-right3"></i>
       </div>
       <div *ngIf="model.commentCount" class="inf">
         <i class="icon-bubble-dots2"></i>
-        <span>{{model.commentCount}}</span>
+        <span>{{ model.commentCount }}</span>
       </div>
       <div *ngIf="model.attachmentCount" class="inf">
         <i class="icon-attachment"></i>
-        <span>{{model.attachmentCount}}</span>
+        <span>{{ model.attachmentCount }}</span>
       </div>
     </div>
     <div class="box box-2">
       <ng-container *ngFor="let member of model.members">
-        <app-member-info [id]="member.recordId" [small]="true"
-                         *ngIf="!member.isGroup"></app-member-info>
-        <app-group-info [id]="member.recordId" [small]="true"
-                        *ngIf="member.isGroup"></app-group-info>
+        <app-member-info
+          [id]="member.recordId"
+          [small]="true"
+          *ngIf="!member.isGroup"
+        ></app-member-info>
+        <app-group-info
+          [id]="member.recordId"
+          [small]="true"
+          *ngIf="member.isGroup"
+        ></app-group-info>
       </ng-container>
     </div>
   </div>

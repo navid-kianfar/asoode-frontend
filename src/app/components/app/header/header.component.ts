@@ -16,9 +16,9 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { HttpService } from '../../../services/core/http.service';
 import { PopperContent } from 'ngx-popper';
 import { OperationResult } from '../../../library/core/operation-result';
-import {Socket} from 'ngx-socket-io';
-import {PushNotificationService} from '../../../services/general/push-notification.service';
-import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
+import { Socket } from 'ngx-socket-io';
+import { PushNotificationService } from '../../../services/general/push-notification.service';
+import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
 
 const EMPTY = {
   members: [],
@@ -52,7 +52,8 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.results = { ...EMPTY };
     this.socket.on('push-notification', (notification: any) =>
-      this.pushNotificationService.handleSocket(notification));
+      this.pushNotificationService.handleSocket(notification),
+    );
   }
 
   ngAfterViewInit() {
@@ -91,8 +92,10 @@ export class HeaderComponent implements AfterViewInit, OnInit {
 
   prepareCreate() {
     const plan = this.identityService.profile.plan;
-    if ((plan.totalUsedProjects >= plan.totalProjects) &&
-      (plan.totalUsedGroups >= plan.totalGroups)) {
+    if (
+      plan.totalUsedProjects >= plan.totalProjects &&
+      plan.totalUsedGroups >= plan.totalGroups
+    ) {
       this.modalService
         .show(UpgradeComponent, {} as CreateModalParameters)
         .subscribe(() => {});

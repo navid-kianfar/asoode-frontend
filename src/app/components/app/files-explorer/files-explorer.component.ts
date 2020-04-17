@@ -1,18 +1,18 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FilesService} from '../../../services/storage/files.service';
-import {OperationResultStatus} from '../../../library/core/enums';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FilesService } from '../../../services/storage/files.service';
+import { OperationResultStatus } from '../../../library/core/enums';
 import {
   ExplorerFileViewModel,
   ExplorerFolderViewModel,
   ExplorerViewModel,
   UploadViewModel,
 } from '../../../view-models/storage/files-types';
-import {OperationResult} from '../../../library/core/operation-result';
-import {ModalService} from '../../../services/core/modal.service';
-import {PromptComponent} from '../../../modals/prompt/prompt.component';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {FormService} from '../../../services/core/form.service';
-import {SortType} from 'src/app/library/app/enums';
+import { OperationResult } from '../../../library/core/operation-result';
+import { ModalService } from '../../../services/core/modal.service';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { FormService } from '../../../services/core/form.service';
+import { SortType } from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-files-explorer',
@@ -46,7 +46,15 @@ export class FilesExplorerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.parent = [{path: '/', name: '', parent: '', createdAt: new Date(), selected: false}];
+    this.parent = [
+      {
+        path: '/',
+        name: '',
+        parent: '',
+        createdAt: new Date(),
+        selected: false,
+      },
+    ];
     this.sort = SortType.DateAsc;
     this.data = { folders: [], files: [] };
     this.allowedTypes = [
@@ -147,8 +155,8 @@ export class FilesExplorerComponent implements OnInit {
     }
     const selectedFolders = this.data.folders.filter(i => i.selected).length;
     const selectedFiles = this.data.files.filter(i => i.selected);
-    this.atLeastOneSelected = (selectedFolders + selectedFiles.length) > 0;
-    this.onlyOneSelected = (selectedFolders + selectedFiles.length) === 1;
+    this.atLeastOneSelected = selectedFolders + selectedFiles.length > 0;
+    this.onlyOneSelected = selectedFolders + selectedFiles.length === 1;
     this.oneFileSelected = selectedFiles.length === 1;
     this.canOpen = this.oneFileSelected && this.canOpenFile(selectedFiles[0]);
   }
@@ -208,7 +216,7 @@ export class FilesExplorerComponent implements OnInit {
         action: async (params, form) => {
           const op = await this.filesService.newFolder({
             path: this.path,
-            name: params.title
+            name: params.title,
           });
           if (op.status === OperationResultStatus.Duplicate) {
             this.formService.setErrors(form, 'title', ['DIRECTORY_EXISTS']);
@@ -265,10 +273,12 @@ export class FilesExplorerComponent implements OnInit {
             path: this.path,
             name: title,
             file: file ? file.url : undefined,
-            folder: folder ? folder.path : undefined
+            folder: folder ? folder.path : undefined,
           });
           if (op.status === OperationResultStatus.Duplicate) {
-            this.formService.setErrors(form, 'title', [file ? 'FILE_EXISTS' : 'DIRECTORY_EXISTS']);
+            this.formService.setErrors(form, 'title', [
+              file ? 'FILE_EXISTS' : 'DIRECTORY_EXISTS',
+            ]);
             throw new Error('DUPLICATE');
           }
           this.fetch(this.path);
@@ -281,7 +291,7 @@ export class FilesExplorerComponent implements OnInit {
     if (f.value) {
       try {
         f.value = '';
-      } catch (err) { }
+      } catch (err) {}
       if (f.value) {
         const form = document.createElement('form');
         const parentNode = f.parentNode;
@@ -294,7 +304,9 @@ export class FilesExplorerComponent implements OnInit {
   }
 
   onChange(target: any) {
-    if (!target.files || !target.files.length) { return; }
+    if (!target.files || !target.files.length) {
+      return;
+    }
     const upload: UploadViewModel[] = [];
     for (let i = 0; i < target.files.length; i++) {
       const f = target.files.item(i);
@@ -308,7 +320,7 @@ export class FilesExplorerComponent implements OnInit {
         file: f,
         extensionLessName: this.filesService.getExtensionLessFileName(f.name),
         extension: this.filesService.getFileExtension(f.name),
-        promise: undefined
+        promise: undefined,
       });
     }
     this.clearInputFile(target);
@@ -319,7 +331,9 @@ export class FilesExplorerComponent implements OnInit {
 
   async goTo(p: ExplorerFolderViewModel) {
     let idx = this.parent.indexOf(p);
-    if (idx === 0) { return; }
+    if (idx === 0) {
+      return;
+    }
     let s: ExplorerFolderViewModel;
     while (idx > 0) {
       s = this.parent.shift();

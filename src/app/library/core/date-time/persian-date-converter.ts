@@ -9,9 +9,15 @@ export default class PersianDateConverter implements IDateConverter {
 
   private innerParse(date: IDateTimeProperties): PersianDate {
     const persian = new PersianDate([date.Year, date.Month, date.Day]);
-    if (date.Hours !== undefined) { persian.hour(date.Hours); }
-    if (date.Minutes !== undefined) { persian.minutes(date.Minutes); }
-    if (date.Seconds !== undefined) { persian.seconds(date.Seconds); }
+    if (date.Hours !== undefined) {
+      persian.hour(date.Hours);
+    }
+    if (date.Minutes !== undefined) {
+      persian.minutes(date.Minutes);
+    }
+    if (date.Seconds !== undefined) {
+      persian.seconds(date.Seconds);
+    }
     return persian;
   }
 
@@ -52,7 +58,8 @@ export default class PersianDateConverter implements IDateConverter {
       .replace(/ss/g, NumberHelpers.pad(converted.Seconds, 2))
       .replace(/ll/g, NumberHelpers.pad(converted.Milliseconds, 2))
       .replace(/AP/g, converted.Hours > 12 ? 'PM' : 'AM')
-      .replace(/NNN/g, converted.MonthName);
+      .replace(/NNN/g, converted.MonthName)
+      .replace(/WW/g, converted.WeekName);
   }
   ToDateTime(date: IDateTimeProperties): Date {
     return this.innerParse(date).toDate();

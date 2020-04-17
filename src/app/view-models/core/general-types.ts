@@ -10,7 +10,7 @@ export interface BaseViewModel {
   updatedAt?: Date;
 }
 export interface TimeViewModel {
+  day: number;
   hour: number;
   minute: number;
-  second: number;
 }

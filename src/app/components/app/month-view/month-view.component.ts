@@ -13,10 +13,7 @@ export class MonthViewComponent implements OnInit {
   dayNames: string[];
   days: any[][];
 
-  constructor(
-    private readonly cultureService: CultureService,
-  ) {}
+  constructor(private readonly cultureService: CultureService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

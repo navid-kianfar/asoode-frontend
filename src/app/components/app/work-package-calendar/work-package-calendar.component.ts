@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { WorkPackageViewModel } from '../../../view-models/projects/project-types';
-import {AccessType} from '../../../library/app/enums';
+import { AccessType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-work-package-calendar',

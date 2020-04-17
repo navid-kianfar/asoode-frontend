@@ -4,14 +4,16 @@
     <div class="logs">
       <div *ngFor="let log of model" class="log">
         <div class="avatar">
-          <app-member-info [id]="log.userId"
-                           [small]="true"
-                           [(model)]="log.member"></app-member-info>
+          <app-member-info
+            [id]="log.userId"
+            [small]="true"
+            [(model)]="log.member"
+          ></app-member-info>
         </div>
         <div class="info">
           <div class="user">
-            <span class="full-name">{{log.member?.fullName}}</span>
-            <span>{{ log.createdAt | culturedDate}}</span>
+            <span class="full-name">{{ log.member?.fullName }}</span>
+            <span>{{ log.createdAt | culturedDate }}</span>
           </div>
           <div class="description">{{ getText(log) }}</div>
         </div>

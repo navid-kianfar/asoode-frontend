@@ -2,7 +2,9 @@
   <div class="title">
     <h2>{{ 'PROJECTS' | translate }}</h2>
   </div>
-  <div *ngIf="!projects.length" class="no-item">{{ 'NO_PROJECT_ACCESS' | translate}}</div>
+  <div *ngIf="!projects.length" class="no-item">
+    {{ 'NO_PROJECT_ACCESS' | translate }}
+  </div>
   <div class="box">
     <app-project-info
       [project]="project"

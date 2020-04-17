@@ -1,6 +1,9 @@
 <div class="outer" (click)="close()">
-  <div class="modal-content prompt-modal {{ cssClass }}" [style.width.px]="width"
-       (click)="$event.stopPropagation();">
+  <div
+    class="modal-content prompt-modal {{ cssClass }}"
+    [style.width.px]="width"
+    (click)="$event.stopPropagation()"
+  >
     <div class="modal-alt-header">
       <div class="btn"></div>
 
@@ -42,4 +45,3 @@
     </div>
   </div>
 </div>
-

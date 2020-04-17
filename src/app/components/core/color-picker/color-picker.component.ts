@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CultureService} from '../../../services/core/culture.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CultureService } from '../../../services/core/culture.service';
 
 @Component({
   selector: 'app-color-picker',

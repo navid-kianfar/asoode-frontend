@@ -1,0 +1,29 @@
+<div class="af-time-span af-component {{ cssClass }}">
+  <app-number
+    [min]="0"
+    [max]="999"
+    [label]="'DAYS'"
+    [(model)]="day"
+    [disabled]="disabled"
+    (modelChange)="update()"
+    placeHolder="DD"
+  ></app-number>
+  <app-number
+    [min]="0"
+    [max]="8"
+    [label]="'HOURS'"
+    [(model)]="hour"
+    [disabled]="disabled"
+    (modelChange)="update()"
+    placeHolder="HH"
+  ></app-number>
+  <app-number
+    [min]="0"
+    [max]="59"
+    [label]="'MINUTES'"
+    [(model)]="minute"
+    [disabled]="disabled"
+    (modelChange)="update()"
+    placeHolder="MN"
+  ></app-number>
+</div>

@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
-import {ChannelRepository, ChannelViewModel, ConversationViewModel} from '../../view-models/communication/messenger-types';
+import {
+  ChannelRepository,
+  ChannelViewModel,
+  ConversationViewModel,
+} from '../../view-models/communication/messenger-types';
 import { OperationResultStatus } from '../../library/core/enums';
 
 @Injectable({
@@ -26,7 +30,9 @@ export class MessengerService {
     return op;
   }
 
-  async fetch(recordId: string): Promise<OperationResult<ConversationViewModel[]>> {
+  async fetch(
+    recordId: string,
+  ): Promise<OperationResult<ConversationViewModel[]>> {
     return await this.httpService.post<ConversationViewModel[]>(
       `/messenger/channel/${recordId}/fetch`,
     );
@@ -34,7 +40,8 @@ export class MessengerService {
 
   async send(recordId: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/messenger/channel/${recordId}/send`, model
+      `/messenger/channel/${recordId}/send`,
+      model,
     );
   }
 }

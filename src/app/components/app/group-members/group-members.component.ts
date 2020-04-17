@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
   GroupMemberViewModel,
-  GroupViewModel, PendingInvitationViewModel,
+  GroupViewModel,
+  PendingInvitationViewModel,
 } from '../../../view-models/groups/group-types';
 import { AccessType } from 'src/app/library/app/enums';
 import { ModalService } from '../../../services/core/modal.service';
@@ -39,7 +40,7 @@ export class GroupMembersComponent implements OnInit {
           this.group.userId,
           this.group.id,
           ...this.group.members.map(m => m.userId),
-          ...this.group.pending.map(p => p.identifier)
+          ...this.group.pending.map(p => p.identifier),
         ],
         handler: async access => {
           return this.groupService.addAccess(this.group.id, access);
@@ -108,10 +109,15 @@ export class GroupMembersComponent implements OnInit {
     );
   }
 
-  async accessPendingChange(member: PendingInvitationViewModel, access: AccessType) {
+  async accessPendingChange(
+    member: PendingInvitationViewModel,
+    access: AccessType,
+  ) {
     member.access = access;
     member.waiting = true;
-    const op = await this.groupService.changePendingAccess(member.id, { access });
+    const op = await this.groupService.changePendingAccess(member.id, {
+      access,
+    });
     member.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error

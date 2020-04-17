@@ -191,7 +191,7 @@ export class ProjectWizardComponent implements OnInit {
       op = await this.projectService.createWorkPackage(this.projectId, {
         ...this.model,
         boardTemplate: this.boardTemplate,
-        parentId: this.parentId
+        parentId: this.parentId,
       });
     } else {
       op = await this.projectService.create({

@@ -5,7 +5,7 @@ import {
   MemberInfoViewModel,
 } from '../../../view-models/auth/identity-types';
 import { ValidationService } from '../../../services/core/validation.service';
-import {NotificationService} from '../../../services/core/notification.service';
+import { NotificationService } from '../../../services/core/notification.service';
 
 @Component({
   selector: 'app-invite-member',
@@ -22,9 +22,7 @@ export class InviteMemberComponent implements OnInit {
   currentRole: AccessType;
   currentEmail: string;
 
-  constructor(
-    private readonly notificationService: NotificationService,
-  ) {}
+  constructor(private readonly notificationService: NotificationService) {}
 
   ngOnInit() {
     this.currentRole = AccessType.Editor;

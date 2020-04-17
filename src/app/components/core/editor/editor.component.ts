@@ -1,11 +1,19 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { CultureService } from '../../../services/core/culture.service';
 import Quill from 'quill';
 import 'quill-mention';
 import 'quill-emoji/dist/quill-emoji.js';
 import { QuillEditorComponent } from 'ngx-quill';
-import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
-import {Subscription} from 'rxjs';
+import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-editor',
@@ -76,7 +84,7 @@ export class EditorComponent implements OnInit, OnDestroy {
       };
     }
     if (this.clear) {
-      this.subscribe = this.clear.subscribe(() => this.model = '');
+      this.subscribe = this.clear.subscribe(() => (this.model = ''));
     }
   }
 }

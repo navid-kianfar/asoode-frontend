@@ -1,8 +1,8 @@
 import { MemberInfoViewModel } from '../auth/identity-types';
 import { ChannelType, ConversationType } from '../../library/app/enums';
 import { BaseViewModel } from '../core/general-types';
-import {GroupMemberViewModel} from '../groups/group-types';
-import {ProjectMemberViewModel} from '../projects/project-types';
+import { GroupMemberViewModel } from '../groups/group-types';
+import { ProjectMemberViewModel } from '../projects/project-types';
 
 export interface ChannelRepository {
   directs: ChannelViewModel[];

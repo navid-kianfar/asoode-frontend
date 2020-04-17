@@ -1,6 +1,6 @@
 <div class="outer-container" (click)="close()">
   <app-project-wizard
-    (click)="$event.stopPropagation();"
+    (click)="$event.stopPropagation()"
     (exit)="close()"
     [complex]="false"
     [projectId]="projectId"

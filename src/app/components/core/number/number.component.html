@@ -1,0 +1,33 @@
+<div
+  class="af-numbox af-component spinbox {{ disabled ? 'disabled' : '' }} {{
+    readonly ? 'readonly' : ''
+  }} form-group {{ cssClass }}"
+>
+  <label *ngIf="label">{{ label | translate: true }}</label>
+  <div class="input-container {{ focusState }}">
+    <i *ngIf="prependIcon" [class]="prependIcon"></i>
+    <input
+      [autofocus]="autofocus"
+      (focus)="onFocus()"
+      (blur)="onBlur()"
+      [ngModel]="model"
+      (keydown)="onKeyDown($event)"
+      [appOnlyNumber]="{ decimals: acceptDecimal }"
+      (ngModelChange)="updateModel($event)"
+      [disabled]="disabled"
+      [placeholder]="placeHolder | translate: true"
+      [readonly]="readonly"
+      autocomplete="off"
+      type="text"
+      #numberInput
+    />
+    <div class="spinbox-buttons btn-group btn-group-vertical">
+      <button (click)="increase()" [disabled]="disabled">
+        <span class="icon-arrow-up2"></span>
+      </button>
+      <button (click)="decrease()" [disabled]="disabled">
+        <span class="icon-arrow-down2"></span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,16 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import * as ol from 'openlayers';
-import {MapMarker} from '../../../view-models/general/map-types';
-import {LocationService} from '../../../services/general/location.service';
+import { MapMarker } from '../../../view-models/general/map-types';
+import { LocationService } from '../../../services/general/location.service';
 
 @Component({
   selector: 'app-map',
@@ -9,8 +18,7 @@ import {LocationService} from '../../../services/general/location.service';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit, OnChanges {
-  constructor(readonly locationService: LocationService) {
-  }
+  constructor(readonly locationService: LocationService) {}
 
   initialized: boolean;
   waiting: boolean;
@@ -19,7 +27,7 @@ export class MapComponent implements OnInit, OnChanges {
   markerStyle: ol.style.Style;
   internalMarkers = [];
   currentWaiting: boolean;
-  @ViewChild('container', {static: false}) container;
+  @ViewChild('container', { static: false }) container;
   @Input() model: string;
   @Input() cssClass: string;
   @Input() center: MapMarker;

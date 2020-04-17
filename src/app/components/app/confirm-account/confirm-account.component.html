@@ -43,7 +43,12 @@
     {{ errorMessage | translate }}
   </div>
 
-  <button [disabled]="disabled" (click)="verify()" mat-flat-button color="primary">
+  <button
+    [disabled]="disabled"
+    (click)="verify()"
+    mat-flat-button
+    color="primary"
+  >
     <i *ngIf="disabled" class="icon-spin icon-spinner2"></i>
     {{ 'VERIFY' | translate }}
   </button>

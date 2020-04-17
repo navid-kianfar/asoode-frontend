@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   SubProjectViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {AccessType, ActivityType} from '../../../library/app/enums';
+import { AccessType, ActivityType } from '../../../library/app/enums';
 import { ProjectService } from '../../../services/projects/project.service';
 import { ModalService } from '../../../services/core/modal.service';
 import { FormService } from '../../../services/core/form.service';
@@ -13,14 +13,14 @@ import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { WorkPackageWizardComponent } from '../../../modals/work-package-wizard/work-package-wizard.component';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { NotificationService } from '../../../services/core/notification.service';
-import {Socket} from 'ngx-socket-io';
-import {OperationResult} from '../../../library/core/operation-result';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {Router} from '@angular/router';
-import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
-import {CreateModalParameters} from '../../../view-models/modals/modals-types';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { Socket } from 'ngx-socket-io';
+import { OperationResult } from '../../../library/core/operation-result';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { Router } from '@angular/router';
+import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
+import { CreateModalParameters } from '../../../view-models/modals/modals-types';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-project-tree',
@@ -141,18 +141,20 @@ export class ProjectTreeComponent implements OnInit {
   deleteSubProject(id: string) {
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_SUB_CONFIRM_HEADING'),
-      [this.model.subProjects.find(s => s.id === id).title]
+      [this.model.subProjects.find(s => s.id === id).title],
     );
-    this.modalService.confirm({
-      title: 'REMOVE_SUB',
-      message: 'REMOVE_SUB_CONFIRM',
-      heading,
-      actionLabel: 'REMOVE_SUB',
-      cancelLabel: 'CANCEL',
-      action: async () => {
-        return await this.projectService.removeSubProject(id);
-      },
-    }).subscribe((confirmed) => { });
+    this.modalService
+      .confirm({
+        title: 'REMOVE_SUB',
+        message: 'REMOVE_SUB_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_SUB',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          return await this.projectService.removeSubProject(id);
+        },
+      })
+      .subscribe(confirmed => {});
   }
 
   editSubProject(id: string) {
@@ -186,10 +188,7 @@ export class ProjectTreeComponent implements OnInit {
           },
         ],
         action: async (params, form) => {
-          const op = await this.projectService.editSubProject(
-            id,
-            params,
-          );
+          const op = await this.projectService.editSubProject(id, params);
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;

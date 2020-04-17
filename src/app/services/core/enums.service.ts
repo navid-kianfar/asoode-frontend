@@ -30,9 +30,10 @@ export class EnumsService {
 
   translateKey(name: string, value: any): string {
     const enumName = name[0].toLowerCase() + name.substring(1);
-    const enumKey = Object.keys(this.repository[enumName]).find(k => {
-      return this.repository[enumName][k] === value;
-    }) || '';
+    const enumKey =
+      Object.keys(this.repository[enumName]).find(k => {
+        return this.repository[enumName][k] === value;
+      }) || '';
     const keyFixed = enumKey
       .replace(/([a-z])([A-Z])/g, '$1-$2')
       .replace(/-/g, '_');

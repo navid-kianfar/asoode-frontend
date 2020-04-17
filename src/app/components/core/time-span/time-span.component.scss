@@ -1,0 +1,17 @@
+.af-time-span {
+  display: flex;
+  margin: 0 -5px;
+  > * {
+    padding: 0 5px;
+  }
+
+  ::ng-deep .af-numbox {
+    input {
+      max-width: 40px !important;
+    }
+
+    label {
+      font-size: 0.8rem;
+    }
+  }
+}

@@ -3,8 +3,14 @@
     <div class="structure-container">
       <ng-container *ngIf="!project.complex">
         <div class="upgrade">
-          <button [disabled]="waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
-                  mat-flat-button>
+          <button
+            [disabled]="
+              waiting ||
+              (permission !== AccessType.Admin &&
+                permission !== AccessType.Owner)
+            "
+            mat-flat-button
+          >
             <i class="icon-trophy4"></i>&nbsp;
             <span>{{ 'ADD_STRUCTURE' | translate }}</span>
           </button>
@@ -13,7 +19,8 @@
       <ng-container *ngIf="project.complex"></ng-container>
       <div class="title">
         <i class="icon-workpackage"></i>&nbsp;
-        <span>{{ workPackage.title }}</span>&nbsp;
+        <span>{{ workPackage.title }}</span
+        >&nbsp;
         <!--        <i class="icon-star-empty"></i>-->
       </div>
     </div>
@@ -62,46 +69,60 @@
             [animation]="'easeInOutQuart'"
             [animationDelay]="0"
           ></round-progress>
-          <div [matMenuTriggerFor]="progressMenu" class="percent">{{ workPackage.progress?.percent || 0 }}%</div>
+          <div [matMenuTriggerFor]="progressMenu" class="percent">
+            {{ workPackage.progress?.percent || 0 }}%
+          </div>
           <mat-menu #progressMenu="matMenu">
             <div class="progress-report">
               <div class="item">
-                <div class="title">{{ 'CREATED_CARDS' | translate}}</div>
+                <div class="title">{{ 'CREATED_CARDS' | translate }}</div>
                 <div class="value">{{ workPackage.progress?.total || 0 }}</div>
               </div>
               <div class="item done">
-                <div class="title">{{ 'DONE_CARDS' | translate}}</div>
+                <div class="title">{{ 'DONE_CARDS' | translate }}</div>
                 <div class="value">{{ workPackage.progress?.done || 0 }}</div>
               </div>
               <div class="item cancel">
-                <div class="title">{{ 'CANCELED_OR_DUPLICATE_CARDS' | translate}}</div>
-                <div class="value">{{ workPackage.progress?.canceledOrDuplicate || 0 }}</div>
+                <div class="title">
+                  {{ 'CANCELED_OR_DUPLICATE_CARDS' | translate }}
+                </div>
+                <div class="value">
+                  {{ workPackage.progress?.canceledOrDuplicate || 0 }}
+                </div>
               </div>
             </div>
           </mat-menu>
         </div>
       </div>
       <div class="objectives-container">
-        <button class="info" [disabled]="(permission !== AccessType.Admin && permission !== AccessType.Owner)"
-             [popper]="popperObjectives"
-             [popperDisabled]="waiting"
-             [popperTrigger]="'click'"
-             [popperHideOnClickOutside]="true"
-             [popperHideOnScroll]="true"
-             [popperPlacement]="'bottom'">
+        <button
+          class="info"
+          [disabled]="
+            permission !== AccessType.Admin && permission !== AccessType.Owner
+          "
+          [popper]="popperObjectives"
+          [popperDisabled]="waiting"
+          [popperTrigger]="'click'"
+          [popperHideOnClickOutside]="true"
+          [popperHideOnScroll]="true"
+          [popperPlacement]="'bottom'"
+        >
           <i class="icon-target"></i>&nbsp;
-          <span class="label">{{ 'OBJECTIVES' | translate }}</span>&nbsp;
+          <span class="label">{{ 'OBJECTIVES' | translate }}</span
+          >&nbsp;
           <span class="badge">{{ workPackage.objectives.length }}</span>
         </button>
       </div>
       <div class="members-container">
         <ng-container *ngFor="let member of workPackage.members | slice: 0:3">
-          <app-member-info [matMenuTriggerFor]="currentMemberMenu"
+          <app-member-info
+            [matMenuTriggerFor]="currentMemberMenu"
             *ngIf="!member.isGroup"
             [id]="member.recordId"
             small="true"
           ></app-member-info>
-          <app-group-info [matMenuTriggerFor]="currentMemberMenu"
+          <app-group-info
+            [matMenuTriggerFor]="currentMemberMenu"
             *ngIf="member.isGroup"
             [id]="member.recordId"
             small="true"
@@ -117,42 +138,79 @@
                   *ngIf="member.isGroup"
                   [id]="member.recordId"
                 ></app-group-info>
-               <div (click)="$event.preventDefault();$event.stopPropagation()">
-                 <app-access-list *ngIf="member.access !== AccessType.Owner"
-                                  (accessChange)="changePermission(member, $event)"
-                                  [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
-                                  [(access)]="member.access"></app-access-list>
-               </div>
+                <div
+                  (click)="$event.preventDefault(); $event.stopPropagation()"
+                >
+                  <app-access-list
+                    *ngIf="member.access !== AccessType.Owner"
+                    (accessChange)="changePermission(member, $event)"
+                    [disabled]="
+                      member.waiting ||
+                      (permission !== AccessType.Admin &&
+                        permission !== AccessType.Owner)
+                    "
+                    [(access)]="member.access"
+                  ></app-access-list>
+                </div>
               </div>
-              <hr>
-              <h3>{{ 'VIEW_ACTIVITY' | translate}}</h3>
-              <h3 *ngIf="member.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
-                  (click)="removeAccess(member, permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h3>
+              <hr />
+              <h3>{{ 'VIEW_ACTIVITY' | translate }}</h3>
+              <h3
+                *ngIf="
+                  member.access !== AccessType.Owner &&
+                  (permission === AccessType.Admin ||
+                    permission === AccessType.Owner)
+                "
+                (click)="removeAccess(member, permission)"
+                class="danger"
+              >
+                {{ 'REMOVE_ACCESS' | translate }}
+              </h3>
             </div>
           </mat-menu>
         </ng-container>
         &nbsp;
-        <div *ngIf="(workPackage.members.length > 3) || workPackage.pending.length"
-             class="add more" [matMenuTriggerFor]="allMemberMenu">
+        <div
+          *ngIf="workPackage.members.length > 3 || workPackage.pending.length"
+          class="add more"
+          [matMenuTriggerFor]="allMemberMenu"
+        >
           <i class="icon-menu"></i>
         </div>
         &nbsp;
-        <div *ngIf="(permission === AccessType.Admin || permission === AccessType.Owner)" (click)="prepareInvite()" class="add">
+        <div
+          *ngIf="
+            permission === AccessType.Admin || permission === AccessType.Owner
+          "
+          (click)="prepareInvite()"
+          class="add"
+        >
           <i class="icon-plus2"></i>
         </div>
       </div>
-      <div class="filters-container"
-           [popperDisabled]="waiting"
-           [popper]="popperFilters"
-           [popperTrigger]="'click'"
-           [popperHideOnClickOutside]="true"
-           [popperHideOnScroll]="true"
-           [popperPlacement]="'bottom'">
+      <div
+        class="filters-container"
+        [popperDisabled]="waiting"
+        [popper]="popperFilters"
+        [popperTrigger]="'click'"
+        [popperHideOnClickOutside]="true"
+        [popperHideOnScroll]="true"
+        [popperPlacement]="'bottom'"
+      >
         <i class="icon-filters"></i>&nbsp;
-        <span>{{ (filters.mine ? 1 : 0) + (filters.archived ? 1 : 0) + (filters.active ? 1 : 0) }}</span>
+        <span>{{
+          (filters.mine ? 1 : 0) +
+            (filters.archived ? 1 : 0) +
+            (filters.active ? 1 : 0)
+        }}</span>
       </div>
-      <div *ngIf="(permission === AccessType.Admin || permission === AccessType.Owner)"
-           (click)="settingMenuToggle()" class="settings-container">
+      <div
+        *ngIf="
+          permission === AccessType.Admin || permission === AccessType.Owner
+        "
+        (click)="settingMenuToggle()"
+        class="settings-container"
+      >
         <i class="icon-cog2"></i>
       </div>
     </div>
@@ -162,18 +220,27 @@
       <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
       <ng-container *ngIf="!waiting">
         <ng-container *ngIf="mode === ViewMode.Board">
-          <app-work-package-board [project]="project" [permission]="permission" [model]="workPackage"></app-work-package-board>
+          <app-work-package-board
+            [project]="project"
+            [permission]="permission"
+            [model]="workPackage"
+          ></app-work-package-board>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.List">
-          <app-work-package-list [permission]="permission" [model]="workPackage"></app-work-package-list>
+          <app-work-package-list
+            [permission]="permission"
+            [model]="workPackage"
+          ></app-work-package-list>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.TimeSpan">
-          <app-work-package-time-span [permission]="permission"
+          <app-work-package-time-span
+            [permission]="permission"
             [model]="workPackage"
           ></app-work-package-time-span>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.Calendar">
-          <app-work-package-calendar [permission]="permission"
+          <app-work-package-calendar
+            [permission]="permission"
             [model]="workPackage"
           ></app-work-package-calendar>
         </ng-container>
@@ -183,61 +250,76 @@
       <div class="setting-header">
         <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
         <i *ngIf="!cultureService.rtl" class="icon-arrow-left2"></i>
-        <span>{{ 'WORK_PACKAGE_SETTING' | translate}}</span>
-        <i (click)="toggleSetting = !toggleSetting" class="icon-cross close"></i>
+        <span>{{ 'WORK_PACKAGE_SETTING' | translate }}</span>
+        <i
+          (click)="toggleSetting = !toggleSetting"
+          class="icon-cross close"
+        ></i>
       </div>
       <div class="setting-content">
         <div class="box">
-          <div class="title">{{ 'RECEIVE_NOTIFICATION' | translate}}</div>
+          <div class="title">{{ 'RECEIVE_NOTIFICATION' | translate }}</div>
           <div class="cnt">
             <mat-radio-group [(ngModel)]="receiveNotification">
-              <mat-radio-button color="primary" [value]="1">{{ 'RECEIVE_ALL_NOTIFICATION' | translate}}</mat-radio-button>
-              <mat-radio-button color="primary" [value]="2">{{ 'RECEIVE_MINE_NOTIFICATION' | translate}}</mat-radio-button>
-              <mat-radio-button color="primary" [value]="3">{{ 'RECEIVE_NONE_NOTIFICATION' | translate}}</mat-radio-button>
+              <mat-radio-button color="primary" [value]="1">{{
+                'RECEIVE_ALL_NOTIFICATION' | translate
+              }}</mat-radio-button>
+              <mat-radio-button color="primary" [value]="2">{{
+                'RECEIVE_MINE_NOTIFICATION' | translate
+              }}</mat-radio-button>
+              <mat-radio-button color="primary" [value]="3">{{
+                'RECEIVE_NONE_NOTIFICATION' | translate
+              }}</mat-radio-button>
             </mat-radio-group>
           </div>
         </div>
         <div class="box">
-          <div class="title">{{ 'APPEARANCE' | translate}}</div>
+          <div class="title">{{ 'APPEARANCE' | translate }}</div>
           <div class="cnt">
             <app-checkbox label="SHOW_LIST_TOTAL_CARDS"></app-checkbox>
-            <br>
-            <h6>{{ 'CHANGE_WORK_PACKAGE_COLOR' | translate}}</h6>
+            <br />
+            <h6>{{ 'CHANGE_WORK_PACKAGE_COLOR' | translate }}</h6>
             <app-color-picker></app-color-picker>
           </div>
         </div>
         <div class="box">
-          <div class="title">{{ 'TASKS_SETTING' | translate}}</div>
+          <div class="title">{{ 'TASKS_SETTING' | translate }}</div>
           <div class="cnt">
-            <h6>{{ 'CHANGE_WORK_PACKAGE_FIELDS' | translate}}</h6>
-            <h6>{{ 'CHANGE_WORK_PACKAGE_LABELS' | translate}}</h6>
-            <h6>{{ 'SHOW_WORK_PACKAGE_ATTACHMENTS' | translate}}</h6>
+            <h6>{{ 'CHANGE_WORK_PACKAGE_FIELDS' | translate }}</h6>
+            <h6>{{ 'CHANGE_WORK_PACKAGE_LABELS' | translate }}</h6>
+            <h6>{{ 'SHOW_WORK_PACKAGE_ATTACHMENTS' | translate }}</h6>
           </div>
         </div>
         <div class="box">
-          <div class="title">{{ 'CUSTOM_FIELDS' | translate}}</div>
+          <div class="title">{{ 'CUSTOM_FIELDS' | translate }}</div>
           <div class="cnt">
             <div class="custom-box">
               <ng-container *ngIf="!workPackage.customFields.length">
-                {{ 'CUSTOM_FIELDS_DETAIL' | translate}}
-                <button mat-stroked-button>{{ 'ACTIVATE' | translate}}</button>
+                {{ 'CUSTOM_FIELDS_DETAIL' | translate }}
+                <button mat-stroked-button>{{ 'ACTIVATE' | translate }}</button>
               </ng-container>
-              <ng-container *ngIf="workPackage.customFields.length"></ng-container>
+              <ng-container
+                *ngIf="workPackage.customFields.length"
+              ></ng-container>
             </div>
           </div>
         </div>
         <div class="box">
-          <div class="title">{{ 'INTEGRATION' | translate}}</div>
+          <div class="title">{{ 'INTEGRATION' | translate }}</div>
           <div class="cnt">
-            <h6>{{ 'GOOGLE_CALENDAR' | translate}}</h6>
-            <h6>{{ 'GITLAB' | translate}}</h6>
+            <h6>{{ 'GOOGLE_CALENDAR' | translate }}</h6>
+            <h6>{{ 'GITLAB' | translate }}</h6>
           </div>
         </div>
-        <hr>
+        <hr />
         <div class="box">
           <div class="cnt">
-            <button mat-flat-button color="accent">{{ 'LEAVE_WORK_PACKAGE' | translate}}</button>&nbsp;
-            <button mat-flat-button color="warn">{{ 'ARCHIVE_WORK_PACKAGE' | translate}}</button>
+            <button mat-flat-button color="accent">
+              {{ 'LEAVE_WORK_PACKAGE' | translate }}</button
+            >&nbsp;
+            <button mat-flat-button color="warn">
+              {{ 'ARCHIVE_WORK_PACKAGE' | translate }}
+            </button>
           </div>
         </div>
       </div>
@@ -248,20 +330,24 @@
 <popper-content #popperObjectives>
   <div class="objectives-popper">
     <div *ngIf="!workPackage.objectives.length">
-      <h5>{{ 'NO_OBJECTIVES' | translate}}</h5>
+      <h5>{{ 'NO_OBJECTIVES' | translate }}</h5>
     </div>
-    <div (click)="addObjective()" *ngIf="permission !== AccessType.Visitor" class="add-objective">
+    <div
+      (click)="addObjective()"
+      *ngIf="permission !== AccessType.Visitor"
+      class="add-objective"
+    >
       <i class="icon-plus2"></i>
-      <span>{{ 'ADD_OBJECTIVES' | translate}}</span>
+      <span>{{ 'ADD_OBJECTIVES' | translate }}</span>
     </div>
-    <br>
+    <br />
     <div *ngFor="let obj of workPackage.objectives" class="objective">
       <div class="ico">
         <i class="icon-target"></i>
       </div>
       <div class="info">
-        <h3>{{obj.title}}</h3>
-        <h4>{{obj.description}}</h4>
+        <h3>{{ obj.title }}</h3>
+        <h4>{{ obj.description }}</h4>
         <div class="rate"></div>
       </div>
       <div class="act">
@@ -273,10 +359,22 @@
 </popper-content>
 <popper-content #popperFilters>
   <div class="filters-popper">
-    <app-checkbox [(model)]="filters.mine" (modelChange)="fetch()" [label]="'FILTERS_TASKS_MINE'"></app-checkbox>
-    <hr>
-    <app-checkbox [(model)]="filters.active" (modelChange)="fetch()" [label]="'FILTERS_TASKS_ACTIVE'"></app-checkbox>
-    <app-checkbox [(model)]="filters.archived" (modelChange)="fetch()" [label]="'FILTERS_TASKS_ARCHIVED'"></app-checkbox>
+    <app-checkbox
+      [(model)]="filters.mine"
+      (modelChange)="fetch()"
+      [label]="'FILTERS_TASKS_MINE'"
+    ></app-checkbox>
+    <hr />
+    <app-checkbox
+      [(model)]="filters.active"
+      (modelChange)="fetch()"
+      [label]="'FILTERS_TASKS_ACTIVE'"
+    ></app-checkbox>
+    <app-checkbox
+      [(model)]="filters.archived"
+      (modelChange)="fetch()"
+      [label]="'FILTERS_TASKS_ARCHIVED'"
+    ></app-checkbox>
   </div>
 </popper-content>
 <mat-menu #allMemberMenu="matMenu" class="popper-all-users">
@@ -291,29 +389,55 @@
           *ngIf="member.isGroup"
           [id]="member.recordId"
         ></app-group-info>
-        <div (click)="$event.preventDefault();$event.stopPropagation()">
-          <app-access-list *ngIf="member.access !== AccessType.Owner"
-                           (accessChange)="changePermission(member, $event)"
-                           [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
-                           [access]="member.access"></app-access-list>
+        <div (click)="$event.preventDefault(); $event.stopPropagation()">
+          <app-access-list
+            *ngIf="member.access !== AccessType.Owner"
+            (accessChange)="changePermission(member, $event)"
+            [disabled]="
+              member.waiting ||
+              (permission !== AccessType.Admin &&
+                permission !== AccessType.Owner)
+            "
+            [access]="member.access"
+          ></app-access-list>
         </div>
       </div>
-      <h4 *ngIf="member.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
-          (click)="removeAccess(member, permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h4>
-      <hr *ngIf="!lst || workPackage.pending.length">
+      <h4
+        *ngIf="
+          member.access !== AccessType.Owner &&
+          (permission === AccessType.Admin || permission === AccessType.Owner)
+        "
+        (click)="removeAccess(member, permission)"
+        class="danger"
+      >
+        {{ 'REMOVE_ACCESS' | translate }}
+      </h4>
+      <hr *ngIf="!lst || workPackage.pending.length" />
     </ng-container>
     <ng-container *ngFor="let member of workPackage.pending; let lst = last">
       <div class="wrapper">
         <app-member-info [email]="member.identifier"></app-member-info>
-        <app-access-list *ngIf="member.access !== AccessType.Owner"
-                         (accessChange)="changePendingPermission(member, $event)"
-                         [disabled]="member.waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
-                         [access]="member.access"></app-access-list>
+        <app-access-list
+          *ngIf="member.access !== AccessType.Owner"
+          (accessChange)="changePendingPermission(member, $event)"
+          [disabled]="
+            member.waiting ||
+            (permission !== AccessType.Admin && permission !== AccessType.Owner)
+          "
+          [access]="member.access"
+        ></app-access-list>
       </div>
-      <h4 *ngIf="member.access !== AccessType.Owner && (permission === AccessType.Admin || permission === AccessType.Owner)"
-          (click)="removePendingAccess(member, permission)" class="danger">{{ 'REMOVE_ACCESS' | translate}}</h4>
-      <hr *ngIf="!lst">
+      <h4
+        *ngIf="
+          member.access !== AccessType.Owner &&
+          (permission === AccessType.Admin || permission === AccessType.Owner)
+        "
+        (click)="removePendingAccess(member, permission)"
+        class="danger"
+      >
+        {{ 'REMOVE_ACCESS' | translate }}
+      </h4>
+      <hr *ngIf="!lst" />
     </ng-container>
   </div>
 </mat-menu>
-

@@ -59,7 +59,11 @@
         <div class="status"></div>
         <div class="actions">
           <app-access-list
-            [disabled]="member.waiting || member.deleting || !canRemovePendingAccess(member)"
+            [disabled]="
+              member.waiting ||
+              member.deleting ||
+              !canRemovePendingAccess(member)
+            "
             [access]="member.access"
             (accessChange)="accessPendingChange(member, $event)"
           ></app-access-list

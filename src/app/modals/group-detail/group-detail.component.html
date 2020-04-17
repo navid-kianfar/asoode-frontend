@@ -1,6 +1,5 @@
 <div class="outer" (click)="close()">
-  <div class="group-detail"
-       (click)="$event.stopPropagation();">
+  <div class="group-detail" (click)="$event.stopPropagation()">
     <div class="detail-header">
       <div class="avatar-container">
         <img *ngIf="group.avatar" src="" alt="" />
@@ -126,4 +125,3 @@
     </ng-container>
   </div>
 </div>
-

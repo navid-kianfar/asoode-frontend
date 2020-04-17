@@ -4,13 +4,15 @@ import { OperationResult } from '../../library/core/operation-result';
 import { DashboardViewModel } from '../../view-models/general/report-types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReportService {
-
-  constructor(private readonly httpService: HttpService) { }
+  constructor(private readonly httpService: HttpService) {}
 
   async dashboard(model): Promise<OperationResult<DashboardViewModel>> {
-    return await this.httpService.post<DashboardViewModel>('/reports/dashboard', model);
+    return await this.httpService.post<DashboardViewModel>(
+      '/reports/dashboard',
+      model,
+    );
   }
 }

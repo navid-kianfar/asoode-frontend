@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { ModalService } from '../../../services/core/modal.service';
 import { MessengerSettingComponent } from '../../../modals/messenger-setting/messenger-setting.component';
 import { ChannelViewModel } from '../../../view-models/communication/messenger-types';
-import {MessengerService} from '../../../services/communication/messenger.service';
-import {ProjectService} from '../../../services/projects/project.service';
-import {GroupService} from '../../../services/groups/group.service';
+import { MessengerService } from '../../../services/communication/messenger.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { GroupService } from '../../../services/groups/group.service';
 
 const STORAGE_KEY = 'dashboard_bot_visible';
 
@@ -32,8 +32,13 @@ export class MessengerShortcutComponent implements OnInit {
   ngOnInit() {
     this.current = this.messengerService.channels.directs[0];
     const closed = localStorage.getItem(STORAGE_KEY);
-    if (!closed && this.dashboard) { this.showMessages = true; }
-    if (!this.projectService.projects.length && !this.groupService.groups.length) {
+    if (!closed && this.dashboard) {
+      this.showMessages = true;
+    }
+    if (
+      !this.projectService.projects.length &&
+      !this.groupService.groups.length
+    ) {
       this.dashboard = true;
     }
   }
@@ -47,7 +52,9 @@ export class MessengerShortcutComponent implements OnInit {
   }
 
   hide() {
-    if (this.dashboard) { localStorage.setItem(STORAGE_KEY, '1'); }
+    if (this.dashboard) {
+      localStorage.setItem(STORAGE_KEY, '1');
+    }
     this.showMessages = false;
   }
 

@@ -1,24 +1,39 @@
 <div class="close-out-side" (click)="close()">
-  <div class="task-wrapper"
-       (click)="$event.stopPropagation();"
-       [class.hasBackground]="model?.coverId"
-       [class.archived]="model?.archivedAt">
+  <div
+    class="task-wrapper"
+    (click)="$event.stopPropagation()"
+    [class.hasBackground]="model?.coverId"
+    [class.archived]="model?.archivedAt"
+  >
     <ng-container *ngIf="waiting">
       <div class="waiting-container">
         <app-waiting></app-waiting>
       </div>
     </ng-container>
     <ng-container *ngIf="!waiting">
-      <div class="header" [ngStyle]="{backgroundImage: bg}">
+      <div class="header" [ngStyle]="{ backgroundImage: bg }">
         <div class="actions">
-          <button [disabled]="togglingWatch" (click)="toggleWatch()" mat-mini-fab>
+          <button
+            [disabled]="togglingWatch"
+            (click)="toggleWatch()"
+            mat-mini-fab
+          >
             <span class="btn-inner">
-              <i *ngIf="!togglingWatch" class="icon-eye2" [class.watching]="model.watching"></i>
+              <i
+                *ngIf="!togglingWatch"
+                class="icon-eye2"
+                [class.watching]="model.watching"
+              ></i>
               <i *ngIf="togglingWatch" class="icon-spinner2 icon-spin"></i>
               <span class="sub-title">{{ 'WATCH' | translate }}</span>
             </span>
           </button>
-          <button [disabled]="togglingArchive" (click)="toggleArchive()" *ngIf="permission !== AccessType.Visitor" mat-mini-fab>
+          <button
+            [disabled]="togglingArchive"
+            (click)="toggleArchive()"
+            *ngIf="permission !== AccessType.Visitor"
+            mat-mini-fab
+          >
             <span class="btn-inner">
               <i *ngIf="!togglingArchive" class="icon-archive"></i>
               <i *ngIf="togglingArchive" class="icon-spinner2 icon-spin"></i>
@@ -27,84 +42,148 @@
           </button>
         </div>
         <div *ngIf="model.archivedAt" class="archived">
-          {{ 'TASK_ARCHIVED_AT' | translate|stringFormat:(model.archivedAt | culturedDate)}}
+          {{
+            'TASK_ARCHIVED_AT'
+              | translate
+              | stringFormat: (model.archivedAt | culturedDate)
+          }}
         </div>
       </div>
       <div class="content">
         <div class="info">
           <div class="box">
-            <button class="status-wrapper no-select" [disabled]="changingState || permission === AccessType.Visitor" [matMenuTriggerFor]="statusMenu">
-            <span class="status-container">
-              <span class="circle color-{{model.state}}"></span>
-              <span class="text">
-                {{model.state | enum:'WorkPackageTaskState'}}&nbsp;
-                <i class="icon-arrow-down2"></i>
+            <button
+              class="status-wrapper no-select"
+              [disabled]="changingState || permission === AccessType.Visitor"
+              [matMenuTriggerFor]="statusMenu"
+            >
+              <span class="status-container">
+                <span class="circle color-{{ model.state }}"></span>
+                <span class="text">
+                  {{ model.state | enum: 'WorkPackageTaskState' }}&nbsp;
+                  <i class="icon-arrow-down2"></i>
+                </span>
               </span>
-            </span>
             </button>
             <div class="date">
               <ng-container *ngIf="model.dueAt || model.endAt || model.beginAt">
                 <i class="icon-calendar"></i>&nbsp;
-                <span>{{ (model.dueAt || model.endAt || model.beginAt) | culturedDate }}</span>
+                <span>{{
+                  model.dueAt || model.endAt || model.beginAt | culturedDate
+                }}</span>
               </ng-container>
             </div>
             <div class="title">
               <ng-container *ngIf="!changingTitle">
-                <i *ngIf="permission !== AccessType.Visitor" (click)="prepareChangeTitle()" class="icon-pencil"></i>
-                <div>{{model.title}}</div>
+                <i
+                  *ngIf="permission !== AccessType.Visitor"
+                  (click)="prepareChangeTitle()"
+                  class="icon-pencil"
+                ></i>
+                <div>{{ model.title }}</div>
               </ng-container>
               <ng-container *ngIf="changingTitle">
-                <i *ngIf="!savingTitle" (click)="changeTitle()" class="icon-checkmark3"></i>
+                <i
+                  *ngIf="!savingTitle"
+                  (click)="changeTitle()"
+                  class="icon-checkmark3"
+                ></i>
                 <i *ngIf="savingTitle" class="icon-spin icon-spinner2"></i>
-                <input [readOnly]="savingTitle" *ngIf="changingTitle" [placeholder]="'TASK_NEW_TITLE' | translate"
-                       [(ngModel)]="newTitle" (keydown.enter)="changeTitle()" type="text">
+                <input
+                  [readOnly]="savingTitle"
+                  *ngIf="changingTitle"
+                  [placeholder]="'TASK_NEW_TITLE' | translate"
+                  [(ngModel)]="newTitle"
+                  (keydown.enter)="changeTitle()"
+                  type="text"
+                />
               </ng-container>
             </div>
             <div class="list-name">
-              {{ 'TASK_IN_LIST' | translate}}&nbsp;
-              {{model.listName}}
+              {{ 'TASK_IN_LIST' | translate }}&nbsp;
+              {{ model.listName }}
             </div>
             <div class="description">
               <ng-container *ngIf="!changingDescription">
-                <i *ngIf="permission !== AccessType.Visitor" (click)="prepareChangeDescription()" class="icon-pencil"></i>
-                <div *ngIf="model.description" class="has-description">{{model.description}}</div>
-                <div *ngIf="!model.description" class="no-description">{{'NO_DESCRIPTION_YET' | translate}}</div>
+                <i
+                  *ngIf="permission !== AccessType.Visitor"
+                  (click)="prepareChangeDescription()"
+                  class="icon-pencil"
+                ></i>
+                <div *ngIf="model.description" class="has-description">
+                  {{ model.description }}
+                </div>
+                <div *ngIf="!model.description" class="no-description">
+                  {{ 'NO_DESCRIPTION_YET' | translate }}
+                </div>
               </ng-container>
               <ng-container *ngIf="changingDescription">
-                <i *ngIf="!savingDescription" (click)="changeDescription()" class="icon-checkmark3"></i>
-                <i *ngIf="savingDescription" class="icon-spin icon-spinner2"></i>
-                <textarea [readOnly]="savingDescription"
-                          rows="2" [placeholder]="'TASK_NEW_DESCRIPTION' | translate"
-                          [(ngModel)]="newDescription" type="text"></textarea>
+                <i
+                  *ngIf="!savingDescription"
+                  (click)="changeDescription()"
+                  class="icon-checkmark3"
+                ></i>
+                <i
+                  *ngIf="savingDescription"
+                  class="icon-spin icon-spinner2"
+                ></i>
+                <textarea
+                  [readOnly]="savingDescription"
+                  rows="2"
+                  [placeholder]="'TASK_NEW_DESCRIPTION' | translate"
+                  [(ngModel)]="newDescription"
+                  type="text"
+                ></textarea>
               </ng-container>
-
             </div>
           </div>
           <div class="box">
-            <h3>{{ 'COMMENTS' | translate}}</h3>
+            <h3>{{ 'COMMENTS' | translate }}</h3>
             <div class="comment-container">
               <div *ngIf="permission !== AccessType.Visitor" class="send">
                 <div class="avatar">
                   <app-member-info [small]="true" [me]="true"></app-member-info>
                 </div>
                 <div class="text">
-                  <textarea [readOnly]="commenting" [(ngModel)]="comment" [placeholder]="'ENTER_YOUR_COMMENT' | translate" rows="3"></textarea>
-                  <button (click)="sendComment()" [disabled]="commenting || !comment || !comment.trim().length">
-                    <i [class]="commenting ? 'icon-spin icon-spinner2' : 'icon-paperplane'"></i>
+                  <textarea
+                    [readOnly]="commenting"
+                    [(ngModel)]="comment"
+                    [placeholder]="'ENTER_YOUR_COMMENT' | translate"
+                    rows="3"
+                  ></textarea>
+                  <button
+                    (click)="sendComment()"
+                    [disabled]="
+                      commenting || !comment || !comment.trim().length
+                    "
+                  >
+                    <i
+                      [class]="
+                        commenting
+                          ? 'icon-spin icon-spinner2'
+                          : 'icon-paperplane'
+                      "
+                    ></i>
                   </button>
                 </div>
               </div>
               <div class="comments">
                 <div *ngFor="let comment of model.comments" class="comment">
                   <div class="avatar">
-                    <app-member-info [small]="true" [id]="comment.userId" [(model)]="comment.member"></app-member-info>
+                    <app-member-info
+                      [small]="true"
+                      [id]="comment.userId"
+                      [(model)]="comment.member"
+                    ></app-member-info>
                   </div>
                   <div class="more">
                     <div class="full-name">
-                      <span class="name">{{comment.member?.fullName}}</span>
-                      <span class="when">{{comment.createdAt | culturedDate}}</span>
+                      <span class="name">{{ comment.member?.fullName }}</span>
+                      <span class="when">{{
+                        comment.createdAt | culturedDate
+                      }}</span>
                     </div>
-                    <div class="message">{{comment.message}}</div>
+                    <div class="message">{{ comment.message }}</div>
                   </div>
                 </div>
               </div>
@@ -113,33 +192,77 @@
         </div>
         <div class="detail">
           <ul class="tabs">
-            <li [class.active]="mode === ViewMode.Detail" (click)="switchMode(ViewMode.Detail)">{{'TASK_DETAILS' | translate}}</li>
-            <li [class.active]="mode === ViewMode.TimeSpent" (click)="switchMode(ViewMode.TimeSpent)">{{'TASK_TIME_SPENT' | translate}}</li>
-            <li *ngIf="!model.parentId" [class.active]="mode === ViewMode.Related" (click)="switchMode(ViewMode.Related)">{{'TASK_RELATED' | translate}}</li>
-            <li [class.active]="mode === ViewMode.CustomField" (click)="switchMode(ViewMode.CustomField)">{{'TASK_CUSTOM_FIELD' | translate}}</li>
-            <li [class.active]="mode === ViewMode.Activity" (click)="switchMode(ViewMode.Activity)">{{'TASK_ACTIVITY' | translate}}</li>
+            <li
+              [class.active]="mode === ViewMode.Detail"
+              (click)="switchMode(ViewMode.Detail)"
+            >
+              {{ 'TASK_DETAILS' | translate }}
+            </li>
+            <li
+              [class.active]="mode === ViewMode.TimeSpent"
+              (click)="switchMode(ViewMode.TimeSpent)"
+            >
+              {{ 'TASK_TIME_SPENT' | translate }}
+            </li>
+            <li
+              *ngIf="!model.parentId"
+              [class.active]="mode === ViewMode.Related"
+              (click)="switchMode(ViewMode.Related)"
+            >
+              {{ 'TASK_RELATED' | translate }}
+            </li>
+            <li
+              [class.active]="mode === ViewMode.CustomField"
+              (click)="switchMode(ViewMode.CustomField)"
+            >
+              {{ 'TASK_CUSTOM_FIELD' | translate }}
+            </li>
+            <li
+              [class.active]="mode === ViewMode.Activity"
+              (click)="switchMode(ViewMode.Activity)"
+            >
+              {{ 'TASK_ACTIVITY' | translate }}
+            </li>
           </ul>
           <div class="tab-content">
             <ng-container *ngIf="mode === ViewMode.Detail">
               <div class="box-container">
                 <div class="header">
-                  <div class="title">{{'TASK_DETAILS' | translate}}</div>
+                  <div class="title">{{ 'TASK_DETAILS' | translate }}</div>
                   <div class="action">
-                    <button [matMenuTriggerFor]="addDetailMenu" *ngIf="permission !== AccessType.Visitor"
-                            mat-mini-fab color="primary">
+                    <button
+                      [matMenuTriggerFor]="addDetailMenu"
+                      *ngIf="permission !== AccessType.Visitor"
+                      mat-mini-fab
+                      color="primary"
+                    >
                       <i class="icon-plus2"></i>
                     </button>
-                    <mat-menu #addDetailMenu=matMenu>
-                      <button *ngIf="!model.parentId" [disabled]="showSubTasks || model.subTasks?.length > 0" (click)="showSubTasks = !showSubTasks" mat-menu-item>
+                    <mat-menu #addDetailMenu="matMenu">
+                      <button
+                        *ngIf="!model.parentId"
+                        [disabled]="showSubTasks || model.subTasks?.length > 0"
+                        (click)="showSubTasks = !showSubTasks"
+                        mat-menu-item
+                      >
                         <i class="icon-tree7"></i>
                         {{ 'TASK_SUB_TASK' | translate }}
                       </button>
-                      <button [disabled]="showVotes || model.upVotes > 0 || model.downVotes > 0" (click)="showVotes = !showVotes" mat-menu-item>
+                      <button
+                        [disabled]="
+                          showVotes || model.upVotes > 0 || model.downVotes > 0
+                        "
+                        (click)="showVotes = !showVotes"
+                        mat-menu-item
+                      >
                         <i class="icon-thumbs-up2"></i>
                         {{ 'TASK_VOTE' | translate }}
                       </button>
-                      <button [disabled]="model.geoLocation?.length > 0"
-                              (click)="prepareMap()" mat-menu-item>
+                      <button
+                        [disabled]="model.geoLocation?.length > 0"
+                        (click)="prepareMap()"
+                        mat-menu-item
+                      >
                         <i class="icon-location"></i>
                         {{ 'TASK_GEO_LOCATION' | translate }}
                       </button>
@@ -149,42 +272,81 @@
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-price-tags4"></i>
-                    <span>{{ 'TASK_LABELS' | translate}}</span>
-                    <i *ngIf="permission !== AccessType.Visitor" [matMenuTriggerFor]="labelMenu" class="add icon-plus2"></i>
+                    <span>{{ 'TASK_LABELS' | translate }}</span>
+                    <i
+                      *ngIf="permission !== AccessType.Visitor"
+                      [matMenuTriggerFor]="labelMenu"
+                      class="add icon-plus2"
+                    ></i>
                   </div>
                   <div class="box-content">
                     <div *ngIf="!model.labels.length" class="no-item">
-                      <h3>{{ 'TASK_NO_LABELS' | translate}}</h3>
+                      <h3>{{ 'TASK_NO_LABELS' | translate }}</h3>
                     </div>
                     <div class="labels">
                       <ng-container *ngFor="let label of workPackage.labels">
-                      <span *ngIf="isLabelSelected(label)"
-                            [style.background]="label.color">{{label.title}}</span>
+                        <span
+                          *ngIf="isLabelSelected(label)"
+                          [style.background]="label.color"
+                          >{{ label.title }}</span
+                        >
                       </ng-container>
                     </div>
                   </div>
                   <mat-menu #labelMenu="matMenu" class="popper-task-labels">
-                    <div class="task-modal-labels-menu" (click)="$event.preventDefault();$event.stopPropagation()">
+                    <div
+                      class="task-modal-labels-menu"
+                      (click)="
+                        $event.preventDefault(); $event.stopPropagation()
+                      "
+                    >
                       <ul>
-                        <li (click)="toggleLabel(label)" *ngFor="let label of workPackage.labels">
-                          <div class="label" [class.selected]="isLabelSelected(label)">
+                        <li
+                          (click)="toggleLabel(label)"
+                          *ngFor="let label of workPackage.labels"
+                        >
+                          <div
+                            class="label"
+                            [class.selected]="isLabelSelected(label)"
+                          >
                             <div class="title">
-                              <span *ngIf="!label.editting" [style.background]="label.color">
-                                {{label.title}}
+                              <span
+                                *ngIf="!label.editting"
+                                [style.background]="label.color"
+                              >
+                                {{ label.title }}
                                 <ng-container *ngIf="!label.title">
                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </ng-container>
                               </span>
                               <ng-container *ngIf="label.editting">
-                                <input [disabled]="label.waiting" type="text" [(ngModel)]="label.tempName">
-                                <i *ngIf="!label.waiting" (click)="saveLabelName(label)"
-                                   class="icon-checkmark3"></i>
-                                <i *ngIf="label.waiting" class="icon-spinner2 icon-spin"></i>
+                                <input
+                                  [disabled]="label.waiting"
+                                  type="text"
+                                  [(ngModel)]="label.tempName"
+                                />
+                                <i
+                                  *ngIf="!label.waiting"
+                                  (click)="saveLabelName(label)"
+                                  class="icon-checkmark3"
+                                ></i>
+                                <i
+                                  *ngIf="label.waiting"
+                                  class="icon-spinner2 icon-spin"
+                                ></i>
                               </ng-container>
                             </div>
-<!--                            <i *ngIf="label.waiting" class="icon-spin icon-spinner2"></i>-->
-                            <i *ngIf="!label.waiting && !label.editting" (click)="prepareRenameLabel(label, $event)" class="icon-pencil"></i>
-                            <i *ngIf="!label.waiting && !label.editting" (click)="deleteLabel(label, $event)" class="icon-delete"></i>
+                            <!--                            <i *ngIf="label.waiting" class="icon-spin icon-spinner2"></i>-->
+                            <i
+                              *ngIf="!label.waiting && !label.editting"
+                              (click)="prepareRenameLabel(label, $event)"
+                              class="icon-pencil"
+                            ></i>
+                            <i
+                              *ngIf="!label.waiting && !label.editting"
+                              (click)="deleteLabel(label, $event)"
+                              class="icon-delete"
+                            ></i>
                           </div>
                         </li>
                       </ul>
@@ -194,154 +356,258 @@
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-users2"></i>
-                    <span>{{ 'TASK_MEMBERS' | translate}}</span>
-                    <i *ngIf="permission !== AccessType.Visitor" [matMenuTriggerFor]="memberMenu" class="add icon-plus2"></i>
+                    <span>{{ 'TASK_MEMBERS' | translate }}</span>
+                    <i
+                      *ngIf="permission !== AccessType.Visitor"
+                      [matMenuTriggerFor]="memberMenu"
+                      class="add icon-plus2"
+                    ></i>
                   </div>
                   <div class="box-content">
                     <div *ngIf="!model.members.length" class="no-item">
-                      <h3>{{ 'TASK_NO_MEMBERS' | translate}}</h3>
+                      <h3>{{ 'TASK_NO_MEMBERS' | translate }}</h3>
                     </div>
                     <div class="members">
-                      <ng-container *ngFor="let member of model.members;">
-                        <app-member-info *ngIf="!member.isGroup" [small]="true"
-                                         [id]="member.recordId"
+                      <ng-container *ngFor="let member of model.members">
+                        <app-member-info
+                          *ngIf="!member.isGroup"
+                          [small]="true"
+                          [id]="member.recordId"
                         ></app-member-info>
-                        <app-group-info *ngIf="member.isGroup" [small]="true"
-                                        [id]="member.recordId"
+                        <app-group-info
+                          *ngIf="member.isGroup"
+                          [small]="true"
+                          [id]="member.recordId"
                         ></app-group-info>
                       </ng-container>
                     </div>
                   </div>
 
                   <mat-menu #memberMenu="matMenu">
-                    <div class="task-modal-members-menu" (click)="$event.preventDefault();$event.stopPropagation()">
+                    <div
+                      class="task-modal-members-menu"
+                      (click)="
+                        $event.preventDefault(); $event.stopPropagation()
+                      "
+                    >
                       <ul>
-                        <li (click)="toggleMember(member)"
-                            *ngFor="let member of project.members;">
-                          <app-member-info [selected]="isMemberSelected(member)"
-                                           *ngIf="!member.isGroup"
-                                           [model]="member.member"
-                                           [id]="member.recordId"
+                        <li
+                          (click)="toggleMember(member)"
+                          *ngFor="let member of project.members"
+                        >
+                          <app-member-info
+                            [selected]="isMemberSelected(member)"
+                            *ngIf="!member.isGroup"
+                            [model]="member.member"
+                            [id]="member.recordId"
                           ></app-member-info>
-                          <app-group-info [selected]="isMemberSelected(member)"
-                                          *ngIf="member.isGroup"
-                                          [id]="member.recordId"
+                          <app-group-info
+                            [selected]="isMemberSelected(member)"
+                            *ngIf="member.isGroup"
+                            [id]="member.recordId"
                           ></app-group-info>
                         </li>
                       </ul>
                     </div>
                   </mat-menu>
                 </div>
-                <div class="box vote-box" *ngIf="showVotes || model.upVotes || model.downVotes">
+                <div
+                  class="box vote-box"
+                  *ngIf="showVotes || model.upVotes || model.downVotes"
+                >
                   <div class="box-header">
-                    <span>{{ 'TASK_VOTE' | translate}}</span>
+                    <span>{{ 'TASK_VOTE' | translate }}</span>
                   </div>
                   <div class="box-content">
                     <div class="vote">
                       <div class="sep up">
-                        <span>{{model.upVotes || 0}}</span>
+                        <span>{{ model.upVotes || 0 }}</span>
                         <i (click)="vote(true)" class="icon-thumbs-up2"></i>
                       </div>
                       <div class="sep down">
                         <i (click)="vote(false)" class="icon-thumbs-down2"></i>
-                        <span>{{model.downVotes || 0}}</span>
+                        <span>{{ model.downVotes || 0 }}</span>
                       </div>
                     </div>
 
-                    <a href="javascript:void(0)">{{ 'SHOW_DETAILS' | translate}}</a>
+                    <a href="javascript:void(0)">{{
+                      'SHOW_DETAILS' | translate
+                    }}</a>
                   </div>
                 </div>
                 <div class="box" *ngIf="showSubTasks || model.subTasks.length">
                   <div class="box-header">
                     <i class="icon-tree7"></i>
-                    <span>{{ 'TASK_SUB_TASK' | translate}}</span>
-                    <i *ngIf="!addingSub" (click)="prepareSubTask()" class="add icon-plus2"></i>
+                    <span>{{ 'TASK_SUB_TASK' | translate }}</span>
+                    <i
+                      *ngIf="!addingSub"
+                      (click)="prepareSubTask()"
+                      class="add icon-plus2"
+                    ></i>
 
-                    <mat-progress-bar [value]="model.subTasksDone * 100 / model.subTasks.length"></mat-progress-bar>
-                    <span>{{model.subTasksDone}}/{{model.subTasks.length}}</span>
+                    <mat-progress-bar
+                      [value]="
+                        (model.subTasksDone * 100) / model.subTasks.length
+                      "
+                    ></mat-progress-bar>
+                    <span
+                      >{{ model.subTasksDone }}/{{
+                        model.subTasks.length
+                      }}</span
+                    >
                   </div>
                   <div class="box-content sub-tasks-wrapper">
-
                     <div *ngIf="addingSub" class="add-sub">
-                      <textarea rows="4" [placeholder]="'NEW_TASK_PLACEHOLDER' | translate" [readOnly]="savingSub" [(ngModel)]="subTaskTitle"></textarea>
+                      <textarea
+                        rows="4"
+                        [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
+                        [readOnly]="savingSub"
+                        [(ngModel)]="subTaskTitle"
+                      ></textarea>
                       <div class="btns">
-                        <button [disabled]="savingSub" (click)="addingSub = false;" mat-flat-button>
-                          {{ 'CANCEL' | translate}}
-                        </button>&nbsp;
-                        <button (click)="createSub()" color="primary" [disabled]="savingSub" mat-flat-button>
-                          <i *ngIf="savingSub" class="icon-spin icon-spinner2"></i>
-                          {{ 'CREATE' | translate}}
+                        <button
+                          [disabled]="savingSub"
+                          (click)="addingSub = false"
+                          mat-flat-button
+                        >
+                          {{ 'CANCEL' | translate }}</button
+                        >&nbsp;
+                        <button
+                          (click)="createSub()"
+                          color="primary"
+                          [disabled]="savingSub"
+                          mat-flat-button
+                        >
+                          <i
+                            *ngIf="savingSub"
+                            class="icon-spin icon-spinner2"
+                          ></i>
+                          {{ 'CREATE' | translate }}
                         </button>
                       </div>
                     </div>
 
-                    <app-work-package-task *ngFor="let sub of model.subTasks"
-                                           (click)="openSubTask(sub, $event)"
-                                           [model]="sub"
-                                           [project]="project"
-                                           [workPackage]="workPackage"></app-work-package-task>
+                    <app-work-package-task
+                      *ngFor="let sub of model.subTasks"
+                      (click)="openSubTask(sub, $event)"
+                      [model]="sub"
+                      [project]="project"
+                      [workPackage]="workPackage"
+                    ></app-work-package-task>
                   </div>
                 </div>
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-attachment"></i>
-                    <span>{{ 'TASK_ATTACHMENTS' | translate}}</span>
-                    <i *ngIf="permission !== AccessType.Visitor" [matMenuTriggerFor]="attachmentMenu" class="add icon-plus2"></i>
+                    <span>{{ 'TASK_ATTACHMENTS' | translate }}</span>
+                    <i
+                      *ngIf="permission !== AccessType.Visitor"
+                      [matMenuTriggerFor]="attachmentMenu"
+                      class="add icon-plus2"
+                    ></i>
                   </div>
                   <div class="box-content">
                     <div *ngIf="!model.attachments.length" class="no-item">
-                      <h3>{{ 'TASK_NO_ATTACHMENTS' | translate}}</h3>
+                      <h3>{{ 'TASK_NO_ATTACHMENTS' | translate }}</h3>
                     </div>
                     <ng-container *ngFor="let upload of filesService.attaching">
-                      <div class="attachment-item" *ngIf="upload.recordId === id">
+                      <div
+                        class="attachment-item"
+                        *ngIf="upload.recordId === id"
+                      >
                         <div class="preview">
                           <i [class]="filesService.icon(upload.name)"></i>
                         </div>
                         <div class="info">
-                          <h4>{{ upload.name}}</h4>
-                          <h5 [class.success]="upload.success"
-                              [class.failed]="upload.failed">
-                            <mat-progress-bar [value]="upload.progress"></mat-progress-bar>
+                          <h4>{{ upload.name }}</h4>
+                          <h5
+                            [class.success]="upload.success"
+                            [class.failed]="upload.failed"
+                          >
+                            <mat-progress-bar
+                              [value]="upload.progress"
+                            ></mat-progress-bar>
                           </h5>
                           <h5>
-                            <span>{{ 'UPLOADING' | translate}}&nbsp;</span>
+                            <span>{{ 'UPLOADING' | translate }}&nbsp;</span>
                           </h5>
                         </div>
-                        <div class="actions">
-
-                        </div>
+                        <div class="actions"></div>
                       </div>
                     </ng-container>
-                    <div class="attachment-item" *ngFor="let attachment of model.attachments">
+                    <div
+                      class="attachment-item"
+                      *ngFor="let attachment of model.attachments"
+                    >
                       <div class="preview">
                         <i [class]="filesService.icon(attachment.path)"></i>
                       </div>
                       <div class="info">
-                        <h4 *ngIf="!attachment.renaming">{{ attachment.title}}</h4>
+                        <h4 *ngIf="!attachment.renaming">
+                          {{ attachment.title }}
+                        </h4>
                         <div *ngIf="attachment.renaming">
-                          <input [readOnly]="attachment.waiting" type="text" [(ngModel)]="attachment.tempName">
-                          <i (click)="renameAttachment(attachment)" *ngIf="!attachment.waiting" class="rename icon-checkmark3"></i>
-                          <i *ngIf="attachment.waiting" class="rename icon-spinner2 icon-spin"></i>
+                          <input
+                            [readOnly]="attachment.waiting"
+                            type="text"
+                            [(ngModel)]="attachment.tempName"
+                          />
+                          <i
+                            (click)="renameAttachment(attachment)"
+                            *ngIf="!attachment.waiting"
+                            class="rename icon-checkmark3"
+                          ></i>
+                          <i
+                            *ngIf="attachment.waiting"
+                            class="rename icon-spinner2 icon-spin"
+                          ></i>
                         </div>
-                        <h5>{{ attachment.createdAt | culturedDate:true }}</h5>
+                        <h5>{{ attachment.createdAt | culturedDate: true }}</h5>
                         <h5>
-                          <span>{{ 'UPLOADED_BY' | translate}}&nbsp;</span>
-                          {{usersService.findUser(attachment.userId)?.fullName}}
+                          <span>{{ 'UPLOADED_BY' | translate }}&nbsp;</span>
+                          {{
+                            usersService.findUser(attachment.userId)?.fullName
+                          }}
                         </h5>
                       </div>
                       <div class="actions">
                         <div class="btns">
-                          <i class="icon-new-window" (click)="openAttachment(attachment)"></i>
-                          <i class="icon-download41" (click)="downloadAttachment(attachment)"></i>
-                          <i *ngIf="permission !== AccessType.Visitor" class="icon-pencil" (click)="editAttachment(attachment)"></i>
-                          <i *ngIf="permission !== AccessType.Visitor" class="icon-delete" (click)="deleteAttachment(attachment)"></i>
+                          <i
+                            class="icon-new-window"
+                            (click)="openAttachment(attachment)"
+                          ></i>
+                          <i
+                            class="icon-download41"
+                            (click)="downloadAttachment(attachment)"
+                          ></i>
+                          <i
+                            *ngIf="permission !== AccessType.Visitor"
+                            class="icon-pencil"
+                            (click)="editAttachment(attachment)"
+                          ></i>
+                          <i
+                            *ngIf="permission !== AccessType.Visitor"
+                            class="icon-delete"
+                            (click)="deleteAttachment(attachment)"
+                          ></i>
                         </div>
-                        <div *ngIf="permission !== AccessType.Visitor" class="cover">
-                          <a (click)="coverToggle(attachment)" href="javascript:void(0)">
+                        <div
+                          *ngIf="permission !== AccessType.Visitor"
+                          class="cover"
+                        >
+                          <a
+                            (click)="coverToggle(attachment)"
+                            href="javascript:void(0)"
+                          >
                             <ng-container *ngIf="attachment.covering">
                               <i class="icon-spin icon-spinner2"></i>&nbsp;
                             </ng-container>
-                            {{ (attachment.isCover ? 'REMOVE_COVER' : 'MAKE_COVER') | translate}}
+                            {{
+                              (attachment.isCover
+                                ? 'REMOVE_COVER'
+                                : 'MAKE_COVER'
+                              ) | translate
+                            }}
                           </a>
                         </div>
                       </div>
@@ -369,28 +635,40 @@
                 <div class="box" *ngIf="showMap || model.geoLocation">
                   <div class="box-header">
                     <i class="icon-location"></i>
-                    <span>{{ 'TASK_GEO_LOCATION' | translate}}</span>
+                    <span>{{ 'TASK_GEO_LOCATION' | translate }}</span>
                     <div class="map-actions">
                       <i (click)="prepareMap()" class="icon-pencil"></i>
                       <i (click)="removeLocation()" class="icon-delete"></i>
                     </div>
                   </div>
                   <div class="box-content">
-                    <app-map [disabled]="true" [model]="model.geoLocation"></app-map>
+                    <app-map
+                      [disabled]="true"
+                      [model]="model.geoLocation"
+                    ></app-map>
                   </div>
                   <mat-menu #memberMenu="matMenu">
-                    <div class="task-modal-members-menu" (click)="$event.preventDefault();$event.stopPropagation()">
+                    <div
+                      class="task-modal-members-menu"
+                      (click)="
+                        $event.preventDefault(); $event.stopPropagation()
+                      "
+                    >
                       <ul>
-                        <li (click)="toggleMember(member)"
-                            *ngFor="let member of project.members;">
-                          <app-member-info [selected]="isMemberSelected(member)"
-                                           *ngIf="!member.isGroup"
-                                           [model]="member.member"
-                                           [id]="member.recordId"
+                        <li
+                          (click)="toggleMember(member)"
+                          *ngFor="let member of project.members"
+                        >
+                          <app-member-info
+                            [selected]="isMemberSelected(member)"
+                            *ngIf="!member.isGroup"
+                            [model]="member.member"
+                            [id]="member.recordId"
                           ></app-member-info>
-                          <app-group-info [selected]="isMemberSelected(member)"
-                                          *ngIf="member.isGroup"
-                                          [id]="member.recordId"
+                          <app-group-info
+                            [selected]="isMemberSelected(member)"
+                            *ngIf="member.isGroup"
+                            [id]="member.recordId"
                           ></app-group-info>
                         </li>
                       </ul>
@@ -402,108 +680,173 @@
             <ng-container *ngIf="mode === ViewMode.TimeSpent">
               <div class="box-container time-spent-container">
                 <div class="header">
-                  <div class="title">{{'TASK_TIME_SPENT' | translate}}</div>
+                  <div class="title">{{ 'TASK_TIME_SPENT' | translate }}</div>
                 </div>
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-timer x2"></i>
-                    <span>{{ 'TASK_ESTIMATED_TIME' | translate}}</span>
-                    <ng-container *ngIf="permission === AccessType.Admin || permission === AccessType.Owner">
-                      <i *ngIf="!model.estimatedTime" class="add icon-plus2"></i>
+                    <span>{{ 'TASK_ESTIMATED_TIME' | translate }}</span>
+                    <ng-container
+                      *ngIf="
+                        permission === AccessType.Admin ||
+                        permission === AccessType.Owner
+                      "
+                    >
+                      <i
+                        [matMenuTriggerFor]="timeSpanMenu"
+                        *ngIf="!model.estimatedTime"
+                        class="add icon-plus2"
+                      ></i>
                       <ng-container *ngIf="model.estimatedTime">
-                        <i class="icon-pencil"></i>
-                        <i class="icon-delete"></i>
+                        <i
+                          [matMenuTriggerFor]="timeSpanMenu"
+                          class="icon-pencil"
+                        ></i
+                        >&nbsp;
+                        <i (click)="removeTimeSpan()" class="icon-delete"></i>
                       </ng-container>
+                      <mat-menu #timeSpanMenu="matMenu">
+                        <div
+                          class="time-span-menu"
+                          (click)="$event.stopPropagation()"
+                        >
+                          <h4>{{ 'HOW_LONG_WILL_TAKE' | translate }}</h4>
+                          <app-time-span
+                            [disabled]="savingEstimated"
+                            [(model)]="tempEstimatedTime"
+                          ></app-time-span>
+                          <h5>*&nbsp;{{ 'ONE_DAY_8_HOURS' | translate }}</h5>
+                          <button
+                            [disabled]="savingEstimated"
+                            (click)="saveEstimated()"
+                            color="primary"
+                            mat-flat-button
+                          >
+                            <i
+                              *ngIf="savingEstimated"
+                              class="icon-spinner2 icon-spin"
+                            ></i>
+                            {{ 'SAVE_CHANGES' | translate }}
+                          </button>
+                        </div>
+                      </mat-menu>
                     </ng-container>
                   </div>
                   <div class="box-content" *ngIf="model.estimatedTime">
-                    <h4>{{ model.estimatedTime | estimatedTime}}</h4>
-                    <h5>*&nbsp;{{ 'ONE_DAY_8_HOURS' | translate}}</h5>
+                    <h4>{{ model.estimatedTime | estimatedTime }}</h4>
+                    <h5>*&nbsp;{{ 'ONE_DAY_8_HOURS' | translate }}</h5>
                   </div>
                 </div>
                 <div class="box time-log">
                   <div class="box-header">
-                    <span>{{ 'RECORD_TIME_SPENT' | translate}}</span>
-                    <div class="action">
+                    <span>{{ 'RECORD_TIME_SPENT' | translate }}</span>
+                    <div (click)="addManualTime()" class="action">
                       <i class="add icon-plus2"></i>
-                      <span>{{ 'ADD_TIME_MANUALLY' | translate}}</span>
+                      <span>{{ 'ADD_TIME_MANUALLY' | translate }}</span>
                     </div>
                   </div>
                   <div class="box-content">
                     <div class="recorder active">
                       <div class="time ltr">
                         <div class="days item">
-                          <span class="value">{{ NumberHelpers.pad(0, 2) }}</span>
-                          <span class="label">{{ 'DAYS' | translate}}</span>
+                          <span class="value">{{
+                            NumberHelpers.pad(totalTimeSpent.day, 2)
+                          }}</span>
+                          <span class="label">{{ 'DAYS' | translate }}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="hours item">
-                          <span class="value">{{ NumberHelpers.pad(0, 2) }}</span>
-                          <span class="label">{{ 'HOURS' | translate}}</span>
+                          <span class="value">{{
+                            NumberHelpers.pad(totalTimeSpent.hour, 2)
+                          }}</span>
+                          <span class="label">{{ 'HOURS' | translate }}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="minutes item">
-                          <span class="value">{{ NumberHelpers.pad(0, 2) }}</span>
-                          <span class="label">{{ 'MINUTES' | translate}}</span>
+                          <span class="value">{{
+                            NumberHelpers.pad(totalTimeSpent.minute, 2)
+                          }}</span>
+                          <span class="label">{{ 'MINUTES' | translate }}</span>
                         </div>
                       </div>
                       <div class="btn">
-                        <button mat-mini-fab color="primary">
-                          <i class="icon-play4"></i>
+                        <button
+                          (click)="toggleWorking()"
+                          [disabled]="recording"
+                          mat-mini-fab
+                          color="primary"
+                        >
+                          <i
+                            *ngIf="
+                              !recording &&
+                              identityService.profile.workingTaskId !== model.id
+                            "
+                            class="icon-play4"
+                          ></i>
+                          <i
+                            *ngIf="
+                              !recording &&
+                              identityService.profile.workingTaskId === model.id
+                            "
+                            class="no-pos icon-stop2"
+                          ></i>
+                          <i
+                            *ngIf="recording"
+                            class="no-pos icon-spin icon-spinner2"
+                          ></i>
                         </button>
                       </div>
                     </div>
 
-                    <div class="no-records">
-                      {{ 'TIME_LOGS_HERE' | translate}}
+                    <div *ngIf="!model.timeSpents.length" class="no-records">
+                      {{ 'TIME_LOGS_HERE' | translate }}
                     </div>
 
-<!--                    <div class="records">-->
-<!--                      <div class="record">-->
-<!--                        <div class="member">-->
-<!--                          <app-member-info small="true"-->
-<!--                                           [me]="true"></app-member-info>-->
-<!--                          <h4>{{ identityService.profile.fullName }}</h4>-->
-<!--                        </div>-->
-<!--                        <div class="total">-->
-<!--                          10:20:30-->
-<!--                        </div>-->
-<!--                        <div class="time-span">-->
-<!--                          <div class="from">09:30</div>-->
-<!--                          <div class="dash">-</div>-->
-<!--                          <div class="to">12:40</div>-->
-<!--                        </div>-->
-<!--                        <div class="date-info">-->
-<!--                          <div class="week">جمعه</div>&nbsp;-->
-<!--                          <div class="date">11/22/33</div>-->
-<!--                        </div>-->
-<!--                        <div class="action">-->
-<!--                          <i class="icon-delete"></i>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                      <div class="record">-->
-<!--                        <div class="member">-->
-<!--                          <app-member-info small="true"-->
-<!--                                           [me]="true"></app-member-info>-->
-<!--                          <h4>{{ identityService.profile.fullName }}</h4>-->
-<!--                        </div>-->
-<!--                        <div class="total">-->
-<!--                          10:20:30-->
-<!--                        </div>-->
-<!--                        <div class="time-span">-->
-<!--                          <div class="from">09:30</div>-->
-<!--                          <div class="dash">-</div>-->
-<!--                          <div class="to">12:40</div>-->
-<!--                        </div>-->
-<!--                        <div class="date-info">-->
-<!--                          <div class="week">جمعه</div>&nbsp;-->
-<!--                          <div class="date">11/22/33</div>-->
-<!--                        </div>-->
-<!--                        <div class="action">-->
-<!--                          <i class="icon-delete"></i>-->
-<!--                        </div>-->
-<!--                      </div>-->
-<!--                    </div>-->
+                    <div class="records">
+                      <div *ngFor="let log of model.timeSpents" class="record">
+                        <div class="member">
+                          <app-member-info
+                            [(model)]="log.member"
+                            small="true"
+                            [id]="log.userId"
+                          ></app-member-info>
+                          <h4>{{ log.member?.fullName }}</h4>
+                        </div>
+                        <div class="total">
+                          {{ log.diff || 0 | msToDuration }}
+                        </div>
+                        <div class="time-span">
+                          <div class="from">
+                            {{ log.begin | amDateFormat: 'HH:mm' }}
+                          </div>
+                          <div class="dash">-</div>
+                          <div *ngIf="!log.end" class="to">
+                            {{ 'CURRENTLY_WORKING' | translate }}
+                          </div>
+                          <div *ngIf="log.end" class="to">
+                            {{ log.end | amDateFormat: 'HH:mm' }}
+                          </div>
+                        </div>
+                        <div class="date-info">
+                          <div class="date">
+                            {{ log.begin | culturedDateTime }}
+                          </div>
+                        </div>
+                        <div
+                          *ngIf="
+                            permission === AccessType.Admin ||
+                            permission === AccessType.Owner ||
+                            log.userId === identityService.identity.userId
+                          "
+                          class="action"
+                        >
+                          <i
+                            (click)="removeRecord(log)"
+                            class="icon-delete"
+                          ></i>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -511,54 +854,65 @@
             <ng-container *ngIf="mode === ViewMode.Related">
               <div class="box-container related">
                 <div class="header">
-                  <div class="title">{{'TASK_RELATED' | translate}}</div>
+                  <div class="title">{{ 'TASK_RELATED' | translate }}</div>
                 </div>
-                <br>
+                <br />
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-task"></i>
-                    <span>{{ 'TASK_RELATED_BEFORE' | translate}}</span>
-                    <ng-container *ngIf="permission === AccessType.Admin || permission === AccessType.Owner">
+                    <span>{{ 'TASK_RELATED_BEFORE' | translate }}</span>
+                    <ng-container
+                      *ngIf="
+                        permission === AccessType.Admin ||
+                        permission === AccessType.Owner
+                      "
+                    >
                       <i class="add icon-plus2"></i>
                     </ng-container>
                   </div>
-                  <div class="box-content">
-
-                  </div>
+                  <div class="box-content"></div>
                 </div>
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-task"></i>
-                    <span>{{ 'TASK_RELATED_AFTER' | translate}}</span>
-                    <ng-container *ngIf="permission === AccessType.Admin || permission === AccessType.Owner">
+                    <span>{{ 'TASK_RELATED_AFTER' | translate }}</span>
+                    <ng-container
+                      *ngIf="
+                        permission === AccessType.Admin ||
+                        permission === AccessType.Owner
+                      "
+                    >
                       <i class="add icon-plus2"></i>
                     </ng-container>
                   </div>
-                  <div class="box-content">
-
-                  </div>
+                  <div class="box-content"></div>
                 </div>
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-stopped"></i>
-                    <span>{{ 'TASK_BLOCKING' | translate}}</span>
-                    <ng-container *ngIf="permission === AccessType.Admin || permission === AccessType.Owner">
+                    <span>{{ 'TASK_BLOCKING' | translate }}</span>
+                    <ng-container
+                      *ngIf="
+                        permission === AccessType.Admin ||
+                        permission === AccessType.Owner
+                      "
+                    >
                       <i class="add icon-plus2"></i>
                     </ng-container>
                   </div>
-                  <div class="box-content">
-
-                  </div>
+                  <div class="box-content"></div>
                 </div>
               </div>
             </ng-container>
             <ng-container *ngIf="mode === ViewMode.CustomField">
               <div class="box-container custom-fields">
                 <div class="header">
-                <div class="title">{{'TASK_CUSTOM_FIELD' | translate}}</div>
-              </div>
-                <app-custom-fields [taskId]="this.model.id"
-                                   [model]="this.workPackage.customFields"></app-custom-fields>
+                  <div class="title">{{ 'TASK_CUSTOM_FIELD' | translate }}</div>
+                </div>
+                <app-custom-fields
+                  [taskId]="this.model.id"
+                  [model]="this.workPackage.customFields"
+                ></app-custom-fields>
               </div>
             </ng-container>
             <ng-container *ngIf="mode === ViewMode.Activity">
@@ -573,14 +927,18 @@
   </div>
 </div>
 <mat-menu #statusMenu="matMenu">
-    <div class="status-popper">
-      <ul class="status-wrapper">
-        <li (click)="changeState(state)" *ngFor="let state of allStates" class="status-container">
-          <div class="circle color-{{state}}"></div>
-          <div class="text">
-            {{state | enum:'WorkPackageTaskState'}}
-          </div>
-        </li>
-      </ul>
-    </div>
+  <div class="status-popper">
+    <ul class="status-wrapper">
+      <li
+        (click)="changeState(state)"
+        *ngFor="let state of allStates"
+        class="status-container"
+      >
+        <div class="circle color-{{ state }}"></div>
+        <div class="text">
+          {{ state | enum: 'WorkPackageTaskState' }}
+        </div>
+      </li>
+    </ul>
+  </div>
 </mat-menu>

@@ -1,6 +1,5 @@
 <div class="outer" (click)="close()">
-  <div class="modal-content create-modal"
-       (click)="$event.stopPropagation();">
+  <div class="modal-content create-modal" (click)="$event.stopPropagation()">
     <div class="modal-alt-header">
       <div class="btn"></div>
 
@@ -18,10 +17,11 @@
     </div>
 
     <div class="modal-body create-group">
-      <app-invite-people [noGroup]="noGroup"
-                         [exclude]="exclude"
-                         [(members)]="members"
-                         [(groups)]="groups"
+      <app-invite-people
+        [noGroup]="noGroup"
+        [exclude]="exclude"
+        [(members)]="members"
+        [(groups)]="groups"
       ></app-invite-people>
     </div>
     <div class="modal-footer">
@@ -37,4 +37,3 @@
     </div>
   </div>
 </div>
-

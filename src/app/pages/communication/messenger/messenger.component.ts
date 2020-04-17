@@ -1,14 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {MessengerService} from '../../../services/communication/messenger.service';
-import {ChannelViewModel} from '../../../view-models/communication/messenger-types';
-import {ChannelType} from '../../../library/app/enums';
-import {ModalService} from '../../../services/core/modal.service';
-import {MessengerSettingComponent} from '../../../modals/messenger-setting/messenger-setting.component';
-import {ProjectService} from '../../../services/projects/project.service';
-import {GroupService} from '../../../services/groups/group.service';
-import {GroupViewModel} from '../../../view-models/groups/group-types';
-import {ProjectViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
-import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
+import { Component, OnInit } from '@angular/core';
+import { MessengerService } from '../../../services/communication/messenger.service';
+import { ChannelViewModel } from '../../../view-models/communication/messenger-types';
+import { ChannelType } from '../../../library/app/enums';
+import { ModalService } from '../../../services/core/modal.service';
+import { MessengerSettingComponent } from '../../../modals/messenger-setting/messenger-setting.component';
+import { ProjectService } from '../../../services/projects/project.service';
+import { GroupService } from '../../../services/groups/group.service';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import {
+  ProjectViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
+import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-messenger',
@@ -33,13 +36,17 @@ export class MessengerComponent implements OnInit {
     const members = [];
     this.groupService.groups.forEach(g => {
       g.members.forEach(m => {
-        if (!m.member || members.find(k => k.id === m.member.id)) { return; }
+        if (!m.member || members.find(k => k.id === m.member.id)) {
+          return;
+        }
         members.push(m.member);
       });
     });
     this.projectService.projects.forEach(g => {
       g.members.forEach(m => {
-        if (m.isGroup || !m.member || members.find(k => k.id === m.member.id)) { return; }
+        if (m.isGroup || !m.member || members.find(k => k.id === m.member.id)) {
+          return;
+        }
         members.push(m.member);
       });
     });
@@ -53,7 +60,7 @@ export class MessengerComponent implements OnInit {
       messages: [],
       members: [],
       title: group.title,
-      type: ChannelType.Group
+      type: ChannelType.Group,
     };
     this.currentMembers = group.members.map(m => m.member);
   }
@@ -63,22 +70,32 @@ export class MessengerComponent implements OnInit {
       messages: [],
       members: [],
       title: project.title,
-      type: ChannelType.Project
+      type: ChannelType.Project,
     };
-    this.currentMembers = project.members.filter(p => !p.isGroup).map(m => m.member);
+    this.currentMembers = project.members
+      .filter(p => !p.isGroup)
+      .map(m => m.member);
   }
 
-  openWorkPackage(project: ProjectViewModel, workPackageViewModel: WorkPackageViewModel) {
+  openWorkPackage(
+    project: ProjectViewModel,
+    workPackageViewModel: WorkPackageViewModel,
+  ) {
     this.current = {
       id: workPackageViewModel.id,
       messages: [],
       members: [],
       title: workPackageViewModel.title,
-      type: ChannelType.WorkPackage
+      type: ChannelType.WorkPackage,
     };
-    this.currentMembers = project.members.filter(p => {
-      return !p.isGroup && workPackageViewModel.members.find(m => m.id === p.recordId);
-    }).map(m => m.member);
+    this.currentMembers = project.members
+      .filter(p => {
+        return (
+          !p.isGroup &&
+          workPackageViewModel.members.find(m => m.id === p.recordId)
+        );
+      })
+      .map(m => m.member);
   }
 
   toggleFiles() {

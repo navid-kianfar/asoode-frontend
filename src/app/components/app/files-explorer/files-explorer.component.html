@@ -98,23 +98,30 @@
     <i class="icon-arrow-down8"></i>&nbsp;
     <span class="label">{{ 'SORT_BY' | translate }}</span
     >&nbsp;
-    <app-dropdown [disabled]="waiting || true" enum="SortType" [model]="sort"></app-dropdown>
+    <app-dropdown
+      [disabled]="waiting || true"
+      enum="SortType"
+      [model]="sort"
+    ></app-dropdown>
   </div>
   <ul>
     <li class="refresh" (click)="fetch(path)">
       <i class="icon-reset"></i>
     </li>
-    <ng-container *ngFor="let p of parent.reverse();">
+    <ng-container *ngFor="let p of parent.reverse()">
       <li (click)="goTo(p)">
-        <span>{{p.name || '/'}}</span>
+        <span>{{ p.name || '/' }}</span>
       </li>
     </ng-container>
-
   </ul>
   <app-waiting *ngIf="waiting"></app-waiting>
   <ng-container *ngIf="!waiting">
     <div class="wrapper">
-      <app-file-folder-preview *ngIf="parent.length > 1" (dblclick)="goUp()" [up]="true"></app-file-folder-preview>
+      <app-file-folder-preview
+        *ngIf="parent.length > 1"
+        (dblclick)="goUp()"
+        [up]="true"
+      ></app-file-folder-preview>
       <app-file-folder-preview
         (click)="handleClick($event, folder)"
         (dblclick)="enterFolder(folder)"
@@ -129,7 +136,10 @@
         [file]="file"
       ></app-file-folder-preview>
     </div>
-    <div *ngIf="!data.files.length && !data.folders.length" class="no-items-found">
+    <div
+      *ngIf="!data.files.length && !data.folders.length"
+      class="no-items-found"
+    >
       <h3>{{ 'NO_FILES_OR_FOLDERS' | translate }}</h3>
     </div>
   </ng-container>

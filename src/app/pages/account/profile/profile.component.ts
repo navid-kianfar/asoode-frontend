@@ -28,12 +28,10 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async prepareChangePhoneNumber() {
-    this.modalService.show(ChangePhoneComponent, {}).subscribe(() => {
-    });
+    this.modalService.show(ChangePhoneComponent, {}).subscribe(() => {});
   }
   async prepareChangeEmail() {
-    this.modalService.show(ChangeEmailComponent, {}).subscribe(() => {
-    });
+    this.modalService.show(ChangeEmailComponent, {}).subscribe(() => {});
   }
   async changePassword(model: any, form) {
     const op = await this.identityService.changePassword({

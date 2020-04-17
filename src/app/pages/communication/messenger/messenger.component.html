@@ -15,7 +15,7 @@
               <div *ngIf="!projectService.projects.length" class="no-item">
                 {{ 'NO_PROJECTS' | translate }}
               </div>
-              <ng-container *ngFor=" let project of projectService.projects">
+              <ng-container *ngFor="let project of projectService.projects">
                 <ng-container *ngIf="project.complex">
                   <div
                     matRipple
@@ -58,7 +58,7 @@
                 matRipple
                 [class.selected]="current?.id === group.id"
                 (click)="openGroup(group)"
-                *ngFor=" let group of groupService.groups"
+                *ngFor="let group of groupService.groups"
                 class="item"
               >
                 {{ group.title }}
@@ -80,10 +80,14 @@
                 </div>
               </div>
 
-              <div class="member" *ngFor=" let member of allMembers | search: ['fullName', 'email', 'phoneNumber']:filter">
-                <app-member-info
-                  [model]="member"
-                ></app-member-info>
+              <div
+                class="member"
+                *ngFor="
+                  let member of allMembers
+                    | search: ['fullName', 'email', 'phoneNumber']:filter
+                "
+              >
+                <app-member-info [model]="member"></app-member-info>
               </div>
             </div>
           </ng-template>
@@ -98,7 +102,7 @@
         <h3>
           <i class="icon-bubble-dots2"></i>
           {{
-            ((projectService.projects.length + groupService.groups.length)
+            (projectService.projects.length + groupService.groups.length
               ? 'NO_CHANNEL_SELECTED'
               : 'NO_CHANNELS'
             ) | translate
@@ -112,10 +116,19 @@
       <div class="channel-header">
         <div class="wrapper">
           <div class="title-container">
-            <span class="title">{{ current.title }}</span>&nbsp;
+            <span class="title">{{ current.title }}</span
+            >&nbsp;
             <i *ngIf="current.type === ChannelType.Group" class="icon-team"></i>
-            <i *ngIf="current.type === ChannelType.WorkPackage" class="icon-workpackage"></i>&nbsp;
-            <i *ngIf="current.type === ChannelType.Project" class="icon-project"></i>&nbsp;
+            <i
+              *ngIf="current.type === ChannelType.WorkPackage"
+              class="icon-workpackage"
+            ></i
+            >&nbsp;
+            <i
+              *ngIf="current.type === ChannelType.Project"
+              class="icon-project"
+            ></i
+            >&nbsp;
             <span class="category">{{ current.title }}</span>
           </div>
           <div class="info-container">
@@ -168,7 +181,10 @@
         </div>
       </div>
       <div class="channel-content">
-        <app-conversation [recordId]="current.id" [members]="currentMembers"></app-conversation>
+        <app-conversation
+          [recordId]="current.id"
+          [members]="currentMembers"
+        ></app-conversation>
       </div>
     </div>
     <div *ngIf="showFiles" class="channel-aside">

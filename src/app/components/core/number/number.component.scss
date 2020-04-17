@@ -1,0 +1,86 @@
+.af-numbox {
+  margin: 0;
+  .input-container {
+    border: 1px solid #e5e5e5;
+    box-shadow: none;
+    background-color: #fff;
+    border-radius: 2px;
+    font-size: 1em;
+    display: flex;
+    i {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 0 0.75rem;
+    }
+    input {
+      border: none;
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      max-width: 70px;
+    }
+    .spinbox-buttons {
+      align-self: stretch;
+      transition: background ease-in-out 0.15s;
+      display: flex;
+      flex-direction: column;
+
+      &:hover {
+        background-color: #ebebeb;
+      }
+
+      button {
+        flex: 1 1 50%;
+        outline: none;
+        background-color: transparent;
+        border-radius: 0;
+        border: none;
+        padding: 0 7px;
+        font-size: 0.6rem;
+
+        span {
+          vertical-align: middle;
+          display: block;
+        }
+
+        &:active {
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        }
+
+        &:hover {
+        }
+
+        &:focus {
+          outline: none;
+        }
+
+        &:active {
+          &:focus {
+          }
+        }
+
+        &:hover:focus,
+        &:hover:active,
+        &:focus:active {
+          background-color: transparent;
+        }
+      }
+    }
+    &:hover,
+    &.focus {
+      border-color: #f5f5f5;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 2px 3px rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .input-container {
+  }
+
+  &.invalid {
+    .input-container {
+      border-color: #ff3547;
+    }
+  }
+}

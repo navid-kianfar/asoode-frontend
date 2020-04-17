@@ -28,16 +28,23 @@ export default class GeorgianDateConverter implements IDateConverter {
       .replace(/ss/g, NumberHelpers.pad(converted.Seconds, 2))
       .replace(/ll/g, NumberHelpers.pad(converted.Milliseconds, 2))
       .replace(/AP/g, converted.Hours > 12 ? 'PM' : 'AM')
-      .replace(/NNN/g, converted.MonthName);
+      .replace(/NNN/g, converted.MonthName)
+      .replace(/WW/g, converted.WeekName);
   }
   private innerParse(date: IDateTimeProperties): PersianDate {
     const temp = new Date(date.Year, date.Month, date.Day);
     const gregorian = new PersianDate(temp)
       .toCalendar('gregorian')
       .toLocale('en');
-    if (date.Hours !== undefined) { gregorian.hour(date.Hours); }
-    if (date.Minutes !== undefined) { gregorian.minutes(date.Minutes); }
-    if (date.Seconds !== undefined) { gregorian.seconds(date.Seconds); }
+    if (date.Hours !== undefined) {
+      gregorian.hour(date.Hours);
+    }
+    if (date.Minutes !== undefined) {
+      gregorian.minutes(date.Minutes);
+    }
+    if (date.Seconds !== undefined) {
+      gregorian.seconds(date.Seconds);
+    }
     return gregorian;
   }
 

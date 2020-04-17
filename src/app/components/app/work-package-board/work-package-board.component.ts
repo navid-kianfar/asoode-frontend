@@ -1,17 +1,21 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageListViewModel,
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {AccessType} from '../../../library/app/enums';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {TaskService} from '../../../services/projects/task.service';
-import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
-import {ModalService} from '../../../services/core/modal.service';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import { AccessType } from '../../../library/app/enums';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { TaskService } from '../../../services/projects/task.service';
+import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
+import { ModalService } from '../../../services/core/modal.service';
 
 @Component({
   selector: 'app-work-package-board',
@@ -48,7 +52,7 @@ export class WorkPackageBoardComponent implements OnInit {
   }
 
   prepareNewTask(list: WorkPackageListViewModel) {
-    this.model.lists.forEach(l => l.expanded = false);
+    this.model.lists.forEach(l => (l.expanded = false));
     list.expanded = true;
     this.newTaskTitle = '';
   }
@@ -56,19 +60,19 @@ export class WorkPackageBoardComponent implements OnInit {
     list.expanded = false;
   }
 
-  changeSort(list: WorkPackageListViewModel) {
+  changeSort(list: WorkPackageListViewModel) {}
 
-  }
-
-  showChart(list: WorkPackageListViewModel) {
-
-  }
+  showChart(list: WorkPackageListViewModel) {}
 
   async createNewList() {
     const name = this.newListName.trim();
-    if (!name) { return; }
+    if (!name) {
+      return;
+    }
     this.creatingNewList = true;
-    const op = await this.workPackageService.createList(this.model.id, {title: name});
+    const op = await this.workPackageService.createList(this.model.id, {
+      title: name,
+    });
     this.creatingNewList = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -96,7 +100,9 @@ export class WorkPackageBoardComponent implements OnInit {
       return;
     }
     list.renameWaiting = true;
-    const op = await this.workPackageService.renameList(list.id, {title: name});
+    const op = await this.workPackageService.renameList(list.id, {
+      title: name,
+    });
     list.renameWaiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -107,12 +113,14 @@ export class WorkPackageBoardComponent implements OnInit {
 
   async createNewTask(list: WorkPackageListViewModel) {
     const name = this.newTaskTitle.trim();
-    if (!name) { return; }
+    if (!name) {
+      return;
+    }
     this.creatingNewTask = true;
     const op = await this.taskService.create(this.model.id, {
       listId: list.id,
       title: name,
-      parentId: undefined
+      parentId: undefined,
     });
     this.creatingNewTask = false;
     if (op.status !== OperationResultStatus.Success) {
@@ -159,14 +167,18 @@ export class WorkPackageBoardComponent implements OnInit {
       event.currentIndex,
     );
     event.item.data.order = event.currentIndex + 1;
-    this.workPackageService.repositionList(id, { order: event.item.data.order });
+    this.workPackageService.repositionList(id, {
+      order: event.item.data.order,
+    });
   }
 
   openTask(task: WorkPackageTaskViewModel) {
-    this.modalService.show(TaskModalComponent, {
-      id: task.id,
-      project: this.project,
-      workPackage: this.model
-    }).subscribe(() => {});
+    this.modalService
+      .show(TaskModalComponent, {
+        id: task.id,
+        project: this.project,
+        workPackage: this.model,
+      })
+      .subscribe(() => {});
   }
 }

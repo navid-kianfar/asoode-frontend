@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SimpleModalComponent } from 'ngx-simple-modal';
 import { CreateModalParameters } from '../../view-models/modals/modals-types';
 import { CultureService } from '../../services/core/culture.service';
-import {IdentityService} from '../../services/auth/identity.service';
+import { IdentityService } from '../../services/auth/identity.service';
 
 @Component({
   selector: 'app-create-wizard',

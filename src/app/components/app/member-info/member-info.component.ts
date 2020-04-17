@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {UsersService} from '../../../services/general/users.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { UsersService } from '../../../services/general/users.service';
 
 @Component({
   selector: 'app-member-info',
@@ -43,7 +43,7 @@ export class MemberInfoComponent implements OnInit {
         firstName: '',
         initials: '',
         avatar: '',
-        bio: ''
+        bio: '',
       };
       this.update();
     }

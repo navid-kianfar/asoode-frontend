@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CultureService } from './culture.service';
 
-import {IDateConverter, IDateTimeProperties} from '../../library/core/date-time/date-contracts';
+import {
+  IDateConverter,
+  IDateTimeProperties,
+} from '../../library/core/date-time/date-contracts';
 import PersianDateConverter from '../../library/core/date-time/persian-date-converter';
 import HijriDateConverter from '../../library/core/date-time/hijri-date-converter';
 import GeorgianDateConverter from '../../library/core/date-time/georgian-date-converter';
 import { NumberHelpers } from '../../helpers/number.helpers';
-import {IdentityService} from '../auth/identity.service';
+import { IdentityService } from '../auth/identity.service';
 
 @Injectable({
   providedIn: 'root',

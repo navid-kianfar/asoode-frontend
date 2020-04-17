@@ -89,15 +89,33 @@
               border-radius: 50px;
               margin: 0 3px;
 
-              &.color-1{ background: #cccccc; }
-              &.color-2{ background: #59a8ef; }
-              &.color-3{ background: #5eb258; }
-              &.color-4{ background: #666666; }
-              &.color-5{ background: #b33634; }
-              &.color-6{ background: #666666; }
-              &.color-7{ background: #808080; }
-              &.color-8{ background: #b3b3b3; }
-              &.color-9{ background: #eb973e; }
+              &.color-1 {
+                background: #cccccc;
+              }
+              &.color-2 {
+                background: #59a8ef;
+              }
+              &.color-3 {
+                background: #5eb258;
+              }
+              &.color-4 {
+                background: #666666;
+              }
+              &.color-5 {
+                background: #b33634;
+              }
+              &.color-6 {
+                background: #666666;
+              }
+              &.color-7 {
+                background: #808080;
+              }
+              &.color-8 {
+                background: #b3b3b3;
+              }
+              &.color-9 {
+                background: #eb973e;
+              }
             }
             .text {
               color: #4d4d4d;
@@ -300,20 +318,22 @@
     .header {
       display: flex;
       height: 30px;
-      align-items: center;
+      min-height: 30px;
+      align-items: baseline;
       .title {
         display: flex;
         flex-grow: 1;
         font-size: 0.9rem;
         font-weight: 500;
       }
-      .action {}
+      .action {
+      }
     }
 
     .box {
       display: flex;
       flex-direction: column;
-      margin-bottom: 20px;
+      margin: 10px 0;
       .box-header {
         display: flex;
         align-items: center;
@@ -447,7 +467,7 @@
       h5 {
         font-size: 0.7rem;
         font-weight: 400;
-        color: #808080
+        color: #808080;
       }
 
       input {
@@ -460,7 +480,6 @@
       }
 
       i.rename {
-
       }
 
       ::ng-deep .mat-progress-bar-fill::after {
@@ -558,6 +577,13 @@
     i.x2 {
       font-size: 1.5rem !important;
     }
+    h4 {
+      margin-top: 10px;
+    }
+    h5 {
+      font-size: 0.7rem;
+      color: #999999;
+    }
 
     .time-log {
       border-top: 2px solid #e6e6e6;
@@ -624,12 +650,18 @@
               font-size: 1.6rem;
               position: relative;
               right: -3px;
+
+              &.no-pos {
+                right: 0;
+                top: 0;
+              }
             }
           }
         }
 
         &.active {
-          .sep, .item .value {
+          .sep,
+          .item .value {
             color: #5eb258;
           }
 
@@ -688,9 +720,14 @@
             align-items: center;
             color: #999999;
             font-size: 0.7rem;
-            .from {}
-            .dash {margin: 0 5px}
-            .to {}
+            width: 70px;
+            .from {
+            }
+            .dash {
+              margin: 0 5px;
+            }
+            .to {
+            }
           }
           .date-info {
             margin: 0 10px;
@@ -699,16 +736,17 @@
             .week {
               width: 50px;
             }
-            .date {}
+            .date {
+            }
           }
           .action {
-            .i {}
+            .i {
+            }
           }
         }
       }
     }
   }
-
 
   .vote-box {
     flex-direction: row !important;
@@ -791,6 +829,20 @@
     }
   }
 }
+.time-span-menu {
+  width: 240px;
+  padding: 10px;
+  h4 {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  h5 {
+    margin-top: 10px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #999;
+  }
+}
 .status-popper {
   width: 150px;
   background: #f2f2f2;
@@ -815,15 +867,33 @@
         border-radius: 50px;
         margin: 0 3px;
 
-        &.color-1{ background: #cccccc; }
-        &.color-2{ background: #59a8ef; }
-        &.color-3{ background: #5eb258; }
-        &.color-4{ background: #666666; }
-        &.color-5{ background: #b33634; }
-        &.color-6{ background: #666666; }
-        &.color-7{ background: #808080; }
-        &.color-8{ background: #b3b3b3; }
-        &.color-9{ background: #eb973e; }
+        &.color-1 {
+          background: #cccccc;
+        }
+        &.color-2 {
+          background: #59a8ef;
+        }
+        &.color-3 {
+          background: #5eb258;
+        }
+        &.color-4 {
+          background: #666666;
+        }
+        &.color-5 {
+          background: #b33634;
+        }
+        &.color-6 {
+          background: #666666;
+        }
+        &.color-7 {
+          background: #808080;
+        }
+        &.color-8 {
+          background: #b3b3b3;
+        }
+        &.color-9 {
+          background: #eb973e;
+        }
       }
 
       &:hover {

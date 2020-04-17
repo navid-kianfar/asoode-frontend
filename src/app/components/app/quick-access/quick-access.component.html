@@ -10,8 +10,10 @@
     <div
       (click)="openProject(proj)"
       class="project-item"
-      *ngFor="let proj of projectService.projects |
-      slice: 0: (showMoreProjects ? projectService.projects.length : 5)"
+      *ngFor="
+        let proj of projectService.projects
+          | slice: 0:(showMoreProjects ? projectService.projects.length : 5)
+      "
     >
       <div class="avatar-container">
         <i
@@ -24,7 +26,11 @@
         <div class="description">{{ proj.description | truncate: 100 }}</div>
       </div>
     </div>
-    <div (click)="moreProjects()" class="more" *ngIf="projectService.projects.length > 5 && !showMoreProjects">
+    <div
+      (click)="moreProjects()"
+      class="more"
+      *ngIf="projectService.projects.length > 5 && !showMoreProjects"
+    >
       <i class="icon-cc"></i>
       {{ 'SHOW_MORE' | translate }}
     </div>
@@ -40,8 +46,10 @@
     <div
       (click)="openGroup(group)"
       class="group-item"
-      *ngFor="let group of groupService.groups |
-      slice: 0:(showMoreGroups ? groupService.groups.length : 5)"
+      *ngFor="
+        let group of groupService.groups
+          | slice: 0:(showMoreGroups ? groupService.groups.length : 5)
+      "
     >
       <div class="avatar-container">
         <img *ngIf="group.avatarId" [src]="group.avatarId" alt="avatar" />
@@ -52,7 +60,11 @@
         <div class="description">{{ group.description | truncate: 100 }}</div>
       </div>
     </div>
-    <div (click)="moreGroups()" class="more" *ngIf="groupService.groups.length > 5 && !showMoreGroups">
+    <div
+      (click)="moreGroups()"
+      class="more"
+      *ngIf="groupService.groups.length > 5 && !showMoreGroups"
+    >
       <i class="icon-cc"></i>
       {{ 'SHOW_MORE' | translate }}
     </div>

@@ -24,7 +24,7 @@ export class FileFolderPreviewComponent implements OnInit {
         selected: false,
         createdAt: new Date(),
         name: '...',
-        path: '/'
+        path: '/',
       };
     }
   }

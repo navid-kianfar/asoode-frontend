@@ -1,9 +1,12 @@
-import {Injectable} from '@angular/core';
-import {HttpService} from '../core/http.service';
-import {OperationResult} from '../../library/core/operation-result';
-import {ExplorerViewModel, UploadViewModel,} from '../../view-models/storage/files-types';
-import {OperationResultStatus} from '../../library/core/enums';
-import {StringDictionary} from '../../library/core/dictionary';
+import { Injectable } from '@angular/core';
+import { HttpService } from '../core/http.service';
+import { OperationResult } from '../../library/core/operation-result';
+import {
+  ExplorerViewModel,
+  UploadViewModel,
+} from '../../view-models/storage/files-types';
+import { OperationResultStatus } from '../../library/core/enums';
+import { StringDictionary } from '../../library/core/dictionary';
 
 @Injectable({
   providedIn: 'root',
@@ -121,28 +124,32 @@ export class FilesService {
   }
 
   upload(upload: UploadViewModel[], path: string) {
-    if (upload.length) { this.hidePlate = false; }
+    if (upload.length) {
+      this.hidePlate = false;
+    }
     upload.forEach(u => {
       u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
-        this.httpService.formUpload(
-          '/files/upload',
-          { path, file: u.file },
-          (percent) => { u.progress = percent; }
-        )
-          .then((op) => {
-            if (op.status !== OperationResultStatus.Success) {
+        this.httpService
+          .formUpload('/files/upload', { path, file: u.file }, percent => {
+            u.progress = percent;
+          })
+          .then(
+            op => {
+              if (op.status !== OperationResultStatus.Success) {
+                u.uploading = false;
+                u.failed = true;
+                return;
+              }
+              u.progress = 100;
+              u.success = true;
+              u.uploading = false;
+            },
+            err => {
+              reject(err);
               u.uploading = false;
               u.failed = true;
-              return;
-            }
-            u.progress = 100;
-            u.success = true;
-            u.uploading = false;
-          }, (err) => {
-            reject(err);
-            u.uploading = false;
-            u.failed = true;
-          });
+            },
+          );
       });
     });
   }
@@ -152,7 +159,9 @@ export class FilesService {
   }
 
   async attach(upload: UploadViewModel[], taskId: string) {
-    if (upload.length) { this.hidePlate = false; }
+    if (upload.length) {
+      this.hidePlate = false;
+    }
     upload.forEach(u => {
       const removeFromList = () => {
         const index = this.attaching.indexOf(u);
@@ -160,26 +169,28 @@ export class FilesService {
         console.log(index, removed, u);
       };
       u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
-        this.httpService.formUpload(
-          `/tasks/${taskId}/attach`,
-          { file: u.file },
-          (percent) => { u.progress = percent; }
-        )
-          .then((op) => {
-            removeFromList();
-            if (op.status !== OperationResultStatus.Success) {
+        this.httpService
+          .formUpload(`/tasks/${taskId}/attach`, { file: u.file }, percent => {
+            u.progress = percent;
+          })
+          .then(
+            op => {
+              removeFromList();
+              if (op.status !== OperationResultStatus.Success) {
+                u.uploading = false;
+                u.failed = true;
+                return;
+              }
+              u.progress = 100;
+              u.success = true;
+              u.uploading = false;
+            },
+            err => {
+              reject(err);
               u.uploading = false;
               u.failed = true;
-              return;
-            }
-            u.progress = 100;
-            u.success = true;
-            u.uploading = false;
-          }, (err) => {
-            reject(err);
-            u.uploading = false;
-            u.failed = true;
-          });
+            },
+          );
       });
     });
   }

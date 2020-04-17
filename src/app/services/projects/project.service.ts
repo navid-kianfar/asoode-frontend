@@ -80,7 +80,9 @@ export class ProjectService {
       typeof project === 'string'
         ? this.projects.find(g => g.id === project)
         : project;
-    const access = proj.members.find(m => m.recordId === this.identityService.identity.userId);
+    const access = proj.members.find(
+      m => m.recordId === this.identityService.identity.userId,
+    );
     const multiple = [];
     if (access) {
       multiple.push(access.access);
@@ -95,8 +97,13 @@ export class ProjectService {
     return multiple.sort()[0];
   }
 
-  getWorkPackagePermission(project: ProjectViewModel, workPackage: WorkPackageViewModel): AccessType {
-    const access = workPackage.members.find(m => m.recordId === this.identityService.identity.userId);
+  getWorkPackagePermission(
+    project: ProjectViewModel,
+    workPackage: WorkPackageViewModel,
+  ): AccessType {
+    const access = workPackage.members.find(
+      m => m.recordId === this.identityService.identity.userId,
+    );
     const multiple = [];
     if (access) {
       multiple.push(access.access);
@@ -111,7 +118,10 @@ export class ProjectService {
     return multiple.sort()[0];
   }
 
-  async changePendingAccess(id: string, model): Promise<OperationResult<boolean>> {
+  async changePendingAccess(
+    id: string,
+    model,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/projects/change-pending-access/${id}`,
       model,
@@ -119,27 +129,46 @@ export class ProjectService {
   }
 
   async removePendingAccess(id: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/projects/remove-pending-access/${id}`);
+    return await this.httpService.post<boolean>(
+      `/projects/remove-pending-access/${id}`,
+    );
   }
 
   async removeSubProject(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/projects/sub/${id}/remove`);
   }
 
-  async editSubProject(id: string, params: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/projects/sub/${id}/edit`, params);
+  async editSubProject(
+    id: string,
+    params: any,
+  ): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/projects/sub/${id}/edit`,
+      params,
+    );
   }
 
-  async createSeasonProject(id: string, params: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/projects/${id}/season/create`, params);
+  async createSeasonProject(
+    id: string,
+    params: any,
+  ): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/projects/${id}/season/create`,
+      params,
+    );
   }
 
   async removeSeason(id: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/projects/season/${id}/remove`);
+    return await this.httpService.post<boolean>(
+      `/projects/season/${id}/remove`,
+    );
   }
 
   async editSeason(id: string, params: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/projects/season/${id}/edit`, params);
+    return await this.httpService.post<boolean>(
+      `/projects/season/${id}/edit`,
+      params,
+    );
   }
 
   async edit(id: string, params: any): Promise<OperationResult<boolean>> {

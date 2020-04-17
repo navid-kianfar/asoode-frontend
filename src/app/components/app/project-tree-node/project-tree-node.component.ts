@@ -1,11 +1,20 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import {
   ProjectViewModel,
   SubProjectViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {Subscription} from 'rxjs';
-import {Router} from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-tree-node',
@@ -28,9 +37,7 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   to?: Date;
   workPackages: WorkPackageViewModel[];
   subscribe: Subscription;
-  constructor(
-    private readonly router: Router,
-  ) {}
+  constructor(private readonly router: Router) {}
 
   ngOnInit() {
     this.from = new Date();

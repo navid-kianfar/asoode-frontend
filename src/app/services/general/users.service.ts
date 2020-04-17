@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
-import {MemberInfoViewModel} from '../../view-models/auth/identity-types';
-import {ProjectService} from '../projects/project.service';
-import {GroupService} from '../groups/group.service';
-import {IdentityService} from '../auth/identity.service';
+import { MemberInfoViewModel } from '../../view-models/auth/identity-types';
+import { ProjectService } from '../projects/project.service';
+import { GroupService } from '../groups/group.service';
+import { IdentityService } from '../auth/identity.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
-
   private repository: any = {};
 
   constructor(
     private readonly projectService: ProjectService,
     private readonly groupService: GroupService,
     private readonly identityService: IdentityService,
-  ) { }
+  ) {}
 
   findUser(userId: string): MemberInfoViewModel {
     if (!this.repository[userId]) {
-      let found: any = this.identityService.identity.userId === userId ?
-        this.identityService.profile : undefined;
+      let found: any =
+        this.identityService.identity.userId === userId
+          ? this.identityService.profile
+          : undefined;
       if (!found) {
         for (const project of this.projectService.projects) {
           for (const member of project.members) {
@@ -29,7 +30,9 @@ export class UsersService {
               break;
             }
           }
-          if (found) { break; }
+          if (found) {
+            break;
+          }
         }
       }
       if (!found) {
@@ -40,7 +43,9 @@ export class UsersService {
               break;
             }
           }
-          if (found) { break; }
+          if (found) {
+            break;
+          }
         }
       }
       this.repository[userId] = found;

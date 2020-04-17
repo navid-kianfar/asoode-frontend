@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {Socket, SocketIoModule} from 'ngx-socket-io';
+import { Socket, SocketIoModule } from 'ngx-socket-io';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -147,9 +147,9 @@ import { InviteModalComponent } from './modals/invite-modal/invite-modal.compone
 import { GroupNamePipe } from './pipes/app/group-name.pipe';
 import { GroupSettingsComponent } from './components/app/group-settings/group-settings.component';
 import { WorkPackageWizardComponent } from './modals/work-package-wizard/work-package-wizard.component';
-import {DeviceDetectorModule} from 'ngx-device-detector';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {ColorPickerModule} from 'ngx-color-picker';
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ColorPickerModule } from 'ngx-color-picker';
 import { WorkPackageTaskComponent } from './components/app/work-package-task/work-package-task.component';
 import { TaskModalComponent } from './modals/task-modal/task-modal.component';
 import { UpgradeComponent } from './modals/upgrade/upgrade.component';
@@ -158,6 +158,8 @@ import { MapModalComponent } from './modals/map-modal/map-modal.component';
 import { EstimatedTimePipe } from './pipes/app/estimated-time.pipe';
 import { ActivityLogComponent } from './components/app/activity-log/activity-log.component';
 import { CustomFieldsComponent } from './components/app/custom-fields/custom-fields.component';
+import { TimeSpanComponent } from './components/core/time-span/time-span.component';
+import { NumberComponent } from './components/core/number/number.component';
 
 @NgModule({
   declarations: [
@@ -280,6 +282,8 @@ import { CustomFieldsComponent } from './components/app/custom-fields/custom-fie
     EstimatedTimePipe,
     ActivityLogComponent,
     CustomFieldsComponent,
+    TimeSpanComponent,
+    NumberComponent,
   ],
   entryComponents: [
     MapModalComponent,
@@ -293,7 +297,7 @@ import { CustomFieldsComponent } from './components/app/custom-fields/custom-fie
     GroupDetailComponent,
     InviteModalComponent,
     TaskModalComponent,
-    UpgradeComponent
+    UpgradeComponent,
   ],
   imports: [
     BrowserModule,
@@ -312,7 +316,7 @@ import { CustomFieldsComponent } from './components/app/custom-fields/custom-fie
     DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
-      {container: 'modal-container'},
+      { container: 'modal-container' },
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -322,7 +326,7 @@ import { CustomFieldsComponent } from './components/app/custom-fields/custom-fie
         bodyClass: 'modal-open',
       },
     ),
-    NgxPopperModule.forRoot({placement: 'bottom'}),
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,

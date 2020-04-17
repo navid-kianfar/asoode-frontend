@@ -1,15 +1,18 @@
 import { BaseViewModel } from '../core/general-types';
 import {
-  AccessType, ActivityType,
+  AccessType,
+  ActivityType,
   BoardTemplate,
   WorkPackageCommentPermission,
-  WorkPackageObjectiveType, WorkPackageTaskAttachmentType,
+  WorkPackageObjectiveType,
+  WorkPackageTaskAttachmentType,
   WorkPackageTaskObjectiveValue,
-  WorkPackageTaskReminderType, WorkPackageTaskState,
+  WorkPackageTaskReminderType,
+  WorkPackageTaskState,
   WorkPackageTaskVoteNecessity,
 } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
-import {PendingInvitationViewModel} from '../groups/group-types';
+import { PendingInvitationViewModel } from '../groups/group-types';
 
 export interface ProjectObjectiveEstimatedPriceViewModel {
   date: Date;
@@ -161,7 +164,6 @@ export interface ActivityLogViewModel extends BaseViewModel {
   type: ActivityType;
   member?: MemberInfoViewModel;
   userId: string;
-
 }
 export interface WorkPackageTaskCommentViewModel extends BaseViewModel {
   taskId: string;
@@ -236,7 +238,7 @@ export interface WorkPackageTaskLabelViewModel extends BaseViewModel {
   title: string;
   dark: boolean;
 }
-export interface WorkPackageTaskAttachmentViewModel extends  BaseViewModel {
+export interface WorkPackageTaskAttachmentViewModel extends BaseViewModel {
   covering?: boolean;
   tempName?: string;
   waiting?: boolean;
@@ -256,7 +258,7 @@ export interface WorkPackageTaskAttachmentViewModel extends  BaseViewModel {
   userId: string;
   subProjectId: string;
 }
-export interface WorkPackageTaskVoteViewModel extends  BaseViewModel {
+export interface WorkPackageTaskVoteViewModel extends BaseViewModel {
   id: string;
   vote: boolean;
   createdAt: Date;
@@ -267,7 +269,8 @@ export interface WorkPackageTaskVoteViewModel extends  BaseViewModel {
   userId: string;
   subProjectId: string;
 }
-export interface WorkPackageTaskTimeViewModel extends  BaseViewModel {
+export interface WorkPackageTaskTimeViewModel extends BaseViewModel {
+  member: MemberInfoViewModel;
   begin: Date;
   end?: Date;
   id: string;
@@ -279,4 +282,5 @@ export interface WorkPackageTaskTimeViewModel extends  BaseViewModel {
   projectId: string;
   taskId: string;
   subProjectId: string;
+  diff?: number;
 }

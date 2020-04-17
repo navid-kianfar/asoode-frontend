@@ -1,5 +1,9 @@
 import { FormViewModel } from '../../components/core/form/contracts';
-import {ProjectViewModel, WorkPackageTaskViewModel, WorkPackageViewModel} from '../projects/project-types';
+import {
+  ProjectViewModel,
+  WorkPackageTaskViewModel,
+  WorkPackageViewModel,
+} from '../projects/project-types';
 
 export interface TaskModalParameters {
   id: string;

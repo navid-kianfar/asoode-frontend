@@ -1,6 +1,8 @@
 <div class="outer" (click)="close()">
-  <div class="modal-content confirm-modal {{ cssClass }}"
-       (click)="$event.stopPropagation();">
+  <div
+    class="modal-content confirm-modal {{ cssClass }}"
+    (click)="$event.stopPropagation()"
+  >
     <div class="modal-header">
       <h4 class="modal-title">
         {{ title | translate: true }}
@@ -17,7 +19,12 @@
       <h3 [innerHTML]="message | translate: true | enterToBr"></h3>
     </div>
     <div class="modal-footer">
-      <button [disabled]="actionWaiting" (click)="onAction($event)" mat-flat-button [color]="actionColor">
+      <button
+        [disabled]="actionWaiting"
+        (click)="onAction($event)"
+        mat-flat-button
+        [color]="actionColor"
+      >
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
         {{ actionLabel | translate: true }}</button
       >&nbsp;
@@ -28,4 +35,3 @@
     </div>
   </div>
 </div>
-

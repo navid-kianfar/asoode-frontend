@@ -6,6 +6,10 @@ import { NumberHelpers } from '../../helpers/number.helpers';
 })
 export class MsToDurationPipe implements PipeTransform {
   transform(milliseconds: number): string {
-    return NumberHelpers.msToDurationString(milliseconds);
+    const model = NumberHelpers.ticksToTimeSpan(milliseconds * 10000);
+    return `${NumberHelpers.pad(model.day, 2)}:${NumberHelpers.pad(
+      model.hour,
+      2,
+    )}:${NumberHelpers.pad(model.minute, 2)}`;
   }
 }

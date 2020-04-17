@@ -4,15 +4,15 @@ import {
   ProjectViewModel,
 } from '../../../view-models/projects/project-types';
 import { AccessType } from '../../../library/app/enums';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ModalService} from '../../../services/core/modal.service';
-import {FormService} from '../../../services/core/form.service';
-import {NotificationService} from '../../../services/core/notification.service';
-import {TranslateService} from '../../../services/core/translate.service';
-import {PromptComponent} from '../../../modals/prompt/prompt.component';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {StringHelpers} from '../../../helpers/string.helpers';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { FormService } from '../../../services/core/form.service';
+import { NotificationService } from '../../../services/core/notification.service';
+import { TranslateService } from '../../../services/core/translate.service';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { StringHelpers } from '../../../helpers/string.helpers';
 
 @Component({
   selector: 'app-project-season',
@@ -83,18 +83,20 @@ export class ProjectSeasonComponent implements OnInit {
   prepareDelete(season: ProjectSeasonViewModel) {
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_SEASON_CONFIRM_HEADING'),
-      [season.title]
+      [season.title],
     );
-    this.modalService.confirm({
-      title: 'REMOVE_SEASON',
-      message: 'REMOVE_SEASON_CONFIRM',
-      heading,
-      actionLabel: 'REMOVE_SEASON',
-      cancelLabel: 'CANCEL',
-      action: async () => {
-        return await this.projectService.removeSeason(season.id);
-      },
-    }).subscribe((confirmed) => { });
+    this.modalService
+      .confirm({
+        title: 'REMOVE_SEASON',
+        message: 'REMOVE_SEASON_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_SEASON',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          return await this.projectService.removeSeason(season.id);
+        },
+      })
+      .subscribe(confirmed => {});
   }
 
   prepareEdit(season: ProjectSeasonViewModel) {
@@ -127,10 +129,7 @@ export class ProjectSeasonComponent implements OnInit {
           },
         ],
         action: async (params, form) => {
-          const op = await this.projectService.editSeason(
-            season.id,
-            params,
-          );
+          const op = await this.projectService.editSeason(season.id, params);
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;

@@ -1,19 +1,31 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { ICulture } from '../../../view-models/core/date-types';
 import { CultureService } from '../../../services/core/culture.service';
-import { IDateConverter, IDateEvent, IDateTimeProperties } from '../../../library/core/date-time/date-contracts';
+import {
+  IDateConverter,
+  IDateEvent,
+  IDateTimeProperties,
+} from '../../../library/core/date-time/date-contracts';
 import PersianDateConverter from '../../../library/core/date-time/persian-date-converter';
 import HijriDateConverter from '../../../library/core/date-time/hijri-date-converter';
 import GeorgianDateConverter from '../../../library/core/date-time/georgian-date-converter';
 import { DateHelpers } from '../../../helpers/date.helpers';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent implements  OnInit, OnChanges {
+export class CalendarComponent implements OnInit, OnChanges {
   converter: IDateConverter;
   today: CalendarNodeItem;
   current: CalendarNodeItem;
@@ -36,9 +48,7 @@ export class CalendarComponent implements  OnInit, OnChanges {
   @Output() hourChange = new EventEmitter<number>();
   @Output() minuteChange = new EventEmitter<number>();
   @Output() modelChange = new EventEmitter<Date>();
-  constructor(
-    readonly culturedDateService: CulturedDateService,
-  ) {
+  constructor(readonly culturedDateService: CulturedDateService) {
     this.reset();
   }
   ngOnInit(skip?: boolean) {
@@ -366,7 +376,9 @@ export class CalendarComponent implements  OnInit, OnChanges {
     this.state.days = this.partition(result);
   }
   pick(day: CalendarNodeItem) {
-    if (day.old && this.monthView) { return; }
+    if (day.old && this.monthView) {
+      return;
+    }
     if (day.disabled || this.disabled) {
       return;
     }

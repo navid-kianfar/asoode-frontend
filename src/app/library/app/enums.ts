@@ -29,7 +29,7 @@ export enum ChannelType {
   Project = 2,
   Group = 3,
   WorkPackage = 4,
-  Bot = 5
+  Bot = 5,
 }
 export enum ConversationType {
   Text = 1,
@@ -141,6 +141,7 @@ export enum ActivityType {
   WorkPackageTaskAttachmentCover = 616,
   WorkPackageTaskAttachmentRename = 617,
   WorkPackageTaskWatch = 618,
+  WorkPackageTaskTime = 619,
 
   WorkPackageObjectiveAdd = 700,
   WorkPackageObjectiveEdit = 701,
@@ -158,15 +159,15 @@ export enum PlanType {
   Custom = 6,
   SaaS = 7,
   Startup = 8,
-  Student = 9
+  Student = 9,
 }
 export enum CostUnit {
-  Toman = 1
+  Toman = 1,
 }
 export enum WorkPackageObjectiveType {
   MustHave = 1,
   ShouldHave = 2,
-  NiceToHave = 3
+  NiceToHave = 3,
 }
 export enum WorkPackageTaskReminderType {
   None = 1,
@@ -200,7 +201,7 @@ export enum WorkPackageTaskObjectiveValue {
   SlightlyValuable = 2,
   ModeratelyValuable = 3,
   VeryValuable = 4,
-  ExtremelyValuable = 5
+  ExtremelyValuable = 5,
 }
 export enum WorkPackageTaskAttachmentType {
   Link = 1,

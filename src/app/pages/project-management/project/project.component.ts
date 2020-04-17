@@ -3,12 +3,12 @@ import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { ProjectService } from '../../../services/projects/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccessType } from '../../../library/app/enums';
-import {PromptComponent} from '../../../modals/prompt/prompt.component';
-import {ModalService} from '../../../services/core/modal.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {FormService} from '../../../services/core/form.service';
-import {NotificationService} from '../../../services/core/notification.service';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { ModalService } from '../../../services/core/modal.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { FormService } from '../../../services/core/form.service';
+import { NotificationService } from '../../../services/core/notification.service';
 
 @Component({
   selector: 'app-project',
@@ -36,7 +36,7 @@ export class ProjectComponent implements OnInit {
     this.report = {
       percent: 0,
       progress: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      total: 0
+      total: 0,
     };
     const id = this.activatedRoute.snapshot.params.id;
     this.project = this.projectService.projects.find(g => g.id === id);
@@ -77,10 +77,7 @@ export class ProjectComponent implements OnInit {
           },
         ],
         action: async (params, form) => {
-          const op = await this.projectService.edit(
-            this.project.id,
-            params,
-          );
+          const op = await this.projectService.edit(this.project.id, params);
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;

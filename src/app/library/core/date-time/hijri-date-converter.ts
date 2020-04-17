@@ -79,6 +79,7 @@ export default class HijriDateConverter implements IDateConverter {
       .replace(/ss/g, NumberHelpers.pad(converted.Seconds, 2))
       .replace(/ll/g, NumberHelpers.pad(converted.Milliseconds, 2))
       .replace(/AP/g, converted.Hours > 12 ? 'PM' : 'AM')
-      .replace(/NNN/g, converted.MonthName);
+      .replace(/NNN/g, converted.MonthName)
+      .replace(/WW/g, converted.WeekName);
   }
 }

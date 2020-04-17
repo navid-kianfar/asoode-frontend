@@ -1,5 +1,5 @@
 import { CalendarType, UserType } from '../../library/core/enums';
-import {AccessType, CostUnit, PlanType} from '../../library/app/enums';
+import { AccessType, CostUnit, PlanType } from '../../library/app/enums';
 import { GroupViewModel } from '../groups/group-types';
 
 export interface IdentityObject {
@@ -25,6 +25,13 @@ export interface InviteViewModel {
   model?: MemberInfoViewModel | GroupViewModel;
 }
 export interface ProfileViewModel extends MemberInfoViewModel {
+  workingGroupId?: string;
+  workingProjectId?: string;
+  workingPackageId?: string;
+  workingTaskId?: string;
+  workingGroupFrom?: Date;
+  workingTaskFrom?: Date;
+
   phoneNumber: string;
   userType: UserType;
   timeZone: string;

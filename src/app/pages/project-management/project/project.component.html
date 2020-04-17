@@ -2,9 +2,13 @@
   <div class="header">
     <div class="info">
       <h4>
-        <i *ngIf="permission === AccessType.Owner || permission === AccessType.Admin"
-           (click)="prepareEdit()"
-           class="icon-pencil"></i>
+        <i
+          *ngIf="
+            permission === AccessType.Owner || permission === AccessType.Admin
+          "
+          (click)="prepareEdit()"
+          class="icon-pencil"
+        ></i>
         <span>{{ project.title }}</span>
       </h4>
       <h5>{{ project.description }}</h5>
@@ -12,7 +16,10 @@
         <div class="member">
           <i class="icon-users"></i>&nbsp;
           <span>
-            {{ (project.members | search: ['isGroup']:false).length + project.pending.length }}&nbsp;
+            {{
+              (project.members | search: ['isGroup']:false).length +
+                project.pending.length
+            }}&nbsp;
             {{ 'INDIVIDUAL_USERS' | translate }}
           </span>
         </div>
@@ -28,7 +35,9 @@
       <h5>{{ 'PROJECT_PROGRESS' | translate }}</h5>
 
       <div class="report">
-        <div class="change"><i class="up icon-arrow-up2"></i>&nbsp;{{report.percent}}%</div>
+        <div class="change">
+          <i class="up icon-arrow-up2"></i>&nbsp;{{ report.percent }}%
+        </div>
         <ngx-trend
           [data]="report.progress"
           stroke="#558c97"
@@ -39,10 +48,12 @@
           autoDrawDuration="1500"
           autoDrawEasing="ease-in"
         ></ngx-trend>
-        <div class="total">{{report.total}}</div>
+        <div class="total">{{ report.total }}</div>
       </div>
       <div class="report">
-        <div class="change"><i class="down icon-arrow-down2"></i>&nbsp;{{report.percent}}%</div>
+        <div class="change">
+          <i class="down icon-arrow-down2"></i>&nbsp;{{ report.percent }}%
+        </div>
         <ngx-trend
           [data]="report.progress"
           stroke="#ee5a60"
@@ -53,10 +64,12 @@
           autoDrawDuration="1500"
           autoDrawEasing="ease-in"
         ></ngx-trend>
-        <div class="total">{{report.total}}</div>
+        <div class="total">{{ report.total }}</div>
       </div>
       <div class="report">
-        <div class="change"><i class="up icon-arrow-up2"></i>&nbsp;{{report.percent}}%</div>
+        <div class="change">
+          <i class="up icon-arrow-up2"></i>&nbsp;{{ report.percent }}%
+        </div>
         <ngx-trend
           [data]="report.progress"
           stroke="#7f33ef"
@@ -67,7 +80,7 @@
           autoDrawDuration="1500"
           autoDrawEasing="ease-in"
         ></ngx-trend>
-        <div class="total">{{report.total}}</div>
+        <div class="total">{{ report.total }}</div>
       </div>
     </div>
   </div>
