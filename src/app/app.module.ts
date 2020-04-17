@@ -156,6 +156,8 @@ import { UpgradeComponent } from './modals/upgrade/upgrade.component';
 import { UpgradeWizardComponent } from './components/app/upgrade-wizard/upgrade-wizard.component';
 import { MapModalComponent } from './modals/map-modal/map-modal.component';
 import { EstimatedTimePipe } from './pipes/app/estimated-time.pipe';
+import { ActivityLogComponent } from './components/app/activity-log/activity-log.component';
+import { CustomFieldsComponent } from './components/app/custom-fields/custom-fields.component';
 
 @NgModule({
   declarations: [
@@ -276,6 +278,8 @@ import { EstimatedTimePipe } from './pipes/app/estimated-time.pipe';
     UpgradeWizardComponent,
     MapModalComponent,
     EstimatedTimePipe,
+    ActivityLogComponent,
+    CustomFieldsComponent,
   ],
   entryComponents: [
     MapModalComponent,

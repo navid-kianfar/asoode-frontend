@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {OperationResult} from '../../library/core/operation-result';
 import {HttpService} from '../core/http.service';
-import {WorkPackageTaskViewModel} from '../../view-models/projects/project-types';
+import {ActivityLogViewModel, WorkPackageTaskViewModel} from '../../view-models/projects/project-types';
 
 @Injectable({
   providedIn: 'root'
@@ -85,5 +85,9 @@ export class TaskService {
 
   async vote(taskId: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/tasks/${taskId}/vote`, model);
+  }
+
+  async logs(taskId): Promise<OperationResult<ActivityLogViewModel[]>> {
+    return await this.httpService.post<ActivityLogViewModel[]>(`/tasks/${taskId}/logs`);
   }
 }

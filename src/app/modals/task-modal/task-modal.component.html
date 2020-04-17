@@ -263,7 +263,7 @@
                   <div class="box-content sub-tasks-wrapper">
 
                     <div *ngIf="addingSub" class="add-sub">
-                      <textarea rows="3" [readOnly]="savingSub" [(ngModel)]="subTaskTitle"></textarea>
+                      <textarea rows="4" [placeholder]="'NEW_TASK_PLACEHOLDER' | translate" [readOnly]="savingSub" [(ngModel)]="subTaskTitle"></textarea>
                       <div class="btns">
                         <button [disabled]="savingSub" (click)="addingSub = false;" mat-flat-button>
                           {{ 'CANCEL' | translate}}
@@ -430,20 +430,20 @@
                     </div>
                   </div>
                   <div class="box-content">
-                    <div class="recorder">
+                    <div class="recorder active">
                       <div class="time ltr">
                         <div class="days item">
-                          <span class="value">{{ NumberHelpers.pad(2, 2) }}</span>
+                          <span class="value">{{ NumberHelpers.pad(0, 2) }}</span>
                           <span class="label">{{ 'DAYS' | translate}}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="hours item">
-                          <span class="value">{{ NumberHelpers.pad(7, 2) }}</span>
+                          <span class="value">{{ NumberHelpers.pad(0, 2) }}</span>
                           <span class="label">{{ 'HOURS' | translate}}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="minutes item">
-                          <span class="value">{{ NumberHelpers.pad(30, 2) }}</span>
+                          <span class="value">{{ NumberHelpers.pad(0, 2) }}</span>
                           <span class="label">{{ 'MINUTES' | translate}}</span>
                         </div>
                       </div>
@@ -457,13 +457,115 @@
                     <div class="no-records">
                       {{ 'TIME_LOGS_HERE' | translate}}
                     </div>
+
+<!--                    <div class="records">-->
+<!--                      <div class="record">-->
+<!--                        <div class="member">-->
+<!--                          <app-member-info small="true"-->
+<!--                                           [me]="true"></app-member-info>-->
+<!--                          <h4>{{ identityService.profile.fullName }}</h4>-->
+<!--                        </div>-->
+<!--                        <div class="total">-->
+<!--                          10:20:30-->
+<!--                        </div>-->
+<!--                        <div class="time-span">-->
+<!--                          <div class="from">09:30</div>-->
+<!--                          <div class="dash">-</div>-->
+<!--                          <div class="to">12:40</div>-->
+<!--                        </div>-->
+<!--                        <div class="date-info">-->
+<!--                          <div class="week">جمعه</div>&nbsp;-->
+<!--                          <div class="date">11/22/33</div>-->
+<!--                        </div>-->
+<!--                        <div class="action">-->
+<!--                          <i class="icon-delete"></i>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <div class="record">-->
+<!--                        <div class="member">-->
+<!--                          <app-member-info small="true"-->
+<!--                                           [me]="true"></app-member-info>-->
+<!--                          <h4>{{ identityService.profile.fullName }}</h4>-->
+<!--                        </div>-->
+<!--                        <div class="total">-->
+<!--                          10:20:30-->
+<!--                        </div>-->
+<!--                        <div class="time-span">-->
+<!--                          <div class="from">09:30</div>-->
+<!--                          <div class="dash">-</div>-->
+<!--                          <div class="to">12:40</div>-->
+<!--                        </div>-->
+<!--                        <div class="date-info">-->
+<!--                          <div class="week">جمعه</div>&nbsp;-->
+<!--                          <div class="date">11/22/33</div>-->
+<!--                        </div>-->
+<!--                        <div class="action">-->
+<!--                          <i class="icon-delete"></i>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                    </div>-->
                   </div>
                 </div>
               </div>
             </ng-container>
-            <ng-container *ngIf="mode === ViewMode.Related">3</ng-container>
-            <ng-container *ngIf="mode === ViewMode.CustomField">4</ng-container>
-            <ng-container *ngIf="mode === ViewMode.Activity">5</ng-container>
+            <ng-container *ngIf="mode === ViewMode.Related">
+              <div class="box-container related">
+                <div class="header">
+                  <div class="title">{{'TASK_RELATED' | translate}}</div>
+                </div>
+                <br>
+                <div class="box">
+                  <div class="box-header">
+                    <i class="icon-task"></i>
+                    <span>{{ 'TASK_RELATED_BEFORE' | translate}}</span>
+                    <ng-container *ngIf="permission === AccessType.Admin || permission === AccessType.Owner">
+                      <i class="add icon-plus2"></i>
+                    </ng-container>
+                  </div>
+                  <div class="box-content">
+
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="box-header">
+                    <i class="icon-task"></i>
+                    <span>{{ 'TASK_RELATED_AFTER' | translate}}</span>
+                    <ng-container *ngIf="permission === AccessType.Admin || permission === AccessType.Owner">
+                      <i class="add icon-plus2"></i>
+                    </ng-container>
+                  </div>
+                  <div class="box-content">
+
+                  </div>
+                </div>
+                <div class="box">
+                  <div class="box-header">
+                    <i class="icon-stopped"></i>
+                    <span>{{ 'TASK_BLOCKING' | translate}}</span>
+                    <ng-container *ngIf="permission === AccessType.Admin || permission === AccessType.Owner">
+                      <i class="add icon-plus2"></i>
+                    </ng-container>
+                  </div>
+                  <div class="box-content">
+
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="mode === ViewMode.CustomField">
+              <div class="box-container custom-fields">
+                <div class="header">
+                <div class="title">{{'TASK_CUSTOM_FIELD' | translate}}</div>
+              </div>
+                <app-custom-fields [taskId]="this.model.id"
+                                   [model]="this.workPackage.customFields"></app-custom-fields>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="mode === ViewMode.Activity">
+              <div class="box-container activities">
+                <app-activity-log [taskId]="this.model.id"></app-activity-log>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>

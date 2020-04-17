@@ -33,7 +33,7 @@
       </div>
       <div *ngIf="list.expanded" class="new-task">
         <div class="wrapper">
-          <textarea [readOnly]="creatingNewTask" [(ngModel)]="newTaskTitle" rows="2"></textarea>
+          <textarea [placeholder]="'NEW_TASK_PLACEHOLDER' | translate" [readOnly]="creatingNewTask" [(ngModel)]="newTaskTitle" rows="2"></textarea>
           <div class="buttons">
             <button [disabled]="creatingNewTask" (click)="createNewTask(list)" mat-stroked-button>
               <i *ngIf="creatingNewTask" class="icon-spin icon-spinner2"></i>

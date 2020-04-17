@@ -71,6 +71,7 @@ export enum ProjectFilter {
   Public = 3,
 }
 export enum ActivityType {
+  None = 0,
   AccountEdit = 100,
 
   GroupAdd = 200,

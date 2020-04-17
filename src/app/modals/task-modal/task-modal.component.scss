@@ -251,6 +251,7 @@
       width: 150px;
       flex-grow: 1;
       flex-direction: column;
+      padding-bottom: 10px;
 
       .tabs {
         list-style: none;
@@ -523,8 +524,9 @@
     padding: 10px;
 
     ::ng-deep .task {
-      min-width: 300px;
-      width: 300px;
+      min-width: 225px;
+      max-width: 225px;
+      width: 225px;
       margin-inline-end: 20px;
     }
 
@@ -532,11 +534,14 @@
       margin-inline-end: 10px;
       textarea {
         display: block;
-        width: 300px;
+        width: 225px;
         border: 1px solid #eee;
         resize: none;
         margin-bottom: 10px;
         font-size: 0.8rem;
+        height: 90px;
+        border-radius: 5px;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
       }
     }
   }
@@ -617,6 +622,21 @@
             }
           }
         }
+
+        &.active {
+          .sep, .item .value {
+            color: #5eb258;
+          }
+
+          ::ng-deep .mat-mini-fab {
+            border: 2px solid #5eb258;
+
+            i {
+              color: #808080;
+              top: -1px;
+            }
+          }
+        }
       }
       .no-records {
         background: #f2f2f2;
@@ -627,6 +647,59 @@
         padding: 15px;
         margin-top: 50px;
         border-radius: 5px;
+      }
+
+      .records {
+        display: flex;
+        flex-direction: column;
+
+        .record {
+          display: flex;
+          margin-top: 10px;
+          border: 2px solid #e6e6e6;
+          align-items: center;
+          padding: 5px 5px 5px 0;
+          border-radius: 10px;
+
+          .member {
+            display: flex;
+            align-items: center;
+
+            h4 {
+              font-size: 0.8rem;
+              font-weight: 500;
+              width: 100px;
+              margin-top: 8px;
+            }
+          }
+          .total {
+            color: #333333;
+            font-size: 0.9rem;
+            font-weight: 400;
+            margin: 0 10px;
+          }
+          .time-span {
+            display: flex;
+            align-items: center;
+            color: #999999;
+            font-size: 0.7rem;
+            .from {}
+            .dash {margin: 0 5px}
+            .to {}
+          }
+          .date-info {
+            margin: 0 10px;
+            font-size: 0.8rem;
+            display: flex;
+            .week {
+              width: 50px;
+            }
+            .date {}
+          }
+          .action {
+            .i {}
+          }
+        }
       }
     }
   }

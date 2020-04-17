@@ -1,6 +1,6 @@
 import { BaseViewModel } from '../core/general-types';
 import {
-  AccessType,
+  AccessType, ActivityType,
   BoardTemplate,
   WorkPackageCommentPermission,
   WorkPackageObjectiveType, WorkPackageTaskAttachmentType,
@@ -155,6 +155,13 @@ export interface WorkPackageListViewModel extends BaseViewModel {
   expanded?: boolean;
   order: number;
   tasks: WorkPackageTaskViewModel[];
+}
+export interface ActivityLogViewModel extends BaseViewModel {
+  description: string;
+  type: ActivityType;
+  member?: MemberInfoViewModel;
+  userId: string;
+
 }
 export interface WorkPackageTaskCommentViewModel extends BaseViewModel {
   taskId: string;

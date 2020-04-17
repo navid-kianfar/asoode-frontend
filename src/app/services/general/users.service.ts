@@ -9,6 +9,8 @@ import {IdentityService} from '../auth/identity.service';
 })
 export class UsersService {
 
+  private repository: any = {};
+
   constructor(
     private readonly projectService: ProjectService,
     private readonly groupService: GroupService,
@@ -16,30 +18,33 @@ export class UsersService {
   ) { }
 
   findUser(userId: string): MemberInfoViewModel {
-    let found: any = this.identityService.identity.userId === userId ?
-      this.identityService.profile : undefined;
-    if (!found) {
-      for (const project of this.projectService.projects) {
-        for (const member of project.members) {
-          if (userId === member.recordId) {
-            found = member.member;
-            break;
+    if (!this.repository[userId]) {
+      let found: any = this.identityService.identity.userId === userId ?
+        this.identityService.profile : undefined;
+      if (!found) {
+        for (const project of this.projectService.projects) {
+          for (const member of project.members) {
+            if (userId === member.recordId) {
+              found = member.member;
+              break;
+            }
           }
+          if (found) { break; }
         }
-        if (found) { break; }
       }
-    }
-    if (!found) {
-      for (const group of this.groupService.groups) {
-        for (const member of group.members) {
-          if (userId === member.id) {
-            found = member.member;
-            break;
+      if (!found) {
+        for (const group of this.groupService.groups) {
+          for (const member of group.members) {
+            if (userId === member.id) {
+              found = member.member;
+              break;
+            }
           }
+          if (found) { break; }
         }
-        if (found) { break; }
       }
+      this.repository[userId] = found;
     }
-    return found;
+    return this.repository[userId];
   }
 }

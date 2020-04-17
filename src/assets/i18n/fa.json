@@ -559,5 +559,9 @@
   "ADD_TIME_MANUALLY": "افزودن دستی زمان",
   "HOURS": "ساعت",
   "MINUTES": "دقیقه",
-  "TIME_LOGS_HERE": "زمان\u200Cهای ثبت شده یا وارد شده اینجا نمایش داده میشوند"
+  "TIME_LOGS_HERE": "زمان\u200Cهای ثبت شده یا وارد شده اینجا نمایش داده میشوند",
+  "TASK_RELATED_BEFORE": "کارتهای قبلی",
+  "TASK_RELATED_AFTER": "کارتهای بعدی",
+  "TASK_BLOCKING": "کارتهای مسدود کنند",
+  "NEW_TASK_PLACEHOLDER": "کاری که باید انجام بشه رو تعریف کن!"
 }

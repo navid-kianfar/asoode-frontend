@@ -1,0 +1,35 @@
+.logs {
+  max-height: 400px;
+  overflow-y: auto;
+
+  .log {
+    display: flex;
+    min-height: 50px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #efefef;
+    .avatar {
+
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      .user {
+        display: flex;
+        .full-name {
+          color: #333333;
+          margin-inline-end: 10px;
+          font-size: 0.8rem;
+          font-weight: 400;
+        }
+        .date {
+          color: #999999;
+          font-size: 0.7rem;
+        }
+      }
+      .description {
+        color: #808080;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
