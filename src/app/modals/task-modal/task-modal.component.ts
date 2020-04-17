@@ -12,7 +12,13 @@ import {
 import {TaskService} from '../../services/projects/task.service';
 import {OperationResultStatus} from '../../library/core/enums';
 import {ProjectService} from '../../services/projects/project.service';
-import {AccessType, ActivityType, WorkPackageTaskState} from '../../library/app/enums';
+import {
+  AccessType,
+  ActivityType, WorkPackageTaskObjectiveValue,
+  WorkPackageTaskReminderType,
+  WorkPackageTaskState,
+  WorkPackageTaskVoteNecessity
+} from '../../library/app/enums';
 import {IdentityService} from '../../services/auth/identity.service';
 import {Socket} from 'ngx-socket-io';
 import {UploadViewModel} from '../../view-models/storage/files-types';
@@ -66,6 +72,7 @@ export class TaskModalComponent
   voting: boolean;
   addingSub: boolean;
   subTaskTitle: string;
+  bg: string;
   savingSub: boolean;
   NumberHelpers = NumberHelpers;
   constructor(
@@ -155,9 +162,26 @@ export class TaskModalComponent
           break;
         case ActivityType.WorkPackageTaskEdit:
           if (this.id === notification.data.id) {
-            delete notification.data.members;
-            delete notification.data.labels;
-            Object.assign(this.model, notification.data);
+            this.model.beginReminder = notification.data.beginReminder;
+            this.model.endReminder = notification.data.endReminder;
+            this.model.voteNecessity = notification.data.voteNecessity;
+            this.model.objectiveValue = notification.data.objectiveValue;
+            this.model.estimatedTime = notification.data.estimatedTime;
+            this.model.coverId = notification.data.coverId;
+            this.model.listId = notification.data.listId;
+            this.model.state = notification.data.state;
+            this.model.listName = notification.data.listName;
+            this.model.timeSpent = notification.data.timeSpent;
+            this.model.doneUserId = notification.data.doneUserId;
+            this.model.archivedAt = notification.data.archivedAt;
+            this.model.dueAt = notification.data.dueAt;
+            this.model.beginAt = notification.data.beginAt;
+            this.model.endAt = notification.data.endAt;
+            this.model.doneAt = notification.data.doneAt;
+            this.model.title = notification.data.title;
+            this.model.description = notification.data.description;
+            this.model.geoLocation = notification.data.geoLocation;
+            this.postProcess();
           }
           break;
         case ActivityType.WorkPackageTaskComment:
@@ -210,8 +234,19 @@ export class TaskModalComponent
             const found = this.model.attachments.find(a => a.id === notification.data.id);
             if (found) {
               found.isCover = notification.data.isCover;
-              this.model.coverId = notification.data.isCover ? notification.data.path : '';
+              this.model.coverId = notification.data.isCover ? notification.data.id : '';
+              this.bg = this.getBackgroundUrl();
             }
+          }
+          break;
+        case ActivityType.WorkPackageTaskWatch:
+          if (this.id === notification.data.taskId) {
+            this.model.watching = notification.data.watching;
+          }
+          break;
+        case ActivityType.WorkPackageTaskArchive:
+          if (this.id === notification.data.id) {
+            this.model.archivedAt = notification.data.archivedAt;
           }
           break;
       }
@@ -249,11 +284,11 @@ export class TaskModalComponent
     this.comment = '';
   }
 
-  getBackgroundUrl(coverId: string): string {
-    if (!coverId) { return ''; }
-    const attachment = this.model.attachments.find(a => a.id === coverId);
+  getBackgroundUrl(): string {
+    if (!this.model.coverId) { return ''; }
+    const attachment = this.model.attachments.find(a => a.id === this.model.coverId);
     if (!attachment) { return ''; }
-    return attachment.path;
+    return `url("${attachment.path}")`;
   }
 
   private postProcess() {
@@ -263,6 +298,7 @@ export class TaskModalComponent
       c.member = this.project.members.find(m => m.recordId === c.userId).member;
     });
     this.model.subTasksDone = this.model.subTasks.filter(i => i.doneAt).length;
+    this.bg = this.getBackgroundUrl();
   }
 
   prepareChangeTitle() {
@@ -494,6 +530,7 @@ export class TaskModalComponent
       return;
     }
     label.title = label.tempName;
+    label.editting = false;
   }
 
   prepareSubTask() {

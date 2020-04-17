@@ -269,6 +269,23 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageTaskRemove:
         case ActivityType.WorkPackageTaskArchive:
           break;
+
+        case ActivityType.WorkPackageLabelAdd:
+          if (this.workPackage.id === notification.data.packageId) {
+            this.workPackage.labels.push(notification.data);
+          }
+          break;
+        case ActivityType.WorkPackageLabelRename:
+          if (this.workPackage.id === notification.data.packageId) {
+            find1 = this.workPackage.labels.find(l => l.id === notification.data.id);
+            if (find1) { find1.title = notification.data.title; }
+          }
+          break;
+        case ActivityType.WorkPackageLabelRemove:
+          if (this.workPackage.id === notification.data.packageId) {
+            this.workPackage.labels = this.workPackage.labels.filter(l => l.id !== notification.data.id);
+          }
+          break;
       }
     });
   }

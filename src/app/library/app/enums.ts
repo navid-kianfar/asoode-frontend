@@ -106,6 +106,9 @@ export enum ActivityType {
   WorkPackageMemberPermission = 406,
   WorkPackageArchive = 407,
   WorkPackageRestore = 408,
+  WorkPackageLabelRename = 409,
+  WorkPackageLabelRemove = 410,
+  WorkPackageLabelAdd = 411,
 
   WorkPackageListAdd = 500,
   WorkPackageListEdit = 501,
@@ -137,6 +140,7 @@ export enum ActivityType {
   WorkPackageTaskAttachmentAdd = 615,
   WorkPackageTaskAttachmentCover = 616,
   WorkPackageTaskAttachmentRename = 617,
+  WorkPackageTaskWatch = 618,
 
   WorkPackageObjectiveAdd = 700,
   WorkPackageObjectiveEdit = 701,

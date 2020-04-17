@@ -9,11 +9,11 @@
       </div>
     </ng-container>
     <ng-container *ngIf="!waiting">
-      <div class="header" [style.backgroundImage]="getBackgroundUrl(model.coverId)">
+      <div class="header" [ngStyle]="{backgroundImage: bg}">
         <div class="actions">
           <button [disabled]="togglingWatch" (click)="toggleWatch()" mat-mini-fab>
             <span class="btn-inner">
-              <i *ngIf="!togglingWatch" class="icon-eye2"></i>
+              <i *ngIf="!togglingWatch" class="icon-eye2" [class.watching]="model.watching"></i>
               <i *ngIf="togglingWatch" class="icon-spinner2 icon-spin"></i>
               <span class="sub-title">{{ 'WATCH' | translate }}</span>
             </span>
@@ -27,7 +27,7 @@
           </button>
         </div>
         <div *ngIf="model.archivedAt" class="archived">
-          <h4>{{ 'TASK_ARCHIVED_AT' | translate|stringFormat:(model.archivedAt | culturedDate)}}</h4>
+          {{ 'TASK_ARCHIVED_AT' | translate|stringFormat:(model.archivedAt | culturedDate)}}
         </div>
       </div>
       <div class="content">

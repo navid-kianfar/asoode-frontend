@@ -172,29 +172,44 @@ export interface WorkPackageTaskCommentViewModel extends BaseViewModel {
   member: MemberInfoViewModel;
 }
 export interface WorkPackageTaskViewModel extends BaseViewModel {
-  comments: WorkPackageTaskCommentViewModel[];
-  listName: string;
   attachmentCount: number;
   commentCount: number;
   hasDescription: boolean;
-  timeSpent: number;
+  watching: boolean;
   targetCounts: number;
   downVotes: number;
   upVotes: number;
   subTasksDone: number;
   subTasksCount: number;
-  subTasks: WorkPackageTaskViewModel[];
-  state: WorkPackageTaskState;
   userId: string;
-  listId: string;
   packageId: string;
   projectId: string;
   subProjectId: string;
   seasonId: string;
-  coverId: string;
-  doneUserId: string;
   parentId: string;
+  order: number;
+  restricted: boolean;
+  votePaused: boolean;
+  votePrivate: boolean;
+  comments: WorkPackageTaskCommentViewModel[];
+  subTasks: WorkPackageTaskViewModel[];
+  members: WorkPackageTaskMemberViewModel[];
+  labels: WorkPackageTaskLabelViewModel[];
+  attachments: WorkPackageTaskAttachmentViewModel[];
+  votes: WorkPackageTaskVoteViewModel[];
+  timeSpents: WorkPackageTaskTimeViewModel[];
+
+  beginReminder: WorkPackageTaskReminderType;
+  endReminder: WorkPackageTaskReminderType;
+  voteNecessity: WorkPackageTaskVoteNecessity;
+  objectiveValue: WorkPackageTaskObjectiveValue;
   estimatedTime?: number;
+  coverId: string;
+  listId: string;
+  state: WorkPackageTaskState;
+  listName: string;
+  timeSpent: number;
+  doneUserId: string;
   archivedAt?: Date;
   dueAt?: Date;
   beginAt?: Date;
@@ -203,20 +218,6 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   title: string;
   description: string;
   geoLocation: string;
-  order: number;
-  restricted: boolean;
-  votePaused: boolean;
-  votePrivate: boolean;
-  beginReminder: WorkPackageTaskReminderType;
-  EndReminder: WorkPackageTaskReminderType;
-  State: WorkPackageTaskState;
-  voteNecessity: WorkPackageTaskVoteNecessity;
-  objectiveValue: WorkPackageTaskObjectiveValue;
-  members: WorkPackageTaskMemberViewModel[];
-  labels: WorkPackageTaskLabelViewModel[];
-  attachments: WorkPackageTaskAttachmentViewModel[];
-  votes: WorkPackageTaskVoteViewModel[];
-  timeSpents: WorkPackageTaskTimeViewModel[];
 }
 export interface WorkPackageTaskMemberViewModel extends BaseViewModel {
   taskId: string;

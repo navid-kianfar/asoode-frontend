@@ -7,9 +7,9 @@
   border-radius: 5px;
 
   .header {
-    height: 80px;
+    min-height: 80px;
     background-position: center top;
-    background-size: cover;
+    background-size: cover !important;
     border-radius: 5px 5px 0 0;
     .actions {
       position: relative;
@@ -32,6 +32,10 @@
               font-size: 1.2rem;
               position: relative;
               top: 7px;
+
+              &.watching {
+                color: #3d8f4d;
+              }
             }
             .sub-title {
               font-size: 0.7rem;
@@ -44,8 +48,9 @@
       background: #f2b254;
       text-align: center;
       font-size: 0.8rem;
-      font-weight: 400;
+      font-weight: 500;
       color: #333333;
+      padding: 5px;
     }
   }
 
@@ -776,9 +781,13 @@
     }
   }
   &.hasBackground {
-    height: 150px;
     .header {
-      padding-top: 80px;
+      .actions {
+        padding-top: 65px;
+      }
+    }
+    .content {
+      padding-top: 5px;
     }
   }
 }
