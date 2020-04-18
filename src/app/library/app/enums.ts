@@ -70,6 +70,15 @@ export enum ProjectFilter {
   Complex = 2,
   Public = 3,
 }
+export enum WorkPackageTaskVisibility {
+  Normal = 1,
+  MembersOnly = 2,
+}
+export enum ReceiveNotificationType {
+  ReceiveAll = 1,
+  ReceiveMine = 2,
+  ReceiveNone = 3,
+}
 export enum ActivityType {
   None = 0,
   AccountEdit = 100,

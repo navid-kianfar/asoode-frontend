@@ -204,11 +204,7 @@
             (filters.active ? 1 : 0)
         }}</span>
       </div>
-      <div
-        *ngIf="
-          permission === AccessType.Admin || permission === AccessType.Owner
-        "
-        (click)="settingMenuToggle()"
+      <div (click)="settingMenuToggle()"
         class="settings-container"
       >
         <i class="icon-cog2"></i>
@@ -260,14 +256,16 @@
         <div class="box">
           <div class="title">{{ 'RECEIVE_NOTIFICATION' | translate }}</div>
           <div class="cnt">
-            <mat-radio-group [(ngModel)]="receiveNotification">
-              <mat-radio-button color="primary" [value]="1">{{
+            <mat-radio-group [disabled]="settingNotificationWaiting"
+                             (ngModelChange)="updateSettingNotification($event)"
+                             [ngModel]="workPackage.userSetting.receiveNotification">
+              <mat-radio-button color="primary" [value]="ReceiveNotificationType.ReceiveAll">{{
                 'RECEIVE_ALL_NOTIFICATION' | translate
               }}</mat-radio-button>
-              <mat-radio-button color="primary" [value]="2">{{
+              <mat-radio-button color="primary" [value]="ReceiveNotificationType.ReceiveMine">{{
                 'RECEIVE_MINE_NOTIFICATION' | translate
               }}</mat-radio-button>
-              <mat-radio-button color="primary" [value]="3">{{
+              <mat-radio-button color="primary" [value]="ReceiveNotificationType.ReceiveNone">{{
                 'RECEIVE_NONE_NOTIFICATION' | translate
               }}</mat-radio-button>
             </mat-radio-group>
@@ -276,48 +274,74 @@
         <div class="box">
           <div class="title">{{ 'APPEARANCE' | translate }}</div>
           <div class="cnt">
-            <app-checkbox label="SHOW_LIST_TOTAL_CARDS"></app-checkbox>
-            <br />
-            <h6>{{ 'CHANGE_WORK_PACKAGE_COLOR' | translate }}</h6>
-            <app-color-picker></app-color-picker>
+            <app-checkbox [model]="workPackage.userSetting.showTotalCards"
+                          [disabled]="settingShowTotalWaiting"
+                          (modelChange)="updateSettingShowTotal($event)"
+                          label="SHOW_LIST_TOTAL_CARDS"></app-checkbox>
+<!--            <br />-->
+<!--            <h6>{{ 'CHANGE_WORK_PACKAGE_COLOR' | translate }}</h6>-->
+<!--            <app-color-picker></app-color-picker>-->
           </div>
         </div>
-        <div class="box">
-          <div class="title">{{ 'TASKS_SETTING' | translate }}</div>
-          <div class="cnt">
-            <h6>{{ 'CHANGE_WORK_PACKAGE_FIELDS' | translate }}</h6>
-            <h6>{{ 'CHANGE_WORK_PACKAGE_LABELS' | translate }}</h6>
-            <h6>{{ 'SHOW_WORK_PACKAGE_ATTACHMENTS' | translate }}</h6>
-          </div>
-        </div>
-        <div class="box">
-          <div class="title">{{ 'CUSTOM_FIELDS' | translate }}</div>
-          <div class="cnt">
-            <div class="custom-box">
-              <ng-container *ngIf="!workPackage.customFields.length">
-                {{ 'CUSTOM_FIELDS_DETAIL' | translate }}
-                <button mat-stroked-button>{{ 'ACTIVATE' | translate }}</button>
-              </ng-container>
-              <ng-container
-                *ngIf="workPackage.customFields.length"
-              ></ng-container>
+        <ng-container *ngIf="
+          permission === AccessType.Admin || permission === AccessType.Owner
+        ">
+          <div class="box">
+            <div class="title">{{ 'TASK_VISIBILITY' | translate }}</div>
+            <div class="cnt">
+              <mat-radio-group [disabled]="settingVisibilityWaiting"
+                               (ngModelChange)="updateSettingVisibility($event)"
+                               [ngModel]="workPackage.taskVisibility">
+                <mat-radio-button color="primary" [value]="WorkPackageTaskVisibility.Normal">{{
+                  'ENUMS_TASK_VISIBILITY_NORMAL' | translate
+                  }}</mat-radio-button>
+                <mat-radio-button color="primary" [value]="WorkPackageTaskVisibility.MembersOnly">{{
+                  'ENUMS_TASK_VISIBILITY_MEMBERS_ONLY' | translate
+                  }}</mat-radio-button>
+              </mat-radio-group>
             </div>
           </div>
-        </div>
-        <div class="box">
-          <div class="title">{{ 'INTEGRATION' | translate }}</div>
-          <div class="cnt">
-            <h6>{{ 'GOOGLE_CALENDAR' | translate }}</h6>
-            <h6>{{ 'GITLAB' | translate }}</h6>
+          <div class="box">
+            <div class="title">{{ 'TASKS_SETTING' | translate }}</div>
+            <div class="cnt">
+              <h6>{{ 'CHANGE_WORK_PACKAGE_FIELDS' | translate }}</h6>
+              <h6>{{ 'CHANGE_WORK_PACKAGE_LABELS' | translate }}</h6>
+              <h6>{{ 'SHOW_WORK_PACKAGE_ATTACHMENTS' | translate }}</h6>
+            </div>
           </div>
-        </div>
+          <div class="box">
+            <div class="title">{{ 'CUSTOM_FIELDS' | translate }}</div>
+            <div class="cnt">
+              <div class="custom-box">
+                <ng-container *ngIf="!workPackage.customFields.length">
+                  {{ 'CUSTOM_FIELDS_DETAIL' | translate }}
+                  <button mat-stroked-button>{{ 'ACTIVATE' | translate }}</button>
+                </ng-container>
+                <ng-container
+                  *ngIf="workPackage.customFields.length"
+                ></ng-container>
+              </div>
+            </div>
+          </div>
+          <div class="box">
+            <div class="title">{{ 'INTEGRATION' | translate }}</div>
+            <div class="cnt">
+              <h6>{{ 'GOOGLE_CALENDAR' | translate }}</h6>
+              <h6>{{ 'GITLAB' | translate }}</h6>
+            </div>
+          </div>
+        </ng-container>
         <hr />
         <div class="box">
           <div class="cnt">
-            <button mat-flat-button color="accent">
+            <button [disabled]="leaving || archiving || waiting" (click)="leave()" mat-flat-button color="accent">
+              <i *ngIf="leaving" class="icon-spin icon-spinner2"></i>
               {{ 'LEAVE_WORK_PACKAGE' | translate }}</button
             >&nbsp;
-            <button mat-flat-button color="warn">
+            <button [disabled]="leaving || archiving || waiting" (click)="archive()" *ngIf="
+              permission === AccessType.Admin || permission === AccessType.Owner
+              " mat-flat-button color="warn">
+              <i *ngIf="archiving" class="icon-spin icon-spinner2"></i>
               {{ 'ARCHIVE_WORK_PACKAGE' | translate }}
             </button>
           </div>

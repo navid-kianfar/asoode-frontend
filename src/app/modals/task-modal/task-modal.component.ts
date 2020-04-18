@@ -92,7 +92,7 @@ export class TaskModalComponent
     readonly usersService: UsersService,
     readonly modalService: ModalService,
     readonly filesService: FilesService,
-    private readonly identityService: IdentityService,
+    readonly identityService: IdentityService,
     private readonly workPackageService: WorkPackageService,
   ) {
     super();

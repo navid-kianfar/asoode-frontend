@@ -2,13 +2,13 @@ import { BaseViewModel } from '../core/general-types';
 import {
   AccessType,
   ActivityType,
-  BoardTemplate,
+  BoardTemplate, ReceiveNotificationType,
   WorkPackageCommentPermission,
   WorkPackageObjectiveType,
   WorkPackageTaskAttachmentType,
   WorkPackageTaskObjectiveValue,
   WorkPackageTaskReminderType,
-  WorkPackageTaskState,
+  WorkPackageTaskState, WorkPackageTaskVisibility,
   WorkPackageTaskVoteNecessity,
 } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
@@ -86,9 +86,18 @@ export interface WorkPackageProgressViewModel {
   done: number;
   canceledOrDuplicate: number;
 }
+export interface WorkPackageUserSetting extends BaseViewModel {
+  showTotalCards: boolean;
+  receiveNotification: ReceiveNotificationType;
+  userId: string;
+  packageId: string;
+  projectId: string;
+}
 export interface WorkPackageViewModel extends BaseViewModel {
+  userSetting: WorkPackageUserSetting;
   pending: PendingInvitationViewModel[];
   progress: WorkPackageProgressViewModel;
+  taskVisibility: WorkPackageTaskVisibility;
   userId: string;
   projectId: string;
   subProjectId: string;
@@ -127,8 +136,6 @@ export interface WorkPackageMemberViewModel extends BaseViewModel {
   recordId: string;
   packageId: string;
   access: AccessType;
-  blockNotification: boolean;
-  showStats: boolean;
   isGroup: boolean;
 }
 export interface WorkPackageLabelViewModel extends BaseViewModel {

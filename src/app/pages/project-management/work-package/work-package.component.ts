@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageMemberViewModel,
@@ -6,29 +6,31 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import { ProjectService } from '../../../services/projects/project.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { WorkPackageService } from '../../../services/projects/work-package.service';
-import { OperationResultStatus } from '../../../library/core/enums';
-import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
-import { PopperContent } from 'ngx-popper';
-import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
-import { ModalService } from '../../../services/core/modal.service';
-import { CultureService } from '../../../services/core/culture.service';
+import {ProjectService} from '../../../services/projects/project.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {WorkPackageService} from '../../../services/projects/work-package.service';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
+import {PopperContent} from 'ngx-popper';
+import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
+import {ModalService} from '../../../services/core/modal.service';
+import {CultureService} from '../../../services/core/culture.service';
 import {
   AccessType,
   ActivityType,
+  ReceiveNotificationType,
   WorkPackageObjectiveType,
+  WorkPackageTaskVisibility,
 } from '../../../library/app/enums';
-import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
-import { FormService } from 'src/app/services/core/form.service';
-import { StringHelpers } from '../../../helpers/string.helpers';
-import { TranslateService } from '../../../services/core/translate.service';
-import { OperationResult } from '../../../library/core/operation-result';
-import { GroupService } from '../../../services/groups/group.service';
-import { PendingInvitationViewModel } from '../../../view-models/groups/group-types';
-import { Socket } from 'ngx-socket-io';
-import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {PromptComponent} from 'src/app/modals/prompt/prompt.component';
+import {FormService} from 'src/app/services/core/form.service';
+import {StringHelpers} from '../../../helpers/string.helpers';
+import {TranslateService} from '../../../services/core/translate.service';
+import {OperationResult} from '../../../library/core/operation-result';
+import {GroupService} from '../../../services/groups/group.service';
+import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
+import {Socket} from 'ngx-socket-io';
+import {moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-work-package',
@@ -48,9 +50,15 @@ export class WorkPackageComponent implements OnInit {
   };
   currentMember: WorkPackageMemberViewModel;
   toggleSetting: boolean;
-  receiveNotification: number;
   permission: AccessType;
   AccessType = AccessType;
+  ReceiveNotificationType = ReceiveNotificationType;
+  WorkPackageTaskVisibility = WorkPackageTaskVisibility;
+  leaving: boolean;
+  archiving: boolean;
+  settingNotificationWaiting: boolean;
+  settingShowTotalWaiting: boolean;
+  settingVisibilityWaiting: boolean;
 
   constructor(
     readonly cultureService: CultureService,
@@ -66,7 +74,6 @@ export class WorkPackageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.receiveNotification = 1;
     this.toggleSetting = false;
     this.filters = {
       mine: false,
@@ -634,11 +641,66 @@ export class WorkPackageComponent implements OnInit {
     if (this.waiting) {
       return;
     }
-    // this.toggleSetting = !this.toggleSetting;
+    this.toggleSetting = !this.toggleSetting;
   }
 
   switchMode(mode: ViewMode) {
     // this.mode = mode;
+  }
+
+  async leave() {
+    this.leaving = true;
+    const op = await this.workPackageService.leave(this.workPackage.id);
+    this.leaving = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    await this.router.navigateByUrl('/dashboard');
+  }
+
+  async archive() {
+    this.archiving = true;
+    const op = await this.workPackageService.archive(this.workPackage.id);
+    this.archiving = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    await this.router.navigateByUrl('/dashboard');
+  }
+
+  async updateSettingNotification(notificationType: ReceiveNotificationType) {
+    this.workPackage.userSetting.receiveNotification = notificationType;
+    this.settingNotificationWaiting = true;
+    const op = await this.workPackageService.updateUserSetting(this.workPackage.id, {notificationType});
+    this.settingNotificationWaiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async updateSettingShowTotal(showTotal: boolean) {
+    this.workPackage.userSetting.showTotalCards = showTotal;
+    this.settingShowTotalWaiting = true;
+    const op = await this.workPackageService.updateUserSetting(this.workPackage.id, {showTotal});
+    this.settingShowTotalWaiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
+
+  async updateSettingVisibility(visibility: WorkPackageTaskVisibility) {
+    this.workPackage.taskVisibility = visibility;
+    this.settingVisibilityWaiting = true;
+    const op = await this.workPackageService.updateSetting(this.workPackage.id, {visibility});
+    this.settingVisibilityWaiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
   }
 }
 

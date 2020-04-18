@@ -5,7 +5,7 @@ import {
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
 import { HttpService } from '../core/http.service';
-import { AccessType } from '../../library/app/enums';
+import {AccessType, ReceiveNotificationType} from '../../library/app/enums';
 import { ProjectService } from './project.service';
 import { IdentityService } from '../auth/identity.service';
 import { GroupService } from '../groups/group.service';
@@ -144,6 +144,29 @@ export class WorkPackageService {
   async removeLabel(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/work-packages/labels/${id}/remove`,
+    );
+  }
+
+  async updateUserSetting(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/setting/user`, model
+    );
+  }
+
+  async updateSetting(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/setting`, model
+    );
+  }
+
+  async leave(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/leave`,
+    );
+  }
+  async archive(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/archive`,
     );
   }
 }

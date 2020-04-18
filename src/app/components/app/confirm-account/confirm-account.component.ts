@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ValidationService } from '../../../services/core/validation.service';
-import { IdentityService } from '../../../services/auth/identity.service';
-import { OperationResultStatus } from '../../../library/core/enums';
-import { Router } from '@angular/router';
-import { AppInitializerProvider } from '../../../services/general/app.initializer';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ValidationService} from '../../../services/core/validation.service';
+import {IdentityService} from '../../../services/auth/identity.service';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {Router} from '@angular/router';
+import {AppInitializerProvider} from '../../../services/general/app.initializer';
 
 @Component({
   selector: 'app-confirm-account',
@@ -21,6 +21,7 @@ export class ConfirmAccountComponent implements OnInit {
   verificationCode: string;
   hasError: boolean;
   errorMessage: string;
+  sendingAgain: boolean;
 
   constructor(
     private readonly identityService: IdentityService,
@@ -46,6 +47,13 @@ export class ConfirmAccountComponent implements OnInit {
   }
 
   async sendAgain() {
+    this.sendingAgain = true;
+    const op = await this.identityService.resendVerification(this.id);
+    this.sendingAgain = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
     this.countDown();
   }
 
