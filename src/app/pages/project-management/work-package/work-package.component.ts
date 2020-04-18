@@ -649,25 +649,71 @@ export class WorkPackageComponent implements OnInit {
   }
 
   async leave() {
-    this.leaving = true;
-    const op = await this.workPackageService.leave(this.workPackage.id);
-    this.leaving = false;
-    if (op.status !== OperationResultStatus.Success) {
-      // TODO: handle error
-      return;
-    }
-    await this.router.navigateByUrl('/dashboard');
+    const heading = StringHelpers.format(
+      this.translateService.fromKey(
+        this.project.complex ?
+          'LEAVE_WORK_PACKAGE_CONFIRM_HEADING' :
+          'LEAVE_PROJECT_CONFIRM_HEADING'
+      ),
+      [this.workPackage.title],
+    );
+
+    this.modalService
+      .confirm({
+        title: this.project.complex ?
+          'LEAVE_WORK_PACKAGE' :
+          'LEAVE_PROJECT',
+        message: this.project.complex ?
+          'LEAVE_WORK_PACKAGE_CONFIRM' :
+          'LEAVE_PROJECT_CONFIRM',
+        heading,
+        actionLabel: 'LEAVE',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          this.leaving = true;
+          const op = await this.workPackageService.leave(this.workPackage.id);
+          this.leaving = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          return await this.router.navigateByUrl('/dashboard');
+        },
+      }).subscribe(() => {});
   }
 
   async archive() {
-    this.archiving = true;
-    const op = await this.workPackageService.archive(this.workPackage.id);
-    this.archiving = false;
-    if (op.status !== OperationResultStatus.Success) {
-      // TODO: handle error
-      return;
-    }
-    await this.router.navigateByUrl('/dashboard');
+    const heading = StringHelpers.format(
+      this.translateService.fromKey(
+        this.project.complex ?
+          'ARCHIVE_WORK_PACKAGE_CONFIRM_HEADING' :
+          'ARCHIVE_PROJECT_CONFIRM_HEADING'
+      ),
+      [this.workPackage.title],
+    );
+
+    this.modalService
+      .confirm({
+        title: this.project.complex ?
+          'ARCHIVE_WORK_PACKAGE' :
+          'ARCHIVE_PROJECT',
+        message: this.project.complex ?
+          'ARCHIVE_WORK_PACKAGE_CONFIRM' :
+          'ARCHIVE_PROJECT_DESCRIPTION',
+        heading,
+        actionLabel: 'ARCHIVE',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          this.archiving = true;
+          const op = await this.workPackageService.archive(this.workPackage.id);
+          this.archiving = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          return await this.router.navigateByUrl('/dashboard');
+        },
+      }).subscribe(() => {});
   }
 
   async updateSettingNotification(notificationType: ReceiveNotificationType) {

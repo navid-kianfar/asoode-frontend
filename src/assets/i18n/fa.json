@@ -569,5 +569,13 @@
   "CURRENTLY_WORKING": "در حال انجام",
   "ENUMS_TASK_VISIBILITY_NORMAL": "همه اعضای بسته کاری میتواند کارت\u200Cها را ببینند",
   "ENUMS_TASK_VISIBILITY_MEMBERS_ONLY": "فقط اعضای کارت میتوانند کارت\u200Cها را ببینند",
-  "TASK_VISIBILITY": "دسترسی کارت ها"
+  "TASK_VISIBILITY": "دسترسی کارت ها",
+  "ARCHIVE_WORK_PACKAGE_CONFIRM_HEADING": "آیا از آرشیو بسته کاری {0} اطمینان دارید؟",
+  "ARCHIVE_PROJECT_CONFIRM_HEADING": "آیا از آرشیو پروژه {0} اطمینان دارید؟",
+  "ARCHIVE_WORK_PACKAGE_CONFIRM": "بعد از آرشیو شدن، این بسته کاری از دسترس اعضا خارج می‌شود اما شما همچنان دسترسی خواهید داشت.",
+  "LEAVE_PROJECT": "خارج شدن از پروژه",
+  "LEAVE_PROJECT_CONFIRM_HEADING":"آیا از خارج شدن از پروژه {0} اطمینان دارید؟" ,
+  "LEAVE_WORK_PACKAGE_CONFIRM":"با حذف دسترسی مستقیم، تنها از طریق دسترسی گروهی امکان مشاهده این بسته کاری را دارید" ,
+  "LEAVE_PROJECT_CONFIRM": "با حذف دسترسی مستقیم، تنها از طریق دسترسی گروهی امکان مشاهده این پروژه را دارید",
+  "LEAVE": "خارج شدن"
 }

@@ -275,6 +275,21 @@ export class PushNotificationService {
           }
         }
         break;
+
+      case ActivityType.WorkPackageArchive:
+        find1 = this.findWorkPackage(notification.data);
+        if (find1) {
+          find2 = this.projectService.projects.find(p => p.id === find1.projectId);
+          if (find2.complex) {
+            find2.workPackages = find2.workPackages.filter(p => p.id !== notification.data);
+          } else {
+            this.projectService.projects = this.projectService.projects.filter(p => p.id !== find2.id);
+          }
+        }
+        break;
+      case ActivityType.WorkPackageRestore:
+        this.projectService.load();
+        break;
     }
   }
 

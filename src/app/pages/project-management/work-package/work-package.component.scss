@@ -261,6 +261,10 @@
               font-weight: 500;
               cursor: pointer;
             }
+
+            ::ng-deep .mat-flat-button {
+              font-size: 0.7rem !important;
+            }
           }
 
           .custom-box {
