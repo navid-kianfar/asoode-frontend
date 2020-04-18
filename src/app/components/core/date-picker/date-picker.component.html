@@ -1,1 +1,29 @@
-<p>date-picker works!</p>
+<div class="af-date-picker {{ cssClass }}">
+  <div class="input-wrapper" [class.empty-date]="!formattedDate">
+    <input
+      readonly
+      class="date"
+      type="text"
+      [value]="formattedDate"
+      [popper]="popperDatePicker"
+      [popperTrigger]="'click'"
+      [popperHideOnClickOutside]="true"
+      [popperHideOnScroll]="true"
+      [popperPlacement]="'bottom'"
+    />
+  </div>
+  <popper-content #popperDatePicker>
+    <div class="date-picker-plate">
+      <app-calendar
+        (formattedDate)="setFormattedDate($event)"
+        [model]="model"
+        (modelChange)="update($event, popperDatePicker)"
+        [disabled]="disabled"
+        [pickButton]="pickButton"
+        [allowNull]="allowNull"
+        [from]="from"
+        [to]="to"
+      ></app-calendar>
+    </div>
+  </popper-content>
+</div>

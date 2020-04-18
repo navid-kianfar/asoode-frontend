@@ -1,0 +1,13 @@
+.af-date-picker {
+  .input-wrapper {
+    input {
+      width: 100px;
+    }
+  }
+}
+.date-picker-plate {
+  font-size: 0.8rem;
+  ::ng-deep table {
+    margin: 0;
+  }
+}

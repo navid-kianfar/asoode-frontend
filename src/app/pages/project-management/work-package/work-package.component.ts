@@ -211,10 +211,20 @@ export class WorkPackageComponent implements OnInit {
           break;
 
         case ActivityType.WorkPackageObjectiveAdd:
+          if (this.workPackage.id === notification.data.packageId) {
+            this.workPackage.objectives.push(notification.data);
+          }
           break;
         case ActivityType.WorkPackageObjectiveEdit:
+          if (this.workPackage.id === notification.data.packageId) {
+            find1 = this.workPackage.objectives.find(o => o.id === notification.data.id);
+            if (find1) { Object.assign(find1, notification.data); }
+          }
           break;
         case ActivityType.WorkPackageObjectiveRemove:
+          if (this.workPackage.id === notification.data.packageId) {
+            this.workPackage.objectives = this.workPackage.objectives.filter(o => o.id !== notification.data.id);
+          }
           break;
 
         case ActivityType.WorkPackageTaskAdd:

@@ -42,7 +42,7 @@ export class NumberHelpers {
   static ticksToDuration(model: number): TimeViewModel {
     return {
       day: Math.floor(model / dayTicks),
-      hour: Math.round((model / hourTicks) % 24),
+      hour: Math.floor((model / hourTicks) % 24),
       minute: Math.round((model / minuteTicks) % 60),
     };
   }

@@ -23,7 +23,7 @@ export class OnlyNumberDirective {
     return e.keyCode === 8 ||
       e.keyCode === 37 ||
       e.keyCode === 39 ||
-      (this.appOnlyNumber.decimals && e.key === '.')
+      (this.appOnlyNumber && this.appOnlyNumber.decimals && e.key === '.')
       ? true
       : new RegExp('^\\d+$').test(e.key);
   }

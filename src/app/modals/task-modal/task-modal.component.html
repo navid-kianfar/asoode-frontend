@@ -202,7 +202,7 @@
               [class.active]="mode === ViewMode.TimeSpent"
               (click)="switchMode(ViewMode.TimeSpent)"
             >
-              {{ 'TASK_TIME_SPENT' | translate }}
+              {{ 'TASK_TIME_MANAGEMENT' | translate }}
             </li>
             <li
               *ngIf="!model.parentId"
@@ -413,7 +413,7 @@
                 </div>
                 <div
                   class="box vote-box"
-                  *ngIf="showVotes || model.upVotes || model.downVotes"
+                  *ngIf="showVotes || model.votes.length"
                 >
                   <div class="box-header">
                     <span>{{ 'TASK_VOTE' | translate }}</span>
@@ -421,12 +421,12 @@
                   <div class="box-content">
                     <div class="vote">
                       <div class="sep up">
-                        <span>{{ model.upVotes || 0 }}</span>
+                        <span>{{ (model.votes | search:['vote']:true).length }}</span>
                         <i (click)="vote(true)" class="icon-thumbs-up2"></i>
                       </div>
                       <div class="sep down">
                         <i (click)="vote(false)" class="icon-thumbs-down2"></i>
-                        <span>{{ model.downVotes || 0 }}</span>
+                        <span>{{ (model.votes | search:['vote']:false).length }}</span>
                       </div>
                     </div>
 
@@ -680,7 +680,100 @@
             <ng-container *ngIf="mode === ViewMode.TimeSpent">
               <div class="box-container time-spent-container">
                 <div class="header">
-                  <div class="title">{{ 'TASK_TIME_SPENT' | translate }}</div>
+                  <div class="title">{{ 'TASK_TIME_MANAGEMENT' | translate }}</div>
+                </div>
+                <div class="box">
+                  <div class="box-header">
+                    <i class="icon-calendar x2"></i>
+                    <span>{{ 'TASK_TIME_RANGE' | translate }}</span>
+                    <ng-container
+                      *ngIf="
+                        permission === AccessType.Admin ||
+                        permission === AccessType.Owner
+                      "
+                    >
+                      <i
+                        [matMenuTriggerFor]="timeRangeMenu"
+                        *ngIf="!model.dueAt && !model.beginAt && !model.endAt "
+                        class="add icon-plus2"
+                      ></i>
+                      <ng-container *ngIf="model.dueAt || model.beginAt || model.endAt">
+                        <i
+                          [matMenuTriggerFor]="timeRangeMenu"
+                          class="icon-pencil"
+                        ></i
+                        >&nbsp;
+                        <i (click)="removeTimeRange()" class="icon-delete"></i>
+                      </ng-container>
+                      <mat-menu #timeRangeMenu="matMenu">
+                        <div
+                          class="time-range-menu"
+                          (click)="$event.stopPropagation()">
+                          <div class="choice">
+                            <mat-radio-button (change)="dueSelected()"
+                                              [checked]="tempDateMode === DateMode.Due"
+                                              [value]="DateMode.Due" color="primary" [name]="'choice'">
+                              {{ 'SET_DUE_DATE' | translate}}
+                            </mat-radio-button>
+                            <div class="due-wrapper">
+                              <div class="date-wrapper">
+                                <h5>{{ 'DUE_AT' | translate}}</h5>
+                                <app-date-picker [model]="tempDueAt"
+                                                 [disabled]="tempDateMode !== DateMode.Due"
+                                                 (modelChange)="updateDueAt($event)"></app-date-picker>
+                              </div>
+                              <div class="time-wrapper">
+                                <h5>{{ 'TIME' | translate}}</h5>
+<!--                                <app-time-picker></app-time-picker>-->
+                              </div>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="choice">
+                            <mat-radio-button (change)="rangeSelected()"
+                                              [checked]="tempDateMode === DateMode.Range"
+                                              [value]="DateMode.Range" color="primary" [name]="'choice'">
+                              {{ 'SET_TIME_RANGE' | translate}}
+                            </mat-radio-button>
+                            <div class="due-wrapper">
+                              <div class="date-wrapper">
+                                <h5>{{ 'BEGIN_AT' | translate}}</h5>
+                                <app-date-picker [model]="tempBeginAt"
+                                                 [disabled]="tempDateMode !== DateMode.Range"
+                                                 (modelChange)="updateBeginAt($event)"></app-date-picker>
+                              </div>
+                              <div class="date-wrapper">
+                                <h5>{{ 'END_AT' | translate}}</h5>
+                                <app-date-picker  [model]="tempEndAt"
+                                                  [disabled]="tempDateMode !== DateMode.Range"
+                                                  (modelChange)="updateEndAt($event)"></app-date-picker>
+                              </div>
+                            </div>
+                          </div>
+                          <br>
+                          <button mat-flat-button color="primary">
+                            {{ 'SAVE_CHANGES' | translate}}
+                          </button>&nbsp;
+                          <button mat-flat-button color="warn">
+                            {{ 'REMOVE' | translate}}
+                          </button>
+                        </div>
+                      </mat-menu>
+                    </ng-container>
+                  </div>
+                  <div class="box-content" *ngIf="model.estimatedTime">
+                    <h4 *ngIf="model.dueAt">
+                      {{ 'DUE_AT' | translate}}&nbsp;
+                      {{ model.dueAt | culturedDate:true }}
+                    </h4>
+                    <ng-container *ngIf="model.beginAt || model.endAt">
+                      <h4>
+                        {{ model.beginAt | culturedDate }}&nbsp;
+                        {{ 'TO_DATE' | translate}}&nbsp;
+                        {{ model.endAt | culturedDate }}
+                      </h4>
+                    </ng-container>
+                  </div>
                 </div>
                 <div class="box">
                   <div class="box-header">

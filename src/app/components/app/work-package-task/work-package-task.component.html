@@ -1,4 +1,4 @@
-<div class="task no-select">
+<div class="task no-select" [class.archived]="model.archivedAt">
   <div class="status">
     <div class="date">
       <ng-container *ngIf="model.dueAt || model.endAt || model.beginAt">

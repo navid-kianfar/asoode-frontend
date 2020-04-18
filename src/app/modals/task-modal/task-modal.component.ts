@@ -60,6 +60,7 @@ export class TaskModalComponent
   allStates: number[];
   permission: AccessType;
   AccessType = AccessType;
+  DateMode = DateMode;
   changingState: boolean;
   project: ProjectViewModel;
   workPackage: WorkPackageViewModel;
@@ -83,7 +84,10 @@ export class TaskModalComponent
   recording: boolean;
   intervalInstance: number;
   totalTimeSpent: TimeViewModel;
-
+  tempDueAt: Date;
+  tempBeginAt: Date;
+  tempEndAt: Date;
+  tempDateMode: DateMode;
   constructor(
     private readonly socket: Socket,
     private readonly taskService: TaskService,
@@ -344,6 +348,12 @@ export class TaskModalComponent
     this.totalTimeSpent = NumberHelpers.ticksToTimeSpan(total * 10000);
   }
 
+  calcDiff(log: WorkPackageTaskTimeViewModel): number {
+    const begin = new Date(log.begin);
+    const end = log.end ? new Date(log.end) : new Date();
+    return end.getTime() - begin.getTime();
+  }
+
   switchMode(mode: ViewMode) {
     this.mode = mode;
   }
@@ -386,6 +396,21 @@ export class TaskModalComponent
     this.model.subTasksDone = this.model.subTasks.filter(i => i.doneAt).length;
     this.bg = this.getBackgroundUrl();
     this.tempEstimatedTime = this.model.estimatedTime;
+
+    this.tempDateMode = (this.model.dueAt || (!this.model.beginAt && !this.model.endAt))
+      ? DateMode.Due : DateMode.Range;
+    this.tempBeginAt = this.model.beginAt;
+    this.tempEndAt = this.model.endAt;
+    this.tempDueAt = this.model.dueAt;
+  }
+
+  dueSelected() {
+    this.tempBeginAt = undefined;
+    this.tempEndAt = undefined;
+  }
+
+  rangeSelected() {
+    this.tempDueAt = undefined;
   }
 
   prepareChangeTitle() {
@@ -771,13 +796,27 @@ export class TaskModalComponent
 
   async removeRecord(log: WorkPackageTaskTimeViewModel) {}
 
-  calcDiff(log: WorkPackageTaskTimeViewModel): number {
-    const begin = new Date(log.begin);
-    const end = log.end ? new Date(log.end) : new Date();
-    return end.getTime() - begin.getTime();
-  }
-}
+  removeTimeRange() {
 
+  }
+
+  updateDueAt(date: Date) {
+
+  }
+
+  updateBeginAt(date: Date) {
+
+  }
+
+  updateEndAt(date: Date) {
+
+  }
+
+}
+export enum DateMode {
+  Due = 1,
+  Range = 2
+}
 export enum ViewMode {
   Detail = 1,
   TimeSpent = 2,

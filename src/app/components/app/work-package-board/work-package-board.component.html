@@ -17,8 +17,12 @@
       cdkDrag
     >
       <div [hidden]="list.renaming" cdkDragHandle class="header">
-        <span>{{ list.title | truncate: 30 }}</span
-        >&nbsp;
+        <span>
+          {{ list.title | truncate: 30 }}
+          <ng-container *ngIf="model.userSetting.showTotalCards">
+            &nbsp;({{list.tasks.length}})
+          </ng-container>
+        </span>&nbsp;
         <i
           *ngIf="permission !== AccessType.Visitor"
           (click)="prepareNewTask(list)"

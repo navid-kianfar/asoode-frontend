@@ -19,6 +19,7 @@ import HijriDateConverter from '../../../library/core/date-time/hijri-date-conve
 import GeorgianDateConverter from '../../../library/core/date-time/georgian-date-converter';
 import { DateHelpers } from '../../../helpers/date.helpers';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import {NumberHelpers} from '../../../helpers/number.helpers';
 
 @Component({
   selector: 'app-calendar',
@@ -113,7 +114,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   parseFormDate(date: Date): CalendarNodeItem {
     const converted = this.converter.FromDateTime(date);
     this.formattedDate.emit(
-      `${converted.Year}/${converted.Month}/${converted.Day}`,
+      `${converted.Year}/${NumberHelpers.pad(converted.Month, 2)}/${NumberHelpers.pad(converted.Day, 2)}`,
     );
     return this.convert(converted);
   }

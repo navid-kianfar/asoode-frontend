@@ -154,13 +154,14 @@
         <tr>
           <th colspan="7">
             <div class="d-flex">
-              <button (click)="setToday()" class="btn btn-light today">
+              <button mat-stroked-button (click)="setToday()" class="btn btn-light today">
                 {{ 'TODAY' | translate }}
               </button>
               <button
                 *ngIf="pickButton"
                 (click)="pickAndClose()"
                 class="btn btn-primary"
+                mat-stroked-button
               >
                 {{ 'PICK_AND_CLOSE' | translate }}
               </button>

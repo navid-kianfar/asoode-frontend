@@ -903,3 +903,23 @@
     }
   }
 }
+.time-range-menu {
+  width: 300px;
+  padding: 10px;
+
+  .choice {
+    .due-wrapper {
+      display: flex;
+      .date-wrapper, .time-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-inline-end: 30px;
+      }
+    }
+
+    ::ng-deep .mat-radio-label-content {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+  }
+}
