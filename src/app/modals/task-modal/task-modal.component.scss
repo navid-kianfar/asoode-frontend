@@ -374,7 +374,7 @@
         }
       }
       .box-content {
-        min-height: 50px;
+        //min-height: 50px;
 
         .no-item {
           background: #f2f2f2;
@@ -579,6 +579,8 @@
     }
     h4 {
       margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 400;
     }
     h5 {
       font-size: 0.7rem;

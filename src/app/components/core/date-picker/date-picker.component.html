@@ -2,6 +2,7 @@
   <div class="input-wrapper" [class.empty-date]="!formattedDate">
     <input
       readonly
+      [disabled]="disabled"
       class="date"
       type="text"
       [value]="formattedDate"
@@ -16,11 +17,11 @@
     <div class="date-picker-plate">
       <app-calendar
         (formattedDate)="setFormattedDate($event)"
-        [model]="model"
         (modelChange)="update($event, popperDatePicker)"
-        [disabled]="disabled"
+        [model]="model"
         [pickButton]="pickButton"
         [allowNull]="allowNull"
+        [disabled]="disabled"
         [from]="from"
         [to]="to"
       ></app-calendar>

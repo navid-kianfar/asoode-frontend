@@ -27,6 +27,7 @@ import {NumberHelpers} from '../../../helpers/number.helpers';
   styleUrls: ['./calendar.component.scss'],
 })
 export class CalendarComponent implements OnInit, OnChanges {
+  initialized: boolean;
   converter: IDateConverter;
   today: CalendarNodeItem;
   current: CalendarNodeItem;
@@ -67,6 +68,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       this.model = this.current.date;
     }
     this.switch('days');
+    this.initialized = true;
   }
   ngOnChanges(changes: SimpleChanges) {
     if (changes.model && !changes.model.firstChange) {
@@ -149,7 +151,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     return this.convert(converted);
   }
   switch(mode: string) {
-    if (this.disabled) {
+    if (this.initialized && this.disabled) {
       return;
     }
     this.state.mode = mode;

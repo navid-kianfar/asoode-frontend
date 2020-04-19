@@ -159,4 +159,11 @@ export class TaskService {
       model,
     );
   }
+
+  async setDate(taskId: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/tasks/${taskId}/set-date`,
+      model,
+    );
+  }
 }

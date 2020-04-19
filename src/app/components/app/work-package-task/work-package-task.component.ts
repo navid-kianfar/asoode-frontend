@@ -28,11 +28,6 @@ export class WorkPackageTaskComponent implements OnInit {
   constructor(private readonly identityService: IdentityService) {}
 
   ngOnInit() {
-    this.allWatching = this.model.members
-      .filter(
-        m => m.recordId === this.identityService.identity.userId && m.watching,
-      )
-      .map(m => m.taskId);
   }
 
   isLabelSelected(label: WorkPackageLabelViewModel): boolean {

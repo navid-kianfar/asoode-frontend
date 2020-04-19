@@ -4,6 +4,10 @@
       width: 100px;
     }
   }
+
+  ::ng-deep .ngxp__container {
+    background: #ffffff !important;
+  }
 }
 .date-picker-plate {
   font-size: 0.8rem;

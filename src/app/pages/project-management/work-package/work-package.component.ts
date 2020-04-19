@@ -245,9 +245,25 @@ export class WorkPackageComponent implements OnInit {
           if (this.workPackage.id === notification.data.packageId) {
             const task = this.findTask(notification.data.id);
             if (task) {
-              delete notification.data.members;
-              delete notification.data.labels;
-              Object.assign(task, notification.data);
+              task.beginReminder = notification.data.beginReminder;
+              task.endReminder = notification.data.endReminder;
+              task.voteNecessity = notification.data.voteNecessity;
+              task.objectiveValue = notification.data.objectiveValue;
+              task.estimatedTime = notification.data.estimatedTime;
+              task.coverId = notification.data.coverId;
+              task.listId = notification.data.listId;
+              task.state = notification.data.state;
+              task.listName = notification.data.listName;
+              task.timeSpent = notification.data.timeSpent;
+              task.doneUserId = notification.data.doneUserId;
+              task.archivedAt = notification.data.archivedAt;
+              task.dueAt = notification.data.dueAt;
+              task.beginAt = notification.data.beginAt;
+              task.endAt = notification.data.endAt;
+              task.doneAt = notification.data.doneAt;
+              task.title = notification.data.title;
+              task.description = notification.data.description;
+              task.geoLocation = notification.data.geoLocation;
               task.hasDescription =
                 task.description && task.description.length > 0;
             }
@@ -311,42 +327,83 @@ export class WorkPackageComponent implements OnInit {
           }
           break;
         case ActivityType.WorkPackageTaskLabelRemove:
-          {
-            const task = this.findTask(notification.data.taskId);
-            if (task) {
-              task.members = task.members.filter(
-                m => m.recordId !== notification.data.recordId,
-              );
-            }
+          find1 = this.findTask(notification.data.taskId);
+          if (find1) {
+            find1.labels = find1.labels.filter(
+              i => i.labelId !== notification.data.labelId,
+            );
           }
           break;
         case ActivityType.WorkPackageTaskMemberAdd:
-          {
-            const task = this.findTask(notification.data.taskId);
-            if (!task) {
-              return;
-            }
-            const already = task.members.find(
-              i => i.recordId === notification.data.recordId,
-            );
-            if (!already) {
-              task.members.push(notification.data);
-            }
+          find1 = this.findTask(notification.data.taskId);
+          if (!find1) {
+            return;
+          }
+          const already = find1.members.find(
+            i => i.recordId === notification.data.recordId,
+          );
+          if (!already) {
+            find1.members.push(notification.data);
           }
           break;
         case ActivityType.WorkPackageTaskMemberRemove:
-          {
-            const task = this.findTask(notification.data.taskId);
-            if (!task) {
-              return;
-            }
-            task.members = task.members.filter(
-              i => i.recordId !== notification.data.recordId,
-            );
+          find1 = this.findTask(notification.data.taskId);
+          if (!find1) {
+            return;
           }
+          find1.members = find1.members.filter(
+            i => i.recordId !== notification.data.recordId,
+          );
           break;
         case ActivityType.WorkPackageTaskRemove:
         case ActivityType.WorkPackageTaskArchive:
+          if (this.workPackage.id === notification.data.packageId) {
+            const task = this.findTask(notification.data.id);
+            if (task) {
+              task.archivedAt = notification.data.archivedAt;
+            }
+          }
+          break;
+        case ActivityType.WorkPackageTaskAttachmentAdd:
+          find1 = this.findTask(notification.data.taskId);
+          if (find1) {
+            find1.attachmentCount++;
+          }
+          break;
+        case ActivityType.WorkPackageTaskAttachmentRemove:
+          find1 = this.findTask(notification.data.taskId);
+          if (find1) {
+            find1.attachmentCount--;
+          }
+          break;
+        case ActivityType.WorkPackageTaskAttachmentCover:
+          find1 = this.findTask(notification.data.taskId);
+          if (find1) {
+            find1.coverUrl = notification.data.isCover ? notification.data.path : '';
+          }
+          break;
+        case ActivityType.WorkPackageTaskWatch:
+          find1 = this.findTask(notification.data.taskId);
+          if (find1) {
+            find1.watching = notification.data.watching;
+          }
+          break;
+        case ActivityType.WorkPackageTaskVote:
+          find1 = this.findTask(notification.data.taskId);
+          if (find1) {
+            if (!notification.data.updatedAt) {
+              find1.upVotes += (notification.data.vote ? 1 : 0);
+              find1.downVotes += (notification.data.vote ? 0 : 1);
+            } else {
+              if (notification.data.vote) {
+                find1.downVotes--;
+                find1.upVotes++;
+              } else {
+                find1.downVotes++;
+                find1.upVotes--;
+              }
+            }
+          }
           break;
 
         case ActivityType.WorkPackageLabelAdd:

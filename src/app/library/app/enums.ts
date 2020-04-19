@@ -118,6 +118,8 @@ export enum ActivityType {
   WorkPackageLabelRename = 409,
   WorkPackageLabelRemove = 410,
   WorkPackageLabelAdd = 411,
+  WorkPackageUserSetting = 412,
+  WorkPackageSetting = 413,
 
   WorkPackageListAdd = 500,
   WorkPackageListEdit = 501,
@@ -151,6 +153,8 @@ export enum ActivityType {
   WorkPackageTaskAttachmentRename = 617,
   WorkPackageTaskWatch = 618,
   WorkPackageTaskTime = 619,
+  WorkPackageTaskVote = 620,
+  WorkPackageTaskVoteReset = 621,
 
   WorkPackageObjectiveAdd = 700,
   WorkPackageObjectiveEdit = 701,

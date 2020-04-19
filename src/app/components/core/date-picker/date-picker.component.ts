@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ICulture} from '../../../view-models/core/date-types';
 import {CulturedDateService} from '../../../services/core/cultured-date.service';
 import {PopperContent} from 'ngx-popper';
@@ -9,7 +9,7 @@ import {NumberHelpers} from '../../../helpers/number.helpers';
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.scss'],
 })
-export class DatePickerComponent implements OnInit {
+export class DatePickerComponent implements OnInit, OnChanges {
   formattedDate: string;
   dateView: any;
   calendar: ICulture;
@@ -36,6 +36,14 @@ export class DatePickerComponent implements OnInit {
   constructor(readonly culturedDateService: CulturedDateService) {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.model && !changes.model.firstChange) {
+      if (!changes.model.currentValue) {
+        this.setFormattedDate('');
+      }
+    }
+  }
+
   ngOnInit() {
     this.formattedDate = '';
     if (this.model) {
@@ -47,7 +55,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   setFormattedDate(formatted) {
-    if (!this.model) {
+    if (!this.model && formatted) {
       return;
     }
     this.formattedDate = formatted;

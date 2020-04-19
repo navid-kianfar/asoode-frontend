@@ -9,7 +9,7 @@
       </ng-container>
     </div>
     <div class="more">
-      <i *ngIf="allWatching.indexOf(model.id) !== -1" class="icon-eye2"></i>
+      <i *ngIf="model.watching" class="icon-eye2"></i>
     </div>
     <div class="status-wrapper">
       <div class="status-container">
@@ -78,6 +78,9 @@
         <span>{{ model.timeSpent | msToDuration }}</span>
       </div>
     </div>
+  </div>
+  <div class="map-wrapper" *ngIf="model.geoLocation">
+    <app-map [disabled]="true" [model]="model.geoLocation"></app-map>
   </div>
   <div
     *ngIf="

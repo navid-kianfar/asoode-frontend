@@ -1,15 +1,7 @@
-<div
-  class="af-calendar af-component lang-{{ culture }} {{
-    state.rtl ? 'rtl' : 'ltr'
-  }} {{ cssClass }}
-    datepicker datepicker-orient-left datepicker-orient-top {{
-    monthView ? 'month-view-only' : ''
-  }}"
->
-  <div
-    *ngIf="state.mode === 'months'"
-    class="datepicker-inner datepicker-months"
-  >
+<div class="af-calendar af-component lang-{{ culture }}
+  {{ state.rtl ? 'rtl' : 'ltr'}} {{ cssClass }} datepicker datepicker-orient-left
+  datepicker-orient-top {{ monthView ? 'month-view-only' : ''}}">
+  <div *ngIf="state.mode === 'months'" class="datepicker-inner datepicker-months">
     <div class="calendar-header">
       <div class="datepicker-switch">
         <span (click)="switch('years')">

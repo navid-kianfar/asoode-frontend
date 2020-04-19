@@ -213,6 +213,7 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   voteNecessity: WorkPackageTaskVoteNecessity;
   objectiveValue: WorkPackageTaskObjectiveValue;
   estimatedTime?: number;
+  coverUrl?: string;
   coverId: string;
   listId: string;
   state: WorkPackageTaskState;
@@ -233,9 +234,6 @@ export interface WorkPackageTaskMemberViewModel extends BaseViewModel {
   recordId: string;
   isGroup: boolean;
   packageId: string;
-  lastView?: Date;
-  watching?: boolean;
-  vote?: boolean;
 }
 export interface WorkPackageTaskLabelViewModel extends BaseViewModel {
   taskId: string;

@@ -1,0 +1,20 @@
+<div class="af-time-picker af-component {{ cssClass }}">
+  <app-number
+    [min]="0"
+    [max]="23"
+    [label]="'HOURS'"
+    [(model)]="hour"
+    [disabled]="disabled"
+    (modelChange)="hourChange.emit($event)"
+    placeHolder="HH"
+  ></app-number>
+  <app-number
+    [min]="0"
+    [max]="59"
+    [label]="'MINUTES'"
+    [(model)]="minute"
+    [disabled]="disabled"
+    (modelChange)="minuteChange.emit($event)"
+    placeHolder="MN"
+  ></app-number>
+</div>

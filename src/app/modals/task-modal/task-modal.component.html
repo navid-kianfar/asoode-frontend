@@ -224,8 +224,8 @@
               {{ 'TASK_ACTIVITY' | translate }}
             </li>
           </ul>
-          <div class="tab-content">
-            <ng-container *ngIf="mode === ViewMode.Detail">
+          <div [ngSwitch]="mode" class="tab-content">
+            <ng-container *ngSwitchCase="ViewMode.Detail">
               <div class="box-container">
                 <div class="header">
                   <div class="title">{{ 'TASK_DETAILS' | translate }}</div>
@@ -421,12 +421,12 @@
                   <div class="box-content">
                     <div class="vote">
                       <div class="sep up">
-                        <span>{{ (model.votes | search:['vote']:true).length }}</span>
+                        <span>{{ model.upVotes }}</span>
                         <i (click)="vote(true)" class="icon-thumbs-up2"></i>
                       </div>
                       <div class="sep down">
                         <i (click)="vote(false)" class="icon-thumbs-down2"></i>
-                        <span>{{ (model.votes | search:['vote']:false).length }}</span>
+                        <span>{{ model.downVotes }}</span>
                       </div>
                     </div>
 
@@ -677,7 +677,7 @@
                 </div>
               </div>
             </ng-container>
-            <ng-container *ngIf="mode === ViewMode.TimeSpent">
+            <ng-container *ngSwitchCase="ViewMode.TimeSpent">
               <div class="box-container time-spent-container">
                 <div class="header">
                   <div class="title">{{ 'TASK_TIME_MANAGEMENT' | translate }}</div>
@@ -703,61 +703,67 @@
                           class="icon-pencil"
                         ></i
                         >&nbsp;
-                        <i (click)="removeTimeRange()" class="icon-delete"></i>
+                        <i (click)="removeDate(undefined)" class="icon-delete"></i>
                       </ng-container>
                       <mat-menu #timeRangeMenu="matMenu">
-                        <div
-                          class="time-range-menu"
-                          (click)="$event.stopPropagation()">
-                          <div class="choice">
-                            <mat-radio-button (change)="dueSelected()"
-                                              [checked]="tempDateMode === DateMode.Due"
-                                              [value]="DateMode.Due" color="primary" [name]="'choice'">
-                              {{ 'SET_DUE_DATE' | translate}}
-                            </mat-radio-button>
-                            <div class="due-wrapper">
-                              <div class="date-wrapper">
-                                <h5>{{ 'DUE_AT' | translate}}</h5>
-                                <app-date-picker [model]="tempDueAt"
-                                                 [disabled]="tempDateMode !== DateMode.Due"
-                                                 (modelChange)="updateDueAt($event)"></app-date-picker>
-                              </div>
-                              <div class="time-wrapper">
-                                <h5>{{ 'TIME' | translate}}</h5>
-<!--                                <app-time-picker></app-time-picker>-->
-                              </div>
-                            </div>
-                          </div>
-                          <hr>
-                          <div class="choice">
-                            <mat-radio-button (change)="rangeSelected()"
-                                              [checked]="tempDateMode === DateMode.Range"
-                                              [value]="DateMode.Range" color="primary" [name]="'choice'">
-                              {{ 'SET_TIME_RANGE' | translate}}
-                            </mat-radio-button>
-                            <div class="due-wrapper">
-                              <div class="date-wrapper">
-                                <h5>{{ 'BEGIN_AT' | translate}}</h5>
-                                <app-date-picker [model]="tempBeginAt"
-                                                 [disabled]="tempDateMode !== DateMode.Range"
-                                                 (modelChange)="updateBeginAt($event)"></app-date-picker>
-                              </div>
-                              <div class="date-wrapper">
-                                <h5>{{ 'END_AT' | translate}}</h5>
-                                <app-date-picker  [model]="tempEndAt"
-                                                  [disabled]="tempDateMode !== DateMode.Range"
-                                                  (modelChange)="updateEndAt($event)"></app-date-picker>
+                        <ng-template matMenuContent>
+                          <div class="time-range-menu"
+                               (click)="$event.stopPropagation()">
+                            <div class="choice">
+                              <mat-radio-button (change)="dueSelected()"
+                                                [checked]="tempDateMode === DateMode.Due"
+                                                [disabled]="savingDate || deletingDate"
+                                                [value]="DateMode.Due" color="primary" [name]="'choice'">
+                                {{ 'SET_DUE_DATE' | translate}}
+                              </mat-radio-button>
+                              <div *ngIf="tempDateMode === DateMode.Due" class="due-wrapper">
+                                <div class="date-wrapper">
+                                  <h5>{{ 'DUE_AT' | translate}}</h5>
+                                  <app-date-picker [(model)]="tempDueAt"
+                                                   [disabled]="savingDate || deletingDate"></app-date-picker>
+
+                                </div>
+                                <div class="time-wrapper">
+<!--                                  <h5>{{ 'TIME' | translate}}</h5>-->
+                                  <app-time-picker [disabled]="savingDate || deletingDate"
+                                                   [(hour)]="tempHour" [(minute)]="tempMinute"></app-time-picker>
+                                </div>
                               </div>
                             </div>
+                            <hr>
+                            <div class="choice">
+                              <mat-radio-button (change)="rangeSelected()"
+                                                [checked]="tempDateMode === DateMode.Range"
+                                                [disabled]="savingDate || deletingDate"
+                                                [value]="DateMode.Range" color="primary" [name]="'choice'">
+                                {{ 'SET_TIME_RANGE' | translate}}
+                              </mat-radio-button>
+                              <div *ngIf="tempDateMode === DateMode.Range" class="due-wrapper">
+                                <div class="date-wrapper">
+                                  <h5>{{ 'BEGIN_AT' | translate}}</h5>
+                                  <app-date-picker [(model)]="tempBeginAt"
+                                                   [disabled]="savingDate || deletingDate"></app-date-picker>
+                                </div>
+                                <div class="date-wrapper">
+                                  <h5>{{ 'END_AT' | translate}}</h5>
+                                  <app-date-picker  [(model)]="tempEndAt"
+                                                    [from]="tempBeginAt"
+                                                    [disabled]="savingDate || deletingDate"></app-date-picker>
+                                </div>
+                              </div>
+                            </div>
+                            <br>
+                            <button [disabled]="savingDate || deletingDate" (click)="saveDate(timeRangeMenu)" mat-flat-button color="primary">
+                              <i *ngIf="savingDate" class="icon-spin icon-spinner2"></i>
+                              {{ 'SAVE_CHANGES' | translate}}
+                            </button>&nbsp;
+                            <button *ngIf="model.dueAt || model.beginAt || model.endAt" (click)="removeDate(timeRangeMenu)"
+                                    [disabled]="savingDate || deletingDate" mat-flat-button color="warn">
+                              <i *ngIf="deletingDate" class="icon-spin icon-spinner2"></i>
+                              {{ 'REMOVE' | translate}}
+                            </button>
                           </div>
-                          <br>
-                          <button mat-flat-button color="primary">
-                            {{ 'SAVE_CHANGES' | translate}}
-                          </button>&nbsp;
-                          <button mat-flat-button color="warn">
-                            {{ 'REMOVE' | translate}}
-                          </button>
-                        </div>
+                        </ng-template>
                       </mat-menu>
                     </ng-container>
                   </div>
@@ -844,21 +850,21 @@
                         <div class="days item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.day, 2)
-                          }}</span>
+                            }}</span>
                           <span class="label">{{ 'DAYS' | translate }}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="hours item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.hour, 2)
-                          }}</span>
+                            }}</span>
                           <span class="label">{{ 'HOURS' | translate }}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="minutes item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.minute, 2)
-                          }}</span>
+                            }}</span>
                           <span class="label">{{ 'MINUTES' | translate }}</span>
                         </div>
                       </div>
@@ -944,7 +950,7 @@
                 </div>
               </div>
             </ng-container>
-            <ng-container *ngIf="mode === ViewMode.Related">
+            <ng-container *ngSwitchCase="ViewMode.Related">
               <div class="box-container related">
                 <div class="header">
                   <div class="title">{{ 'TASK_RELATED' | translate }}</div>
@@ -997,7 +1003,7 @@
                 </div>
               </div>
             </ng-container>
-            <ng-container *ngIf="mode === ViewMode.CustomField">
+            <ng-container *ngSwitchCase="ViewMode.CustomField">
               <div class="box-container custom-fields">
                 <div class="header">
                   <div class="title">{{ 'TASK_CUSTOM_FIELD' | translate }}</div>
@@ -1008,7 +1014,7 @@
                 ></app-custom-fields>
               </div>
             </ng-container>
-            <ng-container *ngIf="mode === ViewMode.Activity">
+            <ng-container *ngSwitchCase="ViewMode.Activity">
               <div class="box-container activities">
                 <app-activity-log [taskId]="this.model.id"></app-activity-log>
               </div>
