@@ -20,6 +20,7 @@ import {
   ActivityType,
   ReceiveNotificationType,
   WorkPackageObjectiveType,
+  WorkPackageTaskState,
   WorkPackageTaskVisibility,
 } from '../../../library/app/enums';
 import {PromptComponent} from 'src/app/modals/prompt/prompt.component';
@@ -228,21 +229,37 @@ export class WorkPackageComponent implements OnInit {
           break;
 
         case ActivityType.WorkPackageTaskAdd:
-          if (
-            this.workPackage.id === notification.data.packageId &&
-            !notification.data.parentId
-          ) {
-            const found = this.workPackage.lists.find(
-              l => l.id === notification.data.listId,
-            );
-            if (found) {
-              found.tasks = found.tasks || [];
-              found.tasks.unshift(notification.data);
+          if (this.workPackage.id === notification.data.packageId) {
+            if (notification.data.parentId) {
+              find1 = this.findTask(notification.data.parentId);
+              if (find1) {
+                find1.subTasksCount++;
+              }
+            } else {
+              const found = this.workPackage.lists.find(
+                l => l.id === notification.data.listId,
+              );
+              if (found) {
+                found.tasks = found.tasks || [];
+                found.tasks.unshift(notification.data);
+              }
             }
           }
           break;
         case ActivityType.WorkPackageTaskEdit:
           if (this.workPackage.id === notification.data.packageId) {
+            if (notification.data.parentId) {
+              const parent = this.findTask(notification.data.parentId);
+              if (parent.state === WorkPackageTaskState.Done) {
+                if (notification.data.state !== WorkPackageTaskState.Done) {
+                  parent.subTasksDone--;
+                }
+              } else if (notification.data.state === WorkPackageTaskState.Done) {
+                parent.subTasksDone++;
+              }
+              return;
+            }
+
             const task = this.findTask(notification.data.id);
             if (task) {
               task.beginReminder = notification.data.beginReminder;
@@ -317,10 +334,10 @@ export class WorkPackageComponent implements OnInit {
           if (this.workPackage.id === notification.data.packageId) {
             const task = this.findTask(notification.data.taskId);
             if (task) {
-              const already = task.labels.find(
+              find1 = task.labels.find(
                 l => l.labelId === notification.data.labelId,
               );
-              if (!already) {
+              if (!find1) {
                 task.labels.push(notification.data);
               }
             }

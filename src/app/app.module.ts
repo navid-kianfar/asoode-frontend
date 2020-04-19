@@ -160,6 +160,7 @@ import { ActivityLogComponent } from './components/app/activity-log/activity-log
 import { CustomFieldsComponent } from './components/app/custom-fields/custom-fields.component';
 import { TimeSpanComponent } from './components/core/time-span/time-span.component';
 import { NumberComponent } from './components/core/number/number.component';
+import { TimePickerComponent } from './components/core/time-picker/time-picker.component';
 
 @NgModule({
   declarations: [
@@ -284,6 +285,7 @@ import { NumberComponent } from './components/core/number/number.component';
     CustomFieldsComponent,
     TimeSpanComponent,
     NumberComponent,
+    TimePickerComponent,
   ],
   entryComponents: [
     MapModalComponent,

@@ -181,4 +181,8 @@ export class WorkPackageBoardComponent implements OnInit {
       })
       .subscribe(() => {});
   }
+
+  archiveList(list: WorkPackageListViewModel) {
+
+  }
 }

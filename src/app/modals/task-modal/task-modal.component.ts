@@ -187,155 +187,158 @@ export class TaskModalComponent
 
   bind() {
     this.socket.on('push-notification', (notification: any) => {
-      switch (notification.type) {
-        case ActivityType.WorkPackageTaskAdd:
-          if (
-            this.workPackage.id === notification.data.packageId &&
-            notification.data.parentId === this.model.id
-          ) {
-            const found = this.model.subTasks.find(
-              l => l.id === notification.data.id,
-            );
-            if (!found) {
-              this.model.subTasks.unshift(notification.data);
+      console.log([this.model, ...this.model.subTasks]);
+      [this.model, ...this.model.subTasks].forEach(travel => {
+        switch (notification.type) {
+          case ActivityType.WorkPackageTaskAdd:
+            if (
+              this.workPackage.id === notification.data.packageId &&
+              notification.data.parentId === travel.id
+            ) {
+              const found = travel.subTasks.find(
+                l => l.id === notification.data.id,
+              );
+              if (!found) {
+                travel.subTasks.unshift(notification.data);
+              }
             }
-          }
-          break;
-        case ActivityType.WorkPackageTaskEdit:
-          if (this.id === notification.data.id) {
-            this.model.beginReminder = notification.data.beginReminder;
-            this.model.endReminder = notification.data.endReminder;
-            this.model.voteNecessity = notification.data.voteNecessity;
-            this.model.objectiveValue = notification.data.objectiveValue;
-            this.model.estimatedTime = notification.data.estimatedTime;
-            this.model.coverId = notification.data.coverId;
-            this.model.listId = notification.data.listId;
-            this.model.state = notification.data.state;
-            this.model.listName = notification.data.listName;
-            this.model.timeSpent = notification.data.timeSpent;
-            this.model.doneUserId = notification.data.doneUserId;
-            this.model.archivedAt = notification.data.archivedAt;
-            this.model.dueAt = notification.data.dueAt;
-            this.model.beginAt = notification.data.beginAt;
-            this.model.endAt = notification.data.endAt;
-            this.model.doneAt = notification.data.doneAt;
-            this.model.title = notification.data.title;
-            this.model.description = notification.data.description;
-            this.model.geoLocation = notification.data.geoLocation;
-            this.tempEstimatedTime = this.model.estimatedTime;
-            this.postProcess();
-          }
-          break;
-        case ActivityType.WorkPackageTaskComment:
-          if (this.id === notification.data.taskId) {
-            this.model.comments.unshift(notification.data);
-          }
-          break;
-        case ActivityType.WorkPackageTaskLabelAdd:
-          if (this.id === notification.data.taskId) {
-            const already = this.model.labels.find(
-              i => i.id === notification.data.labelId,
-            );
-            if (!already) {
-              this.model.labels.push(notification.data);
+            break;
+          case ActivityType.WorkPackageTaskEdit:
+            if (travel.id === notification.data.id) {
+              travel.beginReminder = notification.data.beginReminder;
+              travel.endReminder = notification.data.endReminder;
+              travel.voteNecessity = notification.data.voteNecessity;
+              travel.objectiveValue = notification.data.objectiveValue;
+              travel.estimatedTime = notification.data.estimatedTime;
+              travel.coverId = notification.data.coverId;
+              travel.listId = notification.data.listId;
+              travel.state = notification.data.state;
+              travel.listName = notification.data.listName;
+              travel.timeSpent = notification.data.timeSpent;
+              travel.doneUserId = notification.data.doneUserId;
+              travel.archivedAt = notification.data.archivedAt;
+              travel.dueAt = notification.data.dueAt;
+              travel.beginAt = notification.data.beginAt;
+              travel.endAt = notification.data.endAt;
+              travel.doneAt = notification.data.doneAt;
+              travel.title = notification.data.title;
+              travel.description = notification.data.description;
+              travel.geoLocation = notification.data.geoLocation;
+              this.tempEstimatedTime = travel.estimatedTime;
+              this.postProcess();
             }
-          }
-          break;
-        case ActivityType.WorkPackageTaskLabelRemove:
-          if (this.id === notification.data.taskId) {
-            this.model.labels = this.model.labels.filter(
-              i => i.labelId !== notification.data.labelId,
-            );
-          }
-          break;
-        case ActivityType.WorkPackageTaskMemberAdd:
-          if (this.id === notification.data.taskId) {
-            const already = this.model.members.find(
-              i => i.recordId === notification.data.recordId,
-            );
-            if (!already) {
-              this.model.members.push(notification.data);
+            break;
+          case ActivityType.WorkPackageTaskComment:
+            if (travel.id === notification.data.taskId) {
+              travel.comments.unshift(notification.data);
             }
-          }
-          break;
-        case ActivityType.WorkPackageTaskMemberRemove:
-          if (this.id === notification.data.taskId) {
-            this.model.members = this.model.members.filter(
-              i => i.recordId !== notification.data.recordId,
-            );
-          }
-          break;
-        case ActivityType.WorkPackageTaskAttachmentAdd:
-          if (this.id === notification.data.taskId) {
-            this.model.attachments.unshift(notification.data);
-          }
-          break;
-        case ActivityType.WorkPackageTaskAttachmentRemove:
-          if (this.id === notification.data.taskId) {
-            this.model.attachments = this.model.attachments.filter(
-              a => a.id !== notification.data.id,
-            );
-          }
-          break;
-        case ActivityType.WorkPackageTaskAttachmentRename:
-          if (this.id === notification.data.taskId) {
-            const found = this.model.attachments.find(
-              a => a.id === notification.data.id,
-            );
-            if (found) {
-              Object.assign(found, notification.data);
+            break;
+          case ActivityType.WorkPackageTaskLabelAdd:
+            if (travel.id === notification.data.taskId) {
+              const already = travel.labels.find(
+                i => i.id === notification.data.labelId,
+              );
+              if (!already) {
+                travel.labels.push(notification.data);
+              }
             }
-          }
-          break;
-        case ActivityType.WorkPackageTaskAttachmentCover:
-          if (this.id === notification.data.taskId) {
-            const found = this.model.attachments.find(
-              a => a.id === notification.data.id,
-            );
-            if (found) {
-              found.isCover = notification.data.isCover;
-              this.model.coverId = notification.data.isCover
-                ? notification.data.id
-                : '';
-              this.bg = this.getBackgroundUrl();
+            break;
+          case ActivityType.WorkPackageTaskLabelRemove:
+            if (travel.id === notification.data.taskId) {
+              travel.labels = travel.labels.filter(
+                i => i.labelId !== notification.data.labelId,
+              );
             }
-          }
-          break;
-        case ActivityType.WorkPackageTaskWatch:
-          if (this.id === notification.data.taskId) {
-            this.model.watching = notification.data.watching;
-          }
-          break;
-        case ActivityType.WorkPackageTaskVote:
-          if (this.id === notification.data.taskId) {
-            const found = this.model.votes.find(i => i.id === notification.data.id);
-            if (found) {
-              Object.assign(found, notification.data);
-            } else {
-              this.model.votes.push(notification.data);
+            break;
+          case ActivityType.WorkPackageTaskMemberAdd:
+            if (travel.id === notification.data.taskId) {
+              const already = travel.members.find(
+                i => i.recordId === notification.data.recordId,
+              );
+              if (!already) {
+                travel.members.push(notification.data);
+              }
             }
-            this.model.upVotes = this.model.votes.filter(m => m.vote).length;
-            this.model.downVotes = this.model.votes.filter(m => !m.vote).length;
-          }
-          break;
-        case ActivityType.WorkPackageTaskArchive:
-          if (this.id === notification.data.id) {
-            this.model.archivedAt = notification.data.archivedAt;
-          }
-          break;
-        case ActivityType.WorkPackageTaskTime:
-          if (this.id === notification.data.taskId) {
-            const found = this.model.timeSpents.find(
-              t => t.id === notification.data.id,
-            );
-            if (!found) {
-              this.model.timeSpents.unshift(notification.data);
-            } else {
-              found.end = notification.data.end;
+            break;
+          case ActivityType.WorkPackageTaskMemberRemove:
+            if (travel.id === notification.data.taskId) {
+              travel.members = travel.members.filter(
+                i => i.recordId !== notification.data.recordId,
+              );
             }
-          }
-          break;
-      }
+            break;
+          case ActivityType.WorkPackageTaskAttachmentAdd:
+            if (travel.id === notification.data.taskId) {
+              travel.attachments.unshift(notification.data);
+            }
+            break;
+          case ActivityType.WorkPackageTaskAttachmentRemove:
+            if (travel.id === notification.data.taskId) {
+              travel.attachments = travel.attachments.filter(
+                a => a.id !== notification.data.id,
+              );
+            }
+            break;
+          case ActivityType.WorkPackageTaskAttachmentRename:
+            if (travel.id === notification.data.taskId) {
+              const found = travel.attachments.find(
+                a => a.id === notification.data.id,
+              );
+              if (found) {
+                Object.assign(found, notification.data);
+              }
+            }
+            break;
+          case ActivityType.WorkPackageTaskAttachmentCover:
+            if (travel.id === notification.data.taskId) {
+              const found = travel.attachments.find(
+                a => a.id === notification.data.id,
+              );
+              if (found) {
+                found.isCover = notification.data.isCover;
+                travel.coverId = notification.data.isCover
+                  ? notification.data.id
+                  : '';
+                this.bg = this.getBackgroundUrl();
+              }
+            }
+            break;
+          case ActivityType.WorkPackageTaskWatch:
+            if (travel.id === notification.data.taskId) {
+              travel.watching = notification.data.watching;
+            }
+            break;
+          case ActivityType.WorkPackageTaskVote:
+            if (travel.id === notification.data.taskId) {
+              const found = travel.votes.find(i => i.id === notification.data.id);
+              if (found) {
+                Object.assign(found, notification.data);
+              } else {
+                travel.votes.push(notification.data);
+              }
+              travel.upVotes = travel.votes.filter(m => m.vote).length;
+              travel.downVotes = travel.votes.filter(m => !m.vote).length;
+            }
+            break;
+          case ActivityType.WorkPackageTaskArchive:
+            if (travel.id === notification.data.id) {
+              travel.archivedAt = notification.data.archivedAt;
+            }
+            break;
+          case ActivityType.WorkPackageTaskTime:
+            if (travel.id === notification.data.taskId) {
+              const found = travel.timeSpents.find(
+                t => t.id === notification.data.id,
+              );
+              if (!found) {
+                travel.timeSpents.unshift(notification.data);
+              } else {
+                found.end = notification.data.end;
+              }
+            }
+            break;
+        }
+      });
     });
   }
 
@@ -783,6 +786,7 @@ export class TaskModalComponent
   }
 
   async saveEstimated() {
+    if (!this.tempEstimatedTime) { return; }
     this.savingEstimated = true;
     const op = await this.taskService.changeEstimated(this.model.id, {
       duration: this.tempEstimatedTime,

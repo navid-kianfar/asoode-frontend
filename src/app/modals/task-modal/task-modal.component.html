@@ -767,7 +767,7 @@
                       </mat-menu>
                     </ng-container>
                   </div>
-                  <div class="box-content" *ngIf="model.estimatedTime">
+                  <div class="box-content" *ngIf="model.beginAt || model.endAt || model.dueAt">
                     <h4 *ngIf="model.dueAt">
                       {{ 'DUE_AT' | translate}}&nbsp;
                       {{ model.dueAt | culturedDate:true }}
