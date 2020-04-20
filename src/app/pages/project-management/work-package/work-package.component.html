@@ -442,6 +442,7 @@
       <div class="wrapper">
         <app-member-info [email]="member.identifier"></app-member-info>
         <app-access-list
+          (click)="$event.preventDefault(); $event.stopPropagation()"
           *ngIf="member.access !== AccessType.Owner"
           (accessChange)="changePendingPermission(member, $event)"
           [disabled]="

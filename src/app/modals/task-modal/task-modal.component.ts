@@ -187,7 +187,6 @@ export class TaskModalComponent
 
   bind() {
     this.socket.on('push-notification', (notification: any) => {
-      console.log([this.model, ...this.model.subTasks]);
       [this.model, ...this.model.subTasks].forEach(travel => {
         switch (notification.type) {
           case ActivityType.WorkPackageTaskAdd:
