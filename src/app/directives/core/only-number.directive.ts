@@ -16,14 +16,16 @@ export class OnlyNumberDirective {
     }
   }
 
-  @Input() appOnlyNumber: { decimals?: boolean };
+  @Input() appOnlyNumber: boolean;
+  @Input() appDecimalNumber: boolean;
 
   @HostListener('keydown', ['$event'])
   onKeyDown(e: KeyboardEvent): boolean {
+    if (!this.appOnlyNumber) { return true; }
     return e.keyCode === 8 ||
       e.keyCode === 37 ||
       e.keyCode === 39 ||
-      (this.appOnlyNumber && this.appOnlyNumber.decimals && e.key === '.')
+      (this.appDecimalNumber && e.key === '.')
       ? true
       : new RegExp('^\\d+$').test(e.key);
   }
