@@ -326,7 +326,7 @@ export class TaskModalComponent
             break;
           case ActivityType.WorkPackageTaskTime:
             if (travel.id === notification.data.taskId) {
-              const found = travel.timeSpents.find(
+              const found = (travel.timeSpents || []).find(
                 t => t.id === notification.data.id,
               );
               if (!found) {

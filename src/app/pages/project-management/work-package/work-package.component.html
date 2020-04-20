@@ -257,8 +257,8 @@
           <div class="title">{{ 'RECEIVE_NOTIFICATION' | translate }}</div>
           <div class="cnt">
             <mat-radio-group [disabled]="settingNotificationWaiting"
-                             (ngModelChange)="updateSettingNotification($event)"
-                             [ngModel]="workPackage.userSetting.receiveNotification">
+                             (change)="updateSettingNotification()"
+                             [(ngModel)]="workPackage.userSetting.receiveNotification">
               <mat-radio-button color="primary" [value]="ReceiveNotificationType.ReceiveAll">{{
                 'RECEIVE_ALL_NOTIFICATION' | translate
               }}</mat-radio-button>

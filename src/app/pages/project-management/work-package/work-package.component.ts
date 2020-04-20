@@ -75,6 +75,7 @@ export class WorkPackageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.settingNotificationWaiting = false;
     this.toggleSetting = false;
     this.filters = {
       mine: false,
@@ -800,15 +801,18 @@ export class WorkPackageComponent implements OnInit {
       }).subscribe(() => {});
   }
 
-  async updateSettingNotification(notificationType: ReceiveNotificationType) {
-    this.workPackage.userSetting.receiveNotification = notificationType;
-    this.settingNotificationWaiting = true;
-    const op = await this.workPackageService.updateUserSetting(this.workPackage.id, {notificationType});
-    this.settingNotificationWaiting = false;
-    if (op.status !== OperationResultStatus.Success) {
-      // TODO: handle error
-      return;
-    }
+  updateSettingNotification() {
+    setTimeout(async () => {
+      this.settingNotificationWaiting = true;
+      const op = await this.workPackageService.updateUserSetting(this.workPackage.id, {
+        notificationType: this.workPackage.userSetting.receiveNotification
+      });
+      this.settingNotificationWaiting = false;
+      if (op.status !== OperationResultStatus.Success) {
+        // TODO: handle error
+        return;
+      }
+    }, 500);
   }
 
   async updateSettingShowTotal(showTotal: boolean) {
