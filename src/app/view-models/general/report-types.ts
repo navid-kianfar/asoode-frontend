@@ -9,7 +9,11 @@ export interface OverallViewModel {
   total: number;
   done: number;
   blocked: number;
+  inProgress: number;
 }
 export interface DayReportViewModel extends OverallViewModel {
   date: Date;
+}
+export interface RecentActivityLog {
+
 }

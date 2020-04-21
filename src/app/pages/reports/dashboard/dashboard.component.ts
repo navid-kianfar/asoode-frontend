@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   data: DashboardViewModel;
   begin: Date;
   end: Date;
+  selectedActivityGroup: string;
 
   constructor(
     readonly groupService: GroupService,
@@ -28,6 +29,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.switchActivities(0);
     this.filter = ProjectFilter.All;
     this.fetch();
   }
@@ -48,5 +50,13 @@ export class DashboardComponent implements OnInit {
     }
     this.data = op.data;
     this.waiting = false;
+  }
+
+  switchActivities(index: number) {
+    if (this.groupService.groups[index]) {
+      this.selectedActivityGroup = this.groupService.groups[index].id;
+      return;
+    }
+    this.selectedActivityGroup = '';
   }
 }

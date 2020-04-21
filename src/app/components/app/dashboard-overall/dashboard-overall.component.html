@@ -34,8 +34,8 @@
     </div>
     <div class="circle-3">
       <round-progress
-        [current]="model.blocked"
-        [max]="model.total"
+        [current]="model.inProgress"
+        [max]="model.total - model.done"
         [color]="'#ee6285'"
         [background]="'#e6e6e6'"
         [stroke]="5"
@@ -62,8 +62,8 @@
     </div>
     <div class="box box-3">
       <div class="label"></div>
-      <div class="number">{{ model.blocked }}</div>
-      <div class="title">{{ 'BLOCKED_CARDS' | translate }}</div>
+      <div class="number">{{ model.inProgress }}</div>
+      <div class="title">{{ 'IN_PROGRESS_CARDS' | translate }}</div>
     </div>
   </div>
 </div>

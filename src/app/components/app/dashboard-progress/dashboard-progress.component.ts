@@ -26,6 +26,7 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
   timer: number;
   hidden: any;
 
+
   constructor(
     private element: ElementRef,
     private readonly culturedDateService: CulturedDateService,
@@ -116,5 +117,11 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
     );
   }
 
+  formatY(val) {
+    if (val * 10 % 10) {
+      return '';
+    }
+    return Math.floor(val);
+  }
   ngAfterViewInit(): void {}
 }

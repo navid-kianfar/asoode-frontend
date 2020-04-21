@@ -229,24 +229,9 @@ export class WorkPackageComponent implements OnInit {
           }
           break;
 
-        case ActivityType.WorkPackageTaskAdd:
-          if (this.workPackage.id === notification.data.packageId) {
-            if (notification.data.parentId) {
-              find1 = this.findTask(notification.data.parentId);
-              if (find1) {
-                find1.subTasksCount++;
-              }
-            } else {
-              const found = this.workPackage.lists.find(
-                l => l.id === notification.data.listId,
-              );
-              if (found) {
-                found.tasks = found.tasks || [];
-                found.tasks.unshift(notification.data);
-              }
-            }
-          }
-          break;
+        case ActivityType.WorkPackageTaskDone:
+        case ActivityType.WorkPackageTaskBlocked:
+        case ActivityType.WorkPackageTaskUnBlock:
         case ActivityType.WorkPackageTaskEdit:
           if (this.workPackage.id === notification.data.packageId) {
             if (notification.data.parentId) {
@@ -284,6 +269,24 @@ export class WorkPackageComponent implements OnInit {
               task.geoLocation = notification.data.geoLocation;
               task.hasDescription =
                 task.description && task.description.length > 0;
+            }
+          }
+          break;
+        case ActivityType.WorkPackageTaskAdd:
+          if (this.workPackage.id === notification.data.packageId) {
+            if (notification.data.parentId) {
+              find1 = this.findTask(notification.data.parentId);
+              if (find1) {
+                find1.subTasksCount++;
+              }
+            } else {
+              const found = this.workPackage.lists.find(
+                l => l.id === notification.data.listId,
+              );
+              if (found) {
+                found.tasks = found.tasks || [];
+                found.tasks.unshift(notification.data);
+              }
             }
           }
           break;

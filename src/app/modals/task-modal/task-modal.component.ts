@@ -189,19 +189,9 @@ export class TaskModalComponent
     this.socket.on('push-notification', (notification: any) => {
       [this.model, ...this.model.subTasks].forEach(travel => {
         switch (notification.type) {
-          case ActivityType.WorkPackageTaskAdd:
-            if (
-              this.workPackage.id === notification.data.packageId &&
-              notification.data.parentId === travel.id
-            ) {
-              const found = travel.subTasks.find(
-                l => l.id === notification.data.id,
-              );
-              if (!found) {
-                travel.subTasks.unshift(notification.data);
-              }
-            }
-            break;
+          case ActivityType.WorkPackageTaskDone:
+          case ActivityType.WorkPackageTaskBlocked:
+          case ActivityType.WorkPackageTaskUnBlock:
           case ActivityType.WorkPackageTaskEdit:
             if (travel.id === notification.data.id) {
               travel.beginReminder = notification.data.beginReminder;
@@ -225,6 +215,19 @@ export class TaskModalComponent
               travel.geoLocation = notification.data.geoLocation;
               this.tempEstimatedTime = travel.estimatedTime;
               this.postProcess();
+            }
+            break;
+          case ActivityType.WorkPackageTaskAdd:
+            if (
+              this.workPackage.id === notification.data.packageId &&
+              notification.data.parentId === travel.id
+            ) {
+              const found = travel.subTasks.find(
+                l => l.id === notification.data.id,
+              );
+              if (!found) {
+                travel.subTasks.unshift(notification.data);
+              }
             }
             break;
           case ActivityType.WorkPackageTaskComment:
@@ -350,6 +353,11 @@ export class TaskModalComponent
     }
     this.waiting = false;
     this.model = op.data;
+    if (!this.project) {
+      this.project = this.projectService.projects.find(p => p.id === this.model.projectId);
+      if (!this.project) { return this.close(); }
+      this.workPackage = this.project.workPackages.find(w => w.id === this.model.packageId);
+    }
     this.permission = this.workPackageService.getPermission(
       op.data.projectId,
       op.data.packageId,

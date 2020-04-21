@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="labels">
-    <ng-container *ngFor="let label of workPackage.labels">
+    <ng-container *ngFor="let label of workPackage?.labels">
       <div
         class="label"
         *ngIf="isLabelSelected(label)"

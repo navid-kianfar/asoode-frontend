@@ -155,6 +155,8 @@ export enum ActivityType {
   WorkPackageTaskTime = 619,
   WorkPackageTaskVote = 620,
   WorkPackageTaskVoteReset = 621,
+  WorkPackageTaskUnBlock = 622,
+  WorkPackageTaskBlocked = 623,
 
   WorkPackageObjectiveAdd = 700,
   WorkPackageObjectiveEdit = 701,
