@@ -174,7 +174,7 @@ export class IdentityService {
 
   async resendVerification(id): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      '/account/resend/verification/' + id
+      '/account/resend/verification/' + id,
     );
   }
 }

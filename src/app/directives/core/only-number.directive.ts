@@ -21,7 +21,9 @@ export class OnlyNumberDirective {
 
   @HostListener('keydown', ['$event'])
   onKeyDown(e: KeyboardEvent): boolean {
-    if (!this.appOnlyNumber) { return true; }
+    if (!this.appOnlyNumber) {
+      return true;
+    }
     return e.keyCode === 8 ||
       e.keyCode === 37 ||
       e.keyCode === 39 ||

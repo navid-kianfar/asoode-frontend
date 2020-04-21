@@ -14,6 +14,4 @@ export interface OverallViewModel {
 export interface DayReportViewModel extends OverallViewModel {
   date: Date;
 }
-export interface RecentActivityLog {
-
-}
+export interface RecentActivityLog {}

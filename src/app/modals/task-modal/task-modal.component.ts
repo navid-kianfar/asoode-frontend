@@ -35,8 +35,8 @@ import {
 } from '../../view-models/general/map-types';
 import { NumberHelpers } from 'src/app/helpers/number.helpers';
 import { TimeViewModel } from '../../view-models/core/general-types';
-import {CulturedDateService} from '../../services/core/cultured-date.service';
-import {_MatMenu, MatMenu} from '@angular/material';
+import { CulturedDateService } from '../../services/core/cultured-date.service';
+import { _MatMenu, MatMenu } from '@angular/material';
 
 @Component({
   selector: 'app-task-modal',
@@ -312,7 +312,9 @@ export class TaskModalComponent
             break;
           case ActivityType.WorkPackageTaskVote:
             if (travel.id === notification.data.taskId) {
-              const found = travel.votes.find(i => i.id === notification.data.id);
+              const found = travel.votes.find(
+                i => i.id === notification.data.id,
+              );
               if (found) {
                 Object.assign(found, notification.data);
               } else {
@@ -354,9 +356,15 @@ export class TaskModalComponent
     this.waiting = false;
     this.model = op.data;
     if (!this.project) {
-      this.project = this.projectService.projects.find(p => p.id === this.model.projectId);
-      if (!this.project) { return this.close(); }
-      this.workPackage = this.project.workPackages.find(w => w.id === this.model.packageId);
+      this.project = this.projectService.projects.find(
+        p => p.id === this.model.projectId,
+      );
+      if (!this.project) {
+        return this.close();
+      }
+      this.workPackage = this.project.workPackages.find(
+        w => w.id === this.model.packageId,
+      );
     }
     this.permission = this.workPackageService.getPermission(
       op.data.projectId,
@@ -421,14 +429,18 @@ export class TaskModalComponent
     this.permission = permission ? permission.access : AccessType.Visitor;
     this.model.comments.forEach(c => {
       const found = this.project.members.find(m => m.recordId === c.userId);
-      if (found) { c.member = found.member; }
+      if (found) {
+        c.member = found.member;
+      }
     });
     this.model.subTasksDone = this.model.subTasks.filter(i => i.doneAt).length;
     this.bg = this.getBackgroundUrl();
     this.tempEstimatedTime = this.model.estimatedTime;
 
-    this.tempDateMode = (this.model.dueAt || (!this.model.beginAt && !this.model.endAt))
-      ? DateMode.Due : DateMode.Range;
+    this.tempDateMode =
+      this.model.dueAt || (!this.model.beginAt && !this.model.endAt)
+        ? DateMode.Due
+        : DateMode.Range;
     this.tempBeginAt = this.model.beginAt;
     this.tempEndAt = this.model.endAt;
     this.tempDueAt = this.model.dueAt;
@@ -793,7 +805,9 @@ export class TaskModalComponent
   }
 
   async saveEstimated() {
-    if (!this.tempEstimatedTime) { return; }
+    if (!this.tempEstimatedTime) {
+      return;
+    }
     this.savingEstimated = true;
     const op = await this.taskService.changeEstimated(this.model.id, {
       duration: this.tempEstimatedTime,
@@ -836,18 +850,22 @@ export class TaskModalComponent
     let payload: any;
     const converter = this.culturedDateService.Converter();
     if (this.tempDateMode === DateMode.Due) {
-      if (!this.tempDueAt) { return; }
+      if (!this.tempDueAt) {
+        return;
+      }
       const parsed = converter.FromDateTime(new Date(this.tempDueAt));
       const date = converter.ToDateTime({
         Year: parsed.Year,
         Month: parsed.Month,
         Day: parsed.Day,
         Hours: this.tempHour,
-        Minutes: this.tempMinute
+        Minutes: this.tempMinute,
       });
       payload = { dueAt: date };
     } else {
-      if (!this.tempBeginAt || !this.tempEndAt) { return; }
+      if (!this.tempBeginAt || !this.tempEndAt) {
+        return;
+      }
       payload = { beginAt: this.tempBeginAt, endAt: this.tempEndAt };
     }
     this.savingDate = true;
@@ -862,18 +880,20 @@ export class TaskModalComponent
 
   async removeDate(timeRangeMenu: MatMenu) {
     this.deletingDate = true;
-    const op = await this.taskService.setDate(this.model.id, { });
+    const op = await this.taskService.setDate(this.model.id, {});
     this.deletingDate = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
       return;
     }
-    if (timeRangeMenu) { timeRangeMenu.closed.emit(); }
+    if (timeRangeMenu) {
+      timeRangeMenu.closed.emit();
+    }
   }
 }
 export enum DateMode {
   Due = 1,
-  Range = 2
+  Range = 2,
 }
 export enum ViewMode {
   Detail = 1,

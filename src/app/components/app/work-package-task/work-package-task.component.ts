@@ -11,7 +11,7 @@ import {
 import { IdentityService } from '../../../services/auth/identity.service';
 import { WorkPackageTaskVoteNecessity } from '../../../library/app/enums';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
-import {ProjectService} from '../../../services/projects/project.service';
+import { ProjectService } from '../../../services/projects/project.service';
 
 @Component({
   selector: 'app-work-package-task',
@@ -29,9 +29,15 @@ export class WorkPackageTaskComponent implements OnInit {
 
   ngOnInit() {
     if (!this.project) {
-      this.project = this.projectService.projects.find(p => p.id === this.model.projectId);
-      if (!this.project) { return; }
-      this.workPackage = this.project.workPackages.find(w => w.id === this.model.packageId);
+      this.project = this.projectService.projects.find(
+        p => p.id === this.model.projectId,
+      );
+      if (!this.project) {
+        return;
+      }
+      this.workPackage = this.project.workPackages.find(
+        w => w.id === this.model.packageId,
+      );
     }
   }
 

@@ -5,6 +5,10 @@
     <h5>{{ 'NO_ACTIVITY_LOG' | translate }}</h5>
   </div>
   <div *ngIf="logs.length" class="task-wrapper">
-    <app-work-package-task (click)="openTask(log)" [model]="log" *ngFor="let log of logs"></app-work-package-task>
+    <app-work-package-task
+      (click)="openTask(log)"
+      [model]="log"
+      *ngFor="let log of logs"
+    ></app-work-package-task>
   </div>
 </div>

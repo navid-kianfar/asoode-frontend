@@ -20,9 +20,9 @@
         <span>
           {{ list.title | truncate: 30 }}
           <ng-container *ngIf="model.userSetting.showTotalCards">
-            &nbsp;({{list.tasks.length}})
-          </ng-container>
-        </span>&nbsp;
+            &nbsp;({{ list.tasks.length }})
+          </ng-container> </span
+        >&nbsp;
         <i
           *ngIf="permission !== AccessType.Visitor"
           (click)="prepareNewTask(list)"
@@ -118,36 +118,40 @@
             <span>{{ 'NEW_TASK' | translate }}</span>
           </span>
         </button>
-        <button class="action-btn" (click)="prepareRenameTask(list)" mat-menu-item>
+        <button
+          class="action-btn"
+          (click)="prepareRenameTask(list)"
+          mat-menu-item
+        >
           <span class="cnt">
             <i class="icon-pencil"></i>
             <span>{{ 'RENAME' | translate }}</span>
           </span>
         </button>
-<!--        <button class="action-btn" (click)="changeSort(list)" mat-menu-item>-->
-<!--          <span class="cnt">-->
-<!--            <i class="icon-arrow-down8"></i>-->
-<!--            <span>{{ 'SORT_ORDER' | translate }}</span>-->
-<!--          </span>-->
-<!--        </button>-->
-<!--        <button class="action-btn" (click)="showChart(list)" mat-menu-item>-->
-<!--          <span class="cnt">-->
-<!--            <i class="icon-checkmark3"></i>-->
-<!--            <span>{{ 'SHOW_CHART' | translate }}</span>-->
-<!--          </span>-->
-<!--        </button>-->
-<!--        <button class="action-btn" (click)="listColor(list)" mat-menu-item>-->
-<!--          <span class="cnt">-->
-<!--            <i class="icon-filters x2"></i>-->
-<!--            <span>{{ 'LIST_COLOR' | translate }}</span>-->
-<!--          </span>-->
-<!--        </button>-->
-<!--        <button class="action-btn" (click)="listPermission(list)" mat-menu-item>-->
-<!--          <span class="cnt">-->
-<!--            <i class="icon-stop x2"></i>-->
-<!--            <span>{{ 'ACCESS_LEVEL' | translate }}</span>-->
-<!--          </span>-->
-<!--        </button>-->
+        <!--        <button class="action-btn" (click)="changeSort(list)" mat-menu-item>-->
+        <!--          <span class="cnt">-->
+        <!--            <i class="icon-arrow-down8"></i>-->
+        <!--            <span>{{ 'SORT_ORDER' | translate }}</span>-->
+        <!--          </span>-->
+        <!--        </button>-->
+        <!--        <button class="action-btn" (click)="showChart(list)" mat-menu-item>-->
+        <!--          <span class="cnt">-->
+        <!--            <i class="icon-checkmark3"></i>-->
+        <!--            <span>{{ 'SHOW_CHART' | translate }}</span>-->
+        <!--          </span>-->
+        <!--        </button>-->
+        <!--        <button class="action-btn" (click)="listColor(list)" mat-menu-item>-->
+        <!--          <span class="cnt">-->
+        <!--            <i class="icon-filters x2"></i>-->
+        <!--            <span>{{ 'LIST_COLOR' | translate }}</span>-->
+        <!--          </span>-->
+        <!--        </button>-->
+        <!--        <button class="action-btn" (click)="listPermission(list)" mat-menu-item>-->
+        <!--          <span class="cnt">-->
+        <!--            <i class="icon-stop x2"></i>-->
+        <!--            <span>{{ 'ACCESS_LEVEL' | translate }}</span>-->
+        <!--          </span>-->
+        <!--        </button>-->
         <button class="action-btn" (click)="archiveList(list)" mat-menu-item>
           <span class="cnt">
             <i class="icon-archive x2"></i>

@@ -1,10 +1,10 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NumberHelpers} from '../../../helpers/number.helpers';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { NumberHelpers } from '../../../helpers/number.helpers';
 
 @Component({
   selector: 'app-time-picker',
   templateUrl: './time-picker.component.html',
-  styleUrls: ['./time-picker.component.scss']
+  styleUrls: ['./time-picker.component.scss'],
 })
 export class TimePickerComponent implements OnInit {
   @Input() hour: number;
@@ -27,7 +27,5 @@ export class TimePickerComponent implements OnInit {
     }
   }
 
-  update() {
-
-  }
+  update() {}
 }

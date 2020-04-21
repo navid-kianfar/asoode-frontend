@@ -2,13 +2,15 @@ import { BaseViewModel } from '../core/general-types';
 import {
   AccessType,
   ActivityType,
-  BoardTemplate, ReceiveNotificationType,
+  BoardTemplate,
+  ReceiveNotificationType,
   WorkPackageCommentPermission,
   WorkPackageObjectiveType,
   WorkPackageTaskAttachmentType,
   WorkPackageTaskObjectiveValue,
   WorkPackageTaskReminderType,
-  WorkPackageTaskState, WorkPackageTaskVisibility,
+  WorkPackageTaskState,
+  WorkPackageTaskVisibility,
   WorkPackageTaskVoteNecessity,
 } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';

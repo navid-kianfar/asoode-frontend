@@ -41,7 +41,10 @@
     <div class="section activities-container">
       <div class="header">
         <h3>{{ 'LATEST_ACTIVITIES' | translate }}</h3>
-        <mat-tab-group animationDuration="0ms" (selectedIndexChange)="switchActivities($event)">
+        <mat-tab-group
+          animationDuration="0ms"
+          (selectedIndexChange)="switchActivities($event)"
+        >
           <mat-tab
             *ngFor="let group of groupService.groups"
             [label]="group.title"
@@ -54,7 +57,9 @@
         </mat-tab-group>
       </div>
       <div class="content">
-        <app-dashboard-activity [groupId]="selectedActivityGroup"></app-dashboard-activity>
+        <app-dashboard-activity
+          [groupId]="selectedActivityGroup"
+        ></app-dashboard-activity>
       </div>
     </div>
     <div class="section projects-container">

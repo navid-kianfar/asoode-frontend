@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ValidationService} from '../../../services/core/validation.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {Router} from '@angular/router';
-import {AppInitializerProvider} from '../../../services/general/app.initializer';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ValidationService } from '../../../services/core/validation.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { Router } from '@angular/router';
+import { AppInitializerProvider } from '../../../services/general/app.initializer';
 
 @Component({
   selector: 'app-confirm-account',

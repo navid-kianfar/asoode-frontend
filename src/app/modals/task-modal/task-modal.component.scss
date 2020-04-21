@@ -912,7 +912,8 @@
   .choice {
     .due-wrapper {
       display: flex;
-      .date-wrapper, .time-wrapper {
+      .date-wrapper,
+      .time-wrapper {
         display: flex;
         flex-direction: column;
         margin-inline-end: 30px;

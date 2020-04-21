@@ -1,9 +1,15 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {ReportService} from '../../../services/general/report.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
-import {ModalService} from '../../../services/core/modal.service';
-import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { ReportService } from '../../../services/general/report.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { WorkPackageTaskViewModel } from '../../../view-models/projects/project-types';
+import { ModalService } from '../../../services/core/modal.service';
+import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
 
 @Component({
   selector: 'app-dashboard-activity',
@@ -42,8 +48,10 @@ export class DashboardActivityComponent implements OnInit, OnChanges {
   }
 
   openTask(log: WorkPackageTaskViewModel) {
-    this.modalService.show(TaskModalComponent, {
-      id: log.id
-    }).subscribe(() => {});
+    this.modalService
+      .show(TaskModalComponent, {
+        id: log.id,
+      })
+      .subscribe(() => {});
   }
 }

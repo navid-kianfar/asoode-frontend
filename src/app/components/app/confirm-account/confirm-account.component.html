@@ -28,7 +28,11 @@
   </div>
 
   <div class="send-again">
-    <button (click)="sendAgain()" [disabled]="sendingAgain || remaining > 0" mat-button>
+    <button
+      (click)="sendAgain()"
+      [disabled]="sendingAgain || remaining > 0"
+      mat-button
+    >
       <i *ngIf="sendingAgain" class="icon-spinner2 icon-spin"></i>
       {{ 'SEND_AGAIN' | translate }}
     </button>

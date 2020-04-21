@@ -46,7 +46,8 @@
       model.targetCounts ||
       model.targetCounts ||
       model.voteNecessity !== WorkPackageTaskVoteNecessity.None ||
-        model.upVotes || model.downVotes
+      model.upVotes ||
+      model.downVotes
     "
     class="interactions"
   >
@@ -54,7 +55,8 @@
       <div
         *ngIf="
           model.voteNecessity !== WorkPackageTaskVoteNecessity.None ||
-          model.upVotes || model.downVotes
+          model.upVotes ||
+          model.downVotes
         "
         class="vote"
       >

@@ -1,8 +1,17 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
-import {ICulture} from '../../../view-models/core/date-types';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {PopperContent} from 'ngx-popper';
-import {NumberHelpers} from '../../../helpers/number.helpers';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import { ICulture } from '../../../view-models/core/date-types';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { PopperContent } from 'ngx-popper';
+import { NumberHelpers } from '../../../helpers/number.helpers';
 
 @Component({
   selector: 'app-date-picker',
@@ -33,8 +42,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
   @Input() tillToday: boolean;
   @Output() modelChange = new EventEmitter<Date>();
 
-  constructor(readonly culturedDateService: CulturedDateService) {
-  }
+  constructor(readonly culturedDateService: CulturedDateService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.model && !changes.model.firstChange) {
@@ -47,8 +55,13 @@ export class DatePickerComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.formattedDate = '';
     if (this.model) {
-      const date = this.culturedDateService.Converter().FromDateTime(new Date(this.model));
-      this.formattedDate = `${date.Year}/${NumberHelpers.pad(date.Month, 2)}/${NumberHelpers.pad(date.Day, 2)}`;
+      const date = this.culturedDateService
+        .Converter()
+        .FromDateTime(new Date(this.model));
+      this.formattedDate = `${date.Year}/${NumberHelpers.pad(
+        date.Month,
+        2,
+      )}/${NumberHelpers.pad(date.Day, 2)}`;
     }
     this.dateView = true;
     this.calculateFromTo();

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageMemberViewModel,
@@ -6,15 +6,15 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
-import {PopperContent} from 'ngx-popper';
-import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
-import {ModalService} from '../../../services/core/modal.service';
-import {CultureService} from '../../../services/core/culture.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
+import { PopperContent } from 'ngx-popper';
+import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
+import { ModalService } from '../../../services/core/modal.service';
+import { CultureService } from '../../../services/core/culture.service';
 import {
   AccessType,
   ActivityType,
@@ -23,15 +23,15 @@ import {
   WorkPackageTaskState,
   WorkPackageTaskVisibility,
 } from '../../../library/app/enums';
-import {PromptComponent} from 'src/app/modals/prompt/prompt.component';
-import {FormService} from 'src/app/services/core/form.service';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {OperationResult} from '../../../library/core/operation-result';
-import {GroupService} from '../../../services/groups/group.service';
-import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
-import {Socket} from 'ngx-socket-io';
-import {moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
+import { FormService } from 'src/app/services/core/form.service';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { OperationResult } from '../../../library/core/operation-result';
+import { GroupService } from '../../../services/groups/group.service';
+import { PendingInvitationViewModel } from '../../../view-models/groups/group-types';
+import { Socket } from 'ngx-socket-io';
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-work-package',
@@ -219,13 +219,19 @@ export class WorkPackageComponent implements OnInit {
           break;
         case ActivityType.WorkPackageObjectiveEdit:
           if (this.workPackage.id === notification.data.packageId) {
-            find1 = this.workPackage.objectives.find(o => o.id === notification.data.id);
-            if (find1) { Object.assign(find1, notification.data); }
+            find1 = this.workPackage.objectives.find(
+              o => o.id === notification.data.id,
+            );
+            if (find1) {
+              Object.assign(find1, notification.data);
+            }
           }
           break;
         case ActivityType.WorkPackageObjectiveRemove:
           if (this.workPackage.id === notification.data.packageId) {
-            this.workPackage.objectives = this.workPackage.objectives.filter(o => o.id !== notification.data.id);
+            this.workPackage.objectives = this.workPackage.objectives.filter(
+              o => o.id !== notification.data.id,
+            );
           }
           break;
 
@@ -240,7 +246,9 @@ export class WorkPackageComponent implements OnInit {
                 if (notification.data.state !== WorkPackageTaskState.Done) {
                   parent.subTasksDone--;
                 }
-              } else if (notification.data.state === WorkPackageTaskState.Done) {
+              } else if (
+                notification.data.state === WorkPackageTaskState.Done
+              ) {
                 parent.subTasksDone++;
               }
               return;
@@ -400,7 +408,9 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageTaskAttachmentCover:
           find1 = this.findTask(notification.data.taskId);
           if (find1) {
-            find1.coverUrl = notification.data.isCover ? notification.data.path : '';
+            find1.coverUrl = notification.data.isCover
+              ? notification.data.path
+              : '';
           }
           break;
         case ActivityType.WorkPackageTaskWatch:
@@ -413,8 +423,8 @@ export class WorkPackageComponent implements OnInit {
           find1 = this.findTask(notification.data.taskId);
           if (find1) {
             if (!notification.data.updatedAt) {
-              find1.upVotes += (notification.data.vote ? 1 : 0);
-              find1.downVotes += (notification.data.vote ? 0 : 1);
+              find1.upVotes += notification.data.vote ? 1 : 0;
+              find1.downVotes += notification.data.vote ? 0 : 1;
             } else {
               if (notification.data.vote) {
                 find1.downVotes--;
@@ -739,21 +749,19 @@ export class WorkPackageComponent implements OnInit {
   async leave() {
     const heading = StringHelpers.format(
       this.translateService.fromKey(
-        this.project.complex ?
-          'LEAVE_WORK_PACKAGE_CONFIRM_HEADING' :
-          'LEAVE_PROJECT_CONFIRM_HEADING'
+        this.project.complex
+          ? 'LEAVE_WORK_PACKAGE_CONFIRM_HEADING'
+          : 'LEAVE_PROJECT_CONFIRM_HEADING',
       ),
       [this.workPackage.title],
     );
 
     this.modalService
       .confirm({
-        title: this.project.complex ?
-          'LEAVE_WORK_PACKAGE' :
-          'LEAVE_PROJECT',
-        message: this.project.complex ?
-          'LEAVE_WORK_PACKAGE_CONFIRM' :
-          'LEAVE_PROJECT_CONFIRM',
+        title: this.project.complex ? 'LEAVE_WORK_PACKAGE' : 'LEAVE_PROJECT',
+        message: this.project.complex
+          ? 'LEAVE_WORK_PACKAGE_CONFIRM'
+          : 'LEAVE_PROJECT_CONFIRM',
         heading,
         actionLabel: 'LEAVE',
         cancelLabel: 'CANCEL',
@@ -767,27 +775,28 @@ export class WorkPackageComponent implements OnInit {
           }
           return await this.router.navigateByUrl('/dashboard');
         },
-      }).subscribe(() => {});
+      })
+      .subscribe(() => {});
   }
 
   async archive() {
     const heading = StringHelpers.format(
       this.translateService.fromKey(
-        this.project.complex ?
-          'ARCHIVE_WORK_PACKAGE_CONFIRM_HEADING' :
-          'ARCHIVE_PROJECT_CONFIRM_HEADING'
+        this.project.complex
+          ? 'ARCHIVE_WORK_PACKAGE_CONFIRM_HEADING'
+          : 'ARCHIVE_PROJECT_CONFIRM_HEADING',
       ),
       [this.workPackage.title],
     );
 
     this.modalService
       .confirm({
-        title: this.project.complex ?
-          'ARCHIVE_WORK_PACKAGE' :
-          'ARCHIVE_PROJECT',
-        message: this.project.complex ?
-          'ARCHIVE_WORK_PACKAGE_CONFIRM' :
-          'ARCHIVE_PROJECT_DESCRIPTION',
+        title: this.project.complex
+          ? 'ARCHIVE_WORK_PACKAGE'
+          : 'ARCHIVE_PROJECT',
+        message: this.project.complex
+          ? 'ARCHIVE_WORK_PACKAGE_CONFIRM'
+          : 'ARCHIVE_PROJECT_DESCRIPTION',
         heading,
         actionLabel: 'ARCHIVE',
         cancelLabel: 'CANCEL',
@@ -801,15 +810,19 @@ export class WorkPackageComponent implements OnInit {
           }
           return await this.router.navigateByUrl('/dashboard');
         },
-      }).subscribe(() => {});
+      })
+      .subscribe(() => {});
   }
 
   updateSettingNotification() {
     setTimeout(async () => {
       this.settingNotificationWaiting = true;
-      const op = await this.workPackageService.updateUserSetting(this.workPackage.id, {
-        notificationType: this.workPackage.userSetting.receiveNotification
-      });
+      const op = await this.workPackageService.updateUserSetting(
+        this.workPackage.id,
+        {
+          notificationType: this.workPackage.userSetting.receiveNotification,
+        },
+      );
       this.settingNotificationWaiting = false;
       if (op.status !== OperationResultStatus.Success) {
         // TODO: handle error
@@ -821,7 +834,10 @@ export class WorkPackageComponent implements OnInit {
   async updateSettingShowTotal(showTotal: boolean) {
     this.workPackage.userSetting.showTotalCards = showTotal;
     this.settingShowTotalWaiting = true;
-    const op = await this.workPackageService.updateUserSetting(this.workPackage.id, {showTotal});
+    const op = await this.workPackageService.updateUserSetting(
+      this.workPackage.id,
+      { showTotal },
+    );
     this.settingShowTotalWaiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -832,7 +848,10 @@ export class WorkPackageComponent implements OnInit {
   async updateSettingVisibility(visibility: WorkPackageTaskVisibility) {
     this.workPackage.taskVisibility = visibility;
     this.settingVisibilityWaiting = true;
-    const op = await this.workPackageService.updateSetting(this.workPackage.id, {visibility});
+    const op = await this.workPackageService.updateSetting(
+      this.workPackage.id,
+      { visibility },
+    );
     this.settingVisibilityWaiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
