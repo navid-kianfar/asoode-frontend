@@ -410,11 +410,11 @@
 
 
 
-  "PLANS_FREE_DESCRIPTION": "",
-  "PLANS_PERSONAL_DESCRIPTION": "",
-  "PLANS_ECONOMY_DESCRIPTION": "",
-  "PLANS_COMPANY_DESCRIPTION": "",
-  "PLANS_ORGANIZATION_DESCRIPTION": "",
+  "PLANS_FREE_DESCRIPTION": "مناسب برای استفاده شخصی، و پروژه\u200Cهای کوچک",
+  "PLANS_PERSONAL_DESCRIPTION": "مناسب برای استفاده شخصی، با امکان ارتقا با توجه به نیازمندی\u200Cهای شما",
+  "PLANS_ECONOMY_DESCRIPTION": "مناسب برای پروژه\u200Cهای شخصی و شرکتی، مناسب برای تیم\u200Cهای کوچک و استارتاپ ها",
+  "PLANS_COMPANY_DESCRIPTION": "مناسب برای کمپانی\u200Cهای متوسط (تعداد پرسنل)، مدیریت پرسنل، زمان\u200Cها و هزینه ها",
+  "PLANS_ORGANIZATION_DESCRIPTION": "مناسب برای سازمان\u200Cهای بزرگ با امکان شرط سازمانی، مدیریت پرسنل، زمان\u200Cها و هزینه ها",
   "PLANS_COMPANY_TITLE": "شرکتی",
   "PLANS_ECONOMY_TITLE": "اقتصادی",
   "PLANS_FREE_TITLE": "پایه",

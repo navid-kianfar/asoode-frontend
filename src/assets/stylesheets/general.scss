@@ -51,6 +51,17 @@ body {
   background: #fff;
 }
 @font-face {
+  font-family: 'ikon-asoode';
+  src:  url('/assets/fonts/icons/asoode/ikon-asoode.eot?6klnj8');
+  src:  url('/assets/fonts/icons/asoode/ikon-asoode.eot?6klnj8#iefix') format('embedded-opentype'),
+  url('/assets/fonts/icons/asoode/ikon-asoode.ttf?6klnj8') format('truetype'),
+  url('/assets/fonts/icons/asoode/ikon-asoode.woff?6klnj8') format('woff'),
+  url('/assets/fonts/icons/asoode/ikon-asoode.svg?6klnj8#ikon-asoode') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
   font-family: 'ASOODE';
   src: url('/assets/fonts/icons/asoode/ASOODE.eot?j3anoh');
   src: url('/assets/fonts/icons/asoode/ASOODE.eot?j3anoh#iefix')
