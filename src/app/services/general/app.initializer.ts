@@ -49,7 +49,7 @@ export class AppInitializerProvider {
     promise1.then(op => {
       if (op.status === OperationResultStatus.NotFound) {
         this.identityService.logout();
-        window.location.reload();
+        window.location.href = '/';
         return;
       }
     });
