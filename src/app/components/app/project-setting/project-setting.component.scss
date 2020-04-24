@@ -98,3 +98,15 @@
     }
   }
 }
+
+@media (max-width: 550px) {
+  .project-setting {
+    .box {
+      .members {
+        .member {
+          flex-wrap: wrap;
+        }
+      }
+    }
+  }
+}

@@ -135,13 +135,29 @@
     }
     .wrapper {
       display: flex;
-      flex-grow: 1;
+      width: calc(100vw - 50px);
+      overflow-x: auto;
       min-height: 300px;
       border-top: 2px solid #ffffff;
       padding: 20px;
 
       > div {
         width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .project-detail {
+    .header {
+      flex-direction: column;
+      //.info {
+      //  padding-bottom: 0;
+      //}
+      .reports {
+        padding-top: 0;
+        padding-inline-start: 40px;
       }
     }
   }
