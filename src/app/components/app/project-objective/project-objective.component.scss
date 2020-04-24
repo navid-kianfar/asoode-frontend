@@ -18,8 +18,7 @@
 
     .list {
       display: flex;
-      min-width: 600px;
-      width: 600px;
+      min-width: 400px;
       margin-inline-end: 10px;
       padding: 0 10px;
       flex-direction: column;
@@ -171,6 +170,15 @@
             }
           }
         }
+      }
+    }
+  }
+}
+@media (min-width: 1000px) {
+  .project-objectives {
+    .inner {
+      .list {
+        min-width: 600px;
       }
     }
   }
