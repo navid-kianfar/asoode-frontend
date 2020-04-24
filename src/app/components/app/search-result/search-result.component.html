@@ -20,7 +20,7 @@
   <div *ngIf="results.tasks.length" class="box">
     <div class="title">{{ 'TASKS' | translate }}</div>
     <div class="tasks">
-      <div class="task" *ngFor="let task of results.tasks">
+      <div (click)="openTask(task)" class="task" *ngFor="let task of results.tasks">
         <div class="info">
           <div class="title">{{ task.title }}</div>
           <div class="description">{{ task.description }}</div>
@@ -51,7 +51,7 @@
   <div *ngIf="results.projects.length" class="box">
     <div class="title">{{ 'PROJECTS' | translate }}</div>
     <div class="projects">
-      <div class="project" *ngFor="let project of results.projects">
+      <div (click)="openProject(project)" class="project" *ngFor="let project of results.projects">
         <app-project-info-mini [model]="project"></app-project-info-mini>
       </div>
     </div>

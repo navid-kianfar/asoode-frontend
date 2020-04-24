@@ -13,6 +13,7 @@ import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../services/core/form.service';
 import { SortType } from 'src/app/library/app/enums';
+import {DocumentModalComponent} from '../../../modals/document-modal/document-modal.component';
 
 @Component({
   selector: 'app-files-explorer',
@@ -137,6 +138,7 @@ export class FilesExplorerComponent implements OnInit {
     this.path = this.parent[0].path;
     await this.fetch(this.path);
   }
+
   async enterFolder(folder: ExplorerFolderViewModel) {
     this.preventSimpleClick = true;
     clearTimeout(this.timer);
@@ -234,9 +236,17 @@ export class FilesExplorerComponent implements OnInit {
     this.clipBoard = null;
   }
 
-  actionDownload() {}
+  actionDownload() {
+    const file = this.data.files.find(i => i.selected);
+    this.filesService.download(file.url);
+  }
 
-  actionOpen() {}
+  actionOpen() {
+    const file = this.data.files.find(i => i.selected);
+    this.modalService.show(DocumentModalComponent, {
+      path: file.url
+    }).subscribe(() => {});
+  }
 
   prepareUpload() {
     this.filePicker.nativeElement.click();
@@ -285,6 +295,9 @@ export class FilesExplorerComponent implements OnInit {
         },
       } as PromptModalParameters)
       .subscribe(() => {});
+  }
+  actionDelete() {
+
   }
 
   clearInputFile(f) {
@@ -342,4 +355,5 @@ export class FilesExplorerComponent implements OnInit {
     this.path = s.parent || '/';
     await this.fetch(this.path);
   }
+
 }

@@ -161,6 +161,8 @@ import { CustomFieldsComponent } from './components/app/custom-fields/custom-fie
 import { TimeSpanComponent } from './components/core/time-span/time-span.component';
 import { NumberComponent } from './components/core/number/number.component';
 import { TimePickerComponent } from './components/core/time-picker/time-picker.component';
+import { DocumentModalComponent } from './modals/document-modal/document-modal.component';
+import {NgxDocViewerModule} from 'ngx-doc-viewer';
 
 @NgModule({
   declarations: [
@@ -286,8 +288,10 @@ import { TimePickerComponent } from './components/core/time-picker/time-picker.c
     TimeSpanComponent,
     NumberComponent,
     TimePickerComponent,
+    DocumentModalComponent,
   ],
   entryComponents: [
+    DocumentModalComponent,
     MapModalComponent,
     WorkPackageWizardComponent,
     ConfirmComponent,
@@ -318,7 +322,7 @@ import { TimePickerComponent } from './components/core/time-picker/time-picker.c
     DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
-      { container: 'modal-container' },
+      {container: 'modal-container'},
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -328,7 +332,7 @@ import { TimePickerComponent } from './components/core/time-picker/time-picker.c
         bodyClass: 'modal-open',
       },
     ),
-    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    NgxPopperModule.forRoot({placement: 'bottom'}),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,
@@ -343,6 +347,7 @@ import { TimePickerComponent } from './components/core/time-picker/time-picker.c
     TrendModule,
     DragDropModule,
     ColorPickerModule,
+    NgxDocViewerModule,
   ],
   providers: [
     // {

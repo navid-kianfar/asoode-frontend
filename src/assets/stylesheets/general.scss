@@ -339,12 +339,12 @@ input:focus {
   box-shadow: none !important;
 }
 
-button[disabled] {
-  [class^='icon-'],
-  [class*=' icon-'] {
-    color: #6b3d8d;
-  }
-}
+//button[disabled] {
+//  [class^='icon-'],
+//  [class*=' icon-'] {
+//    color: #6b3d8d;
+//  }
+//}
 
 .mat-tab-group {
   .mat-tab-header {
@@ -532,6 +532,12 @@ body {
         margin: 50px auto;
         width: 800px;
         max-width: 98%;
+      }
+
+      &.document-modal {
+        width: 90vw;
+        height: 80vh;
+        margin: 50px auto;
       }
     }
     .modal-body {

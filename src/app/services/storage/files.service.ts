@@ -82,7 +82,7 @@ export class FilesService {
 
   download(path: string, params: StringDictionary<any> = null) {
     const form = document.createElement('form');
-    form.setAttribute('method', 'post');
+    form.setAttribute('method', 'get');
     form.setAttribute('action', path);
     form.setAttribute('target', '_blank');
     if (params) {

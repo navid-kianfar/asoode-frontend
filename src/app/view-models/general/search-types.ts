@@ -7,6 +7,7 @@ import {
 } from '../storage/files-types';
 import { TaskLabelViewModel } from '../projects/task-types';
 import { WorkPackageTaskState } from '../../library/app/enums';
+import {BaseViewModel} from '../core/general-types';
 
 export interface SearchResultViewModel {
   tasks: SearchTaskViewModel[];
@@ -19,8 +20,8 @@ export interface SearchStorageViewModel {
   files: ExplorerFileViewModel[];
   folders: ExplorerFolderViewModel[];
 }
-export interface SearchTaskViewModel {
-  status: WorkPackageTaskState;
+export interface SearchTaskViewModel extends BaseViewModel{
+  state: WorkPackageTaskState;
   title: string;
   description: string;
   archivedAt: Date;
