@@ -194,36 +194,39 @@
   }
 }
 
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 480px) {
   .af-calendar {
-    width: 225px;
-    font-size: 11px;
+    font-size: 0.8rem;
+    //width: 225px;
+    //font-size: 11px;
 
-    table {
-      thead {
-        tr {
-          th {
-            padding: 3px 0;
-          }
-        }
-      }
-
-      tbody {
-        tr {
-          td {
-            &.day {
-            }
-
-            .month,
-            .year {
-              font-size: 9px;
-              margin: 0;
-              width: 25%;
-              line-height: 51px;
-            }
-          }
-        }
-      }
-    }
+    //table {
+    //  thead {
+    //    tr {
+    //      th {
+    //        padding: 3px 0;
+    //        font-size: 0.8rem;
+    //      }
+    //    }
+    //  }
+    //
+    //  tbody {
+    //    tr {
+    //      td {
+    //        font-size: 0.8rem;
+    //        &.day {
+    //        }
+    //
+    //        .month,
+    //        .year {
+    //
+    //          margin: 0;
+    //          width: 25%;
+    //          line-height: 51px;
+    //        }
+    //      }
+    //    }
+    //  }
+    //}
   }
 }

@@ -13,7 +13,7 @@
     //width: calc(50% - 20px);
     .color {
       display: flex;
-      width: 7px;
+      min-width: 7px;
       height: 7px;
       border-radius: 7px;
       position: relative;

@@ -134,6 +134,10 @@
       }
     }
   }
+
+  ::ng-deep .mat-tab-group {
+    max-width: 100% !important;
+  }
 }
 
 .wrapper {

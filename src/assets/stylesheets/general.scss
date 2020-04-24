@@ -345,8 +345,8 @@ input:focus {
 //    color: #6b3d8d;
 //  }
 //}
-
 .mat-tab-group {
+  max-width: 100% !important;
   .mat-tab-header {
     background: #fff;
   }

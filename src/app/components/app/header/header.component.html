@@ -6,8 +6,6 @@
     </a>
   </h1>
 
-  <span class="create-spacer"></span>
-
   <button
     (click)="prepareCreate()"
     mat-flat-button
@@ -21,10 +19,14 @@
 
   <div class="action-container">
     <!--    <a class="tasks" routerLink="/tasks">{{ 'TASKS_MANAGEMENT' | translate }}</a>-->
-    <a class="tasks" href="javascript:void(0)">{{
-      'TASKS_MANAGEMENT' | translate
-    }}</a>
-    <a class="files" routerLink="/files"> {{ 'FILES' | translate }} </a>
+    <a class="tasks" href="javascript:void(0)">
+      <i class="ico ikon-calendar2"></i>
+      <span class="lbl">{{ 'TASKS_MANAGEMENT' | translate}}</span>
+    </a>
+    <a class="files" routerLink="/files">
+      <i class="ico ikon-folder6"></i>
+      <span class="lbl">{{ 'FILES' | translate }}</span>
+    </a>
     <a
       class="quick-access"
       href="javascript:void(0)"
@@ -54,9 +56,9 @@
         <i class="icon-search primary-color"></i>
       </div>
     </div>
-    <div class="search-container-tiny">
-      <i class="icon-search primary-color"></i>
-    </div>
+<!--    <div class="search-container-tiny">-->
+<!--      <i class="icon-search primary-color"></i>-->
+<!--    </div>-->
     <a class="account-info" routerLink="/account">
       {{ identityService.profile.initials }}
     </a>

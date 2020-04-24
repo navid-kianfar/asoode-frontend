@@ -67,4 +67,15 @@
   .header {
     display: block !important;
   }
+  .overall-holder {
+    width: 100% !important;
+    margin: 0 0 20px !important;
+  }
+  .events-holder {
+    width: 100% !important;
+
+    ::ng-deep .af-calendar {
+      width: 100% !important;
+    }
+  }
 }
