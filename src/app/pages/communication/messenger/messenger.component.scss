@@ -138,6 +138,7 @@
           .category {
             font-size: 0.7rem;
             color: #999999;
+            margin-inline-start: 5px;
           }
         }
         .info-container {
@@ -222,6 +223,7 @@
     overflow: auto;
   }
 }
+
 @media (max-width: 1000px) {
   .channel-aside {
     position: absolute;
@@ -233,16 +235,12 @@
     display: none !important;
   }
 }
-
 @media (max-width: 700px) {
   .messenger-container .aside {
-    min-width: 150px;
-    width: 150px;
+    //min-width: 150px;
+    //width: 150px;
     font-size: 0.8rem;
   }
-}
-
-@media (max-width: 600px) {
   .action-container {
     width: 70px !important;
     justify-content: space-between;
@@ -264,7 +262,8 @@
     }
   }
 }
-@media (max-width: 500px) {
+
+@media (max-width: 600px) {
   .aside.selected {
     display: none !important;
   }
