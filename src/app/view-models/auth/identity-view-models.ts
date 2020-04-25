@@ -1,3 +1,5 @@
+import {BaseViewModel} from '../core/general-types';
+
 export interface LoginResultViewModel {
   emailNotConfirmed: boolean;
   invalidPassword: boolean;
@@ -28,4 +30,9 @@ export interface ForgotResultViewModel {
   notFound: boolean;
   wait: boolean;
   id: string;
+}
+export interface DeviceViewModel extends BaseViewModel {
+  title: string;
+  os: string;
+  enabled: boolean;
 }

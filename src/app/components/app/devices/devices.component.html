@@ -1,0 +1,35 @@
+<div class="app-devices">
+  <div class="box">
+    <app-waiting *ngIf="waiting"></app-waiting>
+    <ng-container *ngIf="!waiting">
+      <div class="actions">
+        <button *ngIf="checkDevice"
+                [disabled]="checkingDevice"
+                (click)="checkThisDevice()"
+                mat-stroked-button color="primary">
+          <i *ngIf="checkingDevice" class="icon-spin icon-spinner2"></i>
+          {{'CHECK_THIS_DEVICE' | translate}}
+        </button>
+      </div>
+      <div class="devices">
+        <div class="device" *ngFor="let device of devices">
+          <div class="ico">
+            <i class="{{getIcon(device)}}"></i>
+          </div>
+          <div class="info">
+            <div class="title"></div>
+            <div class="os"></div>
+          </div>
+          <div class="action">
+            <button>
+              <i class="icon-pencil"></i>
+            </button>
+            <button>
+              <i class="icon-delete"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

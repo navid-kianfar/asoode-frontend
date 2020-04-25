@@ -586,5 +586,7 @@
   "BEGIN_AT": "تاریخ شروع",
   "END_AT": "تاریخ پایان",
   "TIME": "زمان",
-  "IN_PROGRESS_CARDS": "کارت\u200Cهای در حال انجام"
+  "IN_PROGRESS_CARDS": "کارت\u200Cهای در حال انجام",
+  "DEVICES": "دستگاه ها",
+  "CHECK_THIS_DEVICE": "برسی این دستگاه"
 }

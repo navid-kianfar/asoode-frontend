@@ -163,6 +163,9 @@ import { NumberComponent } from './components/core/number/number.component';
 import { TimePickerComponent } from './components/core/time-picker/time-picker.component';
 import { DocumentModalComponent } from './modals/document-modal/document-modal.component';
 import {NgxDocViewerModule} from 'ngx-doc-viewer';
+import { DevicesComponent } from './components/app/devices/devices.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -289,6 +292,7 @@ import {NgxDocViewerModule} from 'ngx-doc-viewer';
     NumberComponent,
     TimePickerComponent,
     DocumentModalComponent,
+    DevicesComponent,
   ],
   entryComponents: [
     DocumentModalComponent,
@@ -348,6 +352,7 @@ import {NgxDocViewerModule} from 'ngx-doc-viewer';
     DragDropModule,
     ColorPickerModule,
     NgxDocViewerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     // {

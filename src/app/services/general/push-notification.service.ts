@@ -6,6 +6,9 @@ import { ActivityType } from '../../library/app/enums';
 import { Router } from '@angular/router';
 import { WindowService } from './window.service';
 import { WorkPackageViewModel } from '../../view-models/projects/project-types';
+import {environment} from '../../../environments/environment';
+import {DeviceDetectorService} from 'ngx-device-detector';
+// import {ServiceWorkerService} from '../core/service-worker.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +20,42 @@ export class PushNotificationService {
     private readonly groupService: GroupService,
     private readonly projectService: ProjectService,
     private readonly windowService: WindowService,
-  ) {}
+    private readonly detector: DeviceDetectorService,
+    // private readonly serviceWorkerService: ServiceWorkerService,
+  ) {
+  }
+
+  // checkDevice(force: boolean = false): Promise<any> {
+  //   return new Promise<any>(resolve => {
+  //     this.serviceWorkerService.registry.pushManager
+  //       .subscribe({
+  //         userVisibleOnly: true,
+  //         applicationServerKey: this.urlBase64ToUint8Array(
+  //           environment.vapid,
+  //         ),
+  //       })
+  //       .then(subscription => {
+  //         const json = subscription.toJSON();
+  //         const platform = this.detector.os.toLowerCase();
+  //         const payload = {
+  //           platform,
+  //           endpoint: json.endpoint,
+  //           expirationTime: json.expirationTime,
+  //           auth: json.keys.auth,
+  //           p256dh: json.keys.p256dh,
+  //           browser: this.detector.browser,
+  //           desktop: this.detector.isDesktop(),
+  //           tablet: this.detector.isTablet(),
+  //           mobile: this.detector.isMobile(),
+  //           android: platform === 'android',
+  //           ios: platform === 'ios',
+  //           safari: this.detector.browser === 'Safari',
+  //           device: this.detector.device,
+  //         };
+  //         resolve(payload);
+  //       });
+  //   });
+  // }
 
   handleSocket(notification: any) {
     let find1: any = null;
@@ -298,6 +336,19 @@ export class PushNotificationService {
         break;
     }
   }
+
+  // urlBase64ToUint8Array(base64String) {
+  //   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  //   const base64 = (base64String + padding)
+  //     .replace(/-/g, '+')
+  //     .replace(/_/g, '/');
+  //   const rawData = window.atob(base64);
+  //   const outputArray = new Uint8Array(rawData.length);
+  //   for (let i = 0; i < rawData.length; ++i) {
+  //     outputArray[i] = rawData.charCodeAt(i);
+  //   }
+  //   return outputArray;
+  // }
 
   private findWorkPackage(id: string): WorkPackageViewModel {
     for (const proj of this.projectService.projects) {

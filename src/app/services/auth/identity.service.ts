@@ -7,6 +7,7 @@ import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import { OperationResultStatus } from '../../library/core/enums';
 import {
+  DeviceViewModel,
   ForgotResultViewModel,
   LoginResultViewModel,
   RegisterResultViewModel,
@@ -175,6 +176,29 @@ export class IdentityService {
   async resendVerification(id): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       '/account/resend/verification/' + id,
+    );
+  }
+
+  async devices(): Promise<OperationResult<DeviceViewModel[]>> {
+    return await this.httpService.post<DeviceViewModel[]>(
+      '/account/devices',
+    );
+  }
+
+  async addDevice(model): Promise<OperationResult<DeviceViewModel>> {
+    return await this.httpService.post<DeviceViewModel>(
+      '/account/devices/add', model
+    );
+  }
+
+  async removeDevice(id): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/account/devices/remove/' + id
+    );
+  }
+  async renameDevice(id, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/account/devices/rename/' + id, model
     );
   }
 }
