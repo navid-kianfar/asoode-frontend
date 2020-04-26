@@ -21,6 +21,7 @@ import { Router } from '@angular/router';
 import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
 import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { IdentityService } from '../../../services/auth/identity.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-project-tree',
@@ -33,6 +34,7 @@ export class ProjectTreeComponent implements OnInit {
   subProjects: SubProjectViewModel[];
   workPackages: WorkPackageViewModel[];
   reCreate = new EventEmitter<string>();
+  dragDelay: number;
   constructor(
     private readonly socket: Socket,
     private readonly router: Router,
@@ -203,5 +205,24 @@ export class ProjectTreeComponent implements OnInit {
 
   openWorkPackage(workPackage: WorkPackageViewModel) {
     this.router.navigateByUrl('/work-package/' + workPackage.id);
+  }
+
+  dropSubProject(event: CdkDragDrop<SubProjectViewModel[], any>) {
+    const id = event.item.data.id;
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+    event.item.data.order = event.currentIndex + 1;
+  }
+
+  dropWorkPackage(event: CdkDragDrop<WorkPackageViewModel[], any>) {
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+    event.item.data.order = event.currentIndex + 1;
   }
 }

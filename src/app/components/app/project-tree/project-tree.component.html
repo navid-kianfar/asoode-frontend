@@ -1,4 +1,4 @@
-<div class="project-tree">
+<div class="project-tree no-select">
   <div class="actions">
     <h3>{{ 'TREE_VIEW' | translate }}</h3>
     <button [matMenuTriggerFor]="menu" mat-stroked-button>
@@ -16,25 +16,51 @@
       <div class="time-span">{{ 'TIME_SPAN' | translate }}</div>
       <div class="time-spent">{{ 'TIME_SPENT' | translate }}</div>
     </div>
-    <app-project-tree-node
-      (deleteSubProject)="deleteSubProject($event)"
-      (editSubProject)="editSubProject($event)"
-      (createSubProject)="newSubProject($event)"
-      (createWorkPackage)="newWorkPackage($event)"
-      *ngFor="let subProject of subProjects"
-      [level]="1"
-      [project]="model"
-      [subProject]="subProject"
-      [reCreate]="reCreate"
-    ></app-project-tree-node>
-    <app-project-tree-node
-      *ngFor="let workPackage of workPackages"
-      [level]="1"
-      [project]="model"
-      [workPackage]="workPackage"
-      [reCreate]="reCreate"
-      (click)="openWorkPackage(workPackage)"
-    ></app-project-tree-node>
+    <div class="sub-projects-container"
+         cdkDropList
+         cdkDropListOrientation="vertical"
+         [cdkDropListData]="subProjects"
+         (cdkDropListDropped)="dropSubProject($event)">
+      <div class="sub-container"
+           *ngFor="let subProject of subProjects"
+           [cdkDragStartDelay]="dragDelay"
+           [cdkDragData]="subProject"
+           [cdkDragDisabled]="subNode.expanded || subProjects.length === 1"
+           cdkDrag>
+        <app-project-tree-node
+          #subNode
+          (deleteSubProject)="deleteSubProject($event)"
+          (editSubProject)="editSubProject($event)"
+          (createSubProject)="newSubProject($event)"
+          (createWorkPackage)="newWorkPackage($event)"
+          [level]="1"
+          [project]="model"
+          [subProject]="subProject"
+          [reCreate]="reCreate"
+        ></app-project-tree-node>
+      </div>
+
+    </div>
+    <div class="work-packages-container"
+         cdkDropList
+         cdkDropListOrientation="vertical"
+         [cdkDropListData]="workPackages"
+         (cdkDropListDropped)="dropWorkPackage($event)">
+      <div class="work-package-container"
+           *ngFor="let workPackage of workPackages"
+           [cdkDragDisabled]="workPackages.length === 1"
+           [cdkDragStartDelay]="dragDelay"
+           [cdkDragData]="workPackage"
+           cdkDrag>
+        <app-project-tree-node
+          [level]="1"
+          [project]="model"
+          [workPackage]="workPackage"
+          [reCreate]="reCreate"
+          (click)="openWorkPackage(workPackage)"
+        ></app-project-tree-node>
+      </div>
+    </div>
   </div>
 </div>
 <mat-menu #menu="matMenu">

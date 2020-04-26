@@ -73,17 +73,42 @@
     </div>
   </div>
   <ng-container *ngIf="expanded">
-    <app-project-tree-node
-      (deleteSubProject)="deleteSubProject.emit($event)"
-      (editSubProject)="editSubProject.emit($event)"
-      (createSubProject)="createSubProject.emit($event)"
-      (createWorkPackage)="createWorkPackage.emit($event)"
-      *ngFor="let subProject of subProjects"
-      [level]="level + 1"
-      [project]="project"
-      [subProject]="subProject"
-      [reCreate]="reCreate"
-    ></app-project-tree-node>
+    <div class="sub-projects-container"
+         cdkDropList
+         cdkDropListOrientation="vertical"
+         [cdkDropListData]="subProjects"
+         (cdkDropListDropped)="dropSubProject($event)">
+      <div class="sub-container"
+           *ngFor="let subProject of subProjects"
+           [cdkDragStartDelay]="dragDelay"
+           [cdkDragData]="subProject"
+           [cdkDragDisabled]="subNode.expanded || subProjects.length === 1"
+           cdkDrag>
+        <app-project-tree-node
+          #subNode
+          (deleteSubProject)="deleteSubProject.emit($event)"
+          (editSubProject)="editSubProject.emit($event)"
+          (createSubProject)="createSubProject.emit($event)"
+          (createWorkPackage)="createWorkPackage.emit($event)"
+          [level]="level + 1"
+          [project]="project"
+          [subProject]="subProject"
+          [reCreate]="reCreate"
+        ></app-project-tree-node>
+      </div>
+    </div>
+
+    <div class="work-packages-container"
+         cdkDropList
+         cdkDropListOrientation="vertical"
+         [cdkDropListData]="workPackages"
+         (cdkDropListDropped)="dropWorkPackage($event)">
+      <div class="work-package-container"
+           *ngFor="let workPackage of workPackages"
+           [cdkDragDisabled]="workPackages.length === 1"
+           [cdkDragStartDelay]="dragDelay"
+           [cdkDragData]="workPackage"
+           cdkDrag>
     <app-project-tree-node
       *ngFor="let workPackage of workPackages"
       [level]="level + 1"
@@ -92,5 +117,7 @@
       [reCreate]="reCreate"
       (click)="openWorkPackage(workPackage)"
     ></app-project-tree-node>
+      </div>
+    </div>
   </ng-container>
 </div>

@@ -32,7 +32,7 @@ export class ProjectComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.mode = ViewMode.RoadMap;
+    this.mode = ViewMode.Tree;
     this.report = {
       percent: 0,
       progress: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

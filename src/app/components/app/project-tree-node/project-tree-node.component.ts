@@ -15,6 +15,7 @@ import {
 } from '../../../view-models/projects/project-types';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-project-tree-node',
@@ -37,6 +38,7 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   to?: Date;
   workPackages: WorkPackageViewModel[];
   subscribe: Subscription;
+  dragDelay: number;
   constructor(private readonly router: Router) {}
 
   ngOnInit() {
@@ -66,5 +68,24 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
         w => w.subProjectId === this.subProject.id,
       );
     }
+  }
+
+  dropSubProject(event: CdkDragDrop<SubProjectViewModel[], any>) {
+    const id = event.item.data.id;
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+    event.item.data.order = event.currentIndex + 1;
+  }
+
+  dropWorkPackage(event: CdkDragDrop<WorkPackageViewModel[], any>) {
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+    event.item.data.order = event.currentIndex + 1;
   }
 }
