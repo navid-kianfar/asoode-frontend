@@ -58,9 +58,11 @@ export class ProjectTreeComponent implements OnInit {
     this.socket.on('push-notification', (notification: any) => {
       switch (notification.type) {
         case ActivityType.WorkPackageAdd:
+        case ActivityType.WorkPackageEdit:
         case ActivityType.ProjectAdd:
         case ActivityType.ProjectSubAdd:
         case ActivityType.ProjectSubRemove:
+        case ActivityType.ProjectSubEdit:
           setTimeout(() => {
             if (notification.data.projectId === this.model.id) {
               this.createTree();

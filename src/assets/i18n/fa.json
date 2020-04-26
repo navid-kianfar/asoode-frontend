@@ -583,5 +583,7 @@
   "TIME": "زمان",
   "IN_PROGRESS_CARDS": "کارت\u200Cهای در حال انجام",
   "DEVICES": "دستگاه ها",
-  "CHECK_THIS_DEVICE": "برسی این دستگاه"
+  "CHECK_THIS_DEVICE": "برسی این دستگاه",
+  "CHOOSE_PACKAGE_TEMPLATE": "انتخاب الگو برای بسته کاری",
+  "EDIT_WORK_PACKAGE": "ویرایش بسته کاری"
 }

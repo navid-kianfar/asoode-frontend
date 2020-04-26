@@ -177,4 +177,11 @@ export class WorkPackageService {
       params,
     );
   }
+
+  async edit(id: string, params: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/edit`,
+      params,
+    );
+  }
 }

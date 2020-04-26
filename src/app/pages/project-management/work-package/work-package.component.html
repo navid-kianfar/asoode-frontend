@@ -17,10 +17,9 @@
         </div>
       </ng-container>
       <ng-container *ngIf="project.complex"></ng-container>
-      <div class="title">
+      <div (click)="prepareRename()" class="title">
         <i class="icon-workpackage"></i>&nbsp;
-        <span>{{ workPackage.title }}</span
-        >&nbsp;
+        <span>{{ workPackage.title }}</span>&nbsp;
         <!--        <i class="icon-star-empty"></i>-->
       </div>
     </div>
