@@ -110,7 +110,6 @@
            [cdkDragData]="workPackage"
            cdkDrag>
     <app-project-tree-node
-      *ngFor="let workPackage of workPackages"
       [level]="level + 1"
       [project]="project"
       [workPackage]="workPackage"
