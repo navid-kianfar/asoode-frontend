@@ -77,19 +77,22 @@
          cdkDropList
          cdkDropListOrientation="vertical"
          [cdkDropListData]="subProjects"
-         (cdkDropListDropped)="dropSubProject($event)">
+         (cdkDropListDropped)="dropSubProject.emit($event)">
       <div class="sub-container"
            *ngFor="let subProject of subProjects"
            [cdkDragStartDelay]="dragDelay"
            [cdkDragData]="subProject"
-           [cdkDragDisabled]="subNode.expanded || subProjects.length === 1"
+           [cdkDragDisabled]="!(permission === AccessType.Admin || permission === AccessType.Owner) || subNode.expanded || subProjects.length === 1"
            cdkDrag>
         <app-project-tree-node
           #subNode
+          [permission]="permission"
           (deleteSubProject)="deleteSubProject.emit($event)"
           (editSubProject)="editSubProject.emit($event)"
           (createSubProject)="createSubProject.emit($event)"
           (createWorkPackage)="createWorkPackage.emit($event)"
+          (dropSubProject)="dropSubProject.emit($event)"
+          (dropWorkPackage)="dropWorkPackage.emit($event)"
           [level]="level + 1"
           [project]="project"
           [subProject]="subProject"
@@ -102,14 +105,16 @@
          cdkDropList
          cdkDropListOrientation="vertical"
          [cdkDropListData]="workPackages"
-         (cdkDropListDropped)="dropWorkPackage($event)">
+         (cdkDropListDropped)="dropWorkPackage.emit($event)">
       <div class="work-package-container"
            *ngFor="let workPackage of workPackages"
-           [cdkDragDisabled]="workPackages.length === 1"
+           [cdkDragDisabled]="!(permission === AccessType.Admin || permission === AccessType.Owner) || workPackages.length === 1"
            [cdkDragStartDelay]="dragDelay"
            [cdkDragData]="workPackage"
            cdkDrag>
     <app-project-tree-node
+      (dropWorkPackage)="dropWorkPackage.emit($event)"
+      [permission]="permission"
       [level]="level + 1"
       [project]="project"
       [workPackage]="workPackage"

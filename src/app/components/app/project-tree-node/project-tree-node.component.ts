@@ -16,6 +16,8 @@ import {
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { AccessType } from 'src/app/library/app/enums';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-project-tree-node',
@@ -23,6 +25,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   styleUrls: ['./project-tree-node.component.scss'],
 })
 export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
+  @Input() permission: AccessType;
   @Input() workPackage: WorkPackageViewModel;
   @Input() project: ProjectViewModel;
   @Input() subProject: SubProjectViewModel;
@@ -32,6 +35,8 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   @Output() createWorkPackage = new EventEmitter<string>();
   @Output() editSubProject = new EventEmitter<string>();
   @Output() deleteSubProject = new EventEmitter<string>();
+  @Output() dropSubProject = new EventEmitter<CdkDragDrop<SubProjectViewModel[], any>>();
+  @Output() dropWorkPackage = new EventEmitter<CdkDragDrop<WorkPackageViewModel[], any>>();
   subProjects: SubProjectViewModel[];
   expanded: boolean;
   from?: Date;
@@ -39,9 +44,14 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   workPackages: WorkPackageViewModel[];
   subscribe: Subscription;
   dragDelay: number;
-  constructor(private readonly router: Router) {}
+  AccessType = AccessType;
+  constructor(
+    private readonly router: Router,
+    private readonly deviceDetectorService: DeviceDetectorService
+  ) {}
 
   ngOnInit() {
+    this.dragDelay = (this.deviceDetectorService.isTablet() || this.deviceDetectorService.isMobile()) ? 2000 : 0;
     this.from = new Date();
     this.to = new Date();
     this.to.setDate(this.to.getDate() + 10);
@@ -63,29 +73,10 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
     } else {
       this.subProjects = this.project.subProjects.filter(
         s => s.parentId === this.subProject.id,
-      );
+      ).sort((a, b) => (a.order > b.order ? 1 : -1));
       this.workPackages = this.project.workPackages.filter(
         w => w.subProjectId === this.subProject.id,
-      );
+      ).sort((a, b) => (a.order > b.order ? 1 : -1));
     }
-  }
-
-  dropSubProject(event: CdkDragDrop<SubProjectViewModel[], any>) {
-    const id = event.item.data.id;
-    moveItemInArray(
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex,
-    );
-    event.item.data.order = event.currentIndex + 1;
-  }
-
-  dropWorkPackage(event: CdkDragDrop<WorkPackageViewModel[], any>) {
-    moveItemInArray(
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex,
-    );
-    event.item.data.order = event.currentIndex + 1;
   }
 }

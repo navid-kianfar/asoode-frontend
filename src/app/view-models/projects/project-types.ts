@@ -96,6 +96,7 @@ export interface WorkPackageUserSetting extends BaseViewModel {
   projectId: string;
 }
 export interface WorkPackageViewModel extends BaseViewModel {
+  order: number;
   userSetting: WorkPackageUserSetting;
   pending: PendingInvitationViewModel[];
   progress: WorkPackageProgressViewModel;

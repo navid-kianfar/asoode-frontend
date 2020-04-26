@@ -170,4 +170,11 @@ export class WorkPackageService {
   async archive(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/work-packages/${id}/archive`);
   }
+
+  async changeOrder(id: string, params: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/order`,
+      params,
+    );
+  }
 }

@@ -22,6 +22,7 @@ import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
 import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { IdentityService } from '../../../services/auth/identity.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {WorkPackageService} from '../../../services/projects/work-package.service';
 
 @Component({
   selector: 'app-project-tree',
@@ -35,6 +36,7 @@ export class ProjectTreeComponent implements OnInit {
   workPackages: WorkPackageViewModel[];
   reCreate = new EventEmitter<string>();
   dragDelay: number;
+  AccessType = AccessType;
   constructor(
     private readonly socket: Socket,
     private readonly router: Router,
@@ -44,6 +46,7 @@ export class ProjectTreeComponent implements OnInit {
     private readonly formService: FormService,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService,
+    private readonly workPackageService: WorkPackageService,
   ) {}
 
   ngOnInit() {
@@ -70,8 +73,10 @@ export class ProjectTreeComponent implements OnInit {
   }
 
   createTree() {
-    this.workPackages = this.model.workPackages.filter(w => !w.subProjectId);
-    this.subProjects = this.model.subProjects.filter(s => !s.parentId);
+    this.workPackages = this.model.workPackages.filter(w => !w.subProjectId)
+      .sort((a, b) => (a.order > b.order ? 1 : -1));
+    this.subProjects = this.model.subProjects.filter(s => !s.parentId)
+      .sort((a, b) => (a.order > b.order ? 1 : -1));
   }
 
   newSubProject(parentId?: string) {
@@ -208,13 +213,15 @@ export class ProjectTreeComponent implements OnInit {
   }
 
   dropSubProject(event: CdkDragDrop<SubProjectViewModel[], any>) {
-    const id = event.item.data.id;
     moveItemInArray(
       event.container.data,
       event.previousIndex,
       event.currentIndex,
     );
     event.item.data.order = event.currentIndex + 1;
+    this.projectService.changeSupProjectOrder(event.item.data.id, {
+      order: event.item.data.order
+    });
   }
 
   dropWorkPackage(event: CdkDragDrop<WorkPackageViewModel[], any>) {
@@ -224,5 +231,8 @@ export class ProjectTreeComponent implements OnInit {
       event.currentIndex,
     );
     event.item.data.order = event.currentIndex + 1;
+    this.workPackageService.changeOrder(event.item.data.id, {
+      order: event.item.data.order
+    });
   }
 }

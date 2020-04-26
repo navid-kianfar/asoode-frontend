@@ -174,4 +174,11 @@ export class ProjectService {
   async edit(id: string, params: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/projects/${id}/edit`, params);
   }
+
+  async changeSupProjectOrder(id: string, params: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/projects/sub/${id}/order`,
+      params,
+    );
+  }
 }

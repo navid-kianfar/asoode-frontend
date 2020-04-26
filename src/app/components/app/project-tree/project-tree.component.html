@@ -25,10 +25,13 @@
            *ngFor="let subProject of subProjects"
            [cdkDragStartDelay]="dragDelay"
            [cdkDragData]="subProject"
-           [cdkDragDisabled]="subNode.expanded || subProjects.length === 1"
+           [cdkDragDisabled]="!(permission === AccessType.Admin || permission === AccessType.Owner) || subNode.expanded || subProjects.length === 1"
            cdkDrag>
         <app-project-tree-node
           #subNode
+          [permission]="permission"
+          (dropWorkPackage)="dropWorkPackage($event)"
+          (dropSubProject)="dropSubProject($event)"
           (deleteSubProject)="deleteSubProject($event)"
           (editSubProject)="editSubProject($event)"
           (createSubProject)="newSubProject($event)"
@@ -48,11 +51,13 @@
          (cdkDropListDropped)="dropWorkPackage($event)">
       <div class="work-package-container"
            *ngFor="let workPackage of workPackages"
-           [cdkDragDisabled]="workPackages.length === 1"
+           [cdkDragDisabled]="!(permission === AccessType.Admin || permission === AccessType.Owner) || workPackages.length === 1"
            [cdkDragStartDelay]="dragDelay"
            [cdkDragData]="workPackage"
            cdkDrag>
         <app-project-tree-node
+          (dropWorkPackage)="dropWorkPackage($event)"
+          [permission]="permission"
           [level]="1"
           [project]="model"
           [workPackage]="workPackage"
