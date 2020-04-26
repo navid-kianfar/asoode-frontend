@@ -168,7 +168,10 @@
                 </div>
               </div>
               <div class="comments">
-                <div *ngFor="let comment of model.comments" class="comment dont-break-out">
+                <div
+                  *ngFor="let comment of model.comments"
+                  class="comment dont-break-out"
+                >
                   <div class="avatar">
                     <app-member-info
                       [small]="true"
@@ -382,7 +385,6 @@
                       </ng-container>
                     </div>
                   </div>
-
                   <mat-menu #memberMenu="matMenu">
                     <div
                       class="task-modal-members-menu"
@@ -396,12 +398,14 @@
                           *ngFor="let member of project.members"
                         >
                           <app-member-info
+                            [waiting]="member.waiting"
                             [selected]="isMemberSelected(member)"
                             *ngIf="!member.isGroup"
                             [model]="member.member"
                             [id]="member.recordId"
                           ></app-member-info>
                           <app-group-info
+                            [waiting]="member.waiting"
                             [selected]="isMemberSelected(member)"
                             *ngIf="member.isGroup"
                             [id]="member.recordId"

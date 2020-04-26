@@ -162,7 +162,7 @@ import { TimeSpanComponent } from './components/core/time-span/time-span.compone
 import { NumberComponent } from './components/core/number/number.component';
 import { TimePickerComponent } from './components/core/time-picker/time-picker.component';
 import { DocumentModalComponent } from './modals/document-modal/document-modal.component';
-import {NgxDocViewerModule} from 'ngx-doc-viewer';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { DevicesComponent } from './components/app/devices/devices.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -326,7 +326,7 @@ import { environment } from '../environments/environment';
     DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
-      {container: 'modal-container'},
+      { container: 'modal-container' },
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -336,7 +336,7 @@ import { environment } from '../environments/environment';
         bodyClass: 'modal-open',
       },
     ),
-    NgxPopperModule.forRoot({placement: 'bottom'}),
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,
@@ -352,7 +352,9 @@ import { environment } from '../environments/environment';
     DragDropModule,
     ColorPickerModule,
     NgxDocViewerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     // {

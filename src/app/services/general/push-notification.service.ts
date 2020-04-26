@@ -6,8 +6,8 @@ import { ActivityType } from '../../library/app/enums';
 import { Router } from '@angular/router';
 import { WindowService } from './window.service';
 import { WorkPackageViewModel } from '../../view-models/projects/project-types';
-import {environment} from '../../../environments/environment';
-import {DeviceDetectorService} from 'ngx-device-detector';
+import { environment } from '../../../environments/environment';
+import { DeviceDetectorService } from 'ngx-device-detector';
 // import {ServiceWorkerService} from '../core/service-worker.service';
 
 @Injectable({
@@ -21,9 +21,8 @@ export class PushNotificationService {
     private readonly projectService: ProjectService,
     private readonly windowService: WindowService,
     private readonly detector: DeviceDetectorService,
-    // private readonly serviceWorkerService: ServiceWorkerService,
-  ) {
-  }
+  ) // private readonly serviceWorkerService: ServiceWorkerService,
+  {}
 
   // checkDevice(force: boolean = false): Promise<any> {
   //   return new Promise<any>(resolve => {

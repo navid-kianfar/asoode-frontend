@@ -2,9 +2,12 @@
   <div class="modal-content document-modal" (click)="$event.stopPropagation()">
     <div class="modal-body">
       <app-waiting *ngIf="waiting"></app-waiting>
-      <ngx-doc-viewer (loaded)="waiting = false;" [url]="path"
-                      viewer="google"
-                      style="width:100%;height:calc(80vh - 30px);"></ngx-doc-viewer>
+      <ngx-doc-viewer
+        (loaded)="waiting = false"
+        [url]="path"
+        viewer="google"
+        style="width:100%;height:calc(80vh - 30px);"
+      ></ngx-doc-viewer>
     </div>
   </div>
 </div>

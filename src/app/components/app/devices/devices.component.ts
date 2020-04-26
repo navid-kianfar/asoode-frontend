@@ -1,15 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {DeviceViewModel} from '../../../view-models/auth/identity-view-models';
-import {SwPush} from '@angular/service-worker';
-import {environment} from '../../../../environments/environment';
-import {DeviceDetectorService} from 'ngx-device-detector';
+import { Component, OnInit } from '@angular/core';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { DeviceViewModel } from '../../../view-models/auth/identity-view-models';
+import { SwPush } from '@angular/service-worker';
+import { environment } from '../../../../environments/environment';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
-  styleUrls: ['./devices.component.scss']
+  styleUrls: ['./devices.component.scss'],
 })
 export class DevicesComponent implements OnInit {
   waiting: boolean;
@@ -21,7 +21,7 @@ export class DevicesComponent implements OnInit {
     private readonly identityService: IdentityService,
     private readonly swPush: SwPush,
     private readonly detector: DeviceDetectorService,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.fetch();
@@ -42,7 +42,7 @@ export class DevicesComponent implements OnInit {
   async checkThisDevice() {
     try {
       const subscription = await this.swPush.requestSubscription({
-        serverPublicKey: environment.vapid
+        serverPublicKey: environment.vapid,
       });
       const json = subscription.toJSON();
       const platform = this.detector.os.toLowerCase();

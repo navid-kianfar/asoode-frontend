@@ -1,5 +1,4 @@
 .dont-break-out {
-
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
   word-wrap: break-word;
@@ -15,7 +14,6 @@
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-
 }
 .no-select {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -52,11 +50,13 @@ body {
 }
 @font-face {
   font-family: 'ikon-asoode';
-  src:  url('/assets/fonts/icons/asoode/ikon-asoode.eot?6klnj8');
-  src:  url('/assets/fonts/icons/asoode/ikon-asoode.eot?6klnj8#iefix') format('embedded-opentype'),
-  url('/assets/fonts/icons/asoode/ikon-asoode.ttf?6klnj8') format('truetype'),
-  url('/assets/fonts/icons/asoode/ikon-asoode.woff?6klnj8') format('woff'),
-  url('/assets/fonts/icons/asoode/ikon-asoode.svg?6klnj8#ikon-asoode') format('svg');
+  src: url('/assets/fonts/icons/asoode/ikon-asoode.eot?6klnj8');
+  src: url('/assets/fonts/icons/asoode/ikon-asoode.eot?6klnj8#iefix')
+      format('embedded-opentype'),
+    url('/assets/fonts/icons/asoode/ikon-asoode.ttf?6klnj8') format('truetype'),
+    url('/assets/fonts/icons/asoode/ikon-asoode.woff?6klnj8') format('woff'),
+    url('/assets/fonts/icons/asoode/ikon-asoode.svg?6klnj8#ikon-asoode')
+      format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;

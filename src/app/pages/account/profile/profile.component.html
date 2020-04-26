@@ -3,8 +3,11 @@
     <ng-container *ngIf="!editing">
       <div class="inner-content">
         <div class="avatar-container">
-          <img *ngIf="identityService.profile.avatar"
-               [src]="identityService.profile.avatar" alt="" />
+          <img
+            *ngIf="identityService.profile.avatar"
+            [src]="identityService.profile.avatar"
+            alt=""
+          />
           <div *ngIf="!identityService.profile.avatar">
             {{ identityService.profile.initials }}
           </div>

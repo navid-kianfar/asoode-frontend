@@ -10,6 +10,7 @@ import { GroupService } from '../../../services/groups/group.service';
 export class GroupInfoComponent implements OnInit {
   @Input() id: string;
   @Input() cssClass: string;
+  @Input() waiting: boolean;
   @Input() small: boolean;
   @Input() selected: boolean;
   @Input() model: GroupViewModel;

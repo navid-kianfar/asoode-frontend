@@ -13,7 +13,7 @@ import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../services/core/form.service';
 import { SortType } from 'src/app/library/app/enums';
-import {DocumentModalComponent} from '../../../modals/document-modal/document-modal.component';
+import { DocumentModalComponent } from '../../../modals/document-modal/document-modal.component';
 
 @Component({
   selector: 'app-files-explorer',
@@ -243,9 +243,11 @@ export class FilesExplorerComponent implements OnInit {
 
   actionOpen() {
     const file = this.data.files.find(i => i.selected);
-    this.modalService.show(DocumentModalComponent, {
-      path: file.url
-    }).subscribe(() => {});
+    this.modalService
+      .show(DocumentModalComponent, {
+        path: file.url,
+      })
+      .subscribe(() => {});
   }
 
   prepareUpload() {
@@ -296,9 +298,7 @@ export class FilesExplorerComponent implements OnInit {
       } as PromptModalParameters)
       .subscribe(() => {});
   }
-  actionDelete() {
-
-  }
+  actionDelete() {}
 
   clearInputFile(f) {
     if (f.value) {
@@ -355,5 +355,4 @@ export class FilesExplorerComponent implements OnInit {
     this.path = s.parent || '/';
     await this.fetch(this.path);
   }
-
 }

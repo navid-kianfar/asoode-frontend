@@ -30,14 +30,30 @@ export class FileFolderPreviewComponent implements OnInit {
   }
 
   getIcon(file: ExplorerFileViewModel) {
-    if (file.isImage) { return 'image icon-image2'; }
-    if (file.isArchive) { return 'archive icon-file-zip'; }
-    if (file.isPdf) { return 'pdf icon-file-pdf'; }
-    if (file.isDocument) { return 'document icon-file-word'; }
-    if (file.isSpreadsheet) { return 'spreadsheet icon-file-excel'; }
-    if (file.isPresentation) { return 'presentation icon-file-presentation'; }
-    if (file.isCode) { return 'code icon-file-xml'; }
-    if (file.isExecutable) { return 'executable icon-file-exe'; }
+    if (file.isImage) {
+      return 'image icon-image2';
+    }
+    if (file.isArchive) {
+      return 'archive icon-file-zip';
+    }
+    if (file.isPdf) {
+      return 'pdf icon-file-pdf';
+    }
+    if (file.isDocument) {
+      return 'document icon-file-word';
+    }
+    if (file.isSpreadsheet) {
+      return 'spreadsheet icon-file-excel';
+    }
+    if (file.isPresentation) {
+      return 'presentation icon-file-presentation';
+    }
+    if (file.isCode) {
+      return 'code icon-file-xml';
+    }
+    if (file.isExecutable) {
+      return 'executable icon-file-exe';
+    }
     return 'other icon-files-empty';
   }
 }

@@ -522,20 +522,22 @@ export class TaskModalComponent
     }
   }
 
-  toggleMember(member: ProjectMemberViewModel) {
+  async toggleMember(member: ProjectMemberViewModel) {
     if (member.waiting) {
       return;
     }
+    member.waiting = true;
     if (
       this.model.members.findIndex(i => i.recordId === member.recordId) === -1
     ) {
-      this.taskService.addMember(this.id, {
+      await this.taskService.addMember(this.id, {
         isGroup: member.isGroup,
         recordId: member.recordId,
       });
     } else {
-      this.taskService.removeMember(this.id, member.recordId);
+      await this.taskService.removeMember(this.id, member.recordId);
     }
+    member.waiting = false;
   }
 
   toggleLabel(label: WorkPackageLabelViewModel) {

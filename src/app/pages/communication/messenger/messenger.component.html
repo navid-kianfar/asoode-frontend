@@ -118,9 +118,15 @@
           <div class="title-container">
             <span class="title">{{ current.title }}</span>
             <i *ngIf="current.type === ChannelType.Group" class="icon-team"></i>
-            <i *ngIf="current.type === ChannelType.WorkPackage" class="icon-workpackage"></i>
-            <i *ngIf="current.type === ChannelType.Project" class="icon-project"></i>
-<!--            <span class="category">{{ current.title }}</span>-->
+            <i
+              *ngIf="current.type === ChannelType.WorkPackage"
+              class="icon-workpackage"
+            ></i>
+            <i
+              *ngIf="current.type === ChannelType.Project"
+              class="icon-project"
+            ></i>
+            <!--            <span class="category">{{ current.title }}</span>-->
           </div>
           <div class="info-container">
             <div class="type">

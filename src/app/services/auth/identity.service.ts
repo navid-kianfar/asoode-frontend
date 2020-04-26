@@ -180,25 +180,25 @@ export class IdentityService {
   }
 
   async devices(): Promise<OperationResult<DeviceViewModel[]>> {
-    return await this.httpService.post<DeviceViewModel[]>(
-      '/account/devices',
-    );
+    return await this.httpService.post<DeviceViewModel[]>('/account/devices');
   }
 
   async addDevice(model): Promise<OperationResult<DeviceViewModel>> {
     return await this.httpService.post<DeviceViewModel>(
-      '/account/devices/add', model
+      '/account/devices/add',
+      model,
     );
   }
 
   async removeDevice(id): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      '/account/devices/remove/' + id
+      '/account/devices/remove/' + id,
     );
   }
   async renameDevice(id, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      '/account/devices/rename/' + id, model
+      '/account/devices/rename/' + id,
+      model,
     );
   }
 }

@@ -13,6 +13,7 @@ export class MemberInfoComponent implements OnInit {
   @Input() id: string;
   @Input() email: string;
   @Input() me: boolean;
+  @Input() waiting: boolean;
   @Input() selected: boolean;
   @Input() small: boolean;
   @Input() cssClass: string;

@@ -7,25 +7,44 @@
         </button>
       </div>
       <div class="commands">
-        <button (click)="actionDelete()" *ngIf="atLeastOneSelected" mat-mini-fab>
+        <button
+          (click)="actionDelete()"
+          *ngIf="atLeastOneSelected"
+          mat-mini-fab
+        >
           <span class="btn-inner">
             <i class="icon-delete"></i>
             <span class="sub-title">{{ 'DELETE' | translate }}</span>
           </span>
         </button>
-        <button disabled (click)="actionCut()" *ngIf="atLeastOneSelected" mat-mini-fab>
+        <button
+          disabled
+          (click)="actionCut()"
+          *ngIf="atLeastOneSelected"
+          mat-mini-fab
+        >
           <span class="btn-inner">
             <i class="icon-cut"></i>
             <span class="sub-title">{{ 'CUT' | translate }}</span>
           </span>
         </button>
-        <button disabled (click)="actionCopy()" *ngIf="atLeastOneSelected" mat-mini-fab>
+        <button
+          disabled
+          (click)="actionCopy()"
+          *ngIf="atLeastOneSelected"
+          mat-mini-fab
+        >
           <span class="btn-inner">
             <i class="icon-copy3"></i>
             <span class="sub-title">{{ 'COPY' | translate }}</span>
           </span>
         </button>
-        <button disabled (click)="actionPaste()" *ngIf="inClipboard" mat-mini-fab>
+        <button
+          disabled
+          (click)="actionPaste()"
+          *ngIf="inClipboard"
+          mat-mini-fab
+        >
           <span class="btn-inner">
             <i class="icon-paste"></i>
             <span class="sub-title">{{ 'PASTE' | translate }}</span>
@@ -37,11 +56,7 @@
             <span class="sub-title">{{ 'RENAME_SHORT' | translate }}</span>
           </span>
         </button>
-        <button
-          (click)="actionDownload()"
-          *ngIf="oneFileSelected"
-          mat-mini-fab
-        >
+        <button (click)="actionDownload()" *ngIf="oneFileSelected" mat-mini-fab>
           <span class="btn-inner">
             <i class="icon-download4"></i>
             <span class="sub-title">{{ 'DOWNLOAD' | translate }}</span>
@@ -73,7 +88,8 @@
           (click)="detail = false"
           [class.active]="!detail"
           class="icon-grid6"
-        ></i>&nbsp;
+        ></i
+        >&nbsp;
         <i
           (click)="detail = true"
           [class.active]="detail"
@@ -104,7 +120,7 @@
     ></app-dropdown>
   </div>
   <ul>
-    <li class="refresh" (click)="fetch(path);clearSelection()">
+    <li class="refresh" (click)="fetch(path); clearSelection()">
       <i class="icon-reset"></i>
     </li>
     <ng-container *ngFor="let p of parent.reverse()">

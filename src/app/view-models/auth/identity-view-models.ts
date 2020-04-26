@@ -1,4 +1,4 @@
-import {BaseViewModel} from '../core/general-types';
+import { BaseViewModel } from '../core/general-types';
 
 export interface LoginResultViewModel {
   emailNotConfirmed: boolean;

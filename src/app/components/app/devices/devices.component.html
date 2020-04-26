@@ -3,18 +3,21 @@
     <app-waiting *ngIf="waiting"></app-waiting>
     <ng-container *ngIf="!waiting">
       <div class="actions">
-        <button *ngIf="checkDevice"
-                [disabled]="checkingDevice"
-                (click)="checkThisDevice()"
-                mat-stroked-button color="primary">
+        <button
+          *ngIf="checkDevice"
+          [disabled]="checkingDevice"
+          (click)="checkThisDevice()"
+          mat-stroked-button
+          color="primary"
+        >
           <i *ngIf="checkingDevice" class="icon-spin icon-spinner2"></i>
-          {{'CHECK_THIS_DEVICE' | translate}}
+          {{ 'CHECK_THIS_DEVICE' | translate }}
         </button>
       </div>
       <div class="devices">
         <div class="device" *ngFor="let device of devices">
           <div class="ico">
-            <i class="{{getIcon(device)}}"></i>
+            <i class="{{ getIcon(device) }}"></i>
           </div>
           <div class="info">
             <div class="title"></div>
