@@ -586,5 +586,6 @@
   "CHECK_THIS_DEVICE": "برسی این دستگاه",
   "CHOOSE_PACKAGE_TEMPLATE": "انتخاب الگو برای بسته کاری",
   "EDIT_WORK_PACKAGE": "ویرایش بسته کاری",
-  "INVITE_MEMBERS": "اعضا"
+  "INVITE_MEMBERS": "اعضا",
+  "NO_MEMBERS": "عضوی برای نمایش وجود ندارد."
 }

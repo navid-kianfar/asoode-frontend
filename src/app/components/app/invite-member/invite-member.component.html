@@ -1,49 +1,20 @@
 <div class="invite-member">
-  <h3>{{ 'INVITE_NEW_MEMBER' | translate }}</h3>
-  <div class="holder">
-    <div class="input-holder">
-      <app-auto-complete
-        [backend]="'/account/invite-query'"
-        [(model)]="currentEmail"
-        [placeHolder]="'EMAIL_OR_PHONE'"
-        (pick)="current = $event"
-        (startModify)="current = undefined"
-        ltr="true"
-      ></app-auto-complete>
-      <app-access-list [(access)]="currentRole"></app-access-list>
-    </div>
-    <div class="action">
-      &nbsp;&nbsp;
-      <button (click)="addMember()" mat-stroked-button color="primary">
-        {{ 'ADD' | translate }}
-      </button>
-    </div>
-  </div>
-
   <div class="members">
-    <div *ngFor="let member of members" class="member">
+    <div class="empty" *ngIf="!members.length">
+      <h3>{{ 'NO_MEMBERS' | translate }}</h3>
+    </div>
+    <div class="member" *ngFor="let member of members">
+      <div class="pick">
+        <mat-checkbox
+          color="primary"
+          [(ngModel)]="member.selected"
+        ></mat-checkbox>
+      </div>
       <div class="info">
         <app-member-info [model]="member.model"></app-member-info>
       </div>
-      <div class="role">
-        <ng-container
-          *ngIf="member.access === AccessType.Owner; else otherRole"
-        >
-          {{ 'ENUMS_ACCESS_TYPE_OWNER' | translate }}
-        </ng-container>
-        <ng-template #otherRole>
-          <app-access-list [(access)]="member.access"></app-access-list>
-        </ng-template>
-      </div>
-      <div class="action">
-        <button
-          (click)="remove(member)"
-          *ngIf="member.access !== AccessType.Owner"
-          mat-stroked-button
-          color="warn"
-        >
-          {{ 'REMOVE' | translate }}
-        </button>
+      <div class="access">
+        <app-access-list [(access)]="member.access"></app-access-list>
       </div>
     </div>
   </div>

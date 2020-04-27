@@ -59,6 +59,7 @@
             <app-member-info
               *ngIf="!member.isGroup"
               [model]="member.member"
+              [id]="member.recordId"
             ></app-member-info>
             <app-group-info
               *ngIf="member.isGroup"

@@ -583,5 +583,9 @@
   "TIME": "Time",
   "IN_PROGRESS_CARDS": "In-progress tasks",
   "DEVICES": "Devices",
-  "CHECK_THIS_DEVICE": "Check this device"
+  "CHECK_THIS_DEVICE": "Check this device",
+  "CHOOSE_PACKAGE_TEMPLATE": "Choose a template for work package",
+  "EDIT_WORK_PACKAGE": "Edit Work Package",
+  "INVITE_MEMBERS": "Members",
+  "NO_MEMBERS": "There are not members to show"
 }

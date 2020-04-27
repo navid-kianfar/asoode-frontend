@@ -29,7 +29,7 @@ export class InvitePeopleComponent implements OnInit {
       this.members = project.members.filter(f => !f.isGroup && this.exclude.indexOf(f.recordId) === -1).map(m => {
         return {
           access: m.access,
-          id: m.id,
+          id: m.recordId,
           model: m.member,
           selected: false
         };
