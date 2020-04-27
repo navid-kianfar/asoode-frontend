@@ -34,6 +34,7 @@ import {Socket} from 'ngx-socket-io';
 import {moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {PromptModalParameters} from '../../../view-models/core/modal-types';
 import {NotificationService} from '../../../services/core/notification.service';
+import {UpgradeWorkPackageComponent} from '../../../modals/upgrade-work-package/upgrade-work-package.component';
 
 @Component({
   selector: 'app-work-package',
@@ -913,6 +914,11 @@ export class WorkPackageComponent implements OnInit {
       actionColor: 'primary',
     } as PromptModalParameters)
       .subscribe(() => {});
+  }
+
+  prepareUpgrade() {
+    this.modalService.show(UpgradeWorkPackageComponent,
+      { workPackage: this.workPackage }).subscribe(() => {});
   }
 }
 

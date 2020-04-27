@@ -167,6 +167,7 @@ import { DevicesComponent } from './components/app/devices/devices.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { InviteMemberComponent } from './components/app/invite-member/invite-member.component';
+import { UpgradeWorkPackageComponent } from './modals/upgrade-work-package/upgrade-work-package.component';
 
 @NgModule({
   declarations: [
@@ -295,8 +296,10 @@ import { InviteMemberComponent } from './components/app/invite-member/invite-mem
     DocumentModalComponent,
     DevicesComponent,
     InviteMemberComponent,
+    UpgradeWorkPackageComponent,
   ],
   entryComponents: [
+    UpgradeWorkPackageComponent,
     DocumentModalComponent,
     MapModalComponent,
     WorkPackageWizardComponent,

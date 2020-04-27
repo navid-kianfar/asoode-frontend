@@ -3,24 +3,29 @@
     <div class="structure-container">
       <ng-container *ngIf="!project.complex">
         <div class="upgrade">
-          <button
-            [disabled]="
-              waiting ||
-              (permission !== AccessType.Admin &&
-                permission !== AccessType.Owner)
-            "
-            mat-flat-button
-          >
+          <button [disabled]=" waiting || (permission !== AccessType.Admin && permission !== AccessType.Owner)"
+                  (click)="prepareUpgrade()"
+                  mat-flat-button>
             <i class="icon-trophy4"></i>&nbsp;
             <span>{{ 'ADD_STRUCTURE' | translate }}</span>
           </button>
         </div>
       </ng-container>
-      <ng-container *ngIf="project.complex"></ng-container>
-      <div (click)="prepareRename()" class="title">
+      <ng-container *ngIf="project.complex">
+        <div class="upgrade">
+          <button [routerLink]="'/project/' + project.id" mat-flat-button>
+            <i class="icon-project"></i>&nbsp;
+            <span>{{ project.title }}</span>
+          </button>
+        </div>
+      </ng-container>
+      <div class="title">
         <i class="icon-workpackage"></i>&nbsp;
-        <span>{{ workPackage.title }}</span>&nbsp;
+        <span>{{ workPackage.title }}</span>&nbsp;&nbsp;
         <!--        <i class="icon-star-empty"></i>-->
+        <i (click)="prepareRename()"
+           *ngIf="(permission === AccessType.Admin || permission === AccessType.Owner)"
+           class="icon-pencil rename"></i>
       </div>
     </div>
     <div class="sections-container">

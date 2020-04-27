@@ -1,0 +1,67 @@
+.modal-body {
+  padding: 20px;
+}
+.choose {
+  .items {
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    flex-wrap: wrap;
+
+    ::ng-deep mat-radio-button {
+      display: flex;
+      width: 50%;
+
+      &.border {
+        border-bottom: 2px solid #efefef;
+        margin-bottom: 10px;
+      }
+    }
+
+    ::ng-deep .mat-radio-label {
+      white-space: pre-line;
+      align-items: start;
+    }
+
+    ::ng-deep .title {
+      display: flex;
+      font-weight: 500;
+      font-size: 1rem;
+      align-items: center;
+
+      i {
+        &.premium {
+          color: #cfaf4e;
+          font-size: 1.3rem;
+        }
+      }
+
+      &.import {
+        align-items: end;
+      }
+    }
+    ::ng-deep p.description {
+      color: #808080;
+      font-size: 0.8rem;
+    }
+
+    .icon-import {
+      font-size: 35px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .choose {
+    .items {
+      ::ng-deep mat-radio-button {
+        width: 100%;
+
+        &.border {
+          border-bottom: none;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

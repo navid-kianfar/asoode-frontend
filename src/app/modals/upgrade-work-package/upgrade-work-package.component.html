@@ -1,0 +1,64 @@
+<div class="outer" (click)="close()">
+  <ng-container *ngIf="mode === WizardMode.Choose">
+    <div class="modal-content create-modal" (click)="$event.stopPropagation()">
+      <div class="modal-alt-header">
+        <div class="btn"></div>
+        <div class="text">
+          <h4 class="modal-title">{{ 'ADD_STRUCTURE' | translate: true }}&nbsp;...</h4>
+        </div>
+        <div class="btn">
+          <button class="close" (click)="onCancel($event)">
+            <i class="icon-cross"></i>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body choose">
+        <mat-radio-group [(ngModel)]="continueAs" class="items">
+          <mat-radio-button
+            class="border"
+            color="primary"
+            [value]="WizardMode.Upgrade"
+          >
+            <div class="title">
+              <i class="icon-project"></i>&nbsp;
+              {{ 'CONVERT_TO_PROJECT' | translate }}
+            </div>
+            <p class="description">
+              {{ 'CONVERT_TO_PROJECT_DESCRIPTION' | translate }}
+            </p>
+          </mat-radio-button>
+          <mat-radio-button
+            class="border"
+            color="primary"
+            [value]="WizardMode.Connect"
+          >
+            <div class="title">
+              <i class="ikon-puzzle4"></i>&nbsp;
+              {{ 'CONNECT_TO_PROJECT' | translate }}
+            </div>
+            <p class="description">
+              {{ 'CONNECT_TO_PROJECT_DESCRIPTION' | translate }}
+            </p>
+          </mat-radio-button>
+          <mat-radio-button
+            color="primary"
+            [value]="WizardMode.Merge"
+          >
+            <div class="title">
+              <i class="ikon-stack"></i>&nbsp;
+              {{ 'MERGE_TO_PACKAGE' | translate }}
+            </div>
+            <p class="description">
+              {{ 'MERGE_TO_PACKAGE_DESCRIPTION' | translate }}
+            </p>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="modal-footer">
+        <button (click)="next($event)" mat-flat-button [color]="'primary'">
+          {{ 'CONTINUE' | translate }}
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>
