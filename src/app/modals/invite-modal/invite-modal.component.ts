@@ -32,11 +32,13 @@ export class InviteModalComponent
   exclude: string[];
   existing: any[];
   handler: (members) => Promise<OperationResult<boolean>>;
+  newMembers: InviteViewModel[];
 
   ngOnInit() {
     this.exclude = [...this.exclude, ...this.existing.map(e => e.recordId)];
     this.groups = this.groups || [];
     this.members = this.members || [];
+    this.newMembers = this.newMembers || [];
   }
 
   async onCancel($event: MouseEvent) {
@@ -62,12 +64,20 @@ export class InviteModalComponent
           access: g.access,
         };
       });
-    model.members = (this.members || []).map(m => {
-      return {
-        id: m.id,
-        access: m.access,
-      };
-    });
+    model.members = (this.members || [])
+      .filter(g => g.selected)
+      .map(g => {
+        return {
+          id: g.id,
+          access: g.access,
+        };
+      }).concat((this.newMembers || []).map(m => {
+        return {
+          id: m.id,
+          access: m.access,
+        };
+      }));
+
     const op = await this.handler(model);
     this.actionWaiting = false;
     if (op.status === OperationResultStatus.Success) {

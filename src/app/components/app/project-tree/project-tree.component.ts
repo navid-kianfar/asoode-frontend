@@ -23,6 +23,7 @@ import { CreateModalParameters } from '../../../view-models/modals/modals-types'
 import { IdentityService } from '../../../services/auth/identity.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {WorkPackageService} from '../../../services/projects/work-package.service';
+import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-project-tree',
@@ -142,7 +143,7 @@ export class ProjectTreeComponent implements OnInit {
     this.modalService
       .show(WorkPackageWizardComponent, {
         projectId: this.model.id,
-        parentId,
+        parentId
       })
       .subscribe(() => {});
   }

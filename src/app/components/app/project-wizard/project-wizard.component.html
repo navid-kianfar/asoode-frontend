@@ -53,8 +53,10 @@
   <ng-container *ngIf="mode === ViewMode.Invite">
     <div class="modal-body create-project">
       <app-invite-people
+        [projectId]="projectId"
         [exclude]="exclude"
         [(members)]="members"
+        [(newMembers)]="newMembers"
         [(groups)]="groups"
       ></app-invite-people>
     </div>

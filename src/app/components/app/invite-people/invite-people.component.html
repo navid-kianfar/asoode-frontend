@@ -8,19 +8,26 @@
         (groupsChange)="updateGroups($event)"
       ></app-invite-group>
     </mat-tab>
-    <mat-tab [label]="'INVITE_INDIVIDUALS' | translate">
+    <mat-tab *ngIf="projectId" [label]="'INVITE_MEMBERS' | translate">
       <app-invite-member
         [exclude]="exclude"
         [members]="members"
         (membersChange)="updateMembers($event)"
       ></app-invite-member>
     </mat-tab>
+    <mat-tab [label]="'INVITE_INDIVIDUALS' | translate">
+      <app-invite-new-member
+        [exclude]="exclude"
+        [members]="newMembers"
+        (membersChange)="updateNewMembers($event)"
+      ></app-invite-new-member>
+    </mat-tab>
   </mat-tab-group>
 </ng-container>
 <ng-container *ngIf="noGroup === true">
-  <app-invite-member
+  <app-invite-new-member
     [exclude]="exclude"
     [members]="members"
     (membersChange)="updateMembers($event)"
-  ></app-invite-member>
+  ></app-invite-new-member>
 </ng-container>

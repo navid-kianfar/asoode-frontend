@@ -96,7 +96,7 @@ import { DashboardProjectComponent } from './components/app/dashboard-project/da
 import { DashboardProjectTemplatesComponent } from './components/app/dashboard-project-templates/dashboard-project-templates.component';
 import { ProjectInfoComponent } from './components/app/project-info/project-info.component';
 import { CreateWizardComponent } from './modals/create-wizard/create-wizard.component';
-import { InviteMemberComponent } from './components/app/invite-member/invite-member.component';
+import { InviteNewMemberComponent } from './components/app/invite-new-member/invite-new-member.component';
 import { MemberInfoComponent } from './components/app/member-info/member-info.component';
 import { MessengerComponent } from './pages/communication/messenger/messenger.component';
 import { GroupComponent } from './pages/collaboration/group/group.component';
@@ -166,6 +166,7 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { DevicesComponent } from './components/app/devices/devices.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { InviteMemberComponent } from './components/app/invite-member/invite-member.component';
 
 @NgModule({
   declarations: [
@@ -231,7 +232,7 @@ import { environment } from '../environments/environment';
     DashboardProjectTemplatesComponent,
     ProjectInfoComponent,
     CreateWizardComponent,
-    InviteMemberComponent,
+    InviteNewMemberComponent,
     MemberInfoComponent,
     MessengerComponent,
     GroupComponent,
@@ -293,6 +294,7 @@ import { environment } from '../environments/environment';
     TimePickerComponent,
     DocumentModalComponent,
     DevicesComponent,
+    InviteMemberComponent,
   ],
   entryComponents: [
     DocumentModalComponent,

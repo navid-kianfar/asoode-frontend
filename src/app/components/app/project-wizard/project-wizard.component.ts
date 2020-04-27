@@ -36,6 +36,7 @@ export class ProjectWizardComponent implements OnInit {
   model: any;
   members: InviteViewModel[];
   groups: InviteViewModel[];
+  newMembers: InviteViewModel[];
   actionWaiting: boolean;
   exclude: string[];
   constructor(
@@ -51,6 +52,7 @@ export class ProjectWizardComponent implements OnInit {
       this.identityService.identity.userId,
       this.identityService.profile.email,
     ];
+    this.newMembers = [];
     this.members = [];
     this.groups = [];
     this.boardTemplate = BoardTemplate.Blank;
@@ -178,12 +180,20 @@ export class ProjectWizardComponent implements OnInit {
           access: g.access,
         };
       });
-    this.model.members = (this.members || []).map(m => {
-      return {
-        id: m.id,
-        access: m.access,
-      };
-    });
+    this.model.members = (this.members || [])
+      .filter(g => g.selected)
+      .map(g => {
+        return {
+          id: g.id,
+          access: g.access,
+        };
+      }).concat((this.newMembers || []).map(m => {
+        return {
+          id: m.id,
+          access: m.access,
+        };
+      }));
+
     this.actionWaiting = true;
     let op: OperationResult<boolean>;
 

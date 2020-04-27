@@ -5,7 +5,7 @@ import { ProjectService } from '../projects/project.service';
 import { ActivityType } from '../../library/app/enums';
 import { Router } from '@angular/router';
 import { WindowService } from './window.service';
-import { WorkPackageViewModel } from '../../view-models/projects/project-types';
+import {ProjectMemberViewModel, WorkPackageViewModel} from '../../view-models/projects/project-types';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
@@ -215,6 +215,55 @@ export class PushNotificationService {
         }
         break;
 
+      case ActivityType.ProjectMemberAdd:
+        find1 = this.projectService.projects.find(p => p.id === notification.data.project.id);
+        if (find1) {
+          find1.members = find1.members.concat(notification.data.members);
+          find1.pending = find1.pending.concat(notification.data.pending);
+        }
+        break;
+      case ActivityType.ProjectMemberRemove:
+        if (notification.data.projectId) {
+          find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+          if (!find1) {
+            return;
+          }
+          find1.members = find1.members.filter(
+            m => m.id !== notification.data.id,
+          );
+          return;
+        }
+        find1 = this.projectService.projects.find(p => p.id === notification.data.recordId);
+        if (!find1) {
+          return;
+        }
+        find1.pending = find1.pending.filter(
+          m => m.id !== notification.data.id,
+        );
+        break;
+      case ActivityType.ProjectMemberPermission:
+        if (notification.data.projectId) {
+          find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+          if (!find1) {
+            return;
+          }
+          find2 = find1.members.find(m => m.id === notification.data.id);
+          if (find2) {
+            find2.access = notification.data.access;
+            return;
+          }
+        }
+        find1 = this.projectService.projects.find(p => p.id === notification.data.recordId);
+        if (!find1) {
+          return;
+        }
+        find2 = find1.pending.find(m => m.id === notification.data.id);
+        if (find2) {
+          find2.access = notification.data.access;
+          return;
+        }
+        break;
+
       case ActivityType.WorkPackageMemberAdd:
         find1 = this.projectService.projects.find(
           p => p.id === notification.data.projectId,
@@ -263,6 +312,9 @@ export class PushNotificationService {
           return;
         }
         find1 = this.findWorkPackage(notification.data.recordId);
+        if (!find1) {
+          return;
+        }
         find1.pending = find1.pending.filter(
           m => m.id !== notification.data.id,
         );
