@@ -184,4 +184,10 @@ export class WorkPackageService {
       params,
     );
   }
+
+  async upgrade(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/upgrade`
+    );
+  }
 }
