@@ -415,6 +415,12 @@ export class PushNotificationService {
           }
         }
         break;
+
+      case ActivityType.WorkPackageConnect:
+      case ActivityType.WorkPackageUpgrade:
+      case ActivityType.WorkPackageMerge:
+        this.projectService.load();
+        break;
     }
   }
 

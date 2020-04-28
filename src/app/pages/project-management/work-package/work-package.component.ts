@@ -476,6 +476,14 @@ export class WorkPackageComponent implements OnInit {
             this.workPackage.order = notification.data.order;
           }
           break;
+
+        case ActivityType.WorkPackageConnect:
+        case ActivityType.WorkPackageUpgrade:
+        case ActivityType.WorkPackageMerge:
+          if (this.workPackage.id === notification.data.id) {
+            this.ngOnInit();
+          }
+          break;
       }
     });
   }

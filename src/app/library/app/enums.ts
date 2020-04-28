@@ -79,7 +79,8 @@ export enum ReceiveNotificationType {
   ReceiveMine = 2,
   ReceiveNone = 3,
 }
-export enum ActivityType {
+export enum ActivityType
+{
   None = 0,
   AccountEdit = 100,
 
@@ -120,6 +121,9 @@ export enum ActivityType {
   WorkPackageLabelAdd = 411,
   WorkPackageUserSetting = 412,
   WorkPackageSetting = 413,
+  WorkPackageUpgrade = 414,
+  WorkPackageConnect = 415,
+  WorkPackageMerge = 416,
 
   WorkPackageListAdd = 500,
   WorkPackageListEdit = 501,
@@ -163,7 +167,7 @@ export enum ActivityType {
   WorkPackageObjectiveRemove = 702,
 
   ChannelMessage = 800,
-  ChannelUpload = 801,
+  ChannelUpload = 801
 }
 export enum PlanType {
   Free = 1,
