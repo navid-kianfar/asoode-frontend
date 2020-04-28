@@ -72,14 +72,30 @@ export class UpgradeWorkPackageComponent
     this.close();
   }
 
-  connect($event: MouseEvent) {
+  async connect($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
+    this.upgrading = true;
+    const op = await this.workPackageService.connect(this.workPackage.id, this.selectedProject);
+    this.upgrading = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.close();
   }
 
-  merge($event: MouseEvent) {
+  async merge($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
+    this.upgrading = true;
+    const op = await this.workPackageService.merge(this.workPackage.id, this.selectedPackage);
+    this.upgrading = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.close();
   }
 
   async onCancel($event: MouseEvent) {

@@ -190,4 +190,16 @@ export class WorkPackageService {
       `/work-packages/${id}/upgrade`
     );
   }
+
+  async merge(id: string, packageId: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/merge/${packageId}`
+    );
+  }
+
+  async connect(id: string, projectId: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/connect/${projectId}`
+    );
+  }
 }
