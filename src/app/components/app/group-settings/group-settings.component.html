@@ -58,19 +58,19 @@
         <i class="archive icon-archive"></i>
       </div>
       <div class="title">
-        <h4>{{ 'ARCHIVE_GROUP' | translate }}</h4>
+        <h4>{{ 'DELETE_GROUP' | translate }}</h4>
       </div>
       <div class="action">
-        <button color="accent" mat-flat-button>
-          {{ 'ARCHIVE_GROUP' | translate }}</button
-        >&nbsp;
-        <button color="warn" mat-flat-button>
+<!--        <button color="accent" mat-flat-button>-->
+<!--          {{ 'ARCHIVE_GROUP' | translate }}</button>&nbsp;-->
+        <button (click)="prepareDelete()" color="warn" mat-flat-button>
+          <i *ngIf="deleting" class="icon-spin icon-spinner2"></i>
           {{ 'DELETE_GROUP' | translate }}
         </button>
       </div>
     </div>
-    <div class="body">
-      <h5>{{ 'ARCHIVE_GROUP_DESCRIPTION' | translate }}</h5>
-    </div>
+<!--    <div class="body">-->
+<!--      <h5>{{ 'ARCHIVE_GROUP_DESCRIPTION' | translate }}</h5>-->
+<!--    </div>-->
   </div>
 </div>

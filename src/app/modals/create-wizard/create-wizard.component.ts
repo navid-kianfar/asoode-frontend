@@ -69,5 +69,5 @@ enum WizardMode {
   Group = 2,
   SimpleProject = 3,
   ComplexProject = 4,
-  Import = 5
+  Import = 5,
 }

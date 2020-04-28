@@ -16,17 +16,27 @@
       <div class="time-span">{{ 'TIME_SPAN' | translate }}</div>
       <div class="time-spent">{{ 'TIME_SPENT' | translate }}</div>
     </div>
-    <div class="sub-projects-container"
-         cdkDropList
-         cdkDropListOrientation="vertical"
-         [cdkDropListData]="subProjects"
-         (cdkDropListDropped)="dropSubProject($event)">
-      <div class="sub-container"
-           *ngFor="let subProject of subProjects"
-           [cdkDragStartDelay]="dragDelay"
-           [cdkDragData]="subProject"
-           [cdkDragDisabled]="!(permission === AccessType.Admin || permission === AccessType.Owner) || subNode.expanded || subProjects.length === 1"
-           cdkDrag>
+    <div
+      class="sub-projects-container"
+      cdkDropList
+      cdkDropListOrientation="vertical"
+      [cdkDropListData]="subProjects"
+      (cdkDropListDropped)="dropSubProject($event)"
+    >
+      <div
+        class="sub-container"
+        *ngFor="let subProject of subProjects"
+        [cdkDragStartDelay]="dragDelay"
+        [cdkDragData]="subProject"
+        [cdkDragDisabled]="
+          !(
+            permission === AccessType.Admin || permission === AccessType.Owner
+          ) ||
+          subNode.expanded ||
+          subProjects.length === 1
+        "
+        cdkDrag
+      >
         <app-project-tree-node
           #subNode
           [permission]="permission"
@@ -42,19 +52,26 @@
           [reCreate]="reCreate"
         ></app-project-tree-node>
       </div>
-
     </div>
-    <div class="work-packages-container"
-         cdkDropList
-         cdkDropListOrientation="vertical"
-         [cdkDropListData]="workPackages"
-         (cdkDropListDropped)="dropWorkPackage($event)">
-      <div class="work-package-container"
-           *ngFor="let workPackage of workPackages"
-           [cdkDragDisabled]="!(permission === AccessType.Admin || permission === AccessType.Owner) || workPackages.length === 1"
-           [cdkDragStartDelay]="dragDelay"
-           [cdkDragData]="workPackage"
-           cdkDrag>
+    <div
+      class="work-packages-container"
+      cdkDropList
+      cdkDropListOrientation="vertical"
+      [cdkDropListData]="workPackages"
+      (cdkDropListDropped)="dropWorkPackage($event)"
+    >
+      <div
+        class="work-package-container"
+        *ngFor="let workPackage of workPackages"
+        [cdkDragDisabled]="
+          !(
+            permission === AccessType.Admin || permission === AccessType.Owner
+          ) || workPackages.length === 1
+        "
+        [cdkDragStartDelay]="dragDelay"
+        [cdkDragData]="workPackage"
+        cdkDrag
+      >
         <app-project-tree-node
           (dropWorkPackage)="dropWorkPackage($event)"
           [permission]="permission"

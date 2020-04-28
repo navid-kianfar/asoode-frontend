@@ -4,7 +4,9 @@
       <div class="modal-alt-header">
         <div class="btn"></div>
         <div class="text">
-          <h4 class="modal-title">{{ 'ADD_STRUCTURE' | translate: true }}&nbsp;...</h4>
+          <h4 class="modal-title">
+            {{ 'ADD_STRUCTURE' | translate: true }}&nbsp;...
+          </h4>
         </div>
         <div class="btn">
           <button class="close" (click)="onCancel($event)">
@@ -40,10 +42,7 @@
               {{ 'CONNECT_TO_PROJECT_DESCRIPTION' | translate }}
             </p>
           </mat-radio-button>
-          <mat-radio-button
-            color="primary"
-            [value]="WizardMode.Merge"
-          >
+          <mat-radio-button color="primary" [value]="WizardMode.Merge">
             <div class="title">
               <i class="ikon-stack"></i>&nbsp;
               {{ 'MERGE_TO_PACKAGE' | translate }}
@@ -55,12 +54,22 @@
         </mat-radio-group>
       </div>
       <div class="modal-footer">
-        <button *ngIf="continueAs === WizardMode.Upgrade" [disabled]="upgrading"
-                (click)="upgrade($event)" mat-flat-button [color]="'primary'">
+        <button
+          *ngIf="continueAs === WizardMode.Upgrade"
+          [disabled]="upgrading"
+          (click)="upgrade($event)"
+          mat-flat-button
+          [color]="'primary'"
+        >
           <i *ngIf="upgrading" class="icon-spin icon-spinner2"></i>
           {{ (hasProject ? 'UPGRADE_TO_PROJECT' : 'CONTINUE') | translate }}
         </button>
-        <button *ngIf="continueAs !== WizardMode.Upgrade" (click)="next($event)" mat-flat-button [color]="'primary'">
+        <button
+          *ngIf="continueAs !== WizardMode.Upgrade"
+          (click)="next($event)"
+          mat-flat-button
+          [color]="'primary'"
+        >
           {{ 'CONTINUE' | translate }}
         </button>
       </div>
@@ -76,7 +85,9 @@
           </button>
         </div>
         <div class="text">
-          <h4 class="modal-title">{{ 'CONNECT_TO_PROJECT' | translate: true }}</h4>
+          <h4 class="modal-title">
+            {{ 'CONNECT_TO_PROJECT' | translate: true }}
+          </h4>
         </div>
         <div class="btn">
           <button class="close" (click)="onCancel($event)">
@@ -85,10 +96,12 @@
         </div>
       </div>
       <div class="modal-body choose">
-        <h4>{{ 'CONNECT_TO_PROJECT_DESCRIPTION' | translate}}</h4>
-        <h5 class="warn">{{ 'CONNECT_TO_PROJECT_WARN' | translate}}</h5>
-        <br>
-        <h5 class="warn" *ngIf="!projects.length">{{ 'NO_PROJECTS' | translate}}</h5>
+        <h4>{{ 'CONNECT_TO_PROJECT_DESCRIPTION' | translate }}</h4>
+        <h5 class="warn">{{ 'CONNECT_TO_PROJECT_WARN' | translate }}</h5>
+        <br />
+        <h5 class="warn" *ngIf="!projects.length">
+          {{ 'NO_PROJECTS' | translate }}
+        </h5>
         <mat-radio-group [(ngModel)]="selectedProject" class="items">
           <mat-radio-button
             class="border"
@@ -108,8 +121,12 @@
         </mat-radio-group>
       </div>
       <div class="modal-footer">
-        <button [disabled]="upgrading || !selectedProject"
-                (click)="connect($event)" mat-flat-button [color]="'primary'">
+        <button
+          [disabled]="upgrading || !selectedProject"
+          (click)="connect($event)"
+          mat-flat-button
+          [color]="'primary'"
+        >
           <i *ngIf="upgrading" class="icon-spin icon-spinner2"></i>
           {{ 'CONNECT' | translate }}
         </button>
@@ -126,7 +143,9 @@
           </button>
         </div>
         <div class="text">
-          <h4 class="modal-title">{{ 'MERGE_TO_PACKAGE' | translate: true }}</h4>
+          <h4 class="modal-title">
+            {{ 'MERGE_TO_PACKAGE' | translate: true }}
+          </h4>
         </div>
         <div class="btn">
           <button class="close" (click)="onCancel($event)">
@@ -135,10 +154,12 @@
         </div>
       </div>
       <div class="modal-body choose">
-        <h4>{{ 'MERGE_TO_PACKAGE_DESCRIPTION' | translate}}</h4>
-        <h5 class="warn">{{ 'MERGE_TO_PACKAGE_WARN' | translate}}</h5>
-        <br>
-        <h5 class="warn" *ngIf="!packages.length">{{ 'NO_PACKAGES' | translate}}</h5>
+        <h4>{{ 'MERGE_TO_PACKAGE_DESCRIPTION' | translate }}</h4>
+        <h5 class="warn">{{ 'MERGE_TO_PACKAGE_WARN' | translate }}</h5>
+        <br />
+        <h5 class="warn" *ngIf="!packages.length">
+          {{ 'NO_PACKAGES' | translate }}
+        </h5>
         <mat-radio-group [(ngModel)]="selectedPackage" class="items">
           <mat-radio-button
             class="border"
@@ -158,8 +179,12 @@
         </mat-radio-group>
       </div>
       <div class="modal-footer">
-        <button [disabled]="upgrading || !selectedPackage"
-                (click)="merge($event)" mat-flat-button [color]="'primary'">
+        <button
+          [disabled]="upgrading || !selectedPackage"
+          (click)="merge($event)"
+          mat-flat-button
+          [color]="'primary'"
+        >
           <i *ngIf="upgrading" class="icon-spin icon-spinner2"></i>
           {{ 'MERGE' | translate }}
         </button>
@@ -167,7 +192,9 @@
     </div>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Plan">
-    <app-upgrade-wizard (click)="$event.stopPropagation()"
-                        (exit)="close()"></app-upgrade-wizard>
+    <app-upgrade-wizard
+      (click)="$event.stopPropagation()"
+      (exit)="close()"
+    ></app-upgrade-wizard>
   </ng-container>
 </div>

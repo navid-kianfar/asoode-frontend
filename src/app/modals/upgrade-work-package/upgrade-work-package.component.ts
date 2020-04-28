@@ -1,18 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {ProjectViewModel, WorkPackageViewModel} from '../../view-models/projects/project-types';
-import {IdentityService} from '../../services/auth/identity.service';
-import {WorkPackageService} from '../../services/projects/work-package.service';
-import {OperationResultStatus} from '../../library/core/enums';
-import {CultureService} from '../../services/core/culture.service';
-import {ProjectService} from '../../services/projects/project.service';
-import {AccessType} from '../../library/app/enums';
-import {GroupService} from '../../services/groups/group.service';
+import { Component, OnInit } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import {
+  ProjectViewModel,
+  WorkPackageViewModel,
+} from '../../view-models/projects/project-types';
+import { IdentityService } from '../../services/auth/identity.service';
+import { WorkPackageService } from '../../services/projects/work-package.service';
+import { OperationResultStatus } from '../../library/core/enums';
+import { CultureService } from '../../services/core/culture.service';
+import { ProjectService } from '../../services/projects/project.service';
+import { AccessType } from '../../library/app/enums';
+import { GroupService } from '../../services/groups/group.service';
 
 @Component({
   selector: 'app-upgrade-work-package',
   templateUrl: './upgrade-work-package.component.html',
-  styleUrls: ['./upgrade-work-package.component.scss']
+  styleUrls: ['./upgrade-work-package.component.scss'],
 })
 export class UpgradeWorkPackageComponent
   extends SimpleModalComponent<{ workPackage: WorkPackageViewModel }, any>
@@ -32,21 +35,26 @@ export class UpgradeWorkPackageComponent
     private readonly projectService: ProjectService,
     private readonly groupService: GroupService,
     private readonly workPackageService: WorkPackageService,
-    private readonly cultureService: CultureService,
-  ) { super(); }
+    readonly cultureService: CultureService,
+  ) {
+    super();
+  }
 
   ngOnInit() {
     this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.Upgrade;
-    this.hasProject = this.identityService.profile.plan.project >
+    this.hasProject =
+      this.identityService.profile.plan.project >
       this.identityService.profile.plan.usedProject;
     const groupIds = this.groupService.groups.map(g => g.id);
     this.projects = this.projectService.projects.filter(p => {
-      return p.members.find(m => p.complex && p.id !== this.workPackage.projectId &&
-        (m.access === AccessType.Admin || m.access === AccessType.Owner) &&
-        (m.recordId === this.identityService.identity.userId || (
-          groupIds.indexOf(m.recordId) !== -1
-        ))
+      return p.members.find(
+        m =>
+          p.complex &&
+          p.id !== this.workPackage.projectId &&
+          (m.access === AccessType.Admin || m.access === AccessType.Owner) &&
+          (m.recordId === this.identityService.identity.userId ||
+            groupIds.indexOf(m.recordId) !== -1),
       );
     });
     this.packages = this.projectService.projects
@@ -76,7 +84,10 @@ export class UpgradeWorkPackageComponent
     $event.stopPropagation();
     $event.preventDefault();
     this.upgrading = true;
-    const op = await this.workPackageService.connect(this.workPackage.id, this.selectedProject);
+    const op = await this.workPackageService.connect(
+      this.workPackage.id,
+      this.selectedProject,
+    );
     this.upgrading = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -89,7 +100,10 @@ export class UpgradeWorkPackageComponent
     $event.stopPropagation();
     $event.preventDefault();
     this.upgrading = true;
-    const op = await this.workPackageService.merge(this.workPackage.id, this.selectedPackage);
+    const op = await this.workPackageService.merge(
+      this.workPackage.id,
+      this.selectedPackage,
+    );
     this.upgrading = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -123,5 +137,5 @@ export enum WizardMode {
   Upgrade = 2,
   Connect = 3,
   Merge = 4,
-  Plan = 5
+  Plan = 5,
 }

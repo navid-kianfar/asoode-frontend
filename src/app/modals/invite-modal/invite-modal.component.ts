@@ -71,12 +71,15 @@ export class InviteModalComponent
           id: g.id,
           access: g.access,
         };
-      }).concat((this.newMembers || []).map(m => {
-        return {
-          id: m.id,
-          access: m.access,
-        };
-      }));
+      })
+      .concat(
+        (this.newMembers || []).map(m => {
+          return {
+            id: m.id,
+            access: m.access,
+          };
+        }),
+      );
 
     const op = await this.handler(model);
     this.actionWaiting = false;

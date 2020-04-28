@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InviteViewModel } from '../../../view-models/auth/identity-types';
 import { AccessType } from '../../../library/app/enums';
-import {ProjectService} from '../../../services/projects/project.service';
+import { ProjectService } from '../../../services/projects/project.service';
 
 @Component({
   selector: 'app-invite-people',
@@ -25,15 +25,19 @@ export class InvitePeopleComponent implements OnInit {
     this.members = this.members || [];
     this.newMembers = this.newMembers || [];
     if (this.projectId) {
-      const project = this.projectService.projects.find(p => p.id === this.projectId);
-      this.members = project.members.filter(f => !f.isGroup && this.exclude.indexOf(f.recordId) === -1).map(m => {
-        return {
-          access: m.access,
-          id: m.recordId,
-          model: m.member,
-          selected: false
-        };
-      });
+      const project = this.projectService.projects.find(
+        p => p.id === this.projectId,
+      );
+      this.members = project.members
+        .filter(f => !f.isGroup && this.exclude.indexOf(f.recordId) === -1)
+        .map(m => {
+          return {
+            access: m.access,
+            id: m.recordId,
+            model: m.member,
+            selected: false,
+          };
+        });
       setTimeout(() => {
         this.membersChange.emit(this.members);
       }, 200);

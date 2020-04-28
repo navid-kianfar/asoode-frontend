@@ -21,9 +21,9 @@ import { Router } from '@angular/router';
 import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
 import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { IdentityService } from '../../../services/auth/identity.service';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-project-tree',
@@ -76,9 +76,11 @@ export class ProjectTreeComponent implements OnInit {
   }
 
   createTree() {
-    this.workPackages = this.model.workPackages.filter(w => !w.subProjectId)
+    this.workPackages = this.model.workPackages
+      .filter(w => !w.subProjectId)
       .sort((a, b) => (a.order > b.order ? 1 : -1));
-    this.subProjects = this.model.subProjects.filter(s => !s.parentId)
+    this.subProjects = this.model.subProjects
+      .filter(s => !s.parentId)
       .sort((a, b) => (a.order > b.order ? 1 : -1));
   }
 
@@ -143,7 +145,7 @@ export class ProjectTreeComponent implements OnInit {
     this.modalService
       .show(WorkPackageWizardComponent, {
         projectId: this.model.id,
-        parentId
+        parentId,
       })
       .subscribe(() => {});
   }
@@ -223,7 +225,7 @@ export class ProjectTreeComponent implements OnInit {
     );
     event.item.data.order = event.currentIndex + 1;
     this.projectService.changeSupProjectOrder(event.item.data.id, {
-      order: event.item.data.order
+      order: event.item.data.order,
     });
   }
 
@@ -235,7 +237,7 @@ export class ProjectTreeComponent implements OnInit {
     );
     event.item.data.order = event.currentIndex + 1;
     this.workPackageService.changeOrder(event.item.data.id, {
-      order: event.item.data.order
+      order: event.item.data.order,
     });
   }
 }

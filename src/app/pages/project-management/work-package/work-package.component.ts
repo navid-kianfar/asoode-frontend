@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageMemberViewModel,
@@ -6,15 +6,15 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
-import {PopperContent} from 'ngx-popper';
-import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
-import {ModalService} from '../../../services/core/modal.service';
-import {CultureService} from '../../../services/core/culture.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
+import { PopperContent } from 'ngx-popper';
+import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
+import { ModalService } from '../../../services/core/modal.service';
+import { CultureService } from '../../../services/core/culture.service';
 import {
   AccessType,
   ActivityType,
@@ -23,18 +23,18 @@ import {
   WorkPackageTaskState,
   WorkPackageTaskVisibility,
 } from '../../../library/app/enums';
-import {PromptComponent} from 'src/app/modals/prompt/prompt.component';
-import {FormService} from 'src/app/services/core/form.service';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {OperationResult} from '../../../library/core/operation-result';
-import {GroupService} from '../../../services/groups/group.service';
-import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
-import {Socket} from 'ngx-socket-io';
-import {moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {NotificationService} from '../../../services/core/notification.service';
-import {UpgradeWorkPackageComponent} from '../../../modals/upgrade-work-package/upgrade-work-package.component';
+import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
+import { FormService } from 'src/app/services/core/form.service';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { OperationResult } from '../../../library/core/operation-result';
+import { GroupService } from '../../../services/groups/group.service';
+import { PendingInvitationViewModel } from '../../../view-models/groups/group-types';
+import { Socket } from 'ngx-socket-io';
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { NotificationService } from '../../../services/core/notification.service';
+import { UpgradeWorkPackageComponent } from '../../../modals/upgrade-work-package/upgrade-work-package.component';
 
 @Component({
   selector: 'app-work-package',
@@ -119,6 +119,10 @@ export class WorkPackageComponent implements OnInit {
       let find1 = null;
       let find2 = null;
       switch (notification.type) {
+        case ActivityType.GroupRemove:
+          this.workPackage.members = this.workPackage.members
+            .filter(m => m.recordId !== notification.data);
+          break;
         case ActivityType.WorkPackageListAdd:
           if (this.workPackage.id === notification.data.packageId) {
             this.workPackage.lists.push(notification.data);
@@ -464,7 +468,6 @@ export class WorkPackageComponent implements OnInit {
             );
           }
           break;
-
 
         case ActivityType.WorkPackageEdit:
           if (this.workPackage.id === notification.data.id) {
@@ -874,51 +877,64 @@ export class WorkPackageComponent implements OnInit {
   }
 
   prepareRename() {
-    if (this.updating || !(this.permission === AccessType.Admin || this.permission === AccessType.Owner)) { return; }
-    this.modalService.show(PromptComponent, {
-      icon: 'icon-workpackage',
-      title: 'EDIT_WORK_PACKAGE',
-      form: [
-        {
-          elements: [
-            this.formService.createInput({
-              config: { field: 'title' },
-              params: { model: this.workPackage.title, placeHolder: 'TITLE' },
-              validation: {
-                required: {
-                  value: true,
-                  message: 'TITLE_REQUIRED',
+    if (
+      this.updating ||
+      !(
+        this.permission === AccessType.Admin ||
+        this.permission === AccessType.Owner
+      )
+    ) {
+      return;
+    }
+    this.modalService
+      .show(PromptComponent, {
+        icon: 'icon-workpackage',
+        title: 'EDIT_WORK_PACKAGE',
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'title' },
+                params: { model: this.workPackage.title, placeHolder: 'TITLE' },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'TITLE_REQUIRED',
+                  },
                 },
-              },
-            }),
-            this.formService.createInput({
-              config: { field: 'description' },
-              params: {
-                model: this.workPackage.description,
-                textArea: true,
-                placeHolder: 'DESCRIPTION',
-              },
-            }),
-          ],
+              }),
+              this.formService.createInput({
+                config: { field: 'description' },
+                params: {
+                  model: this.workPackage.description,
+                  textArea: true,
+                  placeHolder: 'DESCRIPTION',
+                },
+              }),
+            ],
+          },
+        ],
+        action: async (params, form) => {
+          const op = await this.workPackageService.edit(
+            this.workPackage.id,
+            params,
+          );
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          this.notificationService.success('GENERAL_SUCCESS');
         },
-      ],
-      action: async (params, form) => {
-        const op = await this.workPackageService.edit(this.workPackage.id, params);
-        if (op.status !== OperationResultStatus.Success) {
-          // TODO: handle error
-          return;
-        }
-        this.notificationService.success('GENERAL_SUCCESS');
-      },
-      actionLabel: 'SAVE_CHANGES',
-      actionColor: 'primary',
-    } as PromptModalParameters)
+        actionLabel: 'SAVE_CHANGES',
+        actionColor: 'primary',
+      } as PromptModalParameters)
       .subscribe(() => {});
   }
 
   prepareUpgrade() {
-    this.modalService.show(UpgradeWorkPackageComponent,
-      { workPackage: this.workPackage }).subscribe(() => {});
+    this.modalService
+      .show(UpgradeWorkPackageComponent, { workPackage: this.workPackage })
+      .subscribe(() => {});
   }
 }
 

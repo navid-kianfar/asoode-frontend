@@ -46,6 +46,10 @@ export class GroupService {
     return await this.httpService.post<boolean>(`/groups/${id}/edit`, model);
   }
 
+  async remove(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/${id}/remove`);
+  }
+
   async removeAccess(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/groups/remove-access/${id}`);
   }

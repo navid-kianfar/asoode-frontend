@@ -5,7 +5,10 @@ import { ProjectService } from '../projects/project.service';
 import { ActivityType } from '../../library/app/enums';
 import { Router } from '@angular/router';
 import { WindowService } from './window.service';
-import {ProjectMemberViewModel, WorkPackageViewModel} from '../../view-models/projects/project-types';
+import {
+  ProjectMemberViewModel,
+  WorkPackageViewModel,
+} from '../../view-models/projects/project-types';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
@@ -19,8 +22,7 @@ export class PushNotificationService {
     private readonly projectService: ProjectService,
     private readonly windowService: WindowService,
     private readonly detector: DeviceDetectorService,
-    // private readonly serviceWorkerService: ServiceWorkerService,
-  ) {  }
+  ) { }
 
   handleSocket(notification: any) {
     let find1: any = null;
@@ -126,6 +128,15 @@ export class PushNotificationService {
           find1.pending = [...find1.pending, ...notification.data.pending];
         }
         break;
+      case ActivityType.GroupRemove:
+        this.groupService.groups = this.groupService.groups.filter(g => g.id !== notification.data);
+        this.projectService.projects.forEach(p => {
+          p.members = p.members.filter(m => m.recordId !== notification.data);
+          p.workPackages.forEach(w => {
+            w.members = w.members.filter(a => a.recordId !== notification.data);
+          });
+        });
+        break;
 
       case ActivityType.ProjectAdd:
         this.projectService.projects.push(notification.data);
@@ -164,9 +175,11 @@ export class PushNotificationService {
             const oldOrder = find2.order;
             Object.assign(find2, notification.data);
             if (oldOrder !== notification.data.order) {
-              find3 = find1.subProjects.sort((a, b) => (a.order > b.order ? 1 : -1));
+              find3 = find1.subProjects.sort((a, b) =>
+                a.order > b.order ? 1 : -1,
+              );
               let counter = 1;
-              find3.forEach(sp => sp.order = counter++);
+              find3.forEach(sp => (sp.order = counter++));
             }
           }
         }
@@ -179,9 +192,11 @@ export class PushNotificationService {
           find1.subProjects = find1.subProjects.filter(
             i => i.id !== notification.data.id,
           );
-          find3 = find1.subProjects.sort((a, b) => (a.order > b.order ? 1 : -1));
+          find3 = find1.subProjects.sort((a, b) =>
+            a.order > b.order ? 1 : -1,
+          );
           let counter = 1;
-          find3.forEach(sp => sp.order = counter++);
+          find3.forEach(sp => (sp.order = counter++));
         }
         break;
 
@@ -216,7 +231,9 @@ export class PushNotificationService {
         break;
 
       case ActivityType.ProjectMemberAdd:
-        find1 = this.projectService.projects.find(p => p.id === notification.data.project.id);
+        find1 = this.projectService.projects.find(
+          p => p.id === notification.data.project.id,
+        );
         if (find1) {
           find1.members = find1.members.concat(notification.data.members);
           find1.pending = find1.pending.concat(notification.data.pending);
@@ -224,7 +241,9 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectMemberRemove:
         if (notification.data.projectId) {
-          find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+          find1 = this.projectService.projects.find(
+            p => p.id === notification.data.projectId,
+          );
           if (!find1) {
             return;
           }
@@ -233,7 +252,9 @@ export class PushNotificationService {
           );
           return;
         }
-        find1 = this.projectService.projects.find(p => p.id === notification.data.recordId);
+        find1 = this.projectService.projects.find(
+          p => p.id === notification.data.recordId,
+        );
         if (!find1) {
           return;
         }
@@ -243,7 +264,9 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectMemberPermission:
         if (notification.data.projectId) {
-          find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+          find1 = this.projectService.projects.find(
+            p => p.id === notification.data.projectId,
+          );
           if (!find1) {
             return;
           }
@@ -253,7 +276,9 @@ export class PushNotificationService {
             return;
           }
         }
-        find1 = this.projectService.projects.find(p => p.id === notification.data.recordId);
+        find1 = this.projectService.projects.find(
+          p => p.id === notification.data.recordId,
+        );
         if (!find1) {
           return;
         }
@@ -361,13 +386,17 @@ export class PushNotificationService {
         this.projectService.load();
         break;
       case ActivityType.WorkPackageAdd:
-        find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+        find1 = this.projectService.projects.find(
+          p => p.id === notification.data.projectId,
+        );
         if (find1) {
           find1.workPackages.push(notification.data);
         }
         break;
       case ActivityType.WorkPackageEdit:
-        find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+        find1 = this.projectService.projects.find(
+          p => p.id === notification.data.projectId,
+        );
         if (find1) {
           find2 = find1.workPackages.find(w => w.id === notification.data.id);
           if (find2) {
@@ -377,10 +406,11 @@ export class PushNotificationService {
             find1.order = notification.data.order;
 
             if (oldOrder !== notification.data.order) {
-              find3 = find1.workPackages.filter(w => w.subProjectId === notification.data.subProjectId)
+              find3 = find1.workPackages
+                .filter(w => w.subProjectId === notification.data.subProjectId)
                 .sort((a, b) => (a.order > b.order ? 1 : -1));
               let counter = 1;
-              find3.forEach(wp => wp.order = counter++);
+              find3.forEach(wp => (wp.order = counter++));
             }
           }
         }

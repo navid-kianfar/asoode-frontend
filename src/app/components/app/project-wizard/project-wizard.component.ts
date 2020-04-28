@@ -187,12 +187,15 @@ export class ProjectWizardComponent implements OnInit {
           id: g.id,
           access: g.access,
         };
-      }).concat((this.newMembers || []).map(m => {
-        return {
-          id: m.id,
-          access: m.access,
-        };
-      }));
+      })
+      .concat(
+        (this.newMembers || []).map(m => {
+          return {
+            id: m.id,
+            access: m.access,
+          };
+        }),
+      );
 
     this.actionWaiting = true;
     let op: OperationResult<boolean>;

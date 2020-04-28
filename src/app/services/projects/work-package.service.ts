@@ -171,7 +171,10 @@ export class WorkPackageService {
     return await this.httpService.post<boolean>(`/work-packages/${id}/archive`);
   }
 
-  async changeOrder(id: string, params: any): Promise<OperationResult<boolean>> {
+  async changeOrder(
+    id: string,
+    params: any,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/work-packages/${id}/order`,
       params,
@@ -186,20 +189,24 @@ export class WorkPackageService {
   }
 
   async upgrade(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/work-packages/${id}/upgrade`);
+  }
+
+  async merge(
+    id: string,
+    packageId: string,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/work-packages/${id}/upgrade`
+      `/work-packages/${id}/merge/${packageId}`,
     );
   }
 
-  async merge(id: string, packageId: string): Promise<OperationResult<boolean>> {
+  async connect(
+    id: string,
+    projectId: string,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/work-packages/${id}/merge/${packageId}`
-    );
-  }
-
-  async connect(id: string, projectId: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      `/work-packages/${id}/connect/${projectId}`
+      `/work-packages/${id}/connect/${projectId}`,
     );
   }
 }

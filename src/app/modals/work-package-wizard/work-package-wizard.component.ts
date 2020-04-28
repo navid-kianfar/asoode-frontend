@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SimpleModalComponent } from 'ngx-simple-modal';
-import {MemberInfoViewModel} from '../../view-models/auth/identity-types';
+import { MemberInfoViewModel } from '../../view-models/auth/identity-types';
 
 @Component({
   selector: 'app-work-package-wizard',
@@ -23,5 +23,5 @@ export class WorkPackageWizardComponent
     super();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

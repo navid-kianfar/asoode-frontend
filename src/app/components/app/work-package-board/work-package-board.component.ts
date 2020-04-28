@@ -16,7 +16,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { TaskService } from '../../../services/projects/task.service';
 import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
 import { ModalService } from '../../../services/core/modal.service';
-import {DeviceDetectorService} from 'ngx-device-detector';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-work-package-board',
@@ -42,7 +42,11 @@ export class WorkPackageBoardComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.dragDelay = (this.deviceDetectorService.isTablet() || this.deviceDetectorService.isMobile()) ? 2000 : 0;
+    this.dragDelay =
+      this.deviceDetectorService.isTablet() ||
+      this.deviceDetectorService.isMobile()
+        ? 2000
+        : 0;
   }
 
   cancelNewList() {
