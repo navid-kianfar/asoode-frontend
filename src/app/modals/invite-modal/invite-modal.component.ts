@@ -16,6 +16,7 @@ export class InviteModalComponent
       noGroup: boolean;
       existing: any[];
       exclude: string[];
+      projectId: string;
       handler: (members) => Promise<OperationResult<boolean>>;
     },
     void
@@ -31,6 +32,7 @@ export class InviteModalComponent
   groups: InviteViewModel[];
   exclude: string[];
   existing: any[];
+  projectId: string;
   handler: (members) => Promise<OperationResult<boolean>>;
   newMembers: InviteViewModel[];
 

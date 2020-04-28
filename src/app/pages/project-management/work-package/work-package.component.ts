@@ -526,16 +526,13 @@ export class WorkPackageComponent implements OnInit {
     return access.member;
   }
 
-  showMemberInfo(member: WorkPackageMemberViewModel, popper: PopperContent) {
-    this.currentMember = member;
-  }
-
   prepareInvite() {
     if (this.waiting) {
       return;
     }
     this.modalService
       .show(InviteModalComponent, {
+        projectId: this.project.complex ? this.project.id : undefined,
         noProject: true,
         existing: this.workPackage.members,
         exclude: [...(this.workPackage.pending || []).map(p => p.identifier)],
