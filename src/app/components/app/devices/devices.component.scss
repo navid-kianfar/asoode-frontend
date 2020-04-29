@@ -56,3 +56,21 @@
     }
   }
 }
+
+@media (max-width: 770px) {
+  .devices {
+    .device {
+      flex-wrap: wrap;
+    }
+  }
+}
+@media (max-width: 440px) {
+  .devices {
+    .action {
+      flex-wrap: wrap;
+      button {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

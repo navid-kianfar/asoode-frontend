@@ -66,6 +66,37 @@
           {{ 'CALENDAR' | translate }}
         </li>
       </ul>
+      <div class="alt-mode">
+        <button [matMenuTriggerFor]="displayMode">
+          <i class="ikon-display"></i>
+        </button>
+        <mat-menu #displayMode="matMenu">
+          <button class="action-btn" mat-menu-item>
+            <span class="cnt">
+              <i class="ikon-trello"></i>
+              <span>{{ 'BOARD' | translate }}</span>
+            </span>
+          </button>
+          <button class="action-btn" mat-menu-item>
+            <span class="cnt">
+              <i class="icon-list2"></i>
+              <span>{{ 'LIST' | translate }}</span>
+            </span>
+          </button>
+          <button class="action-btn" mat-menu-item>
+            <span class="cnt">
+              <i class="ikon-map2"></i>
+              <span>{{ 'TIME_SPAN' | translate }}</span>
+            </span>
+          </button>
+          <button class="action-btn" mat-menu-item>
+            <span class="cnt">
+              <i class="ikon-calendar5"></i>
+              <span>{{ 'CALENDAR' | translate }}</span>
+            </span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
     <div class="properties-container">
       <div class="progress-container">
