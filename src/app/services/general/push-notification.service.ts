@@ -424,6 +424,13 @@ export class PushNotificationService {
     }
   }
 
+  handlePush(notification: any) {
+    // console.log('push', notification);
+  }
+  handlePushClick(notification: any) {
+    // console.log('click', notification);
+  }
+
   private findWorkPackage(id: string): WorkPackageViewModel {
     for (const proj of this.projectService.projects) {
       for (const wp of proj.workPackages) {
@@ -433,4 +440,5 @@ export class PushNotificationService {
       }
     }
   }
+
 }

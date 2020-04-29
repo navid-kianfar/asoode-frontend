@@ -14,6 +14,7 @@ import {FormService} from '../../../services/core/form.service';
 import {NotificationService} from '../../../services/core/notification.service';
 import {ActivityType} from '../../../library/app/enums';
 import {Socket} from 'ngx-socket-io';
+import {PushNotificationService} from '../../../services/general/push-notification.service';
 
 @Component({
   selector: 'app-devices',
@@ -25,6 +26,7 @@ export class DevicesComponent implements OnInit {
   checkDevice: boolean;
   devices: DeviceViewModel[];
   checkingDevice: boolean;
+  registered: any;
 
 
   constructor(
@@ -35,6 +37,7 @@ export class DevicesComponent implements OnInit {
     private readonly translateService: TranslateService,
     private readonly formService: FormService,
     private readonly notificationService: NotificationService,
+    private readonly pushNotificationService: PushNotificationService,
     private readonly socket: Socket,
   ) {}
 
@@ -104,6 +107,13 @@ export class DevicesComponent implements OnInit {
         return;
       }
       this.checkDevice = true;
+      if (this.registered) { return; }
+      this.registered = this.swPush.messages.subscribe((notification) => {
+        this.pushNotificationService.handlePush(notification);
+      });
+      this.swPush.notificationClicks.subscribe((notification) => {
+        this.pushNotificationService.handlePushClick(notification);
+      });
     } catch (e) {
       console.error(e);
     }
