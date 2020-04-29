@@ -20,15 +20,29 @@
             <i class="{{ getIcon(device) }}"></i>
           </div>
           <div class="info">
-            <div class="title"></div>
-            <div class="os"></div>
+            <div class="title">{{device.title}}</div>
+            <div class="os">{{device.os}}</div>
           </div>
           <div class="action">
-            <button>
-              <i class="icon-pencil"></i>
+
+            <button [disabled]="device.toggling || device.editing || device.deleting" (click)="prepareToggle(device)" *ngIf="device.enabled" mat-stroked-button>
+              <i *ngIf="device.toggling" class="icon-spinner2 icon-spin"></i>
+              <span>{{ 'RECEIVE_NOTIFICATION' | translate }}</span>
             </button>
-            <button>
-              <i class="icon-delete"></i>
+
+            <button [disabled]="device.toggling || device.editing || device.deleting" (click)="prepareToggle(device)" *ngIf="!device.enabled" mat-flat-button color="accent">
+              <i *ngIf="device.toggling" class="icon-spinner2 icon-spin"></i>
+              <span>{{ 'MUTE_NOTIFICATION' | translate }}</span>
+            </button>
+
+            <button [disabled]="device.toggling || device.editing || device.deleting" (click)="prepareRename(device)" mat-stroked-button>
+              <i *ngIf="device.editing" class="icon-spinner2 icon-spin"></i>
+              <span>{{ 'EDIT_DEVICE' | translate }}</span>
+            </button>
+
+            <button [disabled]="device.toggling || device.editing || device.deleting" (click)="prepareDelete(device)" mat-flat-button color="warn">
+              <i *ngIf="device.deleting" class="icon-spinner2 icon-spin"></i>
+              <span>{{ 'REMOVE_DEVICE' | translate }}</span>
             </button>
           </div>
         </div>

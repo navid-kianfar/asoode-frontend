@@ -183,8 +183,8 @@ export class IdentityService {
     return await this.httpService.post<DeviceViewModel[]>('/account/devices');
   }
 
-  async addDevice(model): Promise<OperationResult<DeviceViewModel>> {
-    return await this.httpService.post<DeviceViewModel>(
+  async addDevice(model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
       '/account/devices/add',
       model,
     );
@@ -193,6 +193,11 @@ export class IdentityService {
   async removeDevice(id): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       '/account/devices/remove/' + id,
+    );
+  }
+  async toggleDevice(id): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      '/account/devices/toggle/' + id,
     );
   }
   async renameDevice(id, model): Promise<OperationResult<boolean>> {

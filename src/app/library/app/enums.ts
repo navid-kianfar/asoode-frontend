@@ -79,10 +79,13 @@ export enum ReceiveNotificationType {
   ReceiveMine = 2,
   ReceiveNone = 3,
 }
-export enum ActivityType
-{
+export enum ActivityType {
   None = 0,
   AccountEdit = 100,
+  AccountDeviceAdd = 101,
+  AccountDeviceEdit = 102,
+  AccountDeviceRemove = 103,
+  AccountDeviceState = 104,
 
   GroupAdd = 200,
   GroupEdit = 201,

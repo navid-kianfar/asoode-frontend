@@ -35,4 +35,8 @@ export interface DeviceViewModel extends BaseViewModel {
   title: string;
   os: string;
   enabled: boolean;
+
+  deleting?: boolean;
+  toggling?: boolean;
+  editing?: boolean;
 }
