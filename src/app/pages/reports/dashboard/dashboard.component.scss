@@ -9,7 +9,7 @@
       min-width: 150px;
     }
     ::ng-deep .mat-tab-group {
-      max-width: calc(100% - 150px);
+      max-width: calc(100% - 150px) !important;
     }
     ::ng-deep .mat-tab-label-content {
       i {

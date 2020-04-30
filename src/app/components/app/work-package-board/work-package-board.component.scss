@@ -6,6 +6,7 @@
     height: calc(100vh - 140px);
     .board-list {
       min-width: 250px;
+      max-width: 250px;
       max-height: calc(100vh - 160px);
       background: #fff;
       border-radius: 5px;
@@ -89,10 +90,15 @@
   height: 10px;
   border-radius: 0;
 }
-//@media (max-width: 720px) {
-//  .work-package-board {
-//    .board-lists {
-//      height: calc(100vh - 200px);
-//    }
-//  }
-//}
+@media (max-width: 720px) {
+  .work-package-board {
+    .board-lists {
+      height: calc(100vh - 190px);
+      .board-list {
+        .cards {
+          max-height: calc(100vh - 265px);
+        }
+      }
+    }
+  }
+}

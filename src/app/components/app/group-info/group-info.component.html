@@ -3,21 +3,23 @@
   [class.selected]="selected"
   [class.small]="small"
 >
-  <div *ngIf="model.avatar" class="avatar">
-    <img *ngIf="!waiting" [src]="model.avatar" />
-    <i *ngIf="waiting" class="icon-spinner2 icon-spin"></i>
-  </div>
-  <div *ngIf="!model.avatar" class="initials-holder">
-    <div class="initials">
-      <span *ngIf="small">{{ model.title | initials }}</span>
-      <i
-        *ngIf="!small"
-        class="{{ waiting ? 'icon-spinner2 icon-spin' : 'icon-team' }}"
-      ></i>
+  <ng-container *ngIf="model">
+    <div *ngIf="model.avatar" class="avatar">
+      <img *ngIf="!waiting" [src]="model.avatar" />
+      <i *ngIf="waiting" class="icon-spinner2 icon-spin"></i>
     </div>
-  </div>
-  <div class="info">
-    <div class="name">{{ model.title }}</div>
-    <div class="description">{{ model.description }}</div>
-  </div>
+    <div *ngIf="!model.avatar" class="initials-holder">
+      <div class="initials">
+        <span *ngIf="small">{{ model.title | initials }}</span>
+        <i
+          *ngIf="!small"
+          class="{{ waiting ? 'icon-spinner2 icon-spin' : 'icon-team' }}"
+        ></i>
+      </div>
+    </div>
+    <div class="info">
+      <div class="name">{{ model.title }}</div>
+      <div class="description">{{ model.description }}</div>
+    </div>
+  </ng-container>
 </div>
