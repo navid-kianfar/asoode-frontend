@@ -27,7 +27,7 @@
 <ng-container *ngIf="noGroup === true">
   <app-invite-new-member
     [exclude]="exclude"
-    [members]="members"
-    (membersChange)="updateMembers($event)"
+    [members]="newMembers"
+    (membersChange)="updateNewMembers($event)"
   ></app-invite-new-member>
 </ng-container>

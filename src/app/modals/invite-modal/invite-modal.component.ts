@@ -52,7 +52,7 @@ export class InviteModalComponent
   async invite($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-    if (!this.groups.length && !this.members.length) {
+    if (!this.groups.length && !this.members.length && !this.newMembers.length) {
       // TODO: show error
       return;
     }
@@ -82,7 +82,6 @@ export class InviteModalComponent
           };
         }),
       );
-
     const op = await this.handler(model);
     this.actionWaiting = false;
     if (op.status === OperationResultStatus.Success) {

@@ -23,7 +23,6 @@ export class PushNotificationService {
     private readonly windowService: WindowService,
     private readonly detector: DeviceDetectorService,
   ) { }
-
   handleSocket(notification: any) {
     let find1: any = null;
     let find2: any = null;
@@ -53,7 +52,8 @@ export class PushNotificationService {
           }
         });
         break;
-      case ActivityType.GroupAdd:
+
+        case ActivityType.GroupAdd:
         this.groupService.groups.push(notification.data);
         if (
           this.identityService.identity.userId === notification.data.userId &&
@@ -124,8 +124,8 @@ export class PushNotificationService {
           g => g.id === notification.data.groupId,
         );
         if (find1) {
-          find1.members = [...find1.members, ...notification.data.members];
-          find1.pending = [...find1.pending, ...notification.data.pending];
+          find1.members = [...(find1.members || []), ...(notification.data.members || [])];
+          find1.pending = [...(find1.pending || []), ...(notification.data.pending || [])];
         }
         break;
       case ActivityType.GroupRemove:
@@ -398,12 +398,16 @@ export class PushNotificationService {
           p => p.id === notification.data.projectId,
         );
         if (find1) {
+          if (!find1.complex) {
+            find1.title = notification.data.title;
+            find1.description = notification.data.description;
+          }
           find2 = find1.workPackages.find(w => w.id === notification.data.id);
           if (find2) {
             const oldOrder = find2.order;
-            find1.title = notification.data.title;
-            find1.description = notification.data.description;
-            find1.order = notification.data.order;
+            find2.title = notification.data.title;
+            find2.description = notification.data.description;
+            find2.order = notification.data.order;
 
             if (oldOrder !== notification.data.order) {
               find3 = find1.workPackages
@@ -423,14 +427,12 @@ export class PushNotificationService {
         break;
     }
   }
-
   handlePush(notification: any) {
     // console.log('push', notification);
   }
   handlePushClick(notification: any) {
     // console.log('click', notification);
   }
-
   private findWorkPackage(id: string): WorkPackageViewModel {
     for (const proj of this.projectService.projects) {
       for (const wp of proj.workPackages) {
@@ -440,5 +442,4 @@ export class PushNotificationService {
       }
     }
   }
-
 }
