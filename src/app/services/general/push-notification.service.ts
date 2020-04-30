@@ -241,9 +241,13 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectMemberRemove:
         if (notification.data.projectId) {
-          find1 = this.projectService.projects.find(
-            p => p.id === notification.data.projectId,
-          );
+          find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+
+          if (this.identityService.identity.userId === notification.data.recordId) {
+            this.projectService.projects = this.projectService.projects.filter(p => p.id !== find1.id);
+            return;
+          }
+
           if (!find1) {
             return;
           }
@@ -328,21 +332,37 @@ export class PushNotificationService {
       case ActivityType.WorkPackageMemberRemove:
         if (notification.data.packageId) {
           find1 = this.findWorkPackage(notification.data.packageId);
+          find2 = this.projectService.projects.find(p => p.id === find1.projectId);
+
+          if (this.identityService.identity.userId === notification.data.recordId) {
+            this.projectService.projects = this.projectService.projects.filter(p => p.id !== find2.id);
+            return;
+          }
+
           if (!find1) {
             return;
           }
           find1.members = find1.members.filter(
             m => m.id !== notification.data.id,
           );
+          if (find2 && !find2.complex) {
+            find2.members = find2.members.filter(
+              m => m.id !== notification.data.id,
+            );
+          }
           return;
         }
         find1 = this.findWorkPackage(notification.data.recordId);
-        if (!find1) {
-          return;
-        }
+        if (!find1) { return; }
         find1.pending = find1.pending.filter(
           m => m.id !== notification.data.id,
         );
+        find2 = this.projectService.projects.find(p => p.id === find1.projectId);
+        if (find2 && !find2.complex) {
+          find2.pending = find2.pending.filter(
+            m => m.id !== notification.data.id,
+          );
+        }
         break;
 
       case ActivityType.WorkPackageTaskTime:
