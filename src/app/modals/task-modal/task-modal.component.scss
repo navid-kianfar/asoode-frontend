@@ -43,6 +43,22 @@
           }
         }
       }
+
+      ::ng-deep .close-btn {
+        .mat-button-wrapper {
+          .btn-inner {
+            i {
+              font-size: 0.7rem;
+              top: 3px;
+            }
+          }
+        }
+      }
+
+      .sep {
+        display: flex;
+        flex-grow: 1;
+      }
     }
     .archived {
       background: #f2b254;
