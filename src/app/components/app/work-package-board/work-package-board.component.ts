@@ -11,12 +11,13 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { WorkPackageService } from '../../../services/projects/work-package.service';
-import { AccessType } from '../../../library/app/enums';
+import { AccessType, WorkPackageTaskVoteNecessity } from '../../../library/app/enums';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { TaskService } from '../../../services/projects/task.service';
 import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
 import { ModalService } from '../../../services/core/modal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import {CultureService} from '../../../services/core/culture.service';
 
 @Component({
   selector: 'app-work-package-board',
@@ -28,6 +29,7 @@ export class WorkPackageBoardComponent implements OnInit {
   @Input() model: WorkPackageViewModel;
   @Input() permission: AccessType;
   AccessType = AccessType;
+  WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
   expanded: boolean;
   dragDelay: number;
   creatingNewList: boolean;
@@ -39,6 +41,7 @@ export class WorkPackageBoardComponent implements OnInit {
     private readonly taskService: TaskService,
     private readonly modalService: ModalService,
     private readonly deviceDetectorService: DeviceDetectorService,
+    readonly cultureService: CultureService,
   ) {}
 
   ngOnInit() {
@@ -118,7 +121,7 @@ export class WorkPackageBoardComponent implements OnInit {
   }
 
   async createNewTask(list: WorkPackageListViewModel) {
-    const name = this.newTaskTitle.trim();
+    const name = (list.newTaskTitle || this.newTaskTitle).trim();
     if (!name) {
       return;
     }
@@ -133,7 +136,7 @@ export class WorkPackageBoardComponent implements OnInit {
       // TODO: handle error
       return;
     }
-    this.newTaskTitle = '';
+    list.newTaskTitle = this.newTaskTitle = '';
     list.expanded = false;
   }
 

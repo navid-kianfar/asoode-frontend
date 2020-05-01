@@ -1,16 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WorkPackageViewModel } from '../../../view-models/projects/project-types';
+import {WorkPackageLabelViewModel, WorkPackageTaskViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
 import { AccessType } from '../../../library/app/enums';
+import {WorkPackageBoardComponent} from '../work-package-board/work-package-board.component';
 
 @Component({
   selector: 'app-work-package-list',
   templateUrl: './work-package-list.component.html',
   styleUrls: ['./work-package-list.component.scss'],
 })
-export class WorkPackageListComponent implements OnInit {
-  @Input() model: WorkPackageViewModel;
-  @Input() permission: AccessType;
-  constructor() {}
-
-  ngOnInit() {}
+export class WorkPackageListComponent
+  extends WorkPackageBoardComponent {
+  isLabelSelected(task: WorkPackageTaskViewModel, label: WorkPackageLabelViewModel): boolean {
+    return task.labels.findIndex(i => i.labelId === label.id) !== -1;
+  }
 }

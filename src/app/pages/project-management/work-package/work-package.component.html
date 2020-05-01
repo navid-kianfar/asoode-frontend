@@ -1,4 +1,9 @@
-<div class="work-package" appReloadOnParamsChanged>
+<div class="work-package"
+     [class.board-view]="mode === ViewMode.Board"
+     [class.calendar-view]="mode === ViewMode.Calendar"
+     [class.list-view]="mode === ViewMode.List"
+     [class.time-view]="mode === ViewMode.TimeSpan"
+     appReloadOnParamsChanged>
   <div class="header">
     <div class="structure-container">
       <ng-container *ngIf="!project.complex">
@@ -71,25 +76,25 @@
           <i class="ikon-display"></i>
         </button>
         <mat-menu #displayMode="matMenu">
-          <button class="action-btn" mat-menu-item>
+          <button (click)="switchMode(ViewMode.Board)" class="action-btn" mat-menu-item>
             <span class="cnt">
               <i class="ikon-trello"></i>
               <span>{{ 'BOARD' | translate }}</span>
             </span>
           </button>
-          <button class="action-btn" mat-menu-item>
+          <button (click)="switchMode(ViewMode.List)" class="action-btn" mat-menu-item>
             <span class="cnt">
               <i class="icon-list2"></i>
               <span>{{ 'LIST' | translate }}</span>
             </span>
           </button>
-          <button class="action-btn" mat-menu-item>
+          <button (click)="switchMode(ViewMode.TimeSpan)" class="action-btn" mat-menu-item>
             <span class="cnt">
               <i class="ikon-map2"></i>
               <span>{{ 'TIME_SPAN' | translate }}</span>
             </span>
           </button>
-          <button class="action-btn" mat-menu-item>
+          <button (click)="switchMode(ViewMode.Calendar)" class="action-btn" mat-menu-item>
             <span class="cnt">
               <i class="ikon-calendar5"></i>
               <span>{{ 'CALENDAR' | translate }}</span>
@@ -255,7 +260,8 @@
       </div>
     </div>
   </div>
-  <div class="inner-container" [class.toggleSetting]="toggleSetting">
+  <div class="inner-container"
+       [class.toggleSetting]="toggleSetting">
     <div class="wrapper-container">
       <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
       <ng-container *ngIf="!waiting">
@@ -268,18 +274,21 @@
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.List">
           <app-work-package-list
+            [project]="project"
             [permission]="permission"
             [model]="workPackage"
           ></app-work-package-list>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.TimeSpan">
           <app-work-package-time-span
+            [project]="project"
             [permission]="permission"
             [model]="workPackage"
           ></app-work-package-time-span>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.Calendar">
           <app-work-package-calendar
+            [project]="project"
             [permission]="permission"
             [model]="workPackage"
           ></app-work-package-calendar>

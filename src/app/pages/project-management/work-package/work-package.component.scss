@@ -369,6 +369,10 @@
     .wrapper-container {
     }
   }
+
+  &.calendar-view {
+    height: auto;
+  }
 }
 
 .filters-popper {

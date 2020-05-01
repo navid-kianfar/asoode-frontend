@@ -1,1 +1,143 @@
-<p>work-space-calendar works!</p>
+<div class="work-package-calendar-view">
+  <ng-container *ngIf="mode === ViewMode.Day">
+    <div class="header">
+      <div class="filter">
+        <div class="date">
+          {{ beginDate | culturedDate }}
+          <i class="icon-arrow-down2"></i>
+        </div>
+
+        <div class="btns">
+          <button>
+            <i class="icon-arrow-right2"></i>
+          </button>
+          <button>
+            <i class="icon-arrow-left2"></i>
+          </button>
+        </div>
+
+        <div class="today">
+          <button>
+            {{ 'GO_TODAY' | translate}}
+          </button>
+        </div>
+      </div>
+      <div class="mode">
+        <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
+          {{ 'DAY_VIEW' | translate}}
+          <i class="icon-arrow-down2"></i>
+        </button>
+      </div>
+    </div>
+    <div class="content">
+      <div class="hours">
+        <div class="hour" *ngFor="let hour of hours">
+          <div class="time">{{ hour }}:00</div>
+          <div class="info"></div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mode === ViewMode.Week">
+    <div class="header">
+      <div class="filter">
+        <div class="date">
+          {{ beginDate | culturedDate }} - {{endDate | culturedDate}}
+          <i class="icon-arrow-down2"></i>
+        </div>
+
+        <div class="btns">
+          <button>
+            <i class="icon-arrow-right2"></i>
+          </button>
+          <button>
+            <i class="icon-arrow-left2"></i>
+          </button>
+        </div>
+
+        <div class="today">
+          <button>
+            {{ 'GO_TODAY' | translate}}
+          </button>
+        </div>
+      </div>
+      <div class="mode">
+        <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
+          {{ 'WEEK_VIEW' | translate}}
+          <i class="icon-arrow-down2"></i>
+        </button>
+      </div>
+    </div>
+    <div class="content clipped">
+      <div class="days">
+        <div class="gap"></div>
+        <div class="day">23/03/1365</div>
+        <div class="day">23/03/1365</div>
+        <div class="day">23/03/1365</div>
+        <div class="day">23/03/1365</div>
+        <div class="day">23/03/1365</div>
+        <div class="day">23/03/1365</div>
+        <div class="day">23/03/1365</div>
+      </div>
+      <div class="hours x2">
+        <div class="hour" *ngFor="let hour of hours">
+          <div class="time">{{ hour }}:00</div>
+          <div class="info">
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+            <div class="day"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mode === ViewMode.Month">
+    <div class="header">
+      <div class="filter">
+        <div class="date">
+          {{ beginDate | culturedDate }} - {{endDate | culturedDate}}
+          <i class="icon-arrow-down2"></i>
+        </div>
+
+        <div class="btns">
+          <button>
+            <i class="icon-arrow-right2"></i>
+          </button>
+          <button>
+            <i class="icon-arrow-left2"></i>
+          </button>
+        </div>
+
+        <div class="today">
+          <button>
+            {{ 'GO_TODAY' | translate}}
+          </button>
+        </div>
+      </div>
+      <div class="mode">
+        <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
+          {{ 'MONTH_VIEW' | translate}}
+          <i class="icon-arrow-down2"></i>
+        </button>
+      </div>
+    </div>
+    <div class="content">
+    </div>
+  </ng-container>
+
+  <mat-menu #viewMode="matMenu">
+    <button (click)="mode = ViewMode.Day" mat-menu-item>
+      {{ 'DAY_VIEW' | translate }}
+    </button>
+    <button (click)="mode = ViewMode.Week" mat-menu-item>
+      {{ 'WEEK_VIEW' | translate }}
+    </button>
+    <button (click)="mode = ViewMode.Month" mat-menu-item>
+      {{ 'MONTH_VIEW' | translate }}
+    </button>
+  </mat-menu>
+</div>

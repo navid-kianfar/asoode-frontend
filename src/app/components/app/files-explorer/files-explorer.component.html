@@ -144,6 +144,8 @@
         [(selected)]="folder.selected"
         [folder]="folder"
       ></app-file-folder-preview>
+    </div>
+    <div class="wrapper">
       <app-file-folder-preview
         (click)="selectFile($event, file)"
         *ngFor="let file of data.files"

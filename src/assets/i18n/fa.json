@@ -611,5 +611,9 @@
   "REMOVE_DEVICE": "حذف دستگاه",
   "REMOVE_DEVICE_CONFIRM": "در صورتی که دستگاه حذف شود دیگر اعلانی بر روی این دستگاه دریافت نخواهید کرد، البته در هر زمان امکان اتصال مجدد این دستگاه هست",
   "REMOVE_DEVICE_CONFIRM_HEADING": "آیا از حذف {0} اطمینان دارید؟",
-  "MUTE_NOTIFICATION": "عدم دریافت اعلان"
+  "MUTE_NOTIFICATION": "عدم دریافت اعلان",
+  "DAY_VIEW": "روزانه",
+  "WEEK_VIEW": "هفتگی",
+  "MONTH_VIEW": "ماهانه",
+  "GO_TODAY": "برو به امروز"
 }

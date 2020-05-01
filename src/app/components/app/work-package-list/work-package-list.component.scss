@@ -1,0 +1,198 @@
+.work-package-list-view {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  height: calc(100vh - 117px);
+  overflow-y: auto;
+  .list-item {
+    display: flex;
+    margin-bottom: 50px;
+    flex-direction: column;
+    .title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      span {
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-inline-end: 10px;
+      }
+      i {
+        font-size: 0.5rem;
+      }
+    }
+    .tasks {
+      display: flex;
+      flex-direction: column;
+      .task {
+        display: flex;
+        background: #ffffff;
+        border-bottom: 1px solid #ececec;
+        cursor: pointer;
+        .label {
+          display: flex;
+          min-width: 4px;
+
+          &.color-1 {
+            background: #cccccc;
+          }
+          &.color-2 {
+            background: #59a8ef;
+          }
+          &.color-3 {
+            background: #5eb258;
+          }
+          &.color-4 {
+            background: #666666;
+          }
+          &.color-5 {
+            background: #b33634;
+          }
+          &.color-6 {
+            background: #666666;
+          }
+          &.color-7 {
+            background: #808080;
+          }
+          &.color-8 {
+            background: #b3b3b3;
+          }
+          &.color-9 {
+            background: #eb973e;
+          }
+        }
+        .info {
+          display: flex;
+          flex-direction: column;
+          min-width: 500px;
+          border-inline-end: 1px solid #ececec;
+          padding: 5px;
+          flex-grow: 1;
+          .title {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #333333;
+          }
+          .detail {
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+
+            .detail-wrapper {
+              display: flex;
+              color: #70818c;
+              font-size: 0.8rem;
+              align-items: center;
+              margin-inline-end: 15px;
+
+              > div {
+                display: flex;
+                align-items: center;
+              }
+
+              span {
+                margin: 0 5px;
+              }
+            }
+          }
+        }
+        .members {
+          display: flex;
+          min-width: 250px;
+          border-inline-end: 1px solid #ececec;
+          align-items: center;
+
+          //::ng-deep .member-info,
+          //::ng-deep .group-info {
+          //  width: 35px;
+          //  height: 35px;
+          //
+          //  .initials-holder {
+          //    width: 30px;
+          //    height: 30px;
+          //    min-width: 30px;
+          //
+          //    .initials {
+          //      width: 30px;
+          //      height: 30px;
+          //      font-size: 0.7rem;
+          //    }
+          //  }
+          //}
+        }
+        .date {
+          display: flex;
+          min-width: 100px;
+          border-inline-end: 1px solid #ececec;
+          align-items: center;
+        }
+        .time-spent {
+          display: flex;
+          min-width: 100px;
+          border-inline-end: 1px solid #ececec;
+          align-items: center;
+          justify-content: center;
+          color: #ef6a8c;
+        }
+        .state {
+          display: flex;
+          min-width: 100px;
+          border-inline-end: 1px solid #ececec;
+          align-items: center;
+          font-size: 0.8rem;
+          font-weight: 500;
+          justify-content: center;
+        }
+        .labels {
+          border-inline-end: 1px solid #ececec;
+          display: flex;
+          flex-wrap: wrap;
+          margin-top: 5px;
+          min-width: 150px;
+          align-items: center;
+          justify-content: center;
+          .label-item {
+            display: flex;
+            margin-inline-end: 5px;
+            border-radius: 5px;
+            padding: 1px 10px;
+            margin-bottom: 5px;
+            font-size: 0.7rem;
+            font-weight: 300;
+            color: #fff;
+            min-width: 40px;
+            min-height: 10px;
+            max-height: 30px;
+          }
+        }
+        .add {
+          width: 25px;
+          height: 25px;
+          border-radius: 50px;
+          border: 1px dashed #666666;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 0.7rem;
+
+          i {
+            color: #666666;
+          }
+        }
+        &.archived {
+          .info {
+            background: #f7f7f7;
+          }
+        }
+      }
+      .new-task {
+        input {
+          width: 500px;
+          font-size: 0.8rem;
+          padding: 10px;
+        }
+      }
+    }
+  }
+}

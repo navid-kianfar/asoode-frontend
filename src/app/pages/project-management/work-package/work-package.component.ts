@@ -87,7 +87,7 @@ export class WorkPackageComponent implements OnInit {
       archived: false,
       active: false,
     };
-    this.mode = ViewMode.Board;
+    this.mode = ViewMode.Calendar;
     const id = this.activatedRoute.snapshot.params.id;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.projectService.projects.length; i++) {
@@ -765,7 +765,8 @@ export class WorkPackageComponent implements OnInit {
   }
 
   switchMode(mode: ViewMode) {
-    // this.mode = mode;
+    if (mode === ViewMode.TimeSpan) { return; }
+    this.mode = mode;
   }
 
   async leave() {

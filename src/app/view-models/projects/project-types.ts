@@ -156,6 +156,8 @@ export interface BoardTemplateViewModel {
   lists: string[];
 }
 export interface WorkPackageListViewModel extends BaseViewModel {
+  expandedAlt?: boolean;
+  newTaskTitle?: string;
   tempName: string;
   renameWaiting?: boolean;
   renaming?: boolean;
