@@ -29,11 +29,24 @@
         </button>
       </div>
     </div>
-    <div class="content">
-      <div class="hours">
-        <div class="hour" *ngFor="let hour of hours">
-          <div class="time">{{ hour }}:00</div>
-          <div class="info"></div>
+    <div class="content clipped">
+      <div class="grid-container">
+        <div class="grid">
+          <div class="grid-col time-col grid-col--fixed-{{cultureService.rtl ? 'right' : 'left'}}">
+            <div class="grid-item grid-item--header"> </div>
+            <div *ngFor="let hour of hours" class="grid-item">
+              {{ NumberHelpers.pad(hour, 2) }}:00
+            </div>
+          </div>
+
+          <div class="grid-col x2">
+            <div class="grid-item grid-item--header">
+              {{beginDate | culturedDate}}
+            </div>
+            <div *ngFor="let hour of hours" class="grid-item">
+
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -69,27 +82,21 @@
       </div>
     </div>
     <div class="content clipped">
-      <div class="days">
-        <div class="gap"></div>
-        <div class="day">23/03/1365</div>
-        <div class="day">23/03/1365</div>
-        <div class="day">23/03/1365</div>
-        <div class="day">23/03/1365</div>
-        <div class="day">23/03/1365</div>
-        <div class="day">23/03/1365</div>
-        <div class="day">23/03/1365</div>
-      </div>
-      <div class="hours x2">
-        <div class="hour" *ngFor="let hour of hours">
-          <div class="time">{{ hour }}:00</div>
-          <div class="info">
-            <div class="day"></div>
-            <div class="day"></div>
-            <div class="day"></div>
-            <div class="day"></div>
-            <div class="day"></div>
-            <div class="day"></div>
-            <div class="day"></div>
+      <div class="grid-container">
+        <div class="grid">
+          <div class="grid-col time-col grid-col--fixed-{{cultureService.rtl ? 'right' : 'left'}}">
+            <div class="grid-item grid-item--header"> </div>
+            <div *ngFor="let hour of hours" class="grid-item">
+              {{ NumberHelpers.pad(hour, 2) }}:00
+            </div>
+          </div>
+          <div *ngFor="let day of days" class="grid-col">
+            <div class="grid-item grid-item--header">
+              {{day.date}}
+            </div>
+            <div *ngFor="let hour of hours" class="grid-item">
+
+            </div>
           </div>
         </div>
       </div>
@@ -125,18 +132,18 @@
         </button>
       </div>
     </div>
-    <div class="content">
+    <div class="content clipped">
     </div>
   </ng-container>
 
   <mat-menu #viewMode="matMenu">
-    <button (click)="mode = ViewMode.Day" mat-menu-item>
+    <button (click)="switchMode(ViewMode.Day)" mat-menu-item>
       {{ 'DAY_VIEW' | translate }}
     </button>
-    <button (click)="mode = ViewMode.Week" mat-menu-item>
+    <button (click)="switchMode(ViewMode.Week)" mat-menu-item>
       {{ 'WEEK_VIEW' | translate }}
     </button>
-    <button (click)="mode = ViewMode.Month" mat-menu-item>
+    <button (click)="switchMode(ViewMode.Month)" mat-menu-item>
       {{ 'MONTH_VIEW' | translate }}
     </button>
   </mat-menu>

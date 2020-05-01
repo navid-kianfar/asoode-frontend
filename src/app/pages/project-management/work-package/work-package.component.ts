@@ -87,7 +87,7 @@ export class WorkPackageComponent implements OnInit {
       archived: false,
       active: false,
     };
-    this.mode = ViewMode.Calendar;
+    this.mode = ViewMode.Board;
     const id = this.activatedRoute.snapshot.params.id;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.projectService.projects.length; i++) {

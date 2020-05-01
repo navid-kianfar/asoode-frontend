@@ -372,6 +372,12 @@
 
   &.calendar-view {
     height: auto;
+
+    .inner-container {
+      .wrapper-container {
+        padding: 20px;
+      }
+    }
   }
 }
 
