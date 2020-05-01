@@ -234,6 +234,10 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   description: string;
   geoLocation: string;
 }
+
+export interface TimeSpentViewModel {}
+export interface KartablViewModel {}
+
 export interface WorkPackageTaskMemberViewModel extends BaseViewModel {
   taskId: string;
   recordId: string;

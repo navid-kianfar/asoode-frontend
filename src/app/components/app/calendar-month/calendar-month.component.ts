@@ -95,7 +95,6 @@ export class CalendarMonthComponent implements OnInit {
     for (let i = 0; i < 7; i++) {
       result[i] = mapped.map(m => m[i]);
     }
-    console.log(mapped, result);
     return result;
   }
   reset() {

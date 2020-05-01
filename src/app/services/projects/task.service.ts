@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { OperationResult } from '../../library/core/operation-result';
 import { HttpService } from '../core/http.service';
 import {
-  ActivityLogViewModel,
+  ActivityLogViewModel, KartablViewModel, TimeSpentViewModel, WorkPackageTaskTimeViewModel,
   WorkPackageTaskViewModel,
 } from '../../view-models/projects/project-types';
 
@@ -163,6 +163,27 @@ export class TaskService {
   async setDate(taskId: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/tasks/${taskId}/set-date`,
+      model,
+    );
+  }
+
+  async calendar(model): Promise<OperationResult<WorkPackageTaskViewModel[]>> {
+    return await this.httpService.post<WorkPackageTaskViewModel[]>(
+      `/tasks/calendar`,
+      model,
+    );
+  }
+
+  async kartabl(model): Promise<OperationResult<KartablViewModel[]>> {
+    return await this.httpService.post<KartablViewModel[]>(
+      `/tasks/kartabl`,
+      model,
+    );
+  }
+
+  async timeSpents(model): Promise<OperationResult<TimeSpentViewModel[]>> {
+    return await this.httpService.post<TimeSpentViewModel[]>(
+      `/tasks/time-spents`,
       model,
     );
   }

@@ -1,4 +1,4 @@
-<div class="account-profile">
+<div class="app-tasks-container">
   <div class="header"></div>
   <div class="body">
     <div class="fake-header"></div>
@@ -6,7 +6,8 @@
       <div class="row">
         <div class="col-md-12 wrapper">
           <div class="title">{{ 'TASKS_MANAGEMENT' | translate }}</div>
-          <mat-tab-group animationDuration="0ms" [(selectedIndex)]="tab">
+          <mat-tab-group animationDuration="0ms" [(selectedIndex)]="tab"
+                         (selectedIndexChange)="switchTab($event)">
             <mat-tab [label]="'CALENDAR' | translate"
               ><ng-template matTabContent></ng-template
             ></mat-tab>
@@ -19,15 +20,52 @@
           </mat-tab-group>
         </div>
       </div>
-      <div class="row" *ngIf="tab === TaskTab.Calendar">
-        calendar works!
+      <div class="row">
+        <div class="col-md-12">
+          <app-waiting *ngIf="waiting"></app-waiting>
+          <div class="main-container" *ngIf="!waiting">
+            <div class="header">
+              <div class="filter">
+                <div class="date">
+                  {{ beginDate | culturedDate:false:'NNN YYYY' }}
+                  <i class="icon-arrow-down2"></i>
+                </div>
+
+                <div class="btns">
+                  <button>
+                    <i class="icon-arrow-right2"></i>
+                  </button>
+                  <button>
+                    <i class="icon-arrow-left2"></i>
+                  </button>
+                </div>
+
+                <div class="today">
+                  <button>
+                    {{ 'GO_TODAY' | translate}}
+                  </button>
+                </div>
+              </div>
+              <div class="mode">
+              </div>
+            </div>
+            <div class="row" *ngIf="tab === TaskTab.Calendar">
+              <div class="content clipped">
+                <app-calendar-month></app-calendar-month>
+              </div>
+            </div>
+            <div class="row time-spent-container" *ngIf="tab === TaskTab.TimeSpent">
+              time-spent works!
+            </div>
+            <div class="row kartabl-container" *ngIf="tab === TaskTab.Kartabl">
+              kartabl works!
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="row" *ngIf="tab === TaskTab.TimeSpent">
-        time-spent works!
-      </div>
-      <div class="row" *ngIf="tab === TaskTab.Kartabl">
-        kartabl works!
-      </div>
+
+
+
     </div>
   </div>
 </div>
