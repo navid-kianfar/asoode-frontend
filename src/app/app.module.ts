@@ -168,6 +168,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { InviteMemberComponent } from './components/app/invite-member/invite-member.component';
 import { UpgradeWorkPackageComponent } from './modals/upgrade-work-package/upgrade-work-package.component';
+import { CalendarMonthComponent } from './components/app/calendar-month/calendar-month.component';
 
 @NgModule({
   declarations: [
@@ -297,6 +298,7 @@ import { UpgradeWorkPackageComponent } from './modals/upgrade-work-package/upgra
     DevicesComponent,
     InviteMemberComponent,
     UpgradeWorkPackageComponent,
+    CalendarMonthComponent,
   ],
   entryComponents: [
     UpgradeWorkPackageComponent,

@@ -65,92 +65,10 @@
   }
 
   .content {
-    //.days {
-    //  display: flex;
-    //
-    //  .gap {
-    //    display: flex;
-    //    min-width: 50px;
-    //  }
-    //
-    //  .day {
-    //    display: flex;
-    //    min-width: 250px;
-    //    border-top: 1px solid #e6e6e6;
-    //    border-inline-start: 1px solid #e6e6e6;
-    //    padding: 20px;
-    //    justify-content: center;
-    //
-    //    &:last-child {
-    //      border-inline-end: 1px solid #e6e6e6;
-    //    }
-    //  }
-    //}
-    //
-    //.hours {
-    //  margin-top: 50px;
-    //  display: flex;
-    //  flex-direction: column;
-    //
-    //  .hour {
-    //    display: flex;
-    //
-    //    .time {
-    //      display: flex;
-    //      min-width: 50px;
-    //      color: #999999;
-    //      font-weight: 500;
-    //      align-items: flex-end;
-    //      justify-content: flex-end;
-    //      font-size: 0.8rem;
-    //      padding-inline-end: 5px;
-    //    }
-    //
-    //    .info {
-    //      display: flex;
-    //      min-width: 300px;
-    //      border: 1px solid #e6e6e6;
-    //      border-bottom: none;
-    //      min-height: 40px;
-    //      flex-grow: 1;
-    //
-    //      .day {
-    //        display: flex;
-    //        min-width: 250px;
-    //        border-inline-end: 1px solid #e6e6e6;
-    //        justify-content: center;
-    //        min-height: 60px;
-    //
-    //        &:last-child {
-    //          border-inline-end: none;
-    //        }
-    //      }
-    //    }
-    //
-    //    &:last-child {
-    //      .info {
-    //        border-bottom: 1px solid #e6e6e6;
-    //      }
-    //    }
-    //  }
-    //
-    //  &.x2 {
-    //    margin-top: 0;
-    //  }
-    //}
-
     &.clipped {
       margin-top: 50px;
       max-height: calc(100vh - 283px);
       overflow: auto;
-
-      //.hours {
-      //  .hour {
-      //    .info {
-      //      min-width: unset;
-      //    }
-      //  }
-      //}
     }
   }
 
@@ -177,7 +95,6 @@
       min-width: 400px;
     }
   }
-
   .grid-item--header {
     height: 50px;
     min-height: 50px;
@@ -186,7 +103,6 @@
     background: white;
     top: 0;
   }
-
   .grid-col--fixed-left {
     position: sticky;
     left: 0;
@@ -199,7 +115,6 @@
     z-index: 9998;
     background: white;
   }
-
   .grid-item {
     height: 50px;
     border: 1px solid #e6e6e6;

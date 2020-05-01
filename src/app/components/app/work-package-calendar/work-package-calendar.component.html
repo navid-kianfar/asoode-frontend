@@ -106,7 +106,7 @@
     <div class="header">
       <div class="filter">
         <div class="date">
-          {{ beginDate | culturedDate }} - {{endDate | culturedDate}}
+          {{ beginDate | culturedDate:false:'NNN YYYY' }}
           <i class="icon-arrow-down2"></i>
         </div>
 
@@ -133,6 +133,7 @@
       </div>
     </div>
     <div class="content clipped">
+      <app-calendar-month></app-calendar-month>
     </div>
   </ng-container>
 

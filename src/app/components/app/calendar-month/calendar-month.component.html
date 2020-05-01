@@ -1,0 +1,18 @@
+<div class="calendar-month">
+  <div class="grid-container">
+    <div class="grid">
+      <ng-container *ngFor="let col of state.days; let idx = index">
+        <div class="grid-col">
+          <div class="grid-item grid-item--header">
+            {{ calendar.dayNames[idx] }}
+          </div>
+          <div *ngFor="let row of col" class="grid-item">
+            <ng-container *ngIf="!row.old">
+              <div class="date">{{row.month}}/{{row.day}}</div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

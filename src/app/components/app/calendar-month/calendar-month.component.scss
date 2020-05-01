@@ -1,0 +1,45 @@
+.calendar-month {
+  .grid-container {
+    display: grid; /* This is a (hacky) way to make the .grid element size to fit its content */
+    overflow: auto;
+    height: calc(100vh - 283px);
+    max-width: 100%;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .grid-col {
+    width: 250px;
+    min-width: 250px;
+  }
+  .grid-item--header {
+    height: 50px !important;
+    min-height: 50px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: sticky;
+    position: -webkit-sticky;
+    background: white;
+    top: 0;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  .grid-item {
+    height: 200px;
+    border: 1px solid #e6e6e6;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+
+    .date {
+      display: flex;
+      font-weight: 400;
+      width: 100%;
+      justify-content: center;
+      background: #e6e6e6;
+      font-size: 0.8rem;
+      padding: 3px 0;
+    }
+  }
+}
