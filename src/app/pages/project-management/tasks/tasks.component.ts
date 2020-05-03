@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TaskService} from '../../../services/projects/task.service';
 import {KartablViewModel, TimeSpentViewModel, WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
+import {CulturedDateService} from '../../../services/core/cultured-date.service';
+import {IDateConverter} from '../../../library/core/date-time/date-contracts';
 
 @Component({
   selector: 'app-tasks',
@@ -9,43 +11,67 @@ import {KartablViewModel, TimeSpentViewModel, WorkPackageTaskViewModel} from '..
 })
 export class TasksComponent implements OnInit {
   tab: number;
+  endDate: Date;
   beginDate: Date;
   waiting: boolean;
   TaskTab = TaskTab;
   calendarData: WorkPackageTaskViewModel[];
   timeSpentData: TimeSpentViewModel[];
   kartablData: KartablViewModel[];
-  constructor(private readonly taskService: TaskService) {}
+  converter: IDateConverter;
+  constructor(
+    private readonly taskService: TaskService,
+    private readonly culturedDateService: CulturedDateService,
+  ) {}
 
   ngOnInit() {
-    this.beginDate = new Date();
+    this.converter = this.culturedDateService.Converter();
+    this.thisMonth();
     this.switchTab(TaskTab.Calendar);
   }
 
+  thisMonth() {
+    const now = new Date();
+    const parsed = this.converter.FromDateTime(now);
+    this.beginDate = this.converter.ToDateTime({
+      Year: parsed.Year,
+      Month: parsed.Month,
+      Day: 1,
+      Hours: 0,
+      Minutes: 0
+    });
+    const lastDayInMonth = this.culturedDateService.cultureService
+      .current.daysInMonths[parsed.Month - 1];
+    this.endDate = this.converter.ToDateTime({
+      Year: parsed.Year,
+      Month: parsed.Month,
+      Day: lastDayInMonth,
+      Hours: 23,
+      Minutes: 59
+    });
+  }
+
   async switchTab(tab: TaskTab) {
-    // TODO: fix this
-    const beginDate = new Date();
-    const endDate = new Date();
     this.waiting = true;
     switch (tab) {
       case TaskTab.Calendar:
         const op1 = await this.taskService.calendar({
-          begin: beginDate,
-          end: endDate
+          begin: this.beginDate,
+          end: this.endDate
         });
         this.calendarData = op1.data || [];
         break;
       case TaskTab.TimeSpent:
         const op2 = await this.taskService.timeSpents({
-          begin: beginDate,
-          end: endDate
+          begin: this.beginDate,
+          end: this.endDate
         });
         this.timeSpentData = op2.data || [];
         break;
       case TaskTab.Kartabl:
         const op3 = await this.taskService.kartabl({
-          begin: beginDate,
-          end: endDate
+          begin: this.beginDate,
+          end: this.endDate
         });
         this.kartablData = op3.data || [];
         break;

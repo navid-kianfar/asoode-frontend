@@ -51,21 +51,28 @@
             </div>
             <div class="row" *ngIf="tab === TaskTab.Calendar">
               <div class="content clipped">
-                <app-calendar-month></app-calendar-month>
+                <app-calendar-month [beginDate]="beginDate"
+                                    [endDate]="endDate"
+                                    [model]="calendarData"></app-calendar-month>
               </div>
             </div>
             <div class="row time-spent-container" *ngIf="tab === TaskTab.TimeSpent">
-              time-spent works!
+              <div class="content clipped">
+                <app-time-spent [beginDate]="beginDate"
+                                [endDate]="endDate"
+                                [model]="timeSpentData"></app-time-spent>
+              </div>
             </div>
             <div class="row kartabl-container" *ngIf="tab === TaskTab.Kartabl">
-              kartabl works!
+              <div class="content clipped">
+                <app-kartabl [beginDate]="beginDate"
+                             [endDate]="endDate"
+                             [model]="kartablData"></app-kartabl>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-
-
     </div>
   </div>
 </div>

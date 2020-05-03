@@ -24,7 +24,16 @@ export class ArrayHelpers {
       source.splice(idx, 1);
     });
   }
-
+  static groupBy<T>(objectArray, property): T[] {
+    return objectArray.reduce((acc, obj) => {
+      const key = obj[property];
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+    }, {});
+  }
   static reposition(arr, fromIndex, toIndex) {
     const element = arr[fromIndex];
     arr.splice(fromIndex, 1);

@@ -169,6 +169,8 @@ import { environment } from '../environments/environment';
 import { InviteMemberComponent } from './components/app/invite-member/invite-member.component';
 import { UpgradeWorkPackageComponent } from './modals/upgrade-work-package/upgrade-work-package.component';
 import { CalendarMonthComponent } from './components/app/calendar-month/calendar-month.component';
+import { TimeSpentComponent } from './components/app/time-spent/time-spent.component';
+import { KartablComponent } from './components/app/kartabl/kartabl.component';
 
 @NgModule({
   declarations: [
@@ -299,6 +301,8 @@ import { CalendarMonthComponent } from './components/app/calendar-month/calendar
     InviteMemberComponent,
     UpgradeWorkPackageComponent,
     CalendarMonthComponent,
+    TimeSpentComponent,
+    KartablComponent,
   ],
   entryComponents: [
     UpgradeWorkPackageComponent,

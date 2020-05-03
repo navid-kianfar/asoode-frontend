@@ -15,6 +15,7 @@ import {
 } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
 import { PendingInvitationViewModel } from '../groups/group-types';
+import {IDateTimeProperties} from '../../library/core/date-time/date-contracts';
 
 export interface ProjectObjectiveEstimatedPriceViewModel {
   date: Date;
@@ -235,7 +236,25 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
   geoLocation: string;
 }
 
-export interface TimeSpentViewModel {}
+export interface TimeSpentViewModel {
+  task: WorkPackageTaskViewModel;
+  time: WorkPackageTaskTimeViewModel;
+}
+export interface TimeSpentMappedViewModel {
+  date: IDateTimeProperties;
+  title: string;
+  members: TimeSpentMappedMembersViewModel[];
+}
+export interface TimeSpentMappedMembersViewModel {
+  userId: string;
+  member?: MemberInfoViewModel;
+  times: TimeSpentMappedTaskViewModel[];
+}
+export interface TimeSpentMappedTaskViewModel {
+  time: WorkPackageTaskTimeViewModel;
+  task: WorkPackageTaskViewModel;
+}
+
 export interface KartablViewModel {}
 
 export interface WorkPackageTaskMemberViewModel extends BaseViewModel {

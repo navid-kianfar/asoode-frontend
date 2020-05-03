@@ -5,6 +5,7 @@ import {ICulture} from '../../../view-models/core/date-types';
 import {CalendarNodeItem, CalendarState} from '../../core/calendar/calendar.component';
 import {NumberHelpers} from '../../../helpers/number.helpers';
 import {DateHelpers} from '../../../helpers/date.helpers';
+import {WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-calendar-month',
@@ -12,7 +13,9 @@ import {DateHelpers} from '../../../helpers/date.helpers';
   styleUrls: ['./calendar-month.component.scss']
 })
 export class CalendarMonthComponent implements OnInit {
-  model: Date;
+  @Input() beginDate: Date;
+  @Input() endDate: Date;
+  @Input() model: WorkPackageTaskViewModel[];
   converter: IDateConverter;
   calendar: ICulture;
   today: CalendarNodeItem;
@@ -32,7 +35,7 @@ export class CalendarMonthComponent implements OnInit {
     this.culture = this.calendar.lang;
     this.state.rtl = this.calendar.rtl;
     this.today = this.parseFormDate(now);
-    const start = new Date(this.model || now);
+    const start = new Date(this.beginDate || now);
     this.current = this.parseFormDate(start);
     this.temp = { ...this.current };
     this.paintDays();
@@ -120,7 +123,7 @@ export class CalendarMonthComponent implements OnInit {
   }
   paintDays() {
     let i;
-    const cultured = this.converter.FromDateTime(this.model);
+    const cultured = this.converter.FromDateTime(this.beginDate);
     const daysInMonth = this.calendar.daysInMonths[cultured.Month - 1];
     const grouped = this.groupCards();
     const result: CalendarNodeItem[] = [];
