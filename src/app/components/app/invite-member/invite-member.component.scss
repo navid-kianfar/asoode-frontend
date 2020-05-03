@@ -25,9 +25,20 @@
       }
     }
   }
+  ::ng-deep .member-info {
+    border: none !important;
+    max-width: unset !important;
+  }
 }
 
-::ng-deep .member-info {
-  border: none !important;
-  max-width: unset !important;
+@media (max-width: 500px) {
+  .members {
+    .member {
+      flex-wrap: wrap;
+
+      .info, .access {
+        margin-bottom: 10px;
+      }
+    }
+  }
 }

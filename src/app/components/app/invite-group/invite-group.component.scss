@@ -8,7 +8,7 @@
 
     .pick {
       display: flex;
-      width: 40px;
+      width: 30px;
     }
     .info {
       flex-grow: 1;
@@ -25,9 +25,21 @@
       }
     }
   }
+
+  ::ng-deep .group-info {
+    border: none !important;
+    max-width: unset !important;
+  }
 }
 
-::ng-deep .group-info {
-  border: none !important;
-  max-width: unset !important;
+@media (max-width: 500px) {
+  .groups {
+    .group {
+      flex-wrap: wrap;
+
+      .info, .access {
+        margin-bottom: 10px;
+      }
+    }
+  }
 }

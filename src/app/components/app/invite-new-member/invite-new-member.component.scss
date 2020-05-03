@@ -12,7 +12,7 @@
       ::ng-deep .af-auto-complete {
         input {
           border: 1px solid #dedede;
-          width: 200px !important;
+          width: 200px;
           line-height: 21px;
           border-radius: 0 5px 5px 0;
         }
@@ -58,6 +58,24 @@
         width: 100px;
         padding: 10px 0;
         justify-content: center;
+      }
+    }
+  }
+}
+@media (max-width: 550px) {
+  .invite-member {
+    .holder {
+      flex-direction: column;
+      .input-holder {
+        flex-direction: column;
+        ::ng-deep .af-auto-complete {
+          input {
+            width: 100% !important;
+          }
+        }
+        ::ng-deep .af-dropdown {
+          margin: 10px 0;
+        }
       }
     }
   }
