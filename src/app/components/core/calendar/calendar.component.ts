@@ -382,7 +382,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.state.days = this.partition(result);
   }
   pick(day: CalendarNodeItem) {
-    if (day.old && this.monthView) {
+    if (day.old || this.monthView) {
       return;
     }
     if (day.disabled || this.disabled) {

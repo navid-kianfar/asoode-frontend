@@ -56,6 +56,7 @@
     color: #ffffff;
     display: flex;
     min-width: 300px;
+    flex-wrap: wrap;
 
     .item {
       display: flex;
@@ -66,6 +67,7 @@
       align-items: center;
       max-height: 33px;
       min-width: 130px;
+      margin-bottom: 10px;
 
       i {
         font-size: 0.9rem;
@@ -97,5 +99,11 @@
 
     .details {
     }
+  }
+}
+
+@media (max-width: 500px) {
+  .project-info {
+    .details, .members { min-width: unset}
   }
 }
