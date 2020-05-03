@@ -1,15 +1,17 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import {Directive, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Directive({
   selector: 'input[appOnlyNumber]',
 })
-export class OnlyNumberDirective {
+export class OnlyNumberDirective implements OnInit {
   constructor(
     readonly elementRef: ElementRef,
     readonly detector: DeviceDetectorService,
-  ) {
-    if (!this.detector.isDesktop()) {
+  ) { }
+
+  ngOnInit(): void {
+    if (!this.detector.isDesktop() && this.appOnlyNumber) {
       this.elementRef.nativeElement.setAttribute('pattern', '[0-9]*');
       this.elementRef.nativeElement.setAttribute('inputmode', 'numeric');
       // this.elementRef.nativeElement.setAttribute('type', 'number');

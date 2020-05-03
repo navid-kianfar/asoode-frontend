@@ -1,42 +1,43 @@
 <div
   class="phone-verification {{ cssClass }} {{ hasError ? 'has-error' : '' }}"
+  id="verify-{{prefix}}"
 >
-  <input
+  <input id="txt-1"
     [disabled]="disabled"
     [appOnlyNumber]="true"
     (keyup)="onKeyUp($event, 1)"
     type="text"
     maxlength="1"
   />
-  <input
+  <input id="txt-2"
     [disabled]="disabled"
     [appOnlyNumber]="true"
     (keyup)="onKeyUp($event, 2)"
     type="text"
     maxlength="1"
   />
-  <input
+  <input id="txt-3"
     [disabled]="disabled"
     [appOnlyNumber]="true"
     (keyup)="onKeyUp($event, 3)"
     type="text"
     maxlength="1"
   />
-  <input
+  <input id="txt-4"
     [disabled]="disabled"
     [appOnlyNumber]="true"
     (keyup)="onKeyUp($event, 4)"
     type="text"
     maxlength="1"
   />
-  <input
+  <input id="txt-5"
     [disabled]="disabled"
     [appOnlyNumber]="true"
     (keyup)="onKeyUp($event, 5)"
     type="text"
     maxlength="1"
   />
-  <input
+  <input id="txt-6"
     [disabled]="disabled"
     [appOnlyNumber]="true"
     (keyup)="onKeyUp($event, 6)"
