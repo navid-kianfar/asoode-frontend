@@ -1,9 +1,34 @@
 <div class="time-spent-container">
-  <div class="days">
-    <div *ngFor="let day of data" class="day">
-      <div class="title">
-        <div class="num">{{day.date.Day}}</div>
-        <div class="month">{{day.date.MonthName}}</div>
+  <div *ngIf="data.length" class="no-item">
+    <h3>{{ 'NO_TIME_SPENT_YET' | translate}}</h3>
+    <h4>{{ 'START_RECORDING_TIME' | translate}}</h4>
+  </div>
+  <div *ngIf="!data.length" class="grid-container">
+    <div class="grid">
+      <div class="grid-col date-col grid-col--fixed-{{culturedDateService.cultureService.rtl ? 'right' : 'left'}}">
+        <div class="grid-item grid-item--header">
+          <div class="wrapper">
+            <div class="ico">
+              <i class="icon-timer"></i>
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let day of data" class="grid-item">
+          <div class="wrapper">
+            <div class="num">{{day.date.Day}}</div>
+            <div class="month">{{day.date.MonthName}}</div>
+          </div>
+        </div>
+      </div>
+      <div *ngFor="let hour of hours" class="grid-col time-col">
+        <div class="grid-item grid-item--header">
+          <div class="hour">
+            {{NumberHelpers.pad(hour, 2)}}:00
+          </div>
+        </div>
+        <div *ngFor="let day of data" class="grid-item">
+
+        </div>
       </div>
     </div>
   </div>

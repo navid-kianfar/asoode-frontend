@@ -24,7 +24,7 @@
         <div class="col-md-12">
           <app-waiting *ngIf="waiting"></app-waiting>
           <div class="main-container" *ngIf="!waiting">
-            <div class="header">
+            <div *ngIf="tab !== TaskTab.Kartabl" class="header">
               <div class="filter">
                 <div class="date">
                   {{ beginDate | culturedDate:false:'NNN YYYY' }}
@@ -49,21 +49,21 @@
               <div class="mode">
               </div>
             </div>
-            <div class="row" *ngIf="tab === TaskTab.Calendar">
+            <div class="" *ngIf="tab === TaskTab.Calendar">
               <div class="content clipped">
                 <app-calendar-month [beginDate]="beginDate"
                                     [endDate]="endDate"
                                     [model]="calendarData"></app-calendar-month>
               </div>
             </div>
-            <div class="row time-spent-container" *ngIf="tab === TaskTab.TimeSpent">
+            <div class="time-spent-container" *ngIf="tab === TaskTab.TimeSpent">
               <div class="content clipped">
                 <app-time-spent [beginDate]="beginDate"
                                 [endDate]="endDate"
                                 [model]="timeSpentData"></app-time-spent>
               </div>
             </div>
-            <div class="row kartabl-container" *ngIf="tab === TaskTab.Kartabl">
+            <div class="kartabl-container" *ngIf="tab === TaskTab.Kartabl">
               <div class="content clipped">
                 <app-kartabl [beginDate]="beginDate"
                              [endDate]="endDate"

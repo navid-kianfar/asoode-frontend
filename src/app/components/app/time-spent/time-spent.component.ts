@@ -3,6 +3,7 @@ import {TimeSpentMappedViewModel, TimeSpentViewModel} from '../../../view-models
 import {ArrayHelpers} from '../../../helpers/array.helpers';
 import {CulturedDateService} from '../../../services/core/cultured-date.service';
 import {IDateConverter} from '../../../library/core/date-time/date-contracts';
+import {NumberHelpers} from '../../../helpers/number.helpers';
 
 @Component({
   selector: 'app-time-spent',
@@ -14,13 +15,16 @@ export class TimeSpentComponent implements OnInit {
   @Input() endDate: Date;
   @Input() model: TimeSpentViewModel[];
 
+  hours: number[];
   data: TimeSpentMappedViewModel[];
   private converter: IDateConverter;
+  NumberHelpers = NumberHelpers;
   constructor(
-    private readonly culturedDateService: CulturedDateService,
+    readonly culturedDateService: CulturedDateService,
   ) { }
 
   ngOnInit() {
+    this.hours = Array(24).fill(0).map((e, i) => i);
     this.converter = this.culturedDateService.Converter();
     this.paint();
   }
