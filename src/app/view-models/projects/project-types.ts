@@ -237,6 +237,8 @@ export interface WorkPackageTaskViewModel extends BaseViewModel {
 }
 
 export interface TimeSpentViewModel {
+  style: any;
+  parsed: IDateTimeProperties;
   task: WorkPackageTaskViewModel;
   time: WorkPackageTaskTimeViewModel;
 }
@@ -248,11 +250,7 @@ export interface TimeSpentMappedViewModel {
 export interface TimeSpentMappedMembersViewModel {
   userId: string;
   member?: MemberInfoViewModel;
-  times: TimeSpentMappedTaskViewModel[];
-}
-export interface TimeSpentMappedTaskViewModel {
-  time: WorkPackageTaskTimeViewModel;
-  task: WorkPackageTaskViewModel;
+  times: TimeSpentViewModel[];
 }
 
 export interface KartablViewModel {

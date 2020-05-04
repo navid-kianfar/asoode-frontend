@@ -28,8 +28,8 @@
     min-width: 200px;
 
     &.time-col {
-      width: 50px;
-      min-width: 50px;
+      width: 60px;
+      min-width: 60px;
     }
     &.date-col {
       width: 70px;
@@ -75,7 +75,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-inline-end: 1px dashed #e6e6e6;
     }
   }
   .grid-col--fixed-left {
@@ -96,5 +95,85 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+
+    .members-records {
+      .member-record {
+        cursor: pointer;
+        height: 5px;
+        min-width: 5px;
+        margin-bottom: 10px;
+
+        .member-time {
+          right: 100px;
+          width: 150px;
+          position: absolute;
+          z-index: 2;
+          height: 5px;
+          .time-line {
+            width: 7px;
+            height: 7px;
+            position: relative;
+            top: -1px;
+          }
+
+          &.color-1 {
+            background: #cccccc;
+            .time-line {
+              background: darken(#cccccc, 20%);
+            }
+          }
+          &.color-2 {
+            background: #59a8ef;
+            .time-line {
+              background: darken(#59a8ef, 20%);
+            }
+          }
+          &.color-3 {
+            background: #5eb258;
+            .time-line {
+              background: darken(#5eb258, 20%);
+            }
+          }
+          &.color-4 {
+            background: #666666;
+            .time-line {
+              background: darken(#666666, 20%);
+            }
+          }
+          &.color-5 {
+            background: #b33634;
+            .time-line {
+              background: darken(#b33634, 20%);
+            }
+          }
+          &.color-6 {
+            background: #666666;
+            .time-line {
+              background: darken(#666666, 20%);
+            }
+          }
+          &.color-7 {
+            background: #808080;
+            .time-line {
+              background: darken(#808080, 20%);
+            }
+          }
+          &.color-8 {
+            background: #b3b3b3;
+            .time-line {
+              background: darken(#b3b3b3, 20%);
+            }
+          }
+          &.color-9 {
+            background: #eb973e;
+            .time-line {
+              background: darken(#eb973e, 20%);
+            }
+          }
+        }
+      }
+    }
   }
+
 }

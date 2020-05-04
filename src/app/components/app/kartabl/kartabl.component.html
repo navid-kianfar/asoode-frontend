@@ -1,4 +1,4 @@
-<div class="app-kartabl-container">
+<div class="app-kartabl-container" [class.empty]="!projects.length">
 
   <div *ngIf="!projects.length" class="no-item">
     <h3>{{ 'KARTABL_EMPTY' | translate}}</h3>
@@ -14,7 +14,7 @@
     </div>
     <div class="content">
       <app-work-package-list [permission]=""
-                             [noDrag]="true"
+                             [embed]="true"
                              [model]="pkg"
                              [project]="project"></app-work-package-list>
     </div>

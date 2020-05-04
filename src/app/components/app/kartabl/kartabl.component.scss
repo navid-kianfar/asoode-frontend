@@ -1,17 +1,24 @@
 .app-kartabl-container {
-  .no-item {
-    padding: 20px;
-    background: #efefef;
-    border-radius: 10px;
 
-    h3 {
-      font-weight: 500;
-      font-size: 0.9rem;
+  &.empty {
+    padding: 30px;
+    background: #ffffff;
+
+    .no-item {
+      padding: 20px;
+      background: #efefef;
+      border-radius: 10px;
+
+      h3 {
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+      h4 {
+        font-weight: 400;
+        font-size: 0.8rem;
+      }
     }
-    h4 {
-      font-weight: 400;
-      font-size: 0.8rem;
-    }
+
   }
 
   .header {

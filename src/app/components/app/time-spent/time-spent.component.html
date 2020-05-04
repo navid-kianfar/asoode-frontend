@@ -27,7 +27,18 @@
           </div>
         </div>
         <div *ngFor="let day of data" class="grid-item">
-
+          <div class="members-records">
+            <div *ngFor="let member of day.members" class="member-record">
+              <ng-container *ngFor="let record of member.times">
+                <div [ngStyle]="record.style"
+                     (click)="openTask($event, record.task)"
+                     *ngIf="record.parsed.Hours === hour"
+                     class="member-time color-{{record.task.state}}">
+                  <div class="time-line"></div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -28,7 +28,7 @@ export class WorkPackageBoardComponent implements OnInit {
   @Input() project: ProjectViewModel;
   @Input() model: WorkPackageViewModel;
   @Input() permission: AccessType;
-  @Input() noDrag: boolean;
+  @Input() embed: boolean;
   AccessType = AccessType;
   WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
   expanded: boolean;

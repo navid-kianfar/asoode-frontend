@@ -1,9 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TimeSpentMappedViewModel, TimeSpentViewModel} from '../../../view-models/projects/project-types';
+import {TimeSpentMappedViewModel, TimeSpentViewModel, WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
 import {ArrayHelpers} from '../../../helpers/array.helpers';
 import {CulturedDateService} from '../../../services/core/cultured-date.service';
 import {IDateConverter} from '../../../library/core/date-time/date-contracts';
 import {NumberHelpers} from '../../../helpers/number.helpers';
+import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
+import {ModalService} from '../../../services/core/modal.service';
 
 @Component({
   selector: 'app-time-spent',
@@ -21,6 +23,7 @@ export class TimeSpentComponent implements OnInit {
   NumberHelpers = NumberHelpers;
   constructor(
     readonly culturedDateService: CulturedDateService,
+    readonly modalService: ModalService,
   ) { }
 
   ngOnInit() {
@@ -29,16 +32,28 @@ export class TimeSpentComponent implements OnInit {
     this.paint();
   }
 
+  calculateStyle(begin: Date, end: Date): any {
+    const style = {} as any;
+    if (this.culturedDateService.cultureService.rtl) {
+      style.right = begin.getMinutes() + 'px';
+    } else {
+      style.left = begin.getMinutes() + 'px';
+    }
+    const gap = end.getTime() - begin.getTime();
+    style.width = (gap / 60 / 1000) + 'px';
+    return style;
+  }
+
   paint() {
     const data = {} as any;
     this.model.forEach(m => {
-      const parsed = this.converter.FromDateTime(m.time.begin);
-      const key = `${parsed.Day}/${parsed.Month}`;
+      m.time.begin = new Date(m.time.begin);
+      m.time.end = new Date(m.time.end);
+      m.style = this.calculateStyle(m.time.begin, m.time.end);
+      m.parsed = this.converter.FromDateTime(m.time.begin);
+      const key = `${m.parsed.Day}/${m.parsed.Month}`;
       data[key] = data[key] || [];
-      data[key].push({
-        parsed,
-        data: m
-      });
+      data[key].push(m);
     });
     const mappedByDate = Object.keys(data).map(k => {
       return {
@@ -49,8 +64,8 @@ export class TimeSpentComponent implements OnInit {
     this.data = mappedByDate.map(m => {
       const grouped = {} as any;
       m.data.forEach((d) => {
-        grouped[d.data.time.userId] = grouped[d.data.time.userId] || [];
-        grouped[d.data.time.userId].push(d.data);
+        grouped[d.time.userId] = grouped[d.time.userId] || [];
+        grouped[d.time.userId].push(d);
       });
       return {
         members: Object.keys(grouped).map(k => {
@@ -64,5 +79,11 @@ export class TimeSpentComponent implements OnInit {
       } as TimeSpentMappedViewModel;
     }) as TimeSpentMappedViewModel[];
     console.log(this.data);
+  }
+
+  openTask($event: MouseEvent, task: WorkPackageTaskViewModel) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.modalService.show(TaskModalComponent, { id: task.id }).subscribe(() => {});
   }
 }

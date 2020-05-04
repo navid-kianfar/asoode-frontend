@@ -36,7 +36,7 @@ export class KartablComponent implements OnInit {
       });
     });
     this.projects = ddItems;
-    this.switchProject(ddItems[0].value);
+    if (ddItems.length) { this.switchProject(ddItems[0].value); }
   }
 
   switchProject(selected: any) {
