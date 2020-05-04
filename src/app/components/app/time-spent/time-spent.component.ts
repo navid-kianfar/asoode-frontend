@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TimeSpentMappedViewModel, TimeSpentViewModel, WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
-import {ArrayHelpers} from '../../../helpers/array.helpers';
 import {CulturedDateService} from '../../../services/core/cultured-date.service';
 import {IDateConverter} from '../../../library/core/date-time/date-contracts';
 import {NumberHelpers} from '../../../helpers/number.helpers';
@@ -78,7 +77,6 @@ export class TimeSpentComponent implements OnInit {
         date: m.data[0].parsed,
       } as TimeSpentMappedViewModel;
     }) as TimeSpentMappedViewModel[];
-    console.log(this.data);
   }
 
   openTask($event: MouseEvent, task: WorkPackageTaskViewModel) {

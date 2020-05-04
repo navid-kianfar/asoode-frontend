@@ -29,8 +29,7 @@
     height: 200px;
     border: 1px solid #e6e6e6;
     display: flex;
-    align-items: baseline;
-    justify-content: center;
+    flex-direction: column;
 
     .date {
       display: flex;
@@ -40,6 +39,48 @@
       background: #e6e6e6;
       font-size: 0.8rem;
       padding: 3px 0;
+    }
+
+    .tasks-container {
+      .task-container {
+        color: #fff;
+        margin: 5px;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        cursor: pointer;
+        &.color-1 {
+          background: #cccccc;
+          color: #333333;
+        }
+        &.color-2 {
+          background: #59a8ef;
+        }
+        &.color-3 {
+          background: #5eb258;
+          color: #333333;
+        }
+        &.color-4 {
+          background: #666666;
+        }
+        &.color-5 {
+          background: #b33634;
+        }
+        &.color-6 {
+          background: #666666;
+        }
+        &.color-7 {
+          background: #808080;
+        }
+        &.color-8 {
+          background: #b3b3b3;
+          color: #333333;
+        }
+        &.color-9 {
+          background: #eb973e;
+          color: #333333;
+        }
+      }
     }
   }
 }

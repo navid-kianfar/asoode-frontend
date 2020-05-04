@@ -187,6 +187,7 @@ export interface WorkPackageTaskCommentViewModel extends BaseViewModel {
   member: MemberInfoViewModel;
 }
 export interface WorkPackageTaskViewModel extends BaseViewModel {
+  dueAtFormatted?: string;
   attachmentCount: number;
   commentCount: number;
   hasDescription: boolean;

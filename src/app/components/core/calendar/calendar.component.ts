@@ -20,6 +20,7 @@ import GeorgianDateConverter from '../../../library/core/date-time/georgian-date
 import { DateHelpers } from '../../../helpers/date.helpers';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
 import { NumberHelpers } from '../../../helpers/number.helpers';
+import {WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-calendar',
@@ -424,4 +425,5 @@ export interface CalendarNodeItem {
   date: Date;
   week: string;
   events?: IDateEvent[];
+  tasks?: WorkPackageTaskViewModel[];
 }

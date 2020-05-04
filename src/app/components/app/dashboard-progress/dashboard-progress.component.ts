@@ -11,6 +11,7 @@ import {
 } from '../../../view-models/general/report-types';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
 import { TranslateService } from '../../../services/core/translate.service';
+import {IDateConverter} from '../../../library/core/date-time/date-contracts';
 
 @Component({
   selector: 'app-dashboard-progress',
@@ -25,6 +26,7 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
   view: number[];
   timer: number;
   hidden: any;
+  private converter: IDateConverter;
 
   constructor(
     private element: ElementRef,
@@ -63,10 +65,10 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
 
     const data = {};
     const begin = new Date(this.begin.getTime());
-    const converter = this.culturedDateService.Converter();
+    this.converter = this.culturedDateService.Converter();
     let condition = true;
     do {
-      const date = converter.FromDateTime(begin);
+      const date = this.converter.FromDateTime(begin);
       const key = `${date.Month}/${date.Day}`;
       const info = this.model.find(i => this.sameDay(i.date, begin)) || {
         total: 0,
@@ -103,17 +105,11 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
   }
 
   sameDay(begin: Date | string, end: Date | string): boolean {
-    if (typeof begin === 'string') {
-      begin = new Date(begin);
-    }
-    if (typeof end === 'string') {
-      end = new Date(end);
-    }
-    return (
-      begin.getDate() === end.getDate() &&
-      begin.getMonth() === end.getMonth() &&
-      begin.getFullYear() === end.getFullYear()
-    );
+    const beginParsed = this.converter.FromDateTime(new Date(begin));
+    const endParsed = this.converter.FromDateTime(new Date(end));
+    return beginParsed.Year === endParsed.Year &&
+      beginParsed.Month === endParsed.Month &&
+      beginParsed.Day === endParsed.Day;
   }
 
   formatY(val) {

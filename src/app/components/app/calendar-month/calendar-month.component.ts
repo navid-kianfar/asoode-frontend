@@ -6,6 +6,8 @@ import {CalendarNodeItem, CalendarState} from '../../core/calendar/calendar.comp
 import {NumberHelpers} from '../../../helpers/number.helpers';
 import {DateHelpers} from '../../../helpers/date.helpers';
 import {WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
+import {ModalService} from '../../../services/core/modal.service';
+import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
 
 @Component({
   selector: 'app-calendar-month',
@@ -24,8 +26,17 @@ export class CalendarMonthComponent implements OnInit {
   state: CalendarState;
   @Input() events: IDateEvent[];
   @Input() culture: string;
-  constructor(readonly culturedDateService: CulturedDateService) {
+  constructor(
+    readonly culturedDateService: CulturedDateService,
+    private readonly modalService: ModalService
+  ) {
     this.reset();
+  }
+
+  openTask($event, task) {
+    $event.stopPropagation();
+    $event.preventDefault();
+    this.modalService.show(TaskModalComponent, { id: task.id }).subscribe(() => {});
   }
 
   ngOnInit() {
@@ -108,24 +119,16 @@ export class CalendarMonthComponent implements OnInit {
       tempYears: [],
     };
   }
-  truncateTime(date: Date): string {
-    return DateHelpers.toIsoDateWithTimeZone(date).split('T')[0] + 'T12:00:00';
-  }
-  groupCards() {
-    const result = {};
-    // (this.events || []).forEach(c => {
-    //   c[this.dateField] = new Date(c[this.dateField]);
-    //   const str = this.truncateTime(c[this.dateField]);
-    //   result[str] = result[str] || [];
-    //   result[str].push(c);
-    // });
-    return result;
+  truncateTime(date: IDateTimeProperties): string {
+    return `${date.Year}/${NumberHelpers.pad(date.Month, 2)}/${NumberHelpers.pad(date.Day, 2)}`;
   }
   paintDays() {
     let i;
+    this.model.forEach(t => {
+      t.dueAtFormatted = this.converter.Format(t.dueAt, 'YYYY/MM/DD');
+    });
     const cultured = this.converter.FromDateTime(this.beginDate);
     const daysInMonth = this.calendar.daysInMonths[cultured.Month - 1];
-    const grouped = this.groupCards();
     const result: CalendarNodeItem[] = [];
     const currentMonthIndex = this.temp.month - 1;
     const prevMonthIndex = currentMonthIndex === 0 ? 11 : currentMonthIndex - 1;
@@ -154,7 +157,7 @@ export class CalendarMonthComponent implements OnInit {
         Month: prevMonthIndex + 1,
         Day: prevMonthDays - gap + i + 1,
       });
-      const str = this.truncateTime(culturedScoped.Date);
+      const str = this.truncateTime(culturedScoped);
       result.push({
         year: prevYear,
         month: prevMonthIndex + 1,
@@ -167,7 +170,7 @@ export class CalendarMonthComponent implements OnInit {
         ),
         date: null,
         week: culturedScoped.WeekName,
-        events: grouped[str] || [],
+        tasks: this.model.filter(t => t.dueAtFormatted === str)
       });
     }
     for (i = 1; i <= currentMonthDays; i += 1) {
@@ -176,7 +179,7 @@ export class CalendarMonthComponent implements OnInit {
         Month: this.temp.month,
         Day: i,
       });
-      const str = this.truncateTime(culturedScoped.Date);
+      const str = this.truncateTime(culturedScoped);
       result.push({
         year: this.temp.year,
         month: this.temp.month,
@@ -185,7 +188,7 @@ export class CalendarMonthComponent implements OnInit {
         disabled: this.calculateDisabled(this.temp.year, this.temp.month, i),
         date: null,
         week: culturedScoped.WeekName,
-        events: grouped[str] || [],
+        tasks: this.model.filter(t => t.dueAtFormatted === str)
       });
     }
     const remaining = 7 - (result.length % 7);
@@ -196,7 +199,7 @@ export class CalendarMonthComponent implements OnInit {
           Month: nextMonthIndex + 1,
           Day: i,
         });
-        const str = this.truncateTime(culturedScoped.Date);
+        const str = this.truncateTime(culturedScoped);
         result.push({
           year: nextYear,
           month: nextMonthIndex + 1,
@@ -205,7 +208,7 @@ export class CalendarMonthComponent implements OnInit {
           disabled: this.calculateDisabled(nextYear, nextMonthIndex + 1, i),
           date: null,
           week: culturedScoped.WeekName,
-          events: grouped[str] || [],
+          tasks: this.model.filter(t => t.dueAtFormatted === str)
         });
       }
     }
