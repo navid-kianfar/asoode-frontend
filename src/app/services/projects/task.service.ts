@@ -174,8 +174,8 @@ export class TaskService {
     );
   }
 
-  async kartabl(model): Promise<OperationResult<KartablViewModel[]>> {
-    return await this.httpService.post<KartablViewModel[]>(
+  async kartabl(model): Promise<OperationResult<KartablViewModel>> {
+    return await this.httpService.post<KartablViewModel>(
       `/tasks/kartabl`,
       model,
     );

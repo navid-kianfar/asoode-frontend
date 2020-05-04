@@ -7,7 +7,7 @@
        cdkDrag
        [cdkDragStartDelay]="dragDelay"
        [cdkDragData]="list"
-       [cdkDragDisabled]="list.editing || list.adding || permission === AccessType.Visitor"
+       [cdkDragDisabled]="noDrag || list.editing || list.adding || permission === AccessType.Visitor"
        *ngFor="let list of model.lists">
     <div cdkDragHandle (click)="list.expandedAlt = list.expandedAlt === false ? true : false" class="title">
       <span>{{list.title}}</span>
@@ -26,7 +26,7 @@
            (click)="openTask(task)"
            [cdkDragStartDelay]="dragDelay"
            [cdkDragData]="task"
-           [cdkDragDisabled]="false"
+           [cdkDragDisabled]="noDrag"
            *ngFor="let task of list.tasks">
         <div class="label color-{{task.state}}"></div>
         <div class="info">

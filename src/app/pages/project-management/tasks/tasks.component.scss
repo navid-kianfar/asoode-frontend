@@ -16,6 +16,11 @@
     padding: 20px;
     margin: 20px;
     background: #ffffff;
+
+    &.tab-2 {
+      background: none;
+      padding: 0;
+    }
   }
 
   .header {

@@ -255,7 +255,9 @@ export interface TimeSpentMappedTaskViewModel {
   task: WorkPackageTaskViewModel;
 }
 
-export interface KartablViewModel {}
+export interface KartablViewModel {
+  tasks: WorkPackageTaskViewModel[];
+}
 
 export interface WorkPackageTaskMemberViewModel extends BaseViewModel {
   taskId: string;

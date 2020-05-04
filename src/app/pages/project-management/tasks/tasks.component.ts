@@ -17,7 +17,7 @@ export class TasksComponent implements OnInit {
   TaskTab = TaskTab;
   calendarData: WorkPackageTaskViewModel[];
   timeSpentData: TimeSpentViewModel[];
-  kartablData: KartablViewModel[];
+  kartablData: KartablViewModel;
   converter: IDateConverter;
   constructor(
     private readonly taskService: TaskService,
@@ -73,7 +73,7 @@ export class TasksComponent implements OnInit {
           begin: this.beginDate,
           end: this.endDate
         });
-        this.kartablData = op3.data || [];
+        this.kartablData = op3.data;
         break;
     }
     this.waiting = false;
