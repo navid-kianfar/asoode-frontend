@@ -1,5 +1,9 @@
 export class StringHelpers {
   static readonly dot = '...';
+  static convertNumbers2English(str) {
+    return str.replace(/([٠١٢٣٤٥٦٧٨٩])|([۰۱۲۳۴۵۶۷۸۹])/g,
+      (m, $1, $2) => m.charCodeAt(0) - ($1 ? 1632 : 1776));
+  }
   static format(input: string, args: any[]) {
     return input.replace(/{(\d+)}/g, (match, num) => {
       return typeof args[num] !== 'undefined' ? String(args[num]) : match;

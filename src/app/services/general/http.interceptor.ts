@@ -19,7 +19,11 @@ export class HttpInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     request = request.clone({
-      setHeaders: { Authorization: this.identityService.identity.token || '' },
+      setHeaders: {
+        Authorization: this.identityService.identity.token || '',
+        // @ts-ignore
+        'ngsw-bypass': true
+      },
     });
     return (
       next
