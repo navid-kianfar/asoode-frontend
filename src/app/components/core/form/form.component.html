@@ -114,6 +114,20 @@
                   ></app-input>
                 </ng-container>
 
+                <!-- Number -->
+                <ng-container *ngIf="element.type === FormElementType.Number">
+                  <app-number
+                    [prependIcon]="element.params.prependIcon"
+                    [label]="element.params.label"
+                    [autofocus]="element.params.autofocus"
+                    [placeHolder]="element.params.placeHolder"
+                    [cssClass]="element.config.cssClass"
+                    [readonly]="element.params.readonly"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-number>
+                </ng-container>
+
                 <!-- DropDown -->
                 <ng-container *ngIf="element.type === FormElementType.DropDown">
                   <app-dropdown

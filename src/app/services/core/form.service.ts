@@ -10,7 +10,7 @@ import {
   FormViewModel,
   IFormElementCheckbox,
   IFormElementLabel,
-  IFormElementDatePicker,
+  IFormElementDatePicker, IFormElementNumber,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 import { CaptchaObject } from '../../view-models/core/captcha-types';
@@ -24,6 +24,11 @@ const VERIFICATION_LENGTH = 6;
 export class FormService {
   constructor() {}
 
+  createNumber(options: IFormElementNumber): IFormElementNumber {
+    options.type = FormElementType.Number;
+    options.validation = options.validation || { required: { value: false } };
+    return options;
+  }
   createCheckbox(options: IFormElementCheckbox): IFormElementCheckbox {
     options.type = FormElementType.Checkbox;
     options.validation = options.validation || { required: { value: false } };
@@ -34,10 +39,7 @@ export class FormService {
     options.validation = options.validation || { required: { value: false } };
     return options;
   }
-
-  createVerification(
-    options: IFormElementVerification,
-  ): IFormElementVerification {
+  createVerification(options: IFormElementVerification): IFormElementVerification {
     options.type = FormElementType.Verification;
     options.validation = options.validation || {
       required: { value: true, message: 'VERIFICATION_REQUIRED' },
@@ -48,13 +50,11 @@ export class FormService {
     };
     return options;
   }
-
   createButton(options: IFormElementButton): IFormElementButton {
     options.type = FormElementType.Button;
     options.validation = { errors: [], required: { value: false } };
     return options;
   }
-
   createLabel(options: IFormElementLabel): IFormElementLabel {
     options.type = FormElementType.Label;
     options.validation = { errors: [], required: { value: false } };
@@ -98,7 +98,6 @@ export class FormService {
       type: FormElementType.Captcha,
     } as IFormElementCaptcha;
   }
-
   prepare(form: FormViewModel[]): any {
     this.clearErrors(form);
     const model = this.getModel(form);
@@ -167,6 +166,9 @@ export class FormService {
           case FormElementType.Editor:
           case FormElementType.ColorPicker:
             element.params.model = '';
+            break;
+          case FormElementType.Number:
+            element.params.model = 0;
             break;
           case FormElementType.Captcha:
             element.params.model = {
@@ -240,6 +242,8 @@ export class FormService {
         return this.validateFile(element);
       case FormElementType.Tag:
         return this.validateArray(element);
+      case FormElementType.Number:
+        return this.validateNumber(element);
     }
   }
   private validateBoolean(element: IFormElement): boolean {
@@ -318,6 +322,33 @@ export class FormService {
     if (element.validation.pattern && element.validation.pattern.value) {
       if (!element.validation.pattern.value.test(element.params.model || '')) {
         element.validation.errors = [element.validation.pattern.message];
+        return false;
+      }
+    }
+    return true;
+  }
+  private validateNumber(element: IFormElementNumber): boolean {
+    if (element.validation.required && element.validation.required.value) {
+      if (element.params.model === undefined || element.params.model === null) {
+        element.validation.errors = [element.validation.required.message];
+        return false;
+      }
+    }
+    if (element.validation.min && element.validation.min.value) {
+      if (
+        (element.params.model === undefined || element.params.model === null) ||
+        element.params.model < element.validation.min.value
+      ) {
+        element.validation.errors = [element.validation.min.message];
+        return false;
+      }
+    }
+    if (element.validation.max && element.validation.max.value) {
+      if (
+        (element.params.model === undefined || element.params.model === null) ||
+        element.params.model > element.validation.max.value
+      ) {
+        element.validation.errors = [element.validation.max.message];
         return false;
       }
     }

@@ -12,6 +12,13 @@ export interface FormViewModel {
   elements: IFormElement[];
 }
 
+export interface IFormElementNumber extends IFormElement {
+  validation?: IFormElementNumberValidation;
+  params: {
+    disabled?: boolean;
+    model: number;
+  };
+}
 export interface IFormElementCheckbox extends IFormElement {
   params: {
     disabled?: boolean;
@@ -125,6 +132,10 @@ export interface IFormElementStringValidation extends IFormElementValidation {
   maxLength?: { value: number; message: string };
   match?: { toField: string; message: string };
   pattern?: { value: RegExp; message: string };
+}
+export interface IFormElementNumberValidation extends IFormElementValidation {
+  min?: { value: number; message: string };
+  max?: { value: number; message: string };
 }
 
 export interface IFormElementCaptchaModel {
