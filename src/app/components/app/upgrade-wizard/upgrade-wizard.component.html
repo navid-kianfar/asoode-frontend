@@ -21,111 +21,157 @@
       </button>
     </div>
   </div>
-  <ng-container *ngIf="mode === ViewMode.Init">
-    <div class="modal-body upgrade">
-      <h3>{{ 'YOUR_PLAN_NEEDS_UPGRADE' | translate }}</h3>
-
-      <div class="box-container">
-        <div class="box">
-          <div class="title">{{ 'CURRENT_PLAN' | translate }}</div>
-          <div class="plan">
-            <div class="p-header">
-              {{ identityService.profile.plan.title | translate }}
-            </div>
-            <div class="price">
-              <ng-container *ngIf="!identityService.profile.plan.planCost">
-                <div class="free">{{ 'FREE' | translate }}</div>
-              </ng-container>
-              <ng-container *ngIf="identityService.profile.plan.planCost">
-                {{ identityService.profile.plan.planCost | number }}
-              </ng-container>
-            </div>
-            <div class="duration">
-              <ng-container *ngIf="!identityService.profile.plan.planCost">
-                <span class="days">{{ 'FOREVER' | translate }}</span>
-              </ng-container>
-              <ng-container *ngIf="identityService.profile.plan.planCost">
-                <span class="days">{{
-                  identityService.profile.plan.days
-                }}</span>
-                <span>{{ 'DAYS' | translate }}</span>
-              </ng-container>
-            </div>
-            <div class="features">
-              <div class="feature">
+  <app-waiting *ngIf="waiting"></app-waiting>
+  <ng-container *ngIf="!waiting">
+    <ng-container *ngIf="mode === ViewMode.Init">
+      <div class="modal-body upgrade">
+        <h3>{{ 'YOUR_PLAN_NEEDS_UPGRADE' | translate }}</h3>
+        <div class="box-container">
+          <div class="box no-select">
+            <div class="plan current">
+              <div class="p-header">{{ 'CURRENT_PLAN' | translate }}</div>
+              <div class="p-sub">
+                <div class="price">
+                  <ng-container *ngIf="!identityService.profile.plan.planCost">
+                    <div class="free">{{ 'FREE' | translate }}</div>
+                  </ng-container>
+                  <ng-container *ngIf="identityService.profile.plan.planCost">
+                    {{ identityService.profile.plan.planCost | number }}
+                  </ng-container>
+                </div>
+                <div class="duration">
+<!--                  <ng-container *ngIf="!identityService.profile.plan.planCost">-->
+<!--                    <span class="days">{{ 'FOREVER' | translate }}</span>-->
+<!--                  </ng-container>-->
+                  <ng-container *ngIf="identityService.profile.plan.planCost">
+                    <span class="days">{{ identityService.profile.plan.days}}</span>
+                    <span>{{ 'DAYS' | translate }}</span>
+                  </ng-container>
+                </div>
+              </div>
+              <div class="features">
+                <div class="feature">
                 <span class="count">{{
                   identityService.profile.plan.simpleGroup
-                }}</span>
-                <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
-              </div>
-              <div class="feature">
+                  }}</span>
+                  <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
+                </div>
+                <div class="feature">
                 <span class="count">{{
                   identityService.profile.plan.complexGroup
-                }}</span>
-                <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
-              </div>
-              <div class="feature">
+                  }}</span>
+                  <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
+                </div>
+                <div class="feature">
                 <span class="count">{{
                   identityService.profile.plan.project
-                }}</span>
-                <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
-              </div>
-              <div class="feature">
+                  }}</span>
+                  <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
+                </div>
+                <div class="feature">
                 <span class="count">{{
                   identityService.profile.plan.workPackage
-                }}</span>
-                <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
+                  }}</span>
+                  <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
+                </div>
+                <div class="feature">
+                  <span class="count">{{ NumberHelpers.humanFileSize(identityService.profile.plan.space)}}</span>
+                  <span class="title">{{ 'DISK_SPACE' | translate }}</span>
+                </div>
+                <div class="feature">
+                  <span class="count">{{ identityService.profile.plan.users}}</span>
+                  <span class="title">{{ 'USERS' | translate }}</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="box next">
-          <div class="title">{{ 'NEXT_PLAN' | translate }}</div>
-          <div class="plan">
-            <div class="p-header">
-              {{ identityService.profile.plan.title }}
-            </div>
-            <div class="price">
-              {{ identityService.profile.plan.planCost | number }}
-            </div>
-            <div class="duration">
-              <span class="days">{{ identityService.profile.plan.days }}</span>
-              <span>{{ 'DAYS' | translate }}</span>
-            </div>
-            <div class="features">
-              <div class="feature">
-                <span class="count">{{
-                  identityService.profile.plan.simpleGroup
-                }}</span>
-                <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
+          <div (click)="pick(plan)"
+               *ngFor="let plan of data.plans" class="box"
+               [class.next]="plan.canUse">
+            <div class="plan" [class.selected]="selectedPlan === plan">
+              <div class="p-header">
+                {{ plan.title | translate }}
               </div>
-              <div class="feature">
-                <span class="count">{{
-                  identityService.profile.plan.complexGroup
-                }}</span>
-                <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
+              <div class="p-sub">
+                <div class="price">
+                  {{ plan.planCost | number }}
+                </div>
+                <div class="duration">
+                  <span class="days">{{ plan.days}}</span>
+                  <span>{{ 'DAYS' | translate }}</span>
+                </div>
               </div>
-              <div class="feature">
-                <span class="count">{{
-                  identityService.profile.plan.project
-                }}</span>
-                <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
+              <div class="features">
+                <div class="feature">
+                <span class="count">{{ plan.simpleGroup}}</span>
+                  <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
+                </div>
+                <div class="feature">
+                <span class="count">{{ plan.complexGroup}}</span>
+                  <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
+                </div>
+                <div class="feature">
+                <span class="count">{{ plan.project}}</span>
+                  <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
+                </div>
+                <div class="feature">
+                <span class="count">{{ plan.workPackage}}</span>
+                  <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
+                </div>
+                <div class="feature">
+                  <span class="count">{{ NumberHelpers.humanFileSize(plan.diskSpace)}}</span>
+                  <span class="title">{{ 'DISK_SPACE' | translate }}</span>
+                </div>
+                <div class="feature">
+                  <span class="count">{{ plan.users}}</span>
+                  <span class="title">{{ 'USERS' | translate }}</span>
+                </div>
               </div>
-              <div class="feature">
-                <span class="count">{{
-                  identityService.profile.plan.workPackage
-                }}</span>
-                <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
+            </div>
+          </div>
+          <div (click)="pick(null)" class="box next">
+            <div class="plan" [class.selected]="selectedPlan === null">
+              <div class="p-header">
+                {{ 'CUSTOM_PLAN' | translate }}
+              </div>
+              <div class="p-sub">
+                <div class="price">
+                  {{ 'NEED_CALCULATE' | translate }}
+                </div>
+                <div class="duration">
+                  <span class="days">30</span>
+                  <span>{{ 'DAYS' | translate }}</span>
+                </div>
+              </div>
+              <div class="features">
+                {{ 'ESTIMATE_YOUR_NEED_ALT' | translate }}
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button (click)="next($event)" mat-flat-button [color]="'primary'">
-        {{ 'CONTINUE' | translate: true }}
-      </button>
-    </div>
+      <div class="modal-footer">
+        <button (click)="next($event)" mat-flat-button [color]="'primary'">
+          {{ 'CONTINUE' | translate: true }}
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="mode === ViewMode.Choose">
+      <h3>{{ 'ESTIMATE_YOUR_NEED' | translate }}</h3>
+      <div class="order-item">
+        <div class="title">{{ 'DISK_SPACE' | translate}}</div>
+        <div class="slider">
+          <div class="current">{{NumberHelpers.humanFileSize(identityService.profile.plan.space)}}</div>
+          <mat-slider [min]="identityService.profile.plan.space"
+                      [(value)]="order.diskSpace"
+                      [displayWith]="formatSpaceLabel"
+                      color="primary"
+                      thumbLabel
+                      max="107374182400"
+                      step="1073741824"></mat-slider>
+          <div class="current">100 GB</div>
+        </div>
+      </div>
+    </ng-container>
   </ng-container>
 </div>

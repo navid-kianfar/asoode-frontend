@@ -4,6 +4,7 @@ export interface LoginResultViewModel {
   emailNotConfirmed: boolean;
   invalidPassword: boolean;
   lockedOut: boolean;
+  lockedUntil?: Date;
   notFound: boolean;
   phoneNotConfirmed: boolean;
   smsFailed: boolean;

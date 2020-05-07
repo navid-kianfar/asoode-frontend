@@ -19,8 +19,9 @@ export class NumberHelpers {
     const mm = this.pad(parsed.minute, 2);
     return `${dd}:${hh}:${mm}`;
   }
-  static humanFileSize(source: number, si): string {
-    const thresh = si ? 1000 : 1024;
+  static humanFileSize(source: number): string {
+    const si = true;
+    const thresh = 1024;
     if (Math.abs(source) < thresh) {
       return source + ' B';
     }
@@ -32,7 +33,7 @@ export class NumberHelpers {
       source /= thresh;
       u += 1;
     } while (Math.abs(source) >= thresh && u < units.length - 1);
-    return source.toFixed(1) + ' ' + units[u];
+    return source + ' ' + units[u];
   }
   static ticksToDurationString(model: number): string {
     const parsed = NumberHelpers.ticksToTimeSpan(model);

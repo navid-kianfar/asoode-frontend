@@ -6,6 +6,8 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppInitializerProvider } from '../../../services/general/app.initializer';
 import { environment } from '../../../../environments/environment';
+import {TranslateService} from '../../../services/core/translate.service';
+import {CulturedDateService} from '../../../services/core/cultured-date.service';
 
 @Component({
   selector: 'app-login',
@@ -27,6 +29,8 @@ export class LoginComponent implements OnInit {
     private readonly initializerProvider: AppInitializerProvider,
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
+    private readonly translateService: TranslateService,
+    private readonly culturedDateService: CulturedDateService,
   ) {}
 
   ngOnInit() {
@@ -92,6 +96,15 @@ export class LoginComponent implements OnInit {
         return;
       }
       if (op.data.lockedOut) {
+        if (op.data.lockedUntil) {
+          const msg = this.translateService.fromKey('ACCOUNT_LOCKED_OUT_UNTIL');
+          const date = this.culturedDateService.Converter()
+            .Format(op.data.lockedUntil, 'WW DD NNN HH:MM');
+          this.formService.setErrors(this.form, 'username', [
+            msg.replace('{0}', date),
+          ]);
+          return;
+        }
         this.formService.setErrors(this.form, 'username', [
           'ACCOUNT_LOCKED_OUT',
         ]);
