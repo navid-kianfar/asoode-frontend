@@ -1,8 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormViewModel } from '../../core/form/contracts';
-import { CultureService } from '../../../services/core/culture.service';
-import { FormService } from '../../../services/core/form.service';
-import { ValidationService } from '../../../services/core/validation.service';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormViewModel} from '../../core/form/contracts';
+import {CultureService} from '../../../services/core/culture.service';
+import {FormService} from '../../../services/core/form.service';
+import {ValidationService} from '../../../services/core/validation.service';
+import {NotificationService} from '../../../services/core/notification.service';
+import {HttpService} from '../../../services/core/http.service';
+import {OperationResultStatus} from '../../../library/core/enums';
 
 @Component({
   selector: 'app-import-wizard',
@@ -17,10 +20,14 @@ export class ImportWizardComponent implements OnInit {
   requireMapMembers: boolean;
   actionWaiting: boolean;
   uploading: boolean;
+  uploadingProgress: number;
+  private trelloImportFile: File;
 
   constructor(
     readonly cultureService: CultureService,
+    private readonly httpService: HttpService,
     private readonly formService: FormService,
+    private readonly notificationService: NotificationService,
   ) {}
 
   ngOnInit() {}
@@ -38,50 +45,101 @@ export class ImportWizardComponent implements OnInit {
     $event.preventDefault();
     this.exit.emit();
   }
-  importFromTrello() {
-    this.requireMapMembers = true;
-    this.mapForm = [
-      {
-        elements: [
-          this.formService.createLabel({
-            config: { field: '', label: 'IMPORT_USERNAME' },
-            params: { label: 'IMPORT_USER_MAPPED_EMAIL' },
-          }),
-          ...[
-            { id: '1', username: 'Navid Kianfar' },
-            { id: '2', username: 'Saba Kianfar' },
-            { id: '3', username: 'Hamid Siahpoosh' },
-            { id: '4', username: 'Pouya Faridi' },
-            { id: '5', username: 'Neda Toussi' },
-          ].map(user => {
-            return this.formService.createInput({
-              config: { field: user.id, label: user.username },
-              params: { model: '' },
-              validation: {
-                required: {
-                  value: true,
-                  message: 'EMAIL_REQUIRED',
-                },
-                pattern: {
-                  value: ValidationService.emailRegex,
-                  message: 'EMAIL_INVALID',
-                },
-              },
-            });
-          }),
-        ],
-      },
-    ];
+
+  importFromTrello(target: any) {
+    if (!target.files || !target.files.length) {
+      return;
+    }
+    const trelloFile = target.files[0];
+    this.trelloImportFile = trelloFile;
+    if (!trelloFile) {
+      return;
+    }
+    const reader = new FileReader();
+    reader.onerror = (event: any) => {
+      this.notificationService.error('GENERAL_FAILED');
+    };
+    reader.onload = (event: any) => {
+      const contents = event.target.result;
+      const trelloJson = JSON.parse(contents);
+      const membersList = trelloJson.members.map(member => {
+        return {
+          id: member.id,
+          username: member.username,
+        };
+      });
+      if (membersList.length) {
+        this.requireMapMembers = true;
+        this.mapForm = [
+          {
+            elements: [
+              this.formService.createLabel({
+                config: { field: '', label: 'IMPORT_USERNAME' },
+                params: { label: 'IMPORT_USER_MAPPED_EMAIL' },
+              }),
+              ...membersList.map(user => {
+                return this.formService.createInput({
+                  config: { field: user.id, label: user.username },
+                  params: { model: '', ltr: true },
+                  validation: {
+                    required: {
+                      value: true,
+                      message: 'EMAIL_REQUIRED',
+                    },
+                    pattern: {
+                      value: ValidationService.emailRegex,
+                      message: 'EMAIL_INVALID',
+                    },
+                  },
+                });
+              }),
+            ],
+          },
+        ];
+      }
+    };
+    reader.readAsText(trelloFile);
   }
-
-  importFromTaskWorld() {}
-
-  importFromMonday() {}
-
-  importFromTaskulu() {}
-
-  importTrelloMapped($event: MouseEvent) {
+  async importTrelloMapped($event: MouseEvent) {
     const model = this.formService.prepare(this.mapForm);
-    console.log(model);
+    if (!model) { return; }
+    // this.requireMapMembers = false;
+    this.uploading = true;
+    const op = await this.httpService.formUpload(
+      '/import/trello',
+      { mapData: model, ___FILE: this.trelloImportFile},
+      percent => {
+        this.uploadingProgress = percent;
+      },
+    );
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.uploadingProgress = 0;
+    this.uploading = false;
+    this.exit.emit();
   }
+  async importFromTaskulu(target: any) {
+    if (!target.files || !target.files.length) {
+      return;
+    }
+    this.uploading = true;
+    const op = await this.httpService.formUpload(
+      '/import/taskulu',
+      { ___FILE: target.files[0]},
+      percent => {
+        this.uploadingProgress = percent;
+      },
+    );
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.uploadingProgress = 0;
+    this.uploading = false;
+    this.exit.emit();
+  }
+  importFromTaskWorld() {}
+  importFromMonday() {}
 }
