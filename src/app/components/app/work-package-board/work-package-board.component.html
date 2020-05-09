@@ -12,7 +12,10 @@
       [cdkDragStartDelay]="dragDelay"
       [cdkDragData]="list"
       [cdkDragDisabled]="
-        embed || list.editing || list.adding || permission === AccessType.Visitor
+        embed ||
+        list.editing ||
+        list.adding ||
+        permission === AccessType.Visitor
       "
       cdkDrag
     >

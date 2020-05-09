@@ -1,17 +1,18 @@
 <div class="project-objectives">
   <h3>{{ 'OBJECTIVES' | translate }}</h3>
-  <div class="inner">
-    <div class="empty" *ngIf="!mockService.objectives.length">
+  <app-waiting *ngIf="waiting"></app-waiting>
+  <div *ngIf="!waiting" class="inner">
+    <div class="empty" *ngIf="!objectives.length">
       <h2>
         <i class="icon-target"></i>
         {{ 'NO_OBJECTIVE_DEFINED_TITLE' | translate }}
       </h2>
       <h4>{{ 'NO_OBJECTIVE_DEFINED' | translate }}</h4>
     </div>
-    <div class="list" *ngIf="mockService.objectives.length">
+    <div class="list" *ngIf="objectives.length">
       <div
-        *ngFor="let objective of mockService.objectives"
-        (click)="selected = objective"
+        *ngFor="let objective of objectives"
+        (click)="pickObjective(objective)"
         class="item"
       >
         <div class="ico">

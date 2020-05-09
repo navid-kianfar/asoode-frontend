@@ -5,16 +5,16 @@ import { DeviceViewModel } from '../../../view-models/auth/identity-view-models'
 import { SwPush } from '@angular/service-worker';
 import { environment } from '../../../../environments/environment';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import {ModalService} from '../../../services/core/modal.service';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {PromptComponent} from '../../../modals/prompt/prompt.component';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {FormService} from '../../../services/core/form.service';
-import {NotificationService} from '../../../services/core/notification.service';
-import {ActivityType} from '../../../library/app/enums';
-import {Socket} from 'ngx-socket-io';
-import {PushNotificationService} from '../../../services/general/push-notification.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { FormService } from '../../../services/core/form.service';
+import { NotificationService } from '../../../services/core/notification.service';
+import { ActivityType } from '../../../library/app/enums';
+import { Socket } from 'ngx-socket-io';
+import { PushNotificationService } from '../../../services/general/push-notification.service';
 
 @Component({
   selector: 'app-devices',
@@ -27,7 +27,6 @@ export class DevicesComponent implements OnInit {
   devices: DeviceViewModel[];
   checkingDevice: boolean;
   registered: any;
-
 
   constructor(
     private readonly identityService: IdentityService,
@@ -59,7 +58,9 @@ export class DevicesComponent implements OnInit {
           }
           break;
         case ActivityType.AccountDeviceRemove:
-          this.devices = this.devices.filter(d => d.id !== notification.data.id);
+          this.devices = this.devices.filter(
+            d => d.id !== notification.data.id,
+          );
           break;
       }
     });
@@ -80,7 +81,7 @@ export class DevicesComponent implements OnInit {
   async checkThisDevice() {
     try {
       const subscription = await this.swPush.requestSubscription({
-        serverPublicKey: environment.vapid
+        serverPublicKey: environment.vapid,
       });
       const json = subscription.toJSON();
       const platform = this.detector.os.toLowerCase();
@@ -107,11 +108,13 @@ export class DevicesComponent implements OnInit {
         return;
       }
       this.checkDevice = true;
-      if (this.registered) { return; }
-      this.registered = this.swPush.messages.subscribe((notification) => {
+      if (this.registered) {
+        return;
+      }
+      this.registered = this.swPush.messages.subscribe(notification => {
         this.pushNotificationService.handlePush(notification);
       });
-      this.swPush.notificationClicks.subscribe((notification) => {
+      this.swPush.notificationClicks.subscribe(notification => {
         this.pushNotificationService.handlePushClick(notification);
       });
     } catch (e) {
@@ -121,9 +124,12 @@ export class DevicesComponent implements OnInit {
 
   getIcon(device: DeviceViewModel): string {
     switch (device.os) {
-      case 'android': return 'ikon-android';
-      case 'ios': return 'ikon-ios';
-      default: return 'ikon-display';
+      case 'android':
+        return 'ikon-android';
+      case 'ios':
+        return 'ikon-ios';
+      default:
+        return 'ikon-display';
     }
   }
 
@@ -169,7 +175,7 @@ export class DevicesComponent implements OnInit {
                     message: 'TITLE_REQUIRED',
                   },
                 },
-              })
+              }),
             ],
           },
         ],

@@ -120,8 +120,9 @@ export class WorkPackageComponent implements OnInit {
       let find2 = null;
       switch (notification.type) {
         case ActivityType.GroupRemove:
-          this.workPackage.members = this.workPackage.members
-            .filter(m => m.recordId !== notification.data);
+          this.workPackage.members = this.workPackage.members.filter(
+            m => m.recordId !== notification.data,
+          );
           break;
         case ActivityType.WorkPackageListAdd:
           if (this.workPackage.id === notification.data.packageId) {
@@ -765,7 +766,9 @@ export class WorkPackageComponent implements OnInit {
   }
 
   switchMode(mode: ViewMode) {
-    if (mode === ViewMode.TimeSpan) { return; }
+    if (mode === ViewMode.TimeSpan) {
+      return;
+    }
     this.mode = mode;
   }
 

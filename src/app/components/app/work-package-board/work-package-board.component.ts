@@ -11,13 +11,16 @@ import {
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import { WorkPackageService } from '../../../services/projects/work-package.service';
-import { AccessType, WorkPackageTaskVoteNecessity } from '../../../library/app/enums';
+import {
+  AccessType,
+  WorkPackageTaskVoteNecessity,
+} from '../../../library/app/enums';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { TaskService } from '../../../services/projects/task.service';
 import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
 import { ModalService } from '../../../services/core/modal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import {CultureService} from '../../../services/core/culture.service';
+import { CultureService } from '../../../services/core/culture.service';
 
 @Component({
   selector: 'app-work-package-board',

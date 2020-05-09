@@ -21,11 +21,12 @@
   </div>
   <ng-container *ngIf="!requireMapMembers">
     <div class="modal-body">
-
-      <mat-progress-bar *ngIf="uploading"
-                        color="primary"
-                        mode="determinate"
-                        [value]="uploadingProgress"></mat-progress-bar>
+      <mat-progress-bar
+        *ngIf="uploading"
+        color="primary"
+        mode="determinate"
+        [value]="uploadingProgress"
+      ></mat-progress-bar>
 
       <div class="import">
         <div class="trello item">
@@ -41,7 +42,7 @@
               type="file"
             />
             <button
-              (click)="trelloPicker.click();"
+              (click)="trelloPicker.click()"
               [disabled]="actionWaiting"
               mat-button
             >
@@ -119,12 +120,16 @@
       ></app-form>
     </div>
     <div class="modal-footer">
-      <button [disabled]="uploading || actionWaiting"
+      <button
+        [disabled]="uploading || actionWaiting"
         (click)="importTrelloMapped($event)"
         mat-flat-button
         [color]="'primary'"
       >
-        <i *ngIf="actionWaiting || uploading" class="icon-spin icon-spinner2"></i>
+        <i
+          *ngIf="actionWaiting || uploading"
+          class="icon-spin icon-spinner2"
+        ></i>
         {{ 'IMPORT_DATA' | translate: true }}
       </button>
     </div>

@@ -22,7 +22,7 @@ export class HttpInterceptor implements HttpInterceptor {
       setHeaders: {
         Authorization: this.identityService.identity.token || '',
         // @ts-ignore
-        'ngsw-bypass': true
+        'ngsw-bypass': true,
       },
     });
     return (

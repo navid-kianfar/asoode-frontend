@@ -184,10 +184,7 @@ export class IdentityService {
   }
 
   async addDevice(model): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      '/account/devices/add',
-      model,
-    );
+    return await this.httpService.post<boolean>('/account/devices/add', model);
   }
 
   async removeDevice(id): Promise<OperationResult<boolean>> {

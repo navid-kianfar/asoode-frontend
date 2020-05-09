@@ -24,7 +24,7 @@ import { IdentityService } from '../../../services/auth/identity.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { WorkPackageService } from '../../../services/projects/work-package.service';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
-import {DeviceDetectorService} from 'ngx-device-detector';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-project-tree',
@@ -54,8 +54,8 @@ export class ProjectTreeComponent implements OnInit {
 
   ngOnInit() {
     this.dragDelay =
-      (this.deviceDetectorService.isTablet() ||
-        this.deviceDetectorService.isMobile())
+      this.deviceDetectorService.isTablet() ||
+      this.deviceDetectorService.isMobile()
         ? 2000
         : 0;
     this.bind();

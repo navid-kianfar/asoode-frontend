@@ -1,14 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CultureService} from '../../../services/core/culture.service';
-import {ProjectService} from '../../../services/projects/project.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {NotificationService} from '../../../services/core/notification.service';
-import {GroupService} from '../../../services/groups/group.service';
-import {PlansService} from '../../../services/general/plans.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {OrderViewModel, PlansFetchViewModel, PlanViewModel} from '../../../view-models/general/plan-types';
-import {PlanType} from '../../../library/app/enums';
-import {NumberHelpers} from '../../../helpers/number.helpers';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CultureService } from '../../../services/core/culture.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { NotificationService } from '../../../services/core/notification.service';
+import { GroupService } from '../../../services/groups/group.service';
+import { PlansService } from '../../../services/general/plans.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import {
+  OrderViewModel,
+  PlansFetchViewModel,
+  PlanViewModel,
+} from '../../../view-models/general/plan-types';
+import { PlanType } from '../../../library/app/enums';
+import { NumberHelpers } from '../../../helpers/number.helpers';
 
 @Component({
   selector: 'app-upgrade-wizard',
@@ -33,7 +37,7 @@ export class UpgradeWizardComponent implements OnInit {
     readonly groupService: GroupService,
     readonly identityService: IdentityService,
     private readonly notificationService: NotificationService,
-    private readonly plansService: PlansService
+    private readonly plansService: PlansService,
   ) {}
 
   formatSpaceLabel(value: number) {
@@ -47,7 +51,7 @@ export class UpgradeWizardComponent implements OnInit {
       project: 0,
       simpleGroup: 0,
       workPackage: 0,
-      users: 0
+      users: 0,
     };
     this.mode = ViewMode.Init;
     this.fetch();
@@ -63,26 +67,44 @@ export class UpgradeWizardComponent implements OnInit {
     }
     this.waiting = false;
     op.data.plans.forEach(p => {
-      if (p.type === PlanType.Free) { p.canUse = false; }
-      if (p.users < op.data.mine.users) { p.canUse = false; }
-      if (p.complexGroup < op.data.mine.complexGroup) { p.canUse = false; }
-      if (p.simpleGroup < op.data.mine.simpleGroup) { p.canUse = false; }
-      if (p.workPackage < op.data.mine.workPackage) { p.canUse = false; }
-      if (p.project < op.data.mine.project) { p.canUse = false; }
-      if (p.diskSpace < op.data.mine.space) { p.canUse = false; }
+      if (p.type === PlanType.Free) {
+        p.canUse = false;
+      }
+      if (p.users < op.data.mine.users) {
+        p.canUse = false;
+      }
+      if (p.complexGroup < op.data.mine.complexGroup) {
+        p.canUse = false;
+      }
+      if (p.simpleGroup < op.data.mine.simpleGroup) {
+        p.canUse = false;
+      }
+      if (p.workPackage < op.data.mine.workPackage) {
+        p.canUse = false;
+      }
+      if (p.project < op.data.mine.project) {
+        p.canUse = false;
+      }
+      if (p.diskSpace < op.data.mine.space) {
+        p.canUse = false;
+      }
     });
     op.data.plans = op.data.plans.filter(p => p.type !== PlanType.Free);
     this.data = op.data;
     this.pick(null);
   }
   onBack($event: MouseEvent) {
-    if (this.actionWaiting || this.waiting) { return; }
+    if (this.actionWaiting || this.waiting) {
+      return;
+    }
     $event.stopPropagation();
     $event.preventDefault();
     this.back.emit();
   }
   onCancel($event: MouseEvent) {
-    if (this.actionWaiting || this.waiting) { return; }
+    if (this.actionWaiting || this.waiting) {
+      return;
+    }
     $event.stopPropagation();
     $event.preventDefault();
     this.exit.emit();
@@ -93,11 +115,15 @@ export class UpgradeWizardComponent implements OnInit {
   }
 
   pick(plan: PlanViewModel) {
-    if (this.actionWaiting || (plan && !plan.canUse)) { return; }
+    if (this.actionWaiting || (plan && !plan.canUse)) {
+      return;
+    }
     const hasSelected = this.selectedPlan !== null;
     this.selectedPlan = plan;
     if (plan === null) {
-      if (!hasSelected) { return; }
+      if (!hasSelected) {
+        return;
+      }
       this.order = {
         calculatedPrice: 0,
         diskSpace: this.identityService.profile.plan.space,
@@ -123,5 +149,5 @@ export class UpgradeWizardComponent implements OnInit {
 export enum ViewMode {
   Init = 1,
   Choose = 2,
-  Factor = 3
+  Factor = 3,
 }

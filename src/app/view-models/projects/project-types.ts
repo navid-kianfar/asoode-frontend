@@ -15,7 +15,7 @@ import {
 } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
 import { PendingInvitationViewModel } from '../groups/group-types';
-import {IDateTimeProperties} from '../../library/core/date-time/date-contracts';
+import { IDateTimeProperties } from '../../library/core/date-time/date-contracts';
 
 export interface ProjectObjectiveEstimatedPriceViewModel {
   date: Date;

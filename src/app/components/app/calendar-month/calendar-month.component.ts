@@ -1,18 +1,25 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {IDateConverter, IDateEvent, IDateTimeProperties} from '../../../library/core/date-time/date-contracts';
-import {ICulture} from '../../../view-models/core/date-types';
-import {CalendarNodeItem, CalendarState} from '../../core/calendar/calendar.component';
-import {NumberHelpers} from '../../../helpers/number.helpers';
-import {DateHelpers} from '../../../helpers/date.helpers';
-import {WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
-import {ModalService} from '../../../services/core/modal.service';
-import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
+import { Component, Input, OnInit } from '@angular/core';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import {
+  IDateConverter,
+  IDateEvent,
+  IDateTimeProperties,
+} from '../../../library/core/date-time/date-contracts';
+import { ICulture } from '../../../view-models/core/date-types';
+import {
+  CalendarNodeItem,
+  CalendarState,
+} from '../../core/calendar/calendar.component';
+import { NumberHelpers } from '../../../helpers/number.helpers';
+import { DateHelpers } from '../../../helpers/date.helpers';
+import { WorkPackageTaskViewModel } from '../../../view-models/projects/project-types';
+import { ModalService } from '../../../services/core/modal.service';
+import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
 
 @Component({
   selector: 'app-calendar-month',
   templateUrl: './calendar-month.component.html',
-  styleUrls: ['./calendar-month.component.scss']
+  styleUrls: ['./calendar-month.component.scss'],
 })
 export class CalendarMonthComponent implements OnInit {
   @Input() beginDate: Date;
@@ -28,7 +35,7 @@ export class CalendarMonthComponent implements OnInit {
   @Input() culture: string;
   constructor(
     readonly culturedDateService: CulturedDateService,
-    private readonly modalService: ModalService
+    private readonly modalService: ModalService,
   ) {
     this.reset();
   }
@@ -36,7 +43,9 @@ export class CalendarMonthComponent implements OnInit {
   openTask($event, task) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.modalService.show(TaskModalComponent, { id: task.id }).subscribe(() => {});
+    this.modalService
+      .show(TaskModalComponent, { id: task.id })
+      .subscribe(() => {});
   }
 
   ngOnInit() {
@@ -120,7 +129,10 @@ export class CalendarMonthComponent implements OnInit {
     };
   }
   truncateTime(date: IDateTimeProperties): string {
-    return `${date.Year}/${NumberHelpers.pad(date.Month, 2)}/${NumberHelpers.pad(date.Day, 2)}`;
+    return `${date.Year}/${NumberHelpers.pad(
+      date.Month,
+      2,
+    )}/${NumberHelpers.pad(date.Day, 2)}`;
   }
   paintDays() {
     let i;
@@ -170,7 +182,7 @@ export class CalendarMonthComponent implements OnInit {
         ),
         date: null,
         week: culturedScoped.WeekName,
-        tasks: this.model.filter(t => t.dueAtFormatted === str)
+        tasks: this.model.filter(t => t.dueAtFormatted === str),
       });
     }
     for (i = 1; i <= currentMonthDays; i += 1) {
@@ -188,7 +200,7 @@ export class CalendarMonthComponent implements OnInit {
         disabled: this.calculateDisabled(this.temp.year, this.temp.month, i),
         date: null,
         week: culturedScoped.WeekName,
-        tasks: this.model.filter(t => t.dueAtFormatted === str)
+        tasks: this.model.filter(t => t.dueAtFormatted === str),
       });
     }
     const remaining = 7 - (result.length % 7);
@@ -208,7 +220,7 @@ export class CalendarMonthComponent implements OnInit {
           disabled: this.calculateDisabled(nextYear, nextMonthIndex + 1, i),
           date: null,
           week: culturedScoped.WeekName,
-          tasks: this.model.filter(t => t.dueAtFormatted === str)
+          tasks: this.model.filter(t => t.dueAtFormatted === str),
         });
       }
     }

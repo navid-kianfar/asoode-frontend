@@ -1,11 +1,15 @@
 <div class="time-spent-container">
   <div *ngIf="!data.length" class="no-item">
-    <h3>{{ 'NO_TIME_SPENT_YET' | translate}}</h3>
-    <h4>{{ 'START_RECORDING_TIME' | translate}}</h4>
+    <h3>{{ 'NO_TIME_SPENT_YET' | translate }}</h3>
+    <h4>{{ 'START_RECORDING_TIME' | translate }}</h4>
   </div>
   <div *ngIf="data.length" class="grid-container">
     <div class="grid">
-      <div class="grid-col date-col grid-col--fixed-{{culturedDateService.cultureService.rtl ? 'right' : 'left'}}">
+      <div
+        class="grid-col date-col grid-col--fixed-{{
+          culturedDateService.cultureService.rtl ? 'right' : 'left'
+        }}"
+      >
         <div class="grid-item grid-item--header">
           <div class="wrapper">
             <div class="ico">
@@ -15,25 +19,25 @@
         </div>
         <div *ngFor="let day of data" class="grid-item">
           <div class="wrapper">
-            <div class="num">{{day.date.Day}}</div>
-            <div class="month">{{day.date.MonthName}}</div>
+            <div class="num">{{ day.date.Day }}</div>
+            <div class="month">{{ day.date.MonthName }}</div>
           </div>
         </div>
       </div>
       <div *ngFor="let hour of hours" class="grid-col time-col">
         <div class="grid-item grid-item--header">
-          <div class="hour">
-            {{NumberHelpers.pad(hour, 2)}}:00
-          </div>
+          <div class="hour">{{ NumberHelpers.pad(hour, 2) }}:00</div>
         </div>
         <div *ngFor="let day of data" class="grid-item">
           <div class="members-records">
             <div *ngFor="let member of day.members" class="member-record">
               <ng-container *ngFor="let record of member.times">
-                <div [ngStyle]="record.style"
-                     (click)="openTask($event, record.task)"
-                     *ngIf="record.parsed.Hours === hour"
-                     class="member-time color-{{record.task.state}}">
+                <div
+                  [ngStyle]="record.style"
+                  (click)="openTask($event, record.task)"
+                  *ngIf="record.parsed.Hours === hour"
+                  class="member-time color-{{ record.task.state }}"
+                >
                   <div class="time-line"></div>
                 </div>
               </ng-container>

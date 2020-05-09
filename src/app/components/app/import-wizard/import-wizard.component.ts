@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormViewModel} from '../../core/form/contracts';
-import {CultureService} from '../../../services/core/culture.service';
-import {FormService} from '../../../services/core/form.service';
-import {ValidationService} from '../../../services/core/validation.service';
-import {NotificationService} from '../../../services/core/notification.service';
-import {HttpService} from '../../../services/core/http.service';
-import {OperationResultStatus} from '../../../library/core/enums';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormViewModel } from '../../core/form/contracts';
+import { CultureService } from '../../../services/core/culture.service';
+import { FormService } from '../../../services/core/form.service';
+import { ValidationService } from '../../../services/core/validation.service';
+import { NotificationService } from '../../../services/core/notification.service';
+import { HttpService } from '../../../services/core/http.service';
+import { OperationResultStatus } from '../../../library/core/enums';
 
 @Component({
   selector: 'app-import-wizard',
@@ -102,12 +102,14 @@ export class ImportWizardComponent implements OnInit {
   }
   async importTrelloMapped($event: MouseEvent) {
     const model = this.formService.prepare(this.mapForm);
-    if (!model) { return; }
+    if (!model) {
+      return;
+    }
     // this.requireMapMembers = false;
     this.uploading = true;
     const op = await this.httpService.formUpload(
       '/import/trello',
-      { mapData: model, ___FILE: this.trelloImportFile},
+      { mapData: model, ___FILE: this.trelloImportFile },
       percent => {
         this.uploadingProgress = percent;
       },
@@ -127,7 +129,7 @@ export class ImportWizardComponent implements OnInit {
     this.uploading = true;
     const op = await this.httpService.formUpload(
       '/import/taskulu',
-      { ___FILE: target.files[0]},
+      { ___FILE: target.files[0] },
       percent => {
         this.uploadingProgress = percent;
       },

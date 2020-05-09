@@ -19,7 +19,7 @@ import { OperationResult } from '../../../library/core/operation-result';
 import { Socket } from 'ngx-socket-io';
 import { PushNotificationService } from '../../../services/general/push-notification.service';
 import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
-import {SwPush} from '@angular/service-worker';
+import { SwPush } from '@angular/service-worker';
 
 const EMPTY = {
   members: [],
@@ -57,10 +57,10 @@ export class HeaderComponent implements AfterViewInit, OnInit {
       this.pushNotificationService.handleSocket(notification),
     );
     if (this.swPush.isEnabled) {
-      this.swPush.messages.subscribe((notification) => {
+      this.swPush.messages.subscribe(notification => {
         this.pushNotificationService.handlePush(notification);
       });
-      this.swPush.notificationClicks.subscribe((notification) => {
+      this.swPush.notificationClicks.subscribe(notification => {
         this.pushNotificationService.handlePushClick(notification);
       });
     }

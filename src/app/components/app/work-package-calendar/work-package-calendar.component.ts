@@ -1,12 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {ProjectViewModel, WorkPackageTaskViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
+import {
+  ProjectViewModel,
+  WorkPackageTaskViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
 import { AccessType } from '../../../library/app/enums';
-import {CultureService} from '../../../services/core/culture.service';
-import {NumberHelpers} from '../../../helpers/number.helpers';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {IDateConverter} from '../../../library/core/date-time/date-contracts';
-import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
-import {ModalService} from '../../../services/core/modal.service';
+import { CultureService } from '../../../services/core/culture.service';
+import { NumberHelpers } from '../../../helpers/number.helpers';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { IDateConverter } from '../../../library/core/date-time/date-contracts';
+import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
+import { ModalService } from '../../../services/core/modal.service';
 
 @Component({
   selector: 'app-work-package-calendar',
@@ -29,29 +33,34 @@ export class WorkPackageCalendarComponent implements OnInit {
   constructor(
     readonly cultureService: CultureService,
     private readonly culturedDateService: CulturedDateService,
-    private readonly modalService: ModalService
+    private readonly modalService: ModalService,
   ) {}
 
   ngOnInit() {
-    this.hours = Array(24).fill(0).map((e, i) => i + 1);
+    this.hours = Array(24)
+      .fill(0)
+      .map((e, i) => i + 1);
     this.beginDate = new Date();
     this.converter = this.culturedDateService.Converter();
     this.switchMode(ViewMode.Month);
   }
 
   allTasks(): WorkPackageTaskViewModel[] {
-    return this.model.lists.map(l => l.tasks)
+    return this.model.lists
+      .map(l => l.tasks)
       .reduce((prev, curr) => prev.concat(curr), []);
   }
 
   switchMode(mode: ViewMode) {
     const data = {};
     const begin = new Date(this.beginDate);
-    this.calendarData = this.allTasks().filter(f => f.dueAt).map(t => {
-      t.dueAt = new Date(t.dueAt);
-      t.dueAtFormatted = this.converter.Format(t.dueAt, 'YYYY/MM/DD');
-      return t;
-    });
+    this.calendarData = this.allTasks()
+      .filter(f => f.dueAt)
+      .map(t => {
+        t.dueAt = new Date(t.dueAt);
+        t.dueAtFormatted = this.converter.Format(t.dueAt, 'YYYY/MM/DD');
+        return t;
+      });
     this.endDate = new Date();
 
     switch (mode) {
@@ -82,7 +91,7 @@ export class WorkPackageCalendarComponent implements OnInit {
     this.days = Object.keys(data).map(k => {
       return {
         date: k,
-        events: data[k]
+        events: data[k],
       };
     });
     this.mode = mode;
@@ -91,19 +100,23 @@ export class WorkPackageCalendarComponent implements OnInit {
   sameDay(begin: Date | string, end: Date | string): boolean {
     const beginParsed = this.converter.FromDateTime(new Date(begin));
     const endParsed = this.converter.FromDateTime(new Date(end));
-    return beginParsed.Year === endParsed.Year &&
+    return (
+      beginParsed.Year === endParsed.Year &&
       beginParsed.Month === endParsed.Month &&
-      beginParsed.Day === endParsed.Day;
+      beginParsed.Day === endParsed.Day
+    );
   }
 
   openTask($event, task) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.modalService.show(TaskModalComponent, { id: task.id }).subscribe(() => {});
+    this.modalService
+      .show(TaskModalComponent, { id: task.id })
+      .subscribe(() => {});
   }
 }
 export enum ViewMode {
   Day = 1,
   Week = 2,
-  Month = 3
+  Month = 3,
 }

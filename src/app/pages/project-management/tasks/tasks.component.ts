@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {TaskService} from '../../../services/projects/task.service';
-import {KartablViewModel, TimeSpentViewModel, WorkPackageTaskViewModel} from '../../../view-models/projects/project-types';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {IDateConverter} from '../../../library/core/date-time/date-contracts';
+import { TaskService } from '../../../services/projects/task.service';
+import {
+  KartablViewModel,
+  TimeSpentViewModel,
+  WorkPackageTaskViewModel,
+} from '../../../view-models/projects/project-types';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { IDateConverter } from '../../../library/core/date-time/date-contracts';
 
 @Component({
   selector: 'app-tasks',
@@ -38,16 +42,16 @@ export class TasksComponent implements OnInit {
       Month: parsed.Month,
       Day: 1,
       Hours: 0,
-      Minutes: 0
+      Minutes: 0,
     });
-    const lastDayInMonth = this.culturedDateService.cultureService
-      .current.daysInMonths[parsed.Month - 1];
+    const lastDayInMonth = this.culturedDateService.cultureService.current
+      .daysInMonths[parsed.Month - 1];
     this.endDate = this.converter.ToDateTime({
       Year: parsed.Year,
       Month: parsed.Month,
       Day: lastDayInMonth,
       Hours: 23,
-      Minutes: 59
+      Minutes: 59,
     });
   }
 
@@ -57,21 +61,21 @@ export class TasksComponent implements OnInit {
       case TaskTab.Calendar:
         const op1 = await this.taskService.calendar({
           begin: this.beginDate,
-          end: this.endDate
+          end: this.endDate,
         });
         this.calendarData = op1.data || [];
         break;
       case TaskTab.TimeSpent:
         const op2 = await this.taskService.timeSpents({
           begin: this.beginDate,
-          end: this.endDate
+          end: this.endDate,
         });
         this.timeSpentData = op2.data || [];
         break;
       case TaskTab.Kartabl:
         const op3 = await this.taskService.kartabl({
           begin: this.beginDate,
-          end: this.endDate
+          end: this.endDate,
         });
         this.kartablData = op3.data;
         break;

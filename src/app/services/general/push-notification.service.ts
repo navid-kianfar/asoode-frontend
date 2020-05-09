@@ -1,15 +1,15 @@
-import {Injectable} from '@angular/core';
-import {IdentityService} from '../auth/identity.service';
-import {GroupService} from '../groups/group.service';
-import {ProjectService} from '../projects/project.service';
-import {ActivityType} from '../../library/app/enums';
-import {Router} from '@angular/router';
-import {WindowService} from './window.service';
+import { Injectable } from '@angular/core';
+import { IdentityService } from '../auth/identity.service';
+import { GroupService } from '../groups/group.service';
+import { ProjectService } from '../projects/project.service';
+import { ActivityType } from '../../library/app/enums';
+import { Router } from '@angular/router';
+import { WindowService } from './window.service';
 import {
   ProjectMemberViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
-import {DeviceDetectorService} from 'ngx-device-detector';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
   providedIn: 'root',
@@ -22,8 +22,7 @@ export class PushNotificationService {
     private readonly projectService: ProjectService,
     private readonly windowService: WindowService,
     private readonly detector: DeviceDetectorService,
-  ) {
-  }
+  ) {}
 
   handleSocket(notification: any) {
     let find1: any = null;
@@ -126,14 +125,22 @@ export class PushNotificationService {
           g => g.id === notification.data.groupId,
         );
         if (find1) {
-          find1.members = [...(find1.members || []), ...(notification.data.members || [])];
-          find1.pending = [...(find1.pending || []), ...(notification.data.pending || [])];
+          find1.members = [
+            ...(find1.members || []),
+            ...(notification.data.members || []),
+          ];
+          find1.pending = [
+            ...(find1.pending || []),
+            ...(notification.data.pending || []),
+          ];
         } else {
           this.groupService.load();
         }
         break;
       case ActivityType.GroupRemove:
-        this.groupService.groups = this.groupService.groups.filter(g => g.id !== notification.data);
+        this.groupService.groups = this.groupService.groups.filter(
+          g => g.id !== notification.data,
+        );
         this.projectService.projects.forEach(p => {
           p.members = p.members.filter(m => m.recordId !== notification.data);
           p.workPackages.forEach(w => {
@@ -247,10 +254,16 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectMemberRemove:
         if (notification.data.projectId) {
-          find1 = this.projectService.projects.find(p => p.id === notification.data.projectId);
+          find1 = this.projectService.projects.find(
+            p => p.id === notification.data.projectId,
+          );
 
-          if (this.identityService.identity.userId === notification.data.recordId) {
-            this.projectService.projects = this.projectService.projects.filter(p => p.id !== find1.id);
+          if (
+            this.identityService.identity.userId === notification.data.recordId
+          ) {
+            this.projectService.projects = this.projectService.projects.filter(
+              p => p.id !== find1.id,
+            );
             return;
           }
 
@@ -338,10 +351,16 @@ export class PushNotificationService {
       case ActivityType.WorkPackageMemberRemove:
         if (notification.data.packageId) {
           find1 = this.findWorkPackage(notification.data.packageId);
-          find2 = this.projectService.projects.find(p => p.id === find1.projectId);
+          find2 = this.projectService.projects.find(
+            p => p.id === find1.projectId,
+          );
 
-          if (this.identityService.identity.userId === notification.data.recordId) {
-            this.projectService.projects = this.projectService.projects.filter(p => p.id !== find2.id);
+          if (
+            this.identityService.identity.userId === notification.data.recordId
+          ) {
+            this.projectService.projects = this.projectService.projects.filter(
+              p => p.id !== find2.id,
+            );
             return;
           }
 
@@ -365,7 +384,9 @@ export class PushNotificationService {
         find1.pending = find1.pending.filter(
           m => m.id !== notification.data.id,
         );
-        find2 = this.projectService.projects.find(p => p.id === find1.projectId);
+        find2 = this.projectService.projects.find(
+          p => p.id === find1.projectId,
+        );
         if (find2 && !find2.complex) {
           find2.pending = find2.pending.filter(
             m => m.id !== notification.data.id,

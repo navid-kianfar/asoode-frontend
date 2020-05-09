@@ -4,8 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../../services/groups/group.service';
 import { ModalService } from '../../../services/core/modal.service';
 import { GroupDetailComponent } from '../../../modals/group-detail/group-detail.component';
-import {AccessType, ActivityType} from '../../../library/app/enums';
-import {Socket} from 'ngx-socket-io';
+import { AccessType, ActivityType } from '../../../library/app/enums';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-group',

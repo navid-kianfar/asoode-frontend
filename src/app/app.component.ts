@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AppInitializerProvider } from './services/general/app.initializer';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Socket } from 'ngx-socket-io';
-import {SwUpdate} from '@angular/service-worker';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(
     private readonly device: DeviceDetectorService,
     readonly appInitializerProvider: AppInitializerProvider,
-    private readonly swUpdate: SwUpdate
+    private readonly swUpdate: SwUpdate,
   ) {
     swUpdate.available.subscribe(event => {
       console.log('current version is', event.current);

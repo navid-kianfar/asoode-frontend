@@ -104,6 +104,9 @@
 
 @media (max-width: 500px) {
   .project-info {
-    .details, .members { min-width: unset}
+    .details,
+    .members {
+      min-width: unset;
+    }
   }
 }

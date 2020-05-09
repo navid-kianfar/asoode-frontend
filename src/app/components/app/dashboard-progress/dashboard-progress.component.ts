@@ -11,7 +11,7 @@ import {
 } from '../../../view-models/general/report-types';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
 import { TranslateService } from '../../../services/core/translate.service';
-import {IDateConverter} from '../../../library/core/date-time/date-contracts';
+import { IDateConverter } from '../../../library/core/date-time/date-contracts';
 
 @Component({
   selector: 'app-dashboard-progress',
@@ -107,9 +107,11 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
   sameDay(begin: Date | string, end: Date | string): boolean {
     const beginParsed = this.converter.FromDateTime(new Date(begin));
     const endParsed = this.converter.FromDateTime(new Date(end));
-    return beginParsed.Year === endParsed.Year &&
+    return (
+      beginParsed.Year === endParsed.Year &&
       beginParsed.Month === endParsed.Month &&
-      beginParsed.Day === endParsed.Day;
+      beginParsed.Day === endParsed.Day
+    );
   }
 
   formatY(val) {

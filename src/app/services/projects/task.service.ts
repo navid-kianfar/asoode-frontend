@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { OperationResult } from '../../library/core/operation-result';
 import { HttpService } from '../core/http.service';
 import {
-  ActivityLogViewModel, KartablViewModel, TimeSpentViewModel, WorkPackageTaskTimeViewModel,
+  ActivityLogViewModel,
+  KartablViewModel,
+  TimeSpentViewModel,
+  WorkPackageTaskTimeViewModel,
   WorkPackageTaskViewModel,
 } from '../../view-models/projects/project-types';
 

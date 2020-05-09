@@ -37,7 +37,8 @@
     .group {
       flex-wrap: wrap;
 
-      .info, .access {
+      .info,
+      .access {
         margin-bottom: 10px;
       }
     }

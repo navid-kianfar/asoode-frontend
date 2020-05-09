@@ -56,8 +56,8 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dragDelay =
-      (this.deviceDetectorService.isTablet() ||
-        this.deviceDetectorService.isMobile())
+      this.deviceDetectorService.isTablet() ||
+      this.deviceDetectorService.isMobile()
         ? 2000
         : 0;
     this.from = new Date();

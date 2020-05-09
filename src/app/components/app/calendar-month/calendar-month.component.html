@@ -8,14 +8,16 @@
           </div>
           <div *ngFor="let row of col" class="grid-item">
             <ng-container *ngIf="!row.old">
-              <div class="date">{{row.month}}/{{row.day}}</div>
+              <div class="date">{{ row.month }}/{{ row.day }}</div>
               <div class="tasks-container" *ngIf="row.tasks.length">
-                <div class="task-container color-{{task.state}}"
-                     (click)="openTask($event, task)"
-                     *ngFor="let task of row.tasks">
+                <div
+                  class="task-container color-{{ task.state }}"
+                  (click)="openTask($event, task)"
+                  *ngFor="let task of row.tasks"
+                >
                   <div class="title">
                     <div class="time-line"></div>
-                    {{task.title | truncate:150}}
+                    {{ task.title | truncate: 150 }}
                   </div>
                 </div>
               </div>

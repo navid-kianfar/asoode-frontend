@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import {
+  ProjectObjectiveEstimatedPriceViewModel,
   ProjectTemplateViewModel,
   ProjectViewModel,
+  WorkPackageObjectiveViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
 import { OperationResultStatus } from '../../library/core/enums';
@@ -112,7 +114,9 @@ export class ProjectService {
     for (const ga of workPackage.members.filter(m => m.isGroup)) {
       const found = this.groupService.groups.find(k => k.id === ga.recordId);
       if (found) {
-        const aa = found.members.find(m => m.userId === this.identityService.identity.userId);
+        const aa = found.members.find(
+          m => m.userId === this.identityService.identity.userId,
+        );
         if (aa) {
           multiple.push(aa.access);
         }
@@ -186,5 +190,21 @@ export class ProjectService {
       `/projects/sub/${id}/order`,
       params,
     );
+  }
+
+  async objectives(
+    id: string,
+  ): Promise<OperationResult<WorkPackageObjectiveViewModel[]>> {
+    return await this.httpService.post<WorkPackageObjectiveViewModel[]>(
+      `/projects/objectives/${id}`,
+    );
+  }
+
+  async objectiveDetails(
+    id: string,
+  ): Promise<OperationResult<ProjectObjectiveEstimatedPriceViewModel[]>> {
+    return await this.httpService.post<
+      ProjectObjectiveEstimatedPriceViewModel[]
+    >(`/projects/objectives/${id}/detail`);
   }
 }

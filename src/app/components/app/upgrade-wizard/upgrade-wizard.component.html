@@ -40,54 +40,65 @@
                   </ng-container>
                 </div>
                 <div class="duration">
-<!--                  <ng-container *ngIf="!identityService.profile.plan.planCost">-->
-<!--                    <span class="days">{{ 'FOREVER' | translate }}</span>-->
-<!--                  </ng-container>-->
+                  <!--                  <ng-container *ngIf="!identityService.profile.plan.planCost">-->
+                  <!--                    <span class="days">{{ 'FOREVER' | translate }}</span>-->
+                  <!--                  </ng-container>-->
                   <ng-container *ngIf="identityService.profile.plan.planCost">
-                    <span class="days">{{ identityService.profile.plan.days}}</span>
+                    <span class="days">{{
+                      identityService.profile.plan.days
+                    }}</span>
                     <span>{{ 'DAYS' | translate }}</span>
                   </ng-container>
                 </div>
               </div>
               <div class="features">
                 <div class="feature">
-                <span class="count">{{
-                  identityService.profile.plan.simpleGroup
+                  <span class="count">{{
+                    identityService.profile.plan.simpleGroup
                   }}</span>
                   <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
                 </div>
                 <div class="feature">
-                <span class="count">{{
-                  identityService.profile.plan.complexGroup
+                  <span class="count">{{
+                    identityService.profile.plan.complexGroup
                   }}</span>
                   <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
                 </div>
                 <div class="feature">
-                <span class="count">{{
-                  identityService.profile.plan.project
+                  <span class="count">{{
+                    identityService.profile.plan.project
                   }}</span>
                   <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
                 </div>
                 <div class="feature">
-                <span class="count">{{
-                  identityService.profile.plan.workPackage
+                  <span class="count">{{
+                    identityService.profile.plan.workPackage
                   }}</span>
                   <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
                 </div>
                 <div class="feature">
-                  <span class="count">{{ NumberHelpers.humanFileSize(identityService.profile.plan.space)}}</span>
+                  <span class="count">{{
+                    NumberHelpers.humanFileSize(
+                      identityService.profile.plan.space
+                    )
+                  }}</span>
                   <span class="title">{{ 'DISK_SPACE' | translate }}</span>
                 </div>
                 <div class="feature">
-                  <span class="count">{{ identityService.profile.plan.users}}</span>
+                  <span class="count">{{
+                    identityService.profile.plan.users
+                  }}</span>
                   <span class="title">{{ 'USERS' | translate }}</span>
                 </div>
               </div>
             </div>
           </div>
-          <div (click)="pick(plan)"
-               *ngFor="let plan of data.plans" class="box"
-               [class.next]="plan.canUse">
+          <div
+            (click)="pick(plan)"
+            *ngFor="let plan of data.plans"
+            class="box"
+            [class.next]="plan.canUse"
+          >
             <div class="plan" [class.selected]="selectedPlan === plan">
               <div class="p-header">
                 {{ plan.title | translate }}
@@ -97,33 +108,35 @@
                   {{ plan.planCost | number }}
                 </div>
                 <div class="duration">
-                  <span class="days">{{ plan.days}}</span>
+                  <span class="days">{{ plan.days }}</span>
                   <span>{{ 'DAYS' | translate }}</span>
                 </div>
               </div>
               <div class="features">
                 <div class="feature">
-                <span class="count">{{ plan.simpleGroup}}</span>
+                  <span class="count">{{ plan.simpleGroup }}</span>
                   <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
                 </div>
                 <div class="feature">
-                <span class="count">{{ plan.complexGroup}}</span>
+                  <span class="count">{{ plan.complexGroup }}</span>
                   <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
                 </div>
                 <div class="feature">
-                <span class="count">{{ plan.project}}</span>
+                  <span class="count">{{ plan.project }}</span>
                   <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
                 </div>
                 <div class="feature">
-                <span class="count">{{ plan.workPackage}}</span>
+                  <span class="count">{{ plan.workPackage }}</span>
                   <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
                 </div>
                 <div class="feature">
-                  <span class="count">{{ NumberHelpers.humanFileSize(plan.diskSpace)}}</span>
+                  <span class="count">{{
+                    NumberHelpers.humanFileSize(plan.diskSpace)
+                  }}</span>
                   <span class="title">{{ 'DISK_SPACE' | translate }}</span>
                 </div>
                 <div class="feature">
-                  <span class="count">{{ plan.users}}</span>
+                  <span class="count">{{ plan.users }}</span>
                   <span class="title">{{ 'USERS' | translate }}</span>
                 </div>
               </div>
@@ -159,16 +172,22 @@
     <ng-container *ngIf="mode === ViewMode.Choose">
       <h3>{{ 'ESTIMATE_YOUR_NEED' | translate }}</h3>
       <div class="order-item">
-        <div class="title">{{ 'DISK_SPACE' | translate}}</div>
+        <div class="title">{{ 'DISK_SPACE' | translate }}</div>
         <div class="slider">
-          <div class="current">{{NumberHelpers.humanFileSize(identityService.profile.plan.space)}}</div>
-          <mat-slider [min]="identityService.profile.plan.space"
-                      [(value)]="order.diskSpace"
-                      [displayWith]="formatSpaceLabel"
-                      color="primary"
-                      thumbLabel
-                      max="107374182400"
-                      step="1073741824"></mat-slider>
+          <div class="current">
+            {{
+              NumberHelpers.humanFileSize(identityService.profile.plan.space)
+            }}
+          </div>
+          <mat-slider
+            [min]="identityService.profile.plan.space"
+            [(value)]="order.diskSpace"
+            [displayWith]="formatSpaceLabel"
+            color="primary"
+            thumbLabel
+            max="107374182400"
+            step="1073741824"
+          ></mat-slider>
           <div class="current">100 GB</div>
         </div>
       </div>

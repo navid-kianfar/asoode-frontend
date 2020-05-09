@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {ProjectViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
+import {
+  ProjectViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
 import { AccessType } from '../../../library/app/enums';
 
 @Component({

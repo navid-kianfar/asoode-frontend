@@ -1,5 +1,5 @@
-import {CostUnit, PlanType} from '../../library/app/enums';
-import {BaseViewModel} from '../core/general-types';
+import { CostUnit, PlanType } from '../../library/app/enums';
+import { BaseViewModel } from '../core/general-types';
 
 export interface UserPlanInfoViewModel extends BaseViewModel {
   canUse?: boolean;
@@ -139,5 +139,4 @@ export interface OrderViewModel {
   complexGroup: number;
   simpleGroup: number;
   calculatedPrice: number;
-
 }

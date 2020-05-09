@@ -4,27 +4,27 @@
       <div class="filter">
         <div class="date">
           {{ beginDate | culturedDate }}
-<!--          <i class="icon-arrow-down2"></i>-->
+          <!--          <i class="icon-arrow-down2"></i>-->
         </div>
 
-<!--        <div class="btns">-->
-<!--          <button>-->
-<!--            <i class="icon-arrow-right2"></i>-->
-<!--          </button>-->
-<!--          <button>-->
-<!--            <i class="icon-arrow-left2"></i>-->
-<!--          </button>-->
-<!--        </div>-->
+        <!--        <div class="btns">-->
+        <!--          <button>-->
+        <!--            <i class="icon-arrow-right2"></i>-->
+        <!--          </button>-->
+        <!--          <button>-->
+        <!--            <i class="icon-arrow-left2"></i>-->
+        <!--          </button>-->
+        <!--        </div>-->
 
-<!--        <div class="today">-->
-<!--          <button>-->
-<!--            {{ 'GO_TODAY' | translate}}-->
-<!--          </button>-->
-<!--        </div>-->
+        <!--        <div class="today">-->
+        <!--          <button>-->
+        <!--            {{ 'GO_TODAY' | translate}}-->
+        <!--          </button>-->
+        <!--        </div>-->
       </div>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
-          {{ 'DAY_VIEW' | translate}}
+          {{ 'DAY_VIEW' | translate }}
           <i class="icon-arrow-down2"></i>
         </button>
       </div>
@@ -32,8 +32,12 @@
     <div class="content clipped">
       <div class="grid-container">
         <div class="grid">
-          <div class="grid-col time-col grid-col--fixed-{{cultureService.rtl ? 'right' : 'left'}}">
-            <div class="grid-item grid-item--header"> </div>
+          <div
+            class="grid-col time-col grid-col--fixed-{{
+              cultureService.rtl ? 'right' : 'left'
+            }}"
+          >
+            <div class="grid-item grid-item--header"></div>
             <div *ngFor="let hour of hours" class="grid-item">
               {{ NumberHelpers.pad(hour, 2) }}:00
             </div>
@@ -41,16 +45,19 @@
 
           <div class="grid-col x2">
             <div class="grid-item grid-item--header">
-              {{beginDate | culturedDate}}
+              {{ beginDate | culturedDate }}
             </div>
             <div *ngFor="let hour of hours" class="grid-item">
               <div class="tasks-container" *ngIf="days[0].events.length">
                 <ng-container *ngFor="let task of days[0].events">
-                  <div *ngIf="task.dueAt.getHours() === hour" class="task-container color-{{task.state}}"
-                       (click)="openTask($event, task)">
+                  <div
+                    *ngIf="task.dueAt.getHours() === hour"
+                    class="task-container color-{{ task.state }}"
+                    (click)="openTask($event, task)"
+                  >
                     <div class="title">
                       <div class="time-line"></div>
-                      {{task.title | truncate:50}}
+                      {{ task.title | truncate: 50 }}
                     </div>
                   </div>
                 </ng-container>
@@ -65,28 +72,28 @@
     <div class="header">
       <div class="filter">
         <div class="date">
-          {{ beginDate | culturedDate }} - {{endDate | culturedDate}}
-<!--          <i class="icon-arrow-down2"></i>-->
+          {{ beginDate | culturedDate }} - {{ endDate | culturedDate }}
+          <!--          <i class="icon-arrow-down2"></i>-->
         </div>
 
-<!--        <div class="btns">-->
-<!--          <button>-->
-<!--            <i class="icon-arrow-right2"></i>-->
-<!--          </button>-->
-<!--          <button>-->
-<!--            <i class="icon-arrow-left2"></i>-->
-<!--          </button>-->
-<!--        </div>-->
+        <!--        <div class="btns">-->
+        <!--          <button>-->
+        <!--            <i class="icon-arrow-right2"></i>-->
+        <!--          </button>-->
+        <!--          <button>-->
+        <!--            <i class="icon-arrow-left2"></i>-->
+        <!--          </button>-->
+        <!--        </div>-->
 
-<!--        <div class="today">-->
-<!--          <button>-->
-<!--            {{ 'GO_TODAY' | translate}}-->
-<!--          </button>-->
-<!--        </div>-->
+        <!--        <div class="today">-->
+        <!--          <button>-->
+        <!--            {{ 'GO_TODAY' | translate}}-->
+        <!--          </button>-->
+        <!--        </div>-->
       </div>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
-          {{ 'WEEK_VIEW' | translate}}
+          {{ 'WEEK_VIEW' | translate }}
           <i class="icon-arrow-down2"></i>
         </button>
       </div>
@@ -94,24 +101,31 @@
     <div class="content clipped">
       <div class="grid-container">
         <div class="grid">
-          <div class="grid-col time-col grid-col--fixed-{{cultureService.rtl ? 'right' : 'left'}}">
-            <div class="grid-item grid-item--header"> </div>
+          <div
+            class="grid-col time-col grid-col--fixed-{{
+              cultureService.rtl ? 'right' : 'left'
+            }}"
+          >
+            <div class="grid-item grid-item--header"></div>
             <div *ngFor="let hour of hours" class="grid-item">
               {{ NumberHelpers.pad(hour, 2) }}:00
             </div>
           </div>
           <div *ngFor="let day of days" class="grid-col">
             <div class="grid-item grid-item--header">
-              {{day.date}}
+              {{ day.date }}
             </div>
             <div *ngFor="let hour of hours" class="grid-item">
               <div class="tasks-container" *ngIf="day.events.length">
                 <ng-container *ngFor="let task of day.events">
-                  <div *ngIf="task.dueAt.getHours() === hour" class="task-container color-{{task.state}}"
-                       (click)="openTask($event, task)">
+                  <div
+                    *ngIf="task.dueAt.getHours() === hour"
+                    class="task-container color-{{ task.state }}"
+                    (click)="openTask($event, task)"
+                  >
                     <div class="title">
                       <div class="time-line"></div>
-                      {{task.title | truncate:50}}
+                      {{ task.title | truncate: 50 }}
                     </div>
                   </div>
                 </ng-container>
@@ -126,36 +140,38 @@
     <div class="header">
       <div class="filter">
         <div class="date">
-          {{ beginDate | culturedDate:false:'NNN YYYY' }}
-<!--          <i class="icon-arrow-down2"></i>-->
+          {{ beginDate | culturedDate: false:'NNN YYYY' }}
+          <!--          <i class="icon-arrow-down2"></i>-->
         </div>
 
-<!--        <div class="btns">-->
-<!--          <button>-->
-<!--            <i class="icon-arrow-right2"></i>-->
-<!--          </button>-->
-<!--          <button>-->
-<!--            <i class="icon-arrow-left2"></i>-->
-<!--          </button>-->
-<!--        </div>-->
+        <!--        <div class="btns">-->
+        <!--          <button>-->
+        <!--            <i class="icon-arrow-right2"></i>-->
+        <!--          </button>-->
+        <!--          <button>-->
+        <!--            <i class="icon-arrow-left2"></i>-->
+        <!--          </button>-->
+        <!--        </div>-->
 
-<!--        <div class="today">-->
-<!--          <button>-->
-<!--            {{ 'GO_TODAY' | translate}}-->
-<!--          </button>-->
-<!--        </div>-->
+        <!--        <div class="today">-->
+        <!--          <button>-->
+        <!--            {{ 'GO_TODAY' | translate}}-->
+        <!--          </button>-->
+        <!--        </div>-->
       </div>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
-          {{ 'MONTH_VIEW' | translate}}
+          {{ 'MONTH_VIEW' | translate }}
           <i class="icon-arrow-down2"></i>
         </button>
       </div>
     </div>
     <div class="content clipped">
-      <app-calendar-month [beginDate]="beginDate"
-                          [endDate]="endDate"
-                          [model]="calendarData"></app-calendar-month>
+      <app-calendar-month
+        [beginDate]="beginDate"
+        [endDate]="endDate"
+        [model]="calendarData"
+      ></app-calendar-month>
     </div>
   </ng-container>
 

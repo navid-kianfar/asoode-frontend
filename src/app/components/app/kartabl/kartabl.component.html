@@ -1,22 +1,25 @@
 <div class="app-kartabl-container" [class.empty]="!projects.length">
-
   <div *ngIf="!projects.length" class="no-item">
-    <h3>{{ 'KARTABL_EMPTY' | translate}}</h3>
-    <h4>{{ 'KARTABL_EMPTY_NOTE' | translate}}</h4>
+    <h3>{{ 'KARTABL_EMPTY' | translate }}</h3>
+    <h4>{{ 'KARTABL_EMPTY_NOTE' | translate }}</h4>
   </div>
 
   <div *ngIf="projects.length" class="wrapper">
     <div class="header">
-      <app-dropdown [items]="projects"
-                    [chooseLabel]="'CHOOSE_WORK_PACKAGE'"
-                    [model]="pkg.id"
-                    (modelChange)="switchProject($event)"></app-dropdown>
+      <app-dropdown
+        [items]="projects"
+        [chooseLabel]="'CHOOSE_WORK_PACKAGE'"
+        [model]="pkg.id"
+        (modelChange)="switchProject($event)"
+      ></app-dropdown>
     </div>
     <div class="content">
-      <app-work-package-list [permission]=""
-                             [embed]="true"
-                             [model]="pkg"
-                             [project]="project"></app-work-package-list>
+      <app-work-package-list
+        [permission]=""
+        [embed]="true"
+        [model]="pkg"
+        [project]="project"
+      ></app-work-package-list>
     </div>
   </div>
 </div>

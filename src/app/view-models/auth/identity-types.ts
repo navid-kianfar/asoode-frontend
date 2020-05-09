@@ -1,7 +1,7 @@
-import {CalendarType, UserType} from '../../library/core/enums';
-import {AccessType} from '../../library/app/enums';
-import {GroupViewModel} from '../groups/group-types';
-import {UserPlanInfoViewModel} from '../general/plan-types';
+import { CalendarType, UserType } from '../../library/core/enums';
+import { AccessType } from '../../library/app/enums';
+import { GroupViewModel } from '../groups/group-types';
+import { UserPlanInfoViewModel } from '../general/plan-types';
 
 export interface IdentityObject {
   token: string;

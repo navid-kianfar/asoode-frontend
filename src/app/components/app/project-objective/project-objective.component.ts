@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
   ProjectObjectiveEstimatedPriceViewModel,
-  WorkPackageObjectiveViewModel,
   ProjectViewModel,
+  WorkPackageObjectiveViewModel,
 } from '../../../view-models/projects/project-types';
-import { MockService } from '../../../services/general/mock.service';
 import { AccessType } from '../../../library/app/enums';
+import { ProjectService } from '../../../services/projects/project.service';
+import { OperationResultStatus } from '../../../library/core/enums';
 
 @Component({
   selector: 'app-project-objective',
@@ -17,62 +18,41 @@ export class ProjectObjectiveComponent implements OnInit {
   @Input() permission: AccessType;
   selected: WorkPackageObjectiveViewModel;
   estimated: ProjectObjectiveEstimatedPriceViewModel[];
+  objectives: WorkPackageObjectiveViewModel[];
   estimatedTotalTime: number;
   estimatedTotalAmount: number;
-  constructor(readonly mockService: MockService) {}
+  waiting: boolean;
+  detailWaiting: boolean;
+  constructor(private readonly projectService: ProjectService) {}
 
   ngOnInit() {
-    this.estimated = [
-      {
-        date: new Date(),
-        amount: 100000,
-        time: 1000000,
-        group: 'Development',
-        user: 'Navid Kianfar',
-      },
-      {
-        date: new Date(),
-        amount: 100000,
-        time: 1000000,
-        group: 'Development',
-        user: 'Navid Kianfar',
-      },
-      {
-        date: new Date(),
-        amount: 100000,
-        time: 1000000,
-        group: 'Development',
-        user: 'Navid Kianfar',
-      },
-      {
-        date: new Date(),
-        amount: 100000,
-        time: 1000000,
-        group: 'Development',
-        user: 'Navid Kianfar',
-      },
-      {
-        date: new Date(),
-        amount: 100000,
-        time: 1000000,
-        group: 'Development',
-        user: 'Navid Kianfar',
-      },
-      {
-        date: new Date(),
-        amount: 100000,
-        time: 1000000,
-        group: 'Development',
-        user: 'Navid Kianfar',
-      },
-      {
-        date: new Date(),
-        amount: 100000,
-        time: 1000000,
-        group: 'Development',
-        user: 'Navid Kianfar',
-      },
-    ];
+    this.fetch();
+  }
+
+  async fetch() {
+    this.objectives = [];
+    this.estimated = [];
+    this.waiting = true;
+    const op = await this.projectService.objectives(this.model.id);
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.waiting = false;
+    this.objectives = op.data;
+  }
+
+  async pickObjective(objective: WorkPackageObjectiveViewModel) {
+    this.selected = objective;
+
+    this.detailWaiting = true;
+    const op = await this.projectService.objectiveDetails(objective.id);
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.detailWaiting = false;
+    this.estimated = op.data;
     this.estimatedTotalAmount = this.estimated
       .map(e => e.amount)
       .reduce((p, c) => p + c, 0);

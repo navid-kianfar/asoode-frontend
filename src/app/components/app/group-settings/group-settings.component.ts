@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { AccessType } from '../../../library/app/enums';
-import {GroupService} from '../../../services/groups/group.service';
-import {ModalService} from '../../../services/core/modal.service';
-import {OperationResult} from '../../../library/core/operation-result';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
+import { GroupService } from '../../../services/groups/group.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { OperationResult } from '../../../library/core/operation-result';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-group-settings',
