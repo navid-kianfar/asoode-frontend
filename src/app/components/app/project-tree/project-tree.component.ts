@@ -1,30 +1,24 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import {
-  ProjectViewModel,
-  SubProjectViewModel,
-  WorkPackageViewModel,
-} from '../../../view-models/projects/project-types';
-import { AccessType, ActivityType } from '../../../library/app/enums';
-import { ProjectService } from '../../../services/projects/project.service';
-import { ModalService } from '../../../services/core/modal.service';
-import { FormService } from '../../../services/core/form.service';
-import { PromptComponent } from '../../../modals/prompt/prompt.component';
-import { PromptModalParameters } from '../../../view-models/core/modal-types';
-import { WorkPackageWizardComponent } from '../../../modals/work-package-wizard/work-package-wizard.component';
-import { OperationResultStatus } from '../../../library/core/enums';
-import { NotificationService } from '../../../services/core/notification.service';
-import { Socket } from 'ngx-socket-io';
-import { OperationResult } from '../../../library/core/operation-result';
-import { StringHelpers } from '../../../helpers/string.helpers';
-import { TranslateService } from '../../../services/core/translate.service';
-import { Router } from '@angular/router';
-import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
-import { CreateModalParameters } from '../../../view-models/modals/modals-types';
-import { IdentityService } from '../../../services/auth/identity.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { WorkPackageService } from '../../../services/projects/work-package.service';
-import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {ProjectViewModel, SubProjectViewModel, TreeViewModel, WorkPackageViewModel,} from '../../../view-models/projects/project-types';
+import {AccessType, ActivityType} from '../../../library/app/enums';
+import {ProjectService} from '../../../services/projects/project.service';
+import {ModalService} from '../../../services/core/modal.service';
+import {FormService} from '../../../services/core/form.service';
+import {PromptComponent} from '../../../modals/prompt/prompt.component';
+import {PromptModalParameters} from '../../../view-models/core/modal-types';
+import {WorkPackageWizardComponent} from '../../../modals/work-package-wizard/work-package-wizard.component';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {NotificationService} from '../../../services/core/notification.service';
+import {Socket} from 'ngx-socket-io';
+import {StringHelpers} from '../../../helpers/string.helpers';
+import {TranslateService} from '../../../services/core/translate.service';
+import {Router} from '@angular/router';
+import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
+import {CreateModalParameters} from '../../../view-models/modals/modals-types';
+import {IdentityService} from '../../../services/auth/identity.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {WorkPackageService} from '../../../services/projects/work-package.service';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-project-tree',
@@ -40,6 +34,8 @@ export class ProjectTreeComponent implements OnInit {
   dragDelay: number;
   AccessType = AccessType;
   noDrag: boolean;
+  waiting: boolean;
+  data: TreeViewModel;
   constructor(
     private readonly socket: Socket,
     private readonly router: Router,
@@ -63,6 +59,18 @@ export class ProjectTreeComponent implements OnInit {
       this.permission === AccessType.Owner) ||
       this.deviceDetectorService.os.toLowerCase() === 'ios';
     this.bind();
+    this.fetch();
+  }
+
+  async fetch() {
+    this.waiting = true;
+    const op = await this.projectService.tree(this.model.id);
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+    this.data = op.data;
+    this.waiting = false;
     this.createTree();
   }
 

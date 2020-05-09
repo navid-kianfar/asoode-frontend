@@ -16,7 +16,24 @@ import {
 import { MemberInfoViewModel } from '../auth/identity-types';
 import { PendingInvitationViewModel } from '../groups/group-types';
 import { IDateTimeProperties } from '../../library/core/date-time/date-contracts';
+import {DayReportViewModel} from '../general/report-types';
 
+export interface TreeViewModel {
+  report: DayReportViewModel[];
+  tree: { [key: string]: TreeReportViewModel };
+}
+export interface TreeReportViewModel {
+  progress: number;
+  timeSpent: number;
+  from?: Date;
+  to?: Date;
+  total: number;
+  done: number;
+  members: WorkPackageMemberViewModel[];
+}
+export interface RoadMapViewModel {
+
+}
 export interface ProjectObjectiveEstimatedPriceViewModel {
   date: Date;
   time: number;

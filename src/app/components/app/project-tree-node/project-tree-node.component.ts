@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import {
   ProjectViewModel,
-  SubProjectViewModel,
+  SubProjectViewModel, TreeReportViewModel, TreeViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
 import { Subscription } from 'rxjs';
@@ -25,6 +25,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   styleUrls: ['./project-tree-node.component.scss'],
 })
 export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
+  @Input() data: TreeViewModel;
   @Input() permission: AccessType;
   @Input() workPackage: WorkPackageViewModel;
   @Input() project: ProjectViewModel;
@@ -50,6 +51,7 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   dragDelay: number;
   AccessType = AccessType;
   noDrag: boolean;
+  reportViewModel: TreeReportViewModel;
   constructor(
     private readonly router: Router,
     private readonly deviceDetectorService: DeviceDetectorService,
@@ -82,6 +84,8 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
     if (this.workPackage) {
       this.subProjects = [];
       this.workPackages = [];
+      this.reportViewModel = this.data.tree[this.workPackage.id];
+      this.reportViewModel.members = [...this.workPackage.members];
     } else {
       this.subProjects = this.project.subProjects
         .filter(s => s.parentId === this.subProject.id)
@@ -89,6 +93,51 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
       this.workPackages = this.project.workPackages
         .filter(w => w.subProjectId === this.subProject.id)
         .sort((a, b) => (a.order > b.order ? 1 : -1));
+
+      this.reportViewModel = {
+        done: 0,
+        timeSpent: 0,
+        total: 0,
+        progress: 0,
+        from: null,
+        to: null,
+        members: []
+      };
+      this.workPackages.forEach(p => {
+        const report = this.data.tree[p.id];
+        this.reportViewModel.members = [
+          ...this.reportViewModel.members,
+          ...p.members
+        ];
+        this.reportViewModel.timeSpent += report.timeSpent;
+        this.reportViewModel.done += report.done;
+        this.reportViewModel.total += report.total;
+        if (report.from) {
+          report.from = new Date(report.from);
+          if (!this.reportViewModel.from) {
+            this.reportViewModel.from = report.from;
+          } else if (report.from.getTime() < this.reportViewModel.from.getTime()) {
+            this.reportViewModel.from = report.from;
+          }
+        }
+        if (report.to) {
+          report.to = new Date(report.to);
+          if (!this.reportViewModel.to) {
+            this.reportViewModel.to = report.to;
+          } else if (report.to.getTime() > this.reportViewModel.to.getTime()) {
+            this.reportViewModel.to = report.to;
+          }
+        }
+      });
     }
+    const duplicates = {} as any;
+    this.reportViewModel.progress = this.reportViewModel.total ? (
+      Math.floor(this.reportViewModel.done * 100 / this.reportViewModel.total)
+    ) : 0;
+    this.reportViewModel.members = this.reportViewModel.members.filter(m => {
+      if (duplicates[m.recordId]) { return false; }
+      duplicates[m.recordId] = true;
+      return true;
+    });
   }
 }

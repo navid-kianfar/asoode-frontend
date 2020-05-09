@@ -51,25 +51,30 @@
       {{ subProject ? subProject.description : workPackage.description }}
     </div>
     <div class="members">
-      <!--      <app-member-info-->
-      <!--        small="true"-->
-      <!--        *ngFor="-->
-      <!--          let member of subProject ? project.members : workPackage.members-->
-      <!--        "-->
-      <!--        [model]="member"-->
-      <!--      ></app-member-info>-->
+      <ng-container *ngFor=" let member of reportViewModel.members">
+        <app-member-info
+          small="true"
+          *ngIf="!member.isGroup"
+          [id]="member.recordId"
+        ></app-member-info>
+        <app-group-info
+          small="true"
+          *ngIf="member.isGroup"
+          [id]="member.recordId"
+        ></app-group-info>
+      </ng-container>
     </div>
     <div class="progress">
-      <mat-progress-bar [value]="0" [bufferValue]="100"></mat-progress-bar
-      >&nbsp;<span>{{ 0 }}%</span>
+      <mat-progress-bar [value]="reportViewModel.progress"></mat-progress-bar>&nbsp;
+      <span>{{ reportViewModel.progress }}%</span>
     </div>
     <div class="time-span">
-      <!--      <ng-container *ngIf="from">{{ from | culturedDate }}</ng-container>-->
-      <!--      <ng-container *ngIf="from && to">&nbsp;-&nbsp;</ng-container>-->
-      <!--      <ng-container *ngIf="to">{{ to | culturedDate }}</ng-container>-->
+      <ng-container *ngIf="reportViewModel.from">{{ reportViewModel.from | culturedDate }}</ng-container>
+      <ng-container *ngIf="reportViewModel.from && reportViewModel.to">&nbsp;-&nbsp;</ng-container>
+      <ng-container *ngIf="reportViewModel.to">{{ reportViewModel.to | culturedDate }}</ng-container>
     </div>
     <div class="time-spent">
-      <!--      {{ 100000 | msToDuration }}-->
+      {{ reportViewModel.timeSpent | msToDuration }}
     </div>
   </div>
   <ng-container *ngIf="expanded">
@@ -90,6 +95,7 @@
       >
         <app-project-tree-node
           #subNode
+          [data]="data"
           [permission]="permission"
           (deleteSubProject)="deleteSubProject.emit($event)"
           (editSubProject)="editSubProject.emit($event)"
@@ -121,6 +127,7 @@
         cdkDrag
       >
         <app-project-tree-node
+          [data]="data"
           (dropWorkPackage)="dropWorkPackage.emit($event)"
           [permission]="permission"
           [level]="level + 1"

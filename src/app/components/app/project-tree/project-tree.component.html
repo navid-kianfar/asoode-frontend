@@ -1,12 +1,13 @@
 <div class="project-tree no-select">
   <div class="actions">
     <h3>{{ 'TREE_VIEW' | translate }}</h3>
-    <button [matMenuTriggerFor]="menu" mat-stroked-button>
+    <button [disabled]="waiting" [matMenuTriggerFor]="menu" mat-stroked-button>
       <i class="icon-plus2"></i>&nbsp;
       {{ 'CREATE' | translate }}
     </button>
   </div>
-  <div class="box">
+  <app-waiting *ngIf="waiting"></app-waiting>
+  <div *ngIf="!waiting" class="box">
     <div class="header">
       <div class="collapse">&nbsp;</div>
       <div class="title">&nbsp;</div>
@@ -34,6 +35,7 @@
         <app-project-tree-node
           #subNode
           [permission]="permission"
+          [data]="data"
           (dropWorkPackage)="dropWorkPackage($event)"
           (dropSubProject)="dropSubProject($event)"
           (deleteSubProject)="deleteSubProject($event)"
@@ -63,6 +65,7 @@
         cdkDrag
       >
         <app-project-tree-node
+          [data]="data"
           (dropWorkPackage)="dropWorkPackage($event)"
           [permission]="permission"
           [level]="1"
