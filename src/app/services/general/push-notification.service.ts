@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { IdentityService } from '../auth/identity.service';
-import { GroupService } from '../groups/group.service';
-import { ProjectService } from '../projects/project.service';
-import { ActivityType } from '../../library/app/enums';
-import { Router } from '@angular/router';
-import { WindowService } from './window.service';
+import {Injectable} from '@angular/core';
+import {IdentityService} from '../auth/identity.service';
+import {GroupService} from '../groups/group.service';
+import {ProjectService} from '../projects/project.service';
+import {ActivityType} from '../../library/app/enums';
+import {Router} from '@angular/router';
+import {WindowService} from './window.service';
 import {
   ProjectMemberViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
-import { DeviceDetectorService } from 'ngx-device-detector';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,9 @@ export class PushNotificationService {
     private readonly projectService: ProjectService,
     private readonly windowService: WindowService,
     private readonly detector: DeviceDetectorService,
-  ) { }
+  ) {
+  }
+
   handleSocket(notification: any) {
     let find1: any = null;
     let find2: any = null;
@@ -53,7 +55,7 @@ export class PushNotificationService {
         });
         break;
 
-        case ActivityType.GroupAdd:
+      case ActivityType.GroupAdd:
         this.groupService.groups.push(notification.data);
         if (
           this.identityService.identity.userId === notification.data.userId &&
@@ -126,6 +128,8 @@ export class PushNotificationService {
         if (find1) {
           find1.members = [...(find1.members || []), ...(notification.data.members || [])];
           find1.pending = [...(find1.pending || []), ...(notification.data.pending || [])];
+        } else {
+          this.groupService.load();
         }
         break;
       case ActivityType.GroupRemove:
@@ -237,6 +241,8 @@ export class PushNotificationService {
         if (find1) {
           find1.members = find1.members.concat(notification.data.members);
           find1.pending = find1.pending.concat(notification.data.pending);
+        } else {
+          this.projectService.load();
         }
         break;
       case ActivityType.ProjectMemberRemove:
@@ -353,7 +359,9 @@ export class PushNotificationService {
           return;
         }
         find1 = this.findWorkPackage(notification.data.recordId);
-        if (!find1) { return; }
+        if (!find1) {
+          return;
+        }
         find1.pending = find1.pending.filter(
           m => m.id !== notification.data.id,
         );
@@ -447,12 +455,15 @@ export class PushNotificationService {
         break;
     }
   }
+
   handlePush(notification: any) {
     // console.log('push', notification);
   }
+
   handlePushClick(notification: any) {
     // console.log('click', notification);
   }
+
   private findWorkPackage(id: string): WorkPackageViewModel {
     for (const proj of this.projectService.projects) {
       for (const wp of proj.workPackages) {

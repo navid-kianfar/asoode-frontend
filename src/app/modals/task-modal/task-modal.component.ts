@@ -423,10 +423,10 @@ export class TaskModalComponent
   }
 
   private postProcess() {
-    const permission = this.project.members.find(
-      m => m.recordId === this.identityService.identity.userId,
-    );
-    this.permission = permission ? permission.access : AccessType.Visitor;
+    // const permission = this.project.members.find(
+    //   m => m.recordId === this.identityService.identity.userId,
+    // );
+    // this.permission = permission ? permission.access : AccessType.Visitor;
     this.model.comments.forEach(c => {
       const found = this.project.members.find(m => m.recordId === c.userId);
       if (found) {

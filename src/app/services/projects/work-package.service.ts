@@ -128,7 +128,10 @@ export class WorkPackageService {
     for (const ga of pkg.members.filter(m => m.isGroup)) {
       const found = this.groupService.groups.find(k => k.id === ga.recordId);
       if (found) {
-        multiple.push(found.access);
+        const aa = found.members.find(m => m.userId === this.identityService.identity.userId);
+        if (aa) {
+          multiple.push(aa.access);
+        }
       }
     }
     return multiple.sort()[0];
