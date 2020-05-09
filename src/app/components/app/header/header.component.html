@@ -38,19 +38,18 @@
       <span>{{ 'QUICK_ACCESS' | translate }}&nbsp;</span>
       <i class="icon-arrow-down2"></i>
     </a>
-    <div class="search-container">
+    <div class="search-container"
+         [popper]="popperSearch"
+         [popperHideOnClickOutside]="true"
+         [popperHideOnScroll]="true"
+         [popperPlacement]="'bottom-start'"
+         (click)="openSearchResult($event)">
       <input
-        (focus)="popper = popperSearch"
         type="text"
         [placeholder]="'SEARCH_ANYWHERE' | translate"
       />
       <div
         class="holder"
-        [popper]="popperSearch"
-        [popperTrigger]="'click'"
-        [popperHideOnClickOutside]="true"
-        [popperHideOnScroll]="true"
-        [popperPlacement]="'bottom-start'"
       >
         <i class="icon-search primary-color"></i>
       </div>
@@ -70,12 +69,12 @@
   </popper-content>
 
   <popper-content #popperSearch>
-    <div class="search-popper">
+    <div class="search-popper" (click)="$event.stopPropagation()">
       <app-search-result
         [loading]="loading"
         [results]="results"
         [term]="searchTerm"
-        (hide)="popperSearch.hide()"
+        (hide)="popperSearch.hide(); manualShow = false;"
       ></app-search-result>
     </div>
   </popper-content>

@@ -12,6 +12,7 @@
       display: flex;
       color: #444444;
       align-items: baseline;
+      flex-wrap: wrap;
       .ico {
         display: flex;
         margin-inline-end: 10px;
@@ -71,6 +72,7 @@
         .info {
           display: flex;
           flex-grow: 1;
+          min-width: 200px;
         }
         .access {
           display: flex;
@@ -99,12 +101,20 @@
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 650px) {
   .project-setting {
     .box {
       .members {
         .member {
           flex-wrap: wrap;
+
+          .info {
+            flex: 0 0 100%;
+            min-width: unset;
+          }
+          .access, .action {
+            margin-bottom: 10px;
+          }
         }
       }
     }

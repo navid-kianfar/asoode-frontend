@@ -1,4 +1,5 @@
 @mixin task-drag {
+  min-width: 1300px;
   display: flex;
   background: #ffffff;
   border-bottom: 1px solid #ececec;
@@ -262,6 +263,7 @@
       .new-task {
         input {
           width: 500px;
+          max-width: 100%;
           font-size: 0.8rem;
           padding: 10px;
         }

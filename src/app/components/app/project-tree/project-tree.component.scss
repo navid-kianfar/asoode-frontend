@@ -85,4 +85,8 @@
       justify-content: center;
     }
   }
+
+  ::ng-deep app-project-tree-node {
+    display: flex;
+  }
 }

@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  OnInit,
+  OnInit, Renderer2,
   ViewChild,
 } from '@angular/core';
 import { IdentityService } from '../../../services/auth/identity.service';
@@ -41,8 +41,14 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   loading: boolean;
   searchTerm: string;
   results: SearchResultViewModel;
-  popper: PopperContent;
+
+  @ViewChild('popperSearch', { static: false }) popperSearch: PopperContent;
+
+  // popper: PopperContent;
+  manualShow: boolean;
+  private listener: any;
   constructor(
+    private readonly renderer: Renderer2,
     private readonly socket: Socket,
     public readonly identityService: IdentityService,
     private readonly modalService: ModalService,
@@ -74,23 +80,27 @@ export class HeaderComponent implements AfterViewInit, OnInit {
         tap(() => {
           this.results = { ...EMPTY };
           this.loading = true;
-          if (this.popper) {
-            this.popper.show();
+          this.manualShow = true;
+          this.popperSearch.show();
+          if (!this.listener) {
+            this.listener = this.renderer
+              .listen('document', 'click',
+                  event => { this.popperSearch.hide(); });
           }
         }),
         switchMap(project => {
-          const search = input.value;
-          if (!search) {
+          this.searchTerm = (input.value || '').trim();
+          if (!this.searchTerm) {
             const op = OperationResult.Success<SearchResultViewModel>({
               ...EMPTY,
             });
             return Promise.resolve(op);
           }
-          return this.httpService.post('/search', { search });
+          return this.httpService.post('/search', { search: this.searchTerm });
         }),
       )
       .subscribe(data => {
-        this.searchTerm = input.value;
+        this.searchTerm = (input.value || '').trim();
         if (data.status === OperationResultStatus.Success) {
           this.results = data.data as SearchResultViewModel;
         } else {
@@ -115,5 +125,16 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     this.modalService
       .show(CreateWizardComponent, {} as CreateModalParameters)
       .subscribe(() => {});
+  }
+
+  openSearchResult($event: MouseEvent) {
+    $event.stopPropagation();
+    if (!this.searchTerm) { return; }
+    if (this.popperSearch.state) {
+      this.popperSearch.hide();
+    } else {
+      this.popperSearch.show();
+    }
+
   }
 }
