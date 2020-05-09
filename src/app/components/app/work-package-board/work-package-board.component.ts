@@ -40,6 +40,7 @@ export class WorkPackageBoardComponent implements OnInit {
   creatingNewTask: boolean;
   newListName: string;
   newTaskTitle: string;
+  noDrag: boolean;
   constructor(
     private readonly workPackageService: WorkPackageService,
     private readonly taskService: TaskService,
@@ -52,8 +53,9 @@ export class WorkPackageBoardComponent implements OnInit {
     this.dragDelay =
       this.deviceDetectorService.isTablet() ||
       this.deviceDetectorService.isMobile()
-        ? 2000
+        ? 1000
         : 0;
+    this.noDrag = this.deviceDetectorService.os.toLowerCase() === 'ios';
   }
 
   cancelNewList() {

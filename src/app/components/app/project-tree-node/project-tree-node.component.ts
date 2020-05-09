@@ -49,6 +49,7 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   subscribe: Subscription;
   dragDelay: number;
   AccessType = AccessType;
+  noDrag: boolean;
   constructor(
     private readonly router: Router,
     private readonly deviceDetectorService: DeviceDetectorService,
@@ -58,13 +59,16 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
     this.dragDelay =
       this.deviceDetectorService.isTablet() ||
       this.deviceDetectorService.isMobile()
-        ? 2000
+        ? 1000
         : 0;
     this.from = new Date();
     this.to = new Date();
     this.to.setDate(this.to.getDate() + 10);
     this.createTree();
     this.subscribe = this.reCreate.subscribe(() => this.createTree());
+    this.noDrag = !(this.permission === AccessType.Admin ||
+      this.permission === AccessType.Owner) ||
+      this.deviceDetectorService.os.toLowerCase() === 'ios';
   }
 
   ngOnDestroy() {

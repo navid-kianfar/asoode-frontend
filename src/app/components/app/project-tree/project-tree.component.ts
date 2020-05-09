@@ -39,6 +39,7 @@ export class ProjectTreeComponent implements OnInit {
   reCreate = new EventEmitter<string>();
   dragDelay: number;
   AccessType = AccessType;
+  noDrag: boolean;
   constructor(
     private readonly socket: Socket,
     private readonly router: Router,
@@ -56,8 +57,11 @@ export class ProjectTreeComponent implements OnInit {
     this.dragDelay =
       this.deviceDetectorService.isTablet() ||
       this.deviceDetectorService.isMobile()
-        ? 2000
+        ? 1000
         : 0;
+    this.noDrag = !(this.permission === AccessType.Admin ||
+      this.permission === AccessType.Owner) ||
+      this.deviceDetectorService.os.toLowerCase() === 'ios';
     this.bind();
     this.createTree();
   }

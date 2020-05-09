@@ -55,7 +55,8 @@
             </span>
             {{ 'ESTIMATED_PRICE' | translate }}
           </div>
-          <div class="records">
+          <app-waiting *ngIf="detailWaiting"></app-waiting>
+          <div *ngIf="!detailWaiting" class="records">
             <app-grid
               [showFooter]="false"
               [columns]="['name', 'date', 'time', 'amount', 'group']"

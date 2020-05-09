@@ -28,13 +28,7 @@
         *ngFor="let subProject of subProjects"
         [cdkDragStartDelay]="dragDelay"
         [cdkDragData]="subProject"
-        [cdkDragDisabled]="
-          !(
-            permission === AccessType.Admin || permission === AccessType.Owner
-          ) ||
-          subNode.expanded ||
-          subProjects.length === 1
-        "
+        [cdkDragDisabled]="noDrag || subNode.expanded || subProjects.length === 1"
         cdkDrag
       >
         <app-project-tree-node
@@ -63,11 +57,7 @@
       <div
         class="work-package-container"
         *ngFor="let workPackage of workPackages"
-        [cdkDragDisabled]="
-          !(
-            permission === AccessType.Admin || permission === AccessType.Owner
-          ) || workPackages.length === 1
-        "
+        [cdkDragDisabled]="noDrag"
         [cdkDragStartDelay]="dragDelay"
         [cdkDragData]="workPackage"
         cdkDrag

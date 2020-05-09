@@ -11,12 +11,7 @@
       class="board-list"
       [cdkDragStartDelay]="dragDelay"
       [cdkDragData]="list"
-      [cdkDragDisabled]="
-        embed ||
-        list.editing ||
-        list.adding ||
-        permission === AccessType.Visitor
-      "
+      [cdkDragDisabled]="embed || noDrag || list.editing || list.adding || permission === AccessType.Visitor"
       cdkDrag
     >
       <div [hidden]="list.renaming" cdkDragHandle class="header">
@@ -101,7 +96,7 @@
           *ngFor="let task of list.tasks"
           [cdkDragStartDelay]="dragDelay"
           [cdkDragData]="task"
-          [cdkDragDisabled]="embed"
+          [cdkDragDisabled]="embed || noDrag"
           cdkDrag
           class="list-handler"
         >
