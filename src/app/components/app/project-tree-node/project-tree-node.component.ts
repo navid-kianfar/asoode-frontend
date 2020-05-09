@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AccessType } from 'src/app/library/app/enums';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import {ArrayHelpers} from '../../../helpers/array.helpers';
 
 @Component({
   selector: 'app-project-tree-node',
@@ -93,7 +94,6 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
       this.workPackages = this.project.workPackages
         .filter(w => w.subProjectId === this.subProject.id)
         .sort((a, b) => (a.order > b.order ? 1 : -1));
-
       this.reportViewModel = {
         done: 0,
         timeSpent: 0,
@@ -103,7 +103,7 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
         to: null,
         members: []
       };
-      this.workPackages.forEach(p => {
+      this.findAllSubs(this.subProject.id).forEach(p => {
         const report = this.data.tree[p.id];
         this.reportViewModel.members = [
           ...this.reportViewModel.members,
@@ -139,5 +139,14 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
       duplicates[m.recordId] = true;
       return true;
     });
+  }
+
+  private findAllSubs(id: string): WorkPackageViewModel[] {
+    const subs = this.project.subProjects.filter(s => s.parentId === id);
+    const packages = this.project.workPackages.filter(w => w.subProjectId === id);
+    const include = subs.map(s => this.findAllSubs(s.id));
+    return [
+      ...packages, ...ArrayHelpers.flat(include)
+    ];
   }
 }

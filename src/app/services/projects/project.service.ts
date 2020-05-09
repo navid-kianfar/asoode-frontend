@@ -209,7 +209,7 @@ export class ProjectService {
   }
 
   async tree(id: string): Promise<OperationResult<TreeViewModel>> {
-    return await this.httpService.post<boolean>(
+    return await this.httpService.post<TreeViewModel>(
       `/projects/tree/${id}`,
     );
   }

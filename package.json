@@ -30,6 +30,7 @@
     "@netbasal/ngx-content-loader": "^3.0.0",
     "@swimlane/ngx-charts": "^13.0.2",
     "angular-svg-round-progressbar": "^3.0.1",
+    "array-flat-polyfill": "^1.0.1",
     "hammerjs": "^2.0.8",
     "hijri-date": "^0.2.2",
     "jalali-moment": "^3.3.3",

@@ -1,3 +1,5 @@
+import 'array-flat-polyfill';
+
 export class ArrayHelpers {
   static clear<T>(source: T[]) {
     source.length = 0;
@@ -38,5 +40,9 @@ export class ArrayHelpers {
     const element = arr[fromIndex];
     arr.splice(fromIndex, 1);
     arr.splice(toIndex, 0, element);
+  }
+
+  static flat(source: any): [] {
+    return source.flat(2);
   }
 }
