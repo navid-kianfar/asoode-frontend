@@ -37,6 +37,7 @@ import { NumberHelpers } from 'src/app/helpers/number.helpers';
 import { TimeViewModel } from '../../view-models/core/general-types';
 import { CulturedDateService } from '../../services/core/cultured-date.service';
 import { _MatMenu, MatMenu } from '@angular/material';
+import {GroupService} from '../../services/groups/group.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -94,10 +95,14 @@ export class TaskModalComponent
   tempMinute: number;
   deletingDate: boolean;
   savingDate: boolean;
+
+  groupMembers: ProjectMemberViewModel[];
+  individualMembers: ProjectMemberViewModel[];
   constructor(
     private readonly socket: Socket,
     private readonly taskService: TaskService,
     private readonly projectService: ProjectService,
+    private readonly groupService: GroupService,
     readonly translateService: TranslateService,
     readonly usersService: UsersService,
     readonly modalService: ModalService,
@@ -129,6 +134,37 @@ export class TaskModalComponent
       '.doc,.docx,.rtf,.txt',
     ].join(',');
     this.mode = ViewMode.Detail;
+
+    this.groupMembers = this.project.members
+      .filter(i => i.isGroup)
+      .filter(f => {
+        return this.workPackage.members.find(d => d.recordId === f.recordId);
+      });
+    this.individualMembers = this.project.members.filter(i => !i.isGroup);
+
+    this.groupMembers.forEach(g => {
+      const grp = this.groupService.groups.find(i => i.id === g.recordId);
+      if (grp) {
+        grp.members.forEach(m => {
+          const found = this.individualMembers.find(d => d.recordId === m.userId);
+          if (found) { return; }
+          this.individualMembers.push({
+            recordId: m.userId,
+            isGroup: false,
+            id: m.id,
+            access: m.access,
+            updatedAt: m.updatedAt,
+            selected: false,
+            projectId: this.project.id,
+            deleting: false,
+            createdAt: m.createdAt,
+            waiting: false,
+            member: undefined
+          });
+        });
+      }
+    });
+
     this.bind();
     if (this.model) {
       return;

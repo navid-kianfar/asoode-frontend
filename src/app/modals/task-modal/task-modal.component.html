@@ -402,21 +402,24 @@
                       <ul>
                         <li
                           (click)="toggleMember(member)"
-                          *ngFor="let member of project.members"
+                          *ngFor="let member of groupMembers"
+                        >
+                          <app-group-info
+                            [waiting]="member.waiting"
+                            [selected]="isMemberSelected(member)"
+                            [id]="member.recordId"
+                          ></app-group-info>
+                        </li>
+                        <li
+                          (click)="toggleMember(member)"
+                          *ngFor="let member of individualMembers"
                         >
                           <app-member-info
                             [waiting]="member.waiting"
                             [selected]="isMemberSelected(member)"
-                            *ngIf="!member.isGroup"
                             [model]="member.member"
                             [id]="member.recordId"
                           ></app-member-info>
-                          <app-group-info
-                            [waiting]="member.waiting"
-                            [selected]="isMemberSelected(member)"
-                            *ngIf="member.isGroup"
-                            [id]="member.recordId"
-                          ></app-group-info>
                         </li>
                       </ul>
                     </div>
