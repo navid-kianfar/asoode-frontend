@@ -7,6 +7,8 @@ import {
 
 export interface TaskModalParameters {
   id: string;
+  projectId: string;
+  packageId: string;
   model: WorkPackageTaskViewModel;
   project: ProjectViewModel;
   workPackage: WorkPackageViewModel;

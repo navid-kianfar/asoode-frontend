@@ -5,6 +5,7 @@ import { GroupViewModel } from '../../view-models/groups/group-types';
 import { OperationResultStatus } from '../../library/core/enums';
 import { AccessType } from '../../library/app/enums';
 import { IdentityService } from '../auth/identity.service';
+import {TimeSpentViewModel} from '../../view-models/projects/project-types';
 
 @Injectable({
   providedIn: 'root',
@@ -80,6 +81,12 @@ export class GroupService {
   async removePendingAccess(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/groups/remove-pending-access/${id}`,
+    );
+  }
+
+  async timeSpent(id: string, model): Promise<OperationResult<TimeSpentViewModel[]>> {
+    return await this.httpService.post<TimeSpentViewModel[]>(
+      `/times/group/${id}`, model
     );
   }
 }

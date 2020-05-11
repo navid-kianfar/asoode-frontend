@@ -395,6 +395,10 @@
               </button>
             </div>
 
+            <div *ngIf="discountResult.expired" class="upgrade-notice">{{ 'DISCOUNT_EXPIRED' | translate }}</div>
+            <div *ngIf="discountResult.invalid" class="upgrade-notice">{{ 'DISCOUNT_INVALID' | translate }}</div>
+            <div *ngIf="discountResult.alreadyUsed" class="upgrade-notice">{{ 'DISCOUNT_USED' | translate }}</div>
+
             <div *ngIf="identityService.profile.plan.type !== PlanType.Free" class="upgrade-notice">{{ 'UPGRADE_NOTICE' | translate }}</div>
             <div class="pay-now">
               <br>
@@ -439,7 +443,7 @@
                 [disabled]="actionWaiting"
                 mat-flat-button [color]="'primary'">
           <i *ngIf="actionWaiting" class="icon-spinner2 icon-spin"></i>
-          {{ 'CREATE_FACTOR' | translate: true }}
+          {{ 'CREATE_BILL' | translate: true }}
         </button>
       </div>
     </ng-container>

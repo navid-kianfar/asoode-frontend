@@ -95,6 +95,8 @@ export class TaskModalComponent
   tempMinute: number;
   deletingDate: boolean;
   savingDate: boolean;
+  projectId: string;
+  packageId: string;
 
   groupMembers: ProjectMemberViewModel[];
   individualMembers: ProjectMemberViewModel[];
@@ -115,6 +117,7 @@ export class TaskModalComponent
   }
 
   ngOnInit() {
+    console.log(this.model);
     this.totalTimeSpent = { day: 0, hour: 0, minute: 0 };
     this.filesService.attaching = this.filesService.attaching.filter(a => {
       if (a.recordId !== this.id) {
@@ -134,6 +137,11 @@ export class TaskModalComponent
       '.doc,.docx,.rtf,.txt',
     ].join(',');
     this.mode = ViewMode.Detail;
+
+    if (this.projectId) {
+      this.project = this.projectService.projects.find(p => p.id === this.projectId);
+      this.workPackage = this.project.workPackages.find(w => w.id === this.packageId);
+    }
 
     this.groupMembers = this.project.members
       .filter(i => i.isGroup)

@@ -89,7 +89,11 @@ export class TimeSpentComponent implements OnInit {
     $event.stopPropagation();
     $event.preventDefault();
     this.modalService
-      .show(TaskModalComponent, { id: task.id })
+      .show(TaskModalComponent, {
+        id: task.id,
+        projectId: task.projectId,
+        packageId: task.packageId
+      })
       .subscribe(() => {});
   }
 }

@@ -62,58 +62,58 @@
       </app-grid>
     </div>
   </div>
-  <div class="box">
-    <div class="title">
-      <h3>{{ 'PAYMENTS' | translate }}</h3>
-    </div>
-    <div class="content">
-      <app-grid
-        [columns]="['title', 'amount', 'createdAt', 'paidAt', 'download']"
-        [rows]="[]"
-      >
-        <!-- Title Column -->
-        <ng-container matColumnDef="title">
-          <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.title }}</td>
-        </ng-container>
+<!--  <div class="box">-->
+<!--    <div class="title">-->
+<!--      <h3>{{ 'PAYMENTS' | translate }}</h3>-->
+<!--    </div>-->
+<!--    <div class="content">-->
+<!--      <app-grid-->
+<!--        [columns]="['title', 'amount', 'createdAt', 'paidAt', 'download']"-->
+<!--        [rows]="[]"-->
+<!--      >-->
+<!--        &lt;!&ndash; Title Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="title">-->
+<!--          <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>-->
+<!--          <td mat-cell *matCellDef="let element">{{ element.title }}</td>-->
+<!--        </ng-container>-->
 
-        <!-- Amount Column -->
-        <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef>{{ 'AMOUNT' | translate }}</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.amount | number }}
-          </td>
-        </ng-container>
+<!--        &lt;!&ndash; Amount Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="amount">-->
+<!--          <th mat-header-cell *matHeaderCellDef>{{ 'AMOUNT' | translate }}</th>-->
+<!--          <td mat-cell *matCellDef="let element">-->
+<!--            {{ element.amount | number }}-->
+<!--          </td>-->
+<!--        </ng-container>-->
 
-        <!-- Created at Column -->
-        <ng-container matColumnDef="createdAt">
-          <th mat-header-cell *matHeaderCellDef>
-            {{ 'CREATED_AT' | translate }}
-          </th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.createdAt | culturedDate }}
-          </td>
-        </ng-container>
+<!--        &lt;!&ndash; Created at Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="createdAt">-->
+<!--          <th mat-header-cell *matHeaderCellDef>-->
+<!--            {{ 'CREATED_AT' | translate }}-->
+<!--          </th>-->
+<!--          <td mat-cell *matCellDef="let element">-->
+<!--            {{ element.createdAt | culturedDate }}-->
+<!--          </td>-->
+<!--        </ng-container>-->
 
-        <!-- Paid at Column -->
-        <ng-container matColumnDef="paidAt">
-          <th mat-header-cell *matHeaderCellDef>{{ 'PAID_AT' | translate }}</th>
-          <td mat-cell *matCellDef="let element">
-            {{ element.paidAt | culturedDate }}
-          </td>
-        </ng-container>
+<!--        &lt;!&ndash; Paid at Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="paidAt">-->
+<!--          <th mat-header-cell *matHeaderCellDef>{{ 'PAID_AT' | translate }}</th>-->
+<!--          <td mat-cell *matCellDef="let element">-->
+<!--            {{ element.paidAt | culturedDate }}-->
+<!--          </td>-->
+<!--        </ng-container>-->
 
-        <!-- Download Column -->
-        <ng-container matColumnDef="download">
-          <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-          <td mat-cell *matCellDef="let element">
-            &nbsp;
-            <i class="icon-download4"></i>
-          </td>
-        </ng-container>
-      </app-grid>
-    </div>
-  </div>
+<!--        &lt;!&ndash; Download Column &ndash;&gt;-->
+<!--        <ng-container matColumnDef="download">-->
+<!--          <th mat-header-cell *matHeaderCellDef>&nbsp;</th>-->
+<!--          <td mat-cell *matCellDef="let element">-->
+<!--            &nbsp;-->
+<!--            <i class="icon-download4"></i>-->
+<!--          </td>-->
+<!--        </ng-container>-->
+<!--      </app-grid>-->
+<!--    </div>-->
+<!--  </div>-->
   <div class="box">
     <div class="title">
       <h3>{{ 'SHIFTS' | translate }}</h3>

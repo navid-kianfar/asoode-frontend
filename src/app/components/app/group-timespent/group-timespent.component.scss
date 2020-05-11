@@ -10,4 +10,14 @@
     border-radius: 10px;
     margin-bottom: 50px;
   }
+
+  .date {
+    font-weight: 500;
+    min-width: 200px;
+
+    i {
+      margin-inline-start: 5px;
+      font-size: 0.7rem;
+    }
+  }
 }

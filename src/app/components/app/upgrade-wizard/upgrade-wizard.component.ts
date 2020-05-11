@@ -6,7 +6,7 @@ import {NotificationService} from '../../../services/core/notification.service';
 import {GroupService} from '../../../services/groups/group.service';
 import {PlansService} from '../../../services/general/plans.service';
 import {OperationResultStatus} from '../../../library/core/enums';
-import {OrderViewModel, PlansFetchViewModel, PlanViewModel, UserPlanInfoViewModel,} from '../../../view-models/general/plan-types';
+import {OrderViewModel, PlansFetchViewModel, PlanViewModel, UserPlanInfoViewModel} from '../../../view-models/general/plan-types';
 import {PlanType} from '../../../library/app/enums';
 import {NumberHelpers} from '../../../helpers/number.helpers';
 import {OrderService} from '../../../services/general/order.service';
@@ -151,6 +151,7 @@ export class UpgradeWizardComponent implements OnInit {
       amount: 0,
       expired: false,
       success: false,
+      invalid: false
     };
     if (this.mode === ViewMode.Choose) {
       this.mode = ViewMode.Factor;
@@ -319,6 +320,7 @@ export class UpgradeWizardComponent implements OnInit {
       amount: 0,
       expired: false,
       success: false,
+      invalid: false
     };
     this.checkingDiscount = true;
     const op = await this.orderService.checkDiscount({
@@ -329,6 +331,9 @@ export class UpgradeWizardComponent implements OnInit {
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
       return;
+    }
+    if (!op.data.success) {
+      this.order.discountCode = '';
     }
     this.discountResult = op.data;
     this.order.appliedDiscount = op.data.amount;
@@ -355,7 +360,9 @@ export class UpgradeWizardComponent implements OnInit {
       model.complexGroup = this.order.complexGroup;
       model.simpleGroup = this.order.simpleGroup;
     }
+    this.actionWaiting = true;
     const op = await this.orderService.order(model);
+    this.actionWaiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
       return;
@@ -365,7 +372,6 @@ export class UpgradeWizardComponent implements OnInit {
       this.orderService.pay(op.data);
       return;
     }
-    setTimeout(() => { window.location.reload(); }, 3000);
   }
 }
 export enum ViewMode {

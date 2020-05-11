@@ -186,7 +186,7 @@ export class TaskService {
 
   async timeSpents(model): Promise<OperationResult<TimeSpentViewModel[]>> {
     return await this.httpService.post<TimeSpentViewModel[]>(
-      `/tasks/time-spents`,
+      `/times/mine`,
       model,
     );
   }
