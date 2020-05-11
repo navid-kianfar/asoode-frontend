@@ -3,6 +3,15 @@
     <h2>{{ 'REPORTS' | translate }}</h2>
   </div>
   <div class="box">
-    <app-dashboard-progress></app-dashboard-progress>
+    <app-waiting *ngIf="waiting"></app-waiting>
+    <ng-container *ngIf="!waiting">
+      <div class="date">
+        {{ beginDate | culturedDate: false:'NNN YYYY' }}
+      </div>
+      <br>
+      <app-dashboard-progress [model]="model"
+                              [begin]="beginDate"
+                              [end]="endDate"></app-dashboard-progress>
+    </ng-container>
   </div>
 </div>

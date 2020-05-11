@@ -6,6 +6,7 @@ import { OperationResultStatus } from '../../library/core/enums';
 import { AccessType } from '../../library/app/enums';
 import { IdentityService } from '../auth/identity.service';
 import {TimeSpentViewModel} from '../../view-models/projects/project-types';
+import {DayReportViewModel} from '../../view-models/general/report-types';
 
 @Injectable({
   providedIn: 'root',
@@ -87,6 +88,11 @@ export class GroupService {
   async timeSpent(id: string, model): Promise<OperationResult<TimeSpentViewModel[]>> {
     return await this.httpService.post<TimeSpentViewModel[]>(
       `/times/group/${id}`, model
+    );
+  }
+  async report(id: string, model): Promise<OperationResult<DayReportViewModel[]>> {
+    return await this.httpService.post<DayReportViewModel[]>(
+      `/groups/${id}/report`, model
     );
   }
 }

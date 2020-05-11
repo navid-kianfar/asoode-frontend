@@ -53,6 +53,7 @@ export class GroupTimespentComponent implements OnInit {
       Minutes: 59,
     });
   }
+
   async fetch() {
     this.model = [];
     this.waiting = true;
