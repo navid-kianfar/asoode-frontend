@@ -51,7 +51,7 @@
       {{ subProject ? subProject.description : workPackage.description }}
     </div>
     <div class="members">
-      <ng-container *ngFor=" let member of reportViewModel.members">
+      <ng-container *ngFor="let member of reportViewModel.members">
         <app-member-info
           small="true"
           *ngIf="!member.isGroup"
@@ -65,13 +65,20 @@
       </ng-container>
     </div>
     <div class="progress">
-      <mat-progress-bar [value]="reportViewModel.progress"></mat-progress-bar>&nbsp;
+      <mat-progress-bar [value]="reportViewModel.progress"></mat-progress-bar
+      >&nbsp;
       <span>{{ reportViewModel.progress }}%</span>
     </div>
     <div class="time-span">
-      <ng-container *ngIf="reportViewModel.from">{{ reportViewModel.from | culturedDate }}</ng-container>
-      <ng-container *ngIf="reportViewModel.from && reportViewModel.to">&nbsp;-&nbsp;</ng-container>
-      <ng-container *ngIf="reportViewModel.to">{{ reportViewModel.to | culturedDate }}</ng-container>
+      <ng-container *ngIf="reportViewModel.from">{{
+        reportViewModel.from | culturedDate
+      }}</ng-container>
+      <ng-container *ngIf="reportViewModel.from && reportViewModel.to"
+        >&nbsp;-&nbsp;</ng-container
+      >
+      <ng-container *ngIf="reportViewModel.to">{{
+        reportViewModel.to | culturedDate
+      }}</ng-container>
     </div>
     <div class="time-spent">
       {{ reportViewModel.timeSpent | msToDuration }}
@@ -90,7 +97,9 @@
         *ngFor="let subProject of subProjects"
         [cdkDragStartDelay]="dragDelay"
         [cdkDragData]="subProject"
-        [cdkDragDisabled]="noDrag || subNode.expanded || subProjects.length === 1"
+        [cdkDragDisabled]="
+          noDrag || subNode.expanded || subProjects.length === 1
+        "
         cdkDrag
       >
         <app-project-tree-node

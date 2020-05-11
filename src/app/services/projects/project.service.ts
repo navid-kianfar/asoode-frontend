@@ -4,7 +4,9 @@ import { OperationResult } from '../../library/core/operation-result';
 import {
   ProjectObjectiveEstimatedPriceViewModel,
   ProjectTemplateViewModel,
-  ProjectViewModel, RoadMapViewModel, TreeViewModel,
+  ProjectViewModel,
+  RoadMapViewModel,
+  TreeViewModel,
   WorkPackageObjectiveViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
@@ -209,9 +211,7 @@ export class ProjectService {
   }
 
   async tree(id: string): Promise<OperationResult<TreeViewModel>> {
-    return await this.httpService.post<TreeViewModel>(
-      `/projects/tree/${id}`,
-    );
+    return await this.httpService.post<TreeViewModel>(`/projects/tree/${id}`);
   }
   async roadMap(id: string): Promise<OperationResult<RoadMapViewModel>> {
     return await this.httpService.post<RoadMapViewModel>(

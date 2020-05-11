@@ -71,6 +71,7 @@ export interface UserPlanInfoViewModel extends BaseViewModel {
   totalComplexProjects: number;
   totalUsedProjects: number;
   totalSpace: number;
+  totalUsers: number;
 }
 export interface PlanViewModel extends BaseViewModel {
   canUse?: boolean;
@@ -130,13 +131,25 @@ export interface PlanViewModel extends BaseViewModel {
 export interface PlansFetchViewModel {
   mine: UserPlanInfoViewModel;
   plans: PlanViewModel[];
+  valueAdded: number;
 }
 export interface OrderViewModel {
+  spaceCost: number;
+  usersCost: number;
+  simpleGroupCost: number;
+  complexGroupCost: number;
+  workPackageCost: number;
+  projectCost: number;
+  calculatedPrice: number;
+  payNow: boolean;
+  discountCode: string;
+  valueAdded: number;
+  appliedDiscount: number;
+  yearly: boolean;
   users: number;
   diskSpace: number;
   workPackage: number;
   project: number;
   complexGroup: number;
   simpleGroup: number;
-  calculatedPrice: number;
 }

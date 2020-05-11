@@ -8,11 +8,18 @@
         </button>
       </ng-container>
     </div>
-
     <div class="text">
       <h4 *ngIf="mode === ViewMode.Init" class="modal-title">
         <i class="icon-trophy4"></i><br />
         {{ 'YOU_HAVE_REACHED_PLAN_LIMIT' | translate }}
+      </h4>
+      <h4 *ngIf="mode === ViewMode.Choose" class="modal-title">
+        <i class="ikon-cog3"></i><br />
+        {{ 'ESTIMATE_YOUR_NEED' | translate }}
+      </h4>
+      <h4 *ngIf="mode === ViewMode.Factor" class="modal-title">
+        <i class="ikon-coins"></i><br />
+        {{ 'CREATE_BILL' | translate }}
       </h4>
     </div>
     <div class="btn">
@@ -26,6 +33,26 @@
     <ng-container *ngIf="mode === ViewMode.Init">
       <div class="modal-body upgrade">
         <h3>{{ 'YOUR_PLAN_NEEDS_UPGRADE' | translate }}</h3>
+        <div class="payment-box">
+          <mat-radio-group [(ngModel)]="order.yearly" class="items">
+            <mat-radio-button class="border" color="primary" [value]="false">
+              <span class="title">
+                {{ 'PAY_MONTHLY' | translate }}
+              </span>
+              <span class="description">
+                {{ 'PAY_MONTHLY_DESCRIPTION' | translate }}
+              </span>
+            </mat-radio-button>
+            <mat-radio-button class="border" color="primary" [value]="true">
+              <span class="title">
+                {{ 'PAY_YEARLY' | translate }}
+              </span>
+              <span class="description">
+                {{ 'PAY_YEARLY_DESCRIPTION' | translate }}
+              </span>
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
         <div class="box-container">
           <div class="box no-select">
             <div class="plan current">
@@ -105,10 +132,10 @@
               </div>
               <div class="p-sub">
                 <div class="price">
-                  {{ plan.planCost | number }}
+                  {{ calculatePlanPrice(plan.planCost) | number }}
                 </div>
                 <div class="duration">
-                  <span class="days">{{ plan.days }}</span>
+                  <span class="days">{{ order.yearly ? 365 : plan.days }}</span>
                   <span>{{ 'DAYS' | translate }}</span>
                 </div>
               </div>
@@ -152,8 +179,8 @@
                   <div class="free">{{ 'NEED_CALCULATE' | translate }}</div>
                 </div>
                 <div class="duration">
-                  <span class="days">30</span>
-                  <span>{{ 'DAYS' | translate }}</span>
+                  <span class="days">&nbsp;</span>
+                  <span>&nbsp;</span>
                 </div>
               </div>
               <div class="features">
@@ -170,26 +197,250 @@
       </div>
     </ng-container>
     <ng-container *ngIf="mode === ViewMode.Choose">
-      <h3>{{ 'ESTIMATE_YOUR_NEED' | translate }}</h3>
-      <div class="order-item">
-        <div class="title">{{ 'DISK_SPACE' | translate }}</div>
-        <div class="slider">
-          <div class="current">
-            {{
-              NumberHelpers.humanFileSize(identityService.profile.plan.space)
-            }}
+      <div class="modal-body upgrade">
+        <div class="box-container">
+          <div class="order-item">
+            <div class="title">
+              <i class="icon-server"></i>
+              {{ 'DISK_SPACE' | translate }}
+            </div>
+            <div class="slider">
+              <div class="current">
+                {{
+                  NumberHelpers.humanFileSize(
+                    identityService.profile.plan.space
+                  )
+                }}
+              </div>
+              <mat-slider
+                [min]="identityService.profile.plan.space"
+                [(value)]="order.diskSpace"
+                (valueChange)="calculateSpaceCost()"
+                [displayWith]="formatSpaceLabel"
+                color="primary"
+                thumbLabel
+                max="107374182400"
+                step="1073741824"
+              ></mat-slider>
+              <div class="current">100 GB</div>
+            </div>
+            <div class="estimated-price">
+              {{ order.spaceCost | number }}
+            </div>
           </div>
-          <mat-slider
-            [min]="identityService.profile.plan.space"
-            [(value)]="order.diskSpace"
-            [displayWith]="formatSpaceLabel"
-            color="primary"
-            thumbLabel
-            max="107374182400"
-            step="1073741824"
-          ></mat-slider>
-          <div class="current">100 GB</div>
+          <div class="order-item">
+            <div class="title">
+              <i class="icon-users2"></i>
+              {{ 'USERS' | translate }}
+            </div>
+            <div class="slider">
+              <div class="current">
+                {{ identityService.profile.plan.totalUsers }}
+              </div>
+              <mat-slider
+                [min]="identityService.profile.plan.totalUsers"
+                [(value)]="order.users"
+                (valueChange)="calculateUserCost()"
+                color="primary"
+                thumbLabel
+                max="500"
+                step="1"
+              ></mat-slider>
+              <div class="current">500</div>
+            </div>
+            <div class="estimated-price">
+              {{ order.usersCost | number }}
+            </div>
+          </div>
+          <div class="order-item">
+            <div class="title">
+              <i class="icon-team"></i>
+              {{ 'SIMPLE_GROUP' | translate }}
+            </div>
+            <div class="slider">
+              <div class="current">
+                {{ identityService.profile.plan.totalSimpleGroups }}
+              </div>
+              <mat-slider
+                [min]="identityService.profile.plan.totalSimpleGroups"
+                [(value)]="order.simpleGroup"
+                (valueChange)="calculateSimpleGroupCost()"
+                color="primary"
+                thumbLabel
+                max="500"
+                step="1"
+              ></mat-slider>
+              <div class="current">500</div>
+            </div>
+            <div class="estimated-price">
+              {{ order.simpleGroupCost | number }}
+            </div>
+          </div>
+          <div class="order-item">
+            <div class="title">
+              <i class="icon-tree7"></i>
+              {{ 'COMPLEX_GROUP' | translate }}
+            </div>
+            <div class="slider">
+              <div class="current">
+                {{ identityService.profile.plan.totalComplexGroups }}
+              </div>
+              <mat-slider
+                [min]="identityService.profile.plan.totalComplexGroups"
+                [(value)]="order.complexGroup"
+                (valueChange)="calculateComplexGroupCost()"
+                color="primary"
+                thumbLabel
+                max="500"
+                step="1"
+              ></mat-slider>
+              <div class="current">500</div>
+            </div>
+            <div class="estimated-price">
+              {{ order.complexGroupCost | number }}
+            </div>
+          </div>
+          <div class="order-item">
+            <div class="title">
+              <i class="icon-workpackage"></i>
+              {{ 'SIMPLE_PROJECTS' | translate }}
+            </div>
+            <div class="slider">
+              <div class="current">
+                {{ identityService.profile.plan.totalWorkPackages }}
+              </div>
+              <mat-slider
+                [min]="identityService.profile.plan.totalWorkPackages"
+                [(value)]="order.workPackage"
+                (valueChange)="calculatePackageCost()"
+                color="primary"
+                thumbLabel
+                max="500"
+                step="1"
+              ></mat-slider>
+              <div class="current">500</div>
+            </div>
+            <div class="estimated-price">
+              {{ order.workPackageCost | number }}
+            </div>
+          </div>
+          <div class="order-item">
+            <div class="title">
+              <i class="icon-project"></i>
+              {{ 'WBS_PROJECTS' | translate }}
+            </div>
+            <div class="slider">
+              <div class="current">
+                {{ identityService.profile.plan.totalComplexProjects }}
+              </div>
+              <mat-slider
+                [min]="identityService.profile.plan.totalComplexProjects"
+                [(value)]="order.project"
+                (valueChange)="calculateProjectCost()"
+                color="primary"
+                thumbLabel
+                max="500"
+                step="1"
+              ></mat-slider>
+              <div class="current">500</div>
+            </div>
+            <div class="estimated-price">
+              {{ order.projectCost | number }}
+            </div>
+          </div>
+          <div class="order-item total">
+            <div class="title">
+              <i class="ikon-coin-dollar"></i>
+              {{ 'TOTAL_PRICE' | translate }}
+            </div>
+            <div class="slider"></div>
+            <div class="estimated-price">
+              {{ basedOn.unit | enum: 'CostUnit' }}&nbsp;{{
+                order.calculatedPrice | number
+              }}
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          [disabled]="!order.calculatedPrice || actionWaiting"
+          (click)="next($event)"
+          mat-flat-button
+          [color]="'primary'"
+        >
+          {{ 'CONTINUE' | translate: true }}
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="mode === ViewMode.Factor">
+      <div class="modal-body upgrade">
+        <div class="box-container">
+          <div class="payment-box discount">
+            <h2>{{ 'DO_YOU_HAVE_DISCOUNT' | translate }}</h2>
+            <div class="discount-container">
+              <input
+                type="text"
+                [(ngModel)]="order.discountCode"
+                [readOnly]="checkingDiscount || discountApplied"
+                [placeholder]="'DISCOUNT_CODE' | translate"
+              />
+              <button
+                mat-stroked-button
+                [disabled]="actionWaiting || checkingDiscount"
+                (click)="checkDiscount()"
+              >
+                <i *ngIf="checkingDiscount" class="icon-spin icon-spinner2"></i>
+                {{ 'CHECK_CODE' | translate }}
+              </button>
+            </div>
+
+            <div *ngIf="identityService.profile.plan.type !== PlanType.Free" class="upgrade-notice">{{ 'UPGRADE_NOTICE' | translate }}</div>
+            <div class="pay-now">
+              <br>
+              <mat-radio-group [(ngModel)]="order.payNow" class="items">
+                <mat-radio-button class="border" color="primary" [value]="true">
+                  {{ 'PAY_NOW' | translate }}
+                </mat-radio-button>
+                <mat-radio-button class="border" color="primary" [value]="false">
+                  {{ 'PAY_LATER' | translate }}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="payment-box bg">
+            <div class="price-row">
+              <div class="title">{{ 'TOTAL_PRICE' | translate }}</div>
+              <div class="amount">{{ order.calculatedPrice | number }}</div>
+            </div>
+            <div class="price-row">
+              <div class="title">{{ 'APPLIED_DISCOUNT' | translate }}</div>
+              <div class="amount">- {{ order.appliedDiscount | number }}</div>
+            </div>
+            <div class="price-row">
+              <div class="title">{{ 'VALUE_ADDED' | translate }}</div>
+              <div class="amount">+ {{ order.valueAdded | number }}</div>
+            </div>
+            <div class="price-row">
+              <div class="title">{{ 'FINAL_PRICE' | translate }}</div>
+              <div class="amount">
+                {{
+                  order.calculatedPrice -
+                    order.appliedDiscount +
+                    order.valueAdded | number
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button (click)="createFactor($event)"
+                [disabled]="actionWaiting"
+                mat-flat-button [color]="'primary'">
+          <i *ngIf="actionWaiting" class="icon-spinner2 icon-spin"></i>
+          {{ 'CREATE_FACTOR' | translate: true }}
+        </button>
       </div>
     </ng-container>
   </ng-container>

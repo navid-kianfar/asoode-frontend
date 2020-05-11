@@ -2,7 +2,8 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  OnInit, Renderer2,
+  OnInit,
+  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { IdentityService } from '../../../services/auth/identity.service';
@@ -83,9 +84,9 @@ export class HeaderComponent implements AfterViewInit, OnInit {
           this.manualShow = true;
           this.popperSearch.show();
           if (!this.listener) {
-            this.listener = this.renderer
-              .listen('document', 'click',
-                  event => { this.popperSearch.hide(); });
+            this.listener = this.renderer.listen('document', 'click', event => {
+              this.popperSearch.hide();
+            });
           }
         }),
         switchMap(project => {
@@ -129,12 +130,13 @@ export class HeaderComponent implements AfterViewInit, OnInit {
 
   openSearchResult($event: MouseEvent) {
     $event.stopPropagation();
-    if (!this.searchTerm) { return; }
+    if (!this.searchTerm) {
+      return;
+    }
     if (this.popperSearch.state) {
       this.popperSearch.hide();
     } else {
       this.popperSearch.show();
     }
-
   }
 }

@@ -37,7 +37,7 @@ import { NumberHelpers } from 'src/app/helpers/number.helpers';
 import { TimeViewModel } from '../../view-models/core/general-types';
 import { CulturedDateService } from '../../services/core/cultured-date.service';
 import { _MatMenu, MatMenu } from '@angular/material';
-import {GroupService} from '../../services/groups/group.service';
+import { GroupService } from '../../services/groups/group.service';
 
 @Component({
   selector: 'app-task-modal',
@@ -146,8 +146,12 @@ export class TaskModalComponent
       const grp = this.groupService.groups.find(i => i.id === g.recordId);
       if (grp) {
         grp.members.forEach(m => {
-          const found = this.individualMembers.find(d => d.recordId === m.userId);
-          if (found) { return; }
+          const found = this.individualMembers.find(
+            d => d.recordId === m.userId,
+          );
+          if (found) {
+            return;
+          }
           this.individualMembers.push({
             recordId: m.userId,
             isGroup: false,
@@ -159,7 +163,7 @@ export class TaskModalComponent
             deleting: false,
             createdAt: m.createdAt,
             waiting: false,
-            member: undefined
+            member: undefined,
           });
         });
       }

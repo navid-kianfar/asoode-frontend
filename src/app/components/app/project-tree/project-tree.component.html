@@ -29,7 +29,9 @@
         *ngFor="let subProject of subProjects"
         [cdkDragStartDelay]="dragDelay"
         [cdkDragData]="subProject"
-        [cdkDragDisabled]="noDrag || subNode.expanded || subProjects.length === 1"
+        [cdkDragDisabled]="
+          noDrag || subNode.expanded || subProjects.length === 1
+        "
         cdkDrag
       >
         <app-project-tree-node

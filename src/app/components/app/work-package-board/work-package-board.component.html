@@ -11,7 +11,13 @@
       class="board-list"
       [cdkDragStartDelay]="dragDelay"
       [cdkDragData]="list"
-      [cdkDragDisabled]="embed || noDrag || list.editing || list.adding || permission === AccessType.Visitor"
+      [cdkDragDisabled]="
+        embed ||
+        noDrag ||
+        list.editing ||
+        list.adding ||
+        permission === AccessType.Visitor
+      "
       cdkDrag
     >
       <div [hidden]="list.renaming" cdkDragHandle class="header">

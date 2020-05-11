@@ -10,7 +10,9 @@ import {
 } from '@angular/core';
 import {
   ProjectViewModel,
-  SubProjectViewModel, TreeReportViewModel, TreeViewModel,
+  SubProjectViewModel,
+  TreeReportViewModel,
+  TreeViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
 import { Subscription } from 'rxjs';
@@ -18,7 +20,7 @@ import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AccessType } from 'src/app/library/app/enums';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import {ArrayHelpers} from '../../../helpers/array.helpers';
+import { ArrayHelpers } from '../../../helpers/array.helpers';
 
 @Component({
   selector: 'app-project-tree-node',
@@ -69,9 +71,11 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
     this.to.setDate(this.to.getDate() + 10);
     this.createTree();
     this.subscribe = this.reCreate.subscribe(() => this.createTree());
-    this.noDrag = !(this.permission === AccessType.Admin ||
-      this.permission === AccessType.Owner) ||
-      this.deviceDetectorService.os.toLowerCase() === 'ios';
+    this.noDrag =
+      !(
+        this.permission === AccessType.Admin ||
+        this.permission === AccessType.Owner
+      ) || this.deviceDetectorService.os.toLowerCase() === 'ios';
   }
 
   ngOnDestroy() {
@@ -101,13 +105,13 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
         progress: 0,
         from: null,
         to: null,
-        members: []
+        members: [],
       };
       this.findAllSubs(this.subProject.id).forEach(p => {
         const report = this.data.tree[p.id];
         this.reportViewModel.members = [
           ...this.reportViewModel.members,
-          ...p.members
+          ...p.members,
         ];
         this.reportViewModel.timeSpent += report.timeSpent;
         this.reportViewModel.done += report.done;
@@ -116,7 +120,9 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
           report.from = new Date(report.from);
           if (!this.reportViewModel.from) {
             this.reportViewModel.from = report.from;
-          } else if (report.from.getTime() < this.reportViewModel.from.getTime()) {
+          } else if (
+            report.from.getTime() < this.reportViewModel.from.getTime()
+          ) {
             this.reportViewModel.from = report.from;
           }
         }
@@ -131,11 +137,15 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
       });
     }
     const duplicates = {} as any;
-    this.reportViewModel.progress = this.reportViewModel.total ? (
-      Math.floor(this.reportViewModel.done * 100 / this.reportViewModel.total)
-    ) : 0;
+    this.reportViewModel.progress = this.reportViewModel.total
+      ? Math.floor(
+          (this.reportViewModel.done * 100) / this.reportViewModel.total,
+        )
+      : 0;
     this.reportViewModel.members = this.reportViewModel.members.filter(m => {
-      if (duplicates[m.recordId]) { return false; }
+      if (duplicates[m.recordId]) {
+        return false;
+      }
       duplicates[m.recordId] = true;
       return true;
     });
@@ -143,10 +153,10 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
 
   private findAllSubs(id: string): WorkPackageViewModel[] {
     const subs = this.project.subProjects.filter(s => s.parentId === id);
-    const packages = this.project.workPackages.filter(w => w.subProjectId === id);
+    const packages = this.project.workPackages.filter(
+      w => w.subProjectId === id,
+    );
     const include = subs.map(s => this.findAllSubs(s.id));
-    return [
-      ...packages, ...ArrayHelpers.flat(include)
-    ];
+    return [...packages, ...ArrayHelpers.flat(include)];
   }
 }

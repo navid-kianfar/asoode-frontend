@@ -10,7 +10,13 @@
     cdkDrag
     [cdkDragStartDelay]="dragDelay"
     [cdkDragData]="list"
-    [cdkDragDisabled]="noDrag || embed || list.editing || list.adding || permission === AccessType.Visitor"
+    [cdkDragDisabled]="
+      noDrag ||
+      embed ||
+      list.editing ||
+      list.adding ||
+      permission === AccessType.Visitor
+    "
     *ngFor="let list of model.lists"
   >
     <div
