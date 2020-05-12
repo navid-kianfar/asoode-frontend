@@ -10,10 +10,9 @@
       </button>
     </div>
     <div class="content">
-      <app-grid
-        [columns]="['title', 'timeOffAt', 'requestedAt', 'status', 'action']"
-        [rows]="[]"
-      >
+      <app-grid [backend]="'/groups/time-offs/' + group.id"
+                [columns]="['title', 'timeOffAt', 'requestedAt', 'status', 'action']"
+                [rows]="[]">
         <!-- Title Column -->
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>
@@ -124,17 +123,9 @@
       </button>
     </div>
     <div class="content">
-      <app-grid
-        [columns]="[
-          'title',
-          'shiftRange',
-          'shiftType',
-          'floatLimit',
-          'workingHours',
-          'restingHours'
-        ]"
-        [rows]="[]"
-      >
+      <app-grid [backend]="'/groups/shifts/' + group.id"
+                [columns]="['title', 'shiftRange', 'shiftType', 'floatLimit', 'workingHours', 'restingHours']"
+                [rows]="[]">
         <!-- Title Column -->
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>

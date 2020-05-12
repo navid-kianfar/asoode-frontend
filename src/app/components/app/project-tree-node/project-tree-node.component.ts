@@ -86,11 +86,22 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl('/work-package/' + workPackage.id);
   }
   createTree() {
+    this.reportViewModel = {
+      done: 0,
+      timeSpent: 0,
+      total: 0,
+      progress: 0,
+      from: null,
+      to: null,
+      members: [],
+    };
     if (this.workPackage) {
       this.subProjects = [];
       this.workPackages = [];
-      this.reportViewModel = this.data.tree[this.workPackage.id];
-      this.reportViewModel.members = [...this.workPackage.members];
+      if (this.data.tree[this.workPackage.id]) {
+        this.reportViewModel = this.data.tree[this.workPackage.id];
+        this.reportViewModel.members = [...this.workPackage.members];
+      }
     } else {
       this.subProjects = this.project.subProjects
         .filter(s => s.parentId === this.subProject.id)
@@ -98,17 +109,9 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
       this.workPackages = this.project.workPackages
         .filter(w => w.subProjectId === this.subProject.id)
         .sort((a, b) => (a.order > b.order ? 1 : -1));
-      this.reportViewModel = {
-        done: 0,
-        timeSpent: 0,
-        total: 0,
-        progress: 0,
-        from: null,
-        to: null,
-        members: [],
-      };
       this.findAllSubs(this.subProject.id).forEach(p => {
         const report = this.data.tree[p.id];
+        if (!report) { return; }
         this.reportViewModel.members = [
           ...this.reportViewModel.members,
           ...p.members,
