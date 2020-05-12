@@ -648,5 +648,12 @@
   "ORDER_CREATED": "فاکتور با موفقیت ایجاد شد",
   "DISCOUNT_EXPIRED": "کد تخفیف منقضی شده",
   "DISCOUNT_INVALID": "کد تخفیف صحیح نیست",
-  "DISCOUNT_USED": "قبلا از این کد تخفیف استفاده کردید"
+  "DISCOUNT_USED": "قبلا از این کد تخفیف استفاده کردید",
+  "CLONE_LIST": "کپی لیست",
+  "ARCHIVE_TASKS": "آرشیو کارت ها",
+  "ARCHIVE_LIST": "آرشیو لیست",
+  "ARCHIVE_TASKS_CONFIRM_HEADING": "آیا از آرشیو کارت های لیست {0} اطمینان دارید؟",
+  "ARCHIVE_TASKS_CONFIRM": "در صورت تایید تمامی کارت\u200Cها آرشیو شده، اما لیست همچنان در دسترس است",
+  "ARCHIVE_LIST_CONFIRM_HEADING": "آیا از آرشیو لیست {0} اطمینان دارید؟",
+  "ARCHIVE_LIST_CONFIRM": "در صورت تایید تمامی کارت\u200Cها به همراه لیست آرشیو خواهد شد"
 }

@@ -21,6 +21,12 @@ import { TaskModalComponent } from '../../../modals/task-modal/task-modal.compon
 import { ModalService } from '../../../services/core/modal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CultureService } from '../../../services/core/culture.service';
+import {PromptComponent} from '../../../modals/prompt/prompt.component';
+import {PromptModalParameters} from '../../../view-models/core/modal-types';
+import {FormService} from '../../../services/core/form.service';
+import {NotificationService} from '../../../services/core/notification.service';
+import {StringHelpers} from '../../../helpers/string.helpers';
+import {TranslateService} from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-work-package-board',
@@ -45,6 +51,9 @@ export class WorkPackageBoardComponent implements OnInit {
     private readonly workPackageService: WorkPackageService,
     private readonly taskService: TaskService,
     private readonly modalService: ModalService,
+    private readonly formService: FormService,
+    private readonly notificationService: NotificationService,
+    private readonly translateService: TranslateService,
     private readonly deviceDetectorService: DeviceDetectorService,
     readonly cultureService: CultureService,
   ) {}
@@ -114,11 +123,11 @@ export class WorkPackageBoardComponent implements OnInit {
       this.cancelRenameList(list);
       return;
     }
-    list.renameWaiting = true;
+    list.waiting = true;
     const op = await this.workPackageService.renameList(list.id, {
       title: name,
     });
-    list.renameWaiting = false;
+    list.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
       return;
@@ -197,5 +206,91 @@ export class WorkPackageBoardComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  archiveList(list: WorkPackageListViewModel) {}
+  cloneList(list: WorkPackageListViewModel) {
+    this.modalService
+      .show(PromptComponent, {
+        icon: 'ikon-copy3',
+        title: 'CLONE_LIST',
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'title' },
+                params: { model: list.title + ' 2', placeHolder: 'TITLE' },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'TITLE_REQUIRED',
+                  },
+                },
+              }),
+            ],
+          },
+        ],
+        action: async (params, form) => {
+          const op = await this.workPackageService.cloneList(
+            list.id,
+            params,
+          );
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          this.notificationService.success('GENERAL_SUCCESS');
+        },
+        actionLabel: 'CLONE_LIST',
+        actionColor: 'primary',
+      } as PromptModalParameters)
+      .subscribe(() => {});
+  }
+
+  archiveList(list: WorkPackageListViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('ARCHIVE_LIST_CONFIRM_HEADING'),
+      [list.title],
+    );
+    this.modalService
+      .confirm({
+        title: 'ARCHIVE_LIST',
+        message: 'ARCHIVE_LIST_CONFIRM',
+        heading,
+        actionLabel: 'ARCHIVE_LIST',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          list.waiting = true;
+          const op = await this.workPackageService.archiveList(list.id);
+          list.waiting = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+        },
+      })
+      .subscribe(() => {});
+  }
+
+  archiveListTasks(list: WorkPackageListViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('ARCHIVE_TASKS_CONFIRM_HEADING'),
+      [list.title],
+    );
+    this.modalService
+      .confirm({
+        title: 'ARCHIVE_TASKS',
+        message: 'ARCHIVE_TASKS_CONFIRM',
+        heading,
+        actionLabel: 'ARCHIVE_TASKS',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          list.waiting = true;
+          const op = await this.workPackageService.archiveListTasks(list.id);
+          list.waiting = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+        },
+      })
+      .subscribe(() => {});
+  }
 }

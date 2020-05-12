@@ -214,4 +214,23 @@ export class WorkPackageService {
       `/work-packages/${id}/connect/${projectId}`,
     );
   }
+
+  async cloneList(id: string, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/lists/${id}/clone`,
+      model,
+    );
+  }
+
+  async archiveListTasks(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/lists/${id}/archive-tasks`,
+    );
+  }
+
+  async archiveList(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/lists/${id}/archive`,
+    );
+  }
 }

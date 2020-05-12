@@ -175,7 +175,7 @@ export interface WorkPackageListViewModel extends BaseViewModel {
   expandedAlt?: boolean;
   newTaskTitle?: string;
   tempName: string;
-  renameWaiting?: boolean;
+  waiting?: boolean;
   renaming?: boolean;
   adding?: any;
   editing?: any;

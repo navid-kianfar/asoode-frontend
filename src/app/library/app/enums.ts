@@ -139,6 +139,8 @@ export enum ActivityType {
   WorkPackageListOrder = 508,
   WorkPackageListSort = 509,
   WorkPackageListSetting = 510,
+  WorkPackageListTasksArchive = 511,
+  WorkPackageListClone = 512,
 
   WorkPackageTaskAdd = 600,
   WorkPackageTaskEdit = 601,

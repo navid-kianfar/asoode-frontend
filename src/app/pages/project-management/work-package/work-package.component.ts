@@ -48,6 +48,7 @@ export class WorkPackageComponent implements OnInit {
   workPackage: WorkPackageViewModel;
   waiting: boolean;
   filters: {
+    labels: any;
     mine: boolean;
     archived: boolean;
     active: boolean;
@@ -86,6 +87,7 @@ export class WorkPackageComponent implements OnInit {
       mine: false,
       archived: false,
       active: false,
+      labels: {}
     };
     this.mode = ViewMode.Board;
     const id = this.activatedRoute.snapshot.params.id;
@@ -166,6 +168,22 @@ export class WorkPackageComponent implements OnInit {
           break;
         case ActivityType.WorkPackageListRemove:
         case ActivityType.WorkPackageListArchive:
+          if (this.workPackage.id === notification.data.packageId) {
+            this.workPackage.lists = this.workPackage.lists.filter(
+              l => l.id !== notification.data.id,
+            );
+          }
+          break;
+        case ActivityType.WorkPackageListTasksArchive:
+          const found = this.workPackage.lists.find(
+            l => l.id === notification.data.id,
+          );
+          if (found) {
+            found.tasks = [];
+          }
+          break;
+        case ActivityType.WorkPackageListClone:
+          this.ngOnInit();
           break;
 
         case ActivityType.WorkPackageMemberAdd:

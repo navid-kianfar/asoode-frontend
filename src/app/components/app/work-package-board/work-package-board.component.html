@@ -44,21 +44,21 @@
           <input
             (keydown.enter)="renameList(list)"
             [placeholder]="'ENTER_LIST_NEW_NAME' | translate"
-            [readOnly]="list.renameWaiting"
+            [readOnly]="list.waiting"
             [(ngModel)]="list.tempName"
           />
           <br />
           <div class="buttons">
             <button
-              [disabled]="list.renameWaiting"
+              [disabled]="list.waiting"
               (click)="renameList(list)"
               mat-stroked-button
             >
-              <i *ngIf="list.renameWaiting" class="icon-spin icon-spinner2"></i>
+              <i *ngIf="list.waiting" class="icon-spin icon-spinner2"></i>
               {{ 'RENAME' | translate }}</button
             >&nbsp;
             <button
-              [disabled]="list.renameWaiting"
+              [disabled]="list.waiting"
               (click)="cancelRenameList(list)"
               mat-stroked-button
             >
@@ -122,7 +122,7 @@
             <span>{{ 'NEW_TASK' | translate }}</span>
           </span>
         </button>
-        <button
+        <button [disabled]="list.waiting"
           class="action-btn"
           (click)="prepareRenameTask(list)"
           mat-menu-item
@@ -156,10 +156,22 @@
         <!--            <span>{{ 'ACCESS_LEVEL' | translate }}</span>-->
         <!--          </span>-->
         <!--        </button>-->
-        <button class="action-btn" (click)="archiveList(list)" mat-menu-item>
+        <button [disabled]="list.waiting" class="action-btn" (click)="cloneList(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="ikon-copy3"></i>
+            <span>{{ 'CLONE_LIST' | translate }}</span>
+          </span>
+        </button>
+        <button [disabled]="list.waiting" class="action-btn" (click)="archiveListTasks(list)" mat-menu-item>
           <span class="cnt">
             <i class="icon-archive x2"></i>
-            <span>{{ 'ARCHIVE' | translate }}</span>
+            <span>{{ 'ARCHIVE_TASKS' | translate }}</span>
+          </span>
+        </button>
+        <button [disabled]="list.waiting" class="action-btn" (click)="archiveList(list)" mat-menu-item>
+          <span class="cnt">
+            <i class="icon-archive x2"></i>
+            <span>{{ 'ARCHIVE_LIST' | translate }}</span>
           </span>
         </button>
       </mat-menu>

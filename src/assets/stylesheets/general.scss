@@ -669,5 +669,7 @@ body {
     }
   }
 }
-
+.mat-checkbox-layout .mat-checkbox-label {
+  min-height: 24px;
+}
 @import 'drag.scss';

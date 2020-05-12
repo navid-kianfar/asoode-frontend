@@ -1,9 +1,11 @@
 .work-package-board {
   padding: 10px;
+
   .board-lists {
     display: flex;
     overflow-x: auto;
     height: calc(100vh - 140px);
+
     .board-list {
       min-width: 250px;
       max-width: 250px;
@@ -35,6 +37,7 @@
           align-items: center;
           justify-content: center;
         }
+
         span {
           font-size: 0.8rem;
           color: #999999;
@@ -46,9 +49,11 @@
 
       .new-task {
         padding: 5px;
+
         .wrapper {
           display: flex;
           flex-direction: column;
+
           input {
             border: 1px dashed #cccccc;
             border-radius: 5px;
@@ -56,6 +61,7 @@
             font-size: 0.9rem;
             font-weight: 400;
           }
+
           textarea {
             resize: none;
             margin-bottom: 5px;
@@ -63,6 +69,7 @@
             font-size: 0.8rem;
             font-weight: 400;
           }
+
           .buttons {
             display: flex;
             flex-direction: row;
@@ -90,10 +97,23 @@
   height: 10px;
   border-radius: 0;
 }
+
+::ng-deep .mat-menu-item {
+  display: flex;
+  height: 35px;
+  padding: 0 10px;
+  border-bottom: 1px solid #fafafa;
+  line-height: 35px;
+
+  i {
+
+  }
+}
 @media (max-width: 720px) {
   .work-package-board {
     .board-lists {
       height: calc(100vh - 190px);
+
       .board-list {
         .cards {
           max-height: calc(100vh - 265px);
