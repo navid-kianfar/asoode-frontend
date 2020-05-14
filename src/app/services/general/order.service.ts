@@ -25,8 +25,7 @@ export class OrderService {
 
   pay(id: string) {
     setTimeout(() => {
-      window.location.href = `http://localhost:5000/v2/orders/pay/` + id;
-      // window.location.href = `${environment.api_endpoint}/orders/pay/` + id;
+      window.location.href = `${environment.api_endpoint}/orders/pay/` + id;
     }, 100);
   }
 }
