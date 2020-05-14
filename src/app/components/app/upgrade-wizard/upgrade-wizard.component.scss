@@ -2,6 +2,19 @@
   h3 {
     text-align: center;
   }
+
+  ::ng-deep .is-upgrade {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    .mat-radio-button {
+      .title {
+        font-weight: 500;
+        font-size: 1.2rem;
+      }
+      margin-inline-end: 30px;
+    }
+  }
 }
 .yearly-discount,
 .upgrade-notice {

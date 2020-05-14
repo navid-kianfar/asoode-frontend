@@ -33,162 +33,192 @@
     <ng-container *ngIf="mode === ViewMode.Init">
       <div class="modal-body upgrade">
         <h3>{{ 'YOUR_PLAN_NEEDS_UPGRADE' | translate }}</h3>
-        <div class="payment-box">
-          <mat-radio-group [(ngModel)]="order.yearly" class="items">
-            <mat-radio-button class="border" color="primary" [value]="false">
+
+        <mat-radio-group *ngIf="identityService.profile.plan.type !== PlanType.Free"
+                         [(ngModel)]="order.upgrade" class="is-upgrade">
+          <mat-radio-button class="border" color="primary" [value]="false">
+              <span class="title">
+                {{ 'PATCH_PLAN' | translate }}
+              </span>
+            <span class="description">
+                {{ 'PATCH_PLAN_DESCRIPTION' | translate }}
+              </span>
+          </mat-radio-button>
+          <mat-radio-button class="border" color="primary" [value]="true">
+              <span class="title">
+                {{ 'CHANGE_PLAN' | translate }}
+              </span>
+            <span class="description">
+                {{ 'CHANGE_PLAN_DESCRIPTION' | translate }}
+              </span>
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <ng-container *ngIf="order.upgrade">
+          <br>
+          <div class="payment-box">
+            <mat-radio-group [(ngModel)]="order.yearly" class="items">
+              <mat-radio-button class="border" color="primary" [value]="false">
               <span class="title">
                 {{ 'PAY_MONTHLY' | translate }}
               </span>
-              <span class="description">
+                <span class="description">
                 {{ 'PAY_MONTHLY_DESCRIPTION' | translate }}
               </span>
-            </mat-radio-button>
-            <mat-radio-button class="border" color="primary" [value]="true">
+              </mat-radio-button>
+              <mat-radio-button class="border" color="primary" [value]="true">
               <span class="title">
                 {{ 'PAY_YEARLY' | translate }}
               </span>
-              <span class="description">
+                <span class="description">
                 {{ 'PAY_YEARLY_DESCRIPTION' | translate }}
               </span>
-            </mat-radio-button>
-          </mat-radio-group>
-        </div>
-        <div class="box-container">
-          <div class="box no-select">
-            <div class="plan current">
-              <div class="p-header">{{ 'CURRENT_PLAN' | translate }}</div>
-              <div class="p-sub">
-                <div class="price">
-                  <ng-container *ngIf="!identityService.profile.plan.planCost">
-                    <div class="free">{{ 'FREE' | translate }}</div>
-                  </ng-container>
-                  <ng-container *ngIf="identityService.profile.plan.planCost">
-                    {{ identityService.profile.plan.planCost | number }}
-                  </ng-container>
-                </div>
-                <div class="duration">
-                  <!--                  <ng-container *ngIf="!identityService.profile.plan.planCost">-->
-                  <!--                    <span class="days">{{ 'FOREVER' | translate }}</span>-->
-                  <!--                  </ng-container>-->
-                  <ng-container *ngIf="identityService.profile.plan.planCost">
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="box-container">
+            <div class="box no-select">
+              <div class="plan current">
+                <div class="p-header">{{ 'CURRENT_PLAN' | translate }}</div>
+                <div class="p-sub">
+                  <div class="price">
+                    <ng-container *ngIf="!identityService.profile.plan.planCost">
+                      <div class="free">{{ 'FREE' | translate }}</div>
+                    </ng-container>
+                    <ng-container *ngIf="identityService.profile.plan.planCost">
+                      {{ identityService.profile.plan.planCost | number }}
+                    </ng-container>
+                  </div>
+                  <div class="duration">
+                    <!--                  <ng-container *ngIf="!identityService.profile.plan.planCost">-->
+                    <!--                    <span class="days">{{ 'FOREVER' | translate }}</span>-->
+                    <!--                  </ng-container>-->
+                    <ng-container *ngIf="identityService.profile.plan.planCost">
                     <span class="days">{{
                       identityService.profile.plan.days
-                    }}</span>
-                    <span>{{ 'DAYS' | translate }}</span>
-                  </ng-container>
+                      }}</span>
+                      <span>{{ 'DAYS' | translate }}</span>
+                    </ng-container>
+                  </div>
                 </div>
-              </div>
-              <div class="features">
-                <div class="feature">
+                <div class="features">
+                  <div class="feature">
                   <span class="count">{{
                     identityService.profile.plan.simpleGroup
-                  }}</span>
-                  <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
-                </div>
-                <div class="feature">
+                    }}</span>
+                    <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
+                  </div>
+                  <div class="feature">
                   <span class="count">{{
                     identityService.profile.plan.complexGroup
-                  }}</span>
-                  <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
-                </div>
-                <div class="feature">
+                    }}</span>
+                    <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
+                  </div>
+                  <div class="feature">
                   <span class="count">{{
                     identityService.profile.plan.project
-                  }}</span>
-                  <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
-                </div>
-                <div class="feature">
+                    }}</span>
+                    <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
+                  </div>
+                  <div class="feature">
                   <span class="count">{{
                     identityService.profile.plan.workPackage
-                  }}</span>
-                  <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
-                </div>
-                <div class="feature">
+                    }}</span>
+                    <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
+                  </div>
+                  <div class="feature">
                   <span class="count">{{
                     NumberHelpers.humanFileSize(
                       identityService.profile.plan.space
                     )
-                  }}</span>
-                  <span class="title">{{ 'DISK_SPACE' | translate }}</span>
-                </div>
-                <div class="feature">
+                    }}</span>
+                    <span class="title">{{ 'DISK_SPACE' | translate }}</span>
+                  </div>
+                  <div class="feature">
                   <span class="count">{{
                     identityService.profile.plan.users
-                  }}</span>
-                  <span class="title">{{ 'USERS' | translate }}</span>
+                    }}</span>
+                    <span class="title">{{ 'USERS' | translate }}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            (click)="pick(plan)"
-            *ngFor="let plan of data.plans"
-            class="box"
-            [class.next]="plan.canUse"
-          >
-            <div class="plan" [class.selected]="selectedPlan === plan">
-              <div class="p-header">
-                {{ plan.title | translate }}
-              </div>
-              <div class="p-sub">
-                <div class="price">
-                  {{ calculatePlanPrice(plan.planCost) | number }}
-                </div>
-                <div class="duration">
-                  <span class="days">{{ order.yearly ? 365 : plan.days }}</span>
-                  <span>{{ 'DAYS' | translate }}</span>
-                </div>
-              </div>
-              <div class="features">
-                <div class="feature">
-                  <span class="count">{{ plan.simpleGroup }}</span>
-                  <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
-                </div>
-                <div class="feature">
-                  <span class="count">{{ plan.complexGroup }}</span>
-                  <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
-                </div>
-                <div class="feature">
-                  <span class="count">{{ plan.project }}</span>
-                  <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
-                </div>
-                <div class="feature">
-                  <span class="count">{{ plan.workPackage }}</span>
-                  <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
-                </div>
-                <div class="feature">
+
+            <ng-container *ngFor="let plan of data.plans">
+              <div
+                (click)="pick(plan)"
+                *ngIf="plan.type !== PlanType.Custom"
+                class="box"
+                [class.next]="plan.canUse"
+              >
+                <div class="plan" [class.selected]="selectedPlan === plan">
+                  <div class="p-header">
+                    {{ plan.title | translate }}
+                  </div>
+                  <div class="p-sub">
+                    <div class="price">
+                      {{ calculatePlanPrice(plan.planCost) | number }}
+                    </div>
+                    <div class="duration">
+                      <span class="days">{{ order.yearly ? 365 : plan.days }}</span>
+                      <span>{{ 'DAYS' | translate }}</span>
+                    </div>
+                  </div>
+                  <div class="features">
+                    <div class="feature">
+                      <span class="count">{{ plan.simpleGroup }}</span>
+                      <span class="title">{{ 'SIMPLE_GROUP' | translate }}</span>
+                    </div>
+                    <div class="feature">
+                      <span class="count">{{ plan.complexGroup }}</span>
+                      <span class="title">{{ 'COMPLEX_GROUP' | translate }}</span>
+                    </div>
+                    <div class="feature">
+                      <span class="count">{{ plan.project }}</span>
+                      <span class="title">{{ 'WBS_PROJECTS' | translate }}</span>
+                    </div>
+                    <div class="feature">
+                      <span class="count">{{ plan.workPackage }}</span>
+                      <span class="title">{{ 'SIMPLE_PROJECTS' | translate }}</span>
+                    </div>
+                    <div class="feature">
                   <span class="count">{{
                     NumberHelpers.humanFileSize(plan.diskSpace)
-                  }}</span>
-                  <span class="title">{{ 'DISK_SPACE' | translate }}</span>
-                </div>
-                <div class="feature">
-                  <span class="count">{{ plan.users }}</span>
-                  <span class="title">{{ 'USERS' | translate }}</span>
+                    }}</span>
+                      <span class="title">{{ 'DISK_SPACE' | translate }}</span>
+                    </div>
+                    <div class="feature">
+                      <span class="count">{{ plan.users }}</span>
+                      <span class="title">{{ 'USERS' | translate }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+              <div (click)="pick(plan)"
+                   *ngIf="plan.type === PlanType.Custom"
+                   class="box next">
+                <div class="plan" [class.selected]="selectedPlan === plan">
+                  <div class="p-header">
+                    {{ 'CUSTOM_PLAN' | translate }}
+                  </div>
+                  <div class="p-sub">
+                    <div class="price">
+                      <div class="free">{{ 'NEED_CALCULATE' | translate }}</div>
+                    </div>
+                    <div class="duration">
+                      <span class="days">&nbsp;</span>
+                      <span>&nbsp;</span>
+                    </div>
+                  </div>
+                  <div class="features">
+                    {{ 'ESTIMATE_YOUR_NEED_ALT' | translate }}
+                  </div>
+                </div>
+              </div>
+            </ng-container>
           </div>
-          <div (click)="pick(null)" class="box next">
-            <div class="plan" [class.selected]="selectedPlan === null">
-              <div class="p-header">
-                {{ 'CUSTOM_PLAN' | translate }}
-              </div>
-              <div class="p-sub">
-                <div class="price">
-                  <div class="free">{{ 'NEED_CALCULATE' | translate }}</div>
-                </div>
-                <div class="duration">
-                  <span class="days">&nbsp;</span>
-                  <span>&nbsp;</span>
-                </div>
-              </div>
-              <div class="features">
-                {{ 'ESTIMATE_YOUR_NEED_ALT' | translate }}
-              </div>
-            </div>
-          </div>
-        </div>
+        </ng-container>
+
       </div>
       <div class="modal-footer">
         <button (click)="next($event)" mat-flat-button [color]="'primary'">
@@ -387,7 +417,7 @@
               />
               <button
                 mat-stroked-button
-                [disabled]="actionWaiting || checkingDiscount"
+                [disabled]="actionWaiting || checkingDiscount || !order.discountCode"
                 (click)="checkDiscount()"
               >
                 <i *ngIf="checkingDiscount" class="icon-spin icon-spinner2"></i>
@@ -399,7 +429,7 @@
             <div *ngIf="discountResult.invalid" class="upgrade-notice">{{ 'DISCOUNT_INVALID' | translate }}</div>
             <div *ngIf="discountResult.alreadyUsed" class="upgrade-notice">{{ 'DISCOUNT_USED' | translate }}</div>
 
-            <div *ngIf="identityService.profile.plan.type !== PlanType.Free" class="upgrade-notice">{{ 'UPGRADE_NOTICE' | translate }}</div>
+            <div *ngIf="order.upgrade && identityService.profile.plan.type !== PlanType.Free" class="upgrade-notice">{{ 'UPGRADE_NOTICE' | translate }}</div>
             <div class="pay-now">
               <br>
               <mat-radio-group [(ngModel)]="order.payNow" class="items">

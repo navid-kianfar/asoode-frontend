@@ -67,11 +67,12 @@ export class UpgradeWizardComponent implements OnInit {
       simpleGroupCost: 0,
       complexGroupCost: 0,
       yearly: false,
+      useWallet: true,
+      upgrade: this.identityService.profile.plan.type === PlanType.Free
     };
     this.mode = ViewMode.Init;
     this.fetch();
   }
-
   async fetch() {
     this.waiting = true;
     const op = await this.plansService.fetch();
@@ -82,6 +83,7 @@ export class UpgradeWizardComponent implements OnInit {
     }
     this.waiting = false;
     op.data.plans.forEach(p => {
+      p.canUse = true;
       if (p.type === PlanType.Free) {
         p.canUse = false;
       }
@@ -106,11 +108,11 @@ export class UpgradeWizardComponent implements OnInit {
     });
     op.data.plans = op.data.plans.filter(p => p.type !== PlanType.Free);
     this.data = op.data;
+    const customPlan = op.data.plans.find(p => p.type === PlanType.Custom);
     this.basedOn =
       this.identityService.profile.plan.type === PlanType.Free
-        ? op.data.plans[0]
+        ? customPlan
         : this.identityService.profile.plan;
-    this.pick(null);
   }
   onBack($event: MouseEvent) {
     if (this.actionWaiting || this.waiting) {
@@ -119,8 +121,18 @@ export class UpgradeWizardComponent implements OnInit {
     $event.stopPropagation();
     $event.preventDefault();
 
+
+    switch (this.mode) {
+      case ViewMode.Init:
+        break;
+      case ViewMode.Choose:
+        break;
+      case ViewMode.Factor:
+        break;
+    }
+
     if (this.mode === ViewMode.Factor) {
-      if (this.selectedPlan === null) {
+      if (this.selectedPlan.type === PlanType.Custom) {
         this.mode = ViewMode.Choose;
         return;
       }
@@ -153,51 +165,35 @@ export class UpgradeWizardComponent implements OnInit {
       success: false,
       invalid: false
     };
-    if (this.mode === ViewMode.Choose) {
-      this.mode = ViewMode.Factor;
-      return;
+
+    switch (this.mode) {
+      case ViewMode.Init:
+        if (!this.order.upgrade || this.selectedPlan.type === PlanType.Custom) {
+          this.mode = ViewMode.Choose;
+          return;
+        } else {
+          this.calculateTotalCost(true);
+          this.mode = ViewMode.Factor;
+          return;
+        }
+      case ViewMode.Choose:
+        this.calculateTotalCost(true);
+        this.mode = ViewMode.Factor;
+        return;
+      case ViewMode.Factor:
+        break;
     }
-    if (this.selectedPlan === null) {
-      this.mode = ViewMode.Choose;
-      return;
-    }
-    this.calculateTotalCost(true);
-    this.mode = ViewMode.Factor;
   }
   pick(plan: PlanViewModel) {
-    if (this.actionWaiting || (plan && !plan.canUse)) {
+    if (this.actionWaiting || !plan.canUse) {
       return;
     }
-    const hasSelected = this.selectedPlan !== null;
     this.selectedPlan = plan;
-    if (plan === null) {
-      if (!hasSelected) {
-        return;
-      }
-      this.order = {
-        payNow: true,
-        discountCode: '',
-        valueAdded: 0,
-        appliedDiscount: 0,
-        calculatedPrice: 0,
-        diskSpace: this.identityService.profile.plan.totalSpace,
-        complexGroup: this.identityService.profile.plan.totalComplexGroups,
-        project: this.identityService.profile.plan.totalComplexProjects,
-        simpleGroup: this.identityService.profile.plan.totalSimpleGroups,
-        workPackage: this.identityService.profile.plan.totalWorkPackages,
-        users: this.identityService.profile.plan.totalUsers,
-        spaceCost: 0,
-        projectCost: 0,
-        workPackageCost: 0,
-        usersCost: 0,
-        simpleGroupCost: 0,
-        complexGroupCost: 0,
-        yearly: false,
-      };
-      return;
-    }
     this.order = {
-      payNow: true,
+      useWallet: this.order.useWallet,
+      payNow: this.order.payNow,
+      upgrade: this.order.upgrade,
+      yearly: this.order.yearly,
       discountCode: '',
       valueAdded: 0,
       appliedDiscount: 0,
@@ -213,8 +209,7 @@ export class UpgradeWizardComponent implements OnInit {
       workPackageCost: 0,
       usersCost: 0,
       simpleGroupCost: 0,
-      complexGroupCost: 0,
-      yearly: false,
+      complexGroupCost: 0
     };
   }
   calculateSpaceCost() {
@@ -284,8 +279,26 @@ export class UpgradeWizardComponent implements OnInit {
     }
     this.calculateTotalCost();
   }
+  calculatePlanPrice(planCost: number): number {
+    if (this.order.yearly) {
+      const discount = planCost / 10;
+      return (planCost - discount) * 12;
+    }
+    return planCost;
+  }
   calculateTotalCost(calc: boolean = false) {
     if (calc) {
+      if (this.selectedPlan.type !== PlanType.Custom) {
+        this.order.calculatedPrice = this.selectedPlan.planCost;
+        this.order.valueAdded = Math.round(
+          ((this.order.calculatedPrice - this.order.appliedDiscount) *
+            this.data.valueAdded) /
+          100,
+        );
+
+        return;
+      }
+
       this.calculateComplexGroupCost();
       this.calculateSimpleGroupCost();
       this.calculateUserCost();
@@ -303,18 +316,13 @@ export class UpgradeWizardComponent implements OnInit {
     this.order.valueAdded = Math.round(
       ((this.order.calculatedPrice - this.order.appliedDiscount) *
         this.data.valueAdded) /
-        100,
+      100,
     );
-  }
-  calculatePlanPrice(planCost: number): number {
-    if (this.order.yearly) {
-      const discount = planCost / 10;
-      return (planCost - discount) * 12;
-    }
-    return planCost;
   }
 
   async checkDiscount() {
+    const code = this.order.discountCode.trim();
+    if (!code) { return; }
     this.discountResult = {
       alreadyUsed: false,
       amount: 0,
@@ -324,7 +332,7 @@ export class UpgradeWizardComponent implements OnInit {
     };
     this.checkingDiscount = true;
     const op = await this.orderService.checkDiscount({
-      code: this.order.discountCode,
+      code,
       amount: this.order.calculatedPrice
     });
     this.checkingDiscount = false;
@@ -339,20 +347,16 @@ export class UpgradeWizardComponent implements OnInit {
     this.order.appliedDiscount = op.data.amount;
     this.calculateTotalCost(true);
   }
-
   async createFactor($event: MouseEvent) {
     this.calculateTotalCost(true);
     const model = {} as any;
-    if (this.selectedPlan) {
-      model.planId = this.selectedPlan.id;
-      model.payNow = this.order.payNow;
-      model.yearly = this.order.yearly;
-    } else {
-      model.payNow = this.order.payNow;
-      model.discountCode = this.order.discountCode;
-      model.valueAdded = this.order.valueAdded;
-      model.appliedDiscount = this.order.appliedDiscount;
-      model.yearly = this.order.yearly;
+    model.planId = this.selectedPlan.id;
+    model.payNow = this.order.payNow;
+    model.yearly = this.order.yearly;
+    model.discountCode = this.order.discountCode;
+    model.upgrade = this.order.upgrade;
+    model.useWallet = this.order.useWallet;
+    if (this.selectedPlan.type === PlanType.Custom) {
       model.users = this.order.users;
       model.diskSpace = this.order.diskSpace;
       model.workPackage = this.order.workPackage;

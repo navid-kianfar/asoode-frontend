@@ -134,6 +134,8 @@ export interface PlansFetchViewModel {
   valueAdded: number;
 }
 export interface OrderViewModel {
+  useWallet: boolean;
+  upgrade: boolean;
   spaceCost: number;
   usersCost: number;
   simpleGroupCost: number;
