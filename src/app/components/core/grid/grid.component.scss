@@ -1,0 +1,59 @@
+.af-grid {
+  .extra {
+    display: flex;
+    justify-content: space-between;
+    .create {
+      display: flex;
+      width: 100px;
+    }
+    .filter {
+      width: 300px;
+      display: flex;
+      justify-content: flex-end;
+      input {
+        border: 1px solid #eeeeee;
+        border-radius: 5px;
+        margin-inline-end: 10px;
+        font-size: 0.8rem;
+        width: 200px;
+      }
+    }
+    ::ng-deep .mat-flat-button {
+      max-height: 30px;
+
+      .mat-button-wrapper {
+        position: relative;
+        top: -2px;
+      }
+    }
+  }
+  .paginator {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+
+    .info {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding-top: 10px;
+      margin-inline-end: 10px;
+    }
+  }
+  ::ng-deep .mat-cell {
+    &.operations {
+      button {
+        border: none;
+        background: none;
+
+        i {
+          font-size: 20px;
+          color: #777;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+
+

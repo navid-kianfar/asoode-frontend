@@ -64,6 +64,16 @@ export enum BoardTemplate {
   Departments = 4,
   Kanban = 5,
 }
+export enum TransactionStatus {
+  Pending = 1,
+  Success = 2,
+  Canceled = 3
+}
+export enum OrderStatus {
+  Pending = 1,
+  Success = 2,
+  Canceled = 3
+}
 export enum ProjectFilter {
   All = 0,
   Simple = 1,

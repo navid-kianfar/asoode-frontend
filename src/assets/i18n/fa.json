@@ -659,5 +659,8 @@
   "CHANGE_PLAN": "تغییر پلان",
   "CHANGE_PLAN_DESCRIPTION": "می\u200Cخواهم تغیرات کلی در منابع خود دهم",
   "PATCH_PLAN": "به روز رسانی پلان",
-  "PATCH_PLAN_DESCRIPTION": "می\u200Cخواهم منابع خود را تا پایان فاکتور فعلی افزایش دهم"
+  "PATCH_PLAN_DESCRIPTION": "می\u200Cخواهم منابع خود را تا پایان فاکتور فعلی افزایش دهم",
+  "ENUMS_ORDER_STATUS_CANCELED": "کنسل شده",
+  "ENUMS_ORDER_STATUS_PENDING": "در انتظار پرداخت",
+  "ENUMS_ORDER_STATUS_SUCCESS": "پرداخت شده"
 }

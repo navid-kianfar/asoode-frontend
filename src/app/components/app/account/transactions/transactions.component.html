@@ -3,7 +3,7 @@
     <!-- Title Column -->
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.title | translate }}</td>
     </ng-container>
 
     <!-- Amount Column -->
@@ -29,21 +29,29 @@
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="previousDebt">
-      <th mat-header-cell *matHeaderCellDef>
-        {{ 'PREVIOUS_DEBT' | translate }}
-      </th>
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>{{ 'STATUS' | translate }}</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.previousDebt | number }}
+        {{ element.status | enum: 'OrderStatus' }}
       </td>
     </ng-container>
 
-    <!-- Download Column -->
-    <ng-container matColumnDef="download">
+    <!-- Operations -->
+    <ng-container matColumnDef="operations">
       <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-      <td mat-cell *matCellDef="let element">
-        &nbsp;
-        <i class="icon-download4"></i>
+      <td class="operations" mat-cell *matCellDef="let element">
+
+        <ng-container *ngIf="element.status === OrderStatus.Pending">
+          <button (click)="pay(element)">
+            <i class="ikon-coin-dollar"></i>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="element.status === OrderStatus.Success">
+          <button>
+            <i class="icon-download4"></i>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="element.status === OrderStatus.Canceled"></ng-container>
       </td>
     </ng-container>
   </app-grid>
