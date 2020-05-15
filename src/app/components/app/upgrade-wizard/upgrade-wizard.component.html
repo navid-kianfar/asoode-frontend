@@ -36,7 +36,7 @@
 
         <mat-radio-group *ngIf="identityService.profile.plan.type !== PlanType.Free"
                          [(ngModel)]="order.type" class="is-upgrade">
-          <mat-radio-button class="border" color="primary" [value]="OrderType.Patch">
+          <mat-radio-button class="border" [disabled]="alreadyExpired" color="primary" [value]="OrderType.Patch">
               <span class="title">
                 {{ 'PATCH_PLAN' | translate }}
               </span>
@@ -62,10 +62,10 @@
           </mat-radio-button>
         </mat-radio-group>
 
-        <ng-container *ngIf="order.type === OrderType.Renew">
-          <app-dropdown [enum]="'OrderDuration'" [(model)]="order.duration"></app-dropdown>
-        </ng-container>
-        <ng-container *ngIf="order.type === OrderType.Change">
+<!--        <ng-container *ngIf="order.type === OrderType.Renew">-->
+<!--          <app-dropdown [enum]="'OrderDuration'" [(model)]="order.duration"></app-dropdown>-->
+<!--        </ng-container>-->
+        <ng-container *ngIf="order.type !== OrderType.Patch">
           <br>
           <div class="payment-box">
             <mat-radio-group [(ngModel)]="order.duration" class="items">
@@ -87,7 +87,7 @@
               </mat-radio-button>
             </mat-radio-group>
           </div>
-          <div class="box-container">
+          <div *ngIf="order.type === OrderType.Change" class="box-container">
             <div class="box no-select">
               <div class="plan current">
                 <div class="p-header">{{ 'CURRENT_PLAN' | translate }}</div>
@@ -251,12 +251,12 @@
               <div class="current">
                 {{
                   NumberHelpers.humanFileSize(
-                    identityService.profile.plan.space
+                    identityService.profile.plan.totalSpace
                   )
                 }}
               </div>
               <mat-slider
-                [min]="identityService.profile.plan.space"
+                [min]="identityService.profile.plan.totalSpace"
                 [(value)]="order.diskSpace"
                 (valueChange)="calculateSpaceCost()"
                 [displayWith]="formatSpaceLabel"

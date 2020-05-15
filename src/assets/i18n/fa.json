@@ -669,5 +669,8 @@
   "ENUMS_ORDER_DURATION_MONTHLY": "یک ماه",
   "ENUMS_ORDER_DURATION_SEASON": "سه ماه",
   "ENUMS_ORDER_DURATION_HALF_YEAR": "شش ماه",
-  "ENUMS_ORDER_DURATION_YEARLY": "یک سال"
+  "ENUMS_ORDER_DURATION_YEARLY": "یک سال",
+  "PLANS_CUSTOM_TITLE": "دلخواه",
+  "PLANS_CUSTOM_DESCRIPTION": "مناسب برای مجموعه هایی که نیازشان متغیر است",
+  "EXPIRE_AT": "تاریخ انقضا"
 }

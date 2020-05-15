@@ -39,6 +39,7 @@ export class UpgradeWizardComponent implements OnInit {
   private totalGap: number;
   private remainGap: number;
   private remainPercent: number;
+  alreadyExpired: boolean;
   constructor(
     readonly cultureService: CultureService,
     readonly projectService: ProjectService,
@@ -117,7 +118,11 @@ export class UpgradeWizardComponent implements OnInit {
     } else {
       this.order.type = OrderType.Change;
     }
-
+    if (op.data.mine.expireAt) {
+      op.data.mine.expireAt = new Date(op.data.mine.expireAt);
+      this.alreadyExpired = op.data.mine.expireAt.getTime() < new Date().getTime();
+      if (this.alreadyExpired) { this.order.type = OrderType.Renew; }
+    }
   }
   next($event: MouseEvent) {
     $event.stopPropagation();
@@ -131,6 +136,7 @@ export class UpgradeWizardComponent implements OnInit {
       success: false,
       invalid: false
     };
+    this.calculateTotalCost();
 
     switch (this.mode) {
       case ViewMode.Init:
@@ -138,6 +144,22 @@ export class UpgradeWizardComponent implements OnInit {
         switch (this.order.type) {
           case OrderType.Patch:
             this.mode = ViewMode.Choose;
+
+            switch (this.data.mine.days) {
+              case 30:
+                this.order.duration = OrderDuration.Monthly;
+                break;
+              case 90:
+                this.order.duration = OrderDuration.Season;
+                break;
+              case 180:
+                this.order.duration = OrderDuration.HalfYear;
+                break;
+              case 365:
+                this.order.duration = OrderDuration.Yearly;
+                break;
+            }
+
             return;
           case OrderType.Renew:
             this.mode = ViewMode.Factor;
@@ -147,7 +169,6 @@ export class UpgradeWizardComponent implements OnInit {
               this.mode = ViewMode.Choose;
               return;
             }
-            this.calculateTotalCost(true);
             this.mode = ViewMode.Factor;
             return;
         }
@@ -167,21 +188,21 @@ export class UpgradeWizardComponent implements OnInit {
     $event.stopPropagation();
     $event.preventDefault();
 
-    // switch (this.mode) {
-    //   case ViewMode.Init:
-    //     this.back.emit();
-    //     break;
-    //   case ViewMode.Choose:
-    //     this.mode = ViewMode.Init;
-    //     break;
-    //   case ViewMode.Factor:
-    //     if (!this.order.upgrade || (this.selectedPlan || this.basedOn).type === PlanType.Custom) {
-    //       this.mode = ViewMode.Choose;
-    //       return;
-    //     }
-    //     this.mode = ViewMode.Init;
-    //     break;
-    // }
+    switch (this.mode) {
+      case ViewMode.Init:
+        this.back.emit();
+        break;
+      case ViewMode.Choose:
+        this.mode = ViewMode.Init;
+        break;
+      case ViewMode.Factor:
+        if (this.order.type !== OrderType.Renew) {
+          this.mode = ViewMode.Choose;
+          return;
+        }
+        this.mode = ViewMode.Init;
+        break;
+    }
   }
   onCancel($event: MouseEvent) {
     if (this.actionWaiting || this.waiting) {
@@ -218,73 +239,59 @@ export class UpgradeWizardComponent implements OnInit {
     };
   }
   calculateSpaceCost() {
-    const total =
-      this.order.diskSpace - this.identityService.profile.plan.totalSpace;
+    const total = this.order.diskSpace - this.identityService.profile.plan.totalSpace;
     const gb = total / 1024 / 1024 / 1024;
     this.order.spaceCost = gb * this.basedOn.additionalSpaceCost;
-    if (this.order.duration === OrderDuration.Yearly) {
-      const discount = this.order.spaceCost / 10;
-      this.order.spaceCost = (this.order.spaceCost - discount) * 12;
-    }
+    this.order.spaceCost = this.calculatePlanPrice(this.order.spaceCost);
+    console.log(gb, this.order.spaceCost);
     if (this.order.type === OrderType.Patch) {
       this.order.spaceCost = Math.round(this.order.spaceCost * this.remainPercent / 100);
     }
-    this.calculateTotalCost();
+    console.log(gb, this.order.spaceCost);
+    this.calculateTotalCost(true);
   }
   calculateUserCost() {
     const total =
       this.order.users - this.identityService.profile.plan.totalUsers;
     this.order.usersCost = total * this.basedOn.additionalUserCost;
-    if (this.order.duration === OrderDuration.Yearly) {
-      const discount = this.order.usersCost / 10;
-      this.order.usersCost = (this.order.usersCost - discount) * 12;
-    }
+    this.order.usersCost = this.calculatePlanPrice(this.order.usersCost);
     if (this.order.type === OrderType.Patch) {
       this.order.usersCost = Math.round(this.order.usersCost * this.remainPercent / 100);
     }
-    this.calculateTotalCost();
+    this.calculateTotalCost(true);
   }
   calculateProjectCost() {
     const total =
       this.order.project -
       this.identityService.profile.plan.totalComplexProjects;
     this.order.projectCost = total * this.basedOn.additionalProjectCost;
-    if (this.order.duration === OrderDuration.Yearly) {
-      const discount = this.order.projectCost / 10;
-      this.order.projectCost = (this.order.projectCost - discount) * 12;
-    }
+    this.order.projectCost = this.calculatePlanPrice(this.order.projectCost);
     if (this.order.type === OrderType.Patch) {
       this.order.projectCost = Math.round(this.order.projectCost * this.remainPercent / 100);
     }
-    this.calculateTotalCost();
+    this.calculateTotalCost(true);
   }
   calculatePackageCost() {
     const total =
       this.order.workPackage -
       this.identityService.profile.plan.totalWorkPackages;
     this.order.workPackageCost = total * this.basedOn.additionalWorkPackageCost;
-    if (this.order.duration === OrderDuration.Yearly) {
-      const discount = this.order.workPackageCost / 10;
-      this.order.workPackageCost = (this.order.workPackageCost - discount) * 12;
-    }
+    this.order.workPackageCost = this.calculatePlanPrice(this.order.workPackageCost);
     if (this.order.type === OrderType.Patch) {
       this.order.workPackageCost = Math.round(this.order.workPackageCost * this.remainPercent / 100);
     }
-    this.calculateTotalCost();
+    this.calculateTotalCost(true);
   }
   calculateSimpleGroupCost() {
     const total =
       this.order.simpleGroup -
       this.identityService.profile.plan.totalSimpleGroups;
     this.order.simpleGroupCost = total * this.basedOn.additionalSimpleGroupCost;
-    if (this.order.duration === OrderDuration.Yearly) {
-      const discount = this.order.simpleGroupCost / 10;
-      this.order.simpleGroupCost = (this.order.simpleGroupCost - discount) * 12;
-    }
+    this.order.simpleGroupCost = this.calculatePlanPrice(this.order.simpleGroupCost);
     if (this.order.type === OrderType.Patch) {
       this.order.simpleGroupCost = Math.round(this.order.simpleGroupCost * this.remainPercent / 100);
     }
-    this.calculateTotalCost();
+    this.calculateTotalCost(true);
   }
   calculateComplexGroupCost() {
     const total =
@@ -292,15 +299,11 @@ export class UpgradeWizardComponent implements OnInit {
       this.identityService.profile.plan.totalComplexGroups;
     this.order.complexGroupCost =
       total * this.basedOn.additionalComplexGroupCost;
-    if (this.order.duration === OrderDuration.Yearly) {
-      const discount = this.order.complexGroupCost / 10;
-      this.order.complexGroupCost =
-        (this.order.complexGroupCost - discount) * 12;
-    }
+    this.order.complexGroupCost = this.calculatePlanPrice(this.order.complexGroupCost);
     if (this.order.type === OrderType.Patch) {
       this.order.complexGroupCost = Math.round(this.order.complexGroupCost * this.remainPercent / 100);
     }
-    this.calculateTotalCost();
+    this.calculateTotalCost(true);
   }
   calculatePlanPrice(planCost: number): number {
     if (this.order.duration === OrderDuration.Yearly) {
@@ -309,33 +312,36 @@ export class UpgradeWizardComponent implements OnInit {
     }
     return planCost;
   }
-  calculateTotalCost(calc: boolean = false) {
-    if (calc) {
-      if (this.order.type === OrderType.Change && (this.selectedPlan || this.basedOn).type !== PlanType.Custom) {
-        this.order.calculatedPrice = (this.selectedPlan || this.basedOn).planCost;
-        this.order.valueAdded = Math.round(
-          ((this.order.calculatedPrice - this.order.appliedDiscount) *
-            this.data.valueAdded) /
-          100,
-        );
-
-        return;
-      }
-
-      this.calculateComplexGroupCost();
-      this.calculateSimpleGroupCost();
-      this.calculateUserCost();
-      this.calculatePackageCost();
-      this.calculateProjectCost();
-      this.calculateSpaceCost();
+  calculateTotalCost(sum: boolean = false) {
+    switch (this.order.type) {
+      case OrderType.Renew:
+        this.order.calculatedPrice = this.calculatePlanPrice(this.identityService.profile.plan.planCost);
+        break;
+      case OrderType.Patch:
+        // this.calculateComplexGroupCost();
+        // this.calculateSimpleGroupCost();
+        // this.calculateUserCost();
+        // this.calculatePackageCost();
+        // this.calculateProjectCost();
+        // this.calculateSpaceCost();
+        // calc = true;
+        break;
+      case OrderType.Change:
+        // if ((this.selectedPlan || this.basedOn).type !== PlanType.Custom) {
+        //   this.order.calculatedPrice = (this.selectedPlan || this.basedOn).planCost;
+        // } else { calc = true; }
+        break;
     }
-    this.order.calculatedPrice =
-      this.order.complexGroupCost +
-      this.order.simpleGroupCost +
-      this.order.usersCost +
-      this.order.workPackageCost +
-      this.order.projectCost +
-      this.order.spaceCost;
+
+    if (sum) {
+      this.order.calculatedPrice =
+        this.order.complexGroupCost +
+        this.order.simpleGroupCost +
+        this.order.usersCost +
+        this.order.workPackageCost +
+        this.order.projectCost +
+        this.order.spaceCost;
+    }
     this.order.valueAdded = Math.round(
       ((this.order.calculatedPrice - this.order.appliedDiscount) *
         this.data.valueAdded) /
@@ -368,9 +374,9 @@ export class UpgradeWizardComponent implements OnInit {
     }
     this.discountResult = op.data;
     this.order.appliedDiscount = op.data.amount;
-    this.calculateTotalCost(true);
+    this.calculateTotalCost();
   }
-  async createFactor($event: MouseEvent) {
+  async createFactor() {
     // if (this.order.type === OrderType.Change) {
     //   this.calculateTotalCost(true);
     // }
