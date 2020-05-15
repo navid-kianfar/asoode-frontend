@@ -93,6 +93,7 @@ export class UpgradeWizardComponent implements OnInit {
     op.data.plans.forEach(p => {
       p.canUse = true;
       if (p.type === PlanType.Custom) { return; }
+      if (p.id === this.identityService.profile.plan.planId) {p.canUse = false; }
       if (p.type === PlanType.Free) {p.canUse = false; }
       if (p.order < current.order) {p.canUse = false; }
       if (p.users < op.data.mine.users) {p.canUse = false; }
@@ -142,6 +143,11 @@ export class UpgradeWizardComponent implements OnInit {
             this.mode = ViewMode.Factor;
             return;
           case OrderType.Change:
+            if (this.selectedPlan.type === PlanType.Custom) {
+              this.mode = ViewMode.Choose;
+              return;
+            }
+            this.calculateTotalCost(true);
             this.mode = ViewMode.Factor;
             return;
         }
