@@ -1,7 +1,8 @@
-import { CostUnit, PlanType } from '../../library/app/enums';
+import {CostUnit, OrderDuration, OrderType, PlanType} from '../../library/app/enums';
 import { BaseViewModel } from '../core/general-types';
 
 export interface UserPlanInfoViewModel extends BaseViewModel {
+  expireAt?: Date;
   canUse?: boolean;
   userId: string;
   planId: string;
@@ -134,8 +135,9 @@ export interface PlansFetchViewModel {
   valueAdded: number;
 }
 export interface OrderViewModel {
+  duration: OrderDuration;
   useWallet: boolean;
-  upgrade: boolean;
+  type: OrderType;
   spaceCost: number;
   usersCost: number;
   simpleGroupCost: number;
@@ -147,7 +149,6 @@ export interface OrderViewModel {
   discountCode: string;
   valueAdded: number;
   appliedDiscount: number;
-  yearly: boolean;
   users: number;
   diskSpace: number;
   workPackage: number;

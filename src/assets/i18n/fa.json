@@ -658,9 +658,16 @@
   "ARCHIVE_LIST_CONFIRM": "در صورت تایید تمامی کارت\u200Cها به همراه لیست آرشیو خواهد شد",
   "CHANGE_PLAN": "تغییر پلان",
   "CHANGE_PLAN_DESCRIPTION": "می\u200Cخواهم تغیرات کلی در منابع خود دهم",
-  "PATCH_PLAN": "به روز رسانی پلان",
+  "PATCH_PLAN": "ارتقا پلان",
   "PATCH_PLAN_DESCRIPTION": "می\u200Cخواهم منابع خود را تا پایان فاکتور فعلی افزایش دهم",
   "ENUMS_ORDER_STATUS_CANCELED": "کنسل شده",
   "ENUMS_ORDER_STATUS_PENDING": "در انتظار پرداخت",
-  "ENUMS_ORDER_STATUS_SUCCESS": "پرداخت شده"
+  "ENUMS_ORDER_STATUS_SUCCESS": "پرداخت شده",
+  "DIFF_UNTIL": "توجه: مبالغ محاسبه شده بر اساس باقیمانده بازه زمانی پلان شما تا تاریخ {0} است",
+  "RENEW_PLAN": "تمدید پلان",
+  "RENEW_PLAN_DESCRIPTION": "می\u200Cخواهم پلان فعلی خود را تمدید کنم",
+  "ENUMS_ORDER_DURATION_MONTHLY": "یک ماه",
+  "ENUMS_ORDER_DURATION_SEASON": "سه ماه",
+  "ENUMS_ORDER_DURATION_HALF_YEAR": "شش ماه",
+  "ENUMS_ORDER_DURATION_YEARLY": "یک سال"
 }

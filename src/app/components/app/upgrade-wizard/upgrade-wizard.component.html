@@ -35,8 +35,8 @@
         <h3>{{ 'YOUR_PLAN_NEEDS_UPGRADE' | translate }}</h3>
 
         <mat-radio-group *ngIf="identityService.profile.plan.type !== PlanType.Free"
-                         [(ngModel)]="order.upgrade" class="is-upgrade">
-          <mat-radio-button class="border" color="primary" [value]="false">
+                         [(ngModel)]="order.type" class="is-upgrade">
+          <mat-radio-button class="border" color="primary" [value]="OrderType.Patch">
               <span class="title">
                 {{ 'PATCH_PLAN' | translate }}
               </span>
@@ -44,7 +44,15 @@
                 {{ 'PATCH_PLAN_DESCRIPTION' | translate }}
               </span>
           </mat-radio-button>
-          <mat-radio-button class="border" color="primary" [value]="true">
+          <mat-radio-button class="border" color="primary" [value]="OrderType.Renew">
+              <span class="title">
+                {{ 'RENEW_PLAN' | translate }}
+              </span>
+            <span class="description">
+                {{ 'RENEW_PLAN_DESCRIPTION' | translate }}
+              </span>
+          </mat-radio-button>
+          <mat-radio-button class="border" color="primary" [value]="OrderType.Change">
               <span class="title">
                 {{ 'CHANGE_PLAN' | translate }}
               </span>
@@ -54,11 +62,14 @@
           </mat-radio-button>
         </mat-radio-group>
 
-        <ng-container *ngIf="order.upgrade">
+        <ng-container *ngIf="order.type === OrderType.Renew">
+          <app-dropdown [enum]="'OrderDuration'" [(model)]="order.duration"></app-dropdown>
+        </ng-container>
+        <ng-container *ngIf="order.type === OrderType.Change">
           <br>
           <div class="payment-box">
-            <mat-radio-group [(ngModel)]="order.yearly" class="items">
-              <mat-radio-button class="border" color="primary" [value]="false">
+            <mat-radio-group [(ngModel)]="order.duration" class="items">
+              <mat-radio-button class="border" color="primary" [value]="OrderDuration.Monthly">
               <span class="title">
                 {{ 'PAY_MONTHLY' | translate }}
               </span>
@@ -66,7 +77,7 @@
                 {{ 'PAY_MONTHLY_DESCRIPTION' | translate }}
               </span>
               </mat-radio-button>
-              <mat-radio-button class="border" color="primary" [value]="true">
+              <mat-radio-button class="border" color="primary" [value]="OrderDuration.Yearly">
               <span class="title">
                 {{ 'PAY_YEARLY' | translate }}
               </span>
@@ -82,10 +93,10 @@
                 <div class="p-header">{{ 'CURRENT_PLAN' | translate }}</div>
                 <div class="p-sub">
                   <div class="price">
-                    <ng-container *ngIf="!identityService.profile.plan.planCost">
+                    <ng-container *ngIf="identityService.profile.plan.type === PlanType.Free">
                       <div class="free">{{ 'FREE' | translate }}</div>
                     </ng-container>
-                    <ng-container *ngIf="identityService.profile.plan.planCost">
+                    <ng-container *ngIf="identityService.profile.plan.type !== PlanType.Free">
                       {{ identityService.profile.plan.planCost | number }}
                     </ng-container>
                   </div>
@@ -160,7 +171,7 @@
                       {{ calculatePlanPrice(plan.planCost) | number }}
                     </div>
                     <div class="duration">
-                      <span class="days">{{ order.yearly ? 365 : plan.days }}</span>
+                      <span class="days">{{ order.duration === OrderDuration.Yearly ? 365 : plan.days }}</span>
                       <span>{{ 'DAYS' | translate }}</span>
                     </div>
                   </div>
@@ -229,6 +240,8 @@
     <ng-container *ngIf="mode === ViewMode.Choose">
       <div class="modal-body upgrade">
         <div class="box-container">
+          <div *ngIf="order.type === OrderType.Patch"
+               class="upgrade-notice">{{ 'DIFF_UNTIL' | translate | stringFormat:(data.mine.expireAt | culturedDate) }}</div>
           <div class="order-item">
             <div class="title">
               <i class="icon-server"></i>
@@ -412,7 +425,7 @@
               <input
                 type="text"
                 [(ngModel)]="order.discountCode"
-                [readOnly]="checkingDiscount || discountApplied"
+                [readOnly]="checkingDiscount || discountApplied || actionWaiting"
                 [placeholder]="'DISCOUNT_CODE' | translate"
               />
               <button
@@ -429,10 +442,10 @@
             <div *ngIf="discountResult.invalid" class="upgrade-notice">{{ 'DISCOUNT_INVALID' | translate }}</div>
             <div *ngIf="discountResult.alreadyUsed" class="upgrade-notice">{{ 'DISCOUNT_USED' | translate }}</div>
 
-            <div *ngIf="order.upgrade && identityService.profile.plan.type !== PlanType.Free" class="upgrade-notice">{{ 'UPGRADE_NOTICE' | translate }}</div>
+            <div *ngIf="order.type === OrderType.Change && identityService.profile.plan.type !== PlanType.Free" class="upgrade-notice">{{ 'UPGRADE_NOTICE' | translate }}</div>
             <div class="pay-now">
               <br>
-              <mat-radio-group [(ngModel)]="order.payNow" class="items">
+              <mat-radio-group [disabled]="actionWaiting" [(ngModel)]="order.payNow" class="items">
                 <mat-radio-button class="border" color="primary" [value]="true">
                   {{ 'PAY_NOW' | translate }}
                 </mat-radio-button>
@@ -470,7 +483,7 @@
       </div>
       <div class="modal-footer">
         <button (click)="createFactor($event)"
-                [disabled]="actionWaiting"
+                [disabled]="actionWaiting || !order.calculatedPrice"
                 mat-flat-button [color]="'primary'">
           <i *ngIf="actionWaiting" class="icon-spinner2 icon-spin"></i>
           {{ 'CREATE_BILL' | translate: true }}

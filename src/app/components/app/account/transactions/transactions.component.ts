@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MockService } from '../../../../services/general/mock.service';
 import { OrderStatus } from 'src/app/library/app/enums';
 import {environment} from '../../../../../environments/environment';
+import {OrderService} from '../../../../services/general/order.service';
 
 @Component({
   selector: 'app-transactions',
@@ -18,10 +19,10 @@ export class TransactionsComponent implements OnInit {
     'status',
     'operations',
   ];
-  constructor() {}
+  constructor(private readonly orderService: OrderService) {}
   ngOnInit() {}
 
   pay(element: any) {
-    window.location.href = `${environment.api_endpoint}/v2/orders/pay/${element.id}`;
+    this.orderService.pay(element.id);
   }
 }

@@ -69,6 +69,17 @@ export enum TransactionStatus {
   Success = 2,
   Canceled = 3
 }
+export enum OrderType {
+  Patch = 1,
+  Renew = 2,
+  Change = 3
+}
+export enum OrderDuration {
+  Monthly = 1,
+  Season = 2,
+  HalfYear = 3,
+  Yearly = 4,
+}
 export enum OrderStatus {
   Pending = 1,
   Success = 2,
