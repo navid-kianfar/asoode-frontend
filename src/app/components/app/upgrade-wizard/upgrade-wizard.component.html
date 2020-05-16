@@ -52,7 +52,7 @@
                 {{ 'RENEW_PLAN_DESCRIPTION' | translate }}
               </span>
           </mat-radio-button>
-          <mat-radio-button class="border" color="primary" [value]="OrderType.Change">
+          <mat-radio-button class="border" [disabled]="identityService.profile.plan.type === PlanType.Custom" color="primary" [value]="OrderType.Change">
               <span class="title">
                 {{ 'CHANGE_PLAN' | translate }}
               </span>
@@ -482,7 +482,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button (click)="createFactor($event)"
+        <button (click)="createFactor()"
                 [disabled]="actionWaiting || !order.calculatedPrice"
                 mat-flat-button [color]="'primary'">
           <i *ngIf="actionWaiting" class="icon-spinner2 icon-spin"></i>

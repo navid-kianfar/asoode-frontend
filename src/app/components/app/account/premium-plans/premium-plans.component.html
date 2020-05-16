@@ -1,6 +1,12 @@
 <div class="account-profile-plan">
   <div class="head">
-    <h2>{{ identityService.profile.plan.title | translate }}</h2>
+    <h2>
+      {{ identityService.profile.plan.title | translate }}
+      <ng-container *ngIf="identityService.profile.plan.expireAt">
+        &nbsp;-&nbsp;{{ 'EXPIRE_AT' | translate }}
+        &nbsp;-&nbsp;{{ identityService.profile.plan.expireAt | culturedDate }}
+      </ng-container>
+    </h2>
     <h3>{{ identityService.profile.plan.description | translate }}</h3>
   </div>
 

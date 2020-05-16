@@ -117,7 +117,6 @@ export class TaskModalComponent
   }
 
   ngOnInit() {
-    console.log(this.model);
     this.totalTimeSpent = { day: 0, hour: 0, minute: 0 };
     this.filesService.attaching = this.filesService.attaching.filter(a => {
       if (a.recordId !== this.id) {

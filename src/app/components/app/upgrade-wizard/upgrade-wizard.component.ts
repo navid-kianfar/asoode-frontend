@@ -315,7 +315,10 @@ export class UpgradeWizardComponent implements OnInit {
   calculateTotalCost(sum: boolean = false) {
     switch (this.order.type) {
       case OrderType.Renew:
-        this.order.calculatedPrice = this.calculatePlanPrice(this.identityService.profile.plan.planCost);
+        const cost = this.data.mine.days === 30 ?
+          this.data.mine.planCost :
+          (this.data.mine.planCost + (this.data.mine.planCost * 10 / 100)) / 12;
+        this.order.calculatedPrice = this.calculatePlanPrice(cost);
         break;
       case OrderType.Patch:
         // this.calculateComplexGroupCost();
@@ -342,6 +345,7 @@ export class UpgradeWizardComponent implements OnInit {
         this.order.projectCost +
         this.order.spaceCost;
     }
+    this.order.calculatedPrice = Math.round(this.order.calculatedPrice);
     this.order.valueAdded = Math.round(
       ((this.order.calculatedPrice - this.order.appliedDiscount) *
         this.data.valueAdded) /
@@ -388,13 +392,19 @@ export class UpgradeWizardComponent implements OnInit {
       useWallet: this.order.useWallet
     } as any;
 
-    if (this.order.type !== OrderType.Patch) {
-      model.planId = this.selectedPlan.id;
-    } else {
-      model.planId = this.data.mine.planId;
+    switch (this.order.type) {
+      case OrderType.Patch:
+        model.planId = this.data.mine.planId;
+        break;
+      case OrderType.Change:
+        model.planId = this.selectedPlan.id;
+        break;
+      case OrderType.Renew:
+        model.planId = this.data.mine.planId;
+        break;
     }
 
-    if (this.order.type === OrderType.Patch || this.selectedPlan.type === PlanType.Custom) {
+    if (this.order.type === OrderType.Patch || this.basedOn.type === PlanType.Custom) {
       model.users = this.order.users;
       model.diskSpace = this.order.diskSpace;
       model.workPackage = this.order.workPackage;
