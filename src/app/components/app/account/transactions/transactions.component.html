@@ -47,7 +47,7 @@
           </button>
         </ng-container>
         <ng-container *ngIf="element.status === OrderStatus.Success">
-          <button>
+          <button (click)="download(element)">
             <i class="icon-download4"></i>
           </button>
         </ng-container>

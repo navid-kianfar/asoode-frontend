@@ -25,4 +25,8 @@ export class TransactionsComponent implements OnInit {
   pay(element: any) {
     this.orderService.pay(element.id);
   }
+
+  download(element: any) {
+    window.open('https://api.asoode.com/v2/orders/pdf/' + element.id, '_blank');
+  }
 }
