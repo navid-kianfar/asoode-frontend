@@ -389,7 +389,13 @@ export class UpgradeWizardComponent implements OnInit {
       duration: this.order.duration,
       discountCode: this.order.discountCode,
       type: this.order.type,
-      useWallet: this.order.useWallet
+      useWallet: this.order.useWallet,
+      users: this.order.users,
+      diskSpace: this.order.diskSpace,
+      workPackage: this.order.workPackage,
+      project: this.order.project,
+      complexGroup: this.order.complexGroup,
+      simpleGroup: this.order.simpleGroup,
     } as any;
 
     switch (this.order.type) {
@@ -402,15 +408,6 @@ export class UpgradeWizardComponent implements OnInit {
       case OrderType.Renew:
         model.planId = this.data.mine.planId;
         break;
-    }
-
-    if (this.order.type === OrderType.Patch || this.basedOn.type === PlanType.Custom) {
-      model.users = this.order.users;
-      model.diskSpace = this.order.diskSpace;
-      model.workPackage = this.order.workPackage;
-      model.project = this.order.project;
-      model.complexGroup = this.order.complexGroup;
-      model.simpleGroup = this.order.simpleGroup;
     }
     this.actionWaiting = true;
     const op = await this.orderService.order(model);
