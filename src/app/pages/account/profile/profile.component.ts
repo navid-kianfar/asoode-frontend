@@ -197,6 +197,17 @@ export class ProfileComponent implements OnInit {
               action: () => this.prepareChangePassword(),
             },
           }),
+          this.formService.createCheckbox({
+            config: {
+              cssClass: 'dark-mode',
+              label: '',
+              field: 'darkMode',
+            },
+            params: {
+              model: false,
+              label: 'DARK_MODE',
+            },
+          }),
         ],
       },
     ];
@@ -246,6 +257,10 @@ export class ProfileComponent implements OnInit {
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
       return;
+    }
+    document.body.classList.remove('dark-mode');
+    if (model.darkMode) {
+      document.body.classList.add('dark-mode');
     }
     this.editing = false;
     this.notificationService.success('PROFILE_UPDATE_SUCCESS');

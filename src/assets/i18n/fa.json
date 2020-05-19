@@ -672,5 +672,6 @@
   "ENUMS_ORDER_DURATION_YEARLY": "یک سال",
   "PLANS_CUSTOM_TITLE": "دلخواه",
   "PLANS_CUSTOM_DESCRIPTION": "مناسب برای مجموعه هایی که نیازشان متغیر است",
-  "EXPIRE_AT": "تاریخ انقضا"
+  "EXPIRE_AT": "تاریخ انقضا",
+  "DARK_MODE": "استفاده از تم تیره"
 }

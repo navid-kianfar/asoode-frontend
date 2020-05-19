@@ -94,6 +94,10 @@ export class IdentityService {
     const op = await this.httpService.post<any>('/account/profile');
     if (op.status === OperationResultStatus.Success) {
       this.profileObject = op.data;
+      document.body.classList.remove('dark-mode');
+      if (op.data.darkMode) {
+        document.body.classList.add('dark-mode');
+      }
     }
     return op;
   }

@@ -33,10 +33,12 @@ export interface ProfileViewModel extends MemberInfoViewModel {
   workingGroupFrom?: Date;
   workingTaskFrom?: Date;
 
+  darkMode: boolean;
   phoneNumber: string;
   userType: UserType;
   timeZone: string;
   calendar: CalendarType;
+  phone: string;
   emailConfirmed: boolean;
   phoneConfirmed: boolean;
   plan: UserPlanInfoViewModel;
