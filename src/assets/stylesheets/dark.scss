@@ -8,6 +8,10 @@ body.dark-mode {
   background: $color1;
   color: $color4;
 
+  hr, .mat-radio-button.border {
+    border-color: $color2 !important;
+  }
+
   ::-webkit-scrollbar {
     background: #333333;
   }
@@ -26,6 +30,49 @@ body.dark-mode {
       input, textarea {
         background: transparent !important;
         color: $color4;
+      }
+    }
+
+    &.map-members {
+      .af-form-elements {
+        input, textarea {
+          background: $color2 !important;
+          border: none !important;
+          color: $color4;
+        }
+      }
+    }
+
+    &.upgrade {
+      .box-container .box .plan {
+        background: $color2 !important;
+
+        .price .free {
+          color: inherit !important;
+        }
+      }
+
+      .order-item {
+        background: $color2 !important;
+        &.total {
+          border-top: none !important;
+        }
+      }
+      .payment-box {
+        &.bg {
+          background: $color2 !important;
+        }
+        .discount-container {
+          input {
+            background: $color2 !important;
+            border: none !important;
+            color: $color4 !important;
+          }
+          button {
+            background: $color3 !important;
+            color: $color5 !important;
+          }
+        }
       }
     }
   }
@@ -114,7 +161,7 @@ body.dark-mode {
     }
   }
 
-  .project-info, .group-info, .member-info:not(.small) {
+  .project-info, .group-info:not(.small), .member-info:not(.small) {
     background: $color1 !important;
     color: #999 !important;
 
@@ -123,6 +170,10 @@ body.dark-mode {
         color: #999 !important;
       }
     }
+  }
+
+  .group-info.small {
+    background: transparent !important;
   }
 
   .af-validation-messages {
@@ -154,6 +205,16 @@ body.dark-mode {
 
     .task-wrapper {
       background: $color1 !important;
+    }
+
+    .task {
+      .status-container {
+        background: $color1 !important;
+
+        .text {
+          color: $color4 !important;
+        }
+      }
     }
 
     .overall-report {
@@ -541,6 +602,10 @@ body.dark-mode {
           color: $color3 !important;
         }
       }
+
+      .mat-progress-bar-buffer {
+        background: $color1 !important;
+      }
     }
   }
   .project-seasons {
@@ -675,8 +740,15 @@ body.dark-mode {
         }
 
       }
-    }
 
+      .new-task {
+        textarea, input {
+          background: $color2 !important;
+          border-color: transparent !important;
+          color: $color4 !important;
+        }
+      }
+    }
   }
 
   .group-info.small, .member-info.small {
@@ -686,7 +758,134 @@ body.dark-mode {
     }
   }
 
+  .af-date-picker {
+    input {
+      background: $color1 !important;
+      color: $color4 !important;
+      border: none !important;
+    }
+  }
 
+  .af-calendar, .af-date-picker .ngxp__container {
+    background: $color1 !important;
+  }
+
+  .close-out-side {
+    .task-wrapper {
+      background: $color1 !important;
+      > .header {
+        .actions {
+          button {
+            background: $color3 !important;
+            color: $color2 !important;
+          }
+        }
+      }
+      > .content {
+        .info {
+          .box {
+
+            .status-container {
+              background: $color1 !important;
+              .text {
+                color: $color5 !important;
+              }
+            }
+
+            textarea, input {
+              background: $color1 !important;
+              color: $color4 !important;
+              border: none !important;
+            }
+
+            background: $color2 !important;
+            .title, .description {
+              color: $color4 !important;
+            }
+          }
+          .send {
+            .text {
+              border-color: $color1 !important;
+              textarea {
+                background: $color2 !important;
+                color: $color4 !important;
+              }
+              button {
+                i {
+                  color: $color3 !important;
+                }
+              }
+            }
+          }
+        }
+        .detail {
+          .tabs {
+            li {
+              background: none !important;
+              &.active {
+                background: $color2 !important;
+                color: $color4 !important;
+              }
+            }
+          }
+          .tab-content {
+            background: $color2 !important;
+            .box-container {
+              background: $color2 !important;
+              .no-item {
+                background: $color1 !important;
+              }
+            }
+            .recorder {
+              background: $color1 !important;
+            }
+            .vote {
+              background: $color1 !important;
+              .sep {
+                i {
+                  color: $color4 !important;
+                }
+                span {
+                  background: $color2 !important;
+                }
+              }
+            }
+            .records {
+              .record {
+                border-color: $color1 !important;
+              }
+            }
+            .no-records {
+              background: $color1 !important;
+            }
+            .logs {
+              .log {
+                background: $color1 !important;
+                border-color: $color2 !important;
+
+                .full-name {
+                  color: inherit !important;
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+  .task-modal-labels-menu ul li .label {
+    background: $color1 !important;
+  }
+  .task-wrapper .time-spent-container .time-log .recorder .btn .mat-mini-fab {
+    background: $color1 !important;
+  }
+  .status-popper {
+    background: $color1 !important;
+    .status-container {
+      border-color: $color2 !important;
+    }
+  }
   /* ANGULAR MATERIAL */
 
   .ngxp__container {

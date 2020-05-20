@@ -106,7 +106,10 @@
   line-height: 35px;
 
   i {
-
+    position: relative;
+    padding: 5px;
+    top: 5px;
+    margin-inline-end: 5px;
   }
 }
 @media (max-width: 720px) {
