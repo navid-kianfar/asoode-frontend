@@ -6,6 +6,7 @@ import { ChannelViewModel } from '../../../view-models/communication/messenger-t
 import { MessengerService } from '../../../services/communication/messenger.service';
 import { ProjectService } from '../../../services/projects/project.service';
 import { GroupService } from '../../../services/groups/group.service';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 const STORAGE_KEY = 'dashboard_bot_visible';
 
@@ -26,6 +27,7 @@ export class MessengerShortcutComponent implements OnInit {
     readonly modalService: ModalService,
     readonly messengerService: MessengerService,
     readonly projectService: ProjectService,
+    readonly identityService: IdentityService,
     readonly groupService: GroupService,
   ) {}
 

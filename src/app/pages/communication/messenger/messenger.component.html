@@ -2,7 +2,7 @@
   <div [class.selected]="current !== undefined" class="aside">
     <div class="aside-header">
       <img
-        src="/assets/images/messenger/asoode-chat-icon.svg"
+        src="/assets/images/messenger/asoode-chat-icon{{identityService.profile.darkMode ? '-dark' : ''}}.svg"
         alt="asoode-chat-icon"
       />&nbsp;
       <span>{{ 'ASOODE_MESSENGER' | translate }}</span>

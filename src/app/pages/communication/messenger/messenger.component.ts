@@ -12,6 +12,7 @@ import {
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-messenger',
@@ -30,6 +31,7 @@ export class MessengerComponent implements OnInit {
     readonly projectService: ProjectService,
     readonly groupService: GroupService,
     readonly modalService: ModalService,
+    readonly identityService: IdentityService,
   ) {}
 
   ngOnInit() {

@@ -1,8 +1,8 @@
-<nav *ngIf="identityService.identity.token">
+<nav class="app-header" *ngIf="identityService.identity.token">
   <h1>
     <a routerLink="/dashboard">
-      <img class="logo" src="/assets/images/asoode-logo.svg" alt="" />
-      <img class="logo-alt" src="/assets/images/logo-colored.svg" alt="" />
+      <img class="logo" src="/assets/images/asoode-logo{{identityService.profile.darkMode ? '-dark' : ''}}.svg" alt="" />
+      <img class="logo-alt" src="/assets/images/logo-{{identityService.profile.darkMode ? 'dark' : 'colored'}}.svg" alt="" />
     </a>
   </h1>
 

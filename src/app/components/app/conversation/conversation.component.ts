@@ -18,6 +18,7 @@ import { ModalService } from '../../../services/core/modal.service';
 import { CreateWizardComponent } from '../../../modals/create-wizard/create-wizard.component';
 import { Socket } from 'ngx-socket-io';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-conversation',
@@ -35,6 +36,7 @@ export class ConversationComponent implements OnInit, OnChanges {
   ConversationType = ConversationType;
 
   constructor(
+    readonly identityService: IdentityService,
     private readonly messengerService: MessengerService,
     private readonly modalService: ModalService,
     private readonly culturedDateService: CulturedDateService,

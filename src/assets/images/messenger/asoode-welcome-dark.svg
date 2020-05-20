@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 353 220" style="enable-background:new 0 0 353 220;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#d08d00;}
+	.st1{opacity:0.8;fill:#FFFFFF;}
+	.st2{fill:#4D4D4D;}
+	.st3{fill:#C1272D;}
+	.st4{opacity:0.33;}
+	.st5{clip-path:url(#SVGID_2_);}
+	.st6{fill:#29ABE2;}
+	.st7{clip-path:url(#SVGID_4_);}
+</style>
+<g>
+	<path class="st0" d="M243,115.9c0-32.9-26.7-59.7-59.7-59.7s-59.7,26.7-59.7,59.7c0,32.9,26.7,59.7,59.7,59.7v18.5
+		c0,2.7,3.3,3.9,5.1,1.9l25.4-28.8C231.3,156.8,243,137.8,243,115.9z"/>
+	<circle class="st1" cx="183.3" cy="116.8" r="50.5"/>
+	<circle class="st2" cx="152.5" cy="111.2" r="3.6"/>
+	<circle class="st2" cx="210.9" cy="111.2" r="3.6"/>
+	<g>
+		<path class="st2" d="M201.4,117.3c-4.6,7.4-12.8,11.5-21,10.5c-10-1.2-15.1-9.4-15.7-10.5H201.4z"/>
+		<path class="st3" d="M173.2,122.8c-0.5,0.5-0.9,1.2-1.2,1.9c2.3,1.4,5,2.7,8.4,3.1c4,0.5,8.1-0.3,11.7-2.1
+			C188.1,122.6,177.1,118.9,173.2,122.8z"/>
+	</g>
+	<g>
+		<rect x="180.4" y="44.7" class="st0" width="3.9" height="15.6"/>
+		<circle class="st0" cx="182.3" cy="39.8" r="7.5"/>
+	</g>
+</g>
+<g class="st4">
+	<defs>
+		<rect id="SVGID_1_" x="2" y="121" class="st4" width="192" height="80"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st5">
+		<circle class="st6" cx="95.5" cy="162.5" r="38.5"/>
+		<circle class="st6" cx="56.5" cy="189.5" r="38.5"/>
+		<circle class="st6" cx="130.5" cy="201.5" r="38.5"/>
+	</g>
+</g>
+<g class="st4">
+	<defs>
+
+			<rect id="SVGID_3_" x="236" y="94" transform="matrix(-1 -4.493129e-11 4.493129e-11 -1 582.4 234)" class="st4" width="110.4" height="46"/>
+	</defs>
+	<clipPath id="SVGID_4_">
+		<use xlink:href="#SVGID_3_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st7">
+		<circle class="st6" cx="292.6" cy="117.9" r="22.1"/>
+		<circle class="st6" cx="315.1" cy="133.4" r="22.1"/>
+		<circle class="st6" cx="272.5" cy="140.3" r="22.1"/>
+	</g>
+</g>
+</svg>
