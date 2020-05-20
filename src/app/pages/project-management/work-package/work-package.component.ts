@@ -35,6 +35,7 @@ import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { NotificationService } from '../../../services/core/notification.service';
 import { UpgradeWorkPackageComponent } from '../../../modals/upgrade-work-package/upgrade-work-package.component';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-work-package',
@@ -67,6 +68,7 @@ export class WorkPackageComponent implements OnInit {
   updating: boolean;
 
   constructor(
+    readonly identityService: IdentityService,
     readonly cultureService: CultureService,
     private readonly socket: Socket,
     private readonly modalService: ModalService,

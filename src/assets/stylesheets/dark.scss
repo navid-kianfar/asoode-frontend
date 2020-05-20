@@ -1,74 +1,99 @@
+$color1: #484848;
+$color2: #444243;
+$color3: #d08d00;
+$color4: #999999;
+$color5: #fff;
+
 body.dark-mode {
-  background: #484848;
-  color: #999;
+  background: $color1;
+  color: $color4;
+
+  ::-webkit-scrollbar {
+    background: #333333;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #777777;
+    -webkit-box-shadow: none;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: #333333;
+  }
 
   .modal-body {
     .af-form-elements {
       input, textarea {
         background: transparent !important;
-        color: #999999;
+        color: $color4;
       }
     }
   }
+
   .modal-content {
-    background: #484848;
+    background: $color1;
   }
 
   .fake-header {
-    background-color: #484848 !important;
+    background-color: $color1 !important;
   }
 
   .waiting-container {
     background-image: url('/assets/images/logo-dark.svg') !important;
+
     .waiting-spinner::before {
-      border-color: #d08d00 !important;
+      border-color: $color3 !important;
     }
   }
 
   .app-header {
-    border-color: #d08d00 !important;
+    border-color: $color3 !important;
 
     a, .quick-access, .tasks {
-      color: #d08d00 !important;
+      color: $color3 !important;
     }
+
     .create-button {
-      background-color: #d08d00 !important;
+      background-color: $color3 !important;
     }
 
     .search-container {
-      border-color: #d08d00 !important;
+      border-color: $color3 !important;
 
       input {
         background: transparent;
-        color: #ffffff;
+        color: $color5;
       }
     }
 
     .account-info {
-      color: #d08d00 !important;
-      border: 1px solid #d08d00 !important;
+      color: $color3 !important;
+      border: 1px solid $color3 !important;
       background: rgba(208, 141, 0, 0.3) !important;
     }
 
     .quick-access-popper {
-      background: #484848 !important;
+      background: $color1 !important;
 
       .quick-access-container {
         h3 {
-          color: #999999 !important;
+          color: $color4 !important;
         }
 
         .project-item, .group-item {
-          background: #444243 !important;
+          background: $color2 !important;
         }
       }
     }
+  }
+  .filters-popper {
+    background: $color1 !important;
   }
 
   .invite-group {
     .groups {
       .group {
-        border-bottom: 1px solid #444243 !important;
+        border-bottom: 1px solid $color2 !important;
       }
     }
   }
@@ -77,19 +102,20 @@ body.dark-mode {
     button {
       border: none !important;
       color: #999 !important;
-      background: #444243 !important;
+      background: $color2 !important;
     }
   }
+
   .af-textbox {
     input {
       border: none !important;
       color: #999 !important;
-      background: #444243 !important;
+      background: $color2 !important;
     }
   }
 
-  .project-info, .group-info, .member-info {
-    background: #484848 !important;
+  .project-info, .group-info, .member-info:not(.small) {
+    background: $color1 !important;
     color: #999 !important;
 
     .info {
@@ -102,23 +128,24 @@ body.dark-mode {
   .af-validation-messages {
     li {
       background: transparent !important;
-      color: #d08d00 !important;
+      color: $color3 !important;
     }
   }
 
   .dashboard {
     .section {
       .content {
-        background: #444243 !important;
+        background: $color2 !important;
 
         .wrapper {
-          background: #484848 !important;
+          background: $color1 !important;
         }
       }
 
       .task {
-        background: #444243 !important;
+        background: $color2 !important;
         color: #999 !important;
+
         .title {
           color: #999 !important;
         }
@@ -126,16 +153,18 @@ body.dark-mode {
     }
 
     .task-wrapper {
-      background: #484848 !important;
+      background: $color1 !important;
     }
 
     .overall-report {
-      color: #999999;
+      color: $color4;
     }
+
     .af-calendar {
-      background: #484848 !important;
+      background: $color1 !important;
+
       th, td {
-        color: #999999;
+        color: $color4;
       }
     }
   }
@@ -143,41 +172,45 @@ body.dark-mode {
   .account-profile, .group-page {
     .header {
       .email, .phone {
-        color: #999999 !important;
+        color: $color4 !important;
       }
     }
+
     .body {
-      background: #444243 !important;
+      background: $color2 !important;
     }
   }
 
   .outer {
     .group-detail {
-      background: #484848 !important;
-      color: #999999 !important;
+      background: $color1 !important;
+      color: $color4 !important;
 
       input, textarea, .value, .date {
         border: none !important;
-        background: #444243 !important;
-        color: #999999 !important;
+        background: $color2 !important;
+        color: $color4 !important;
       }
     }
   }
 
   .shortcut-messenger-container {
-    background: #484848 !important;
+    background: $color1 !important;
+
     .header span {
-      color: #999999 !important;
+      color: $color4 !important;
     }
   }
+
   .conversation-block .date-grouped {
     .date {
       background: none !important;
-      color: #d08d00 !important;
+      color: $color3 !important;
     }
+
     .message .text {
       .wrapper .name, .text-message {
-        color: #999999 !important;
+        color: $color4 !important;
       }
     }
   }
@@ -186,11 +219,11 @@ body.dark-mode {
     .members-container .filter .wrapper input {
       background: transparent !important;
       border: none !important;
-      color: #d08d00 !important;
+      color: $color3 !important;
     }
 
     .aside, .aside-header, .channel-header {
-      border-color: #444243 !important;
+      border-color: $color2 !important;
 
       .action-container {
         button {
@@ -200,17 +233,19 @@ body.dark-mode {
     }
 
     .asoode-editor {
-      background: #ffffff;
+      background: $color5;
     }
 
     .aside-item {
-      border-color: #444243 !important;
+      border-color: $color2 !important;
+
       .item {
         &:hover {
-          background-color: #444243 !important;
+          background-color: $color2 !important;
         }
+
         &.selected {
-          background-color: #d08d00 !important;
+          background-color: $color3 !important;
         }
       }
     }
@@ -218,17 +253,18 @@ body.dark-mode {
 
   .confirm-modal {
     .modal-title, .modal-body h2, .modal-body h3 {
-      color: #d08d00 !important;
+      color: $color3 !important;
     }
   }
 
   .group-setting {
     .box {
       .header {
-        color: #999999 !important;
+        color: $color4 !important;
       }
+
       .body {
-        background: #484848 !important;
+        background: $color1 !important;
       }
     }
   }
@@ -239,10 +275,12 @@ body.dark-mode {
     }
 
     .box {
-      background: #484848 !important;
+      background: $color1 !important;
+
       .header {
-        color: #999999 !important;
+        color: $color4 !important;
       }
+
       .body {
         background: transparent !important;
       }
@@ -250,47 +288,72 @@ body.dark-mode {
   }
 
   .account-profile-transactions {
-    background: #484848 !important;
+    background: $color1 !important;
+
     .mat-table th.mat-header-cell {
-      background: #484848 !important;
+      background: $color1 !important;
     }
   }
 
   .group-page {
     .body {
-      background: #444243 !important;
+      background: $color2 !important;
+
       .box {
-        background: #484848 !important;
+        background: $color1 !important;
       }
     }
   }
 
-  .group-chart .box .free .go-premium{
-    background: #444243 !important;
-    color: #d08d00 !important;
+  .group-chart .box .free .go-premium {
+    background: $color2 !important;
+    color: $color3 !important;
   }
 
   .group-members {
     input {
       border: none !important;
-      background: #444243 !important;
-      color: #999999 !important;
+      background: $color2 !important;
+      color: $color4 !important;
     }
+
     .member {
-      border-color: #444243 !important;
+      border-color: $color2 !important;
     }
   }
 
   .group-projects {
     .no-item {
-      background: #484848 !important;
-      color: #999999 !important;
+      background: $color1 !important;
+      color: $color4 !important;
     }
   }
 
   .time-spent-container {
     .no-item {
-      background: #444243 !important;
+      background: $color2 !important;
+    }
+
+    .grid-item--header {
+      background: $color2 !important;
+      border-color: $color2 !important;
+    }
+
+    .grid-item {
+      border-color: $color2 !important;
+
+      > .date {
+        background: transparent !important;
+        color: $color3 !important;
+      }
+    }
+
+    .grid-col--fixed-right, .grid-col--fixed-left {
+      .grid-item {
+        color: $color4 !important;
+        background: $color2 !important;
+        border-color: $color2 !important;
+      }
     }
   }
 
@@ -298,25 +361,35 @@ body.dark-mode {
     .box {
       .title {
         h3 {
-          color: #999999 !important;
+          color: $color4 !important;
         }
       }
     }
+
     .mat-table th.mat-header-cell {
-      background-color: #484848 !important;
+      background-color: $color1 !important;
+    }
+  }
+
+  .project-tree {
+    .actions {
+      button {
+        background-color: $color3 !important;
+        color: $color5 !important;
+      }
     }
   }
 
   ol.organizational-chart app-org-chart-node li > div {
-    background: #444243 !important;
+    background: $color2 !important;
 
     .chart-node {
       border: none !important;
-      background: #444243 !important;
+      background: $color2 !important;
 
       .info {
         .name {
-          color: #999999 !important;
+          color: $color4 !important;
         }
       }
     }
@@ -324,40 +397,33 @@ body.dark-mode {
 
   .app-tasks-container {
     .body {
-      background: #444243 !important;
+      background: $color2 !important;
 
       .app-kartabl-container.empty, .main-container {
-        background: #484848 !important;
+        background: $color1 !important;
 
         .no-item {
-          background: #444243 !important;
+          background: $color2 !important;
         }
       }
 
       .app-kartabl-container {
         .header {
-          background: #484848 !important;
+          background: $color1 !important;
         }
       }
 
       .grid-item--header {
-        background: #444243 !important;
-        border-color: #444243 !important;
+        background: $color2 !important;
+        border-color: $color2 !important;
       }
+
       .grid-item {
-        border-color: #444243 !important;
+        border-color: $color2 !important;
 
         > .date {
           background: transparent !important;
-          color: #d08d00 !important;
-        }
-      }
-
-      .grid-col--fixed-right, .grid-col--fixed-left{
-        .grid-item {
-          color: #999999 !important;
-          background: #444243 !important;
-          border-color: #444243 !important;
+          color: $color3 !important;
         }
       }
     }
@@ -366,110 +432,422 @@ body.dark-mode {
   .list-item {
     .tasks {
       .task {
-        background: #444243 !important;
-        border-color: #484848 !important;
+        background: $color2 !important;
+        border-color: $color1 !important;
 
         .info {
-          border-color: #484848 !important;
+          border-color: $color1 !important;
+
           .title, .detail {
-            color: #999999 !important;
+            color: $color4 !important;
           }
         }
+
         .members, .date, .state, .labels, .time-spent {
-          border-color: #484848 !important;
+          border-color: $color1 !important;
         }
       }
     }
   }
 
   .app-devices .box {
-    background: #484848 !important;
+    background: $color1 !important;
   }
+
   .storage-files {
-    background: #444243 !important;
+    background: $color2 !important;
+
     .body {
-      background: #444243 !important;
+      background: $color2 !important;
+
       .files-shared {
-        background: #484848 !important;
+        background: $color1 !important;
       }
     }
   }
 
   .invite-member {
     input {
-      background: #444243 !important;
+      background: $color2 !important;
       border: none !important;
-      color: #999999 !important;
+      color: $color4 !important;
     }
   }
 
-  .activities-report .no-activity{
-    background: #484848 !important;
+  .activities-report .no-activity {
+    background: $color1 !important;
   }
 
+  .project-detail {
+    background: $color1 !important;
+    color: $color4 !important;
+
+    .header {
+      background: $color1 !important;
+      color: $color4 !important;
+
+      .info {
+        h4 {
+          color: $color4 !important;
+        }
+
+        .members {
+          .member {
+            i {
+              background: $color2 !important;
+              color: $color4 !important;
+            }
+          }
+        }
+      }
+    }
+
+    .inner-container {
+      .aside {
+        background: $color2 !important;
+        color: $color4 !important;
+
+        button.selected, button:hover {
+          color: $color3 !important;
+        }
+      }
+
+      .wrapper {
+        border-color: $color3 !important;
+
+        .project-road-map {
+          .season {
+            border-color: $color3 !important;
+
+            .info .title span {
+              color: $color3 !important;
+            }
+          }
+        }
+
+
+      }
+    }
+  }
+  .project-tree-node {
+    background: $color2 !important;
+    color: $color4 !important;
+
+    .node {
+      border-color: $color1 !important;
+
+      .title {
+        i.sub, span {
+          color: $color3 !important;
+        }
+      }
+    }
+  }
+  .project-seasons {
+    .list .item {
+      background: $color2 !important;
+      .title {
+        color: inherit !important;
+      }
+    }
+    .summary {
+      h2 {
+        color: inherit !important;
+      }
+    }
+  }
+  .project-objectives {
+    .list .item {
+      background: $color2 !important;
+      .title {
+        color: inherit !important;
+      }
+    }
+    .summary, .empty {
+      h2 {
+        color: inherit !important;
+      }
+    }
+  }
+  .project-setting {
+    .box {
+      background: $color2 !important;
+
+      .header {
+        background: $color2 !important;
+      }
+
+      .member-info {
+        background: $color2 !important;
+      }
+    }
+  }
+
+  .modal-header, .modal-alt-header {
+    button {
+      color: #999 !important;
+    }
+  }
+
+  .member-info-popper {
+    background: $color1 !important;
+  }
+
+  .work-package {
+    background: $color2 !important;
+    > .header {
+      background: $color1 !important;
+      border-bottom: 1px solid $color2 !important;
+
+      .upgrade {
+        button {
+          background: $color2 !important;
+          color: $color4 !important;
+        }
+      }
+
+      .progress-wrapper {
+        background: $color1 !important;
+      }
+
+      .objectives-container {
+        button {
+          .label {
+            color: $color4 !important;
+          }
+          .badge {
+            background: $color2 !important;
+            color: $color4 !important;
+          }
+        }
+      }
+
+      .filters-container {
+        span {
+          background: $color2 !important;
+          color: $color4 !important;
+        }
+      }
+
+    }
+
+    .setting-container {
+      background: $color1 !important;
+
+      .setting-header {
+        border-color: $color2 !important;
+      }
+    }
+    .board-lists .board-list {
+      background: $color1 !important;
+      .header {
+        border-color: $color2 !important;
+      }
+
+      .task {
+        .status-container {
+          background: $color2 !important;
+          .text {
+            color: $color4 !important;
+          }
+        }
+        .vote {
+          background: $color2 !important;
+          .sep {
+            i {
+              color: $color4 !important;
+            }
+            span {
+              background: $color1 !important;
+            }
+          }
+        }
+        .title {
+          color: $color4 !important;
+        }
+
+        .mat-progress-bar-fill::after {
+          background-color: $color3 !important;
+        }
+
+        .mat-progress-bar-buffer {
+          background: $color2 !important;
+        }
+
+      }
+    }
+
+  }
+
+  .group-info.small, .member-info.small {
+    .initials {
+      background: $color2 !important;
+      color: $color4 !important;
+    }
+  }
+
+
+  /* ANGULAR MATERIAL */
+
   .ngxp__container {
-    border-color: #d08d00 !important;
+    border-color: $color3 !important;
   }
 
   .primary-color {
-    color: #d08d00 !important;
-  }
-  .primary-bg-color, .mat-ink-bar {
-    background-color: #d08d00 !important;
-  }
-  button.mat-primary {
-    background-color: #d08d00 !important;
-    color: #ffffff !important;
+    color: $color3 !important;
   }
 
+  .primary-bg-color, .mat-ink-bar {
+    background-color: $color3 !important;
+  }
+
+  button.mat-primary {
+    background-color: $color3 !important;
+    color: $color5 !important;
+  }
 
   .mat-progress-bar-fill::after {
-    background-color: #d08d00;
+    background-color: $color3;
   }
 
   .mat-progress-bar-buffer {
-    background: #444243;
+    background: $color2;
   }
+
   .mat-menu-panel {
-    background: #444243 !important;
+    background: $color2 !important;
 
     .mat-menu-item {
-      background: #444243 !important;
+      background: $color2 !important;
+      color: $color4;
+
       &.has-description .title {
-        color: #999999;
         font-weight: 500;
       }
-      border-bottom: 1px solid #484848;
+
+      border-bottom: 1px solid $color1;
     }
 
   }
 
   .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
-    background-color: #d08d00 !important;
+    background-color: $color3 !important;
   }
+
   .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
-    border-color: #d08d00 !important;
+    border-color: $color3 !important;
   }
+
   .mat-radio-button.mat-primary .mat-radio-inner-circle, .mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-primary:active .mat-radio-persistent-ripple {
-    background-color: #d08d00 !important;
+    background-color: $color3 !important;
   }
 
   .mat-tab-group {
     .mat-tab-header {
       background: transparent !important;
     }
+
     .mat-tab-label-content {
-      color: #d08d00 !important;
+      color: $color3 !important;
     }
   }
 
   .mat-table {
     th.mat-header-cell {
-      background-color: #444243 !important;
-      color: #d08d00 !important;
+      background-color: $color2 !important;
+      color: $color3 !important;
       font-size: 0.7rem;
       font-weight: 400;
     }
   }
 
+
+  /* DRAG */
+
+  @mixin task-drag {
+    background: $color2 !important;
+    border-bottom: 1px solid $color1 !important;
+    .info {
+      border-inline-end: 1px solid $color1 !important;
+    }
+    .members {
+      border-inline-end: 1px solid $color1 !important;
+    }
+    .date {
+      border-inline-end: 1px solid $color1 !important;
+    }
+    .time-spent {
+      border-inline-end: 1px solid $color1 !important;
+      color: #ef6a8c;
+    }
+    .state {
+      border-inline-end: 1px solid $color1 !important;
+    }
+    .labels {
+      border-inline-end: 1px solid $color1 !important;
+
+      .label-item {
+        color: #fff;
+      }
+    }
+    .add {
+      border: 1px dashed #666666;
+
+      i {
+        color: #666666;
+      }
+    }
+    &.archived {
+      .info {
+        background: #f7f7f7;
+      }
+    }
+    .add {
+      border: 1px dashed #666666;
+
+      i {
+        color: #666666;
+      }
+    }
+  }
+
+  .cdk-drag-preview {
+    &.board-list {
+      .header {
+        i {
+          border: 1px dashed #cccccc;
+        }
+
+        span {
+          color: $color4;
+        }
+      }
+
+      .new-task {
+        .wrapper {
+          textarea {
+            border: 1px dashed #cccccc;
+            color: #b3b3b3;
+          }
+        }
+      }
+    }
+
+    &.list-handler {
+      background: $color5;
+    }
+
+    &.list-item {
+      .tasks {
+        .task {
+          @include task-drag;
+        }
+      }
+    }
+
+    &.task {
+      @include task-drag;
+    }
+  }
 }
+
