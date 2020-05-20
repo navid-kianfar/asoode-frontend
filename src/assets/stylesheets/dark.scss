@@ -658,6 +658,16 @@ body.dark-mode {
     background: $color1 !important;
   }
 
+  .sub-tasks-wrapper {
+    .sub-task {
+      &:not(.add-sub) {
+        &:hover {
+          background: $color1 !important;
+        }
+      }
+    }
+  }
+
   .work-package {
     background: $color2 !important;
     > .header {

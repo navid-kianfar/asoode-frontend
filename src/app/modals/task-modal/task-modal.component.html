@@ -506,36 +506,37 @@
                       </div>
                     </div>
 
-                    <div class="sub-task no-select color-{{sub.state}}"
-                         *ngFor="let sub of model.subTasks"
+                    <div *ngFor="let sub of model.subTasks"
                          (click)="openSubTask(sub, $event)"
                          [cdkDragStartDelay]="dragDelay"
-                         [cdkDragData]="sub"
+                         [cdkDragData]="sub" class="sub-task-handle"
                          [cdkDragDisabled]="noDrag || dragging || addingSub" cdkDrag>
-                      <div class="text">
-                        <div class="title">{{sub.title}}</div>
-                        <div class="description">{{sub.description}}</div>
-                      </div>
-                      <div class="details ltr">
-                        <div class="date">
-                          <ng-container *ngIf="sub.dueAt || sub.endAt || sub.beginAt">
-                            <i class="icon-calendar"></i>&nbsp;
-                            <span>{{ sub.dueAt || sub.endAt || sub.beginAt | culturedDate}}</span>
-                          </ng-container>
+                      <div class="sub-task no-select color-{{sub.state}}">
+                        <div class="text">
+                          <div class="title">{{sub.title}}</div>
+                          <div class="description">{{sub.description}}</div>
                         </div>
-                        <div class="members">
-                          <ng-container *ngFor="let member of sub.members">
-                            <app-member-info
-                              [id]="member.recordId"
-                              [small]="true"
-                              *ngIf="!member.isGroup"
-                            ></app-member-info>
-                            <app-group-info
-                              [id]="member.recordId"
-                              [small]="true"
-                              *ngIf="member.isGroup"
-                            ></app-group-info>
-                          </ng-container>
+                        <div class="details ltr">
+                          <div class="date">
+                            <ng-container *ngIf="sub.dueAt || sub.endAt || sub.beginAt">
+                              <i class="icon-calendar"></i>&nbsp;
+                              <span>{{ sub.dueAt || sub.endAt || sub.beginAt | culturedDate}}</span>
+                            </ng-container>
+                          </div>
+                          <div class="members">
+                            <ng-container *ngFor="let member of sub.members">
+                              <app-member-info
+                                [id]="member.recordId"
+                                [small]="true"
+                                *ngIf="!member.isGroup"
+                              ></app-member-info>
+                              <app-group-info
+                                [id]="member.recordId"
+                                [small]="true"
+                                *ngIf="member.isGroup"
+                              ></app-group-info>
+                            </ng-container>
+                          </div>
                         </div>
                       </div>
                     </div>

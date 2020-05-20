@@ -571,6 +571,9 @@
       cursor: pointer;
 
       &:not(.add-sub) {
+        &:hover {
+          background: #f2f2f2;
+        }
         border: 1px solid #f2f2f2;
         border-inline-start: 5px solid #f2f2f2;
         &.color-1 {
@@ -599,9 +602,6 @@
         }
         &.color-9 {
           border-color: #eb973e;
-        }
-        &:hover {
-          background: #f2f2f2;
         }
       }
 

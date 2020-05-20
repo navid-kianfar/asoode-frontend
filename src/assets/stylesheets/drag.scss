@@ -275,88 +275,90 @@
     @include task-drag;
   }
 
-  &.sub-task {
-    display: flex;
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 5px;
-    cursor: pointer;
-
-    &:not(.add-sub) {
-      border: 1px solid #f2f2f2;
-      border-inline-start: 5px solid #f2f2f2;
-      &.color-1 {
-        border-color: #cccccc;
-      }
-      &.color-2 {
-        border-color: #59a8ef;
-      }
-      &.color-3 {
-        border-color: #5eb258;
-      }
-      &.color-4 {
-        border-color: #666666;
-      }
-      &.color-5 {
-        border-color: #b33634;
-      }
-      &.color-6 {
-        border-color: #666666;
-      }
-      &.color-7 {
-        border-color: #808080;
-      }
-      &.color-8 {
-        border-color: #b3b3b3;
-      }
-      &.color-9 {
-        border-color: #eb973e;
-      }
-      &:hover {
-        background: #f2f2f2;
-      }
-    }
-
-    .text {
+  &.sub-task-handle {
+    .sub-task {
       display: flex;
-      flex-direction: column;
-      width: 300px;
-      .title {
-        font-weight: 500;
-        font-size: 0.8rem;
-      }
-      .description {
-        font-weight: 400;
-        font-size: 0.7rem;
-      }
-    }
-    .details {
-      display: flex;
-      flex-direction: column;
-      min-width: 120px;
-      .date {
-        display: flex;
-        align-items: center;
+      border-radius: 5px;
+      padding: 5px;
+      margin-bottom: 5px;
+      cursor: pointer;
 
-        span {
-          font-size: 0.8rem;
-          font-weight: 400;
+      &:not(.add-sub) {
+        border: 1px solid #f2f2f2;
+        border-inline-start: 5px solid #f2f2f2;
+        &.color-1 {
+          border-color: #cccccc;
+        }
+        &.color-2 {
+          border-color: #59a8ef;
+        }
+        &.color-3 {
+          border-color: #5eb258;
+        }
+        &.color-4 {
+          border-color: #666666;
+        }
+        &.color-5 {
+          border-color: #b33634;
+        }
+        &.color-6 {
+          border-color: #666666;
+        }
+        &.color-7 {
+          border-color: #808080;
+        }
+        &.color-8 {
+          border-color: #b3b3b3;
+        }
+        &.color-9 {
+          border-color: #eb973e;
+        }
+        &:hover {
+          background: #f2f2f2;
         }
       }
-      .members {
-        .member-info, .group-info {
-          width: 25px !important;
-          height: 25px !important;
 
-          .initials-holder {
-            width: 20px !important;
-            height: 20px !important;
-            min-width: 20px;
+      .text {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        .title {
+          font-weight: 500;
+          font-size: 0.8rem;
+        }
+        .description {
+          font-weight: 400;
+          font-size: 0.7rem;
+        }
+      }
+      .details {
+        display: flex;
+        flex-direction: column;
+        min-width: 120px;
+        .date {
+          display: flex;
+          align-items: center;
 
-            .initials {
-              width: 20px;
-              height: 20px;
-              font-size: 0.6rem;
+          span {
+            font-size: 0.8rem;
+            font-weight: 400;
+          }
+        }
+        .members {
+          .member-info, .group-info {
+            width: 25px !important;
+            height: 25px !important;
+
+            .initials-holder {
+              width: 20px !important;
+              height: 20px !important;
+              min-width: 20px;
+
+              .initials {
+                width: 20px;
+                height: 20px;
+                font-size: 0.6rem;
+              }
             }
           }
         }

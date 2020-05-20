@@ -954,17 +954,15 @@ export class TaskModalComponent
     }
   }
 
-  drop($event: CdkDragDrop<WorkPackageTaskViewModel[], any>) {
-    // const id = event.item.data.id;
-    // moveItemInArray(
-    //   event.container.data,
-    //   event.previousIndex,
-    //   event.currentIndex,
-    // );
-    // event.item.data.order = event.currentIndex + 1;
-    // this.workPackageService.repositionList(id, {
-    //   order: event.item.data.order,
-    // });
+  drop(event: CdkDragDrop<WorkPackageTaskViewModel[], any>) {
+    const id = event.item.data.id;
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex,
+    );
+    event.item.data.order = event.currentIndex + 1;
+    this.taskService.reposition(id, { order: event.currentIndex + 1 });
   }
 }
 export enum DateMode {
