@@ -470,10 +470,15 @@
                       }}</span
                     >
                   </div>
-                  <div class="box-content sub-tasks-wrapper">
-                    <div *ngIf="addingSub" class="add-sub">
+                  <div class="box-content sub-tasks-wrapper"
+                       cdkDropList
+                       cdkDropListOrientation="vertical"
+                       [cdkDropListData]="model.subTasks"
+                       (cdkDropListDropped)="drop($event)">
+
+                    <div *ngIf="addingSub" class="sub-task add-sub">
                       <textarea
-                        rows="4"
+                        rows="3"
                         [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
                         [readOnly]="savingSub"
                         [(ngModel)]="subTaskTitle"
@@ -501,13 +506,39 @@
                       </div>
                     </div>
 
-                    <app-work-package-task
-                      *ngFor="let sub of model.subTasks"
-                      (click)="openSubTask(sub, $event)"
-                      [model]="sub"
-                      [project]="project"
-                      [workPackage]="workPackage"
-                    ></app-work-package-task>
+                    <div class="sub-task no-select color-{{sub.state}}"
+                         *ngFor="let sub of model.subTasks"
+                         (click)="openSubTask(sub, $event)"
+                         [cdkDragStartDelay]="dragDelay"
+                         [cdkDragData]="sub"
+                         [cdkDragDisabled]="noDrag || dragging || addingSub" cdkDrag>
+                      <div class="text">
+                        <div class="title">{{sub.title}}</div>
+                        <div class="description">{{sub.description}}</div>
+                      </div>
+                      <div class="details ltr">
+                        <div class="date">
+                          <ng-container *ngIf="sub.dueAt || sub.endAt || sub.beginAt">
+                            <i class="icon-calendar"></i>&nbsp;
+                            <span>{{ sub.dueAt || sub.endAt || sub.beginAt | culturedDate}}</span>
+                          </ng-container>
+                        </div>
+                        <div class="members">
+                          <ng-container *ngFor="let member of sub.members">
+                            <app-member-info
+                              [id]="member.recordId"
+                              [small]="true"
+                              *ngIf="!member.isGroup"
+                            ></app-member-info>
+                            <app-group-info
+                              [id]="member.recordId"
+                              [small]="true"
+                              *ngIf="member.isGroup"
+                            ></app-group-info>
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="box">

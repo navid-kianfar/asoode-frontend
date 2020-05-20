@@ -750,7 +750,9 @@ body.dark-mode {
       }
     }
   }
-
+  .task.archived {
+    background: #555;
+  }
   .group-info.small, .member-info.small {
     .initials {
       background: $color2 !important;
@@ -998,7 +1000,7 @@ body.dark-mode {
     }
     &.archived {
       .info {
-        background: #f7f7f7;
+        background: #555555;
       }
     }
     .add {
@@ -1033,7 +1035,7 @@ body.dark-mode {
     }
 
     &.list-handler {
-      background: $color5;
+      background: $color1;
     }
 
     &.list-item {

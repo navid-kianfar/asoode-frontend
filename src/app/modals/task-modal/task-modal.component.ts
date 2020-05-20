@@ -38,6 +38,8 @@ import { TimeViewModel } from '../../view-models/core/general-types';
 import { CulturedDateService } from '../../services/core/cultured-date.service';
 import { _MatMenu, MatMenu } from '@angular/material';
 import { GroupService } from '../../services/groups/group.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-task-modal',
@@ -100,6 +102,11 @@ export class TaskModalComponent
 
   groupMembers: ProjectMemberViewModel[];
   individualMembers: ProjectMemberViewModel[];
+  noDrag: boolean;
+  dragging: boolean;
+  dragDelay: number;
+
+
   constructor(
     private readonly socket: Socket,
     private readonly taskService: TaskService,
@@ -112,11 +119,18 @@ export class TaskModalComponent
     readonly identityService: IdentityService,
     private readonly workPackageService: WorkPackageService,
     private readonly culturedDateService: CulturedDateService,
+    private readonly deviceDetectorService: DeviceDetectorService,
   ) {
     super();
   }
 
   ngOnInit() {
+    this.dragDelay =
+      this.deviceDetectorService.isTablet() ||
+      this.deviceDetectorService.isMobile()
+        ? 1000
+        : 0;
+    this.noDrag = this.deviceDetectorService.os.toLowerCase() === 'ios';
     this.totalTimeSpent = { day: 0, hour: 0, minute: 0 };
     this.filesService.attaching = this.filesService.attaching.filter(a => {
       if (a.recordId !== this.id) {
@@ -938,6 +952,19 @@ export class TaskModalComponent
     if (timeRangeMenu) {
       timeRangeMenu.closed.emit();
     }
+  }
+
+  drop($event: CdkDragDrop<WorkPackageTaskViewModel[], any>) {
+    // const id = event.item.data.id;
+    // moveItemInArray(
+    //   event.container.data,
+    //   event.previousIndex,
+    //   event.currentIndex,
+    // );
+    // event.item.data.order = event.currentIndex + 1;
+    // this.workPackageService.repositionList(id, {
+    //   order: event.item.data.order,
+    // });
   }
 }
 export enum DateMode {
