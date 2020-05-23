@@ -27,31 +27,22 @@ export class GroupTimespentComponent implements OnInit {
     private readonly groupService: GroupService
   ) {}
 
-  ngOnInit() {
-    this.converter = this.culturedDateService.Converter();
-    this.thisMonth();
-    this.fetch();
+  ngOnInit() {  }
+
+  onBeginChange($event: Date) {
+    if (!$event) { return; }
+    setTimeout(() => {
+      if (!this.beginDate || this.beginDate.getTime() !== $event.getTime()) {
+        this.beginDate = $event;
+        this.fetch();
+      }
+    }, 100);
   }
 
-  thisMonth() {
-    const now = new Date();
-    const parsed = this.converter.FromDateTime(now);
-    this.beginDate = this.converter.ToDateTime({
-      Year: parsed.Year,
-      Month: parsed.Month,
-      Day: 1,
-      Hours: 0,
-      Minutes: 0,
-    });
-    const lastDayInMonth = this.culturedDateService.cultureService.current
-      .daysInMonths[parsed.Month - 1];
-    this.endDate = this.converter.ToDateTime({
-      Year: parsed.Year,
-      Month: parsed.Month,
-      Day: lastDayInMonth,
-      Hours: 23,
-      Minutes: 59,
-    });
+  onEndChange($event: Date) {
+    setTimeout(() => {
+      this.endDate = $event;
+    }, 10);
   }
 
   async fetch() {

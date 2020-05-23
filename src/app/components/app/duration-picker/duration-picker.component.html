@@ -1,0 +1,21 @@
+<div class="duration-filter">
+  <div class="date">
+    {{ model | culturedDate: false:format }}
+    <i class="icon-arrow-down2"></i>
+  </div>
+
+  <div class="btns">
+    <button (click)="prev()">
+      <i class="icon-arrow-{{culturedDateService.cultureService.rtl ? 'right2': 'left2'}}"></i>
+    </button>
+    <button (click)="next()">
+      <i class="icon-arrow-{{culturedDateService.cultureService.rtl ? 'left2': 'right2'}}"></i>
+    </button>
+  </div>
+
+  <div class="today">
+    <button (click)="today()">
+      {{ 'GO_TODAY' | translate}}
+    </button>
+  </div>
+</div>

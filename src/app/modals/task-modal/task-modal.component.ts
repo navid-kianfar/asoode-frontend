@@ -143,10 +143,6 @@ export class TaskModalComponent
       '.doc,.docx,.rtf,.txt',
     ].join(',');
     this.mode = ViewMode.Detail;
-
-    if (this.projectId) {
-      this.project = this.projectService.projects.find(p => p.id === this.projectId);
-    }
     this.bind();
     this.fetch();
   }
@@ -364,10 +360,20 @@ export class TaskModalComponent
   async fetch() {
     this.waiting = true;
 
+    const op = await this.taskService.fetch(this.id);
+    if (op.status !== OperationResultStatus.Success) {
+      console.error('Task not found');
+      return this.close();
+    }
+
+    if (!this.project) {
+      this.project = this.projectService.projects.find(p => p.id === op.data.projectId);
+    }
+
     if (!this.project) {
       const archivedProject = await this.projectService.fetchArchived(this.projectId);
       if (archivedProject.status !== OperationResultStatus.Success) {
-        // TODO: can not find archived project
+        console.error('Project not found');
         return this.close();
       }
       this.projectService.projects.push(archivedProject.data);
@@ -375,7 +381,11 @@ export class TaskModalComponent
     }
 
     if (!this.workPackage) {
-      this.workPackage = this.project.workPackages.find(w => w.id === this.packageId);
+      this.workPackage = this.project.workPackages.find(w => w.id === op.data.packageId);
+    }
+    if (!this.workPackage) {
+      console.error('Package not found');
+      return this.close();
     }
 
     this.groupMembers = this.project.members
@@ -412,28 +422,8 @@ export class TaskModalComponent
       }
     });
 
-    if (this.model) {
-      return;
-    }
-
-    const op = await this.taskService.fetch(this.id);
-    if (op.status !== OperationResultStatus.Success) {
-      this.close();
-      return;
-    }
     this.waiting = false;
     this.model = op.data;
-    if (!this.project) {
-      this.project = this.projectService.projects.find(
-        p => p.id === this.model.projectId,
-      );
-      if (!this.project) {
-        return this.close();
-      }
-      this.workPackage = this.project.workPackages.find(
-        w => w.id === this.model.packageId,
-      );
-    }
     this.permission = this.workPackageService.getPermission(
       op.data.projectId,
       op.data.packageId,

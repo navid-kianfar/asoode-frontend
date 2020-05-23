@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
 import {
   IDateConverter,
@@ -21,7 +21,7 @@ import { TaskModalComponent } from '../../../modals/task-modal/task-modal.compon
   templateUrl: './calendar-month.component.html',
   styleUrls: ['./calendar-month.component.scss'],
 })
-export class CalendarMonthComponent implements OnInit {
+export class CalendarMonthComponent implements OnInit, OnChanges {
   @Input() beginDate: Date;
   @Input() endDate: Date;
   @Input() model: WorkPackageTaskViewModel[];
@@ -44,8 +44,18 @@ export class CalendarMonthComponent implements OnInit {
     $event.stopPropagation();
     $event.preventDefault();
     this.modalService
-      .show(TaskModalComponent, { id: task.id })
+      .show(TaskModalComponent, {
+        id: task.id,
+        projectId: task.projectId,
+        packageId: task.workPackageId,
+      })
       .subscribe(() => {});
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.beginDate && !changes.beginDate.firstChange) {
+      this.ngOnInit();
+    }
   }
 
   ngOnInit() {

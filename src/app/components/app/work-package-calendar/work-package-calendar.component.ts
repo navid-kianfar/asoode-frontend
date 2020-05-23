@@ -4,7 +4,7 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import { AccessType } from '../../../library/app/enums';
+import { AccessType, DurationMode } from '../../../library/app/enums';
 import { CultureService } from '../../../services/core/culture.service';
 import { NumberHelpers } from '../../../helpers/number.helpers';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
@@ -22,28 +22,20 @@ export class WorkPackageCalendarComponent implements OnInit {
   @Input() model: WorkPackageViewModel;
   @Input() permission: AccessType;
   calendarData: WorkPackageTaskViewModel[];
+  DurationMode = DurationMode;
   ViewMode = ViewMode;
   mode: ViewMode;
   beginDate: Date;
   endDate: Date;
   hours: number[];
   NumberHelpers = NumberHelpers;
-  private converter: IDateConverter;
   days: { date: string; events: any }[];
+  private converter: IDateConverter;
   constructor(
     readonly cultureService: CultureService,
     private readonly culturedDateService: CulturedDateService,
     private readonly modalService: ModalService,
   ) {}
-
-  ngOnInit() {
-    this.hours = Array(24)
-      .fill(0)
-      .map((e, i) => i + 1);
-    this.beginDate = new Date();
-    this.converter = this.culturedDateService.Converter();
-    this.switchMode(ViewMode.Month);
-  }
 
   allTasks(): WorkPackageTaskViewModel[] {
     return this.model.lists
@@ -51,9 +43,17 @@ export class WorkPackageCalendarComponent implements OnInit {
       .reduce((prev, curr) => prev.concat(curr), []);
   }
 
+  ngOnInit() {
+    this.converter = this.culturedDateService.Converter();
+    this.hours = Array(24)
+      .fill(0)
+      .map((e, i) => i + 1);
+
+    this.mode = ViewMode.Month;
+  }
+
   switchMode(mode: ViewMode) {
     const data = {};
-    const begin = new Date(this.beginDate);
     this.calendarData = this.allTasks()
       .filter(f => f.dueAt)
       .map(t => {
@@ -61,20 +61,9 @@ export class WorkPackageCalendarComponent implements OnInit {
         t.dueAtFormatted = this.converter.Format(t.dueAt, 'YYYY/MM/DD');
         return t;
       });
-    this.endDate = new Date();
-
-    switch (mode) {
-      case ViewMode.Day:
-        this.endDate.setDate(this.endDate.getDate() + 1);
-        break;
-      case ViewMode.Week:
-        this.endDate.setDate(this.endDate.getDate() + 7);
-        break;
-      case ViewMode.Month:
-        break;
-    }
 
     let condition = true;
+    const begin = new Date(this.beginDate);
     const endParsed = this.converter.Format(this.endDate, 'YYYY/MM/DD');
     do {
       let beginParsed = this.converter.Format(begin, 'YYYY/MM/DD');
@@ -97,21 +86,31 @@ export class WorkPackageCalendarComponent implements OnInit {
     this.mode = mode;
   }
 
-  sameDay(begin: Date | string, end: Date | string): boolean {
-    const beginParsed = this.converter.FromDateTime(new Date(begin));
-    const endParsed = this.converter.FromDateTime(new Date(end));
-    return (
-      beginParsed.Year === endParsed.Year &&
-      beginParsed.Month === endParsed.Month &&
-      beginParsed.Day === endParsed.Day
-    );
+  onBeginChange($event: Date) {
+    if (!$event) { return; }
+    setTimeout(() => {
+      if (!this.beginDate || this.beginDate.getTime() !== $event.getTime()) {
+        this.beginDate = $event;
+        this.switchMode(this.mode);
+      }
+    }, 100);
+  }
+
+  onEndChange($event: Date) {
+    setTimeout(() => {
+      this.endDate = $event;
+    }, 10);
   }
 
   openTask($event, task) {
     $event.stopPropagation();
     $event.preventDefault();
     this.modalService
-      .show(TaskModalComponent, { id: task.id })
+      .show(TaskModalComponent, {
+        id: task.id,
+        project: this.project,
+        workPackage: this.model,
+      })
       .subscribe(() => {});
   }
 }

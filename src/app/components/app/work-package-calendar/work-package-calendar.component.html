@@ -1,27 +1,11 @@
 <div class="work-package-calendar-view">
   <ng-container *ngIf="mode === ViewMode.Day">
     <div class="header">
-      <div class="filter">
-        <div class="date">
-          {{ beginDate | culturedDate }}
-          <!--          <i class="icon-arrow-down2"></i>-->
-        </div>
-
-        <!--        <div class="btns">-->
-        <!--          <button>-->
-        <!--            <i class="icon-arrow-right2"></i>-->
-        <!--          </button>-->
-        <!--          <button>-->
-        <!--            <i class="icon-arrow-left2"></i>-->
-        <!--          </button>-->
-        <!--        </div>-->
-
-        <!--        <div class="today">-->
-        <!--          <button>-->
-        <!--            {{ 'GO_TODAY' | translate}}-->
-        <!--          </button>-->
-        <!--        </div>-->
-      </div>
+      <app-duration-picker [model]="beginDate"
+                           [endDate]="endDate"
+                           [mode]="DurationMode.Day"
+                           (modelChange)="onBeginChange($event)"
+                           (endDateChange)="onEndChange($event)"></app-duration-picker>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
           {{ 'DAY_VIEW' | translate }}
@@ -29,7 +13,7 @@
         </button>
       </div>
     </div>
-    <div class="content clipped">
+    <div *ngIf="days" class="content clipped">
       <div class="grid-container">
         <div class="grid">
           <div
@@ -70,27 +54,11 @@
   </ng-container>
   <ng-container *ngIf="mode === ViewMode.Week">
     <div class="header">
-      <div class="filter">
-        <div class="date">
-          {{ beginDate | culturedDate }} - {{ endDate | culturedDate }}
-          <!--          <i class="icon-arrow-down2"></i>-->
-        </div>
-
-        <!--        <div class="btns">-->
-        <!--          <button>-->
-        <!--            <i class="icon-arrow-right2"></i>-->
-        <!--          </button>-->
-        <!--          <button>-->
-        <!--            <i class="icon-arrow-left2"></i>-->
-        <!--          </button>-->
-        <!--        </div>-->
-
-        <!--        <div class="today">-->
-        <!--          <button>-->
-        <!--            {{ 'GO_TODAY' | translate}}-->
-        <!--          </button>-->
-        <!--        </div>-->
-      </div>
+      <app-duration-picker [model]="beginDate"
+                           [mode]="DurationMode.Week"
+                           [endDate]="endDate"
+                           (modelChange)="onBeginChange($event)"
+                           (endDateChange)="onEndChange($event)"></app-duration-picker>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
           {{ 'WEEK_VIEW' | translate }}
@@ -98,7 +66,7 @@
         </button>
       </div>
     </div>
-    <div class="content clipped">
+    <div *ngIf="days" class="content clipped">
       <div class="grid-container">
         <div class="grid">
           <div
@@ -138,27 +106,11 @@
   </ng-container>
   <ng-container *ngIf="mode === ViewMode.Month">
     <div class="header">
-      <div class="filter">
-        <div class="date">
-          {{ beginDate | culturedDate: false:'NNN YYYY' }}
-          <!--          <i class="icon-arrow-down2"></i>-->
-        </div>
-
-        <!--        <div class="btns">-->
-        <!--          <button>-->
-        <!--            <i class="icon-arrow-right2"></i>-->
-        <!--          </button>-->
-        <!--          <button>-->
-        <!--            <i class="icon-arrow-left2"></i>-->
-        <!--          </button>-->
-        <!--        </div>-->
-
-        <!--        <div class="today">-->
-        <!--          <button>-->
-        <!--            {{ 'GO_TODAY' | translate}}-->
-        <!--          </button>-->
-        <!--        </div>-->
-      </div>
+      <app-duration-picker [model]="beginDate"
+                           [mode]="DurationMode.Month"
+                           [endDate]="endDate"
+                           (modelChange)="onBeginChange($event)"
+                           (endDateChange)="onEndChange($event)"></app-duration-picker>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
           {{ 'MONTH_VIEW' | translate }}
@@ -166,7 +118,7 @@
         </button>
       </div>
     </div>
-    <div class="content clipped">
+    <div *ngIf="calendarData" class="content clipped">
       <app-calendar-month
         [beginDate]="beginDate"
         [endDate]="endDate"

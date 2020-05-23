@@ -172,6 +172,7 @@ import { UpgradeWorkPackageComponent } from './modals/upgrade-work-package/upgra
 import { CalendarMonthComponent } from './components/app/calendar-month/calendar-month.component';
 import { TimeSpentComponent } from './components/app/time-spent/time-spent.component';
 import { KartablComponent } from './components/app/kartabl/kartabl.component';
+import { DurationPickerComponent } from './components/app/duration-picker/duration-picker.component';
 
 @NgModule({
   declarations: [
@@ -304,6 +305,7 @@ import { KartablComponent } from './components/app/kartabl/kartabl.component';
     CalendarMonthComponent,
     TimeSpentComponent,
     KartablComponent,
+    DurationPickerComponent,
   ],
   entryComponents: [
     UpgradeWorkPackageComponent,

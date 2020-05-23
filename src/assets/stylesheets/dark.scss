@@ -782,6 +782,20 @@ body.dark-mode {
     background: $color1 !important;
   }
 
+  .duration-filter {
+    .btns {
+      button {
+        color: $color1 !important;
+        background: $color4 !important;
+      }
+    }
+    .today {
+      button {
+        color: $color4 !important;
+      }
+    }
+  }
+
   .close-out-side {
     .task-wrapper {
       background: $color1 !important;

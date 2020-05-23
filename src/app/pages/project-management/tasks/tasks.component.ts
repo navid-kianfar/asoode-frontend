@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { TaskService } from '../../../services/projects/task.service';
 import {
   KartablViewModel,
   TimeSpentViewModel,
   WorkPackageTaskViewModel,
 } from '../../../view-models/projects/project-types';
-import { CulturedDateService } from '../../../services/core/cultured-date.service';
-import { IDateConverter } from '../../../library/core/date-time/date-contracts';
 
 @Component({
   selector: 'app-tasks',
@@ -22,37 +20,12 @@ export class TasksComponent implements OnInit {
   calendarData: WorkPackageTaskViewModel[];
   timeSpentData: TimeSpentViewModel[];
   kartablData: KartablViewModel;
-  converter: IDateConverter;
   constructor(
     private readonly taskService: TaskService,
-    private readonly culturedDateService: CulturedDateService,
   ) {}
 
   ngOnInit() {
-    this.converter = this.culturedDateService.Converter();
-    this.thisMonth();
-    this.switchTab(TaskTab.Calendar);
-  }
 
-  thisMonth() {
-    const now = new Date();
-    const parsed = this.converter.FromDateTime(now);
-    this.beginDate = this.converter.ToDateTime({
-      Year: parsed.Year,
-      Month: parsed.Month,
-      Day: 1,
-      Hours: 0,
-      Minutes: 0,
-    });
-    const lastDayInMonth = this.culturedDateService.cultureService.current
-      .daysInMonths[parsed.Month - 1];
-    this.endDate = this.converter.ToDateTime({
-      Year: parsed.Year,
-      Month: parsed.Month,
-      Day: lastDayInMonth,
-      Hours: 23,
-      Minutes: 59,
-    });
   }
 
   async switchTab(tab: TaskTab) {
@@ -82,6 +55,26 @@ export class TasksComponent implements OnInit {
     }
     this.waiting = false;
     this.tab = tab;
+  }
+
+  onBeginChange($event: Date) {
+    if (!$event) { return; }
+    setTimeout(() => {
+      if (!this.beginDate || this.beginDate.getTime() !== $event.getTime()) {
+        this.beginDate = $event;
+        if (this.tab === undefined) {
+          this.switchTab(TaskTab.Calendar);
+        } else {
+          this.switchTab(this.tab);
+        }
+      }
+    }, 100);
+  }
+
+  onEndChange($event: Date) {
+    setTimeout(() => {
+      this.endDate = $event;
+    }, 10);
   }
 }
 export enum TaskTab {

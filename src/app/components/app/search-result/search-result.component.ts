@@ -30,7 +30,11 @@ export class SearchResultComponent implements OnInit {
 
   openTask(task: SearchTaskViewModel) {
     this.modalService
-      .show(TaskModalComponent, { id: task.id })
+      .show(TaskModalComponent, {
+        id: task.id,
+        projectId: task.projectId,
+        packageId: task.workPackageId,
+      })
       .subscribe(() => {});
   }
 

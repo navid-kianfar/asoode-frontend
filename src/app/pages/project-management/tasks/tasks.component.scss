@@ -27,55 +27,6 @@
     display: flex;
     align-items: center;
 
-    .filter {
-      flex-grow: 1;
-      display: flex;
-
-      .date {
-        font-weight: 500;
-        min-width: 200px;
-
-        i {
-          margin-inline-start: 5px;
-          font-size: 0.7rem;
-        }
-      }
-
-      .btns {
-        display: flex;
-
-        button {
-          background: #eeeeee;
-          color: #666666;
-          width: 30px;
-          height: 30px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-          margin-inline-end: 5px;
-          border-radius: 20px;
-          border-color: transparent;
-
-          i {
-            font-size: 0.7rem;
-          }
-        }
-      }
-
-      .today {
-        button {
-          cursor: pointer;
-          background: none;
-          border: none;
-          text-decoration: underline;
-          color: #4d4d4d;
-          font-size: 0.8rem;
-          margin-inline-start: 20px;
-        }
-      }
-    }
-
     .mode {
       width: 100px;
       display: flex;

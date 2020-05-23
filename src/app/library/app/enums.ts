@@ -12,6 +12,11 @@ export enum GroupType {
   Sbu = 11,
   Individual = 12,
 }
+export enum DurationMode {
+  Day = 1,
+  Week = 2,
+  Month = 3
+}
 export enum AccessType {
   Owner = 1,
   Admin = 2,
