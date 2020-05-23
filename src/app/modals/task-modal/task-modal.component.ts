@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
-import { TaskModalParameters } from '../../view-models/core/modal-types';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {SimpleModalComponent} from 'ngx-simple-modal';
+import {TaskModalParameters} from '../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
   ProjectViewModel,
@@ -10,34 +10,27 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
-import { TaskService } from '../../services/projects/task.service';
-import { OperationResultStatus } from '../../library/core/enums';
-import { ProjectService } from '../../services/projects/project.service';
-import {
-  AccessType,
-  ActivityType,
-  WorkPackageTaskState,
-} from '../../library/app/enums';
-import { IdentityService } from '../../services/auth/identity.service';
-import { Socket } from 'ngx-socket-io';
-import { UploadViewModel } from '../../view-models/storage/files-types';
-import { FilesService } from '../../services/storage/files.service';
-import { UsersService } from '../../services/general/users.service';
-import { ModalService } from '../../services/core/modal.service';
-import { StringHelpers } from '../../helpers/string.helpers';
-import { TranslateService } from '../../services/core/translate.service';
-import { WorkPackageService } from '../../services/projects/work-package.service';
-import { MapModalComponent } from '../map-modal/map-modal.component';
-import { OperationResult } from '../../library/core/operation-result';
-import {
-  MapMarker,
-  MapModalParameters,
-} from '../../view-models/general/map-types';
-import { NumberHelpers } from 'src/app/helpers/number.helpers';
-import { TimeViewModel } from '../../view-models/core/general-types';
-import { CulturedDateService } from '../../services/core/cultured-date.service';
-import { _MatMenu, MatMenu } from '@angular/material';
-import { GroupService } from '../../services/groups/group.service';
+import {TaskService} from '../../services/projects/task.service';
+import {OperationResultStatus} from '../../library/core/enums';
+import {ProjectService} from '../../services/projects/project.service';
+import {AccessType, ActivityType, WorkPackageTaskState,} from '../../library/app/enums';
+import {IdentityService} from '../../services/auth/identity.service';
+import {Socket} from 'ngx-socket-io';
+import {UploadViewModel} from '../../view-models/storage/files-types';
+import {FilesService} from '../../services/storage/files.service';
+import {UsersService} from '../../services/general/users.service';
+import {ModalService} from '../../services/core/modal.service';
+import {StringHelpers} from '../../helpers/string.helpers';
+import {TranslateService} from '../../services/core/translate.service';
+import {WorkPackageService} from '../../services/projects/work-package.service';
+import {MapModalComponent} from '../map-modal/map-modal.component';
+import {OperationResult} from '../../library/core/operation-result';
+import {MapMarker, MapModalParameters,} from '../../view-models/general/map-types';
+import {NumberHelpers} from 'src/app/helpers/number.helpers';
+import {TimeViewModel} from '../../view-models/core/general-types';
+import {CulturedDateService} from '../../services/core/cultured-date.service';
+import {MatMenu} from '@angular/material';
+import {GroupService} from '../../services/groups/group.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {DeviceDetectorService} from 'ngx-device-detector';
 
@@ -153,47 +146,8 @@ export class TaskModalComponent
 
     if (this.projectId) {
       this.project = this.projectService.projects.find(p => p.id === this.projectId);
-      this.workPackage = this.project.workPackages.find(w => w.id === this.packageId);
     }
-
-    this.groupMembers = this.project.members
-      .filter(i => i.isGroup)
-      .filter(f => {
-        return this.workPackage.members.find(d => d.recordId === f.recordId);
-      });
-    this.individualMembers = this.project.members.filter(i => !i.isGroup);
-
-    this.groupMembers.forEach(g => {
-      const grp = this.groupService.groups.find(i => i.id === g.recordId);
-      if (grp) {
-        grp.members.forEach(m => {
-          const found = this.individualMembers.find(
-            d => d.recordId === m.userId,
-          );
-          if (found) {
-            return;
-          }
-          this.individualMembers.push({
-            recordId: m.userId,
-            isGroup: false,
-            id: m.id,
-            access: m.access,
-            updatedAt: m.updatedAt,
-            selected: false,
-            projectId: this.project.id,
-            deleting: false,
-            createdAt: m.createdAt,
-            waiting: false,
-            member: undefined,
-          });
-        });
-      }
-    });
-
     this.bind();
-    if (this.model) {
-      return;
-    }
     this.fetch();
   }
 
@@ -409,6 +363,59 @@ export class TaskModalComponent
 
   async fetch() {
     this.waiting = true;
+
+    if (!this.project) {
+      const archivedProject = await this.projectService.fetchArchived(this.projectId);
+      if (archivedProject.status !== OperationResultStatus.Success) {
+        // TODO: can not find archived project
+        return this.close();
+      }
+      this.projectService.projects.push(archivedProject.data);
+      this.project = archivedProject.data;
+    }
+
+    if (!this.workPackage) {
+      this.workPackage = this.project.workPackages.find(w => w.id === this.packageId);
+    }
+
+    this.groupMembers = this.project.members
+      .filter(i => i.isGroup)
+      .filter(f => {
+        return this.workPackage.members.find(d => d.recordId === f.recordId);
+      });
+    this.individualMembers = this.project.members.filter(i => !i.isGroup);
+
+    this.groupMembers.forEach(g => {
+      const grp = this.groupService.groups.find(i => i.id === g.recordId);
+      if (grp) {
+        grp.members.forEach(m => {
+          const found = this.individualMembers.find(
+            d => d.recordId === m.userId,
+          );
+          if (found) {
+            return;
+          }
+          this.individualMembers.push({
+            recordId: m.userId,
+            isGroup: false,
+            id: m.id,
+            access: m.access,
+            updatedAt: m.updatedAt,
+            selected: false,
+            projectId: this.project.id,
+            deleting: false,
+            createdAt: m.createdAt,
+            waiting: false,
+            member: undefined,
+          });
+        });
+      }
+    });
+
+    if (this.model) {
+      return;
+    }
+
     const op = await this.taskService.fetch(this.id);
     if (op.status !== OperationResultStatus.Success) {
       this.close();

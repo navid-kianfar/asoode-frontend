@@ -196,11 +196,20 @@ export class UpgradeWizardComponent implements OnInit {
         this.mode = ViewMode.Init;
         break;
       case ViewMode.Factor:
-        if (this.order.type !== OrderType.Renew) {
-          this.mode = ViewMode.Choose;
-          return;
+
+        switch (this.order.type) {
+          case OrderType.Renew:
+            this.mode = ViewMode.Init;
+            break;
+          case OrderType.Patch:
+          case OrderType.Change:
+            if (((this.selectedPlan || this.basedOn).type !== PlanType.Custom)) {
+              this.mode = ViewMode.Init;
+              return;
+            }
+            this.mode = ViewMode.Choose;
+            break;
         }
-        this.mode = ViewMode.Init;
         break;
     }
   }
@@ -330,9 +339,9 @@ export class UpgradeWizardComponent implements OnInit {
         // calc = true;
         break;
       case OrderType.Change:
-        // if ((this.selectedPlan || this.basedOn).type !== PlanType.Custom) {
-        //   this.order.calculatedPrice = (this.selectedPlan || this.basedOn).planCost;
-        // } else { calc = true; }
+        if ((this.selectedPlan || this.basedOn).type !== PlanType.Custom) {
+          this.order.calculatedPrice = (this.selectedPlan || this.basedOn).planCost;
+        } else { sum = true; }
         break;
     }
 

@@ -134,7 +134,7 @@ export class ProfileComponent implements OnInit {
           this.formService.createButton({
             config: {
               label: 'PHONE_NUMBER',
-              field: 'phoneNumber',
+              field: 'phone',
               cssClass: 'change-phone',
             },
             params: {
@@ -239,6 +239,7 @@ export class ProfileComponent implements OnInit {
     this.formService.setModel(this.form, this.identityService.profile);
     if (
       this.identityService.profile.email &&
+      this.identityService.profile.email.indexOf('@asoode.user') === -1 &&
       !this.identityService.profile.emailConfirmed
     ) {
       this.formService.setErrors(this.form, 'email', ['PLEASE_CHECK_EMAIL']);

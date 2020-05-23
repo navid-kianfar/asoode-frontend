@@ -27,7 +27,7 @@
             <button
               [disabled]="device.toggling || device.editing || device.deleting"
               (click)="prepareToggle(device)"
-              *ngIf="device.enabled"
+              *ngIf="!device.enabled"
               mat-stroked-button
             >
               <i *ngIf="device.toggling" class="icon-spinner2 icon-spin"></i>
@@ -37,7 +37,7 @@
             <button
               [disabled]="device.toggling || device.editing || device.deleting"
               (click)="prepareToggle(device)"
-              *ngIf="!device.enabled"
+              *ngIf="device.enabled"
               mat-flat-button
               color="accent"
             >

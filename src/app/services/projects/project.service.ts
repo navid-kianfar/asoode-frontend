@@ -39,6 +39,12 @@ export class ProjectService {
     return op;
   }
 
+  async fetchArchived(id): Promise<OperationResult<ProjectViewModel>> {
+    return await this.httpService.post<ProjectViewModel>(
+      '/projects/archived/' + id,
+    );
+  }
+
   async create(model: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>('/projects/create', model);
   }

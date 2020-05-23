@@ -51,6 +51,8 @@ export class DashboardActivityComponent implements OnInit, OnChanges {
     this.modalService
       .show(TaskModalComponent, {
         id: log.id,
+        projectId: log.projectId,
+        packageId: log.packageId,
       })
       .subscribe(() => {});
   }
