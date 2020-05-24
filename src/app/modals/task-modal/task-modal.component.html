@@ -586,7 +586,8 @@
                       *ngFor="let attachment of model.attachments"
                     >
                       <div class="preview">
-                        <i [class]="filesService.icon(attachment.path)"></i>
+                        <img *ngIf="attachment.thumbnailPath" [src]="attachment.thumbnailPath" alt="">
+                        <i *ngIf="!attachment.thumbnailPath" [class]="filesService.icon(attachment.path)"></i>
                       </div>
                       <div class="info">
                         <h4 *ngIf="!attachment.renaming">

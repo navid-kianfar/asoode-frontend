@@ -295,6 +295,7 @@ export interface WorkPackageTaskAttachmentViewModel extends BaseViewModel {
   description: string;
   id: string;
   path: string;
+  thumbnailPath: string;
   title: string;
   type: WorkPackageTaskAttachmentType;
   createdAt: Date;
