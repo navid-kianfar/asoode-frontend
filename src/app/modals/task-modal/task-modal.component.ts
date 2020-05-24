@@ -962,6 +962,11 @@ export class TaskModalComponent
     this.taskService.reposition(id, { order: event.currentIndex + 1 });
   }
 
+  isAdminOrHasPermission(permission: boolean) {
+    return (this.permission === AccessType.Owner || this.permission === AccessType.Admin) ||
+      (this.permission !== AccessType.Visitor && permission);
+  }
+
   onAudioEnded($event: any, attachment: WorkPackageTaskAttachmentViewModel) {
 
   }

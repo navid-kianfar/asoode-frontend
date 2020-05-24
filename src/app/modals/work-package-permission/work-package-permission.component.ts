@@ -42,7 +42,7 @@ export class WorkPackagePermissionComponent
       permissionEditList: this.workPackage.permissionEditList,
       permissionCreateList: this.workPackage.permissionCreateList
     });
-    this.waiting = true;
+    this.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error;
       return;

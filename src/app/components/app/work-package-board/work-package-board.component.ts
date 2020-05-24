@@ -1,26 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageListViewModel,
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-import { WorkPackageService } from '../../../services/projects/work-package.service';
-import {
-  AccessType,
-  WorkPackageTaskVoteNecessity,
-} from '../../../library/app/enums';
-import { OperationResultStatus } from '../../../library/core/enums';
-import { TaskService } from '../../../services/projects/task.service';
-import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
-import { ModalService } from '../../../services/core/modal.service';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import { CultureService } from '../../../services/core/culture.service';
+import {CdkDragDrop, moveItemInArray, transferArrayItem,} from '@angular/cdk/drag-drop';
+import {WorkPackageService} from '../../../services/projects/work-package.service';
+import {AccessType, WorkPackageTaskVoteNecessity,} from '../../../library/app/enums';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {TaskService} from '../../../services/projects/task.service';
+import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
+import {ModalService} from '../../../services/core/modal.service';
+import {DeviceDetectorService} from 'ngx-device-detector';
+import {CultureService} from '../../../services/core/culture.service';
 import {PromptComponent} from '../../../modals/prompt/prompt.component';
 import {PromptModalParameters} from '../../../view-models/core/modal-types';
 import {FormService} from '../../../services/core/form.service';
@@ -292,5 +285,10 @@ export class WorkPackageBoardComponent implements OnInit {
         },
       })
       .subscribe(() => {});
+  }
+
+  isAdminOrHasPermission(permission: boolean) {
+    return (this.permission === AccessType.Owner || this.permission === AccessType.Admin) ||
+      (this.permission !== AccessType.Visitor && permission);
   }
 }

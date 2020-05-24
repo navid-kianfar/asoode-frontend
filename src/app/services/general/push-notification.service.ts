@@ -458,6 +458,19 @@ export class PushNotificationService {
             find2.description = notification.data.description;
             find2.order = notification.data.order;
 
+            find2.permissionComment = notification.data.permissionComment;
+            find2.permissionEditAttachment = notification.data.permissionEditAttachment;
+            find2.permissionCreateAttachment = notification.data.permissionCreateAttachment;
+            find2.permissionAssignMembers = notification.data.permissionAssignMembers;
+            find2.permissionAssignLabels = notification.data.permissionAssignLabels;
+            find2.permissionChangeTaskState = notification.data.permissionChangeTaskState;
+            find2.permissionEditTask = notification.data.permissionEditTask;
+            find2.permissionArchiveTask = notification.data.permissionArchiveTask;
+            find2.permissionCreateTask = notification.data.permissionCreateTask;
+            find2.permissionArchiveList = notification.data.permissionArchiveList;
+            find2.permissionEditList = notification.data.permissionEditList;
+            find2.permissionCreateList = notification.data.permissionCreateList;
+
             if (oldOrder !== notification.data.order) {
               find3 = find1.workPackages
                 .filter(w => w.subProjectId === notification.data.subProjectId)

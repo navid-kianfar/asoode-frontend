@@ -16,7 +16,7 @@
         noDrag ||
         list.editing ||
         list.adding ||
-        permission === AccessType.Visitor
+        !isAdminOrHasPermission(model.permissionEditList)
       "
       cdkDrag
     >
@@ -27,15 +27,13 @@
             &nbsp;({{ list.tasks.length }})
           </ng-container> </span
         >&nbsp;
-        <i
-          *ngIf="permission !== AccessType.Visitor"
+        <i *ngIf="isAdminOrHasPermission(model.permissionCreateTask)"
           (click)="prepareNewTask(list)"
           class="icon-plus2"
         ></i
         >&nbsp;
-        <i
+        <i *ngIf="isAdminOrHasPermission(model.permissionEditList)"
           [matMenuTriggerFor]="menu"
-          *ngIf="permission !== AccessType.Visitor"
           class="icon-menu"
         ></i>
       </div>
@@ -102,7 +100,7 @@
           *ngFor="let task of list.tasks"
           [cdkDragStartDelay]="dragDelay"
           [cdkDragData]="task"
-          [cdkDragDisabled]="embed || noDrag"
+          [cdkDragDisabled]="embed || noDrag || !isAdminOrHasPermission(model.permissionEditTask)"
           cdkDrag
           class="list-handler"
         >
@@ -116,13 +114,16 @@
         </div>
       </div>
       <mat-menu #menu="matMenu">
-        <button class="action-btn" (click)="prepareNewTask(list)" mat-menu-item>
+        <button *ngIf="isAdminOrHasPermission(model.permissionCreateTask)"
+                class="action-btn"
+                (click)="prepareNewTask(list)" mat-menu-item>
           <span class="cnt">
             <i class="icon-task"></i>
             <span>{{ 'NEW_TASK' | translate }}</span>
           </span>
         </button>
-        <button [disabled]="list.waiting"
+        <button *ngIf="isAdminOrHasPermission(model.permissionEditList)"
+                [disabled]="list.waiting"
           class="action-btn"
           (click)="prepareRenameTask(list)"
           mat-menu-item
@@ -156,19 +157,22 @@
         <!--            <span>{{ 'ACCESS_LEVEL' | translate }}</span>-->
         <!--          </span>-->
         <!--        </button>-->
-        <button [disabled]="list.waiting" class="action-btn" (click)="cloneList(list)" mat-menu-item>
+        <button *ngIf="isAdminOrHasPermission(model.permissionCreateList)"
+                [disabled]="list.waiting" class="action-btn" (click)="cloneList(list)" mat-menu-item>
           <span class="cnt">
             <i class="ikon-copy3"></i>
             <span>{{ 'CLONE_LIST' | translate }}</span>
           </span>
         </button>
-        <button [disabled]="list.waiting" class="action-btn" (click)="archiveListTasks(list)" mat-menu-item>
+        <button *ngIf="isAdminOrHasPermission(model.permissionArchiveList && model.permissionArchiveTask)"
+                [disabled]="list.waiting" class="action-btn" (click)="archiveListTasks(list)" mat-menu-item>
           <span class="cnt">
             <i class="icon-archive x2"></i>
             <span>{{ 'ARCHIVE_TASKS' | translate }}</span>
           </span>
         </button>
-        <button [disabled]="list.waiting" class="action-btn" (click)="archiveList(list)" mat-menu-item>
+        <button *ngIf="isAdminOrHasPermission(model.permissionArchiveList)"
+                [disabled]="list.waiting" class="action-btn" (click)="archiveList(list)" mat-menu-item>
           <span class="cnt">
             <i class="icon-archive x2"></i>
             <span>{{ 'ARCHIVE_LIST' | translate }}</span>
@@ -176,7 +180,7 @@
         </button>
       </mat-menu>
     </div>
-    <div class="board-list add-new">
+    <div *ngIf="isAdminOrHasPermission(model.permissionCreateList)" class="board-list add-new">
       <div *ngIf="!expanded" (click)="prepareNewList()" class="header">
         <i class="icon-plus2"></i>&nbsp;
         <span>{{ 'CREATE_NEW_LIST' | translate }}</span>

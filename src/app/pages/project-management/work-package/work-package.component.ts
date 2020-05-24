@@ -496,6 +496,18 @@ export class WorkPackageComponent implements OnInit {
             this.workPackage.title = notification.data.title;
             this.workPackage.description = notification.data.description;
             this.workPackage.order = notification.data.order;
+            this.workPackage.permissionComment = notification.data.permissionComment;
+            this.workPackage.permissionEditAttachment = notification.data.permissionEditAttachment;
+            this.workPackage.permissionCreateAttachment = notification.data.permissionCreateAttachment;
+            this.workPackage.permissionAssignMembers = notification.data.permissionAssignMembers;
+            this.workPackage.permissionAssignLabels = notification.data.permissionAssignLabels;
+            this.workPackage.permissionChangeTaskState = notification.data.permissionChangeTaskState;
+            this.workPackage.permissionEditTask = notification.data.permissionEditTask;
+            this.workPackage.permissionArchiveTask = notification.data.permissionArchiveTask;
+            this.workPackage.permissionCreateTask = notification.data.permissionCreateTask;
+            this.workPackage.permissionArchiveList = notification.data.permissionArchiveList;
+            this.workPackage.permissionEditList = notification.data.permissionEditList;
+            this.workPackage.permissionCreateList = notification.data.permissionCreateList;
           }
           break;
 

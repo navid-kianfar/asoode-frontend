@@ -31,7 +31,7 @@
           <button
             [disabled]="togglingArchive"
             (click)="toggleArchive()"
-            *ngIf="permission !== AccessType.Visitor"
+            *ngIf="isAdminOrHasPermission(workPackage.permissionArchiveTask)"
             mat-mini-fab
           >
             <span class="btn-inner">
@@ -61,7 +61,7 @@
           <div class="box">
             <button
               class="status-wrapper no-select"
-              [disabled]="changingState || permission === AccessType.Visitor"
+              [disabled]="changingState || !isAdminOrHasPermission(workPackage.permissionChangeTaskState)"
               [matMenuTriggerFor]="statusMenu"
             >
               <span class="status-container">
@@ -83,7 +83,7 @@
             <div class="title">
               <ng-container *ngIf="!changingTitle">
                 <i
-                  *ngIf="permission !== AccessType.Visitor"
+                  *ngIf="isAdminOrHasPermission(workPackage.permissionEditTask)"
                   (click)="prepareChangeTitle()"
                   class="icon-pencil"
                 ></i>
@@ -113,7 +113,7 @@
             <div class="description">
               <ng-container *ngIf="!changingDescription">
                 <i
-                  *ngIf="permission !== AccessType.Visitor"
+                  *ngIf="isAdminOrHasPermission(workPackage.permissionEditTask)"
                   (click)="prepareChangeDescription()"
                   class="icon-pencil"
                 ></i>
@@ -147,7 +147,8 @@
           <div class="box">
             <h3>{{ 'COMMENTS' | translate }}</h3>
             <div class="comment-container">
-              <div *ngIf="permission !== AccessType.Visitor" class="send">
+              <div
+                *ngIf="isAdminOrHasPermission(workPackage.permissionComment)" class="send">
                 <div class="avatar">
                   <app-member-info [small]="true" [me]="true"></app-member-info>
                 </div>
@@ -251,14 +252,16 @@
                     <mat-menu #addDetailMenu="matMenu">
                       <button
                         *ngIf="!model.parentId"
-                        [disabled]="showSubTasks || model.subTasks?.length > 0"
+                        [disabled]="showSubTasks ||
+                        model.subTasks?.length > 0 ||
+                        !isAdminOrHasPermission(workPackage.permissionCreateTask)"
                         (click)="showSubTasks = !showSubTasks"
                         mat-menu-item
                       >
                         <i class="icon-tree7"></i>
                         {{ 'TASK_SUB_TASK' | translate }}
                       </button>
-                      <button
+                      <button *ngIf="permission !== AccessType.Visitor"
                         [disabled]="
                           showVotes || model.upVotes > 0 || model.downVotes > 0
                         "
@@ -268,7 +271,7 @@
                         <i class="icon-thumbs-up2"></i>
                         {{ 'TASK_VOTE' | translate }}
                       </button>
-                      <button
+                      <button *ngIf="permission !== AccessType.Visitor"
                         [disabled]="model.geoLocation?.length > 0"
                         (click)="prepareMap()"
                         mat-menu-item
@@ -284,7 +287,7 @@
                     <i class="icon-price-tags4"></i>
                     <span>{{ 'TASK_LABELS' | translate }}</span>
                     <i
-                      *ngIf="permission !== AccessType.Visitor"
+                      *ngIf="isAdminOrHasPermission(workPackage.permissionAssignLabels)"
                       [matMenuTriggerFor]="labelMenu"
                       class="add icon-plus2"
                     ></i>
@@ -368,7 +371,7 @@
                     <i class="icon-users2"></i>
                     <span>{{ 'TASK_MEMBERS' | translate }}</span>
                     <i
-                      *ngIf="permission !== AccessType.Visitor"
+                      *ngIf="isAdminOrHasPermission(workPackage.permissionAssignMembers)"
                       [matMenuTriggerFor]="memberMenu"
                       class="add icon-plus2"
                     ></i>
@@ -547,7 +550,7 @@
                     <i class="icon-attachment"></i>
                     <span>{{ 'TASK_ATTACHMENTS' | translate }}</span>
                     <i
-                      *ngIf="permission !== AccessType.Visitor"
+                      *ngIf="isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
                       [matMenuTriggerFor]="attachmentMenu"
                       class="add icon-plus2"
                     ></i>
@@ -627,12 +630,12 @@
                               (click)="downloadAttachment(attachment)"
                             ></i>
                             <i
-                              *ngIf="permission !== AccessType.Visitor"
+                              *ngIf="isAdminOrHasPermission(workPackage.permissionEditAttachment)"
                               class="icon-pencil"
                               (click)="editAttachment(attachment)"
                             ></i>
                             <i
-                              *ngIf="permission !== AccessType.Visitor"
+                              *ngIf="isAdminOrHasPermission(workPackage.permissionEditAttachment)"
                               class="icon-delete"
                               (click)="deleteAttachment(attachment)"
                             ></i>
@@ -706,7 +709,8 @@
                   <div class="box-header">
                     <i class="icon-location"></i>
                     <span>{{ 'TASK_GEO_LOCATION' | translate }}</span>
-                    <div class="map-actions">
+                    <div class="map-actions"
+                         *ngIf="isAdminOrHasPermission(workPackage.permissionEditTask)">
                       <i (click)="prepareMap()" class="icon-pencil"></i>
                       <i (click)="removeLocation()" class="icon-delete"></i>
                     </div>

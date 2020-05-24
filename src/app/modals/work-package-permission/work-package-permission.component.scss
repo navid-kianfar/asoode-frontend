@@ -1,4 +1,9 @@
 .modal-body {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+
+  ::ng-deep .mat-checkbox {
+    display: flex;
+    width: 200px;
+  }
 }
