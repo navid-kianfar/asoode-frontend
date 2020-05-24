@@ -233,4 +233,10 @@ export class WorkPackageService {
       `/work-packages/lists/${id}/archive`,
     );
   }
+
+  async changePermissions(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/permissions`, model
+    );
+  }
 }

@@ -1,0 +1,40 @@
+<div class="modal-content package-permission-modal {{ cssClass }}">
+  <div class="modal-header">
+    <h4>{{ title | translate: true:'MEMBERS_PERMISSIONS' }}</h4>
+    <button (click)="close()" class="close">
+      <i class="icon-cross"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-checkbox [(model)]="workPackage.permissionCreateList" [label]="'CAN_CREATE_LIST' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionEditList" [label]="'CAN_EDIT_LIST' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionArchiveList" [label]="'CAN_ARCHIVE_LIST' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionCreateTask" [label]="'CAN_CREATE_TASK' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionArchiveTask" [label]="'CAN_ARCHIVE_TASK' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionEditTask" [label]="'CAN_EDIT_TASK' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionChangeTaskState" [label]="'CAN_EDIT_TASK_STATE' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionAssignLabels" [label]="'CAN_EDIT_TASK_LABEL' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionAssignMembers" [label]="'CAN_EDIT_TASK_MEMBER' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionCreateAttachment" [label]="'CAN_CREATE_TASK_ATTACHMENT' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionEditAttachment" [label]="'CAN_EDIT_TASK_ATTACHMENT' | translate"></app-checkbox>
+    <app-checkbox [(model)]="workPackage.permissionComment" [label]="'CAN_COMMENT_TASK' | translate"></app-checkbox>
+  </div>
+  <div class="modal-footer">
+    <!--    <button (click)="share()" class="btn btn-light mr-auto">-->
+    <!--      {{ 'SHARE' | translate }}-->
+    <!--    </button> -->
+    <button mat-flat-button class="btn btn-light" (click)="close()">
+      {{ 'CANCEL' | translate }}
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="waiting"
+      class="btn btn-primary"
+      (click)="save()"
+    >
+      <i class="icon-spin icon-spinner2" *ngIf="waiting"></i>
+      {{ 'SAVE_CHANGES' | translate }}</button
+    >&nbsp;
+  </div>
+</div>

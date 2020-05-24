@@ -175,6 +175,7 @@ import { KartablComponent } from './components/app/kartabl/kartabl.component';
 import { DurationPickerComponent } from './components/app/duration-picker/duration-picker.component';
 import {NgxAudioPlayerModule} from 'ngx-audio-player';
 import {MatVideoModule} from 'mat-video';
+import { WorkPackagePermissionComponent } from './modals/work-package-permission/work-package-permission.component';
 
 @NgModule({
   declarations: [
@@ -308,8 +309,10 @@ import {MatVideoModule} from 'mat-video';
     TimeSpentComponent,
     KartablComponent,
     DurationPickerComponent,
+    WorkPackagePermissionComponent,
   ],
   entryComponents: [
+    WorkPackagePermissionComponent,
     UpgradeWorkPackageComponent,
     DocumentModalComponent,
     MapModalComponent,

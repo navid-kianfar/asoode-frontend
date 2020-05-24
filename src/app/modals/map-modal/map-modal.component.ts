@@ -13,10 +13,10 @@ import {
 export class MapModalComponent
   extends SimpleModalComponent<MapModalParameters, MapMarker[]>
   implements OnInit {
-  waiting: boolean;
   center: MapMarker;
   markers: MapMarker[];
   mapLocation: string;
+  waiting: boolean;
   cssClass: string;
   title: string;
   removeTitle: string;

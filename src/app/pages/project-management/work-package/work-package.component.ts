@@ -36,6 +36,7 @@ import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { NotificationService } from '../../../services/core/notification.service';
 import { UpgradeWorkPackageComponent } from '../../../modals/upgrade-work-package/upgrade-work-package.component';
 import {IdentityService} from '../../../services/auth/identity.service';
+import {WorkPackagePermissionComponent} from '../../../modals/work-package-permission/work-package-permission.component';
 
 @Component({
   selector: 'app-work-package',
@@ -964,6 +965,12 @@ export class WorkPackageComponent implements OnInit {
     this.modalService
       .show(UpgradeWorkPackageComponent, { workPackage: this.workPackage })
       .subscribe(() => {});
+  }
+
+  openPermissions() {
+    this.modalService.show(WorkPackagePermissionComponent, {
+      workPackage: {...this.workPackage}
+    }).subscribe(() => {});
   }
 }
 

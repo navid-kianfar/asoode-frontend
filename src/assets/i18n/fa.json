@@ -673,5 +673,18 @@
   "PLANS_CUSTOM_TITLE": "دلخواه",
   "PLANS_CUSTOM_DESCRIPTION": "مناسب برای مجموعه هایی که نیازشان متغیر است",
   "EXPIRE_AT": "تاریخ انقضا",
-  "DARK_MODE": "استفاده از تم تیره"
+  "DARK_MODE": "استفاده از تم تیره",
+  "MEMBERS_PERMISSIONS": "سطح دسترسی ویراستار",
+  "CAN_CREATE_LIST": "ایجاد لیست",
+  "CAN_EDIT_LIST": "ویرایش لیست",
+  "CAN_CREATE_TASK": "ایجاد کارت",
+  "CAN_EDIT_TASK": "ویرایش کارت",
+  "CAN_EDIT_TASK_STATE": "تغییر وضعیت کارت",
+  "CAN_EDIT_TASK_LABEL": "اتصال برچسب",
+  "CAN_EDIT_TASK_MEMBER": "اتصال اعضا",
+  "CAN_CREATE_TASK_ATTACHMENT": "افزودن پیوست",
+  "CAN_EDIT_TASK_ATTACHMENT": "ویرایش پیوست",
+  "CAN_COMMENT_TASK": "درج نظر",
+  "CAN_ARCHIVE_LIST": "آرشیو لیست",
+  "CAN_ARCHIVE_TASK": "آرشیو کارت"
 }

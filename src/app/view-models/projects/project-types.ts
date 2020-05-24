@@ -112,6 +112,20 @@ export interface WorkPackageUserSetting extends BaseViewModel {
   projectId: string;
 }
 export interface WorkPackageViewModel extends BaseViewModel {
+  permissionComment: boolean;
+  permissionEditAttachment: boolean;
+  permissionCreateAttachment: boolean;
+  permissionAssignMembers: boolean;
+  permissionAssignLabels: boolean;
+  permissionChangeTaskState: boolean;
+  permissionEditTask: boolean;
+  permissionArchiveTask: boolean;
+  permissionCreateTask: boolean;
+  permissionArchiveList: boolean;
+  permissionEditList: boolean;
+  permissionCreateList: boolean;
+
+
   order: number;
   userSetting: WorkPackageUserSetting;
   pending: PendingInvitationViewModel[];
