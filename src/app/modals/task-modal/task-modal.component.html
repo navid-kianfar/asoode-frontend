@@ -581,84 +581,107 @@
                         <div class="actions"></div>
                       </div>
                     </ng-container>
-                    <div
-                      class="attachment-item"
-                      *ngFor="let attachment of model.attachments"
-                    >
-                      <div class="preview">
-                        <img *ngIf="attachment.thumbnailPath" [src]="attachment.thumbnailPath" alt="">
-                        <i *ngIf="!attachment.thumbnailPath" [class]="filesService.icon(attachment.path)"></i>
-                      </div>
-                      <div class="info">
-                        <h4 *ngIf="!attachment.renaming">
-                          {{ attachment.title }}
-                        </h4>
-                        <div *ngIf="attachment.renaming">
-                          <input
-                            [readOnly]="attachment.waiting"
-                            type="text"
-                            [(ngModel)]="attachment.tempName"
-                          />
-                          <i
-                            (click)="renameAttachment(attachment)"
-                            *ngIf="!attachment.waiting"
-                            class="rename icon-checkmark3"
-                          ></i>
-                          <i
-                            *ngIf="attachment.waiting"
-                            class="rename icon-spinner2 icon-spin"
-                          ></i>
+
+                    <ng-container *ngFor="let attachment of model.attachments">
+                      <div class="attachment-item">
+                        <div class="preview">
+                          <img *ngIf="attachment.thumbnailPath" [src]="attachment.thumbnailPath" alt="">
+                          <i *ngIf="!attachment.thumbnailPath" [class]="filesService.icon(attachment.path)"></i>
                         </div>
-                        <h5>{{ attachment.createdAt | culturedDate: true }}</h5>
-                        <h5>
-                          <span>{{ 'UPLOADED_BY' | translate }}&nbsp;</span>
-                          {{
-                            usersService.findUser(attachment.userId)?.fullName
-                          }}
-                        </h5>
-                      </div>
-                      <div class="actions">
-                        <div class="btns">
-                          <i
-                            class="icon-new-window"
-                            (click)="openAttachment(attachment)"
-                          ></i>
-                          <i
-                            class="icon-download41"
-                            (click)="downloadAttachment(attachment)"
-                          ></i>
-                          <i
-                            *ngIf="permission !== AccessType.Visitor"
-                            class="icon-pencil"
-                            (click)="editAttachment(attachment)"
-                          ></i>
-                          <i
-                            *ngIf="permission !== AccessType.Visitor"
-                            class="icon-delete"
-                            (click)="deleteAttachment(attachment)"
-                          ></i>
-                        </div>
-                        <div
-                          *ngIf="permission !== AccessType.Visitor"
-                          class="cover"
-                        >
-                          <a
-                            (click)="coverToggle(attachment)"
-                            href="javascript:void(0)"
-                          >
-                            <ng-container *ngIf="attachment.covering">
-                              <i class="icon-spin icon-spinner2"></i>&nbsp;
-                            </ng-container>
+                        <div class="info">
+                          <h4 *ngIf="!attachment.renaming">
+                            {{ attachment.title }}
+                          </h4>
+                          <div *ngIf="attachment.renaming">
+                            <input
+                              [readOnly]="attachment.waiting"
+                              type="text"
+                              [(ngModel)]="attachment.tempName"
+                            />
+                            <i
+                              (click)="renameAttachment(attachment)"
+                              *ngIf="!attachment.waiting"
+                              class="rename icon-checkmark3"
+                            ></i>
+                            <i
+                              *ngIf="attachment.waiting"
+                              class="rename icon-spinner2 icon-spin"
+                            ></i>
+                          </div>
+                          <h5>{{ attachment.createdAt | culturedDate: true }}</h5>
+                          <h5>
+                            <span>{{ 'UPLOADED_BY' | translate }}&nbsp;</span>
                             {{
-                              (attachment.isCover
-                                ? 'REMOVE_COVER'
-                                : 'MAKE_COVER'
-                              ) | translate
+                            usersService.findUser(attachment.userId)?.fullName
                             }}
-                          </a>
+                          </h5>
+                        </div>
+                        <div class="actions">
+                          <div class="btns">
+                            <i
+                              class="icon-new-window"
+                              (click)="openAttachment(attachment)"
+                            ></i>
+                            <i
+                              class="icon-download41"
+                              (click)="downloadAttachment(attachment)"
+                            ></i>
+                            <i
+                              *ngIf="permission !== AccessType.Visitor"
+                              class="icon-pencil"
+                              (click)="editAttachment(attachment)"
+                            ></i>
+                            <i
+                              *ngIf="permission !== AccessType.Visitor"
+                              class="icon-delete"
+                              (click)="deleteAttachment(attachment)"
+                            ></i>
+                          </div>
+                          <div
+                            *ngIf="filesService.isImage(attachment.path) && permission !== AccessType.Visitor"
+                            class="cover"
+                          >
+                            <a
+                              (click)="coverToggle(attachment)"
+                              href="javascript:void(0)"
+                            >
+                              <ng-container *ngIf="attachment.covering">
+                                <i class="icon-spin icon-spinner2"></i>&nbsp;
+                              </ng-container>
+                              {{
+                              (attachment.isCover
+                                  ? 'REMOVE_COVER'
+                                  : 'MAKE_COVER'
+                              ) | translate
+                              }}
+                            </a>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                      <div class="audio-container" *ngIf="filesService.isAudio(attachment.path)">
+                        <mat-basic-audio-player [audioUrl]="attachment.path"
+                                                [title]="attachment.title"
+                                                (ended)="onAudioEnded($event, attachment)"
+                                                [autoPlay]="false"
+                                                [displayTitle]="false"
+                                                [displayVolumeControls]="true"></mat-basic-audio-player>
+                        <br>
+                      </div>
+                      <div class="video-container ltr" *ngIf="filesService.isVideo(attachment.path)">
+                        <mat-video [title]="attachment.title"
+                                   [autoplay]="false"
+                                   [preload]="false"
+                                   [fullscreen]="false"
+                                   [download]="false"
+                                   color="primary"
+                                   spinner="spin"
+                                   [poster]="attachment.thumbnailPath"
+                                   [src]="attachment.path"></mat-video>
+                        <br>
+                      </div>
+                    </ng-container>
+
+
                   </div>
                   <input
                     #filePicker

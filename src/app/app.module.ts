@@ -19,7 +19,7 @@ import { BarChartModule } from '@swimlane/ngx-charts';
 import {
   MatAutocompleteModule,
   MatCheckboxModule,
-  MatFormFieldModule,
+  MatFormFieldModule, MatIconModule,
   MatProgressBarModule,
   MatRadioModule,
   MatRippleModule,
@@ -173,6 +173,8 @@ import { CalendarMonthComponent } from './components/app/calendar-month/calendar
 import { TimeSpentComponent } from './components/app/time-spent/time-spent.component';
 import { KartablComponent } from './components/app/kartabl/kartabl.component';
 import { DurationPickerComponent } from './components/app/duration-picker/duration-picker.component';
+import {NgxAudioPlayerModule} from 'ngx-audio-player';
+import {MatVideoModule} from 'mat-video';
 
 @NgModule({
   declarations: [
@@ -340,7 +342,7 @@ import { DurationPickerComponent } from './components/app/duration-picker/durati
     DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
-      { container: 'modal-container' },
+      {container: 'modal-container'},
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -350,7 +352,7 @@ import { DurationPickerComponent } from './components/app/duration-picker/durati
         bodyClass: 'modal-open',
       },
     ),
-    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    NgxPopperModule.forRoot({placement: 'bottom'}),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,
@@ -370,6 +372,9 @@ import { DurationPickerComponent } from './components/app/duration-picker/durati
       enabled: environment.production,
     }),
     MatSliderModule,
+    MatIconModule,
+    NgxAudioPlayerModule,
+    MatVideoModule,
   ],
   providers: [
     // {

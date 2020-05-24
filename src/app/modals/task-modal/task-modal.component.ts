@@ -961,6 +961,10 @@ export class TaskModalComponent
     event.item.data.order = event.currentIndex + 1;
     this.taskService.reposition(id, { order: event.currentIndex + 1 });
   }
+
+  onAudioEnded($event: any, attachment: WorkPackageTaskAttachmentViewModel) {
+
+  }
 }
 export enum DateMode {
   Due = 1,

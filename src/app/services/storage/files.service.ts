@@ -16,6 +16,8 @@ export class FilesService {
   uploading: UploadViewModel[] = [];
   attaching: UploadViewModel[] = [];
   private readonly imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
+  private readonly audioExtensions = ['.mp3', '.wave', '.wav', '.ogg'];
+  private readonly videoExtensions = ['.mp4'];
 
   getFileExtension(filename: string): string {
     const ext = /^.+\.([^.]+)$/.exec(filename);
@@ -31,6 +33,16 @@ export class FilesService {
     const ext = this.getFileExtension(name);
     return this.imageExtensions.indexOf(ext) !== -1;
   }
+  isAudio(file: string | File) {
+    const name = file instanceof File ? file.name : file;
+    const ext = this.getFileExtension(name);
+    return this.audioExtensions.indexOf(ext) !== -1;
+  }
+  isVideo(file: string | File) {
+    const name = file instanceof File ? file.name : file;
+    const ext = this.getFileExtension(name);
+    return this.videoExtensions.indexOf(ext) !== -1;
+  }
 
   icon(input: string): string {
     switch (this.getFileExtension(input)) {
@@ -42,12 +54,13 @@ export class FilesService {
         return 'icon-image2';
       case '.mp3':
       case '.wave':
+      case '.wav':
+      case '.ogg':
         return 'icon-play4';
       case '.mp4':
       case '.mkv':
       case '.flv':
       case '.web':
-      case '.ogg':
         return 'icon-play';
       case '.zip':
       case '.rar':
@@ -194,4 +207,6 @@ export class FilesService {
       });
     });
   }
+
+
 }
