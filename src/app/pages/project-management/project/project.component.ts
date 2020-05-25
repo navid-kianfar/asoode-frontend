@@ -73,6 +73,14 @@ export class ProjectComponent implements OnInit {
                   placeHolder: 'DESCRIPTION',
                 },
               }),
+              this.formService.createDropDown({
+                config: { field: 'template', label: 'TEMPLATE' },
+                params: {
+                  model: this.project.template,
+                  items: [],
+                  enum: 'ProjectTemplate'
+                },
+              }),
             ],
           },
         ],

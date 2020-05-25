@@ -77,26 +77,19 @@
       <ng-container *ngIf="complex">
         <div class="templates">
           <div class="titles">
-            <button (click)="template = undefined" [class.selected]="!template">
-              <i class="icon-blocked"></i>
-              {{ 'NO_TEMPLATE' | translate }}
-            </button>
             <button
-              *ngFor="let t of projectService.templates"
-              (click)="template = t"
-              [class.selected]="template === t"
+              *ngFor="let t of projectTemplates"
+              (click)="projectTemplate = t"
+              [class.selected]="projectTemplate === t"
             >
               <i [class]="t.icon"></i>
-              {{ t.title }}
+              {{ t.text | translate }}
             </button>
           </div>
         </div>
-        <div *ngIf="!template" class="preview">
-          <h4>{{ 'NO_TEMPLATE_DESCRIPTION' | translate }}</h4>
-        </div>
-        <div *ngIf="template" class="preview">
-          <h4>{{ template.description }}</h4>
-          <img [src]="template.image" alt="" />
+        <div class="preview">
+          <h4>{{ projectTemplate.description | translate }}</h4>
+          <img *ngIf="projectTemplate.payload" [src]="projectTemplate.payload" alt="" />
         </div>
       </ng-container>
 

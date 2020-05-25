@@ -2,7 +2,7 @@ import { BaseViewModel } from '../core/general-types';
 import {
   AccessType,
   ActivityType,
-  BoardTemplate,
+  BoardTemplate, ProjectTemplate,
   ReceiveNotificationType,
   WorkPackageCommentPermission,
   WorkPackageObjectiveType,
@@ -57,6 +57,7 @@ export interface ProjectTemplateViewModel extends BaseViewModel {
 }
 
 export interface ProjectViewModel extends BaseViewModel {
+  template: ProjectTemplate;
   userId: string;
   title: string;
   description: string;

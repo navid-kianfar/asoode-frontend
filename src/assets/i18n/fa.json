@@ -686,5 +686,14 @@
   "CAN_EDIT_TASK_ATTACHMENT": "ویرایش پیوست",
   "CAN_COMMENT_TASK": "درج نظر",
   "CAN_ARCHIVE_LIST": "آرشیو لیست",
-  "CAN_ARCHIVE_TASK": "آرشیو کارت"
+  "CAN_ARCHIVE_TASK": "آرشیو کارت",
+  "TEMPLATE_ANIMATION": "انیمیشن",
+  "TEMPLATE_ANIMATION_DESCRIPTION": "این پروژه با ۳ شکست ساختار : پیش تولید، تولید و نهایی سازی، ایجاد میشود؛ برای هر اپیزود یک بسته کاری در نظر گرفته میشود؛ توجه داشته باشید امکان تغییر در ساختار شکست پروژه در آینده وجود دارد.",
+  "TEMPLATE": "الگو",
+  "ENUMS_PROJECT_TEMPLATE_NONE": "بدون الگو",
+  "ENUMS_PROJECT_TEMPLATE_ANIMATION": "انیمیشن",
+  "TEMPLATE_ANIMATION_EP_STORY_REEL": "استوری ریل",
+  "TEMPLATE_ANIMATION_EP_ANIMATE": "انیمیت",
+  "TEMPLATE_ANIMATION_EP_COMPOSITE": "کامپوزیت",
+  "TEMPLATE_ANIMATION_EP_EDITING": "تدوین"
 }

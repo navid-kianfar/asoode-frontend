@@ -7,13 +7,14 @@ import {
   BoardTemplateViewModel,
   ProjectTemplateViewModel,
 } from '../../../view-models/projects/project-types';
-import { BoardTemplate } from '../../../library/app/enums';
+import {BoardTemplate, ProjectTemplate} from '../../../library/app/enums';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { InviteViewModel } from '../../../view-models/auth/identity-types';
 import { ProjectService } from '../../../services/projects/project.service';
 import { NotificationService } from '../../../services/core/notification.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResult } from '../../../library/core/operation-result';
+import {ListViewModel} from '../../../view-models/core/list-types';
 
 @Component({
   selector: 'app-project-wizard',
@@ -30,7 +31,8 @@ export class ProjectWizardComponent implements OnInit {
   @Output() exit = new EventEmitter();
   mode: ViewMode;
   projectForm: FormViewModel[];
-  template: ProjectTemplateViewModel;
+  projectTemplates: ListViewModel[];
+  projectTemplate: ListViewModel;
   boardTemplates: BoardTemplateViewModel[];
   boardTemplate: BoardTemplate;
   model: any;
@@ -134,6 +136,21 @@ export class ProjectWizardComponent implements OnInit {
         ],
       },
     ];
+    this.projectTemplates = [
+      {
+        text: 'NO_TEMPLATE',
+        value: ProjectTemplate.None,
+        description: 'NO_TEMPLATE_DESCRIPTION',
+        icon: 'icon-blocked'
+      },
+      {
+        text: 'TEMPLATE_ANIMATION',
+        value: ProjectTemplate.Animation,
+        description: 'TEMPLATE_ANIMATION_DESCRIPTION',
+        icon: 'ikon-recording'
+      }
+    ];
+    this.projectTemplate = this.projectTemplates[0];
   }
   onBack($event: MouseEvent) {
     $event.stopPropagation();
@@ -210,7 +227,7 @@ export class ProjectWizardComponent implements OnInit {
       op = await this.projectService.create({
         ...this.model,
         boardTemplate: this.boardTemplate,
-        templateId: this.template ? this.template.id : undefined,
+        template: this.projectTemplate.value,
         complex: this.complex,
       });
     }
