@@ -912,6 +912,53 @@ body.dark-mode {
       border-color: $color2 !important;
     }
   }
+
+  .project-tree-animation {
+    .actions {
+      span {
+        background: $color2 !important;
+        color: $color4 !important;
+      }
+      h3 {
+      }
+      button {
+        background: $color3 !important;
+        color: $color5 !important;
+
+        span {
+          background: $color3 !important;
+          color: $color5 !important;
+        }
+      }
+    }
+  }
+
+  .project-tree-animation-node {
+    background: $color2;
+    border-color: transparent;
+
+    .node {
+      .title {
+        background: $color3 !important;
+        color: $color5 !important;
+      }
+
+      .progress {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+
+        .mat-progress-bar-fill::after {
+          background-color: $color3 !important;
+        }
+
+        .mat-progress-bar-buffer {
+          background: $color1 !important;
+        }
+      }
+    }
+  }
+
   /* ANGULAR MATERIAL */
 
   .ngxp__container {
