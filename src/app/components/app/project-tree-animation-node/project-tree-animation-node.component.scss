@@ -1,0 +1,66 @@
+.project-tree-animation-node {
+  display: flex;
+  width: 250px;
+  //height: 200px;
+  margin-inline-end: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background: #fff;
+  border: 2px dashed #ccc;
+  cursor: pointer;
+
+  .node {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .title {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: #ddd;
+      span {
+        display: flex;
+        align-items: center;
+        flex-grow: 1;
+        font-size: 0.9rem;
+        font-weight: 400;
+      }
+      i {
+        display: flex;
+        width: 25px;
+        height: 25px;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .info {
+      padding: 5px 10px;
+      display: flex;
+      .label {
+        display: flex;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-inline-end: 15px;
+        align-items: center;
+      }
+      .value {
+        display: flex;
+        font-size: 0.7rem;
+        font-weight: 600;
+        align-items: center;
+      }
+    }
+
+    //.description {
+    //  height: 50px;
+    //}
+
+    .progress {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+  }
+}

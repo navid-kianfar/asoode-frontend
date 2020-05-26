@@ -101,12 +101,13 @@ export class ProjectTreeComponent implements OnInit {
     });
   }
 
-  createTree() {
+  createTree(sub: SubProjectViewModel = null) {
+    const subId = sub ? sub.id : null;
     this.workPackages = this.model.workPackages
-      .filter(w => !w.subProjectId)
+      .filter(w => w.subProjectId === subId)
       .sort((a, b) => (a.order > b.order ? 1 : -1));
     this.subProjects = this.model.subProjects
-      .filter(s => !s.parentId)
+      .filter(s => s.parentId === subId)
       .sort((a, b) => (a.order > b.order ? 1 : -1));
   }
 

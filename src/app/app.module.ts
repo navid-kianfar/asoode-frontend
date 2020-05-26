@@ -176,6 +176,8 @@ import { DurationPickerComponent } from './components/app/duration-picker/durati
 import {NgxAudioPlayerModule} from 'ngx-audio-player';
 import {MatVideoModule} from 'mat-video';
 import { WorkPackagePermissionComponent } from './modals/work-package-permission/work-package-permission.component';
+import { ProjectTreeAnimationComponent } from './components/app/project-tree-animation/project-tree-animation.component';
+import { ProjectTreeAnimationNodeComponent } from './components/app/project-tree-animation-node/project-tree-animation-node.component';
 
 @NgModule({
   declarations: [
@@ -310,6 +312,8 @@ import { WorkPackagePermissionComponent } from './modals/work-package-permission
     KartablComponent,
     DurationPickerComponent,
     WorkPackagePermissionComponent,
+    ProjectTreeAnimationComponent,
+    ProjectTreeAnimationNodeComponent,
   ],
   entryComponents: [
     WorkPackagePermissionComponent,

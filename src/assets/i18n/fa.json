@@ -695,5 +695,8 @@
   "TEMPLATE_ANIMATION_EP_STORY_REEL": "استوری ریل",
   "TEMPLATE_ANIMATION_EP_ANIMATE": "انیمیت",
   "TEMPLATE_ANIMATION_EP_COMPOSITE": "کامپوزیت",
-  "TEMPLATE_ANIMATION_EP_EDITING": "تدوین"
+  "TEMPLATE_ANIMATION_EP_EDITING": "تدوین",
+  "TOTAL_PLANS": "تعداد پلان ها",
+  "TOTAL_DONE": "انجام شده ها",
+  "TOTAL_PENDING": "در انتظار تایید"
 }

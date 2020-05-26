@@ -129,11 +129,17 @@
           [model]="project"
         ></app-project-road-map>
       </div>
-      <div *ngIf="mode === ViewMode.Tree" class="tree-container">
+      <div *ngIf="mode === ViewMode.Tree && project.template === ProjectTemplate.None" class="tree-container">
         <app-project-tree
           [permission]="permission"
           [model]="project"
         ></app-project-tree>
+      </div>
+      <div *ngIf="mode === ViewMode.Tree && project.template === ProjectTemplate.Animation" class="tree-container">
+        <app-project-tree-animation
+          [permission]="permission"
+          [model]="project"
+        ></app-project-tree-animation>
       </div>
       <div *ngIf="mode === ViewMode.Seasons" class="seasons-container">
         <app-project-season

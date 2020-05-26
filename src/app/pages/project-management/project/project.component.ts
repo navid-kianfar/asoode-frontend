@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { ProjectService } from '../../../services/projects/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccessType } from '../../../library/app/enums';
+import { AccessType, ProjectTemplate } from '../../../library/app/enums';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { ModalService } from '../../../services/core/modal.service';
 import { OperationResultStatus } from '../../../library/core/enums';
@@ -17,6 +17,7 @@ import { NotificationService } from '../../../services/core/notification.service
 })
 export class ProjectComponent implements OnInit {
   ViewMode = ViewMode;
+  ProjectTemplate = ProjectTemplate;
   mode: ViewMode;
   project: ProjectViewModel;
   permission: AccessType;

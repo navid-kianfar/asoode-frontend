@@ -65,29 +65,6 @@
           </div>
         </div>
       </div>
-      <div *ngIf="list.expanded" class="new-task">
-        <div class="wrapper">
-          <textarea
-            [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
-            [readOnly]="creatingNewTask"
-            [(ngModel)]="newTaskTitle"
-            rows="2"
-          ></textarea>
-          <div class="buttons">
-            <button
-              [disabled]="creatingNewTask"
-              (click)="createNewTask(list)"
-              mat-stroked-button
-            >
-              <i *ngIf="creatingNewTask" class="icon-spin icon-spinner2"></i>
-              {{ 'CREATE' | translate }}</button
-            >&nbsp;&nbsp;
-            <button (click)="cancelNewTask(list)" mat-stroked-button>
-              {{ 'CANCEL' | translate }}
-            </button>
-          </div>
-        </div>
-      </div>
       <div
         class="cards"
         id="{{ list.id }}"
@@ -96,11 +73,34 @@
         (cdkDropListDropped)="dropTask($event, list.id)"
         [cdkDropListData]="list.tasks"
       >
+        <div *ngIf="list.expanded" class="new-task">
+          <div class="wrapper">
+          <textarea
+            [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
+            [readOnly]="creatingNewTask"
+            [(ngModel)]="newTaskTitle"
+            rows="2"
+          ></textarea>
+            <div class="buttons">
+              <button
+                [disabled]="creatingNewTask"
+                (click)="createNewTask(list)"
+                mat-stroked-button
+              >
+                <i *ngIf="creatingNewTask" class="icon-spin icon-spinner2"></i>
+                {{ 'CREATE' | translate }}</button
+              >&nbsp;&nbsp;
+              <button (click)="cancelNewTask(list)" mat-stroked-button>
+                {{ 'CANCEL' | translate }}
+              </button>
+            </div>
+          </div>
+        </div>
         <div
           *ngFor="let task of list.tasks"
           [cdkDragStartDelay]="dragDelay"
           [cdkDragData]="task"
-          [cdkDragDisabled]="embed || noDrag || !isAdminOrHasPermission(model.permissionEditTask)"
+          [cdkDragDisabled]="embed || list.expanded || noDrag || !isAdminOrHasPermission(model.permissionEditTask)"
           cdkDrag
           class="list-handler"
         >
