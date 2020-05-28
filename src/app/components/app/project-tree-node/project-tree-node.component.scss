@@ -67,6 +67,9 @@
       ::ng-deep .group-info {
         width: 25px;
         height: 25px;
+        img {
+          padding: 2px !important;
+        }
 
         .initials-holder {
           width: 20px;

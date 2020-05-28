@@ -11,18 +11,6 @@
     border: 1px solid #59a8ef;
     background-color: rgba(89, 168, 239, 0.16);
   }
-  .avatar {
-    width: 40px;
-    height: 40px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    border-radius: 50px;
-
-    img {
-      max-width: 50px;
-    }
-  }
   .initials-holder {
     width: 40px;
     min-width: 40px;
@@ -47,6 +35,20 @@
         position: relative;
         top: 2px;
       }
+    }
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+
+    img {
+      max-width: 100%;
+      border-radius: 20px;
+      padding: 4px;
     }
   }
   .info {
@@ -82,6 +84,17 @@
     }
     .info {
       display: none;
+    }
+  }
+
+
+  &.has-avatar {
+    padding: 0;
+    &.small {
+      .avatar {
+        width: inherit;
+        height: inherit;
+      }
     }
   }
 }

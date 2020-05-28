@@ -20,6 +20,11 @@
       background-color: #e6e6e6;
       border-radius: 50%;
       margin: 0 auto 20px;
+      overflow: hidden;
+
+      img {
+        width: 100px;
+      }
 
       div {
         font-size: 3rem;
