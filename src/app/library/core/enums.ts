@@ -11,6 +11,16 @@ export enum OperationResultStatus {
   OverCapacity = 10,
   Expire = 11,
 }
+export enum FileType {
+  Any = 1,
+  Image = 2,
+  Audio = 3,
+  Video = 4,
+  Excel = 5,
+  Word = 6,
+  Pdf = 7,
+  Specific = 8,
+}
 export enum WeekDay {
   Sunday = 0,
   Monday = 1,

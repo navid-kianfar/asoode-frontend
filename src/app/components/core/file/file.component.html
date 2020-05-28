@@ -1,1 +1,18 @@
-<p>file works!</p>
+<div *ngIf="!thumbnail" class="af-file-picker af-component {{ cssClass }}">
+  <button mat-stroked-button
+          (click)="triggerFileDialog()"
+          [disabled]="disabled || uploading"
+          class="btn btn-file"
+  >
+    {{ (inputText || (browse || 'BROWSE')) | translate: true }}
+  </button>
+  <div class="summary-container" *ngIf="summary">{{ summary }}</div>
+  <input
+    #filePicker
+    (change)="onChange($event.target.files)"
+    [accept]="allowedTypes"
+    [multiple]="multiple"
+    hidden
+    type="file"
+  />
+</div>

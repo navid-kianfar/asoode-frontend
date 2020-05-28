@@ -1,7 +1,8 @@
 import {
-  DropdownKnownList,
+  DropdownKnownList, FileType,
   FormElementType,
 } from '../../../library/core/enums';
+import {EventEmitter, Input, Output} from '@angular/core';
 
 export interface FormViewModel {
   disabled?: boolean;
@@ -12,6 +13,35 @@ export interface FormViewModel {
   elements: IFormElement[];
 }
 
+export interface IFormElementFilePicker extends IFormElement {
+  params: {
+    model?: File | File[];
+    disabled?: boolean;
+    placeHolder?: string;
+    backend?: string;
+    browse?: string;
+    backendParams?: any;
+    summary?: string;
+    extensions?: string[];
+    cssClass?: string;
+    data?: any;
+    uploadOnPick?: boolean;
+    clearAfterUpload?: boolean;
+    current?: string;
+    multiple?: boolean;
+    preview?: boolean;
+    fileType?: FileType;
+    thumbnail?: boolean;
+    thumbnailLabel?: string;
+    thumbnailIcon?: string;
+    onStart?: EventEmitter<void>;
+    onError?: EventEmitter<void>;
+    onProgress?: EventEmitter<number>;
+    onFinished?: EventEmitter<void>;
+    modelChange?: EventEmitter<File | File[]>;
+    currentChange?: EventEmitter<string | string[]>;
+  };
+}
 export interface IFormElementNumber extends IFormElement {
   validation?: IFormElementNumberValidation;
   params: {

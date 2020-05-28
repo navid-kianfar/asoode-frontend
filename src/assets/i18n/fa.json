@@ -698,5 +698,9 @@
   "TEMPLATE_ANIMATION_EP_EDITING": "تدوین",
   "TOTAL_PLANS": "تعداد پلان ها",
   "TOTAL_DONE": "انجام شده ها",
-  "TOTAL_PENDING": "در انتظار تایید"
+  "TOTAL_PENDING": "در انتظار تایید",
+  "AVATAR": "عکس پروفایل",
+  "BROWSE": "جستجو",
+  "CHANGE_AVATAR": "تغییر عکس پروفایل",
+  "NO_FILES_SELECTED": "فایلی انتخاب نشده"
 }

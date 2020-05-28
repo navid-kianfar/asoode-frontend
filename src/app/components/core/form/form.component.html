@@ -149,6 +149,34 @@
                   ></app-dropdown>
                 </ng-container>
 
+                <!-- File -->
+                <ng-container *ngIf="element.type === FormElementType.File">
+                  <app-file
+                    [(model)]="element.params.model"
+                    [preview]="element.params.preview"
+                    [(current)]="element.params.current"
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [placeHolder]="element.params.placeHolder"
+                    [backend]="element.params.backend"
+                    [browse]="element.params.browse"
+                    [backendParams]="element.params.backendParams"
+                    [clearAfterUpload]="element.params.clearAfterUpload"
+                    [extensions]="element.params.extensions"
+                    [fileType]="element.params.fileType"
+                    [multiple]="element.params.multiple"
+                    [summary]="element.params.summary"
+                    [thumbnail]="element.params.thumbnail"
+                    [thumbnailIcon]="element.params.thumbnailIcon"
+                    [thumbnailLabel]="element.params.thumbnailLabel"
+                    [uploadOnPick]="element.params.uploadOnPick"
+                    (onError)="element.params.onError($event)"
+                    (onFinished)="element.params.onFinished($event)"
+                    (onProgress)="element.params.onProgress($event)"
+                    (onStart)="element.params.onStart($event)"
+                  ></app-file>
+                </ng-container>
+
                 <app-validation
                   [model]="element.validation.errors"
                 ></app-validation>

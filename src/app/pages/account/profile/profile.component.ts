@@ -4,7 +4,7 @@ import { ModalService } from '../../../services/core/modal.service';
 import { Router } from '@angular/router';
 import { FormViewModel } from '../../../components/core/form/contracts';
 import { FormService } from '../../../services/core/form.service';
-import { OperationResultStatus } from '../../../library/core/enums';
+import {FileType, OperationResultStatus} from '../../../library/core/enums';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ChangePhoneComponent } from '../../../modals/change-phone/change-phone.component';
@@ -157,6 +157,18 @@ export class ProfileComponent implements OnInit {
               action: () => this.prepareChangeEmail(),
             },
           }),
+          this.formService.createButton({
+            config: {
+              cssClass: 'change-password',
+              label: '',
+              field: '',
+            },
+            params: {
+              model: '',
+              label: 'CHANGE_PASSWORD',
+              action: () => this.prepareChangePassword(),
+            },
+          }),
         ],
       },
       {
@@ -185,16 +197,14 @@ export class ProfileComponent implements OnInit {
               required: { value: true, message: 'CALENDAR_REQUIRED' },
             },
           }),
-          this.formService.createButton({
+          this.formService.createFilePicker({
             config: {
-              cssClass: 'change-password',
-              label: '',
-              field: '',
+              cssClass: 'avatar',
+              label: 'CHANGE_AVATAR',
+              field: 'avatar',
             },
             params: {
-              model: '',
-              label: 'CHANGE_PASSWORD',
-              action: () => this.prepareChangePassword(),
+              fileType: FileType.Image
             },
           }),
           this.formService.createCheckbox({

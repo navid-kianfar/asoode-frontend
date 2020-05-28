@@ -142,7 +142,7 @@ export class IdentityService {
   }
 
   async updateProfile(model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
+    return await this.httpService.formUpload<boolean>(
       '/account/profile/update',
       model,
     );

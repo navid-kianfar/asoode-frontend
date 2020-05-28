@@ -12,6 +12,8 @@ import {
   IFormElementLabel,
   IFormElementDatePicker,
   IFormElementNumber,
+  IFormElementFilePicker,
+  // IFormElementEditor,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 import { CaptchaObject } from '../../view-models/core/captcha-types';
@@ -40,6 +42,11 @@ export class FormService {
     options.validation = options.validation || { required: { value: false } };
     return options;
   }
+  // createEditor(options: IFormElementEditor): IFormElementEditor {
+  //   options.type = FormElementType.Editor;
+  //   options.validation = options.validation || { required: { value: false } };
+  //   return options;
+  // }
   createVerification(
     options: IFormElementVerification,
   ): IFormElementVerification {
@@ -65,6 +72,11 @@ export class FormService {
   }
   createDropDown(options: IFormElementDropDown): IFormElementDropDown {
     options.type = FormElementType.DropDown;
+    options.validation = options.validation || { required: { value: false } };
+    return options;
+  }
+  createFilePicker(options: IFormElementFilePicker): IFormElementFilePicker {
+    options.type = FormElementType.File;
     options.validation = options.validation || { required: { value: false } };
     return options;
   }
@@ -377,10 +389,16 @@ export class FormService {
     // }
     return true;
   }
-  private validateColor(element: IFormElement): boolean {
-    return false;
-  }
   private validateFile(element: IFormElement): boolean {
+    if (element.validation.required && element.validation.required.value) {
+      if (!element.params.model) {
+        element.validation.errors = [element.validation.required.message];
+        return false;
+      }
+    }
+    return true;
+  }
+  private validateColor(element: IFormElement): boolean {
     return false;
   }
 }
