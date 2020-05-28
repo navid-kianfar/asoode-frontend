@@ -33,6 +33,25 @@
         <ng-container *ngIf="reportViewModel.to">{{ reportViewModel.to | culturedDate}}</ng-container>
       </div>
     </div>
+
+
+    <div class="members">
+      <div class="member-container" *ngFor="let member of reportViewModel.members">
+        <div class="member">
+          <app-member-info
+            small="true"
+            *ngIf="!member.isGroup"
+            [id]="member.recordId"
+          ></app-member-info>
+          <app-group-info
+            small="true"
+            *ngIf="member.isGroup"
+            [id]="member.recordId"
+          ></app-group-info>
+        </div>
+      </div>
+    </div>
+
     <div class="progress">
       <mat-progress-bar [value]="reportViewModel.progress"></mat-progress-bar>&nbsp;
       <span>{{ reportViewModel.progress }}%</span>
