@@ -114,31 +114,6 @@ export class WorkPackageService {
     );
   }
 
-  getPermission(projectId, packageId: string): AccessType {
-    const project = this.projectService.projects.find(g => g.id === projectId);
-    const pkg = project.workPackages.find(w => w.id === packageId);
-    const access = pkg.members.find(
-      m => m.recordId === this.identityService.identity.userId,
-    );
-    const multiple = [];
-    if (access) {
-      multiple.push(access.access);
-    }
-
-    for (const ga of pkg.members.filter(m => m.isGroup)) {
-      const found = this.groupService.groups.find(k => k.id === ga.recordId);
-      if (found) {
-        const aa = found.members.find(
-          m => m.userId === this.identityService.identity.userId,
-        );
-        if (aa) {
-          multiple.push(aa.access);
-        }
-      }
-    }
-    return multiple.sort()[0];
-  }
-
   async renameLabel(id: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/work-packages/labels/${id}/rename`,
@@ -239,4 +214,32 @@ export class WorkPackageService {
       `/work-packages/${id}/permissions`, model
     );
   }
+
+
+
+  getPermission(projectId, packageId: string): AccessType {
+    const project = this.projectService.projects.find(g => g.id === projectId);
+    const pkg = project.workPackages.find(w => w.id === packageId);
+    const access = pkg.members.find(
+      m => m.recordId === this.identityService.identity.userId,
+    );
+    const multiple = [];
+    if (access) {
+      multiple.push(access.access);
+    }
+
+    for (const ga of pkg.members.filter(m => m.isGroup)) {
+      const found = this.groupService.groups.find(k => k.id === ga.recordId);
+      if (found) {
+        const aa = found.members.find(
+          m => m.userId === this.identityService.identity.userId,
+        );
+        if (aa) {
+          multiple.push(ga.access);
+        }
+      }
+    }
+    return multiple.sort()[0];
+  }
+
 }

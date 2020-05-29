@@ -16,7 +16,7 @@ export class UsersService {
     private readonly identityService: IdentityService,
   ) {}
 
-  findUser(userId: string): MemberInfoViewModel {
+  async findUser(userId: string): Promise<MemberInfoViewModel> {
     if (!this.repository[userId]) {
       let found: any =
         this.identityService.identity.userId === userId
@@ -47,6 +47,9 @@ export class UsersService {
             break;
           }
         }
+      }
+      if (!found) {
+        found = (await this.identityService.getMemberInfo(userId)).data;
       }
       this.repository[userId] = found;
     }

@@ -48,10 +48,16 @@ export class MemberInfoComponent implements OnInit {
       };
       this.update();
     }
+    this.cssClass = `${this.cssClass} member-info`;
+    this.fetch();
+  }
+
+  async fetch() {
     if (this.id && !this.model) {
-      this.model = this.usersService.findUser(this.id);
+      this.waiting = true;
+      this.model = await this.usersService.findUser(this.id);
+      this.waiting = false;
       this.update();
     }
-    this.cssClass = `${this.cssClass} member-info`;
   }
 }

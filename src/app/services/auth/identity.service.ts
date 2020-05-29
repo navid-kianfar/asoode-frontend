@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  IdentityObject,
+  IdentityObject, MemberInfoViewModel,
   ProfileViewModel,
 } from '../../view-models/auth/identity-types';
 import { HttpService } from '../core/http.service';
@@ -205,6 +205,12 @@ export class IdentityService {
     return await this.httpService.post<boolean>(
       '/account/devices/rename/' + id,
       model,
+    );
+  }
+
+  async getMemberInfo(userId: string): Promise<OperationResult<MemberInfoViewModel>> {
+    return await this.httpService.post<MemberInfoViewModel>(
+      '/account/profile/' + userId,
     );
   }
 }

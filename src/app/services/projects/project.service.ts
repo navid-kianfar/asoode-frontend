@@ -126,7 +126,7 @@ export class ProjectService {
           m => m.userId === this.identityService.identity.userId,
         );
         if (aa) {
-          multiple.push(aa.access);
+          multiple.push(ga.access);
         }
       }
     }

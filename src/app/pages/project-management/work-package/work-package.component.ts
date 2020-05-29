@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { WorkPackageService } from '../../../services/projects/work-package.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
-import { PopperContent } from 'ngx-popper';
 import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
 import { ModalService } from '../../../services/core/modal.service';
 import { CultureService } from '../../../services/core/culture.service';
@@ -55,7 +54,6 @@ export class WorkPackageComponent implements OnInit {
     archived: boolean;
     active: boolean;
   };
-  currentMember: WorkPackageMemberViewModel;
   toggleSetting: boolean;
   permission: AccessType;
   AccessType = AccessType;
@@ -136,25 +134,25 @@ export class WorkPackageComponent implements OnInit {
           break;
         case ActivityType.WorkPackageListEdit:
           if (this.workPackage.id === notification.data.packageId) {
-            const found = this.workPackage.lists.find(
+            find1 = this.workPackage.lists.find(
               l => l.id === notification.data.id,
             );
-            if (found) {
-              Object.assign(found, notification.data);
+            if (find1) {
+              Object.assign(find1, notification.data);
             }
           }
           break;
         case ActivityType.WorkPackageListOrder:
           if (this.workPackage.id === notification.data.packageId) {
-            const found = this.workPackage.lists.find(
+            find1 = this.workPackage.lists.find(
               l => l.id === notification.data.id,
             );
-            if (!found || found.order === notification.data.order) {
+            if (!find1 || find1.order === notification.data.order) {
               return;
             }
             moveItemInArray(
               this.workPackage.lists,
-              found.order - 1,
+              find1.order - 1,
               notification.data.order - 1,
             );
             let index = 1;
@@ -319,12 +317,12 @@ export class WorkPackageComponent implements OnInit {
                 find1.subTasksCount++;
               }
             } else {
-              const found = this.workPackage.lists.find(
+              find1 = this.workPackage.lists.find(
                 l => l.id === notification.data.listId,
               );
-              if (found) {
-                found.tasks = found.tasks || [];
-                found.tasks.unshift(notification.data);
+              if (find1) {
+                find1.tasks = found.tasks || [];
+                find1.tasks.unshift(notification.data);
               }
             }
           }
@@ -339,12 +337,12 @@ export class WorkPackageComponent implements OnInit {
           break;
         case ActivityType.WorkPackageTaskMove:
           if (this.workPackage.id === notification.data.packageId) {
-            const found = this.findTask(notification.data.id);
-            if (!found || found.listId === notification.data.listId) {
+            find1 = this.findTask(notification.data.id);
+            if (!find1 || find1.listId === notification.data.listId) {
               return;
             }
             const list = this.workPackage.lists.find(
-              l => l.id === found.listId,
+              l => l.id === find1.listId,
             );
             const destination = this.workPackage.lists.find(
               l => l.id === notification.data.listId,
@@ -352,23 +350,23 @@ export class WorkPackageComponent implements OnInit {
             transferArrayItem(
               list.tasks,
               destination.tasks,
-              list.tasks.indexOf(found),
+              list.tasks.indexOf(find1),
               notification.data.order - 1,
             );
           }
           break;
         case ActivityType.WorkPackageTaskReposition:
           if (this.workPackage.id === notification.data.packageId) {
-            const found = this.findTask(notification.data.id);
-            if (!found || found.order === notification.data.order) {
+            find1 = this.findTask(notification.data.id);
+            if (!find1 || find1.order === notification.data.order) {
               return;
             }
             const list = this.workPackage.lists.find(
-              l => l.id === found.listId,
+              l => l.id === find1.listId,
             );
             moveItemInArray(
               list.tasks,
-              list.tasks.indexOf(found),
+              list.tasks.indexOf(find1),
               notification.data.order - 1,
             );
           }
