@@ -80,6 +80,10 @@
         .member {
           width:40px;
           height:40px;
+
+          ::ng-deep .group-info{
+            background: inherit !important;
+          }
         }
       }
 

@@ -55,7 +55,10 @@
     <!--      <i class="icon-search primary-color"></i>-->
     <!--    </div>-->
     <a class="account-info" routerLink="/account">
-      {{ identityService.profile.initials }}
+      <img [src]="identityService.profile.avatar" *ngIf="identityService.profile.avatar" alt="">
+      <ng-container *ngIf="!identityService.profile.avatar">
+        {{ identityService.profile.initials }}
+      </ng-container>
     </a>
   </div>
 
