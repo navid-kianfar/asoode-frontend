@@ -17,6 +17,7 @@ import {
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
 import { CaptchaObject } from '../../view-models/core/captcha-types';
+import {NumberHelpers} from '../../helpers/number.helpers';
 
 const CAPTCHA_LENGTH = 5;
 const VERIFICATION_LENGTH = 6;
@@ -155,6 +156,11 @@ export class FormService {
           element.type === FormElementType.Label
         ) {
           return;
+        }
+        if (element.type === FormElementType.Captcha) {
+          element.params.model.code = NumberHelpers.clearNumbers(element.params.model.code);
+        } else if (typeof element.params.model === 'string') {
+          element.params.model = NumberHelpers.clearNumbers(element.params.model);
         }
         model[element.config.field] = element.params.model;
       });

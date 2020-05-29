@@ -40,7 +40,7 @@ export class ChangePhoneComponent extends SimpleModalComponent<{}, string>
     });
     this.actionWaiting = false;
     if (op.status === OperationResultStatus.Success) {
-      this.identityService.profile.phoneNumber = this.newNumber;
+      this.identityService.profile.phone = this.newNumber;
       this.identityService.profile.phoneConfirmed = true;
       this.result = this.newNumber;
       this.close();

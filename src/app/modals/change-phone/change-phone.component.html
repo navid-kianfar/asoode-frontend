@@ -13,11 +13,11 @@
     </div>
     <div class="modal-body">
       <div
-        *ngIf="identityService.profile.phoneNumber"
+        *ngIf="identityService.profile.phone"
         class="form-group current"
       >
         <label>{{ 'CURRENT_PHONE_NUMBER' | translate }}</label>
-        <span>{{ identityService.profile.phoneNumber }}</span>
+        <span>{{ identityService.profile.phone }}</span>
       </div>
       <div class="form-group new">
         <label>{{ 'NEW_PHONE_NUMBER' | translate }}</label>

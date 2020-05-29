@@ -28,10 +28,22 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async prepareChangePhoneNumber() {
-    this.modalService.show(ChangePhoneComponent, {}).subscribe(() => {});
+    this.modalService.show(ChangePhoneComponent, {})
+      .subscribe((result) => {
+        if (result) {
+          this.identityService.profile.phone = result;
+          this.edit();
+        }
+      });
   }
   async prepareChangeEmail() {
-    this.modalService.show(ChangeEmailComponent, {}).subscribe(() => {});
+    this.modalService.show(ChangeEmailComponent, {})
+      .subscribe((result) => {
+        if (result) {
+          this.identityService.profile.email = result;
+          this.edit();
+        }
+      });
   }
   async changePassword(model: any, form) {
     const op = await this.identityService.changePassword({

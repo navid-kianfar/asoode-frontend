@@ -21,6 +21,7 @@ import { Socket } from 'ngx-socket-io';
 import { PushNotificationService } from '../../../services/general/push-notification.service';
 import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
 import { SwPush } from '@angular/service-worker';
+import {NumberHelpers} from '../../../helpers/number.helpers';
 
 const EMPTY = {
   members: [],
@@ -90,7 +91,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
           }
         }),
         switchMap(project => {
-          this.searchTerm = (input.value || '').trim();
+          this.searchTerm = NumberHelpers.clearNumbers((input.value || '').trim());
           if (!this.searchTerm) {
             const op = OperationResult.Success<SearchResultViewModel>({
               ...EMPTY,
@@ -101,7 +102,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
         }),
       )
       .subscribe(data => {
-        this.searchTerm = (input.value || '').trim();
+        this.searchTerm = NumberHelpers.clearNumbers((input.value || '').trim());
         if (data.status === OperationResultStatus.Success) {
           this.results = data.data as SearchResultViewModel;
         } else {

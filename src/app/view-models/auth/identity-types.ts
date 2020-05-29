@@ -34,7 +34,6 @@ export interface ProfileViewModel extends MemberInfoViewModel {
   workingTaskFrom?: Date;
 
   darkMode: boolean;
-  phoneNumber: string;
   userType: UserType;
   timeZone: string;
   calendar: CalendarType;

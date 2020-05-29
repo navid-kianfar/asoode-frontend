@@ -27,7 +27,7 @@
             {{ identityService.profile.email }}
           </div>
           <div
-            *ngIf="identityService.profile.phoneNumber"
+            *ngIf="identityService.profile.phone"
             [class.check]="!identityService.profile.phoneConfirmed"
             class="phone h3"
           >
@@ -35,7 +35,7 @@
               *ngIf="!identityService.profile.phoneConfirmed"
               class="icon-blocked"
             ></i>
-            {{ identityService.profile.phoneNumber }}
+            {{ identityService.profile.phone }}
           </div>
         </div>
         <div class="actions">
