@@ -2,7 +2,7 @@ $color1: #313131;
 $color2: #3b3b3b;
 $color3: #59a8ef;
 $color4: #999999;
-$color5: #fff;
+$color5: #ffffff;
 
 body.dark-mode {
   background: $color1;
@@ -148,7 +148,7 @@ body.dark-mode {
   .af-dropdown {
     button {
       border: none !important;
-      color: #999 !important;
+      color: $color4 !important;
       background: $color2 !important;
     }
   }
@@ -156,18 +156,26 @@ body.dark-mode {
   .af-textbox {
     input {
       border: none !important;
-      color: #999 !important;
+      color: $color4 !important;
       background: $color2 !important;
+    }
+  }
+
+  .file-folder-preview {
+    .info {
+      .title {
+        color: $color4 !important;
+      }
     }
   }
 
   .project-info, .group-info:not(.small), .member-info:not(.small) {
     background: $color1 !important;
-    color: #999 !important;
+    color: $color4 !important;
 
     .info {
       .name {
-        color: #999 !important;
+        color: $color4 !important;
       }
     }
   }
@@ -195,10 +203,10 @@ body.dark-mode {
 
       .task {
         background: $color2 !important;
-        color: #999 !important;
+        color: $color4 !important;
 
         .title {
-          color: #999 !important;
+          color: $color4 !important;
         }
       }
     }
@@ -650,7 +658,7 @@ body.dark-mode {
 
   .modal-header, .modal-alt-header {
     button {
-      color: #999 !important;
+      color: $color4 !important;
     }
   }
 

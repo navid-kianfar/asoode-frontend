@@ -9,6 +9,7 @@ import { IdentityService } from '../auth/identity.service';
 })
 export class UsersService {
   private repository: any = {};
+  private pending: any = {};
 
   constructor(
     private readonly projectService: ProjectService,
@@ -49,7 +50,13 @@ export class UsersService {
         }
       }
       if (!found) {
-        found = (await this.identityService.getMemberInfo(userId)).data;
+        if (this.pending[userId]) {
+          found = (await this.pending[userId]).data;
+        } else {
+          this.pending[userId] = this.identityService.getMemberInfo(userId);
+          found = (await this.pending[userId]).data;
+          this.pending[userId] = null;
+        }
       }
       this.repository[userId] = found;
     }
