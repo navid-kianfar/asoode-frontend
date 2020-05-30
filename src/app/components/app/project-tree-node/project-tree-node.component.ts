@@ -39,12 +39,8 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   @Output() createWorkPackage = new EventEmitter<string>();
   @Output() editSubProject = new EventEmitter<string>();
   @Output() deleteSubProject = new EventEmitter<string>();
-  @Output() dropSubProject = new EventEmitter<
-    CdkDragDrop<SubProjectViewModel[], any>
-  >();
-  @Output() dropWorkPackage = new EventEmitter<
-    CdkDragDrop<WorkPackageViewModel[], any>
-  >();
+  @Output() dropSubProject = new EventEmitter<CdkDragDrop<SubProjectViewModel[], any>>();
+  @Output() dropWorkPackage = new EventEmitter<CdkDragDrop<WorkPackageViewModel[], any>>();
   subProjects: SubProjectViewModel[];
   expanded: boolean;
   from?: Date;

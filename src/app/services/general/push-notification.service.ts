@@ -187,9 +187,10 @@ export class PushNotificationService {
         if (find1) {
           find2 = find1.subProjects.find(s => s.id === notification.data.id);
           if (find2) {
+            const index = find1.subProjects.findIndex(s => s.id === notification.data.id);
             const oldOrder = find2.order;
             Object.assign(find2, notification.data);
-            if (oldOrder !== notification.data.order) {
+            if (oldOrder !== notification.data.order && index !== (find2.order - 1)) {
               find3 = find1.subProjects.sort((a, b) =>
                 a.order > b.order ? 1 : -1,
               );

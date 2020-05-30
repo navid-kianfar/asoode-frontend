@@ -37,6 +37,10 @@
     .sub-projects-container, .work-packages-container {
       display: flex;
       flex-grow: 1;
+
+      .drag-wrapper {
+        display: flex;
+      }
     }
   }
 }

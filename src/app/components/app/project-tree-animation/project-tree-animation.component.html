@@ -14,6 +14,7 @@
     <div
       class="sub-projects-container"
       cdkDropList
+      cdkDropListOrientation="horizontal"
       [cdkDropListData]="subProjects"
       (cdkDropListDropped)="dropSubProject($event)"
     >
@@ -45,6 +46,7 @@
     <div
       class="work-packages-container"
       cdkDropList
+      cdkDropListOrientation="horizontal"
       [cdkDropListData]="workPackages"
       (cdkDropListDropped)="dropWorkPackage($event)"
     >

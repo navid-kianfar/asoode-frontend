@@ -251,6 +251,9 @@ export class ProjectTreeComponent implements OnInit {
     this.projectService.changeSupProjectOrder(event.item.data.id, {
       order: event.item.data.order,
     });
+    this.subProjects.forEach((sub, index) => {
+      sub.order = index + 1;
+    });
   }
 
   dropWorkPackage(event: CdkDragDrop<WorkPackageViewModel[], any>) {
@@ -262,6 +265,9 @@ export class ProjectTreeComponent implements OnInit {
     event.item.data.order = event.currentIndex + 1;
     this.workPackageService.changeOrder(event.item.data.id, {
       order: event.item.data.order,
+    });
+    this.workPackages.forEach((sub, index) => {
+      sub.order = index + 1;
     });
   }
 }
