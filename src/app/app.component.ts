@@ -3,6 +3,7 @@ import { AppInitializerProvider } from './services/general/app.initializer';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Socket } from 'ngx-socket-io';
 import { SwUpdate } from '@angular/service-worker';
+import {NetworkService} from './services/core/network.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppComponent {
   constructor(
+    readonly networkService: NetworkService,
     private readonly device: DeviceDetectorService,
     readonly appInitializerProvider: AppInitializerProvider,
     private readonly swUpdate: SwUpdate,
@@ -35,5 +37,9 @@ export class AppComponent {
   updateApp() {
     document.location.reload();
     console.log('The app is updating right now');
+  }
+
+  refresh() {
+    window.location.reload();
   }
 }

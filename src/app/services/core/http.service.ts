@@ -5,12 +5,14 @@ import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 import { GridFilter, GridResult } from '../../view-models/core/grid-types';
+import {NetworkService} from './network.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HttpService {
   constructor(
+    readonly networkService: NetworkService,
     private readonly client: HttpClient,
     private readonly config: ConfigService,
     private readonly notificationService: NotificationService,
@@ -29,14 +31,16 @@ export class HttpService {
           (op: OperationResult<T>) => {
             if (
               op.status !== OperationResultStatus.Success &&
-              handleNoneSuccess !== false
+              handleNoneSuccess !== false && this.networkService.isOnline
             ) {
               this.notificationService.handleRequest(op.status);
             }
             resolve(op);
           },
           (err: Error) => {
-            this.notificationService.error('GENERAL_FAILED');
+            if (this.networkService.isOnline) {
+              this.notificationService.error('GENERAL_FAILED');
+            }
             resolve(OperationResult.Failed<T>(err));
           },
         );
@@ -85,7 +89,7 @@ export class HttpService {
             const op = event.body as Response;
             if (
               op.status !== OperationResultStatus.Success &&
-              handleNoneSuccess !== false
+              handleNoneSuccess !== false && this.networkService.isOnline
             ) {
               this.notificationService.handleRequest(op.status);
             }
@@ -93,7 +97,9 @@ export class HttpService {
           }
         });
       } catch (e) {
-        this.notificationService.error('GENERAL_FAILED');
+        if (this.networkService.isOnline) {
+          this.notificationService.error('GENERAL_FAILED');
+        }
         resolve(OperationResult.Failed<T>(e));
       }
     });
@@ -184,7 +190,7 @@ export class HttpService {
             const op = event.body as Response;
             if (
               op.status !== OperationResultStatus.Success &&
-              handleNoneSuccess !== false
+              handleNoneSuccess !== false && this.networkService.isOnline
             ) {
               this.notificationService.handleRequest(op.status);
             }
@@ -192,7 +198,9 @@ export class HttpService {
           }
         });
       } catch (e) {
-        this.notificationService.error('GENERAL_FAILED');
+        if (this.networkService.isOnline) {
+          this.notificationService.error('GENERAL_FAILED');
+        }
         resolve(OperationResult.Failed<T>(e));
       }
     });

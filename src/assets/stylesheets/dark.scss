@@ -93,6 +93,10 @@ body.dark-mode {
     }
   }
 
+  .actions button:not(:disabled) {
+    background-color: $color2 !important;
+  }
+
   .app-header {
     border-color: $color3 !important;
 
@@ -116,7 +120,7 @@ body.dark-mode {
     .account-info {
       color: $color3 !important;
       border: 1px solid $color3 !important;
-      background: rgba(208, 141, 0, 0.3) !important;
+      background: $color1 !important;
     }
 
     .quick-access-popper {
@@ -127,7 +131,7 @@ body.dark-mode {
           color: $color4 !important;
         }
 
-        .project-item, .group-item {
+        .project-item, .group-item, .no-item {
           background: $color2 !important;
         }
       }
@@ -165,6 +169,14 @@ body.dark-mode {
     .info {
       .title {
         color: $color4 !important;
+      }
+    }
+
+    &.selected {
+      background: $color2 !important;
+
+      .selected {
+        background: $color3 !important;
       }
     }
   }
@@ -238,8 +250,15 @@ body.dark-mode {
     }
   }
 
+  .search-popper {
+    background: $color2 !important;
+  }
+
   .account-profile, .group-page {
     .header {
+      .avatar-container {
+        background: $color2 !important;
+      }
       .email, .phone {
         color: $color4 !important;
       }
@@ -423,6 +442,7 @@ body.dark-mode {
         background: $color2 !important;
         border-color: $color2 !important;
       }
+      background: $color2 !important;
     }
   }
 
