@@ -28,7 +28,7 @@ export class WorkPackageTaskComponent implements OnInit {
   WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
   constructor(
     private readonly projectService: ProjectService,
-    private readonly cultureService: CultureService,
+    readonly cultureService: CultureService,
   ) {}
 
   ngOnInit() {
