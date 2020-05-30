@@ -702,5 +702,11 @@
   "AVATAR": "عکس پروفایل",
   "BROWSE": "جستجو",
   "CHANGE_AVATAR": "تغییر عکس پروفایل",
-  "NO_FILES_SELECTED": "فایلی انتخاب نشده"
+  "NO_FILES_SELECTED": "فایلی انتخاب نشده",
+
+
+
+  "REMOVE_FILES_FOLDERS_CONFIRM_HEADING": "آیا از حذف موارد {0} مطمئن هستید؟",
+  "REMOVE_FILES_FOLDERS": "حذف فایل / پوشه",
+  "REMOVE_FILES_FOLDERS_CONFIRM": "در صورت تائید برای همیشه حذف خواهند شد و هر پیوستی که به این موارد اشاره میکرد از کار خواهد افتاد"
 }

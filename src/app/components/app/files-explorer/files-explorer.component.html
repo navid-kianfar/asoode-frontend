@@ -1,7 +1,7 @@
-<div *ngIf="private" class="actions">
+<div class="actions">
   <div class="action-container">
     <div class="action-bar">
-      <div class="space">
+      <div *ngIf="private" class="space">
         <button [matMenuTriggerFor]="menu" mat-stroked-button>
           +&nbsp;{{ 'ADD' | translate }}
         </button>
@@ -9,7 +9,7 @@
       <div class="commands">
         <button
           (click)="actionDelete()"
-          *ngIf="atLeastOneSelected"
+          *ngIf="atLeastOneSelected && private"
           mat-mini-fab
         >
           <span class="btn-inner">
@@ -20,7 +20,7 @@
         <button
           disabled
           (click)="actionCut()"
-          *ngIf="atLeastOneSelected"
+          *ngIf="atLeastOneSelected && private"
           mat-mini-fab
         >
           <span class="btn-inner">
@@ -31,7 +31,7 @@
         <button
           disabled
           (click)="actionCopy()"
-          *ngIf="atLeastOneSelected"
+          *ngIf="atLeastOneSelected && private"
           mat-mini-fab
         >
           <span class="btn-inner">
@@ -41,7 +41,7 @@
         </button>
         <button
           disabled
-          (click)="actionPaste()"
+          (click)="actionPaste() && private"
           *ngIf="inClipboard"
           mat-mini-fab
         >
@@ -50,7 +50,7 @@
             <span class="sub-title">{{ 'PASTE' | translate }}</span>
           </span>
         </button>
-        <button (click)="actionRename()" *ngIf="onlyOneSelected" mat-mini-fab>
+        <button (click)="actionRename()" *ngIf="onlyOneSelected && private" mat-mini-fab>
           <span class="btn-inner">
             <i class="icon-pencil"></i>
             <span class="sub-title">{{ 'RENAME_SHORT' | translate }}</span>
@@ -120,14 +120,14 @@
     ></app-dropdown>
   </div>
   <ul>
-    <li class="refresh" (click)="fetch(path); clearSelection()">
-      <i class="icon-reset"></i>
-    </li>
-    <ng-container *ngFor="let p of parent.reverse()">
+    <ng-container *ngFor="let p of parent">
       <li (click)="goTo(p)">
         <span>{{ p.name || '/' }}</span>
       </li>
     </ng-container>
+    <li class="refresh" (click)="fetch(path); clearSelection()">
+      <i class="icon-reset"></i>
+    </li>
   </ul>
   <app-waiting *ngIf="waiting"></app-waiting>
   <ng-container *ngIf="!waiting">

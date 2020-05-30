@@ -209,4 +209,7 @@ export class FilesService {
   }
 
 
+  async delete(model): Promise<OperationResult<boolean>> {
+    return this.httpService.post<boolean>('/files/delete', model, false);
+  }
 }

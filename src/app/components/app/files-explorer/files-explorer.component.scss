@@ -48,6 +48,7 @@
       direction: ltr;
       text-align: left;
       padding: 0 20px;
+      min-height: 50px;
 
       button {
         border-radius: 50px !important;
@@ -117,6 +118,8 @@ ul {
   display: flex;
   height: 25px;
   margin: 0 0 20px;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 
   li {
     font-size: 0.8rem;

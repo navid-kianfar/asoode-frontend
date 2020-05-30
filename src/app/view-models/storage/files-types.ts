@@ -13,6 +13,7 @@ export interface ExplorerFolderViewModel {
 }
 export interface ExplorerFileViewModel {
   userId?: string;
+  path: string;
   url: string;
   thumbnail: string;
   name: string;
