@@ -321,7 +321,7 @@ export class WorkPackageComponent implements OnInit {
                 l => l.id === notification.data.listId,
               );
               if (find1) {
-                find1.tasks = found.tasks || [];
+                find1.tasks = find1.tasks || [];
                 find1.tasks.unshift(notification.data);
               }
             }
