@@ -14,6 +14,7 @@ import {
   GroupMemberViewModel,
   PendingInvitationViewModel,
 } from '../../../view-models/groups/group-types';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-project-setting',
@@ -24,11 +25,13 @@ export class ProjectSettingComponent implements OnInit {
   AccessType = AccessType;
   @Input() model: ProjectViewModel;
   @Input() permission: AccessType;
+  archiving: boolean;
   constructor(
     private readonly modalService: ModalService,
     private readonly projectService: ProjectService,
     private readonly groupService: GroupService,
     private readonly translateService: TranslateService,
+    private readonly router: Router,
   ) {}
 
   ngOnInit() {}
@@ -156,5 +159,31 @@ export class ProjectSettingComponent implements OnInit {
         }
         this.model.pending = this.model.pending.filter(g => g !== member);
       });
+  }
+
+  prepareArchive() {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('ARCHIVE_PROJECT_CONFIRM_HEADING'),
+      [this.model.title],
+    );
+    this.modalService
+      .confirm({
+        title: 'ARCHIVE_PROJECT',
+        message: 'ARCHIVE_PROJECT_CONFIRM',
+        heading,
+        actionLabel: 'ARCHIVE_PROJECT',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          this.archiving = true;
+          const op = await this.projectService.archiveProject(this.model.id);
+          this.archiving = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          return this.router.navigateByUrl('/dashboard');
+        },
+      })
+      .subscribe(confirmed => {});
   }
 }

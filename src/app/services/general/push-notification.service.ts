@@ -200,12 +200,23 @@ export class PushNotificationService {
           p => p.id === notification.data.projectId,
         );
         if (find1) {
+          find2 = find1.subProjects.find(s => s.id === notification.data.id);
           find1.subProjects = find1.subProjects.filter(
             i => i.id !== notification.data.id,
           );
           find3 = find1.subProjects.sort((a, b) =>
             a.order > b.order ? 1 : -1,
           );
+          find1.subProjects.forEach(s => {
+            if (s.parentId === find2.id) {
+              s.parentId = find2.parentId;
+            }
+          });
+          find1.workPackages.forEach(s => {
+            if (s.subProjectId === find2.id) {
+              s.subProjectId = find2.parentId;
+            }
+          });
           let counter = 1;
           find3.forEach(sp => (sp.order = counter++));
         }

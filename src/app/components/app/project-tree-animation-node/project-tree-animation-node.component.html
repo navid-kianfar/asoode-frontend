@@ -1,13 +1,13 @@
 <div class="project-tree-animation-node" (click)="onNodeSelect()">
   <div class="node">
-    <div class="title">
+    <div class="title" (click)="$event.preventDefault();$event.stopPropagation()">
       <i class="sub {{ subProject ? 'icon-tree7' : 'icon-workpackage' }}"></i>&nbsp;
-      <span>{{ subProject ? subProject.title : workPackage.title }}</span>&nbsp;
+      <span>{{ (subProject ? subProject.title : workPackage.title) | translate:false | truncate:15 }}</span>&nbsp;
       <i (click)="editSubProject.emit(subProject.id)" *ngIf="subProject" class="add icon-pencil"></i>&nbsp;
       <i (click)="deleteSubProject.emit(subProject.id)" *ngIf="subProject" class="add icon-delete"></i>
     </div>
     <div class="description info">
-      {{ subProject ? subProject.description : workPackage.description }}
+      {{ (subProject ? subProject.description : workPackage.description) | translate:true }}
     </div>
     <div class="total-tasks info">
       <div class="label">{{ 'TOTAL_PLANS' | translate }}</div>

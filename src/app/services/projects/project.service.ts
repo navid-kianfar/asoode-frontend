@@ -179,6 +179,12 @@ export class ProjectService {
     );
   }
 
+  async archiveProject(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/projects/${id}/archive`,
+    );
+  }
+
   async editSeason(id: string, params: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/projects/season/${id}/edit`,

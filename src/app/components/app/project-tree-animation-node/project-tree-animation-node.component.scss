@@ -53,9 +53,9 @@
       }
     }
 
-    //.description {
-    //  height: 50px;
-    //}
+    .description {
+      word-break: break-all;
+    }
 
     .progress {
       display: flex;

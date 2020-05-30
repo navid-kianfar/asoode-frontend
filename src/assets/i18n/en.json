@@ -703,5 +703,6 @@
   "WORK_PACKAGE_SETTING": "Work package setting",
   "YEARLY_DISCOUNT": "All plans include 10% discount if paid annually",
   "YOUR_PLAN_NEEDS_UPGRADE": "You have reached the maximum level set for your plan; For further use, please upgrade your plan as you like.",
-  "YOU_HAVE_REACHED_PLAN_LIMIT": "Your current plan needs to be upgraded!"
+  "YOU_HAVE_REACHED_PLAN_LIMIT": "Your current plan needs to be upgraded!",
+  "ARCHIVE_PROJECT_CONFIRM": "If confirmed all work packages, sub projects and channels will no longer be available to users except admins"
 }
