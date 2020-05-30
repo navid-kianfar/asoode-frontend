@@ -122,6 +122,11 @@ export class WorkPackageComponent implements OnInit {
       let find1 = null;
       let find2 = null;
       switch (notification.type) {
+        case ActivityType.ProjectArchive:
+          if (this.workPackage.projectId === notification.data.id) {
+            return this.router.navigateByUrl('/dashboard');
+          }
+          break;
         case ActivityType.GroupRemove:
           this.workPackage.members = this.workPackage.members.filter(
             m => m.recordId !== notification.data,

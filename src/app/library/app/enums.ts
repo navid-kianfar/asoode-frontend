@@ -139,6 +139,8 @@ export enum ActivityType {
   ProjectSeasonAdd = 309,
   ProjectSeasonEdit = 310,
   ProjectSeasonRemove = 311,
+  ProjectArchive = 312,
+  ProjectRestore = 313,
 
   WorkPackageAdd = 400,
   WorkPackageEdit = 401,
@@ -202,7 +204,7 @@ export enum ActivityType {
   WorkPackageObjectiveRemove = 702,
 
   ChannelMessage = 800,
-  ChannelUpload = 801,
+  ChannelUpload = 801
 }
 export enum PlanType {
   Free = 1,

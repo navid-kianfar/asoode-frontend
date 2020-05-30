@@ -167,6 +167,10 @@ export class PushNotificationService {
           find1.description = notification.data.description;
         }
         break;
+      case ActivityType.ProjectArchive:
+        this.projectService.projects = this.projectService.projects
+          .filter(f => f.id !== notification.data.id);
+        break;
 
       case ActivityType.ProjectSubAdd:
         find1 = this.projectService.projects.find(
