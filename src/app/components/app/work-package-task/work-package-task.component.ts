@@ -12,6 +12,7 @@ import { IdentityService } from '../../../services/auth/identity.service';
 import { WorkPackageTaskVoteNecessity } from '../../../library/app/enums';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { ProjectService } from '../../../services/projects/project.service';
+import {CultureService} from '../../../services/core/culture.service';
 
 @Component({
   selector: 'app-work-package-task',
@@ -25,7 +26,10 @@ export class WorkPackageTaskComponent implements OnInit {
   @Input() list: WorkPackageListViewModel;
 
   WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
-  constructor(private readonly projectService: ProjectService) {}
+  constructor(
+    private readonly projectService: ProjectService,
+    private readonly cultureService: CultureService,
+  ) {}
 
   ngOnInit() {
     if (!this.project) {

@@ -5,9 +5,9 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {CdkDragDrop, moveItemInArray, transferArrayItem,} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {AccessType, WorkPackageTaskVoteNecessity,} from '../../../library/app/enums';
+import {AccessType, WorkPackageTaskVoteNecessity } from '../../../library/app/enums';
 import {OperationResultStatus} from '../../../library/core/enums';
 import {TaskService} from '../../../services/projects/task.service';
 import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';

@@ -178,6 +178,8 @@ import {MatVideoModule} from 'mat-video';
 import { WorkPackagePermissionComponent } from './modals/work-package-permission/work-package-permission.component';
 import { ProjectTreeAnimationComponent } from './components/app/project-tree-animation/project-tree-animation.component';
 import { ProjectTreeAnimationNodeComponent } from './components/app/project-tree-animation-node/project-tree-animation-node.component';
+import { AnimationWorkPackageBoardComponent } from './components/app/animation-work-package-board/animation-work-package-board.component';
+import { AnimationWorkPackageTaskComponent } from './components/app/animation-work-package-task/animation-work-package-task.component';
 
 @NgModule({
   declarations: [
@@ -314,6 +316,8 @@ import { ProjectTreeAnimationNodeComponent } from './components/app/project-tree
     WorkPackagePermissionComponent,
     ProjectTreeAnimationComponent,
     ProjectTreeAnimationNodeComponent,
+    AnimationWorkPackageBoardComponent,
+    AnimationWorkPackageTaskComponent,
   ],
   entryComponents: [
     WorkPackagePermissionComponent,

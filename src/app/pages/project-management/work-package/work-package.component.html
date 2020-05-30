@@ -283,11 +283,16 @@
       <mat-progress-bar *ngIf="waiting" mode="indeterminate"></mat-progress-bar>
       <ng-container *ngIf="!waiting">
         <ng-container *ngIf="mode === ViewMode.Board">
-          <app-work-package-board
+          <app-work-package-board *ngIf="project.template !== ProjectTemplate.Animation"
             [project]="project"
             [permission]="permission"
             [model]="workPackage"
           ></app-work-package-board>
+          <app-animation-work-package-board *ngIf="project.template === ProjectTemplate.Animation"
+            [project]="project"
+            [permission]="permission"
+            [model]="workPackage"
+          ></app-animation-work-package-board>
         </ng-container>
         <ng-container *ngIf="mode === ViewMode.List">
           <app-work-package-list

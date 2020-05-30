@@ -21,6 +21,7 @@ import {
   WorkPackageObjectiveType,
   WorkPackageTaskState,
   WorkPackageTaskVisibility,
+  ProjectTemplate,
 } from '../../../library/app/enums';
 import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
 import { FormService } from 'src/app/services/core/form.service';
@@ -44,6 +45,7 @@ import {WorkPackagePermissionComponent} from '../../../modals/work-package-permi
 })
 export class WorkPackageComponent implements OnInit {
   ViewMode = ViewMode;
+  ProjectTemplate = ProjectTemplate;
   mode: ViewMode;
   project: ProjectViewModel;
   workPackage: WorkPackageViewModel;

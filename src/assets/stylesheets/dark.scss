@@ -768,15 +768,12 @@ body.dark-mode {
         .title {
           color: $color4 !important;
         }
-
         .mat-progress-bar-fill::after {
           background-color: $color3 !important;
         }
-
         .mat-progress-bar-buffer {
           background: $color2 !important;
         }
-
       }
 
       .new-task {
@@ -933,6 +930,20 @@ body.dark-mode {
   }
   .task-wrapper .time-spent-container .time-log .recorder .btn .mat-mini-fab {
     background: $color1 !important;
+  }
+
+  .board-list {
+    .task {
+      .status .status-wrapper .status-container{
+        background: $color2 !important;
+        .text {
+          color: $color4 !important;
+        }
+      }
+      .title {
+        color: $color4 !important;
+      }
+    }
   }
   .status-popper {
     background: $color1 !important;
@@ -1097,6 +1108,21 @@ body.dark-mode {
         color: #666666;
       }
     }
+
+    .status-container, .state {
+      background: $color2 !important;
+      .text {
+        color: $color4 !important;
+        background: $color2 !important;
+      }
+      .title {
+        color: $color4 !important;
+      }
+    }
+    .title {
+      color: $color4 !important;
+    }
+
     &.archived {
       .info {
         background: #555555;
@@ -1113,6 +1139,7 @@ body.dark-mode {
 
   .cdk-drag-preview {
     &.board-list {
+      background: $color1;
       .header {
         i {
           border: 1px dashed #cccccc;
