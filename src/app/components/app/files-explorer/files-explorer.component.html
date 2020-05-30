@@ -41,8 +41,8 @@
         </button>
         <button
           disabled
-          (click)="actionPaste() && private"
-          *ngIf="inClipboard"
+          (click)="actionPaste()"
+          *ngIf="inClipboard && private"
           mat-mini-fab
         >
           <span class="btn-inner">
