@@ -163,6 +163,7 @@ export class PushNotificationService {
           p => p.id === notification.data.id,
         );
         if (find1) {
+          find1.template = notification.data.template;
           find1.title = notification.data.title;
           find1.description = notification.data.description;
         }

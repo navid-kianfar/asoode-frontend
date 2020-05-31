@@ -5,7 +5,7 @@ import { GroupViewModel } from '../../view-models/groups/group-types';
 import { OperationResultStatus } from '../../library/core/enums';
 import { AccessType } from '../../library/app/enums';
 import { IdentityService } from '../auth/identity.service';
-import {TimeSpentViewModel} from '../../view-models/projects/project-types';
+import {ProjectViewModel, TimeSpentViewModel} from '../../view-models/projects/project-types';
 import {DayReportViewModel} from '../../view-models/general/report-types';
 
 @Injectable({
@@ -38,6 +38,10 @@ export class GroupService {
       this.groups = op.data;
     }
     return op;
+  }
+
+  async archived(): Promise<OperationResult<GroupViewModel[]>> {
+    return await this.httpService.post<GroupViewModel[]>('/groups/archived');
   }
 
   async create(model: any): Promise<OperationResult<boolean>> {

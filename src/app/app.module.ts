@@ -180,6 +180,8 @@ import { ProjectTreeAnimationComponent } from './components/app/project-tree-ani
 import { ProjectTreeAnimationNodeComponent } from './components/app/project-tree-animation-node/project-tree-animation-node.component';
 import { AnimationWorkPackageBoardComponent } from './components/app/animation-work-package-board/animation-work-package-board.component';
 import { AnimationWorkPackageTaskComponent } from './components/app/animation-work-package-task/animation-work-package-task.component';
+import { ArchivedProjectsComponent } from './components/app/archived-projects/archived-projects.component';
+import { ArchivedGroupsComponent } from './components/app/archived-groups/archived-groups.component';
 
 @NgModule({
   declarations: [
@@ -318,6 +320,8 @@ import { AnimationWorkPackageTaskComponent } from './components/app/animation-wo
     ProjectTreeAnimationNodeComponent,
     AnimationWorkPackageBoardComponent,
     AnimationWorkPackageTaskComponent,
+    ArchivedProjectsComponent,
+    ArchivedGroupsComponent,
   ],
   entryComponents: [
     WorkPackagePermissionComponent,
