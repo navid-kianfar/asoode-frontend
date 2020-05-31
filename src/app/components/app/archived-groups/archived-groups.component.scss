@@ -13,4 +13,9 @@
     font-weight: 500;
     font-size: 0.9rem;
   }
+
+  ::ng-deep .group-info {
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
 }

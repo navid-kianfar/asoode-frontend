@@ -56,6 +56,10 @@ export class GroupService {
     return await this.httpService.post<boolean>(`/groups/${id}/remove`);
   }
 
+  async archive(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/${id}/archive`);
+  }
+
   async removeAccess(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/groups/remove-access/${id}`);
   }
@@ -98,5 +102,15 @@ export class GroupService {
     return await this.httpService.post<DayReportViewModel[]>(
       `/groups/${id}/report`, model
     );
+  }
+
+  async fetch(id: any): Promise<OperationResult<GroupViewModel>> {
+    return await this.httpService.post<GroupViewModel>(
+      `/groups/${id}/fetch`
+    );
+  }
+
+  async restore(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/${id}/restore`);
   }
 }

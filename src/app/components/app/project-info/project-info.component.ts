@@ -16,12 +16,22 @@ export class ProjectInfoComponent implements OnInit {
   ngOnInit() {}
 
   openProject() {
+    if (this.project.archivedAt) {
+      if (this.project.complex) {
+        this.router.navigateByUrl('/project/' + this.project.id + '/archived/');
+        return;
+      }
+      this.router.navigateByUrl(
+        '/work-package/' + this.project.workPackages[0].id + '/archived/',
+      );
+      return;
+    }
     if (this.project.complex) {
-      this.router.navigateByUrl('project/' + this.project.id);
+      this.router.navigateByUrl('/project/' + this.project.id);
       return;
     }
     this.router.navigateByUrl(
-      'work-package/' + this.project.workPackages[0].id,
+      '/work-package/' + this.project.workPackages[0].id,
     );
   }
 }

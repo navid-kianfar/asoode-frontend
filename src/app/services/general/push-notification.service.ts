@@ -54,14 +54,9 @@ export class PushNotificationService {
         });
         break;
 
+      case ActivityType.GroupRestore:
       case ActivityType.GroupAdd:
         this.groupService.groups.push(notification.data);
-        if (
-          this.identityService.identity.userId === notification.data.userId &&
-          this.windowService.active
-        ) {
-          this.router.navigateByUrl(url);
-        }
         break;
       case ActivityType.GroupEdit:
         find1 = this.groupService.groups.find(
@@ -137,6 +132,7 @@ export class PushNotificationService {
           this.groupService.load();
         }
         break;
+      case ActivityType.GroupArchive:
       case ActivityType.GroupRemove:
         this.groupService.groups = this.groupService.groups.filter(
           g => g.id !== notification.data,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {GroupViewModel} from '../../../view-models/groups/group-types';
 import {GroupService} from '../../../services/groups/group.service';
 import {OperationResultStatus} from '../../../library/core/enums';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-archived-groups',
@@ -12,7 +13,10 @@ export class ArchivedGroupsComponent implements OnInit {
   waiting: boolean;
   groups: GroupViewModel[];
 
-  constructor(private readonly groupService: GroupService) { }
+  constructor(
+    private readonly groupService: GroupService,
+    private readonly router: Router
+  ) { }
 
   ngOnInit() {
     this.fetch();
@@ -28,4 +32,7 @@ export class ArchivedGroupsComponent implements OnInit {
     this.groups = op.data || [];
   }
 
+  openGroup(group: GroupViewModel) {
+    this.router.navigateByUrl('/group/' + group.id + '/archived');
+  }
 }

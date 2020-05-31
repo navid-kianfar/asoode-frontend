@@ -10,7 +10,7 @@
         type="text"
       />
 
-      <button (click)="invite()" mat-stroked-button>
+      <button [disabled]="group.archivedAt !== null" (click)="invite()" mat-stroked-button>
         +&nbsp;{{ 'INVITE_NEW_MEMBER' | translate }}
       </button>
     </div>

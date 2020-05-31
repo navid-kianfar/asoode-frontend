@@ -3,6 +3,7 @@ import { AccessType, GroupType } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
 
 export interface GroupViewModel extends BaseViewModel {
+  archivedAt?: Date;
   access?: AccessType;
   parentId: string;
   userId: string;

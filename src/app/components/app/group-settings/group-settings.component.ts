@@ -17,6 +17,7 @@ export class GroupSettingsComponent implements OnInit {
   @Input() group: GroupViewModel;
   @Input() permission: AccessType;
   deleting: boolean;
+  AccessType = AccessType;
   constructor(
     private readonly groupService: GroupService,
     private readonly modalService: ModalService,
@@ -40,6 +41,56 @@ export class GroupSettingsComponent implements OnInit {
         action: async () => {
           this.deleting = true;
           const op = await this.groupService.remove(this.group.id);
+          this.deleting = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+        },
+      })
+      .subscribe(() => {});
+  }
+
+  prepareArchive() {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('ARCHIVE_GROUP_CONFIRM_HEADING'),
+      [this.group.title],
+    );
+    this.modalService
+      .confirm({
+        title: 'ARCHIVE_GROUP',
+        message: 'ARCHIVE_GROUP_CONFIRM',
+        heading,
+        actionLabel: 'ARCHIVE_GROUP',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          this.deleting = true;
+          const op = await this.groupService.archive(this.group.id);
+          this.deleting = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+        },
+      })
+      .subscribe(() => {});
+  }
+
+  prepareRestore() {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('RESTORE_GROUP_CONFIRM_HEADING'),
+      [this.group.title],
+    );
+    this.modalService
+      .confirm({
+        title: 'RESTORE_GROUP',
+        message: 'RESTORE_GROUP_CONFIRM',
+        heading,
+        actionLabel: 'RESTORE_GROUP',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          this.deleting = true;
+          const op = await this.groupService.restore(this.group.id);
           this.deleting = false;
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error

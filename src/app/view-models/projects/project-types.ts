@@ -57,6 +57,7 @@ export interface ProjectTemplateViewModel extends BaseViewModel {
 }
 
 export interface ProjectViewModel extends BaseViewModel {
+  archivedAt?: Date;
   template: ProjectTemplate;
   userId: string;
   title: string;

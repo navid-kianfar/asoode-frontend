@@ -9,7 +9,7 @@
       </div>
       <div class="action-container">
         <button
-          [disabled]="waiting"
+          [disabled]="waiting || group.archivedAt !== null"
           *ngIf="canEdit && !editing"
           (click)="editing = true"
           color="primary"

@@ -4,7 +4,7 @@
     <div class="title">
       <h3>{{ 'TIME_OFF' | translate }}</h3>
       &nbsp;
-      <button mat-stroked-button>
+      <button [disabled]="group.archivedAt !== null" mat-stroked-button>
         +&nbsp;
         {{ 'REQUEST_TIME_OFF' | translate }}
       </button>
@@ -117,7 +117,7 @@
     <div class="title">
       <h3>{{ 'SHIFTS' | translate }}</h3>
       &nbsp;
-      <button mat-stroked-button>
+      <button [disabled]="group.archivedAt !== null" mat-stroked-button>
         +&nbsp;
         {{ 'CREATE_SHIFT' | translate }}
       </button>
