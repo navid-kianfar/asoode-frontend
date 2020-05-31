@@ -191,6 +191,12 @@ export class ProjectService {
     );
   }
 
+  async remove(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/projects/${id}/remove`,
+    );
+  }
+
   async editSeason(id: string, params: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/projects/season/${id}/edit`,

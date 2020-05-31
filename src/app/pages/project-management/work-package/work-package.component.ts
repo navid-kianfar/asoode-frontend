@@ -67,6 +67,7 @@ export class WorkPackageComponent implements OnInit {
   settingShowTotalWaiting: boolean;
   settingVisibilityWaiting: boolean;
   updating: boolean;
+  deleting: boolean;
 
   constructor(
     readonly identityService: IdentityService,
@@ -988,6 +989,45 @@ export class WorkPackageComponent implements OnInit {
     this.modalService.show(WorkPackagePermissionComponent, {
       workPackage: {...this.workPackage}
     }).subscribe(() => {});
+  }
+
+  async remove() {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey(
+        this.project.complex
+          ? 'REMOVE_WORK_PACKAGE_CONFIRM_HEADING'
+          : 'REMOVE_PROJECT_CONFIRM_HEADING',
+      ),
+      [this.workPackage.title],
+    );
+
+    this.modalService
+      .confirm({
+        title: this.project.complex
+          ? 'REMOVE_WORK_PACKAGE'
+          : 'REMOVE_PROJECT',
+        message: this.project.complex
+          ? 'REMOVE_WORK_PACKAGE_CONFIRM'
+          : 'REMOVE_PROJECT_DESCRIPTION',
+        heading,
+        actionLabel: 'REMOVE',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          this.deleting = true;
+          const op = await (
+            this.project.complex ?
+            this.projectService.remove(this.project.id) :
+            this.workPackageService.remove(this.workPackage.id)
+          );
+          this.deleting = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          return await this.router.navigateByUrl('/dashboard');
+        },
+      })
+      .subscribe(() => {});
   }
 }
 

@@ -26,6 +26,7 @@ export class ProjectSettingComponent implements OnInit {
   @Input() model: ProjectViewModel;
   @Input() permission: AccessType;
   archiving: boolean;
+  deleting: boolean;
   constructor(
     private readonly modalService: ModalService,
     private readonly projectService: ProjectService,
@@ -177,6 +178,32 @@ export class ProjectSettingComponent implements OnInit {
           this.archiving = true;
           const op = await this.projectService.archiveProject(this.model.id);
           this.archiving = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          return this.router.navigateByUrl('/dashboard');
+        },
+      })
+      .subscribe(confirmed => {});
+  }
+
+  prepareDelete() {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_PROJECT_CONFIRM_HEADING'),
+      [this.model.title],
+    );
+    this.modalService
+      .confirm({
+        title: 'REMOVE_PROJECT',
+        message: 'REMOVE_PROJECT_DESCRIPTION',
+        heading,
+        actionLabel: 'REMOVE_PROJECT',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          this.deleting = true;
+          const op = await this.projectService.remove(this.model.id);
+          this.deleting = false;
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;

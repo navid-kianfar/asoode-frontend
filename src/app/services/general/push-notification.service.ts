@@ -164,6 +164,7 @@ export class PushNotificationService {
           find1.description = notification.data.description;
         }
         break;
+      case ActivityType.ProjectRemove:
       case ActivityType.ProjectArchive:
         this.projectService.projects = this.projectService.projects
           .filter(f => f.id !== notification.data.id);
@@ -427,6 +428,7 @@ export class PushNotificationService {
         }
         break;
 
+      case ActivityType.WorkPackageRemove:
       case ActivityType.WorkPackageArchive:
         find1 = this.findWorkPackage(notification.data);
         if (find1) {

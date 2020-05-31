@@ -81,6 +81,13 @@ body.dark-mode {
     background: $color1;
   }
 
+  .archived-groups, .archived-projects {
+    .no-item {
+      background-color: $color1 !important;
+      color: $color4 !important;
+    }
+  }
+
   .fake-header {
     background-color: $color1 !important;
   }

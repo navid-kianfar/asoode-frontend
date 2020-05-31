@@ -52,6 +52,11 @@ export class GroupComponent implements OnInit {
   bind() {
     this.socket.on('push-notification', (notification: any) => {
       switch (notification.type) {
+        case ActivityType.GroupRestore:
+          if (this.group.id === notification.data.id) {
+            this.group = notification.data;
+          }
+          break;
         case ActivityType.GroupArchive:
         case ActivityType.GroupRemove:
           if (this.group.id === notification.data) {

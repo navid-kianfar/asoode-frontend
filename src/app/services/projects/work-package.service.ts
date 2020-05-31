@@ -151,6 +151,10 @@ export class WorkPackageService {
     return await this.httpService.post<boolean>(`/work-packages/${id}/archive`);
   }
 
+  async remove(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/work-packages/${id}/remove`);
+  }
+
   async changeOrder(
     id: string,
     params: any,
@@ -241,5 +245,4 @@ export class WorkPackageService {
     }
     return multiple.sort()[0];
   }
-
 }
