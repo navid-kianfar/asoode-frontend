@@ -41,7 +41,7 @@ export class ProjectService {
 
   async archived(): Promise<OperationResult<ProjectViewModel[]>> {
     return await this.httpService.post<ProjectViewModel[]>(
-      '/projects/list',
+      '/projects/archived',
     );
   }
 

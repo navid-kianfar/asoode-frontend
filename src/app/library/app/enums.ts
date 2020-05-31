@@ -126,6 +126,8 @@ export enum ActivityType {
   GroupMemberAdd = 206,
   GroupMemberRemove = 207,
   GroupMemberPermission = 208,
+  GroupArchive = 209,
+  GroupRestore = 210,
 
   ProjectAdd = 300,
   ProjectEdit = 301,
