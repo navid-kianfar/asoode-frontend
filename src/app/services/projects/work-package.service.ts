@@ -26,7 +26,16 @@ export class WorkPackageService {
     model,
   ): Promise<OperationResult<WorkPackageViewModel>> {
     return await this.httpService.post<WorkPackageViewModel>(
-      '/work-packages/get/' + id,
+      '/work-packages/fetch/' + id,
+      model,
+    );
+  }
+  async fetchArchived(
+    id: string,
+    model,
+  ): Promise<OperationResult<WorkPackageViewModel>> {
+    return await this.httpService.post<WorkPackageViewModel>(
+      '/work-packages/fetch/' + id + '/archived',
       model,
     );
   }
@@ -245,4 +254,5 @@ export class WorkPackageService {
     }
     return multiple.sort()[0];
   }
+
 }

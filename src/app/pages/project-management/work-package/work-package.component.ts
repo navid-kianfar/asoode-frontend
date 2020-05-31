@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageMemberViewModel,
@@ -6,35 +6,35 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import { ProjectService } from '../../../services/projects/project.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { WorkPackageService } from '../../../services/projects/work-package.service';
-import { OperationResultStatus } from '../../../library/core/enums';
-import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
-import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
-import { ModalService } from '../../../services/core/modal.service';
-import { CultureService } from '../../../services/core/culture.service';
+import {ProjectService} from '../../../services/projects/project.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {WorkPackageService} from '../../../services/projects/work-package.service';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
+import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
+import {ModalService} from '../../../services/core/modal.service';
+import {CultureService} from '../../../services/core/culture.service';
 import {
   AccessType,
   ActivityType,
+  ProjectTemplate,
   ReceiveNotificationType,
   WorkPackageObjectiveType,
   WorkPackageTaskState,
   WorkPackageTaskVisibility,
-  ProjectTemplate,
 } from '../../../library/app/enums';
-import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
-import { FormService } from 'src/app/services/core/form.service';
-import { StringHelpers } from '../../../helpers/string.helpers';
-import { TranslateService } from '../../../services/core/translate.service';
-import { OperationResult } from '../../../library/core/operation-result';
-import { GroupService } from '../../../services/groups/group.service';
-import { PendingInvitationViewModel } from '../../../view-models/groups/group-types';
-import { Socket } from 'ngx-socket-io';
-import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { PromptModalParameters } from '../../../view-models/core/modal-types';
-import { NotificationService } from '../../../services/core/notification.service';
-import { UpgradeWorkPackageComponent } from '../../../modals/upgrade-work-package/upgrade-work-package.component';
+import {PromptComponent} from 'src/app/modals/prompt/prompt.component';
+import {FormService} from 'src/app/services/core/form.service';
+import {StringHelpers} from '../../../helpers/string.helpers';
+import {TranslateService} from '../../../services/core/translate.service';
+import {OperationResult} from '../../../library/core/operation-result';
+import {GroupService} from '../../../services/groups/group.service';
+import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
+import {Socket} from 'ngx-socket-io';
+import {moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {PromptModalParameters} from '../../../view-models/core/modal-types';
+import {NotificationService} from '../../../services/core/notification.service';
+import {UpgradeWorkPackageComponent} from '../../../modals/upgrade-work-package/upgrade-work-package.component';
 import {IdentityService} from '../../../services/auth/identity.service';
 import {WorkPackagePermissionComponent} from '../../../modals/work-package-permission/work-package-permission.component';
 
@@ -68,6 +68,7 @@ export class WorkPackageComponent implements OnInit {
   settingVisibilityWaiting: boolean;
   updating: boolean;
   deleting: boolean;
+  preWaiting: boolean;
 
   constructor(
     readonly identityService: IdentityService,
@@ -94,29 +95,7 @@ export class WorkPackageComponent implements OnInit {
       labels: {}
     };
     this.mode = ViewMode.Board;
-    const id = this.activatedRoute.snapshot.params.id;
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.projectService.projects.length; i++) {
-      this.workPackage = this.projectService.projects[i].workPackages.find(
-        w => w.id === id,
-      );
-      if (this.workPackage) {
-        this.project = this.projectService.projects[i];
-        break;
-      }
-    }
-    if (!this.workPackage) {
-      this.router.navigateByUrl('dashboard');
-      return;
-    }
-    // if (this.workPackage.progress === undefined) {
-    //   this.workPackage.progress = 0;
-    // }
-    this.permission = this.projectService.getWorkPackagePermission(
-      this.project,
-      this.workPackage,
-    );
-    this.fetch();
+    this.preFetch();
     this.bind();
   }
 
@@ -527,17 +506,45 @@ export class WorkPackageComponent implements OnInit {
       }
     });
   }
-
-  findTask(id: string): WorkPackageTaskViewModel {
-    for (const list of this.workPackage.lists) {
-      for (const task of list.tasks) {
-        if (task.id === id) {
-          return task;
-        }
+  async preFetch() {
+    const id = this.activatedRoute.snapshot.params.id;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.projectService.projects.length; i++) {
+      this.workPackage = this.projectService.projects[i].workPackages.find(
+        w => w.id === id,
+      );
+      if (this.workPackage) {
+        this.project = this.projectService.projects[i];
+        break;
       }
     }
-  }
+    if (!this.workPackage) {
+      this.preWaiting = true;
+      const op = await this.workPackageService.fetch(id, this.filters);
+      if (op.status !== OperationResultStatus.Success) {
+        this.router.navigateByUrl('dashboard');
+        return;
+      }
+      this.workPackage = op.data;
+      const projOp = await this.projectService.fetchArchived(op.data.projectId);
+      if (projOp.status !== OperationResultStatus.Success) {
+        this.router.navigateByUrl('dashboard');
+        return;
+      }
+      this.preWaiting = false;
+      this.project = projOp.data;
 
+      return;
+    }
+    // if (this.workPackage.progress === undefined) {
+    //   this.workPackage.progress = 0;
+    // }
+    this.permission = this.projectService.getWorkPackagePermission(
+      this.project,
+      this.workPackage,
+    );
+    this.fetch();
+  }
   async fetch() {
     this.waiting = true;
     const op = await this.workPackageService.fetch(
@@ -551,6 +558,17 @@ export class WorkPackageComponent implements OnInit {
     this.workPackage = this.mapData(op.data);
     this.waiting = false;
   }
+
+  findTask(id: string): WorkPackageTaskViewModel {
+    for (const list of this.workPackage.lists) {
+      for (const task of list.tasks) {
+        if (task.id === id) {
+          return task;
+        }
+      }
+    }
+  }
+
 
   mapData(model: WorkPackageViewModel): WorkPackageViewModel {
     model.lists.forEach(list => {

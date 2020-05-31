@@ -47,7 +47,7 @@ export class ProjectService {
 
   async fetchArchived(id): Promise<OperationResult<ProjectViewModel>> {
     return await this.httpService.post<ProjectViewModel>(
-      '/projects/archived/' + id,
+      '/projects/' + id + '/fetch',
     );
   }
 

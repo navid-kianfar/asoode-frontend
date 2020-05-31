@@ -2,7 +2,7 @@
   class="project-info"
   [class.simple]="!project.complex"
   [class.template]="template"
-  (click)="openProject()"
+  (click)="openProject($event)"
 >
   <div class="title">
     <i *ngIf="project.complex" class="icon-project"></i>
