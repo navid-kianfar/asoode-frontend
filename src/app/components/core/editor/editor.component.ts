@@ -14,6 +14,7 @@ import 'quill-emoji/dist/quill-emoji.js';
 import { QuillEditorComponent } from 'ngx-quill';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { Subscription } from 'rxjs';
+import {DeviceDetectorService} from 'ngx-device-detector';
 
 @Component({
   selector: 'app-editor',
@@ -35,7 +36,10 @@ export class EditorComponent implements OnInit, OnDestroy {
   modules: any;
   @ViewChild(QuillEditorComponent, { static: true })
   editor: QuillEditorComponent;
-  constructor(readonly cultureService: CultureService) {}
+  constructor(
+    readonly cultureService: CultureService,
+    readonly deviceDetectorService: DeviceDetectorService,
+  ) {}
 
   ngOnDestroy(): void {
     if (this.subscribe) {

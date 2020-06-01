@@ -77,10 +77,17 @@
       [disabled]="sending"
       (send)="sendMessage($event)"
       (fileUpload)="uploadFile()"
-      (filePick)="pickFile()"
       [clear]="clearEditor"
       [members]="[]"
       [messenger]="true"
     ></app-editor>
   </div>
 </div>
+<input
+  #filePicker
+  (change)="onChange($event.target)"
+  [accept]="allowedTypes"
+  multiple
+  hidden
+  type="file"
+/>

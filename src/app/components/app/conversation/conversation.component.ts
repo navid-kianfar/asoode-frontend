@@ -4,7 +4,7 @@ import {
   Input,
   OnChanges, OnDestroy,
   OnInit,
-  SimpleChanges,
+  SimpleChanges, ViewChild,
 } from '@angular/core';
 import {
   ConversationViewModel,
@@ -19,6 +19,8 @@ import { CreateWizardComponent } from '../../../modals/create-wizard/create-wiza
 import { Socket } from 'ngx-socket-io';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
 import {IdentityService} from '../../../services/auth/identity.service';
+import {UploadViewModel} from '../../../view-models/storage/files-types';
+import {FilesService} from '../../../services/storage/files.service';
 
 @Component({
   selector: 'app-conversation',
@@ -30,22 +32,36 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
   @Input() popup: boolean;
   @Input() dashboard: boolean;
   @Input() members: MemberInfoViewModel[];
+  @ViewChild('filePicker', { static: false }) filePicker;
+
   waiting: boolean;
   sending: boolean;
   clearEditor = new EventEmitter();
   mappedConversations: MappedConversationViewModel[] = [];
   ConversationType = ConversationType;
+  allowedTypes: string;
 
   constructor(
     readonly identityService: IdentityService,
     private readonly messengerService: MessengerService,
     private readonly modalService: ModalService,
     private readonly culturedDateService: CulturedDateService,
+    private readonly filesService: FilesService,
     private readonly socket: Socket,
   ) {}
 
   ngOnInit() {
     this.mappedConversations = [];
+    this.allowedTypes = [
+      'image/*',
+      'audio/*',
+      'video/*',
+      '.xls,.xlsx,.csv',
+      '.zip,.rar,.7z,.tar,.gz',
+      '.pdf',
+      '.ppt,.pptx',
+      '.doc,.docx,.rtf,.txt',
+    ].join(',');
     this.bind();
     this.fetch();
   }
@@ -136,7 +152,50 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
     this.clearEditor.emit();
   }
 
-  uploadFile() {}
+  uploadFile() {
+    this.filePicker.nativeElement.click();
+  }
 
-  pickFile() {}
+
+  onChange(target: any) {
+    if (!target.files || !target.files.length) {
+      return;
+    }
+    const upload: UploadViewModel[] = [];
+    for (let i = 0; i < target.files.length; i++) {
+      const f = target.files.item(i);
+      upload.push({
+        uploading: false,
+        success: false,
+        failed: false,
+        progress: 0,
+        name: f.name,
+        size: f.size,
+        file: f,
+        extensionLessName: this.filesService.getExtensionLessFileName(f.name),
+        extension: this.filesService.getFileExtension(f.name),
+        promise: undefined,
+        recordId: this.recordId,
+      });
+    }
+    this.clearInputFile(target);
+    this.filesService.chatAttaching = [...this.filesService.chatAttaching, ...upload];
+    this.filesService.attachChat(upload, this.recordId);
+  }
+
+  clearInputFile(f) {
+    if (f.value) {
+      try {
+        f.value = '';
+      } catch (err) {}
+      if (f.value) {
+        const form = document.createElement('form');
+        const parentNode = f.parentNode;
+        const ref = f.nextSibling;
+        form.appendChild(f);
+        form.reset();
+        parentNode.insertBefore(f, ref);
+      }
+    }
+  }
 }

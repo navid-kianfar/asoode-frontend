@@ -15,6 +15,7 @@ export class FilesService {
   hidePlate: boolean;
   uploading: UploadViewModel[] = [];
   attaching: UploadViewModel[] = [];
+  chatAttaching: UploadViewModel[] = [];
   private readonly imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
   private readonly audioExtensions = ['.mp3', '.wave', '.wav', '.ogg'];
   private readonly videoExtensions = ['.mp4'];
@@ -208,6 +209,45 @@ export class FilesService {
     });
   }
 
+
+  async attachChat(upload: UploadViewModel[], recordId: string) {
+    if (upload.length) {
+      this.hidePlate = false;
+    }
+    upload.forEach(u => {
+      const removeFromList = () => {
+        const index = this.chatAttaching.indexOf(u);
+        const removed = this.chatAttaching.splice(index, 1);
+        console.log(index, removed, u);
+      };
+      u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
+        this.httpService
+          .formUpload(
+            `/messenger/channel/${recordId}/attach`,
+            { file: u.file },
+              percent => { u.progress = percent; }
+          )
+          .then(
+            op => {
+              removeFromList();
+              if (op.status !== OperationResultStatus.Success) {
+                u.uploading = false;
+                u.failed = true;
+                return;
+              }
+              u.progress = 100;
+              u.success = true;
+              u.uploading = false;
+            },
+            err => {
+              reject(err);
+              u.uploading = false;
+              u.failed = true;
+            },
+          );
+      });
+    });
+  }
 
   async delete(model): Promise<OperationResult<boolean>> {
     return this.httpService.post<boolean>('/files/delete', model, false);
