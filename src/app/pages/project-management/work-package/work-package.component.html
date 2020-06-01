@@ -480,7 +480,7 @@
     </div>
   </ng-container>
 </div>
-<app-messenger-shortcut></app-messenger-shortcut>
+<app-messenger-shortcut *ngIf="workPackage" [packageId]="workPackage.id"></app-messenger-shortcut>
 <popper-content #popperObjectives>
   <div class="objectives-popper">
     <div *ngIf="!workPackage.objectives.length">

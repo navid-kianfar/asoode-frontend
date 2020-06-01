@@ -80,14 +80,16 @@
                 </div>
               </div>
 
-              <div
-                class="member"
-                *ngFor="
+              <div class="members-inner-container">
+                <div
+                  class="member"
+                  *ngFor="
                   let member of allMembers
                     | search: ['fullName', 'email', 'phoneNumber']:filter
                 "
-              >
-                <app-member-info [model]="member"></app-member-info>
+                >
+                  <app-member-info [model]="member"></app-member-info>
+                </div>
               </div>
             </div>
           </ng-template>

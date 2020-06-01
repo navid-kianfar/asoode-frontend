@@ -2,7 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
+  OnChanges, OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
@@ -25,7 +25,7 @@ import {IdentityService} from '../../../services/auth/identity.service';
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.scss'],
 })
-export class ConversationComponent implements OnInit, OnChanges {
+export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
   @Input() recordId: string;
   @Input() dashboard: boolean;
   @Input() members: MemberInfoViewModel[];
@@ -49,8 +49,14 @@ export class ConversationComponent implements OnInit, OnChanges {
     this.fetch();
   }
 
+  ngOnDestroy(): void {
+    this.messengerService.lock = false;
+  }
+
   bind() {
-    this.socket.on('push-notification', (notification: any) => {
+    if (this.messengerService.lock) { return; }
+    this.messengerService.lock = true;
+    this.socket.on('push-notification', (notification) => {
       switch (notification.type) {
         case ActivityType.ChannelMessage:
           if (this.recordId === notification.data.channelId) {

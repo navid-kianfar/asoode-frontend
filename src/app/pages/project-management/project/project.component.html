@@ -165,4 +165,4 @@
     </div>
   </ng-container>
 </div>
-<app-messenger-shortcut></app-messenger-shortcut>
+<app-messenger-shortcut *ngIf="project" [project]="project" [projectId]="project.id"></app-messenger-shortcut>

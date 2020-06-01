@@ -12,6 +12,7 @@ import { OperationResultStatus } from '../../library/core/enums';
   providedIn: 'root',
 })
 export class MessengerService {
+  lock: boolean;
   channels: ChannelRepository;
 
   constructor(private readonly httpService: HttpService) {

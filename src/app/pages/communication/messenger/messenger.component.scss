@@ -39,6 +39,10 @@
         padding-top: 10px;
         border-bottom: 1px solid #e6e6e6;
         margin-bottom: 10px;
+
+        max-height: calc(100vh - 165px);
+        overflow-y: auto;
+
         .item {
           cursor: pointer;
           padding: 10px;
@@ -81,20 +85,26 @@
           }
         }
 
-        .member {
-          ::ng-deep .member-info {
-            .initials {
-              border-color: #ee6285;
+        .members-inner-container {
+          max-height: calc(100vh - 225px);
+          overflow-y: auto;
+
+          .member {
+            ::ng-deep .member-info {
+              .initials {
+                border-color: #ee6285;
+              }
+            }
+          }
+          .member.online {
+            ::ng-deep .member-info {
+              .initials {
+                border-color: #5eb258;
+              }
             }
           }
         }
-        .member.online {
-          ::ng-deep .member-info {
-            .initials {
-              border-color: #5eb258;
-            }
-          }
-        }
+
       }
     }
   }
