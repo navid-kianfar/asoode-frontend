@@ -27,6 +27,7 @@ import {IdentityService} from '../../../services/auth/identity.service';
 })
 export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
   @Input() recordId: string;
+  @Input() popup: boolean;
   @Input() dashboard: boolean;
   @Input() members: MemberInfoViewModel[];
   waiting: boolean;

@@ -327,9 +327,6 @@ body.dark-mode {
       }
     }
 
-    .asoode-editor {
-      background: $color5;
-    }
 
     .aside-item {
       border-color: $color2 !important;
@@ -346,6 +343,9 @@ body.dark-mode {
     }
   }
 
+  .asoode-editor {
+    background: $color5;
+  }
   .confirm-modal {
     .modal-title, .modal-body h2, .modal-body h3 {
       color: $color3 !important;

@@ -1,4 +1,4 @@
-<div class="conversation-block">
+<div class="conversation-block" [class.popup]="popup">
   <app-waiting *ngIf="waiting"></app-waiting>
 
   <div *ngIf="!waiting" class="conversations">

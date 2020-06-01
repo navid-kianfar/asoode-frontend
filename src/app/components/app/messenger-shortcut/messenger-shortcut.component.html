@@ -36,6 +36,7 @@
       <img src="/assets/images/messenger/asoode-welcome{{identityService.profile.darkMode ? '-dark' : ''}}.svg" alt="welcome" />
     </div>
     <app-conversation
+      [popup]="true"
       [dashboard]="dashboard"
       [recordId]="current.id"
     ></app-conversation>
