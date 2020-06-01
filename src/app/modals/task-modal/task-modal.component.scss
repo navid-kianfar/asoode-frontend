@@ -1039,6 +1039,12 @@
 }
 
 @media (max-width: 740px) {
+
+  .sub-tasks-wrapper{
+    width: auto;
+    max-width: 100%;
+  }
+
   .task-wrapper {
     margin: 0;
     width: 100%;

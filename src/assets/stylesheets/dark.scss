@@ -388,6 +388,10 @@ body.dark-mode {
     .mat-table th.mat-header-cell {
       background: $color1 !important;
     }
+    .mat-table td {
+      background: $color1 !important;
+      color: $color4 !important;
+    }
   }
 
   .group-page {
