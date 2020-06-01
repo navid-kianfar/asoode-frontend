@@ -440,6 +440,7 @@
 
             <div *ngIf="discountResult.expired" class="upgrade-notice">{{ 'DISCOUNT_EXPIRED' | translate }}</div>
             <div *ngIf="discountResult.invalid" class="upgrade-notice">{{ 'DISCOUNT_INVALID' | translate }}</div>
+            <div *ngIf="discountResult.invalidPlan" class="upgrade-notice">{{ 'DISCOUNT_INVALID_PLAN' | translate }}</div>
             <div *ngIf="discountResult.alreadyUsed" class="upgrade-notice">{{ 'DISCOUNT_USED' | translate }}</div>
 
             <div *ngIf="order.type === OrderType.Change && identityService.profile.plan.type !== PlanType.Free" class="upgrade-notice">{{ 'UPGRADE_NOTICE' | translate }}</div>

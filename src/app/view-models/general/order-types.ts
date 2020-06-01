@@ -3,5 +3,6 @@ export interface OrderDiscountResultViewModel {
   expired: boolean;
   success: boolean;
   invalid: boolean;
+  invalidPlan: boolean;
   amount: number;
 }

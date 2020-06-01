@@ -134,7 +134,8 @@ export class UpgradeWizardComponent implements OnInit {
       amount: 0,
       expired: false,
       success: false,
-      invalid: false
+      invalid: false,
+      invalidPlan: false
     };
     this.calculateTotalCost();
 
@@ -370,13 +371,24 @@ export class UpgradeWizardComponent implements OnInit {
       amount: 0,
       expired: false,
       success: false,
-      invalid: false
+      invalid: false,
+      invalidPlan: false
     };
     this.checkingDiscount = true;
-    const op = await this.orderService.checkDiscount({
-      code,
-      amount: this.order.calculatedPrice
-    });
+    const model = { code, amount: this.order.calculatedPrice } as any;
+
+    switch (this.order.type) {
+      case OrderType.Patch:
+        model.planId = this.data.mine.planId;
+        break;
+      case OrderType.Change:
+        model.planId = this.selectedPlan.id;
+        break;
+      case OrderType.Renew:
+        model.planId = this.data.mine.planId;
+        break;
+    }
+    const op = await this.orderService.checkDiscount(model);
     this.checkingDiscount = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error

@@ -717,5 +717,6 @@
   "REMOVE_WORK_PACKAGE": "Remove work package",
   "REMOVE_PROJECT_CONFIRM_HEADING": "Are you sure to remove project {0} and all related work packages?",
   "REMOVE_PROJECT_DESCRIPTION": "If confirmed the project will be lost for ever!",
-  "REMOVE_PROJECT": "Remove project and all related work packages"
+  "REMOVE_PROJECT": "Remove project and all related work packages",
+  "DISCOUNT_INVALID_PLAN": "Discount code belongs to another plan"
 }
