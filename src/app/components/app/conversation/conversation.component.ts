@@ -22,6 +22,7 @@ import {IdentityService} from '../../../services/auth/identity.service';
 import {UploadViewModel} from '../../../view-models/storage/files-types';
 import {FilesService} from '../../../services/storage/files.service';
 import {UsersService} from '../../../services/general/users.service';
+import {WorkPackageTaskAttachmentViewModel} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-conversation',
@@ -109,10 +110,14 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
     this.waiting = false;
     const dictionary = {};
     op.data.forEach(m => {
+      m.createdAt = new Date(m.createdAt);
+    });
+    op.data.forEach(m => {
       const date = this.culturedDateService.toString(m.createdAt);
       dictionary[date] = dictionary[date] || [];
       dictionary[date].push(m);
     });
+    // op.data.sort((a, b) => a.createdAt.getTime() > b.createdAt.getTime() ? 1 : -1);
     this.mappedConversations = Object.keys(dictionary).map(k => {
       return { date: k, messages: dictionary[k] };
     });
@@ -208,5 +213,19 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
 
   onAudioEnded($event: any, upload: any) {
 
+  }
+  getPath(attachment: any) {
+    if (attachment.path.indexOf('https://') === -1) {
+      return 'https://storage.asoode.com' + attachment.path;
+    }
+    return attachment.path;
+  }
+
+  openAttachment(upload: any) {
+    window.open(this.getPath(upload), '_blank');
+  }
+
+  downloadAttachment(upload: any) {
+    this.filesService.download(upload.path, null);
   }
 }

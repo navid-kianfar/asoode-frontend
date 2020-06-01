@@ -310,6 +310,8 @@ body.dark-mode {
     }
   }
 
+
+
   .messenger-container {
     .members-container .filter .wrapper input {
       background: transparent !important;
@@ -378,6 +380,18 @@ body.dark-mode {
 
       .body {
         background: transparent !important;
+      }
+    }
+  }
+
+  .attachment-item {
+    &:hover {
+      background: $color1 !important;
+      border-color: $color2 !important;
+    }
+    .info {
+      h4 {
+        color: $color4 !important;
       }
     }
   }

@@ -57,12 +57,12 @@ export class FilesService {
       case '.wave':
       case '.wav':
       case '.ogg':
-        return 'icon-play4';
+        return 'ikon-music5';
       case '.mp4':
       case '.mkv':
       case '.flv':
       case '.web':
-        return 'icon-play';
+        return 'ikon-film4';
       case '.zip':
       case '.rar':
       case '.7z':

@@ -34,7 +34,7 @@
             </div>
           </div>
         </ng-container>
-        <ng-container *ngIf="!message.fromBot && message.type !== ConversationType.Upload">
+        <ng-container *ngIf="!message.fromBot && !message.upload">
           <div class="from">
             <app-member-info
               [small]="true"
@@ -68,7 +68,7 @@
             </div>
           </div>
         </ng-container>
-        <ng-container *ngIf="!message.fromBot && message.type === ConversationType.Upload">
+        <ng-container *ngIf="!message.fromBot && message.upload">
           <div class="attachment-item">
             <div class="preview">
               <img *ngIf="message.upload.thumbnailPath" [src]="message.upload.thumbnailPath" alt="">
@@ -81,15 +81,15 @@
               <h5>{{ message.upload.createdAt | culturedDate: true }}</h5>
             </div>
             <div class="actions">
-<!--              <div class="btns">-->
-<!--                <i-->
-<!--                  class="icon-new-window"-->
-<!--                  (click)="openAttachment(attachment)"-->
-<!--                ></i>-->
-<!--                <i-->
-<!--                  class="icon-download41"-->
-<!--                  (click)="downloadAttachment(attachment)"-->
-<!--                ></i>-->
+              <div class="btns">
+                <i
+                  class="icon-new-window"
+                  (click)="openAttachment(message.upload)"
+                ></i>
+                <i
+                  class="icon-download41"
+                  (click)="downloadAttachment(message.upload)"
+                ></i>
 <!--                <i-->
 <!--                  *ngIf="isAdminOrHasPermission(workPackage.permissionEditAttachment)"-->
 <!--                  class="icon-pencil"-->
@@ -100,7 +100,7 @@
 <!--                  class="icon-delete"-->
 <!--                  (click)="deleteAttachment(attachment)"-->
 <!--                ></i>-->
-<!--              </div>-->
+              </div>
             </div>
           </div>
           <div class="audio-container" *ngIf="filesService.isAudio(message.upload.path)">
