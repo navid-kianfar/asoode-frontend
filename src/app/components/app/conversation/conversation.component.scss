@@ -61,6 +61,123 @@
     }
   }
 
+  .attachment-item {
+    display: flex;
+    margin-top: 20px;
+    border: 1px solid transparent;
+    padding: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background: #fefefe;
+      border-color: #eeeeee;
+    }
+    .preview {
+      display: flex;
+      width: 50px;
+      height: 50px;
+      margin-inline-end: 5px;
+      align-items: center;
+      justify-content: center;
+      i {
+        color: #dadada;
+        font-size: 30px;
+      }
+
+      img {
+        width: 50px;
+        max-height: 50px;
+      }
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      margin-inline-end: 5px;
+      max-width: 260px;
+
+      h4 {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #333333;
+      }
+
+      h5 {
+        font-size: 0.7rem;
+        font-weight: 400;
+        color: #808080;
+      }
+
+      input {
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        padding: 2px 5px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        margin-inline-end: 5px;
+      }
+
+      i.rename {
+      }
+
+      ::ng-deep .mat-progress-bar-fill::after {
+        background-color: #50a9dd;
+      }
+
+      ::ng-deep .mat-progress-bar-buffer {
+        background: #e6e6e6;
+      }
+
+      ::ng-deep .mat-progress-bar {
+        border-radius: 2px;
+      }
+
+      .success {
+        ::ng-deep .mat-progress-bar-fill::after {
+          background-color: #3d8f4d;
+        }
+
+        ::ng-deep .mat-progress-bar-buffer {
+          background: #e6e6e6;
+        }
+
+        ::ng-deep .mat-progress-bar {
+          border-radius: 2px;
+        }
+      }
+      .failed {
+        ::ng-deep .mat-progress-bar-fill::after {
+          background-color: #b63d3c;
+        }
+
+        ::ng-deep .mat-progress-bar-buffer {
+          background: #e6e6e6;
+        }
+
+        ::ng-deep .mat-progress-bar {
+          border-radius: 2px;
+        }
+      }
+    }
+    .actions {
+      display: flex;
+      width: 100px;
+      flex-direction: column;
+      .btns {
+        display: flex;
+        justify-content: space-around;
+        color: #808080;
+        font-size: 0.9rem;
+      }
+      .cover {
+        padding-top: 10px;
+        a {
+          color: #808080;
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
   ::ng-deep .ql-editor {
     max-height: 200px;
   }

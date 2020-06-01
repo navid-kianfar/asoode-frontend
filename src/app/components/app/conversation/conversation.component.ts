@@ -10,7 +10,7 @@ import {
   ConversationViewModel,
   MappedConversationViewModel,
 } from '../../../view-models/communication/messenger-types';
-import { ActivityType, ConversationType } from 'src/app/library/app/enums';
+import {AccessType, ActivityType, ConversationType} from 'src/app/library/app/enums';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { MessengerService } from '../../../services/communication/messenger.service';
 import { OperationResultStatus } from '../../../library/core/enums';
@@ -21,6 +21,7 @@ import { CulturedDateService } from '../../../services/core/cultured-date.servic
 import {IdentityService} from '../../../services/auth/identity.service';
 import {UploadViewModel} from '../../../view-models/storage/files-types';
 import {FilesService} from '../../../services/storage/files.service';
+import {UsersService} from '../../../services/general/users.service';
 
 @Component({
   selector: 'app-conversation',
@@ -39,14 +40,17 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
   clearEditor = new EventEmitter();
   mappedConversations: MappedConversationViewModel[] = [];
   ConversationType = ConversationType;
+  AccessType = AccessType;
   allowedTypes: string;
+  permission: AccessType;
 
   constructor(
     readonly identityService: IdentityService,
     private readonly messengerService: MessengerService,
     private readonly modalService: ModalService,
     private readonly culturedDateService: CulturedDateService,
-    private readonly filesService: FilesService,
+    readonly filesService: FilesService,
+    readonly usersService: UsersService,
     private readonly socket: Socket,
   ) {}
 
@@ -81,6 +85,9 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
           }
           break;
         case ActivityType.ChannelUpload:
+          if (this.recordId === notification.data.channelId) {
+            this.push(notification.data);
+          }
           break;
       }
     });
@@ -197,5 +204,9 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
         parentNode.insertBefore(f, ref);
       }
     }
+  }
+
+  onAudioEnded($event: any, upload: any) {
+
   }
 }

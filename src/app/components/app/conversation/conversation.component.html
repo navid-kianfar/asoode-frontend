@@ -4,7 +4,7 @@
   <div *ngIf="!waiting" class="conversations">
     <div class="date-grouped" *ngFor="let conversation of mappedConversations">
       <div class="date">{{ conversation.date }}</div>
-      <div *ngFor="let message of conversation.messages" class="message">
+      <div *ngFor="let message of conversation.messages" class="message" [class.attachment-item]="message.uploadId !== null">
         <ng-container *ngIf="message.fromBot">
           <div class="from">
             <img src="/assets/images/messenger/asoode-bot-icon{{identityService.profile.darkMode ? '-dark' : ''}}.svg" alt="bot" />
@@ -34,7 +34,7 @@
             </div>
           </div>
         </ng-container>
-        <ng-container *ngIf="!message.fromBot">
+        <ng-container *ngIf="!message.fromBot && message.type !== ConversationType.Upload">
           <div class="from">
             <app-member-info
               [small]="true"
@@ -68,8 +68,90 @@
             </div>
           </div>
         </ng-container>
+        <ng-container *ngIf="!message.fromBot && message.type === ConversationType.Upload">
+          <div class="attachment-item">
+            <div class="preview">
+              <img *ngIf="message.upload.thumbnailPath" [src]="message.upload.thumbnailPath" alt="">
+              <i *ngIf="!message.upload.thumbnailPath" [class]="filesService.icon(message.upload.path)"></i>
+            </div>
+            <div class="info">
+              <h4>
+                {{ message.upload.name }}
+              </h4>
+              <h5>{{ message.upload.createdAt | culturedDate: true }}</h5>
+            </div>
+            <div class="actions">
+<!--              <div class="btns">-->
+<!--                <i-->
+<!--                  class="icon-new-window"-->
+<!--                  (click)="openAttachment(attachment)"-->
+<!--                ></i>-->
+<!--                <i-->
+<!--                  class="icon-download41"-->
+<!--                  (click)="downloadAttachment(attachment)"-->
+<!--                ></i>-->
+<!--                <i-->
+<!--                  *ngIf="isAdminOrHasPermission(workPackage.permissionEditAttachment)"-->
+<!--                  class="icon-pencil"-->
+<!--                  (click)="editAttachment(attachment)"-->
+<!--                ></i>-->
+<!--                <i-->
+<!--                  *ngIf="isAdminOrHasPermission(workPackage.permissionEditAttachment)"-->
+<!--                  class="icon-delete"-->
+<!--                  (click)="deleteAttachment(attachment)"-->
+<!--                ></i>-->
+<!--              </div>-->
+            </div>
+          </div>
+          <div class="audio-container" *ngIf="filesService.isAudio(message.upload.path)">
+            <mat-basic-audio-player [audioUrl]="message.upload.path"
+                                    [title]="message.upload.name"
+                                    (ended)="onAudioEnded($event, message.upload)"
+                                    [autoPlay]="false"
+                                    [displayTitle]="false"
+                                    [displayVolumeControls]="true"></mat-basic-audio-player>
+            <br>
+          </div>
+          <div class="video-container ltr" *ngIf="filesService.isVideo(message.upload.path)">
+            <mat-video [title]="message.upload.name"
+                       [autoplay]="false"
+                       [preload]="false"
+                       [fullscreen]="false"
+                       [download]="false"
+                       color="primary"
+                       spinner="spin"
+                       [poster]="message.upload.thumbnailPath"
+                       [src]="message.upload.path"></mat-video>
+            <br>
+          </div>
+        </ng-container>
       </div>
     </div>
+    <ng-container *ngFor="let upload of filesService.chatAttaching">
+      <div
+        class="message attachment-item"
+        *ngIf="upload.recordId === recordId"
+      >
+        <div class="preview">
+          <i [class]="filesService.icon(upload.name)"></i>
+        </div>
+        <div class="info">
+          <h4>{{ upload.name }}</h4>
+          <h5
+            [class.success]="upload.success"
+            [class.failed]="upload.failed"
+          >
+            <mat-progress-bar
+              [value]="upload.progress"
+            ></mat-progress-bar>
+          </h5>
+          <h5>
+            <span>{{ 'UPLOADING' | translate }}&nbsp;</span>
+          </h5>
+        </div>
+        <div class="actions"></div>
+      </div>
+    </ng-container>
   </div>
 
   <div *ngIf="!dashboard && !waiting" class="send-message">
