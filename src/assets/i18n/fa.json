@@ -718,5 +718,6 @@
   "REMOVE_PROJECT_CONFIRM_HEADING": "آیا از حذف پروژه به همراه تمامی بسته\u200Cهای کاری {0} اطمینان دارید؟",
   "REMOVE_PROJECT_DESCRIPTION": "در صورت تایید، امکان بازگردانی مجدد وجود ندارد",
   "REMOVE_PROJECT": "حذف پروژه به همراه تمامی بسته\u200Cهای کاری",
-  "DISCOUNT_INVALID_PLAN": "کد تخفیف مربوط به پلان دیگری می\u200Cباشد"
+  "DISCOUNT_INVALID_PLAN": "کد تخفیف مربوط به پلان دیگری می\u200Cباشد",
+  "TOTAL_EPISODES": "اپیزود ها"
 }

@@ -23,6 +23,9 @@ export interface TreeViewModel {
   tree: { [key: string]: TreeReportViewModel };
 }
 export interface TreeReportViewModel {
+  doneWorkPackages: number;
+  workPackages: number;
+  workPackageProgress: number;
   progress: number;
   timeSpent: number;
   from?: Date;

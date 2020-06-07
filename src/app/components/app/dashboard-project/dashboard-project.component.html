@@ -2,7 +2,7 @@
   <div class="no-projects" *ngIf="!projectService.projects.length">
     <h5>{{ 'NO_PROJECTS_YET' | translate }}</h5>
 
-    <div class="create-holder">
+    <div (click)="openModal()" class="create-holder">
       <div class="plus">
         <i class="icon-plus2"></i>
       </div>

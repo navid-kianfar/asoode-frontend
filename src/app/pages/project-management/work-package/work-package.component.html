@@ -480,9 +480,11 @@
     </div>
   </ng-container>
 </div>
-<app-messenger-shortcut *ngIf="workPackage" [packageId]="workPackage.id"></app-messenger-shortcut>
+<app-messenger-shortcut *ngIf="workPackage && project"
+                        [workPackage]="workPackage"
+                        [project]="project"></app-messenger-shortcut>
 <popper-content #popperObjectives>
-  <div class="objectives-popper">
+  <div *ngIf="workPackage" class="objectives-popper">
     <div *ngIf="!workPackage.objectives.length">
       <h5>{{ 'NO_OBJECTIVES' | translate }}</h5>
     </div>
@@ -512,7 +514,7 @@
   </div>
 </popper-content>
 <popper-content #popperFilters>
-  <div class="filters-popper">
+  <div *ngIf="workPackage" class="filters-popper">
     <app-checkbox
       [(model)]="filters.mine"
       (modelChange)="fetch()"
@@ -543,7 +545,7 @@
   </div>
 </popper-content>
 <mat-menu #allMemberMenu="matMenu" class="popper-all-users">
-  <div class="member-info-popper">
+  <div *ngIf="workPackage" class="member-info-popper">
     <ng-container *ngFor="let member of workPackage.members; let lst = last">
       <div class="wrapper">
         <app-member-info
