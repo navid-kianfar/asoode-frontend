@@ -7,11 +7,17 @@
     margin-bottom: 30px;
   }
 
+  .box-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
   .box {
     padding: 20px;
     background: #ffffff;
     margin-bottom: 10px;
     border-radius: 5px;
+    width: 45%;
+    margin-inline-end: 5%;
 
     .header {
       display: flex;

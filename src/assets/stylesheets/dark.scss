@@ -199,6 +199,13 @@ body.dark-mode {
     }
   }
 
+  .project-info {
+    .item {
+      background: $color2 !important;
+      color: $color4 !important;
+    }
+  }
+
   .group-info.small {
     background: transparent !important;
   }

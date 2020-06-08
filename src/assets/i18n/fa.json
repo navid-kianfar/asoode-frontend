@@ -175,8 +175,8 @@
   "DISCOUNT_USED": "قبلا از این کد تخفیف استفاده کردید",
   "DISK_SPACE": "فضای دیسک",
   "DISK_USAGE": "مصرف دیسک",
-  "DISK_USAGE_GB_DETAIL": "{0} گیگابایت از {1} گیگابایت فضای دیسک را مصرف کرده‌اید.",
-  "DISK_USAGE_MB_DETAIL": "{0} مگابایت از {1} مگابایت فضای دیسک را مصرف کرده‌اید.",
+  "DISK_USAGE_GB_DETAIL": "{0} از {1} فضای دیسک را مصرف کرده‌اید.",
+  "DISK_USAGE_MB_DETAIL": "{0} از {1} فضای دیسک را مصرف کرده‌اید.",
   "DONE_CARDS": "کارت‌های انجام شده",
   "DOWNLOAD": "دانلود",
   "DO_YOU_HAVE_DISCOUNT": "کد تخفیف دارید؟",
@@ -719,5 +719,13 @@
   "REMOVE_PROJECT_DESCRIPTION": "در صورت تایید، امکان بازگردانی مجدد وجود ندارد",
   "REMOVE_PROJECT": "حذف پروژه به همراه تمامی بسته\u200Cهای کاری",
   "DISCOUNT_INVALID_PLAN": "کد تخفیف مربوط به پلان دیگری می\u200Cباشد",
-  "TOTAL_EPISODES": "اپیزود ها"
+  "TOTAL_EPISODES": "اپیزود ها",
+  "ATTACHMENT_SIZE": "حجم پیوست",
+  "UPGRADE": "ارتقا پلان",
+  "UPLOAD_REMAINING": "آپلود باقی فایل ها",
+  "MAX_ATTACHMENT_EXCEEDED": "حجم پیوست برای پلان شما {0} می\u200Cباشد، فایل\u200Cهای زیر آپلود نخواهند شد:",
+  "SIMPLE_GROUP_USAGE": "مصرف گروه ساده",
+  "COMPLEX_GROUP_USAGE": "مصرف گروه ساختار دار",
+  "SIMPLE_PROJECT_USAGE": "مصرف پروژه ساده",
+  "COMPLEX_PROJECT_USAGE": "مصرف پروژه ساختار دار"
 }

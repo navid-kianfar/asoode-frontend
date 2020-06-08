@@ -22,7 +22,6 @@ import {IdentityService} from '../../../services/auth/identity.service';
 import {UploadViewModel} from '../../../view-models/storage/files-types';
 import {FilesService} from '../../../services/storage/files.service';
 import {UsersService} from '../../../services/general/users.service';
-import {WorkPackageTaskAttachmentViewModel} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-conversation',
@@ -30,6 +29,7 @@ import {WorkPackageTaskAttachmentViewModel} from '../../../view-models/projects/
   styleUrls: ['./conversation.component.scss'],
 })
 export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
+  @Input() attachmentSize: number;
   @Input() recordId: string;
   @Input() popup: boolean;
   @Input() dashboard: boolean;
@@ -191,8 +191,10 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
     this.clearInputFile(target);
-    this.filesService.chatAttaching = [...this.filesService.chatAttaching, ...upload];
-    this.filesService.attachChat(upload, this.recordId);
+    this.filesService.attachChat(upload, this.recordId, this.attachmentSize)
+      .then(filtered => {
+        this.filesService.chatAttaching = [...this.filesService.chatAttaching, ...filtered];
+      });
   }
 
   clearInputFile(f) {

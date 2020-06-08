@@ -182,6 +182,7 @@ import { AnimationWorkPackageBoardComponent } from './components/app/animation-w
 import { AnimationWorkPackageTaskComponent } from './components/app/animation-work-package-task/animation-work-package-task.component';
 import { ArchivedProjectsComponent } from './components/app/archived-projects/archived-projects.component';
 import { ArchivedGroupsComponent } from './components/app/archived-groups/archived-groups.component';
+import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @NgModule({
   declarations: [
@@ -322,8 +323,10 @@ import { ArchivedGroupsComponent } from './components/app/archived-groups/archiv
     AnimationWorkPackageTaskComponent,
     ArchivedProjectsComponent,
     ArchivedGroupsComponent,
+    UploadExceedModalComponent,
   ],
   entryComponents: [
+    UploadExceedModalComponent,
     WorkPackagePermissionComponent,
     UpgradeWorkPackageComponent,
     DocumentModalComponent,

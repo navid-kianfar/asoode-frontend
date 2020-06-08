@@ -175,8 +175,8 @@
   "DISCOUNT_USED": "You have used this discount code before",
   "DISK_SPACE": "Disk space",
   "DISK_USAGE": "Disk usage",
-  "DISK_USAGE_GB_DETAIL": "You have used {0} GB of {1} GB of dedicated space",
-  "DISK_USAGE_MB_DETAIL": "You have used {0} MB of {1} MB of dedicated space",
+  "DISK_USAGE_GB_DETAIL": "You have used {0} of {1} of dedicated space",
+  "DISK_USAGE_MB_DETAIL": "You have used {0} of {1} of dedicated space",
   "DONE_CARDS": "Done cards",
   "DOWNLOAD": "Download",
   "DO_YOU_HAVE_DISCOUNT": "Do you have a discount code?",
@@ -718,5 +718,14 @@
   "REMOVE_PROJECT_CONFIRM_HEADING": "Are you sure to remove project {0} and all related work packages?",
   "REMOVE_PROJECT_DESCRIPTION": "If confirmed the project will be lost for ever!",
   "REMOVE_PROJECT": "Remove project and all related work packages",
-  "DISCOUNT_INVALID_PLAN": "Discount code belongs to another plan"
+  "DISCOUNT_INVALID_PLAN": "Discount code belongs to another plan",
+  "TOTAL_EPISODES": "Episodes",
+  "ATTACHMENT_SIZE": "Attachment Size",
+  "UPGRADE": "Upgrade plan",
+  "UPLOAD_REMAINING": "Upload remaining files",
+  "MAX_ATTACHMENT_EXCEEDED": "Your plan attachment size is {0}, following files would not be uploaded:",
+  "SIMPLE_GROUP_USAGE": "Simple group usage",
+  "COMPLEX_GROUP_USAGE": "Complex group usage",
+  "SIMPLE_PROJECT_USAGE": "Work package usage",
+  "COMPLEX_PROJECT_USAGE": "WBS project usage"
 }

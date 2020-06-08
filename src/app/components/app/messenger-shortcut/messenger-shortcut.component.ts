@@ -48,7 +48,8 @@ export class MessengerShortcutComponent implements OnInit {
         members: this.project.members.map(m => m.member),
         messages: [],
         title: this.project.title,
-        type: ChannelType.Project
+        type: ChannelType.Project,
+        attachmentSize: this.project.attachmentSize
       };
     } else if (this.projectId) {
       const project = this.projectService.projects.find(p => p.id === this.projectId);
@@ -57,7 +58,8 @@ export class MessengerShortcutComponent implements OnInit {
         members: project.members.map(m => m.member),
         messages: [],
         title: project.title,
-        type: ChannelType.Project
+        type: ChannelType.Project,
+        attachmentSize: project.attachmentSize
       };
     } else if (this.workPackage) {
       const project = this.projectService.projects.find(p => p.id === this.workPackage.projectId);
@@ -68,7 +70,8 @@ export class MessengerShortcutComponent implements OnInit {
         }).map(m => m.member),
         messages: [],
         title: this.workPackage.title,
-        type: ChannelType.WorkPackage
+        type: ChannelType.WorkPackage,
+        attachmentSize: project.attachmentSize
       };
     } else if (this.packageId) {
       let found: WorkPackageViewModel;
@@ -88,7 +91,8 @@ export class MessengerShortcutComponent implements OnInit {
         }).map(m => m.member),
         messages: [],
         title: found.title,
-        type: ChannelType.WorkPackage
+        type: ChannelType.WorkPackage,
+        attachmentSize: project.attachmentSize
       };
     } else if (this.group) {
       this.current = {
@@ -96,7 +100,8 @@ export class MessengerShortcutComponent implements OnInit {
         members: this.group.members.map(m => m.member),
         messages: [],
         title: this.group.title,
-        type: ChannelType.Group
+        type: ChannelType.Group,
+        attachmentSize: this.group.attachmentSize
       };
     } else if (this.groupId) {
       const found = this.groupService.groups.find(g => g.id === this.groupId);
@@ -105,7 +110,8 @@ export class MessengerShortcutComponent implements OnInit {
         members: found.members.map(m => m.member),
         messages: [],
         title: found.title,
-        type: ChannelType.Group
+        type: ChannelType.Group,
+        attachmentSize: found.attachmentSize
       };
     } else if (this.dashboard) {
       this.current = this.messengerService.channels.directs[0];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MockService } from '../../../services/general/mock.service';
 import { ProjectService } from '../../../services/projects/project.service';
+import {ProjectViewModel} from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-dashboard-project-templates',
@@ -8,10 +8,11 @@ import { ProjectService } from '../../../services/projects/project.service';
   styleUrls: ['./dashboard-project-templates.component.scss'],
 })
 export class DashboardProjectTemplatesComponent implements OnInit {
+  projects: ProjectViewModel[] = [];
+
   constructor(
     readonly projectService: ProjectService,
-    readonly mockService: MockService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

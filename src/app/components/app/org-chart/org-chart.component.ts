@@ -1,6 +1,5 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
-import { MockService } from '../../../services/general/mock.service';
 import { GroupService } from '../../../services/groups/group.service';
 
 @Component({

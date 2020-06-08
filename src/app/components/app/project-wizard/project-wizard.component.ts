@@ -2,10 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CultureService } from '../../../services/core/culture.service';
 import { FormService } from '../../../services/core/form.service';
 import { FormViewModel } from '../../core/form/contracts';
-import { MockService } from '../../../services/general/mock.service';
 import {
   BoardTemplateViewModel,
-  ProjectTemplateViewModel,
 } from '../../../view-models/projects/project-types';
 import {BoardTemplate, ProjectTemplate} from '../../../library/app/enums';
 import { OperationResultStatus } from '../../../library/core/enums';

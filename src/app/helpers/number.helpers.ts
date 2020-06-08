@@ -33,7 +33,7 @@ export class NumberHelpers {
       source /= thresh;
       u += 1;
     } while (Math.abs(source) >= thresh && u < units.length - 1);
-    return source + ' ' + units[u];
+    return Math.round(source) + ' ' + units[u];
   }
   static ticksToDurationString(model: number): string {
     const parsed = NumberHelpers.ticksToTimeSpan(model);

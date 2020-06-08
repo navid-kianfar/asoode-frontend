@@ -16,6 +16,7 @@ import {SortType} from 'src/app/library/app/enums';
 import {DocumentModalComponent} from '../../../modals/document-modal/document-modal.component';
 import {StringHelpers} from '../../../helpers/string.helpers';
 import {TranslateService} from '../../../services/core/translate.service';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-files-explorer',
@@ -46,6 +47,7 @@ export class FilesExplorerComponent implements OnInit {
     private readonly filesService: FilesService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
+    private readonly identityService: IdentityService,
     private readonly translateService: TranslateService,
   ) {}
 
@@ -370,8 +372,13 @@ export class FilesExplorerComponent implements OnInit {
     }
     this.clearInputFile(target);
     this.filesService.uploading = [...this.filesService.uploading, ...upload];
-    this.filesService.upload(upload, this.path);
-    upload.forEach(u => u.promise.then(() => this.fetch(this.path)));
+    this.filesService.upload(
+      upload,
+      this.path,
+      this.identityService.profile.plan.attachmentSize
+    ).then(filtered => {
+      filtered.forEach(u => u.promise.then(() => this.fetch(this.path)));
+    });
   }
 
   async goTo(p: ExplorerFolderViewModel) {

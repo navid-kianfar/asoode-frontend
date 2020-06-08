@@ -7,6 +7,8 @@ import {
 } from '../../view-models/storage/files-types';
 import { OperationResultStatus } from '../../library/core/enums';
 import { StringDictionary } from '../../library/core/dictionary';
+import {ModalService} from '../core/modal.service';
+import {UploadExceedModalComponent} from '../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +21,13 @@ export class FilesService {
   private readonly imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp'];
   private readonly audioExtensions = ['.mp3', '.wave', '.wav', '.ogg'];
   private readonly videoExtensions = ['.mp4'];
+
+  constructor(
+    private readonly modalService: ModalService,
+    private readonly httpService: HttpService
+  ) {
+    this.hidePlate = false;
+  }
 
   getFileExtension(filename: string): string {
     const ext = /^.+\.([^.]+)$/.exec(filename);
@@ -112,10 +121,6 @@ export class FilesService {
     document.body.removeChild(form);
   }
 
-  constructor(private readonly httpService: HttpService) {
-    this.hidePlate = false;
-  }
-
   async myFiles(path: string): Promise<OperationResult<ExplorerViewModel>> {
     return this.httpService.post<ExplorerViewModel>('/files/mine', { path });
   }
@@ -137,11 +142,38 @@ export class FilesService {
     return this.httpService.post<boolean>('/files/new-folder', param, false);
   }
 
-  upload(upload: UploadViewModel[], path: string) {
-    if (upload.length) {
+  async rename(model): Promise<OperationResult<boolean>> {
+    return this.httpService.post<boolean>('/files/rename', model, false);
+  }
+
+  async filterFiles(upload: UploadViewModel[], attachmentSize: number): Promise<UploadViewModel[]> {
+    return new Promise((resolve, reject) => {
+      const exceed: UploadViewModel[] = [];
+      const filtered: UploadViewModel[] = [];
+      (upload || []).forEach(u => {
+        if (u.file.size > attachmentSize) {
+          exceed.push(u);
+        } else {
+          filtered.push(u);
+        }
+      });
+      if (exceed.length) {
+        this.modalService.show(UploadExceedModalComponent, {
+          uploads: exceed,
+          attachmentSize
+        }).subscribe(() => resolve(filtered));
+        return;
+      }
+      resolve(filtered);
+    });
+  }
+
+  async upload(upload: UploadViewModel[], path: string, attachmentSize: number): Promise<UploadViewModel[]> {
+    const filtered = await this.filterFiles(upload, attachmentSize);
+    if (filtered.length) {
       this.hidePlate = false;
     }
-    upload.forEach(u => {
+    filtered.forEach(u => {
       u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
         this.httpService
           .formUpload('/files/upload', { path, file: u.file }, percent => {
@@ -166,17 +198,15 @@ export class FilesService {
           );
       });
     });
+    return filtered;
   }
 
-  async rename(model): Promise<OperationResult<boolean>> {
-    return this.httpService.post<boolean>('/files/rename', model, false);
-  }
-
-  async attach(upload: UploadViewModel[], taskId: string) {
-    if (upload.length) {
+  async attach(upload: UploadViewModel[], taskId: string, attachmentSize: number) {
+    const filtered = await this.filterFiles(upload, attachmentSize);
+    if (filtered.length) {
       this.hidePlate = false;
     }
-    upload.forEach(u => {
+    filtered.forEach(u => {
       const removeFromList = () => {
         const index = this.attaching.indexOf(u);
         const removed = this.attaching.splice(index, 1);
@@ -207,14 +237,15 @@ export class FilesService {
           );
       });
     });
+    return filtered;
   }
 
-
-  async attachChat(upload: UploadViewModel[], recordId: string) {
-    if (upload.length) {
+  async attachChat(upload: UploadViewModel[], recordId: string, attachmentSize: number) {
+    const filtered = await this.filterFiles(upload, attachmentSize);
+    if (filtered.length) {
       this.hidePlate = false;
     }
-    upload.forEach(u => {
+    filtered.forEach(u => {
       const removeFromList = () => {
         const index = this.chatAttaching.indexOf(u);
         const removed = this.chatAttaching.splice(index, 1);
@@ -247,6 +278,7 @@ export class FilesService {
           );
       });
     });
+    return filtered;
   }
 
   async delete(model): Promise<OperationResult<boolean>> {

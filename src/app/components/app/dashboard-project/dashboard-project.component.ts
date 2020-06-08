@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/projects/project.service';
-import { MockService } from '../../../services/general/mock.service';
 import { ProjectFilter } from '../../../library/app/enums';
 import {ModalService} from '../../../services/core/modal.service';
 import {CreateWizardComponent} from '../../../modals/create-wizard/create-wizard.component';

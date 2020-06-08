@@ -192,8 +192,10 @@ export class TaskModalComponent
       });
     }
     this.clearInputFile(target);
-    this.filesService.attaching = [...this.filesService.attaching, ...upload];
-    this.filesService.attach(upload, this.id);
+    this.filesService.attach(upload, this.id, this.project.attachmentSize)
+      .then(filtered => {
+        this.filesService.attaching = [...this.filesService.attaching, ...filtered];
+      });
   }
 
   bind() {

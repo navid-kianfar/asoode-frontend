@@ -3,6 +3,7 @@ import { IdentityService } from '../../../../services/auth/identity.service';
 import { PlanType } from 'src/app/library/app/enums';
 import { UpgradeComponent } from '../../../../modals/upgrade/upgrade.component';
 import { ModalService } from '../../../../services/core/modal.service';
+import {NumberHelpers} from '../../../../helpers/number.helpers';
 
 @Component({
   selector: 'app-premium-plans',
@@ -15,12 +16,13 @@ export class PremiumPlansComponent implements OnInit {
     readonly modalService: ModalService,
   ) {}
   PlanType = PlanType;
+  NumberHelpers = NumberHelpers;
   ngOnInit() {}
 
   calculateDiskSpace() {
     return (
-      ((this.identityService.profile.plan.usedSpace / 1024 / 1024) * 100) /
-      (this.identityService.profile.plan.totalSpace / 1024 / 1024)
+      (this.identityService.profile.plan.usedSpace * 100) /
+      (this.identityService.profile.plan.totalSpace)
     );
   }
 

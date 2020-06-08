@@ -8,143 +8,210 @@
       </ng-container>
     </h2>
     <h3>{{ identityService.profile.plan.description | translate }}</h3>
+    <h5>{{ 'ATTACHMENT_SIZE' | translate }} : {{NumberHelpers.humanFileSize(identityService.profile.plan.attachmentSize)}}</h5>
   </div>
 
-  <div class="box disk">
-    <div class="header">
-      <div class="ico">
-        <i class="icon-server"></i>
+  <div class="box-wrapper">
+    <div class="box disk">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-server"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'DISK_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button (click)="upgrade()" mat-stroked-button>
+            {{ 'BUY_MORE_SPACE' | translate }}
+          </button>
+        </div>
       </div>
-      <div class="title">
-        <h4>{{ 'DISK_USAGE' | translate }}</h4>
-      </div>
-      <div class="action">
-        <button (click)="upgrade()" mat-stroked-button>
-          {{ 'BUY_MORE_SPACE' | translate }}
-        </button>
-      </div>
-    </div>
-    <div class="body">
-      <mat-progress-bar [value]="calculateDiskSpace()"></mat-progress-bar>
-      <h5 *ngIf="identityService.profile.plan.type === PlanType.Free">
-        {{
+      <div class="body">
+        <mat-progress-bar [value]="calculateDiskSpace()"></mat-progress-bar>
+        <h5 *ngIf="identityService.profile.plan.type === PlanType.Free">
+          {{
           'DISK_USAGE_MB_DETAIL'
             | translate
             | stringFormat
-              : (identityService.profile.plan.usedSpace / 1024 / 1024).toFixed(
-                  2
-                )
-              : identityService.profile.plan.space / 1024 / 1024
-        }}
-      </h5>
-      <h5 *ngIf="identityService.profile.plan.type !== PlanType.Free">
-        {{
+            : NumberHelpers.humanFileSize(identityService.profile.plan.usedSpace)
+              : NumberHelpers.humanFileSize(identityService.profile.plan.totalSpace)
+          }}
+        </h5>
+        <h5 *ngIf="identityService.profile.plan.type !== PlanType.Free">
+          {{
           'DISK_USAGE_GB_DETAIL'
             | translate
             | stringFormat
-              : identityService.profile.plan.usedSpace / 1024 / 1024 / 1024
-              : identityService.profile.plan.space / 1024 / 1024 / 1024
-        }}
-      </h5>
+            : NumberHelpers.humanFileSize(identityService.profile.plan.usedSpace)
+              : NumberHelpers.humanFileSize(identityService.profile.plan.totalSpace)
+          }}
+        </h5>
+      </div>
     </div>
-  </div>
 
-  <div class="box user">
-    <div class="header">
-      <div class="ico">
-        <i class="icon-users2"></i>
+    <div class="box user">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-users2"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'USER_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button (click)="upgrade()" mat-stroked-button>
+            {{ 'BUY_MORE_USER' | translate }}
+          </button>
+        </div>
       </div>
-      <div class="title">
-        <h4>{{ 'USER_USAGE' | translate }}</h4>
-      </div>
-      <div class="action">
-        <button (click)="upgrade()" mat-stroked-button>
-          {{ 'BUY_MORE_USER' | translate }}
-        </button>
-      </div>
-    </div>
-    <div class="body">
-      <mat-progress-bar
-        [value]="
+      <div class="body">
+        <mat-progress-bar
+          [value]="
           (identityService.profile.plan.usedUser * 100) /
           identityService.profile.plan.users
         "
-      ></mat-progress-bar>
-      <h5>
-        {{
+        ></mat-progress-bar>
+        <h5>
+          {{
           'MEMBER_USAGE_DETAIL'
             | translate
             | stringFormat
-              : identityService.profile.plan.usedUser
+            : identityService.profile.plan.usedUser
               : identityService.profile.plan.users
-        }}
-      </h5>
+          }}
+        </h5>
+      </div>
     </div>
-  </div>
 
-  <div class="box group">
-    <div class="header">
-      <div class="ico">
-        <i class="icon-team"></i>
+    <div class="box group">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-team"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'SIMPLE_GROUP_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button (click)="upgrade()" mat-stroked-button>
+            {{ 'BUY_MORE_GROUP' | translate }}
+          </button>
+        </div>
       </div>
-      <div class="title">
-        <h4>{{ 'GROUP_USAGE' | translate }}</h4>
-      </div>
-      <div class="action">
-        <button (click)="upgrade()" mat-stroked-button>
-          {{ 'BUY_MORE_GROUP' | translate }}
-        </button>
-      </div>
-    </div>
-    <div class="body">
-      <mat-progress-bar
-        [value]="
-          (identityService.profile.plan.totalUsedGroups * 100) /
-          identityService.profile.plan.totalGroups
+      <div class="body">
+        <mat-progress-bar
+          [value]="
+          (identityService.profile.plan.usedSimpleGroup * 100) /
+          identityService.profile.plan.totalSimpleGroups
         "
-      ></mat-progress-bar>
-      <h5>
-        {{
+        ></mat-progress-bar>
+        <h5>
+          {{
           'GROUP_USAGE_DETAIL'
             | translate
             | stringFormat
-              : identityService.profile.plan.totalUsedGroups
-              : identityService.profile.plan.totalGroups
-        }}
-      </h5>
+            : identityService.profile.plan.usedSimpleGroup
+              : identityService.profile.plan.totalSimpleGroups
+          }}
+        </h5>
+      </div>
     </div>
-  </div>
 
-  <div class="box project">
-    <div class="header">
-      <div class="ico">
-        <i class="icon-workpackage"></i>
+    <div class="box group">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-team"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'COMPLEX_GROUP_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button (click)="upgrade()" mat-stroked-button>
+            {{ 'BUY_MORE_GROUP' | translate }}
+          </button>
+        </div>
       </div>
-      <div class="title">
-        <h4>{{ 'PROJECT_USAGE' | translate }}</h4>
-      </div>
-      <div class="action">
-        <button (click)="upgrade()" mat-stroked-button>
-          {{ 'BUY_MORE_PROJECT' | translate }}
-        </button>
+      <div class="body">
+        <mat-progress-bar
+          [value]="
+          (identityService.profile.plan.usedComplexGroup * 100) /
+          identityService.profile.plan.totalComplexGroups
+        "
+        ></mat-progress-bar>
+        <h5>
+          {{
+          'GROUP_USAGE_DETAIL'
+            | translate
+            | stringFormat
+            : identityService.profile.plan.usedComplexGroup
+              : identityService.profile.plan.totalComplexGroups
+          }}
+        </h5>
       </div>
     </div>
-    <div class="body">
-      <mat-progress-bar
-        [value]="
-          (identityService.profile.plan.totalUsedProjects * 100) /
-          identityService.profile.plan.totalProjects
+
+    <div class="box project">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-workpackage"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'SIMPLE_PROJECT_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button (click)="upgrade()" mat-stroked-button>
+            {{ 'BUY_MORE_PROJECT' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="body">
+        <mat-progress-bar
+          [value]="
+          (identityService.profile.plan.usedWorkPackage * 100) /
+          identityService.profile.plan.totalWorkPackages
         "
-      ></mat-progress-bar>
-      <h5>
-        {{
+        ></mat-progress-bar>
+        <h5>
+          {{
           'PROJECT_USAGE_DETAIL'
             | translate
             | stringFormat
-              : identityService.profile.plan.totalUsedProjects
-              : identityService.profile.plan.totalProjects
-        }}
-      </h5>
+            : identityService.profile.plan.usedWorkPackage
+              : identityService.profile.plan.totalWorkPackages
+          }}
+        </h5>
+      </div>
+    </div>
+
+    <div class="box project">
+      <div class="header">
+        <div class="ico">
+          <i class="icon-project"></i>
+        </div>
+        <div class="title">
+          <h4>{{ 'COMPLEX_PROJECT_USAGE' | translate }}</h4>
+        </div>
+        <div class="action">
+          <button (click)="upgrade()" mat-stroked-button>
+            {{ 'BUY_MORE_PROJECT' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="body">
+        <mat-progress-bar
+          [value]="
+          (identityService.profile.plan.usedProject * 100) /
+          identityService.profile.plan.totalComplexProjects
+        "
+        ></mat-progress-bar>
+        <h5>
+          {{
+          'PROJECT_USAGE_DETAIL'
+            | translate
+            | stringFormat
+            : identityService.profile.plan.usedProject
+              : identityService.profile.plan.totalComplexProjects
+          }}
+        </h5>
+      </div>
     </div>
   </div>
 </div>

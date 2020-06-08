@@ -4,6 +4,7 @@ import { MemberInfoViewModel } from '../auth/identity-types';
 
 export interface GroupViewModel extends BaseViewModel {
   archivedAt?: Date;
+  attachmentSize: number;
   access?: AccessType;
   parentId: string;
   userId: string;
