@@ -37,6 +37,7 @@ import {NotificationService} from '../../../services/core/notification.service';
 import {UpgradeWorkPackageComponent} from '../../../modals/upgrade-work-package/upgrade-work-package.component';
 import {IdentityService} from '../../../services/auth/identity.service';
 import {WorkPackagePermissionComponent} from '../../../modals/work-package-permission/work-package-permission.component';
+import {UsersService} from '../../../services/general/users.service';
 
 @Component({
   selector: 'app-work-package',
@@ -74,6 +75,7 @@ export class WorkPackageComponent implements OnInit {
     readonly identityService: IdentityService,
     readonly cultureService: CultureService,
     private readonly socket: Socket,
+    private readonly usersService: UsersService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
     private readonly groupService: GroupService,
@@ -579,10 +581,10 @@ export class WorkPackageComponent implements OnInit {
     return model;
   }
 
-  findMember(recordId: string): MemberInfoViewModel {
-    const access = this.project.members.find(m => m.recordId === recordId);
-    return access.member;
-  }
+  // findMember(recordId: string): MemberInfoViewModel {
+  //   const access = this.project.members.find(m => m.recordId === recordId);
+  //   return access.member;
+  // }
 
   prepareInvite() {
     if (this.waiting) {
@@ -604,7 +606,7 @@ export class WorkPackageComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  removeAccess(
+  async removeAccess(
     member: WorkPackageMemberViewModel,
     permission: AccessType,
     pending: PendingInvitationViewModel = null,
@@ -617,7 +619,7 @@ export class WorkPackageComponent implements OnInit {
             ? this.groupService.groups.find(g => g.id === member.recordId).title
             : pending
             ? pending.identifier
-            : this.findMember(member.recordId).fullName,
+            : (await this.usersService.findUser(member.recordId)).fullName
         ],
       );
       this.modalService
