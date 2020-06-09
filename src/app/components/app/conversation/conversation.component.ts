@@ -22,6 +22,7 @@ import {IdentityService} from '../../../services/auth/identity.service';
 import {UploadViewModel} from '../../../view-models/storage/files-types';
 import {FilesService} from '../../../services/storage/files.service';
 import {UsersService} from '../../../services/general/users.service';
+import {UploadExceedModalComponent} from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Component({
   selector: 'app-conversation',
@@ -191,12 +192,34 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
     this.clearInputFile(target);
-    this.filesService.attachChat(upload, this.recordId, this.attachmentSize)
-      .then(filtered => {
+    this.filterFiles(upload)
+      .then((filtered) => {
+        this.filesService.attachChat(filtered, this.recordId);
         this.filesService.chatAttaching = [...this.filesService.chatAttaching, ...filtered];
       });
   }
 
+  async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
+    return new Promise((resolve, reject) => {
+      const filtered: UploadViewModel[] = [];
+      const allowed: UploadViewModel[] = [];
+      (upload || []).forEach(u => {
+        if (u.file.size > this.attachmentSize) {
+          filtered.push(u);
+        } else {
+          allowed.push(u);
+        }
+      });
+      if (filtered.length) {
+        this.modalService.show(UploadExceedModalComponent, {
+          uploads: filtered,
+          attachmentSize: this.attachmentSize
+        }).subscribe(() => resolve(allowed));
+        return;
+      }
+      resolve(allowed);
+    });
+  }
   clearInputFile(f) {
     if (f.value) {
       try {

@@ -146,30 +146,7 @@ export class FilesService {
     return this.httpService.post<boolean>('/files/rename', model, false);
   }
 
-  async filterFiles(upload: UploadViewModel[], attachmentSize: number): Promise<UploadViewModel[]> {
-    return new Promise((resolve, reject) => {
-      const exceed: UploadViewModel[] = [];
-      const filtered: UploadViewModel[] = [];
-      (upload || []).forEach(u => {
-        if (u.file.size > attachmentSize) {
-          exceed.push(u);
-        } else {
-          filtered.push(u);
-        }
-      });
-      if (exceed.length) {
-        this.modalService.show(UploadExceedModalComponent, {
-          uploads: exceed,
-          attachmentSize
-        }).subscribe(() => resolve(filtered));
-        return;
-      }
-      resolve(filtered);
-    });
-  }
-
-  async upload(upload: UploadViewModel[], path: string, attachmentSize: number): Promise<UploadViewModel[]> {
-    const filtered = await this.filterFiles(upload, attachmentSize);
+  async upload(filtered: UploadViewModel[], path: string): Promise<UploadViewModel[]> {
     if (filtered.length) {
       this.hidePlate = false;
     }
@@ -201,8 +178,7 @@ export class FilesService {
     return filtered;
   }
 
-  async attach(upload: UploadViewModel[], taskId: string, attachmentSize: number) {
-    const filtered = await this.filterFiles(upload, attachmentSize);
+  async attach(filtered: UploadViewModel[], taskId: string) {
     if (filtered.length) {
       this.hidePlate = false;
     }
@@ -240,8 +216,7 @@ export class FilesService {
     return filtered;
   }
 
-  async attachChat(upload: UploadViewModel[], recordId: string, attachmentSize: number) {
-    const filtered = await this.filterFiles(upload, attachmentSize);
+  async attachChat(filtered: UploadViewModel[], recordId: string) {
     if (filtered.length) {
       this.hidePlate = false;
     }

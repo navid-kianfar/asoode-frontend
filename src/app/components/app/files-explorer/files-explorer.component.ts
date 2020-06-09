@@ -17,6 +17,7 @@ import {DocumentModalComponent} from '../../../modals/document-modal/document-mo
 import {StringHelpers} from '../../../helpers/string.helpers';
 import {TranslateService} from '../../../services/core/translate.service';
 import {IdentityService} from '../../../services/auth/identity.service';
+import {UploadExceedModalComponent} from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Component({
   selector: 'app-files-explorer',
@@ -371,13 +372,34 @@ export class FilesExplorerComponent implements OnInit {
       });
     }
     this.clearInputFile(target);
-    this.filesService.uploading = [...this.filesService.uploading, ...upload];
-    this.filesService.upload(
-      upload,
-      this.path,
-      this.identityService.profile.plan.attachmentSize
-    ).then(filtered => {
-      filtered.forEach(u => u.promise.then(() => this.fetch(this.path)));
+
+    this.filterFiles(upload)
+      .then((filtered) => {
+        this.filesService.upload(filtered, this.path);
+        filtered.forEach(u => u.promise.then(() => this.fetch(this.path)));
+        this.filesService.uploading = [...this.filesService.uploading, ...filtered];
+      });
+  }
+
+  async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
+    return new Promise((resolve, reject) => {
+      const filtered: UploadViewModel[] = [];
+      const allowed: UploadViewModel[] = [];
+      (upload || []).forEach(u => {
+        if (u.file.size > this.identityService.profile.plan.attachmentSize) {
+          filtered.push(u);
+        } else {
+          allowed.push(u);
+        }
+      });
+      if (filtered.length) {
+        this.modalService.show(UploadExceedModalComponent, {
+          uploads: filtered,
+          attachmentSize: this.identityService.profile.plan.attachmentSize
+        }).subscribe(() => resolve(allowed));
+        return;
+      }
+      resolve(allowed);
     });
   }
 

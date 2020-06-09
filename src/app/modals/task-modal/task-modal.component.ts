@@ -33,6 +33,7 @@ import {MatMenu} from '@angular/material';
 import {GroupService} from '../../services/groups/group.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {DeviceDetectorService} from 'ngx-device-detector';
+import {UploadExceedModalComponent} from '../upload-exceed-modal/upload-exceed-modal.component';
 
 @Component({
   selector: 'app-task-modal',
@@ -192,10 +193,33 @@ export class TaskModalComponent
       });
     }
     this.clearInputFile(target);
-    this.filesService.attach(upload, this.id, this.project.attachmentSize)
-      .then(filtered => {
+    this.filterFiles(upload)
+      .then((filtered) => {
+        this.filesService.attach(filtered, this.id);
         this.filesService.attaching = [...this.filesService.attaching, ...filtered];
       });
+  }
+
+  async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
+    return new Promise((resolve, reject) => {
+      const filtered: UploadViewModel[] = [];
+      const allowed: UploadViewModel[] = [];
+      (upload || []).forEach(u => {
+        if (u.file.size > this.project.attachmentSize) {
+          filtered.push(u);
+        } else {
+          allowed.push(u);
+        }
+      });
+      if (filtered.length) {
+        this.modalService.show(UploadExceedModalComponent, {
+          uploads: filtered,
+          attachmentSize: this.project.attachmentSize
+        }).subscribe(() => resolve(allowed));
+        return;
+      }
+      resolve(allowed);
+    });
   }
 
   bind() {
