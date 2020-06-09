@@ -206,6 +206,14 @@ body.dark-mode {
     }
   }
 
+  .shortcut-messenger-container {
+    .category {
+      background: $color2 !important;
+    }
+    .header {
+      border-color: $color2 !important;
+    }
+  }
   .group-info.small {
     background: transparent !important;
   }

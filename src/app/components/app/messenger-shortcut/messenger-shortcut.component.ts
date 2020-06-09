@@ -42,26 +42,7 @@ export class MessengerShortcutComponent implements OnInit {
 
   ngOnInit() {
 
-    if (this.project) {
-      this.current = {
-        id: this.project.id,
-        members: this.project.members.map(m => m.member),
-        messages: [],
-        title: this.project.title,
-        type: ChannelType.Project,
-        attachmentSize: this.project.attachmentSize
-      };
-    } else if (this.projectId) {
-      const project = this.projectService.projects.find(p => p.id === this.projectId);
-      this.current = {
-        id: this.projectId,
-        members: project.members.map(m => m.member),
-        messages: [],
-        title: project.title,
-        type: ChannelType.Project,
-        attachmentSize: project.attachmentSize
-      };
-    } else if (this.workPackage) {
+    if (this.workPackage) {
       const project = this.projectService.projects.find(p => p.id === this.workPackage.projectId);
       this.current = {
         id: this.workPackage.id,
@@ -92,6 +73,25 @@ export class MessengerShortcutComponent implements OnInit {
         messages: [],
         title: found.title,
         type: ChannelType.WorkPackage,
+        attachmentSize: project.attachmentSize
+      };
+    } else if (this.project) {
+      this.current = {
+        id: this.project.id,
+        members: this.project.members.map(m => m.member),
+        messages: [],
+        title: this.project.title,
+        type: ChannelType.Project,
+        attachmentSize: this.project.attachmentSize
+      };
+    } else if (this.projectId) {
+      const project = this.projectService.projects.find(p => p.id === this.projectId);
+      this.current = {
+        id: this.projectId,
+        members: project.members.map(m => m.member),
+        messages: [],
+        title: project.title,
+        type: ChannelType.Project,
         attachmentSize: project.attachmentSize
       };
     } else if (this.group) {
