@@ -527,7 +527,11 @@ export class TaskModalComponent
         : DateMode.Range;
     this.tempBeginAt = this.model.beginAt;
     this.tempEndAt = this.model.endAt;
-    this.tempDueAt = this.model.dueAt;
+    this.tempDueAt = this.model.dueAt ? new Date(this.model.dueAt) : null;
+    if (this.tempDateMode === DateMode.Due && this.tempDueAt) {
+      this.tempHour = this.tempDueAt.getHours();
+      this.tempMinute = this.tempDueAt.getMinutes();
+    }
 
     this.model.upVotes = this.model.votes.filter(m => m.vote).length;
     this.model.downVotes = this.model.votes.filter(m => !m.vote).length;
@@ -535,13 +539,17 @@ export class TaskModalComponent
 
   dueSelected() {
     this.tempDateMode = DateMode.Due;
-    this.tempBeginAt = undefined;
-    this.tempEndAt = undefined;
+    // this.tempBeginAt = undefined;
+    // this.tempEndAt = undefined;
+    if (this.tempDateMode === DateMode.Due && this.tempDueAt) {
+      this.tempHour = this.tempDueAt.getHours();
+      this.tempMinute = this.tempDueAt.getMinutes();
+    }
   }
 
   rangeSelected() {
     this.tempDateMode = DateMode.Range;
-    this.tempDueAt = undefined;
+    // this.tempDueAt = undefined;
   }
 
   prepareChangeTitle() {

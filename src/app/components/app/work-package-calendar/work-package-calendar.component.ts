@@ -83,6 +83,7 @@ export class WorkPackageCalendarComponent implements OnInit {
         events: data[k],
       };
     });
+    console.log(this.days);
     this.mode = mode;
   }
 
