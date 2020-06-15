@@ -727,5 +727,7 @@
   "SIMPLE_GROUP_USAGE": "مصرف گروه ساده",
   "COMPLEX_GROUP_USAGE": "مصرف گروه ساختار دار",
   "SIMPLE_PROJECT_USAGE": "مصرف پروژه ساده",
-  "COMPLEX_PROJECT_USAGE": "مصرف پروژه ساختار دار"
+  "COMPLEX_PROJECT_USAGE": "مصرف پروژه ساختار دار",
+
+  "NEW_LABEL_TITLE": "عنوان برچسب جدید"
 }

@@ -14,7 +14,7 @@ import {
   GroupMemberViewModel,
   PendingInvitationViewModel,
 } from '../../../view-models/groups/group-types';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-setting',

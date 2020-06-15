@@ -1,15 +1,18 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
-import {Router} from '@angular/router';
-import {ModalService} from '../../../services/core/modal.service';
-import {MessengerSettingComponent} from '../../../modals/messenger-setting/messenger-setting.component';
-import {ChannelViewModel} from '../../../view-models/communication/messenger-types';
-import {MessengerService} from '../../../services/communication/messenger.service';
-import {ProjectService} from '../../../services/projects/project.service';
-import {GroupService} from '../../../services/groups/group.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {ChannelType} from '../../../library/app/enums';
-import {ProjectViewModel, WorkPackageViewModel} from '../../../view-models/projects/project-types';
-import {GroupViewModel} from '../../../view-models/groups/group-types';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalService } from '../../../services/core/modal.service';
+import { MessengerSettingComponent } from '../../../modals/messenger-setting/messenger-setting.component';
+import { ChannelViewModel } from '../../../view-models/communication/messenger-types';
+import { MessengerService } from '../../../services/communication/messenger.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { GroupService } from '../../../services/groups/group.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { ChannelType } from '../../../library/app/enums';
+import {
+  ProjectViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
 
 const STORAGE_KEY = 'dashboard_bot_visible';
 
@@ -41,18 +44,23 @@ export class MessengerShortcutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     if (this.workPackage) {
-      const project = this.projectService.projects.find(p => p.id === this.workPackage.projectId);
+      const project = this.projectService.projects.find(
+        p => p.id === this.workPackage.projectId,
+      );
       this.current = {
         id: this.workPackage.id,
-        members: project.members.filter(m => {
-          return this.workPackage.members.find(wm => wm.recordId === m.recordId);
-        }).map(m => m.member),
+        members: project.members
+          .filter(m => {
+            return this.workPackage.members.find(
+              wm => wm.recordId === m.recordId,
+            );
+          })
+          .map(m => m.member),
         messages: [],
         title: this.workPackage.title,
         type: ChannelType.WorkPackage,
-        attachmentSize: project.attachmentSize
+        attachmentSize: project.attachmentSize,
       };
     } else if (this.packageId) {
       let found: WorkPackageViewModel;
@@ -67,13 +75,15 @@ export class MessengerShortcutComponent implements OnInit {
       });
       this.current = {
         id: this.packageId,
-        members: project.members.filter(m => {
-          return found.members.find(wm => wm.recordId === m.recordId);
-        }).map(m => m.member),
+        members: project.members
+          .filter(m => {
+            return found.members.find(wm => wm.recordId === m.recordId);
+          })
+          .map(m => m.member),
         messages: [],
         title: found.title,
         type: ChannelType.WorkPackage,
-        attachmentSize: project.attachmentSize
+        attachmentSize: project.attachmentSize,
       };
     } else if (this.project) {
       this.current = {
@@ -82,17 +92,19 @@ export class MessengerShortcutComponent implements OnInit {
         messages: [],
         title: this.project.title,
         type: ChannelType.Project,
-        attachmentSize: this.project.attachmentSize
+        attachmentSize: this.project.attachmentSize,
       };
     } else if (this.projectId) {
-      const project = this.projectService.projects.find(p => p.id === this.projectId);
+      const project = this.projectService.projects.find(
+        p => p.id === this.projectId,
+      );
       this.current = {
         id: this.projectId,
         members: project.members.map(m => m.member),
         messages: [],
         title: project.title,
         type: ChannelType.Project,
-        attachmentSize: project.attachmentSize
+        attachmentSize: project.attachmentSize,
       };
     } else if (this.group) {
       this.current = {
@@ -101,7 +113,7 @@ export class MessengerShortcutComponent implements OnInit {
         messages: [],
         title: this.group.title,
         type: ChannelType.Group,
-        attachmentSize: this.group.attachmentSize
+        attachmentSize: this.group.attachmentSize,
       };
     } else if (this.groupId) {
       const found = this.groupService.groups.find(g => g.id === this.groupId);
@@ -111,7 +123,7 @@ export class MessengerShortcutComponent implements OnInit {
         messages: [],
         title: found.title,
         type: ChannelType.Group,
-        attachmentSize: found.attachmentSize
+        attachmentSize: found.attachmentSize,
       };
     } else if (this.dashboard) {
       this.current = this.messengerService.channels.directs[0];
@@ -134,9 +146,12 @@ export class MessengerShortcutComponent implements OnInit {
     }
 
     if (
-      this.project || this.projectId ||
-      this.workPackage || this.packageId ||
-      this.group || this.groupId
+      this.project ||
+      this.projectId ||
+      this.workPackage ||
+      this.packageId ||
+      this.group ||
+      this.groupId
     ) {
       this.showMessages = true;
       return;

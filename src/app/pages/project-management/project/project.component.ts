@@ -2,14 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { ProjectService } from '../../../services/projects/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {AccessType, ActivityType, ProjectTemplate, WorkPackageTaskState} from '../../../library/app/enums';
+import {
+  AccessType,
+  ActivityType,
+  ProjectTemplate,
+  WorkPackageTaskState,
+} from '../../../library/app/enums';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { ModalService } from '../../../services/core/modal.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../services/core/form.service';
 import { NotificationService } from '../../../services/core/notification.service';
-import {Socket} from 'ngx-socket-io';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-project',
@@ -105,7 +110,7 @@ export class ProjectComponent implements OnInit {
                 params: {
                   model: this.project.template,
                   items: [],
-                  enum: 'ProjectTemplate'
+                  enum: 'ProjectTemplate',
                 },
               }),
             ],

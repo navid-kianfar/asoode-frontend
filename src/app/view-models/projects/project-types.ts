@@ -2,7 +2,8 @@ import { BaseViewModel } from '../core/general-types';
 import {
   AccessType,
   ActivityType,
-  BoardTemplate, ProjectTemplate,
+  BoardTemplate,
+  ProjectTemplate,
   ReceiveNotificationType,
   WorkPackageCommentPermission,
   WorkPackageObjectiveType,
@@ -131,7 +132,6 @@ export interface WorkPackageViewModel extends BaseViewModel {
   permissionEditList: boolean;
   permissionCreateList: boolean;
 
-
   order: number;
   userSetting: WorkPackageUserSetting;
   pending: PendingInvitationViewModel[];
@@ -178,6 +178,7 @@ export interface WorkPackageMemberViewModel extends BaseViewModel {
   isGroup: boolean;
 }
 export interface WorkPackageLabelViewModel extends BaseViewModel {
+  tempColor?: string;
   tempName?: string;
   editting?: boolean;
   waiting: boolean;

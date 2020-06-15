@@ -80,9 +80,9 @@
               </mat-tab>
               <mat-tab
                 *ngIf="
-                permission === AccessType.Owner ||
-                permission === AccessType.Admin
-              "
+                  permission === AccessType.Owner ||
+                  permission === AccessType.Admin
+                "
                 [label]="'SETTINGS' | translate"
               >
                 <ng-template matTabContent>
@@ -99,4 +99,8 @@
     </div>
   </ng-container>
 </div>
-<app-messenger-shortcut *ngIf="group" [group]="group" [groupId]="group.id"></app-messenger-shortcut>
+<app-messenger-shortcut
+  *ngIf="group"
+  [group]="group"
+  [groupId]="group.id"
+></app-messenger-shortcut>

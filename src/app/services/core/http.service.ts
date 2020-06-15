@@ -5,7 +5,7 @@ import { HttpClient, HttpEventType, HttpRequest } from '@angular/common/http';
 import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 import { GridFilter, GridResult } from '../../view-models/core/grid-types';
-import {NetworkService} from './network.service';
+import { NetworkService } from './network.service';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +31,8 @@ export class HttpService {
           (op: OperationResult<T>) => {
             if (
               op.status !== OperationResultStatus.Success &&
-              handleNoneSuccess !== false && this.networkService.isOnline
+              handleNoneSuccess !== false &&
+              this.networkService.isOnline
             ) {
               this.notificationService.handleRequest(op.status);
             }
@@ -89,7 +90,8 @@ export class HttpService {
             const op = event.body as Response;
             if (
               op.status !== OperationResultStatus.Success &&
-              handleNoneSuccess !== false && this.networkService.isOnline
+              handleNoneSuccess !== false &&
+              this.networkService.isOnline
             ) {
               this.notificationService.handleRequest(op.status);
             }
@@ -190,7 +192,8 @@ export class HttpService {
             const op = event.body as Response;
             if (
               op.status !== OperationResultStatus.Success &&
-              handleNoneSuccess !== false && this.networkService.isOnline
+              handleNoneSuccess !== false &&
+              this.networkService.isOnline
             ) {
               this.notificationService.handleRequest(op.status);
             }

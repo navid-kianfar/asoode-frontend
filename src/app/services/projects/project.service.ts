@@ -186,15 +186,11 @@ export class ProjectService {
   }
 
   async archiveProject(id: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      `/projects/${id}/archive`,
-    );
+    return await this.httpService.post<boolean>(`/projects/${id}/archive`);
   }
 
   async remove(id: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      `/projects/${id}/remove`,
-    );
+    return await this.httpService.post<boolean>(`/projects/${id}/remove`);
   }
 
   async editSeason(id: string, params: any): Promise<OperationResult<boolean>> {

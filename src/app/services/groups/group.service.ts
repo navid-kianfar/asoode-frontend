@@ -5,8 +5,11 @@ import { GroupViewModel } from '../../view-models/groups/group-types';
 import { OperationResultStatus } from '../../library/core/enums';
 import { AccessType } from '../../library/app/enums';
 import { IdentityService } from '../auth/identity.service';
-import {ProjectViewModel, TimeSpentViewModel} from '../../view-models/projects/project-types';
-import {DayReportViewModel} from '../../view-models/general/report-types';
+import {
+  ProjectViewModel,
+  TimeSpentViewModel,
+} from '../../view-models/projects/project-types';
+import { DayReportViewModel } from '../../view-models/general/report-types';
 
 @Injectable({
   providedIn: 'root',
@@ -93,21 +96,27 @@ export class GroupService {
     );
   }
 
-  async timeSpent(id: string, model): Promise<OperationResult<TimeSpentViewModel[]>> {
+  async timeSpent(
+    id: string,
+    model,
+  ): Promise<OperationResult<TimeSpentViewModel[]>> {
     return await this.httpService.post<TimeSpentViewModel[]>(
-      `/times/group/${id}`, model
+      `/times/group/${id}`,
+      model,
     );
   }
-  async report(id: string, model): Promise<OperationResult<DayReportViewModel[]>> {
+  async report(
+    id: string,
+    model,
+  ): Promise<OperationResult<DayReportViewModel[]>> {
     return await this.httpService.post<DayReportViewModel[]>(
-      `/groups/${id}/report`, model
+      `/groups/${id}/report`,
+      model,
     );
   }
 
   async fetch(id: any): Promise<OperationResult<GroupViewModel>> {
-    return await this.httpService.post<GroupViewModel>(
-      `/groups/${id}/fetch`
-    );
+    return await this.httpService.post<GroupViewModel>(`/groups/${id}/fetch`);
   }
 
   async restore(id: string): Promise<OperationResult<boolean>> {

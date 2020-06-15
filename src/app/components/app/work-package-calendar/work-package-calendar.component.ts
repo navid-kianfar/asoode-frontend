@@ -88,7 +88,9 @@ export class WorkPackageCalendarComponent implements OnInit {
   }
 
   onBeginChange($event: Date) {
-    if (!$event) { return; }
+    if (!$event) {
+      return;
+    }
     setTimeout(() => {
       if (!this.beginDate || this.beginDate.getTime() !== $event.getTime()) {
         this.beginDate = $event;

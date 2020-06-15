@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {GroupViewModel} from '../../../view-models/groups/group-types';
-import {GroupService} from '../../../services/groups/group.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {Router} from '@angular/router';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { GroupService } from '../../../services/groups/group.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-archived-groups',
   templateUrl: './archived-groups.component.html',
-  styleUrls: ['./archived-groups.component.scss']
+  styleUrls: ['./archived-groups.component.scss'],
 })
 export class ArchivedGroupsComponent implements OnInit {
   waiting: boolean;
@@ -15,8 +15,8 @@ export class ArchivedGroupsComponent implements OnInit {
 
   constructor(
     private readonly groupService: GroupService,
-    private readonly router: Router
-  ) { }
+    private readonly router: Router,
+  ) {}
 
   ngOnInit() {
     this.fetch();

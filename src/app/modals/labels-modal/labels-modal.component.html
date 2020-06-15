@@ -1,0 +1,88 @@
+<div class="modal-content labels-modal">
+  <div class="modal-header">
+    <h4>{{ 'CHANGE_WORK_PACKAGE_LABELS' | translate }}</h4>
+    <button (click)="close()" class="close">
+      <i class="icon-cross"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="task-modal-labels-menu">
+      <ul>
+        <li *ngFor="let label of workPackage.labels">
+          <div class="label">
+            <div class="title" (click)="handleClick($event, label)">
+              <span [(colorPicker)]="label.tempColor"
+                    [cpDisabled]="!label.editting"
+                    [style.background]="label.tempColor || label.color">
+
+                <ng-container *ngIf="!label.editting && label.title">
+                  {{label.title}}
+                </ng-container>
+                <ng-container *ngIf="label.editting || !label.title">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </ng-container>
+
+              </span>&nbsp;
+              <ng-container *ngIf="label.editting">
+                <input
+                  [disabled]="label.waiting"
+                  type="text"
+                  [(ngModel)]="label.tempName"
+                />
+                <i
+                  *ngIf="!label.waiting"
+                  (click)="saveLabelName(label, $event)"
+                  class="icon-checkmark3"
+                ></i>
+                <i *ngIf="label.waiting" class="icon-spinner2 icon-spin"></i>
+              </ng-container>
+            </div>
+            <i
+              *ngIf="!label.waiting && !label.editting"
+              (click)="prepareRenameLabel(label, $event)"
+              class="icon-pencil"
+            ></i>
+            <i
+              *ngIf="!label.waiting && !label.editting"
+              (click)="deleteLabel(label, $event)"
+              class="icon-delete"
+            ></i>
+          </div>
+        </li>
+        <li>
+          <div class="label">
+            <div class="title">
+              <span [(colorPicker)]="temp.color" [style.background]="temp.color">
+                <ng-container>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </ng-container>
+              </span>&nbsp;
+              <input
+                [disabled]="temp.waiting"
+                type="text"
+                [placeholder]="'NEW_LABEL_TITLE' | translate"
+                [(ngModel)]="temp.title"
+              />
+              <i
+                *ngIf="!temp.waiting"
+                (click)="createLabel(temp, $event)"
+                class="icon-checkmark3"
+              ></i>
+              <i *ngIf="temp.waiting" class="icon-spinner2 icon-spin"></i>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      color="primary"
+      mat-flat-button
+      class="btn btn-light"
+      (click)="close()"
+    >
+      {{ 'CLOSE' | translate }}
+    </button>
+  </div>
+</div>

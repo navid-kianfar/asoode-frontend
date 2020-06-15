@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageMemberViewModel,
@@ -6,14 +6,14 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {MemberInfoViewModel} from '../../../view-models/auth/identity-types';
-import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
-import {ModalService} from '../../../services/core/modal.service';
-import {CultureService} from '../../../services/core/culture.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
+import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
+import { ModalService } from '../../../services/core/modal.service';
+import { CultureService } from '../../../services/core/culture.service';
 import {
   AccessType,
   ActivityType,
@@ -23,21 +23,23 @@ import {
   WorkPackageTaskState,
   WorkPackageTaskVisibility,
 } from '../../../library/app/enums';
-import {PromptComponent} from 'src/app/modals/prompt/prompt.component';
-import {FormService} from 'src/app/services/core/form.service';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {OperationResult} from '../../../library/core/operation-result';
-import {GroupService} from '../../../services/groups/group.service';
-import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
-import {Socket} from 'ngx-socket-io';
-import {moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {NotificationService} from '../../../services/core/notification.service';
-import {UpgradeWorkPackageComponent} from '../../../modals/upgrade-work-package/upgrade-work-package.component';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {WorkPackagePermissionComponent} from '../../../modals/work-package-permission/work-package-permission.component';
-import {UsersService} from '../../../services/general/users.service';
+import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
+import { FormService } from 'src/app/services/core/form.service';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { OperationResult } from '../../../library/core/operation-result';
+import { GroupService } from '../../../services/groups/group.service';
+import { PendingInvitationViewModel } from '../../../view-models/groups/group-types';
+import { Socket } from 'ngx-socket-io';
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { NotificationService } from '../../../services/core/notification.service';
+import { UpgradeWorkPackageComponent } from '../../../modals/upgrade-work-package/upgrade-work-package.component';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { WorkPackagePermissionComponent } from '../../../modals/work-package-permission/work-package-permission.component';
+import { UsersService } from '../../../services/general/users.service';
+import { CustomFieldsModalComponent } from '../../../modals/custom-fields-modal/custom-fields-modal.component';
+import { LabelsModalComponent } from '../../../modals/labels-modal/labels-modal.component';
 
 @Component({
   selector: 'app-work-package',
@@ -94,7 +96,7 @@ export class WorkPackageComponent implements OnInit {
       mine: false,
       archived: false,
       active: false,
-      labels: {}
+      labels: {},
     };
     this.mode = ViewMode.Board;
     this.preFetch();
@@ -467,6 +469,7 @@ export class WorkPackageComponent implements OnInit {
             );
             if (find1) {
               find1.title = notification.data.title;
+              find1.color = notification.data.color;
             }
           }
           break;
@@ -483,18 +486,30 @@ export class WorkPackageComponent implements OnInit {
             this.workPackage.title = notification.data.title;
             this.workPackage.description = notification.data.description;
             this.workPackage.order = notification.data.order;
-            this.workPackage.permissionComment = notification.data.permissionComment;
-            this.workPackage.permissionEditAttachment = notification.data.permissionEditAttachment;
-            this.workPackage.permissionCreateAttachment = notification.data.permissionCreateAttachment;
-            this.workPackage.permissionAssignMembers = notification.data.permissionAssignMembers;
-            this.workPackage.permissionAssignLabels = notification.data.permissionAssignLabels;
-            this.workPackage.permissionChangeTaskState = notification.data.permissionChangeTaskState;
-            this.workPackage.permissionEditTask = notification.data.permissionEditTask;
-            this.workPackage.permissionArchiveTask = notification.data.permissionArchiveTask;
-            this.workPackage.permissionCreateTask = notification.data.permissionCreateTask;
-            this.workPackage.permissionArchiveList = notification.data.permissionArchiveList;
-            this.workPackage.permissionEditList = notification.data.permissionEditList;
-            this.workPackage.permissionCreateList = notification.data.permissionCreateList;
+            this.workPackage.permissionComment =
+              notification.data.permissionComment;
+            this.workPackage.permissionEditAttachment =
+              notification.data.permissionEditAttachment;
+            this.workPackage.permissionCreateAttachment =
+              notification.data.permissionCreateAttachment;
+            this.workPackage.permissionAssignMembers =
+              notification.data.permissionAssignMembers;
+            this.workPackage.permissionAssignLabels =
+              notification.data.permissionAssignLabels;
+            this.workPackage.permissionChangeTaskState =
+              notification.data.permissionChangeTaskState;
+            this.workPackage.permissionEditTask =
+              notification.data.permissionEditTask;
+            this.workPackage.permissionArchiveTask =
+              notification.data.permissionArchiveTask;
+            this.workPackage.permissionCreateTask =
+              notification.data.permissionCreateTask;
+            this.workPackage.permissionArchiveList =
+              notification.data.permissionArchiveList;
+            this.workPackage.permissionEditList =
+              notification.data.permissionEditList;
+            this.workPackage.permissionCreateList =
+              notification.data.permissionCreateList;
           }
           break;
 
@@ -571,7 +586,6 @@ export class WorkPackageComponent implements OnInit {
     }
   }
 
-
   mapData(model: WorkPackageViewModel): WorkPackageViewModel {
     model.lists.forEach(list => {
       list.tasks = model.tasks
@@ -619,7 +633,7 @@ export class WorkPackageComponent implements OnInit {
             ? this.groupService.groups.find(g => g.id === member.recordId).title
             : pending
             ? pending.identifier
-            : (await this.usersService.findUser(member.recordId)).fullName
+            : (await this.usersService.findUser(member.recordId)).fullName,
         ],
       );
       this.modalService
@@ -1006,9 +1020,11 @@ export class WorkPackageComponent implements OnInit {
   }
 
   openPermissions() {
-    this.modalService.show(WorkPackagePermissionComponent, {
-      workPackage: {...this.workPackage}
-    }).subscribe(() => {});
+    this.modalService
+      .show(WorkPackagePermissionComponent, {
+        workPackage: { ...this.workPackage },
+      })
+      .subscribe(() => {});
   }
 
   async remove() {
@@ -1023,9 +1039,7 @@ export class WorkPackageComponent implements OnInit {
 
     this.modalService
       .confirm({
-        title: this.project.complex
-          ? 'REMOVE_WORK_PACKAGE'
-          : 'REMOVE_PROJECT',
+        title: this.project.complex ? 'REMOVE_WORK_PACKAGE' : 'REMOVE_PROJECT',
         message: this.project.complex
           ? 'REMOVE_WORK_PACKAGE_CONFIRM'
           : 'REMOVE_PROJECT_DESCRIPTION',
@@ -1034,11 +1048,9 @@ export class WorkPackageComponent implements OnInit {
         cancelLabel: 'CANCEL',
         action: async () => {
           this.deleting = true;
-          const op = await (
-            this.project.complex ?
-            this.projectService.remove(this.project.id) :
-            this.workPackageService.remove(this.workPackage.id)
-          );
+          const op = await (this.project.complex
+            ? this.projectService.remove(this.project.id)
+            : this.workPackageService.remove(this.workPackage.id));
           this.deleting = false;
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
@@ -1047,6 +1059,18 @@ export class WorkPackageComponent implements OnInit {
           return await this.router.navigateByUrl('/dashboard');
         },
       })
+      .subscribe(() => {});
+  }
+
+  openCustomFields() {
+    this.modalService
+      .show(CustomFieldsModalComponent, { workPackage: this.workPackage })
+      .subscribe(() => {});
+  }
+
+  openLabels() {
+    this.modalService
+      .show(LabelsModalComponent, { workPackage: this.workPackage })
       .subscribe(() => {});
   }
 }

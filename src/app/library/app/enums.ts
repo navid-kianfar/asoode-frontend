@@ -14,12 +14,12 @@ export enum GroupType {
 }
 export enum ProjectTemplate {
   None = 0,
-  Animation = 1
+  Animation = 1,
 }
 export enum DurationMode {
   Day = 1,
   Week = 2,
-  Month = 3
+  Month = 3,
 }
 export enum AccessType {
   Owner = 1,
@@ -76,12 +76,12 @@ export enum BoardTemplate {
 export enum TransactionStatus {
   Pending = 1,
   Success = 2,
-  Canceled = 3
+  Canceled = 3,
 }
 export enum OrderType {
   Patch = 1,
   Renew = 2,
-  Change = 3
+  Change = 3,
 }
 export enum OrderDuration {
   Monthly = 1,
@@ -92,7 +92,7 @@ export enum OrderDuration {
 export enum OrderStatus {
   Pending = 1,
   Success = 2,
-  Canceled = 3
+  Canceled = 3,
 }
 export enum ProjectFilter {
   All = 0,
@@ -206,7 +206,7 @@ export enum ActivityType {
   WorkPackageObjectiveRemove = 702,
 
   ChannelMessage = 800,
-  ChannelUpload = 801
+  ChannelUpload = 801,
 }
 export enum PlanType {
   Free = 1,

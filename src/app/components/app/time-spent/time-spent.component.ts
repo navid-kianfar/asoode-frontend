@@ -92,7 +92,7 @@ export class TimeSpentComponent implements OnInit {
       .show(TaskModalComponent, {
         id: task.id,
         projectId: task.projectId,
-        packageId: task.packageId
+        packageId: task.packageId,
       })
       .subscribe(() => {});
   }

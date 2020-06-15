@@ -2,17 +2,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CultureService } from '../../../services/core/culture.service';
 import { FormService } from '../../../services/core/form.service';
 import { FormViewModel } from '../../core/form/contracts';
-import {
-  BoardTemplateViewModel,
-} from '../../../view-models/projects/project-types';
-import {BoardTemplate, ProjectTemplate} from '../../../library/app/enums';
+import { BoardTemplateViewModel } from '../../../view-models/projects/project-types';
+import { BoardTemplate, ProjectTemplate } from '../../../library/app/enums';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { InviteViewModel } from '../../../view-models/auth/identity-types';
 import { ProjectService } from '../../../services/projects/project.service';
 import { NotificationService } from '../../../services/core/notification.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResult } from '../../../library/core/operation-result';
-import {ListViewModel} from '../../../view-models/core/list-types';
+import { ListViewModel } from '../../../view-models/core/list-types';
 
 @Component({
   selector: 'app-project-wizard',
@@ -139,14 +137,14 @@ export class ProjectWizardComponent implements OnInit {
         text: 'NO_TEMPLATE',
         value: ProjectTemplate.None,
         description: 'NO_TEMPLATE_DESCRIPTION',
-        icon: 'icon-blocked'
+        icon: 'icon-blocked',
       },
       {
         text: 'TEMPLATE_ANIMATION',
         value: ProjectTemplate.Animation,
         description: 'TEMPLATE_ANIMATION_DESCRIPTION',
-        icon: 'ikon-recording'
-      }
+        icon: 'ikon-recording',
+      },
     ];
     this.projectTemplate = this.projectTemplates[0];
   }

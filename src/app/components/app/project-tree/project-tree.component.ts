@@ -1,24 +1,33 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
-import {ProjectViewModel, SubProjectViewModel, TreeViewModel, WorkPackageViewModel,} from '../../../view-models/projects/project-types';
-import {AccessType, ActivityType, ProjectTemplate} from '../../../library/app/enums';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ModalService} from '../../../services/core/modal.service';
-import {FormService} from '../../../services/core/form.service';
-import {PromptComponent} from '../../../modals/prompt/prompt.component';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {WorkPackageWizardComponent} from '../../../modals/work-package-wizard/work-package-wizard.component';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {NotificationService} from '../../../services/core/notification.service';
-import {Socket} from 'ngx-socket-io';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {Router} from '@angular/router';
-import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
-import {CreateModalParameters} from '../../../view-models/modals/modals-types';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {DeviceDetectorService} from 'ngx-device-detector';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import {
+  ProjectViewModel,
+  SubProjectViewModel,
+  TreeViewModel,
+  WorkPackageViewModel,
+} from '../../../view-models/projects/project-types';
+import {
+  AccessType,
+  ActivityType,
+  ProjectTemplate,
+} from '../../../library/app/enums';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { FormService } from '../../../services/core/form.service';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { WorkPackageWizardComponent } from '../../../modals/work-package-wizard/work-package-wizard.component';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { NotificationService } from '../../../services/core/notification.service';
+import { Socket } from 'ngx-socket-io';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { Router } from '@angular/router';
+import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
+import { CreateModalParameters } from '../../../view-models/modals/modals-types';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-project-tree',

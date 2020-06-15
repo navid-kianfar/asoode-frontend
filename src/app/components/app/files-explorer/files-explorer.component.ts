@@ -1,23 +1,23 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {FilesService} from '../../../services/storage/files.service';
-import {OperationResultStatus} from '../../../library/core/enums';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FilesService } from '../../../services/storage/files.service';
+import { OperationResultStatus } from '../../../library/core/enums';
 import {
   ExplorerFileViewModel,
   ExplorerFolderViewModel,
   ExplorerViewModel,
   UploadViewModel,
 } from '../../../view-models/storage/files-types';
-import {OperationResult} from '../../../library/core/operation-result';
-import {ModalService} from '../../../services/core/modal.service';
-import {PromptComponent} from '../../../modals/prompt/prompt.component';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {FormService} from '../../../services/core/form.service';
-import {SortType} from 'src/app/library/app/enums';
-import {DocumentModalComponent} from '../../../modals/document-modal/document-modal.component';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {UploadExceedModalComponent} from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
+import { OperationResult } from '../../../library/core/operation-result';
+import { ModalService } from '../../../services/core/modal.service';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { FormService } from '../../../services/core/form.service';
+import { SortType } from 'src/app/library/app/enums';
+import { DocumentModalComponent } from '../../../modals/document-modal/document-modal.component';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { UploadExceedModalComponent } from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Component({
   selector: 'app-files-explorer',
@@ -306,15 +306,17 @@ export class FilesExplorerComponent implements OnInit {
     const selectedFolders = this.data.folders.filter(i => i.selected);
     const selectedFiles = this.data.files.filter(i => i.selected);
 
-    const names = selectedFolders.map(f => f.name)
+    const names = selectedFolders
+      .map(f => f.name)
       .concat(selectedFiles.map(f => f.name));
 
-    const paths = selectedFolders.map(f => f.path)
+    const paths = selectedFolders
+      .map(f => f.path)
       .concat(selectedFiles.map(f => f.path));
 
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_FILES_FOLDERS_CONFIRM_HEADING'),
-      [ names.join(', ') ],
+      [names.join(', ')],
     );
     this.modalService
       .confirm({
@@ -324,7 +326,7 @@ export class FilesExplorerComponent implements OnInit {
         actionLabel: 'REMOVE_FILES_FOLDERS',
         cancelLabel: 'CANCEL',
         action: async () => {
-          const op = await this.filesService.delete({paths});
+          const op = await this.filesService.delete({ paths });
           if (op.status === OperationResultStatus.Success) {
             await this.fetch(this.path);
             return;
@@ -373,12 +375,14 @@ export class FilesExplorerComponent implements OnInit {
     }
     this.clearInputFile(target);
 
-    this.filterFiles(upload)
-      .then((filtered) => {
-        this.filesService.upload(filtered, this.path);
-        filtered.forEach(u => u.promise.then(() => this.fetch(this.path)));
-        this.filesService.uploading = [...this.filesService.uploading, ...filtered];
-      });
+    this.filterFiles(upload).then(filtered => {
+      this.filesService.upload(filtered, this.path);
+      filtered.forEach(u => u.promise.then(() => this.fetch(this.path)));
+      this.filesService.uploading = [
+        ...this.filesService.uploading,
+        ...filtered,
+      ];
+    });
   }
 
   async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
@@ -393,10 +397,12 @@ export class FilesExplorerComponent implements OnInit {
         }
       });
       if (filtered.length) {
-        this.modalService.show(UploadExceedModalComponent, {
-          uploads: filtered,
-          attachmentSize: this.identityService.profile.plan.attachmentSize
-        }).subscribe(() => resolve(allowed));
+        this.modalService
+          .show(UploadExceedModalComponent, {
+            uploads: filtered,
+            attachmentSize: this.identityService.profile.plan.attachmentSize,
+          })
+          .subscribe(() => resolve(allowed));
         return;
       }
       resolve(allowed);

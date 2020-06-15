@@ -1,25 +1,32 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageListViewModel,
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {AccessType, WorkPackageTaskVoteNecessity } from '../../../library/app/enums';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {TaskService} from '../../../services/projects/task.service';
-import {TaskModalComponent} from '../../../modals/task-modal/task-modal.component';
-import {ModalService} from '../../../services/core/modal.service';
-import {DeviceDetectorService} from 'ngx-device-detector';
-import {CultureService} from '../../../services/core/culture.service';
-import {PromptComponent} from '../../../modals/prompt/prompt.component';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {FormService} from '../../../services/core/form.service';
-import {NotificationService} from '../../../services/core/notification.service';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import {
+  AccessType,
+  WorkPackageTaskVoteNecessity,
+} from '../../../library/app/enums';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { TaskService } from '../../../services/projects/task.service';
+import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
+import { ModalService } from '../../../services/core/modal.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { CultureService } from '../../../services/core/culture.service';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { FormService } from '../../../services/core/form.service';
+import { NotificationService } from '../../../services/core/notification.service';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-work-package-board',
@@ -221,10 +228,7 @@ export class WorkPackageBoardComponent implements OnInit {
           },
         ],
         action: async (params, form) => {
-          const op = await this.workPackageService.cloneList(
-            list.id,
-            params,
-          );
+          const op = await this.workPackageService.cloneList(list.id, params);
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;
@@ -288,7 +292,10 @@ export class WorkPackageBoardComponent implements OnInit {
   }
 
   isAdminOrHasPermission(permission: boolean) {
-    return (this.permission === AccessType.Owner || this.permission === AccessType.Admin) ||
-      (this.permission !== AccessType.Visitor && permission);
+    return (
+      this.permission === AccessType.Owner ||
+      this.permission === AccessType.Admin ||
+      (this.permission !== AccessType.Visitor && permission)
+    );
   }
 }

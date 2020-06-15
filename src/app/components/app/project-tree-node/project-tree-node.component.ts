@@ -39,8 +39,12 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   @Output() createWorkPackage = new EventEmitter<string>();
   @Output() editSubProject = new EventEmitter<string>();
   @Output() deleteSubProject = new EventEmitter<string>();
-  @Output() dropSubProject = new EventEmitter<CdkDragDrop<SubProjectViewModel[], any>>();
-  @Output() dropWorkPackage = new EventEmitter<CdkDragDrop<WorkPackageViewModel[], any>>();
+  @Output() dropSubProject = new EventEmitter<
+    CdkDragDrop<SubProjectViewModel[], any>
+  >();
+  @Output() dropWorkPackage = new EventEmitter<
+    CdkDragDrop<WorkPackageViewModel[], any>
+  >();
   subProjects: SubProjectViewModel[];
   expanded: boolean;
   from?: Date;
@@ -92,7 +96,7 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
       members: [],
       doneWorkPackages: 0,
       workPackages: 0,
-      workPackageProgress: 0
+      workPackageProgress: 0,
     };
     if (this.workPackage) {
       this.subProjects = [];
@@ -114,7 +118,9 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
       this.reportViewModel.workPackages = this.workPackages.length;
       this.findAllSubs(this.subProject.id).forEach(p => {
         const report = this.data.tree[p.id];
-        if (!report) { return; }
+        if (!report) {
+          return;
+        }
         this.reportViewModel.members = [
           ...this.reportViewModel.members,
           ...p.members,

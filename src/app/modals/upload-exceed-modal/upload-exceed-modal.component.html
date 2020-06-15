@@ -1,5 +1,9 @@
 <div class="outer" (click)="close()">
-  <div *ngIf="mode === ViewMode.Init" class="modal-content create-modal" (click)="$event.stopPropagation()">
+  <div
+    *ngIf="mode === ViewMode.Init"
+    class="modal-content create-modal"
+    (click)="$event.stopPropagation()"
+  >
     <div class="modal-alt-header">
       <div class="btn"></div>
 
@@ -16,29 +20,31 @@
       </div>
     </div>
     <div class="modal-body create-group">
-      <h4>{{ 'MAX_ATTACHMENT_EXCEEDED' | translate|stringFormat:NumberHelpers.humanFileSize(attachmentSize)}}</h4>
+      <h4>
+        {{
+          'MAX_ATTACHMENT_EXCEEDED'
+            | translate
+            | stringFormat: NumberHelpers.humanFileSize(attachmentSize)
+        }}
+      </h4>
       <ul class="files">
         <li *ngFor="let u of uploads">
           <div class="ico">
             <i [class]="filesService.icon(u.name)"></i>
           </div>
-          <div class="name">{{u.name}}</div>
+          <div class="name">{{ u.name }}</div>
         </li>
       </ul>
     </div>
     <div class="modal-footer">
       <button
-        (click)="mode = ViewMode.Upgrade;$event.stopPropagation()"
+        (click)="mode = ViewMode.Upgrade; $event.stopPropagation()"
         mat-flat-button
         [color]="'primary'"
       >
-        {{ 'UPGRADE' | translate: true }}
-      </button>&nbsp;
-      <button
-        (click)="close()"
-        mat-flat-button
-        color="accent"
-      >
+        {{ 'UPGRADE' | translate: true }}</button
+      >&nbsp;
+      <button (click)="close()" mat-flat-button color="accent">
         {{ 'UPLOAD_REMAINING' | translate: true }}
       </button>
     </div>

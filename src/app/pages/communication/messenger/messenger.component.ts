@@ -12,7 +12,7 @@ import {
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-messenger',
@@ -63,7 +63,7 @@ export class MessengerComponent implements OnInit {
       members: [],
       title: group.title,
       type: ChannelType.Group,
-      attachmentSize: group.attachmentSize
+      attachmentSize: group.attachmentSize,
     };
     this.currentMembers = group.members.map(m => m.member);
   }
@@ -74,7 +74,7 @@ export class MessengerComponent implements OnInit {
       members: [],
       title: project.title,
       type: ChannelType.Project,
-      attachmentSize: project.attachmentSize
+      attachmentSize: project.attachmentSize,
     };
     this.currentMembers = project.members
       .filter(p => !p.isGroup)
@@ -91,7 +91,7 @@ export class MessengerComponent implements OnInit {
       members: [],
       title: workPackageViewModel.title,
       type: ChannelType.WorkPackage,
-      attachmentSize: project.attachmentSize
+      attachmentSize: project.attachmentSize,
     };
     this.currentMembers = project.members
       .filter(p => {

@@ -3,12 +3,18 @@
     <h2>
       {{ identityService.profile.plan.title | translate }}
       <ng-container *ngIf="identityService.profile.plan.expireAt">
-        &nbsp;-&nbsp;{{ 'EXPIRE_AT' | translate }}
-        &nbsp;-&nbsp;{{ identityService.profile.plan.expireAt | culturedDate }}
+        &nbsp;-&nbsp;{{ 'EXPIRE_AT' | translate }} &nbsp;-&nbsp;{{
+          identityService.profile.plan.expireAt | culturedDate
+        }}
       </ng-container>
     </h2>
     <h3>{{ identityService.profile.plan.description | translate }}</h3>
-    <h5>{{ 'ATTACHMENT_SIZE' | translate }} : {{NumberHelpers.humanFileSize(identityService.profile.plan.attachmentSize)}}</h5>
+    <h5>
+      {{ 'ATTACHMENT_SIZE' | translate }} :
+      {{
+        NumberHelpers.humanFileSize(identityService.profile.plan.attachmentSize)
+      }}
+    </h5>
   </div>
 
   <div class="box-wrapper">
@@ -30,20 +36,28 @@
         <mat-progress-bar [value]="calculateDiskSpace()"></mat-progress-bar>
         <h5 *ngIf="identityService.profile.plan.type === PlanType.Free">
           {{
-          'DISK_USAGE_MB_DETAIL'
-            | translate
-            | stringFormat
-            : NumberHelpers.humanFileSize(identityService.profile.plan.usedSpace)
-              : NumberHelpers.humanFileSize(identityService.profile.plan.totalSpace)
+            'DISK_USAGE_MB_DETAIL'
+              | translate
+              | stringFormat
+                : NumberHelpers.humanFileSize(
+                    identityService.profile.plan.usedSpace
+                  )
+                : NumberHelpers.humanFileSize(
+                    identityService.profile.plan.totalSpace
+                  )
           }}
         </h5>
         <h5 *ngIf="identityService.profile.plan.type !== PlanType.Free">
           {{
-          'DISK_USAGE_GB_DETAIL'
-            | translate
-            | stringFormat
-            : NumberHelpers.humanFileSize(identityService.profile.plan.usedSpace)
-              : NumberHelpers.humanFileSize(identityService.profile.plan.totalSpace)
+            'DISK_USAGE_GB_DETAIL'
+              | translate
+              | stringFormat
+                : NumberHelpers.humanFileSize(
+                    identityService.profile.plan.usedSpace
+                  )
+                : NumberHelpers.humanFileSize(
+                    identityService.profile.plan.totalSpace
+                  )
           }}
         </h5>
       </div>
@@ -66,17 +80,17 @@
       <div class="body">
         <mat-progress-bar
           [value]="
-          (identityService.profile.plan.usedUser * 100) /
-          identityService.profile.plan.users
-        "
+            (identityService.profile.plan.usedUser * 100) /
+            identityService.profile.plan.users
+          "
         ></mat-progress-bar>
         <h5>
           {{
-          'MEMBER_USAGE_DETAIL'
-            | translate
-            | stringFormat
-            : identityService.profile.plan.usedUser
-              : identityService.profile.plan.users
+            'MEMBER_USAGE_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.usedUser
+                : identityService.profile.plan.users
           }}
         </h5>
       </div>
@@ -99,17 +113,17 @@
       <div class="body">
         <mat-progress-bar
           [value]="
-          (identityService.profile.plan.usedSimpleGroup * 100) /
-          identityService.profile.plan.totalSimpleGroups
-        "
+            (identityService.profile.plan.usedSimpleGroup * 100) /
+            identityService.profile.plan.totalSimpleGroups
+          "
         ></mat-progress-bar>
         <h5>
           {{
-          'GROUP_USAGE_DETAIL'
-            | translate
-            | stringFormat
-            : identityService.profile.plan.usedSimpleGroup
-              : identityService.profile.plan.totalSimpleGroups
+            'GROUP_USAGE_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.usedSimpleGroup
+                : identityService.profile.plan.totalSimpleGroups
           }}
         </h5>
       </div>
@@ -132,17 +146,17 @@
       <div class="body">
         <mat-progress-bar
           [value]="
-          (identityService.profile.plan.usedComplexGroup * 100) /
-          identityService.profile.plan.totalComplexGroups
-        "
+            (identityService.profile.plan.usedComplexGroup * 100) /
+            identityService.profile.plan.totalComplexGroups
+          "
         ></mat-progress-bar>
         <h5>
           {{
-          'GROUP_USAGE_DETAIL'
-            | translate
-            | stringFormat
-            : identityService.profile.plan.usedComplexGroup
-              : identityService.profile.plan.totalComplexGroups
+            'GROUP_USAGE_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.usedComplexGroup
+                : identityService.profile.plan.totalComplexGroups
           }}
         </h5>
       </div>
@@ -165,17 +179,17 @@
       <div class="body">
         <mat-progress-bar
           [value]="
-          (identityService.profile.plan.usedWorkPackage * 100) /
-          identityService.profile.plan.totalWorkPackages
-        "
+            (identityService.profile.plan.usedWorkPackage * 100) /
+            identityService.profile.plan.totalWorkPackages
+          "
         ></mat-progress-bar>
         <h5>
           {{
-          'PROJECT_USAGE_DETAIL'
-            | translate
-            | stringFormat
-            : identityService.profile.plan.usedWorkPackage
-              : identityService.profile.plan.totalWorkPackages
+            'PROJECT_USAGE_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.usedWorkPackage
+                : identityService.profile.plan.totalWorkPackages
           }}
         </h5>
       </div>
@@ -198,17 +212,17 @@
       <div class="body">
         <mat-progress-bar
           [value]="
-          (identityService.profile.plan.usedProject * 100) /
-          identityService.profile.plan.totalComplexProjects
-        "
+            (identityService.profile.plan.usedProject * 100) /
+            identityService.profile.plan.totalComplexProjects
+          "
         ></mat-progress-bar>
         <h5>
           {{
-          'PROJECT_USAGE_DETAIL'
-            | translate
-            | stringFormat
-            : identityService.profile.plan.usedProject
-              : identityService.profile.plan.totalComplexProjects
+            'PROJECT_USAGE_DETAIL'
+              | translate
+              | stringFormat
+                : identityService.profile.plan.usedProject
+                : identityService.profile.plan.totalComplexProjects
           }}
         </h5>
       </div>

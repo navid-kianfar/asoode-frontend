@@ -58,9 +58,7 @@ export class DevicesComponent implements OnInit {
           }
           break;
         case ActivityType.AccountDeviceRemove:
-          this.devices = this.devices.filter(
-            d => d.id !== notification.data,
-          );
+          this.devices = this.devices.filter(d => d.id !== notification.data);
           break;
       }
     });
@@ -82,10 +80,14 @@ export class DevicesComponent implements OnInit {
     return new Promise((resolve, reject) => {
       if (this.swPush.isEnabled) {
         let ranAlready = false;
-        this.swPush.subscription.subscribe((old) => {
+        this.swPush.subscription.subscribe(old => {
           if (old) {
             const json = old.toJSON();
-            if (!ranAlready && json.keys.p256dh && json.keys.p256dh !== environment.vapid) {
+            if (
+              !ranAlready &&
+              json.keys.p256dh &&
+              json.keys.p256dh !== environment.vapid
+            ) {
               ranAlready = true;
               console.log('SUBSCRIPTION_CHANGED!');
               old.unsubscribe();

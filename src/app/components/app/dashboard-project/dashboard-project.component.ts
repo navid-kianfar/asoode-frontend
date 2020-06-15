@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/projects/project.service';
 import { ProjectFilter } from '../../../library/app/enums';
-import {ModalService} from '../../../services/core/modal.service';
-import {CreateWizardComponent} from '../../../modals/create-wizard/create-wizard.component';
+import { ModalService } from '../../../services/core/modal.service';
+import { CreateWizardComponent } from '../../../modals/create-wizard/create-wizard.component';
 
 @Component({
   selector: 'app-dashboard-project',
@@ -14,7 +14,7 @@ export class DashboardProjectComponent implements OnInit {
   ProjectFilter = ProjectFilter;
   constructor(
     readonly projectService: ProjectService,
-    private readonly modalService: ModalService
+    private readonly modalService: ModalService,
   ) {}
 
   ngOnInit() {}

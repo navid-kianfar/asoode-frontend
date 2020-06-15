@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectTreeComponent} from '../project-tree/project-tree.component';
-import {SubProjectViewModel} from '../../../view-models/projects/project-types';
-import {ActivityType, ProjectTemplate} from '../../../library/app/enums';
+import { ProjectTreeComponent } from '../project-tree/project-tree.component';
+import { SubProjectViewModel } from '../../../view-models/projects/project-types';
+import { ActivityType, ProjectTemplate } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-project-tree-animation',
   templateUrl: './project-tree-animation.component.html',
-  styleUrls: ['./project-tree-animation.component.scss']
+  styleUrls: ['./project-tree-animation.component.scss'],
 })
 export class ProjectTreeAnimationComponent extends ProjectTreeComponent {
   crumbs: SubProjectViewModel[] = [];

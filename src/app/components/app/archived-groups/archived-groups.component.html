@@ -1,8 +1,11 @@
 <div class="archived-groups">
   <app-waiting *ngIf="waiting"></app-waiting>
   <div class="groups" *ngIf="!waiting && groups.length">
-    <app-group-info *ngFor="let group of groups" (click)="openGroup(group)"
-                      [model]="group"></app-group-info>
+    <app-group-info
+      *ngFor="let group of groups"
+      (click)="openGroup(group)"
+      [model]="group"
+    ></app-group-info>
   </div>
   <div *ngIf="!waiting && !groups.length" class="no-item">
     {{ 'NO_GROUPS' | translate }}

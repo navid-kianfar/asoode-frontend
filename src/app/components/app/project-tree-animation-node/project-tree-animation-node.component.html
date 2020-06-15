@@ -1,13 +1,34 @@
 <div class="project-tree-animation-node" (click)="onNodeSelect()">
   <div class="node">
-    <div class="title" (click)="$event.preventDefault();$event.stopPropagation()">
-      <i class="sub {{ subProject ? 'icon-tree7' : 'icon-workpackage' }}"></i>&nbsp;
-      <span>{{ (subProject ? subProject.title : workPackage.title) | translate:false | truncate:15 }}</span>&nbsp;
-      <i (click)="editSubProject.emit(subProject.id)" *ngIf="subProject" class="add icon-pencil"></i>&nbsp;
-      <i (click)="deleteSubProject.emit(subProject.id)" *ngIf="subProject" class="add icon-delete"></i>
+    <div
+      class="title"
+      (click)="$event.preventDefault(); $event.stopPropagation()"
+    >
+      <i class="sub {{ subProject ? 'icon-tree7' : 'icon-workpackage' }}"></i
+      >&nbsp;
+      <span>{{
+        (subProject ? subProject.title : workPackage.title)
+          | translate: false
+          | truncate: 15
+      }}</span
+      >&nbsp;
+      <i
+        (click)="editSubProject.emit(subProject.id)"
+        *ngIf="subProject"
+        class="add icon-pencil"
+      ></i
+      >&nbsp;
+      <i
+        (click)="deleteSubProject.emit(subProject.id)"
+        *ngIf="subProject"
+        class="add icon-delete"
+      ></i>
     </div>
     <div class="description info">
-      {{ (subProject ? subProject.description : workPackage.description) | translate:true }}
+      {{
+        (subProject ? subProject.description : workPackage.description)
+          | translate: true
+      }}
     </div>
     <ng-container *ngIf="subProject">
       <div class="total-tasks info">
@@ -20,7 +41,12 @@
       </div>
       <div class="total-tasks info">
         <div class="label">{{ 'TOTAL_PENDING' | translate }}</div>
-        <div class="value">{{ (reportViewModel.workPackages - reportViewModel.doneWorkPackages) | number }}</div>
+        <div class="value">
+          {{
+            reportViewModel.workPackages - reportViewModel.doneWorkPackages
+              | number
+          }}
+        </div>
       </div>
     </ng-container>
     <ng-container *ngIf="!subProject">
@@ -34,7 +60,9 @@
       </div>
       <div class="total-tasks info">
         <div class="label">{{ 'TOTAL_PENDING' | translate }}</div>
-        <div class="value">{{ (reportViewModel.total - reportViewModel.done) | number }}</div>
+        <div class="value">
+          {{ reportViewModel.total - reportViewModel.done | number }}
+        </div>
       </div>
     </ng-container>
 
@@ -45,13 +73,22 @@
     <div class="time-span info">
       <div class="label">{{ 'TIME_SPAN' | translate }}</div>
       <div class="value">
-        <ng-container *ngIf="reportViewModel.from">{{ reportViewModel.from | culturedDate}}</ng-container>
-        <ng-container *ngIf="reportViewModel.from && reportViewModel.to">&nbsp;-&nbsp;</ng-container>
-        <ng-container *ngIf="reportViewModel.to">{{ reportViewModel.to | culturedDate}}</ng-container>
+        <ng-container *ngIf="reportViewModel.from">{{
+          reportViewModel.from | culturedDate
+        }}</ng-container>
+        <ng-container *ngIf="reportViewModel.from && reportViewModel.to"
+          >&nbsp;-&nbsp;</ng-container
+        >
+        <ng-container *ngIf="reportViewModel.to">{{
+          reportViewModel.to | culturedDate
+        }}</ng-container>
       </div>
     </div>
     <div class="members">
-      <div class="member-container" *ngFor="let member of reportViewModel.members">
+      <div
+        class="member-container"
+        *ngFor="let member of reportViewModel.members"
+      >
         <div class="member">
           <app-member-info
             small="true"
@@ -67,11 +104,15 @@
       </div>
     </div>
     <div *ngIf="subProject" class="progress">
-      <mat-progress-bar [value]="reportViewModel.workPackageProgress"></mat-progress-bar>&nbsp;
+      <mat-progress-bar
+        [value]="reportViewModel.workPackageProgress"
+      ></mat-progress-bar
+      >&nbsp;
       <span>{{ reportViewModel.workPackageProgress }}%</span>
     </div>
     <div *ngIf="!subProject" class="progress">
-      <mat-progress-bar [value]="reportViewModel.progress"></mat-progress-bar>&nbsp;
+      <mat-progress-bar [value]="reportViewModel.progress"></mat-progress-bar
+      >&nbsp;
       <span>{{ reportViewModel.progress }}%</span>
     </div>
   </div>

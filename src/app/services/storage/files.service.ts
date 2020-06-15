@@ -7,8 +7,8 @@ import {
 } from '../../view-models/storage/files-types';
 import { OperationResultStatus } from '../../library/core/enums';
 import { StringDictionary } from '../../library/core/dictionary';
-import {ModalService} from '../core/modal.service';
-import {UploadExceedModalComponent} from '../../modals/upload-exceed-modal/upload-exceed-modal.component';
+import { ModalService } from '../core/modal.service';
+import { UploadExceedModalComponent } from '../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class FilesService {
 
   constructor(
     private readonly modalService: ModalService,
-    private readonly httpService: HttpService
+    private readonly httpService: HttpService,
   ) {
     this.hidePlate = false;
   }
@@ -146,7 +146,10 @@ export class FilesService {
     return this.httpService.post<boolean>('/files/rename', model, false);
   }
 
-  async upload(filtered: UploadViewModel[], path: string): Promise<UploadViewModel[]> {
+  async upload(
+    filtered: UploadViewModel[],
+    path: string,
+  ): Promise<UploadViewModel[]> {
     if (filtered.length) {
       this.hidePlate = false;
     }
@@ -231,7 +234,9 @@ export class FilesService {
           .formUpload(
             `/messenger/channel/${recordId}/attach`,
             { file: u.file },
-              percent => { u.progress = percent; }
+            percent => {
+              u.progress = percent;
+            },
           )
           .then(
             op => {

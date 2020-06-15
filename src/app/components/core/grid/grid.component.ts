@@ -147,10 +147,10 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
       backend: this.backend,
       params: {
         query: this.query,
-        ...(this.backendParams || {})
+        ...(this.backendParams || {}),
       },
       page: this.currentPage || 1,
-      pageSize: this.pageSize || 10
+      pageSize: this.pageSize || 10,
     });
     this.isLoading = false;
     this.isLoadingChange.emit(this.isLoading);
@@ -164,7 +164,6 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
     this.dataSource.data = op.data.items;
 
-
     this.totalItemsChange.emit(this.totalItems);
     this.rowsChange.emit(op.data.items);
     this.totalPagesChange.emit(this.totalPages);
@@ -177,8 +176,12 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   }
 
   calculateOf() {
-    if (!this.totalItems) { return 0; }
-    if (this.totalItems < this.pageSize) { return this.totalItems; }
-    return ((this.currentPage - 1) * this.pageSize) + this.pageSize;
+    if (!this.totalItems) {
+      return 0;
+    }
+    if (this.totalItems < this.pageSize) {
+      return this.totalItems;
+    }
+    return (this.currentPage - 1) * this.pageSize + this.pageSize;
   }
 }

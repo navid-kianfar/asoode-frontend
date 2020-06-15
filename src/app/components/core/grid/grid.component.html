@@ -1,13 +1,29 @@
 <div class="af-grid {{ cssClass }}">
   <div class="extra">
     <div class="create">
-      <button *ngIf="create" [disabled]="isLoading" mat-flat-button color="primary" (click)="onCreate.emit()">
+      <button
+        *ngIf="create"
+        [disabled]="isLoading"
+        mat-flat-button
+        color="primary"
+        (click)="onCreate.emit()"
+      >
         {{ 'CREATE' | translate }}
       </button>
     </div>
     <div class="filter" *ngIf="filter">
-      <input [disabled]="isLoading" type="text" [(ngModel)]="query" [placeholder]="'FILTER_QUERY' | translate">
-      <button [disabled]="isLoading" mat-flat-button color="primary" (click)="filterResult()">
+      <input
+        [disabled]="isLoading"
+        type="text"
+        [(ngModel)]="query"
+        [placeholder]="'FILTER_QUERY' | translate"
+      />
+      <button
+        [disabled]="isLoading"
+        mat-flat-button
+        color="primary"
+        (click)="filterResult()"
+      >
         <i *ngIf="isLoading" class="icon-spinner2 icon-spin"></i>
         {{ 'FILTER' | translate }}
       </button>
@@ -18,24 +34,46 @@
     <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
+
   <div class="paginator">
     <div class="info">
       {{
-      'PAGINATOR_OF' | translate | stringFormat:
-        (((currentPage - 1) * pageSize) + (totalItems ? 1 : 0)): calculateOf(): totalItems}}
+        'PAGINATOR_OF'
+          | translate
+          | stringFormat
+            : (currentPage - 1) * pageSize + (totalItems ? 1 : 0)
+            : calculateOf()
+            : totalItems
+      }}
     </div>
     <div class="actions">
-      <button mat-stroked-button [disabled]="isLoading || currentPage === 1" (click)="changePage(1)">
-        {{ 'PAGINATOR_FIRST' | translate}}
-      </button>&nbsp;
-      <button mat-stroked-button [disabled]="isLoading || currentPage === 1" (click)="changePage(currentPage - 1)">
-        {{ 'PAGINATOR_PREV' | translate}}
-      </button>&nbsp;
-      <button mat-stroked-button [disabled]="isLoading || currentPage === totalPages" (click)="changePage(currentPage + 1)">
-        {{ 'PAGINATOR_NEXT' | translate}}
-      </button>&nbsp;
-      <button mat-stroked-button [disabled]="isLoading || currentPage === totalPages" (click)="changePage(totalPages)">
-        {{ 'PAGINATOR_LAST' | translate}}
+      <button
+        mat-stroked-button
+        [disabled]="isLoading || currentPage === 1"
+        (click)="changePage(1)"
+      >
+        {{ 'PAGINATOR_FIRST' | translate }}</button
+      >&nbsp;
+      <button
+        mat-stroked-button
+        [disabled]="isLoading || currentPage === 1"
+        (click)="changePage(currentPage - 1)"
+      >
+        {{ 'PAGINATOR_PREV' | translate }}</button
+      >&nbsp;
+      <button
+        mat-stroked-button
+        [disabled]="isLoading || currentPage === totalPages"
+        (click)="changePage(currentPage + 1)"
+      >
+        {{ 'PAGINATOR_NEXT' | translate }}</button
+      >&nbsp;
+      <button
+        mat-stroked-button
+        [disabled]="isLoading || currentPage === totalPages"
+        (click)="changePage(totalPages)"
+      >
+        {{ 'PAGINATOR_LAST' | translate }}
       </button>
     </div>
   </div>

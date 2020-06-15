@@ -1,4 +1,10 @@
-import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { TaskService } from '../../../services/projects/task.service';
 import {
   KartablViewModel,
@@ -20,13 +26,9 @@ export class TasksComponent implements OnInit {
   calendarData: WorkPackageTaskViewModel[];
   timeSpentData: TimeSpentViewModel[];
   kartablData: KartablViewModel;
-  constructor(
-    private readonly taskService: TaskService,
-  ) {}
+  constructor(private readonly taskService: TaskService) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   async switchTab(tab: TaskTab) {
     this.waiting = true;
@@ -58,7 +60,9 @@ export class TasksComponent implements OnInit {
   }
 
   onBeginChange($event: Date) {
-    if (!$event) { return; }
+    if (!$event) {
+      return;
+    }
     setTimeout(() => {
       if (!this.beginDate || this.beginDate.getTime() !== $event.getTime()) {
         this.beginDate = $event;

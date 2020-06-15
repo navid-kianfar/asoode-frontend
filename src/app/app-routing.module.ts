@@ -59,7 +59,7 @@ const routes: Routes = [
     path: 'group/:id/archived',
     component: GroupComponent,
     canActivate: [AuthGuard],
-    data: { archived: true }
+    data: { archived: true },
   },
   {
     path: 'project/:id',
@@ -70,7 +70,7 @@ const routes: Routes = [
     path: 'project/:id/archived',
     component: ProjectComponent,
     canActivate: [AuthGuard],
-    data: { archived: true }
+    data: { archived: true },
   },
   {
     path: 'work-package/:id',
@@ -81,7 +81,7 @@ const routes: Routes = [
     path: 'work-package/:id/archived',
     component: WorkPackageComponent,
     canActivate: [AuthGuard],
-    data: { archived: true }
+    data: { archived: true },
   },
   {
     path: 'tasks',

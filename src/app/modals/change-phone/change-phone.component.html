@@ -12,10 +12,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <div
-        *ngIf="identityService.profile.phone"
-        class="form-group current"
-      >
+      <div *ngIf="identityService.profile.phone" class="form-group current">
         <label>{{ 'CURRENT_PHONE_NUMBER' | translate }}</label>
         <span>{{ identityService.profile.phone }}</span>
       </div>

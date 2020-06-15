@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import { OrderDiscountResultViewModel } from '../../view-models/general/order-types';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

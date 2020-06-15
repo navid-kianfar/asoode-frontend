@@ -1,11 +1,13 @@
 <div class="work-package-calendar-view">
   <ng-container *ngIf="mode === ViewMode.Day">
     <div class="header">
-      <app-duration-picker [model]="beginDate"
-                           [endDate]="endDate"
-                           [mode]="DurationMode.Day"
-                           (modelChange)="onBeginChange($event)"
-                           (endDateChange)="onEndChange($event)"></app-duration-picker>
+      <app-duration-picker
+        [model]="beginDate"
+        [endDate]="endDate"
+        [mode]="DurationMode.Day"
+        (modelChange)="onBeginChange($event)"
+        (endDateChange)="onEndChange($event)"
+      ></app-duration-picker>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
           {{ 'DAY_VIEW' | translate }}
@@ -54,11 +56,13 @@
   </ng-container>
   <ng-container *ngIf="mode === ViewMode.Week">
     <div class="header">
-      <app-duration-picker [model]="beginDate"
-                           [mode]="DurationMode.Week"
-                           [endDate]="endDate"
-                           (modelChange)="onBeginChange($event)"
-                           (endDateChange)="onEndChange($event)"></app-duration-picker>
+      <app-duration-picker
+        [model]="beginDate"
+        [mode]="DurationMode.Week"
+        [endDate]="endDate"
+        (modelChange)="onBeginChange($event)"
+        (endDateChange)="onEndChange($event)"
+      ></app-duration-picker>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
           {{ 'WEEK_VIEW' | translate }}
@@ -106,11 +110,13 @@
   </ng-container>
   <ng-container *ngIf="mode === ViewMode.Month">
     <div class="header">
-      <app-duration-picker [model]="beginDate"
-                           [mode]="DurationMode.Month"
-                           [endDate]="endDate"
-                           (modelChange)="onBeginChange($event)"
-                           (endDateChange)="onEndChange($event)"></app-duration-picker>
+      <app-duration-picker
+        [model]="beginDate"
+        [mode]="DurationMode.Month"
+        [endDate]="endDate"
+        (modelChange)="onBeginChange($event)"
+        (endDateChange)="onEndChange($event)"
+      ></app-duration-picker>
       <div class="mode">
         <button [matMenuTriggerFor]="viewMode" mat-stroked-button>
           {{ 'MONTH_VIEW' | translate }}

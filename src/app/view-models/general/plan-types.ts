@@ -1,4 +1,9 @@
-import {CostUnit, OrderDuration, OrderType, PlanType} from '../../library/app/enums';
+import {
+  CostUnit,
+  OrderDuration,
+  OrderType,
+  PlanType,
+} from '../../library/app/enums';
 import { BaseViewModel } from '../core/general-types';
 
 export interface UserPlanInfoViewModel extends BaseViewModel {

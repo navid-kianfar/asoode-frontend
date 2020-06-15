@@ -19,20 +19,19 @@
         margin-inline-start: -18px;
         position: relative;
         border-radius: 50%;
-        overflow:hidden;
-        width:40px;
-        height:40px;
+        overflow: hidden;
+        width: 40px;
+        height: 40px;
 
         .member {
-          width:40px;
-          height:40px;
+          width: 40px;
+          height: 40px;
 
-          ::ng-deep .group-info{
+          ::ng-deep .group-info {
             background: inherit !important;
           }
         }
       }
-
     }
 
     &.color-1 {

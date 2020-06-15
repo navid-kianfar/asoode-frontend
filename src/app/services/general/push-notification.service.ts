@@ -166,8 +166,9 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectRemove:
       case ActivityType.ProjectArchive:
-        this.projectService.projects = this.projectService.projects
-          .filter(f => f.id !== notification.data.id);
+        this.projectService.projects = this.projectService.projects.filter(
+          f => f.id !== notification.data.id,
+        );
         break;
 
       case ActivityType.ProjectSubAdd:
@@ -185,10 +186,15 @@ export class PushNotificationService {
         if (find1) {
           find2 = find1.subProjects.find(s => s.id === notification.data.id);
           if (find2) {
-            const index = find1.subProjects.findIndex(s => s.id === notification.data.id);
+            const index = find1.subProjects.findIndex(
+              s => s.id === notification.data.id,
+            );
             const oldOrder = find2.order;
             Object.assign(find2, notification.data);
-            if (oldOrder !== notification.data.order && index !== (find2.order - 1)) {
+            if (
+              oldOrder !== notification.data.order &&
+              index !== find2.order - 1
+            ) {
               find3 = find1.subProjects.sort((a, b) =>
                 a.order > b.order ? 1 : -1,
               );
@@ -474,15 +480,22 @@ export class PushNotificationService {
             find2.order = notification.data.order;
 
             find2.permissionComment = notification.data.permissionComment;
-            find2.permissionEditAttachment = notification.data.permissionEditAttachment;
-            find2.permissionCreateAttachment = notification.data.permissionCreateAttachment;
-            find2.permissionAssignMembers = notification.data.permissionAssignMembers;
-            find2.permissionAssignLabels = notification.data.permissionAssignLabels;
-            find2.permissionChangeTaskState = notification.data.permissionChangeTaskState;
+            find2.permissionEditAttachment =
+              notification.data.permissionEditAttachment;
+            find2.permissionCreateAttachment =
+              notification.data.permissionCreateAttachment;
+            find2.permissionAssignMembers =
+              notification.data.permissionAssignMembers;
+            find2.permissionAssignLabels =
+              notification.data.permissionAssignLabels;
+            find2.permissionChangeTaskState =
+              notification.data.permissionChangeTaskState;
             find2.permissionEditTask = notification.data.permissionEditTask;
-            find2.permissionArchiveTask = notification.data.permissionArchiveTask;
+            find2.permissionArchiveTask =
+              notification.data.permissionArchiveTask;
             find2.permissionCreateTask = notification.data.permissionCreateTask;
-            find2.permissionArchiveList = notification.data.permissionArchiveList;
+            find2.permissionArchiveList =
+              notification.data.permissionArchiveList;
             find2.permissionEditList = notification.data.permissionEditList;
             find2.permissionCreateList = notification.data.permissionCreateList;
 

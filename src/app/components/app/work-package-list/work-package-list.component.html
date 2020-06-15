@@ -47,7 +47,9 @@
         (click)="openTask(task)"
         [cdkDragStartDelay]="dragDelay"
         [cdkDragData]="task"
-        [cdkDragDisabled]="noDrag || embed || !isAdminOrHasPermission(model.permissionEditTask)"
+        [cdkDragDisabled]="
+          noDrag || embed || !isAdminOrHasPermission(model.permissionEditTask)
+        "
         *ngFor="let task of list.tasks"
       >
         <div class="label color-{{ task.state }}"></div>
@@ -147,7 +149,10 @@
           </ng-container>
         </div>
       </div>
-      <div *ngIf="!embed && isAdminOrHasPermission(model.permissionCreateTask)" class="new-task">
+      <div
+        *ngIf="!embed && isAdminOrHasPermission(model.permissionCreateTask)"
+        class="new-task"
+      >
         <input
           type="text"
           [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"

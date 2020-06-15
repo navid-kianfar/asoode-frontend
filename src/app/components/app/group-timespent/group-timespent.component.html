@@ -5,16 +5,20 @@
   <div class="box">
     <app-waiting *ngIf="waiting"></app-waiting>
     <div [hidden]="waiting">
-      <app-duration-picker [model]="beginDate"
-                           [endDate]="endDate"
-                           (modelChange)="onBeginChange($event)"
-                           (endDateChange)="onEndChange($event)"></app-duration-picker>
-      <br>
+      <app-duration-picker
+        [model]="beginDate"
+        [endDate]="endDate"
+        (modelChange)="onBeginChange($event)"
+        (endDateChange)="onEndChange($event)"
+      ></app-duration-picker>
+      <br />
     </div>
     <ng-container *ngIf="!waiting && model">
-      <app-time-spent [model]="model"
-                      [endDate]="endDate"
-                      [beginDate]="beginDate"></app-time-spent>
+      <app-time-spent
+        [model]="model"
+        [endDate]="endDate"
+        [beginDate]="beginDate"
+      ></app-time-spent>
     </ng-container>
   </div>
 </div>

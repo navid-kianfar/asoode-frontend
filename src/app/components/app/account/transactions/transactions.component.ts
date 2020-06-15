@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderStatus } from 'src/app/library/app/enums';
-import {OrderService} from '../../../../services/general/order.service';
+import { OrderService } from '../../../../services/general/order.service';
 
 @Component({
   selector: 'app-transactions',

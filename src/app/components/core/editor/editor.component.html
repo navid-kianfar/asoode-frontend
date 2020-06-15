@@ -30,8 +30,11 @@
         <button class="ql-underline"></button>
         <button class="ql-italic"></button>
         <button class="ql-bold"></button>
-        <button *ngIf="deviceDetectorService.isDesktop()"
-                class="ql-emoji" [title]="'INSERT_EMOJI' | translate"></button>
+        <button
+          *ngIf="deviceDetectorService.isDesktop()"
+          class="ql-emoji"
+          [title]="'INSERT_EMOJI' | translate"
+        ></button>
         <button
           [matMenuTriggerFor]="attachment"
           class="action-btn"

@@ -1,8 +1,9 @@
 import {
-  DropdownKnownList, FileType,
+  DropdownKnownList,
+  FileType,
   FormElementType,
 } from '../../../library/core/enums';
-import {EventEmitter, Input, Output} from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 
 export interface FormViewModel {
   disabled?: boolean;

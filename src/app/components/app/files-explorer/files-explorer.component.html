@@ -50,7 +50,11 @@
             <span class="sub-title">{{ 'PASTE' | translate }}</span>
           </span>
         </button>
-        <button (click)="actionRename()" *ngIf="onlyOneSelected && private" mat-mini-fab>
+        <button
+          (click)="actionRename()"
+          *ngIf="onlyOneSelected && private"
+          mat-mini-fab
+        >
           <span class="btn-inner">
             <i class="icon-pencil"></i>
             <span class="sub-title">{{ 'RENAME_SHORT' | translate }}</span>
@@ -121,7 +125,7 @@
   </div>
   <ul>
     <ng-container *ngFor="let p of parent">
-<!--      <li (click)="goTo(p)">-->
+      <!--      <li (click)="goTo(p)">-->
       <li>
         <span>{{ p.name || '/' }}</span>
       </li>

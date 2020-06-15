@@ -2,15 +2,21 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges, OnDestroy,
+  OnChanges,
+  OnDestroy,
   OnInit,
-  SimpleChanges, ViewChild,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import {
   ConversationViewModel,
   MappedConversationViewModel,
 } from '../../../view-models/communication/messenger-types';
-import {AccessType, ActivityType, ConversationType} from 'src/app/library/app/enums';
+import {
+  AccessType,
+  ActivityType,
+  ConversationType,
+} from 'src/app/library/app/enums';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { MessengerService } from '../../../services/communication/messenger.service';
 import { OperationResultStatus } from '../../../library/core/enums';
@@ -18,11 +24,11 @@ import { ModalService } from '../../../services/core/modal.service';
 import { CreateWizardComponent } from '../../../modals/create-wizard/create-wizard.component';
 import { Socket } from 'ngx-socket-io';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {UploadViewModel} from '../../../view-models/storage/files-types';
-import {FilesService} from '../../../services/storage/files.service';
-import {UsersService} from '../../../services/general/users.service';
-import {UploadExceedModalComponent} from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { UploadViewModel } from '../../../view-models/storage/files-types';
+import { FilesService } from '../../../services/storage/files.service';
+import { UsersService } from '../../../services/general/users.service';
+import { UploadExceedModalComponent } from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Component({
   selector: 'app-conversation',
@@ -77,9 +83,11 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   bind() {
-    if (this.messengerService.lock) { return; }
+    if (this.messengerService.lock) {
+      return;
+    }
     this.messengerService.lock = true;
-    this.socket.on('push-notification', (notification) => {
+    this.socket.on('push-notification', notification => {
       switch (notification.type) {
         case ActivityType.ChannelMessage:
           if (this.recordId === notification.data.channelId) {
@@ -169,7 +177,6 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
     this.filePicker.nativeElement.click();
   }
 
-
   onChange(target: any) {
     if (!target.files || !target.files.length) {
       return;
@@ -192,11 +199,13 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
     this.clearInputFile(target);
-    this.filterFiles(upload)
-      .then((filtered) => {
-        this.filesService.attachChat(filtered, this.recordId);
-        this.filesService.chatAttaching = [...this.filesService.chatAttaching, ...filtered];
-      });
+    this.filterFiles(upload).then(filtered => {
+      this.filesService.attachChat(filtered, this.recordId);
+      this.filesService.chatAttaching = [
+        ...this.filesService.chatAttaching,
+        ...filtered,
+      ];
+    });
   }
 
   async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
@@ -211,10 +220,12 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
         }
       });
       if (filtered.length) {
-        this.modalService.show(UploadExceedModalComponent, {
-          uploads: filtered,
-          attachmentSize: this.attachmentSize
-        }).subscribe(() => resolve(allowed));
+        this.modalService
+          .show(UploadExceedModalComponent, {
+            uploads: filtered,
+            attachmentSize: this.attachmentSize,
+          })
+          .subscribe(() => resolve(allowed));
         return;
       }
       resolve(allowed);
@@ -236,9 +247,7 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  onAudioEnded($event: any, upload: any) {
-
-  }
+  onAudioEnded($event: any, upload: any) {}
   getPath(attachment: any) {
     if (attachment.path.indexOf('https://') === -1) {
       return 'https://storage.asoode.com' + attachment.path;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../../services/projects/project.service';
-import {ProjectViewModel} from '../../../view-models/projects/project-types';
+import { ProjectViewModel } from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-dashboard-project-templates',
@@ -10,9 +10,7 @@ import {ProjectViewModel} from '../../../view-models/projects/project-types';
 export class DashboardProjectTemplatesComponent implements OnInit {
   projects: ProjectViewModel[] = [];
 
-  constructor(
-    readonly projectService: ProjectService,
-  ) {}
+  constructor(readonly projectService: ProjectService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

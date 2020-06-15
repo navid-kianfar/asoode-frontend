@@ -1,12 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {GroupViewModel} from '../../../view-models/groups/group-types';
-import {AccessType} from '../../../library/app/enums';
-import {GroupService} from '../../../services/groups/group.service';
-import {TimeSpentViewModel} from '../../../view-models/projects/project-types';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {ModalService} from '../../../services/core/modal.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {IDateConverter} from '../../../library/core/date-time/date-contracts';
+import { Component, Input, OnInit } from '@angular/core';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { AccessType } from '../../../library/app/enums';
+import { GroupService } from '../../../services/groups/group.service';
+import { TimeSpentViewModel } from '../../../view-models/projects/project-types';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { IDateConverter } from '../../../library/core/date-time/date-contracts';
 
 @Component({
   selector: 'app-group-timespent',
@@ -24,13 +24,15 @@ export class GroupTimespentComponent implements OnInit {
   constructor(
     readonly culturedDateService: CulturedDateService,
     readonly modalService: ModalService,
-    private readonly groupService: GroupService
+    private readonly groupService: GroupService,
   ) {}
 
-  ngOnInit() {  }
+  ngOnInit() {}
 
   onBeginChange($event: Date) {
-    if (!$event) { return; }
+    if (!$event) {
+      return;
+    }
     setTimeout(() => {
       if (!this.beginDate || this.beginDate.getTime() !== $event.getTime()) {
         this.beginDate = $event;

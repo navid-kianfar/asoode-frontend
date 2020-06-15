@@ -14,7 +14,6 @@
       margin-inline-end: 10px;
 
       i {
-
       }
     }
     h3 {
@@ -34,7 +33,8 @@
     display: flex;
     flex-direction: column;
 
-    .sub-projects-container, .work-packages-container {
+    .sub-projects-container,
+    .work-packages-container {
       display: flex;
       flex-grow: 1;
 

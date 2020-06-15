@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectViewModel} from '../../../view-models/projects/project-types';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {ProjectService} from '../../../services/projects/project.service';
+import { ProjectViewModel } from '../../../view-models/projects/project-types';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { ProjectService } from '../../../services/projects/project.service';
 
 @Component({
   selector: 'app-archived-projects',
   templateUrl: './archived-projects.component.html',
-  styleUrls: ['./archived-projects.component.scss']
+  styleUrls: ['./archived-projects.component.scss'],
 })
 export class ArchivedProjectsComponent implements OnInit {
   waiting: boolean;
   projects: ProjectViewModel[];
 
-  constructor(private readonly projectService: ProjectService) { }
+  constructor(private readonly projectService: ProjectService) {}
 
   ngOnInit() {
     this.fetch();
@@ -27,5 +27,4 @@ export class ArchivedProjectsComponent implements OnInit {
     }
     this.projects = op.data || [];
   }
-
 }

@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {TaskModalParameters} from '../../view-models/core/modal-types';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { TaskModalParameters } from '../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
   ProjectViewModel,
@@ -10,30 +10,37 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
-import {TaskService} from '../../services/projects/task.service';
-import {OperationResultStatus} from '../../library/core/enums';
-import {ProjectService} from '../../services/projects/project.service';
-import {AccessType, ActivityType, WorkPackageTaskState,} from '../../library/app/enums';
-import {IdentityService} from '../../services/auth/identity.service';
-import {Socket} from 'ngx-socket-io';
-import {UploadViewModel} from '../../view-models/storage/files-types';
-import {FilesService} from '../../services/storage/files.service';
-import {UsersService} from '../../services/general/users.service';
-import {ModalService} from '../../services/core/modal.service';
-import {StringHelpers} from '../../helpers/string.helpers';
-import {TranslateService} from '../../services/core/translate.service';
-import {WorkPackageService} from '../../services/projects/work-package.service';
-import {MapModalComponent} from '../map-modal/map-modal.component';
-import {OperationResult} from '../../library/core/operation-result';
-import {MapMarker, MapModalParameters,} from '../../view-models/general/map-types';
-import {NumberHelpers} from 'src/app/helpers/number.helpers';
-import {TimeViewModel} from '../../view-models/core/general-types';
-import {CulturedDateService} from '../../services/core/cultured-date.service';
-import {MatMenu} from '@angular/material';
-import {GroupService} from '../../services/groups/group.service';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {DeviceDetectorService} from 'ngx-device-detector';
-import {UploadExceedModalComponent} from '../upload-exceed-modal/upload-exceed-modal.component';
+import { TaskService } from '../../services/projects/task.service';
+import { OperationResultStatus } from '../../library/core/enums';
+import { ProjectService } from '../../services/projects/project.service';
+import {
+  AccessType,
+  ActivityType,
+  WorkPackageTaskState,
+} from '../../library/app/enums';
+import { IdentityService } from '../../services/auth/identity.service';
+import { Socket } from 'ngx-socket-io';
+import { UploadViewModel } from '../../view-models/storage/files-types';
+import { FilesService } from '../../services/storage/files.service';
+import { UsersService } from '../../services/general/users.service';
+import { ModalService } from '../../services/core/modal.service';
+import { StringHelpers } from '../../helpers/string.helpers';
+import { TranslateService } from '../../services/core/translate.service';
+import { WorkPackageService } from '../../services/projects/work-package.service';
+import { MapModalComponent } from '../map-modal/map-modal.component';
+import { OperationResult } from '../../library/core/operation-result';
+import {
+  MapMarker,
+  MapModalParameters,
+} from '../../view-models/general/map-types';
+import { NumberHelpers } from 'src/app/helpers/number.helpers';
+import { TimeViewModel } from '../../view-models/core/general-types';
+import { CulturedDateService } from '../../services/core/cultured-date.service';
+import { MatMenu } from '@angular/material';
+import { GroupService } from '../../services/groups/group.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { UploadExceedModalComponent } from '../upload-exceed-modal/upload-exceed-modal.component';
 
 @Component({
   selector: 'app-task-modal',
@@ -99,7 +106,6 @@ export class TaskModalComponent
   noDrag: boolean;
   dragging: boolean;
   dragDelay: number;
-
 
   constructor(
     private readonly socket: Socket,
@@ -193,11 +199,13 @@ export class TaskModalComponent
       });
     }
     this.clearInputFile(target);
-    this.filterFiles(upload)
-      .then((filtered) => {
-        this.filesService.attach(filtered, this.id);
-        this.filesService.attaching = [...this.filesService.attaching, ...filtered];
-      });
+    this.filterFiles(upload).then(filtered => {
+      this.filesService.attach(filtered, this.id);
+      this.filesService.attaching = [
+        ...this.filesService.attaching,
+        ...filtered,
+      ];
+    });
   }
 
   async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
@@ -212,10 +220,12 @@ export class TaskModalComponent
         }
       });
       if (filtered.length) {
-        this.modalService.show(UploadExceedModalComponent, {
-          uploads: filtered,
-          attachmentSize: this.project.attachmentSize
-        }).subscribe(() => resolve(allowed));
+        this.modalService
+          .show(UploadExceedModalComponent, {
+            uploads: filtered,
+            attachmentSize: this.project.attachmentSize,
+          })
+          .subscribe(() => resolve(allowed));
         return;
       }
       resolve(allowed);
@@ -393,11 +403,15 @@ export class TaskModalComponent
     }
 
     if (!this.project) {
-      this.project = this.projectService.projects.find(p => p.id === op.data.projectId);
+      this.project = this.projectService.projects.find(
+        p => p.id === op.data.projectId,
+      );
     }
 
     if (!this.project) {
-      const archivedProject = await this.projectService.fetchArchived(this.projectId);
+      const archivedProject = await this.projectService.fetchArchived(
+        this.projectId,
+      );
       if (archivedProject.status !== OperationResultStatus.Success) {
         console.error('Project not found');
         return this.close();
@@ -407,7 +421,9 @@ export class TaskModalComponent
     }
 
     if (!this.workPackage) {
-      this.workPackage = this.project.workPackages.find(w => w.id === op.data.packageId);
+      this.workPackage = this.project.workPackages.find(
+        w => w.id === op.data.packageId,
+      );
     }
     if (!this.workPackage) {
       console.error('Package not found');
@@ -767,6 +783,7 @@ export class TaskModalComponent
     });
     label.editting = true;
     label.tempName = label.title;
+    label.tempColor = label.color;
   }
 
   deleteLabel(label: WorkPackageLabelViewModel, $event: MouseEvent) {
@@ -791,14 +808,17 @@ export class TaskModalComponent
       .subscribe(() => {});
   }
 
-  async saveLabelName(label: WorkPackageLabelViewModel) {
+  async saveLabelName(label: WorkPackageLabelViewModel, $event) {
+    $event.stopPropagation();
+    $event.preventDefault();
     const title = label.tempName.trim();
-    if (title === label.title) {
+    const color = label.tempColor.trim();
+    if (title === label.title && color === label.color) {
       label.editting = false;
       return;
     }
     label.waiting = true;
-    const op = await this.workPackageService.renameLabel(label.id, { title });
+    const op = await this.workPackageService.renameLabel(label.id, {title, color});
     label.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -997,12 +1017,21 @@ export class TaskModalComponent
   }
 
   isAdminOrHasPermission(permission: boolean) {
-    return (this.permission === AccessType.Owner || this.permission === AccessType.Admin) ||
-      (this.permission !== AccessType.Visitor && permission);
+    return (
+      this.permission === AccessType.Owner ||
+      this.permission === AccessType.Admin ||
+      (this.permission !== AccessType.Visitor && permission)
+    );
   }
 
-  onAudioEnded($event: any, attachment: WorkPackageTaskAttachmentViewModel) {
+  onAudioEnded($event: any, attachment: WorkPackageTaskAttachmentViewModel) {}
 
+  handleClick($event: MouseEvent, label: WorkPackageLabelViewModel) {
+    if (label.editting) {
+      $event.stopPropagation();
+      $event.preventDefault();
+      return;
+    }
   }
 }
 export enum DateMode {

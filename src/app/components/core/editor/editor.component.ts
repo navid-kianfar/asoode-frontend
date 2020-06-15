@@ -14,7 +14,7 @@ import 'quill-emoji/dist/quill-emoji.js';
 import { QuillEditorComponent } from 'ngx-quill';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { Subscription } from 'rxjs';
-import {DeviceDetectorService} from 'ngx-device-detector';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-editor',

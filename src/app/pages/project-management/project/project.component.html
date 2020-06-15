@@ -6,8 +6,8 @@
         <h4>
           <i
             *ngIf="
-            permission === AccessType.Owner || permission === AccessType.Admin
-          "
+              permission === AccessType.Owner || permission === AccessType.Admin
+            "
             (click)="prepareEdit()"
             class="icon-pencil"
           ></i>
@@ -18,12 +18,12 @@
           <div class="member">
             <i class="icon-users"></i>&nbsp;
             <span>
-            {{
-              (project.members | search: ['isGroup']:false).length +
-              project.pending.length
+              {{
+                (project.members | search: ['isGroup']:false).length +
+                  project.pending.length
               }}&nbsp;
               {{ 'INDIVIDUAL_USERS' | translate }}
-          </span>
+            </span>
           </div>
           <ng-container *ngFor="let m of project.members">
             <div *ngIf="m.isGroup" class="member">
@@ -131,13 +131,24 @@
             [model]="project"
           ></app-project-road-map>
         </div>
-        <div *ngIf="mode === ViewMode.Tree && project.template === ProjectTemplate.None" class="tree-container">
+        <div
+          *ngIf="
+            mode === ViewMode.Tree && project.template === ProjectTemplate.None
+          "
+          class="tree-container"
+        >
           <app-project-tree
             [permission]="permission"
             [model]="project"
           ></app-project-tree>
         </div>
-        <div *ngIf="mode === ViewMode.Tree && project.template === ProjectTemplate.Animation" class="tree-container">
+        <div
+          *ngIf="
+            mode === ViewMode.Tree &&
+            project.template === ProjectTemplate.Animation
+          "
+          class="tree-container"
+        >
           <app-project-tree-animation
             [permission]="permission"
             [model]="project"
@@ -165,4 +176,7 @@
     </div>
   </ng-container>
 </div>
-<app-messenger-shortcut *ngIf="project" [project]="project"></app-messenger-shortcut>
+<app-messenger-shortcut
+  *ngIf="project"
+  [project]="project"
+></app-messenger-shortcut>

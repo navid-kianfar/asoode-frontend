@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {IDateConverter} from '../../../library/core/date-time/date-contracts';
-import {DurationMode} from '../../../library/app/enums';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { IDateConverter } from '../../../library/core/date-time/date-contracts';
+import { DurationMode } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-duration-picker',
   templateUrl: './duration-picker.component.html',
-  styleUrls: ['./duration-picker.component.scss']
+  styleUrls: ['./duration-picker.component.scss'],
 })
 export class DurationPickerComponent implements OnInit {
   @Input() mode: DurationMode;
@@ -16,9 +16,7 @@ export class DurationPickerComponent implements OnInit {
   @Output() modelChange = new EventEmitter<Date>();
   @Output() endDateChange = new EventEmitter<Date>();
   converter: IDateConverter;
-  constructor(
-    readonly culturedDateService: CulturedDateService
-  ) { }
+  constructor(readonly culturedDateService: CulturedDateService) {}
 
   ngOnInit() {
     this.model = this.model || new Date();

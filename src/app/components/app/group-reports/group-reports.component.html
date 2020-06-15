@@ -8,10 +8,12 @@
       <div class="date">
         {{ beginDate | culturedDate: false:'NNN YYYY' }}
       </div>
-      <br>
-      <app-dashboard-progress [model]="model"
-                              [begin]="beginDate"
-                              [end]="endDate"></app-dashboard-progress>
+      <br />
+      <app-dashboard-progress
+        [model]="model"
+        [begin]="beginDate"
+        [end]="endDate"
+      ></app-dashboard-progress>
     </ng-container>
   </div>
 </div>

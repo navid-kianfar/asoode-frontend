@@ -1,16 +1,21 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CultureService} from '../../../services/core/culture.service';
-import {ProjectService} from '../../../services/projects/project.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {NotificationService} from '../../../services/core/notification.service';
-import {GroupService} from '../../../services/groups/group.service';
-import {PlansService} from '../../../services/general/plans.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {OrderViewModel, PlansFetchViewModel, PlanViewModel, UserPlanInfoViewModel} from '../../../view-models/general/plan-types';
-import {OrderDuration, OrderType, PlanType} from '../../../library/app/enums';
-import {NumberHelpers} from '../../../helpers/number.helpers';
-import {OrderService} from '../../../services/general/order.service';
-import {OrderDiscountResultViewModel} from '../../../view-models/general/order-types';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CultureService } from '../../../services/core/culture.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { NotificationService } from '../../../services/core/notification.service';
+import { GroupService } from '../../../services/groups/group.service';
+import { PlansService } from '../../../services/general/plans.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import {
+  OrderViewModel,
+  PlansFetchViewModel,
+  PlanViewModel,
+  UserPlanInfoViewModel,
+} from '../../../view-models/general/plan-types';
+import { OrderDuration, OrderType, PlanType } from '../../../library/app/enums';
+import { NumberHelpers } from '../../../helpers/number.helpers';
+import { OrderService } from '../../../services/general/order.service';
+import { OrderDiscountResultViewModel } from '../../../view-models/general/order-types';
 
 @Component({
   selector: 'app-upgrade-wizard',
@@ -74,7 +79,7 @@ export class UpgradeWizardComponent implements OnInit {
       complexGroupCost: 0,
       duration: OrderDuration.Monthly,
       useWallet: true,
-      type: OrderType.Patch
+      type: OrderType.Patch,
     };
     this.mode = ViewMode.Init;
     this.fetch();
@@ -93,35 +98,60 @@ export class UpgradeWizardComponent implements OnInit {
     op.data.mine.createdAt = new Date(op.data.mine.createdAt);
     op.data.plans.forEach(p => {
       p.canUse = true;
-      if (p.type === PlanType.Custom) { return; }
-      if (p.id === this.identityService.profile.plan.planId) {p.canUse = false; }
-      if (p.type === PlanType.Free) {p.canUse = false; }
-      if (p.order < current.order) {p.canUse = false; }
-      if (p.users < op.data.mine.users) {p.canUse = false; }
-      if (p.complexGroup < op.data.mine.complexGroup) {p.canUse = false; }
-      if (p.simpleGroup < op.data.mine.simpleGroup) {p.canUse = false; }
-      if (p.workPackage < op.data.mine.workPackage) {p.canUse = false; }
-      if (p.project < op.data.mine.project) {p.canUse = false; }
-      if (p.diskSpace < op.data.mine.space) {p.canUse = false; }
+      if (p.type === PlanType.Custom) {
+        return;
+      }
+      if (p.id === this.identityService.profile.plan.planId) {
+        p.canUse = false;
+      }
+      if (p.type === PlanType.Free) {
+        p.canUse = false;
+      }
+      if (p.order < current.order) {
+        p.canUse = false;
+      }
+      if (p.users < op.data.mine.users) {
+        p.canUse = false;
+      }
+      if (p.complexGroup < op.data.mine.complexGroup) {
+        p.canUse = false;
+      }
+      if (p.simpleGroup < op.data.mine.simpleGroup) {
+        p.canUse = false;
+      }
+      if (p.workPackage < op.data.mine.workPackage) {
+        p.canUse = false;
+      }
+      if (p.project < op.data.mine.project) {
+        p.canUse = false;
+      }
+      if (p.diskSpace < op.data.mine.space) {
+        p.canUse = false;
+      }
     });
     op.data.plans = op.data.plans.filter(p => p.type !== PlanType.Free);
     this.data = op.data;
-    this.basedOn = current.type === PlanType.Free
+    this.basedOn =
+      current.type === PlanType.Free
         ? customPlan
         : this.identityService.profile.plan;
 
     if (this.identityService.profile.plan.type !== PlanType.Free) {
       op.data.mine.expireAt = new Date(op.data.mine.expireAt);
-      this.totalGap = op.data.mine.expireAt.getTime() - op.data.mine.createdAt.getTime();
+      this.totalGap =
+        op.data.mine.expireAt.getTime() - op.data.mine.createdAt.getTime();
       this.remainGap = new Date().getTime() - op.data.mine.createdAt.getTime();
-      this.remainPercent = 100 - (this.remainGap * 100 / this.totalGap);
+      this.remainPercent = 100 - (this.remainGap * 100) / this.totalGap;
     } else {
       this.order.type = OrderType.Change;
     }
     if (op.data.mine.expireAt) {
       op.data.mine.expireAt = new Date(op.data.mine.expireAt);
-      this.alreadyExpired = op.data.mine.expireAt.getTime() < new Date().getTime();
-      if (this.alreadyExpired) { this.order.type = OrderType.Renew; }
+      this.alreadyExpired =
+        op.data.mine.expireAt.getTime() < new Date().getTime();
+      if (this.alreadyExpired) {
+        this.order.type = OrderType.Renew;
+      }
     }
   }
   next($event: MouseEvent) {
@@ -135,13 +165,12 @@ export class UpgradeWizardComponent implements OnInit {
       expired: false,
       success: false,
       invalid: false,
-      invalidPlan: false
+      invalidPlan: false,
     };
     this.calculateTotalCost();
 
     switch (this.mode) {
       case ViewMode.Init:
-
         switch (this.order.type) {
           case OrderType.Patch:
             this.mode = ViewMode.Choose;
@@ -197,14 +226,13 @@ export class UpgradeWizardComponent implements OnInit {
         this.mode = ViewMode.Init;
         break;
       case ViewMode.Factor:
-
         switch (this.order.type) {
           case OrderType.Renew:
             this.mode = ViewMode.Init;
             break;
           case OrderType.Patch:
           case OrderType.Change:
-            if (((this.selectedPlan || this.basedOn).type !== PlanType.Custom)) {
+            if ((this.selectedPlan || this.basedOn).type !== PlanType.Custom) {
               this.mode = ViewMode.Init;
               return;
             }
@@ -223,7 +251,9 @@ export class UpgradeWizardComponent implements OnInit {
     this.exit.emit();
   }
   pick(plan: PlanViewModel) {
-    if (this.actionWaiting || !plan.canUse) { return; }
+    if (this.actionWaiting || !plan.canUse) {
+      return;
+    }
     this.selectedPlan = plan;
     this.order = {
       useWallet: this.order.useWallet,
@@ -245,17 +275,20 @@ export class UpgradeWizardComponent implements OnInit {
       workPackageCost: 0,
       usersCost: 0,
       simpleGroupCost: 0,
-      complexGroupCost: 0
+      complexGroupCost: 0,
     };
   }
   calculateSpaceCost() {
-    const total = this.order.diskSpace - this.identityService.profile.plan.totalSpace;
+    const total =
+      this.order.diskSpace - this.identityService.profile.plan.totalSpace;
     const gb = total / 1024 / 1024 / 1024;
     this.order.spaceCost = gb * this.basedOn.additionalSpaceCost;
     this.order.spaceCost = this.calculatePlanPrice(this.order.spaceCost);
     console.log(gb, this.order.spaceCost);
     if (this.order.type === OrderType.Patch) {
-      this.order.spaceCost = Math.round(this.order.spaceCost * this.remainPercent / 100);
+      this.order.spaceCost = Math.round(
+        (this.order.spaceCost * this.remainPercent) / 100,
+      );
     }
     console.log(gb, this.order.spaceCost);
     this.calculateTotalCost(true);
@@ -266,7 +299,9 @@ export class UpgradeWizardComponent implements OnInit {
     this.order.usersCost = total * this.basedOn.additionalUserCost;
     this.order.usersCost = this.calculatePlanPrice(this.order.usersCost);
     if (this.order.type === OrderType.Patch) {
-      this.order.usersCost = Math.round(this.order.usersCost * this.remainPercent / 100);
+      this.order.usersCost = Math.round(
+        (this.order.usersCost * this.remainPercent) / 100,
+      );
     }
     this.calculateTotalCost(true);
   }
@@ -277,7 +312,9 @@ export class UpgradeWizardComponent implements OnInit {
     this.order.projectCost = total * this.basedOn.additionalProjectCost;
     this.order.projectCost = this.calculatePlanPrice(this.order.projectCost);
     if (this.order.type === OrderType.Patch) {
-      this.order.projectCost = Math.round(this.order.projectCost * this.remainPercent / 100);
+      this.order.projectCost = Math.round(
+        (this.order.projectCost * this.remainPercent) / 100,
+      );
     }
     this.calculateTotalCost(true);
   }
@@ -286,9 +323,13 @@ export class UpgradeWizardComponent implements OnInit {
       this.order.workPackage -
       this.identityService.profile.plan.totalWorkPackages;
     this.order.workPackageCost = total * this.basedOn.additionalWorkPackageCost;
-    this.order.workPackageCost = this.calculatePlanPrice(this.order.workPackageCost);
+    this.order.workPackageCost = this.calculatePlanPrice(
+      this.order.workPackageCost,
+    );
     if (this.order.type === OrderType.Patch) {
-      this.order.workPackageCost = Math.round(this.order.workPackageCost * this.remainPercent / 100);
+      this.order.workPackageCost = Math.round(
+        (this.order.workPackageCost * this.remainPercent) / 100,
+      );
     }
     this.calculateTotalCost(true);
   }
@@ -297,9 +338,13 @@ export class UpgradeWizardComponent implements OnInit {
       this.order.simpleGroup -
       this.identityService.profile.plan.totalSimpleGroups;
     this.order.simpleGroupCost = total * this.basedOn.additionalSimpleGroupCost;
-    this.order.simpleGroupCost = this.calculatePlanPrice(this.order.simpleGroupCost);
+    this.order.simpleGroupCost = this.calculatePlanPrice(
+      this.order.simpleGroupCost,
+    );
     if (this.order.type === OrderType.Patch) {
-      this.order.simpleGroupCost = Math.round(this.order.simpleGroupCost * this.remainPercent / 100);
+      this.order.simpleGroupCost = Math.round(
+        (this.order.simpleGroupCost * this.remainPercent) / 100,
+      );
     }
     this.calculateTotalCost(true);
   }
@@ -309,9 +354,13 @@ export class UpgradeWizardComponent implements OnInit {
       this.identityService.profile.plan.totalComplexGroups;
     this.order.complexGroupCost =
       total * this.basedOn.additionalComplexGroupCost;
-    this.order.complexGroupCost = this.calculatePlanPrice(this.order.complexGroupCost);
+    this.order.complexGroupCost = this.calculatePlanPrice(
+      this.order.complexGroupCost,
+    );
     if (this.order.type === OrderType.Patch) {
-      this.order.complexGroupCost = Math.round(this.order.complexGroupCost * this.remainPercent / 100);
+      this.order.complexGroupCost = Math.round(
+        (this.order.complexGroupCost * this.remainPercent) / 100,
+      );
     }
     this.calculateTotalCost(true);
   }
@@ -325,9 +374,11 @@ export class UpgradeWizardComponent implements OnInit {
   calculateTotalCost(sum: boolean = false) {
     switch (this.order.type) {
       case OrderType.Renew:
-        const cost = this.data.mine.days === 30 ?
-          this.data.mine.planCost :
-          (this.data.mine.planCost + (this.data.mine.planCost * 10 / 100)) / 12;
+        const cost =
+          this.data.mine.days === 30
+            ? this.data.mine.planCost
+            : (this.data.mine.planCost + (this.data.mine.planCost * 10) / 100) /
+              12;
         this.order.calculatedPrice = this.calculatePlanPrice(cost);
         break;
       case OrderType.Patch:
@@ -341,8 +392,12 @@ export class UpgradeWizardComponent implements OnInit {
         break;
       case OrderType.Change:
         if ((this.selectedPlan || this.basedOn).type !== PlanType.Custom) {
-          this.order.calculatedPrice = (this.selectedPlan || this.basedOn).planCost;
-        } else { sum = true; }
+          this.order.calculatedPrice = (
+            this.selectedPlan || this.basedOn
+          ).planCost;
+        } else {
+          sum = true;
+        }
         break;
     }
 
@@ -359,20 +414,22 @@ export class UpgradeWizardComponent implements OnInit {
     this.order.valueAdded = Math.round(
       ((this.order.calculatedPrice - this.order.appliedDiscount) *
         this.data.valueAdded) /
-      100,
+        100,
     );
   }
 
   async checkDiscount() {
     const code = this.order.discountCode.trim();
-    if (!code) { return; }
+    if (!code) {
+      return;
+    }
     this.discountResult = {
       alreadyUsed: false,
       amount: 0,
       expired: false,
       success: false,
       invalid: false,
-      invalidPlan: false
+      invalidPlan: false,
     };
     this.checkingDiscount = true;
     const model = { code, amount: this.order.calculatedPrice } as any;

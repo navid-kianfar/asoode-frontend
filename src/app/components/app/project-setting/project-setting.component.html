@@ -136,11 +136,21 @@
         <h4>{{ 'ARCHIVE_PROJECT' | translate }}</h4>
       </div>
       <div class="action">
-        <button [disabled]="archiving || deleting" (click)="prepareArchive()" color="accent" mat-flat-button>
+        <button
+          [disabled]="archiving || deleting"
+          (click)="prepareArchive()"
+          color="accent"
+          mat-flat-button
+        >
           <i class="icon-spinner2 icon-spin" *ngIf="archiving"></i>
           {{ 'ARCHIVE_PROJECT' | translate }}</button
         >&nbsp;
-        <button [disabled]="deleting || archiving" (click)="prepareDelete()" color="warn" mat-flat-button>
+        <button
+          [disabled]="deleting || archiving"
+          (click)="prepareDelete()"
+          color="warn"
+          mat-flat-button
+        >
           {{ 'DELETE_PROJECT' | translate }}
         </button>
       </div>

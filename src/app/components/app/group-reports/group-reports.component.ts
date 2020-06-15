@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { AccessType } from '../../../library/app/enums';
-import {IDateConverter} from '../../../library/core/date-time/date-contracts';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {ModalService} from '../../../services/core/modal.service';
-import {GroupService} from '../../../services/groups/group.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {DayReportViewModel} from '../../../view-models/general/report-types';
+import { IDateConverter } from '../../../library/core/date-time/date-contracts';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { ModalService } from '../../../services/core/modal.service';
+import { GroupService } from '../../../services/groups/group.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { DayReportViewModel } from '../../../view-models/general/report-types';
 
 @Component({
   selector: 'app-group-reports',
@@ -24,7 +24,7 @@ export class GroupReportsComponent implements OnInit {
   constructor(
     readonly culturedDateService: CulturedDateService,
     readonly modalService: ModalService,
-    private readonly groupService: GroupService
+    private readonly groupService: GroupService,
   ) {}
 
   ngOnInit() {

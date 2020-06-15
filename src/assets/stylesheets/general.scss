@@ -1,4 +1,4 @@
-@import "fonts";
+@import 'fonts';
 .dont-break-out {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
@@ -57,7 +57,7 @@ body {
       font-weight: 300;
     }
     .material-icons {
-      font-family: "Material Icons" !important;
+      font-family: 'Material Icons' !important;
     }
   }
   &.lang-en {
@@ -511,7 +511,7 @@ body {
             font-size: 0.8rem;
             font-weight: 400;
             margin-inline-end: 5px;
-            width: 280px;
+            width: 260px;
           }
           i {
             justify-content: center;
@@ -546,10 +546,13 @@ body {
   min-height: 24px;
 }
 
-
 body {
   &.lang-fa {
-    .task-wrapper, .project-tree-animation-node, .new-task, .task, .task-animation {
+    .task-wrapper,
+    .project-tree-animation-node,
+    .new-task,
+    .task,
+    .task-animation {
       * {
         font-family: IRANSans;
         font-weight: 300;

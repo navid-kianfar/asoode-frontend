@@ -6,7 +6,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import {NumberHelpers} from '../../helpers/number.helpers';
+import { NumberHelpers } from '../../helpers/number.helpers';
 
 @Directive({
   selector: 'input[appOnlyNumber]',
@@ -60,6 +60,8 @@ export class OnlyNumberDirective implements OnInit {
       e.keyCode === 39 ||
       (this.appDecimalNumber && e.key === '.')
       ? true
-      : (/^-?\d*[.,]?\d*$/.test(e.key) || /[٠-٩]|\./.test(e.key) || /[۰-۹]|\./.test(e.key));
+      : /^-?\d*[.,]?\d*$/.test(e.key) ||
+          /[٠-٩]|\./.test(e.key) ||
+          /[۰-۹]|\./.test(e.key);
   }
 }

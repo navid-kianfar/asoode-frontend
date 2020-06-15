@@ -4,7 +4,7 @@ import { ModalService } from '../../../services/core/modal.service';
 import { Router } from '@angular/router';
 import { FormViewModel } from '../../../components/core/form/contracts';
 import { FormService } from '../../../services/core/form.service';
-import {FileType, OperationResultStatus} from '../../../library/core/enums';
+import { FileType, OperationResultStatus } from '../../../library/core/enums';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ChangePhoneComponent } from '../../../modals/change-phone/change-phone.component';
@@ -28,22 +28,20 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async prepareChangePhoneNumber() {
-    this.modalService.show(ChangePhoneComponent, {})
-      .subscribe((result) => {
-        if (result) {
-          this.identityService.profile.phone = result;
-          this.edit();
-        }
-      });
+    this.modalService.show(ChangePhoneComponent, {}).subscribe(result => {
+      if (result) {
+        this.identityService.profile.phone = result;
+        this.edit();
+      }
+    });
   }
   async prepareChangeEmail() {
-    this.modalService.show(ChangeEmailComponent, {})
-      .subscribe((result) => {
-        if (result) {
-          this.identityService.profile.email = result;
-          this.edit();
-        }
-      });
+    this.modalService.show(ChangeEmailComponent, {}).subscribe(result => {
+      if (result) {
+        this.identityService.profile.email = result;
+        this.edit();
+      }
+    });
   }
   async changePassword(model: any, form) {
     const op = await this.identityService.changePassword({
@@ -216,7 +214,7 @@ export class ProfileComponent implements OnInit {
               field: 'avatar',
             },
             params: {
-              fileType: FileType.Image
+              fileType: FileType.Image,
             },
           }),
           this.formService.createCheckbox({

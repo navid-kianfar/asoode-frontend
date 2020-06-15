@@ -8,7 +8,8 @@ body.dark-mode {
   background: $color1;
   color: $color4;
 
-  hr, .mat-radio-button.border {
+  hr,
+  .mat-radio-button.border {
     border-color: $color2 !important;
   }
 
@@ -27,7 +28,8 @@ body.dark-mode {
 
   .modal-body {
     .af-form-elements {
-      input, textarea {
+      input,
+      textarea {
         background: transparent !important;
         color: $color4;
       }
@@ -35,7 +37,8 @@ body.dark-mode {
 
     &.map-members {
       .af-form-elements {
-        input, textarea {
+        input,
+        textarea {
           background: $color2 !important;
           border: none !important;
           color: $color4;
@@ -81,7 +84,8 @@ body.dark-mode {
     background: $color1;
   }
 
-  .archived-groups, .archived-projects {
+  .archived-groups,
+  .archived-projects {
     .no-item {
       background-color: $color1 !important;
       color: $color4 !important;
@@ -107,7 +111,9 @@ body.dark-mode {
   .app-header {
     border-color: $color3 !important;
 
-    a, .quick-access, .tasks {
+    a,
+    .quick-access,
+    .tasks {
       color: $color3 !important;
     }
 
@@ -138,7 +144,9 @@ body.dark-mode {
           color: $color4 !important;
         }
 
-        .project-item, .group-item, .no-item {
+        .project-item,
+        .group-item,
+        .no-item {
           background: $color2 !important;
         }
       }
@@ -188,7 +196,9 @@ body.dark-mode {
     }
   }
 
-  .project-info, .group-info:not(.small), .member-info:not(.small) {
+  .project-info,
+  .group-info:not(.small),
+  .member-info:not(.small) {
     background: $color1 !important;
     color: $color4 !important;
 
@@ -266,7 +276,8 @@ body.dark-mode {
     .af-calendar {
       background: $color1 !important;
 
-      th, td {
+      th,
+      td {
         color: $color4;
       }
     }
@@ -276,12 +287,14 @@ body.dark-mode {
     background: $color2 !important;
   }
 
-  .account-profile, .group-page {
+  .account-profile,
+  .group-page {
     .header {
       .avatar-container {
         background: $color2 !important;
       }
-      .email, .phone {
+      .email,
+      .phone {
         color: $color4 !important;
       }
     }
@@ -296,7 +309,10 @@ body.dark-mode {
       background: $color1 !important;
       color: $color4 !important;
 
-      input, textarea, .value, .date {
+      input,
+      textarea,
+      .value,
+      .date {
         border: none !important;
         background: $color2 !important;
         color: $color4 !important;
@@ -319,13 +335,12 @@ body.dark-mode {
     }
 
     .message .text {
-      .wrapper .name, .text-message {
+      .wrapper .name,
+      .text-message {
         color: $color4 !important;
       }
     }
   }
-
-
 
   .messenger-container {
     .members-container .filter .wrapper input {
@@ -334,7 +349,9 @@ body.dark-mode {
       color: $color3 !important;
     }
 
-    .aside, .aside-header, .channel-header {
+    .aside,
+    .aside-header,
+    .channel-header {
       border-color: $color2 !important;
 
       .action-container {
@@ -343,7 +360,6 @@ body.dark-mode {
         }
       }
     }
-
 
     .aside-item {
       border-color: $color2 !important;
@@ -364,7 +380,9 @@ body.dark-mode {
     background: $color5;
   }
   .confirm-modal {
-    .modal-title, .modal-body h2, .modal-body h3 {
+    .modal-title,
+    .modal-body h2,
+    .modal-body h3 {
       color: $color3 !important;
     }
   }
@@ -399,7 +417,8 @@ body.dark-mode {
     }
   }
 
-  .create-holder, .work-package-calendar-view {
+  .create-holder,
+  .work-package-calendar-view {
     background: $color1 !important;
   }
   .calendar-month .grid-item--header {
@@ -408,7 +427,7 @@ body.dark-mode {
   .calendar-month .grid-item .date {
     background: $color2 !important;
   }
-  .calendar-month .grid-item{
+  .calendar-month .grid-item {
     border-color: $color2 !important;
   }
   .attachment-item {
@@ -488,7 +507,8 @@ body.dark-mode {
       }
     }
 
-    .grid-col--fixed-right, .grid-col--fixed-left {
+    .grid-col--fixed-right,
+    .grid-col--fixed-left {
       .grid-item {
         color: $color4 !important;
         background: $color2 !important;
@@ -540,7 +560,8 @@ body.dark-mode {
     .body {
       background: $color2 !important;
 
-      .app-kartabl-container.empty, .main-container {
+      .app-kartabl-container.empty,
+      .main-container {
         background: $color1 !important;
 
         .no-item {
@@ -579,12 +600,17 @@ body.dark-mode {
         .info {
           border-color: $color1 !important;
 
-          .title, .detail {
+          .title,
+          .detail {
             color: $color4 !important;
           }
         }
 
-        .members, .date, .state, .labels, .time-spent {
+        .members,
+        .date,
+        .state,
+        .labels,
+        .time-spent {
           border-color: $color1 !important;
         }
       }
@@ -651,7 +677,8 @@ body.dark-mode {
         background: $color2 !important;
         color: $color4 !important;
 
-        button.selected, button:hover {
+        button.selected,
+        button:hover {
           color: $color3 !important;
         }
       }
@@ -668,8 +695,6 @@ body.dark-mode {
             }
           }
         }
-
-
       }
     }
   }
@@ -681,7 +706,8 @@ body.dark-mode {
       border-color: $color1 !important;
 
       .title {
-        i.sub, span {
+        i.sub,
+        span {
           color: $color3 !important;
         }
       }
@@ -711,7 +737,8 @@ body.dark-mode {
         color: inherit !important;
       }
     }
-    .summary, .empty {
+    .summary,
+    .empty {
       h2 {
         color: inherit !important;
       }
@@ -731,7 +758,8 @@ body.dark-mode {
     }
   }
 
-  .modal-header, .modal-alt-header {
+  .modal-header,
+  .modal-alt-header {
     button {
       color: $color4 !important;
     }
@@ -786,7 +814,6 @@ body.dark-mode {
           color: $color4 !important;
         }
       }
-
     }
 
     .setting-container {
@@ -832,7 +859,8 @@ body.dark-mode {
       }
 
       .new-task {
-        textarea, input {
+        textarea,
+        input {
           background: $color2 !important;
           border-color: transparent !important;
           color: $color4 !important;
@@ -843,7 +871,8 @@ body.dark-mode {
   .task.archived {
     background: #555;
   }
-  .group-info.small, .member-info.small {
+  .group-info.small,
+  .member-info.small {
     .initials {
       background: $color2 !important;
       color: $color4 !important;
@@ -858,7 +887,8 @@ body.dark-mode {
     }
   }
 
-  .af-calendar, .af-date-picker .ngxp__container {
+  .af-calendar,
+  .af-date-picker .ngxp__container {
     background: $color1 !important;
   }
 
@@ -890,7 +920,6 @@ body.dark-mode {
       > .content {
         .info {
           .box {
-
             .status-container {
               background: $color1 !important;
               .text {
@@ -898,14 +927,16 @@ body.dark-mode {
               }
             }
 
-            textarea, input {
+            textarea,
+            input {
               background: $color1 !important;
               color: $color4 !important;
               border: none !important;
             }
 
             background: $color2 !important;
-            .title, .description {
+            .title,
+            .description {
               color: $color4 !important;
             }
           }
@@ -977,7 +1008,6 @@ body.dark-mode {
           }
         }
       }
-
     }
   }
   .task-modal-labels-menu ul li .label {
@@ -989,7 +1019,7 @@ body.dark-mode {
 
   .board-list {
     .task {
-      .status .status-wrapper .status-container{
+      .status .status-wrapper .status-container {
         background: $color2 !important;
         .text {
           color: $color4 !important;
@@ -1063,7 +1093,8 @@ body.dark-mode {
     color: $color3 !important;
   }
 
-  .primary-bg-color, .mat-ink-bar {
+  .primary-bg-color,
+  .mat-ink-bar {
     background-color: $color3 !important;
   }
 
@@ -1093,10 +1124,10 @@ body.dark-mode {
 
       border-bottom: 1px solid $color1;
     }
-
   }
 
-  .mat-checkbox-checked.mat-primary .mat-checkbox-background, .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
+  .mat-checkbox-checked.mat-primary .mat-checkbox-background,
+  .mat-checkbox-indeterminate.mat-primary .mat-checkbox-background {
     background-color: $color3 !important;
   }
 
@@ -1104,7 +1135,12 @@ body.dark-mode {
     border-color: $color3 !important;
   }
 
-  .mat-radio-button.mat-primary .mat-radio-inner-circle, .mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-primary:active .mat-radio-persistent-ripple {
+  .mat-radio-button.mat-primary .mat-radio-inner-circle,
+  .mat-radio-button.mat-primary
+    .mat-radio-ripple
+    .mat-ripple-element:not(.mat-radio-persistent-ripple),
+  .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-persistent-ripple,
+  .mat-radio-button.mat-primary:active .mat-radio-persistent-ripple {
     background-color: $color3 !important;
   }
 
@@ -1126,7 +1162,6 @@ body.dark-mode {
       font-weight: 400;
     }
   }
-
 
   /* DRAG */
 
@@ -1164,7 +1199,8 @@ body.dark-mode {
       }
     }
 
-    .status-container, .state {
+    .status-container,
+    .state {
       background: $color2 !important;
       .text {
         color: $color4 !important;
@@ -1232,4 +1268,3 @@ body.dark-mode {
     }
   }
 }
-

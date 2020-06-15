@@ -2,7 +2,9 @@
   <div [class.selected]="current !== undefined" class="aside">
     <div class="aside-header">
       <img
-        src="/assets/images/messenger/asoode-chat-icon{{identityService.profile.darkMode ? '-dark' : ''}}.svg"
+        src="/assets/images/messenger/asoode-chat-icon{{
+          identityService.profile.darkMode ? '-dark' : ''
+        }}.svg"
         alt="asoode-chat-icon"
       />&nbsp;
       <span>{{ 'ASOODE_MESSENGER' | translate }}</span>
@@ -84,9 +86,9 @@
                 <div
                   class="member"
                   *ngFor="
-                  let member of allMembers
-                    | search: ['fullName', 'email', 'phoneNumber']:filter
-                "
+                    let member of allMembers
+                      | search: ['fullName', 'email', 'phoneNumber']:filter
+                  "
                 >
                   <app-member-info [model]="member"></app-member-info>
                 </div>

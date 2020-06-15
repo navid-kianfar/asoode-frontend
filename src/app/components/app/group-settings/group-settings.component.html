@@ -29,15 +29,34 @@
         <h4>{{ 'DELETE_GROUP' | translate }}</h4>
       </div>
       <div class="action">
-        <button *ngIf="group.archivedAt === null && (permission === AccessType.Owner || permission === AccessType.Admin)"
-                (click)="prepareArchive()" color="accent" mat-flat-button>
-          {{ 'ARCHIVE_GROUP' | translate }}
-        </button>&nbsp;
-        <button *ngIf="group.archivedAt !== null && (permission === AccessType.Owner || permission === AccessType.Admin)"
-                (click)="prepareRestore()" color="accent" mat-flat-button>
-          {{ 'RESTORE_GROUP' | translate }}
-        </button>&nbsp;
-        <button *ngIf="permission === AccessType.Owner" (click)="prepareDelete()" color="warn" mat-flat-button>
+        <button
+          *ngIf="
+            group.archivedAt === null &&
+            (permission === AccessType.Owner || permission === AccessType.Admin)
+          "
+          (click)="prepareArchive()"
+          color="accent"
+          mat-flat-button
+        >
+          {{ 'ARCHIVE_GROUP' | translate }}</button
+        >&nbsp;
+        <button
+          *ngIf="
+            group.archivedAt !== null &&
+            (permission === AccessType.Owner || permission === AccessType.Admin)
+          "
+          (click)="prepareRestore()"
+          color="accent"
+          mat-flat-button
+        >
+          {{ 'RESTORE_GROUP' | translate }}</button
+        >&nbsp;
+        <button
+          *ngIf="permission === AccessType.Owner"
+          (click)="prepareDelete()"
+          color="warn"
+          mat-flat-button
+        >
           <i *ngIf="deleting" class="icon-spin icon-spinner2"></i>
           {{ 'DELETE_GROUP' | translate }}
         </button>

@@ -61,7 +61,10 @@
           <div class="box">
             <button
               class="status-wrapper no-select"
-              [disabled]="changingState || !isAdminOrHasPermission(workPackage.permissionChangeTaskState)"
+              [disabled]="
+                changingState ||
+                !isAdminOrHasPermission(workPackage.permissionChangeTaskState)
+              "
               [matMenuTriggerFor]="statusMenu"
             >
               <span class="status-container">
@@ -148,7 +151,9 @@
             <h3>{{ 'COMMENTS' | translate }}</h3>
             <div class="comment-container">
               <div
-                *ngIf="isAdminOrHasPermission(workPackage.permissionComment)" class="send">
+                *ngIf="isAdminOrHasPermission(workPackage.permissionComment)"
+                class="send"
+              >
                 <div class="avatar">
                   <app-member-info [small]="true" [me]="true"></app-member-info>
                 </div>
@@ -252,16 +257,21 @@
                     <mat-menu #addDetailMenu="matMenu">
                       <button
                         *ngIf="!model.parentId"
-                        [disabled]="showSubTasks ||
-                        model.subTasks?.length > 0 ||
-                        !isAdminOrHasPermission(workPackage.permissionCreateTask)"
+                        [disabled]="
+                          showSubTasks ||
+                          model.subTasks?.length > 0 ||
+                          !isAdminOrHasPermission(
+                            workPackage.permissionCreateTask
+                          )
+                        "
                         (click)="showSubTasks = !showSubTasks"
                         mat-menu-item
                       >
                         <i class="icon-tree7"></i>
                         {{ 'TASK_SUB_TASK' | translate }}
                       </button>
-                      <button *ngIf="permission !== AccessType.Visitor"
+                      <button
+                        *ngIf="permission !== AccessType.Visitor"
                         [disabled]="
                           showVotes || model.upVotes > 0 || model.downVotes > 0
                         "
@@ -271,7 +281,8 @@
                         <i class="icon-thumbs-up2"></i>
                         {{ 'TASK_VOTE' | translate }}
                       </button>
-                      <button *ngIf="permission !== AccessType.Visitor"
+                      <button
+                        *ngIf="permission !== AccessType.Visitor"
                         [disabled]="model.geoLocation?.length > 0"
                         (click)="prepareMap()"
                         mat-menu-item
@@ -287,7 +298,11 @@
                     <i class="icon-price-tags4"></i>
                     <span>{{ 'TASK_LABELS' | translate }}</span>
                     <i
-                      *ngIf="isAdminOrHasPermission(workPackage.permissionAssignLabels)"
+                      *ngIf="
+                        isAdminOrHasPermission(
+                          workPackage.permissionAssignLabels
+                        )
+                      "
                       [matMenuTriggerFor]="labelMenu"
                       class="add icon-plus2"
                     ></i>
@@ -322,16 +337,19 @@
                             class="label"
                             [class.selected]="isLabelSelected(label)"
                           >
-                            <div class="title">
-                              <span
-                                *ngIf="!label.editting"
-                                [style.background]="label.color"
-                              >
-                                {{ label.title }}
-                                <ng-container *ngIf="!label.title">
+                            <div class="title" (click)="handleClick($event, label)">
+                              <span [(colorPicker)]="label.tempColor"
+                                    [cpDisabled]="!label.editting"
+                                    [style.background]="label.tempColor || label.color">
+
+                                <ng-container *ngIf="!label.editting && label.title">
+                                  {{label.title}}
+                                </ng-container>
+                                <ng-container *ngIf="label.editting || !label.title">
                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 </ng-container>
-                              </span>
+
+                              </span>&nbsp;
                               <ng-container *ngIf="label.editting">
                                 <input
                                   [disabled]="label.waiting"
@@ -340,7 +358,7 @@
                                 />
                                 <i
                                   *ngIf="!label.waiting"
-                                  (click)="saveLabelName(label)"
+                                  (click)="saveLabelName(label, $event)"
                                   class="icon-checkmark3"
                                 ></i>
                                 <i
@@ -371,7 +389,11 @@
                     <i class="icon-users2"></i>
                     <span>{{ 'TASK_MEMBERS' | translate }}</span>
                     <i
-                      *ngIf="isAdminOrHasPermission(workPackage.permissionAssignMembers)"
+                      *ngIf="
+                        isAdminOrHasPermission(
+                          workPackage.permissionAssignMembers
+                        )
+                      "
                       [matMenuTriggerFor]="memberMenu"
                       class="add icon-plus2"
                     ></i>
@@ -473,12 +495,13 @@
                       }}</span
                     >
                   </div>
-                  <div class="box-content sub-tasks-wrapper"
-                       cdkDropList
-                       cdkDropListOrientation="vertical"
-                       [cdkDropListData]="model.subTasks"
-                       (cdkDropListDropped)="drop($event)">
-
+                  <div
+                    class="box-content sub-tasks-wrapper"
+                    cdkDropList
+                    cdkDropListOrientation="vertical"
+                    [cdkDropListData]="model.subTasks"
+                    (cdkDropListDropped)="drop($event)"
+                  >
                     <div *ngIf="addingSub" class="sub-task add-sub">
                       <textarea
                         rows="3"
@@ -509,21 +532,30 @@
                       </div>
                     </div>
 
-                    <div *ngFor="let sub of model.subTasks"
-                         (click)="openSubTask(sub, $event)"
-                         [cdkDragStartDelay]="dragDelay"
-                         [cdkDragData]="sub" class="sub-task-handle"
-                         [cdkDragDisabled]="noDrag || dragging || addingSub" cdkDrag>
-                      <div class="sub-task no-select color-{{sub.state}}">
+                    <div
+                      *ngFor="let sub of model.subTasks"
+                      (click)="openSubTask(sub, $event)"
+                      [cdkDragStartDelay]="dragDelay"
+                      [cdkDragData]="sub"
+                      class="sub-task-handle"
+                      [cdkDragDisabled]="noDrag || dragging || addingSub"
+                      cdkDrag
+                    >
+                      <div class="sub-task no-select color-{{ sub.state }}">
                         <div class="text">
-                          <div class="title">{{sub.title}}</div>
-                          <div class="description">{{sub.description}}</div>
+                          <div class="title">{{ sub.title }}</div>
+                          <div class="description">{{ sub.description }}</div>
                         </div>
                         <div class="details ltr">
                           <div class="date">
-                            <ng-container *ngIf="sub.dueAt || sub.endAt || sub.beginAt">
+                            <ng-container
+                              *ngIf="sub.dueAt || sub.endAt || sub.beginAt"
+                            >
                               <i class="icon-calendar"></i>&nbsp;
-                              <span>{{ sub.dueAt || sub.endAt || sub.beginAt | culturedDate}}</span>
+                              <span>{{
+                                sub.dueAt || sub.endAt || sub.beginAt
+                                  | culturedDate
+                              }}</span>
                             </ng-container>
                           </div>
                           <div class="members">
@@ -550,7 +582,11 @@
                     <i class="icon-attachment"></i>
                     <span>{{ 'TASK_ATTACHMENTS' | translate }}</span>
                     <i
-                      *ngIf="isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
+                      *ngIf="
+                        isAdminOrHasPermission(
+                          workPackage.permissionCreateAttachment
+                        )
+                      "
                       [matMenuTriggerFor]="attachmentMenu"
                       class="add icon-plus2"
                     ></i>
@@ -588,8 +624,15 @@
                     <ng-container *ngFor="let attachment of model.attachments">
                       <div class="attachment-item">
                         <div class="preview">
-                          <img *ngIf="attachment.thumbnailPath" [src]="attachment.thumbnailPath" alt="">
-                          <i *ngIf="!attachment.thumbnailPath" [class]="filesService.icon(attachment.path)"></i>
+                          <img
+                            *ngIf="attachment.thumbnailPath"
+                            [src]="attachment.thumbnailPath"
+                            alt=""
+                          />
+                          <i
+                            *ngIf="!attachment.thumbnailPath"
+                            [class]="filesService.icon(attachment.path)"
+                          ></i>
                         </div>
                         <div class="info">
                           <h4 *ngIf="!attachment.renaming">
@@ -611,11 +654,13 @@
                               class="rename icon-spinner2 icon-spin"
                             ></i>
                           </div>
-                          <h5>{{ attachment.createdAt | culturedDate: true }}</h5>
+                          <h5>
+                            {{ attachment.createdAt | culturedDate: true }}
+                          </h5>
                           <h5>
                             <span>{{ 'UPLOADED_BY' | translate }}&nbsp;</span>
                             {{
-                            usersService.findUser(attachment.userId)?.fullName
+                              usersService.findUser(attachment.userId)?.fullName
                             }}
                           </h5>
                         </div>
@@ -630,18 +675,29 @@
                               (click)="downloadAttachment(attachment)"
                             ></i>
                             <i
-                              *ngIf="isAdminOrHasPermission(workPackage.permissionEditAttachment)"
+                              *ngIf="
+                                isAdminOrHasPermission(
+                                  workPackage.permissionEditAttachment
+                                )
+                              "
                               class="icon-pencil"
                               (click)="editAttachment(attachment)"
                             ></i>
                             <i
-                              *ngIf="isAdminOrHasPermission(workPackage.permissionEditAttachment)"
+                              *ngIf="
+                                isAdminOrHasPermission(
+                                  workPackage.permissionEditAttachment
+                                )
+                              "
                               class="icon-delete"
                               (click)="deleteAttachment(attachment)"
                             ></i>
                           </div>
                           <div
-                            *ngIf="filesService.isImage(attachment.path) && permission !== AccessType.Visitor"
+                            *ngIf="
+                              filesService.isImage(attachment.path) &&
+                              permission !== AccessType.Visitor
+                            "
                             class="cover"
                           >
                             <a
@@ -652,39 +708,47 @@
                                 <i class="icon-spin icon-spinner2"></i>&nbsp;
                               </ng-container>
                               {{
-                              (attachment.isCover
+                                (attachment.isCover
                                   ? 'REMOVE_COVER'
                                   : 'MAKE_COVER'
-                              ) | translate
+                                ) | translate
                               }}
                             </a>
                           </div>
                         </div>
                       </div>
-                      <div class="audio-container" *ngIf="filesService.isAudio(attachment.path)">
-                        <mat-basic-audio-player [audioUrl]="attachment.path"
-                                                [title]="attachment.title"
-                                                (ended)="onAudioEnded($event, attachment)"
-                                                [autoPlay]="false"
-                                                [displayTitle]="false"
-                                                [displayVolumeControls]="true"></mat-basic-audio-player>
-                        <br>
+                      <div
+                        class="audio-container"
+                        *ngIf="filesService.isAudio(attachment.path)"
+                      >
+                        <mat-basic-audio-player
+                          [audioUrl]="attachment.path"
+                          [title]="attachment.title"
+                          (ended)="onAudioEnded($event, attachment)"
+                          [autoPlay]="false"
+                          [displayTitle]="false"
+                          [displayVolumeControls]="true"
+                        ></mat-basic-audio-player>
+                        <br />
                       </div>
-                      <div class="video-container ltr" *ngIf="filesService.isVideo(attachment.path)">
-                        <mat-video [title]="attachment.title"
-                                   [autoplay]="false"
-                                   [preload]="false"
-                                   [fullscreen]="false"
-                                   [download]="false"
-                                   color="primary"
-                                   spinner="spin"
-                                   [poster]="attachment.thumbnailPath"
-                                   [src]="attachment.path"></mat-video>
-                        <br>
+                      <div
+                        class="video-container ltr"
+                        *ngIf="filesService.isVideo(attachment.path)"
+                      >
+                        <mat-video
+                          [title]="attachment.title"
+                          [autoplay]="false"
+                          [preload]="false"
+                          [fullscreen]="false"
+                          [download]="false"
+                          color="primary"
+                          spinner="spin"
+                          [poster]="attachment.thumbnailPath"
+                          [src]="attachment.path"
+                        ></mat-video>
+                        <br />
                       </div>
                     </ng-container>
-
-
                   </div>
                   <input
                     #filePicker
@@ -709,8 +773,12 @@
                   <div class="box-header">
                     <i class="icon-location"></i>
                     <span>{{ 'TASK_GEO_LOCATION' | translate }}</span>
-                    <div class="map-actions"
-                         *ngIf="isAdminOrHasPermission(workPackage.permissionEditTask)">
+                    <div
+                      class="map-actions"
+                      *ngIf="
+                        isAdminOrHasPermission(workPackage.permissionEditTask)
+                      "
+                    >
                       <i (click)="prepareMap()" class="icon-pencil"></i>
                       <i (click)="removeLocation()" class="icon-delete"></i>
                     </div>

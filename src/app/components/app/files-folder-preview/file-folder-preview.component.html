@@ -1,4 +1,8 @@
-<div *ngIf="file" class="file-folder-preview file-item" [class.selected]="file.selected">
+<div
+  *ngIf="file"
+  class="file-folder-preview file-item"
+  [class.selected]="file.selected"
+>
   <div class="preview">
     <div class="holder">
       <i *ngIf="!file.isImage" class="{{ getIcon(file) }}"></i>

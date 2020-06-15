@@ -1,0 +1,19 @@
+<div class="modal-content cf-modal">
+  <div class="modal-header">
+    <h4>{{ 'CUSTOM_FIELDS' | translate }}</h4>
+    <button (click)="close()" class="close">
+      <i class="icon-cross"></i>
+    </button>
+  </div>
+  <div class="modal-body"></div>
+  <div class="modal-footer">
+    <button
+      color="primary"
+      mat-flat-button
+      class="btn btn-light"
+      (click)="close()"
+    >
+      {{ 'CLOSE' | translate }}
+    </button>
+  </div>
+</div>

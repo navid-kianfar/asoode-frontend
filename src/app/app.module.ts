@@ -19,7 +19,8 @@ import { BarChartModule } from '@swimlane/ngx-charts';
 import {
   MatAutocompleteModule,
   MatCheckboxModule,
-  MatFormFieldModule, MatIconModule,
+  MatFormFieldModule,
+  MatIconModule,
   MatProgressBarModule,
   MatRadioModule,
   MatRippleModule,
@@ -173,8 +174,8 @@ import { CalendarMonthComponent } from './components/app/calendar-month/calendar
 import { TimeSpentComponent } from './components/app/time-spent/time-spent.component';
 import { KartablComponent } from './components/app/kartabl/kartabl.component';
 import { DurationPickerComponent } from './components/app/duration-picker/duration-picker.component';
-import {NgxAudioPlayerModule} from 'ngx-audio-player';
-import {MatVideoModule} from 'mat-video';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { MatVideoModule } from 'mat-video';
 import { WorkPackagePermissionComponent } from './modals/work-package-permission/work-package-permission.component';
 import { ProjectTreeAnimationComponent } from './components/app/project-tree-animation/project-tree-animation.component';
 import { ProjectTreeAnimationNodeComponent } from './components/app/project-tree-animation-node/project-tree-animation-node.component';
@@ -183,6 +184,8 @@ import { AnimationWorkPackageTaskComponent } from './components/app/animation-wo
 import { ArchivedProjectsComponent } from './components/app/archived-projects/archived-projects.component';
 import { ArchivedGroupsComponent } from './components/app/archived-groups/archived-groups.component';
 import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-exceed-modal.component';
+import { LabelsModalComponent } from './modals/labels-modal/labels-modal.component';
+import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-fields-modal.component';
 
 @NgModule({
   declarations: [
@@ -324,8 +327,12 @@ import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-
     ArchivedProjectsComponent,
     ArchivedGroupsComponent,
     UploadExceedModalComponent,
+    LabelsModalComponent,
+    CustomFieldsModalComponent,
   ],
   entryComponents: [
+    CustomFieldsModalComponent,
+    LabelsModalComponent,
     UploadExceedModalComponent,
     WorkPackagePermissionComponent,
     UpgradeWorkPackageComponent,
@@ -360,7 +367,7 @@ import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-
     DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
-      {container: 'modal-container'},
+      { container: 'modal-container' },
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -370,7 +377,7 @@ import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-
         bodyClass: 'modal-open',
       },
     ),
-    NgxPopperModule.forRoot({placement: 'bottom'}),
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,

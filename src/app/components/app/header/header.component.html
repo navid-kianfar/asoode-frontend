@@ -1,8 +1,20 @@
 <nav class="app-header" *ngIf="identityService.identity.token">
   <h1>
     <a routerLink="/dashboard">
-      <img class="logo" src="/assets/images/asoode-logo{{identityService.profile.darkMode ? '-dark' : ''}}.svg" alt="" />
-      <img class="logo-alt" src="/assets/images/logo-{{identityService.profile.darkMode ? 'dark' : 'colored'}}.svg" alt="" />
+      <img
+        class="logo"
+        src="/assets/images/asoode-logo{{
+          identityService.profile.darkMode ? '-dark' : ''
+        }}.svg"
+        alt=""
+      />
+      <img
+        class="logo-alt"
+        src="/assets/images/logo-{{
+          identityService.profile.darkMode ? 'dark' : 'colored'
+        }}.svg"
+        alt=""
+      />
     </a>
   </h1>
 
@@ -55,7 +67,11 @@
     <!--      <i class="icon-search primary-color"></i>-->
     <!--    </div>-->
     <a class="account-info" routerLink="/account">
-      <img [src]="identityService.profile.avatar" *ngIf="identityService.profile.avatar" alt="">
+      <img
+        [src]="identityService.profile.avatar"
+        *ngIf="identityService.profile.avatar"
+        alt=""
+      />
       <ng-container *ngIf="!identityService.profile.avatar">
         {{ identityService.profile.initials }}
       </ng-container>

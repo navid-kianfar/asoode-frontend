@@ -89,7 +89,11 @@
         </div>
         <div class="preview">
           <h4>{{ projectTemplate.description | translate }}</h4>
-          <img *ngIf="projectTemplate.payload" [src]="projectTemplate.payload" alt="" />
+          <img
+            *ngIf="projectTemplate.payload"
+            [src]="projectTemplate.payload"
+            alt=""
+          />
         </div>
       </ng-container>
 

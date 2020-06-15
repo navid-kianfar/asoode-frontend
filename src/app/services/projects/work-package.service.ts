@@ -136,6 +136,11 @@ export class WorkPackageService {
     );
   }
 
+  async createLabel(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/labels/${id}/create`, model
+    );
+  }
   async updateUserSetting(
     id: string,
     model,
@@ -222,13 +227,15 @@ export class WorkPackageService {
     );
   }
 
-  async changePermissions(id: string, model): Promise<OperationResult<boolean>> {
+  async changePermissions(
+    id: string,
+    model,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/work-packages/${id}/permissions`, model
+      `/work-packages/${id}/permissions`,
+      model,
     );
   }
-
-
 
   getPermission(projectId, packageId: string): AccessType {
     const project = this.projectService.projects.find(g => g.id === projectId);
@@ -254,5 +261,4 @@ export class WorkPackageService {
     }
     return multiple.sort()[0];
   }
-
 }

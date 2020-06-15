@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import {fromEvent, merge, Observable, Observer} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { fromEvent, merge, Observable, Observer } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NetworkService {
-
   isOnline: boolean;
 
   constructor() {
-    this.listener().subscribe((isOnline) => {
+    this.listener().subscribe(isOnline => {
       this.isOnline = isOnline;
     });
   }
@@ -22,6 +21,7 @@ export class NetworkService {
       new Observable((sub: Observer<boolean>) => {
         sub.next(navigator.onLine);
         sub.complete();
-      }));
+      }),
+    );
   }
 }

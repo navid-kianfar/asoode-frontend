@@ -3,7 +3,7 @@ import { AppInitializerProvider } from './services/general/app.initializer';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Socket } from 'ngx-socket-io';
 import { SwUpdate } from '@angular/service-worker';
-import {NetworkService} from './services/core/network.service';
+import { NetworkService } from './services/core/network.service';
 
 @Component({
   selector: 'app-root',

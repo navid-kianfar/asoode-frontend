@@ -1,10 +1,11 @@
 <div *ngIf="!thumbnail" class="af-file-picker af-component {{ cssClass }}">
-  <button mat-stroked-button
-          (click)="triggerFileDialog()"
-          [disabled]="disabled || uploading"
-          class="btn btn-file"
+  <button
+    mat-stroked-button
+    (click)="triggerFileDialog()"
+    [disabled]="disabled || uploading"
+    class="btn btn-file"
   >
-    {{ (inputText || (browse || 'BROWSE')) | translate: true }}
+    {{ inputText || browse || 'BROWSE' | translate: true }}
   </button>
   <div class="summary-container" *ngIf="summary">{{ summary }}</div>
   <input

@@ -3,7 +3,9 @@
     <!-- Title Column -->
     <ng-container matColumnDef="title">
       <th mat-header-cell *matHeaderCellDef>{{ 'TITLE' | translate }}</th>
-      <td mat-cell *matCellDef="let element">{{ element.title | translate }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.title | translate }}
+      </td>
     </ng-container>
 
     <!-- Amount Column -->
@@ -40,7 +42,6 @@
     <ng-container matColumnDef="operations">
       <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
       <td class="operations" mat-cell *matCellDef="let element">
-
         <ng-container *ngIf="element.status === OrderStatus.Pending">
           <button (click)="pay(element)">
             <i class="ikon-coin-dollar"></i>
@@ -51,7 +52,9 @@
             <i class="icon-download4"></i>
           </button>
         </ng-container>
-        <ng-container *ngIf="element.status === OrderStatus.Canceled"></ng-container>
+        <ng-container
+          *ngIf="element.status === OrderStatus.Canceled"
+        ></ng-container>
       </td>
     </ng-container>
   </app-grid>
