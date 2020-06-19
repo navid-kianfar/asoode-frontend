@@ -4,6 +4,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Socket } from 'ngx-socket-io';
 import { SwUpdate } from '@angular/service-worker';
 import { NetworkService } from './services/core/network.service';
+import {ModalService} from './services/core/modal.service';
+import {Subscription} from 'rxjs';
+import {OfflineComponent} from './modals/offline/offline.component';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +16,7 @@ import { NetworkService } from './services/core/network.service';
 export class AppComponent {
   constructor(
     readonly networkService: NetworkService,
+    readonly modalService: ModalService,
     private readonly device: DeviceDetectorService,
     readonly appInitializerProvider: AppInitializerProvider,
     private readonly swUpdate: SwUpdate,
@@ -27,6 +31,40 @@ export class AppComponent {
     });
     swUpdate.available.subscribe(event => {
       swUpdate.activateUpdate().then(() => this.updateApp());
+    });
+
+    let subscription: any;
+    this.networkService.connectionChanged.subscribe(status => {
+      if (status) {
+        if (subscription) {
+          subscription.unsubscribe();
+          subscription = null;
+        }
+      } else {
+        if (!subscription) {
+          const offlineModal = this.modalService.show(OfflineComponent, {
+            isConnected: this.networkService.isConnected,
+            isOnline: this.networkService.isOnline,
+          });
+          subscription = offlineModal.subscribe(() => {});
+        }
+      }
+    });
+    this.networkService.networkChanged.subscribe(status => {
+      if (status) {
+        if (subscription) {
+          subscription.unsubscribe();
+          subscription = null;
+        }
+      } else {
+        if (!subscription) {
+          const offlineModal = this.modalService.show(OfflineComponent, {
+            isConnected: this.networkService.isConnected,
+            isOnline: this.networkService.isOnline,
+          });
+          subscription = offlineModal.subscribe(() => {});
+        }
+      }
     });
 
     const loader = document.getElementById('app-loading-container');

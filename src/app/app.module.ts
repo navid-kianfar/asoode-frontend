@@ -186,6 +186,7 @@ import { ArchivedGroupsComponent } from './components/app/archived-groups/archiv
 import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-exceed-modal.component';
 import { LabelsModalComponent } from './modals/labels-modal/labels-modal.component';
 import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-fields-modal.component';
+import { OfflineComponent } from './modals/offline/offline.component';
 
 @NgModule({
   declarations: [
@@ -329,8 +330,10 @@ import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-
     UploadExceedModalComponent,
     LabelsModalComponent,
     CustomFieldsModalComponent,
+    OfflineComponent,
   ],
   entryComponents: [
+    OfflineComponent,
     CustomFieldsModalComponent,
     LabelsModalComponent,
     UploadExceedModalComponent,

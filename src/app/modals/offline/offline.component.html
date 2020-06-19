@@ -1,0 +1,18 @@
+<div class="outer" (click)="cancel($event)">
+  <div class="modal-content offline-modal">
+    <div class="modal-header">
+      <h2 class="modal-title">
+        {{ 'YOU_ARE_OFFLINE' | translate }}
+      </h2>
+    </div>
+    <div class="modal-body">
+      <h3>
+        <i class="icon-sphere"></i>
+        {{ 'NO_INTERNET_CONNECTION' | translate }}
+      </h3>
+      <br>
+      <button mat-flat-button color="primary"
+              (click)="refresh()">{{ 'REFRESH' | translate}}</button>
+    </div>
+  </div>
+</div>

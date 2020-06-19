@@ -423,7 +423,7 @@
   "NO_FILES_OR_FOLDERS": "No files or folders found",
   "NO_FILES_SELECTED": "No files selected",
   "NO_GROUPS": "No groups to display",
-  "NO_INTERNET_CONNECTION": "Your internet connection is lost, if you are seeing this message for too long try pressing refresh button",
+  "YOU_ARE_OFFLINE": "Your internet connection is lost",
   "NO_MEMBERS": "There are not members to show",
   "NO_OBJECTIVES": "No objective has been set for this package",
   "NO_OBJECTIVE_DEFINED": "You can create and check objectives in work packages of this project. You can also report on objectives here.",
@@ -727,5 +727,8 @@
   "SIMPLE_GROUP_USAGE": "Simple group usage",
   "COMPLEX_GROUP_USAGE": "Complex group usage",
   "SIMPLE_PROJECT_USAGE": "Work package usage",
-  "COMPLEX_PROJECT_USAGE": "WBS project usage"
+  "COMPLEX_PROJECT_USAGE": "WBS project usage",
+
+  "NEW_LABEL_TITLE": "New label title",
+  "NO_INTERNET_CONNECTION": "If it is taking too long, please consider refreshing the app"
 }
