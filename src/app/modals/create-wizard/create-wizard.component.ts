@@ -37,7 +37,7 @@ export class CreateWizardComponent
     const plan = this.identityService.profile.plan;
     this.canCreateGroup = plan.totalUsedGroups < plan.totalGroups;
     this.canCreateWorkPackage = plan.usedWorkPackage < plan.totalWorkPackages;
-    this.canCreateProject = plan.totalUsedProjects < plan.totalProjects;
+    this.canCreateProject = plan.usedProject < plan.totalComplexProjects;
 
     this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;

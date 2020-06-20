@@ -136,6 +136,7 @@ export class ProjectService {
         }
       }
     }
+    console.log(multiple);
     return multiple.sort()[0];
   }
 

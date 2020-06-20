@@ -550,7 +550,10 @@ export class WorkPackageComponent implements OnInit {
       }
       this.preWaiting = false;
       this.project = projOp.data;
-
+      this.permission = this.projectService.getWorkPackagePermission(
+        this.project,
+        this.workPackage,
+      );
       return;
     }
     // if (this.workPackage.progress === undefined) {

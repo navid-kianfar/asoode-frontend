@@ -45,7 +45,7 @@ export class MessengerShortcutComponent implements OnInit {
 
   ngOnInit() {
     if (this.workPackage) {
-      const project = this.projectService.projects.find(
+      const project = this.project || this.projectService.projects.find(
         p => p.id === this.workPackage.projectId,
       );
       this.current = {
@@ -64,7 +64,7 @@ export class MessengerShortcutComponent implements OnInit {
       };
     } else if (this.packageId) {
       let found: WorkPackageViewModel;
-      let project: ProjectViewModel;
+      let project: ProjectViewModel = this.project;
       this.projectService.projects.forEach(p => {
         p.workPackages.forEach(w => {
           if (w.id === this.packageId) {
