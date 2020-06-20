@@ -187,6 +187,7 @@ import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-
 import { LabelsModalComponent } from './modals/labels-modal/labels-modal.component';
 import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-fields-modal.component';
 import { OfflineComponent } from './modals/offline/offline.component';
+import { CulturedTimePipe } from './pipes/core/cultured-time.pipe';
 
 @NgModule({
   declarations: [

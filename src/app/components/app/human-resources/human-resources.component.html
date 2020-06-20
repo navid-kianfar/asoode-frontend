@@ -2,6 +2,72 @@
   <h2>{{ 'HUMAN_RESOURCES' | translate }}</h2>
   <div class="box">
     <div class="title">
+      <h3>{{ 'ENTRY_LOGS' | translate }}</h3>
+      &nbsp;
+      <button (click)="createEntry()" [disabled]="group.archivedAt !== null" mat-stroked-button>
+        +&nbsp;
+        {{ (identityService.profile.workingGroupId === group.id ? 'END_ENTRY' : 'BEGIN_ENTRY') | translate }}
+      </button>
+    </div>
+    <div class="content">
+      <app-grid
+        [commander]="entryCommander"
+        [backend]="'/groups/entry-logs/' + group.id"
+        [columns]="[
+          'date',
+          'user',
+          'beginAt',
+          'endAt',
+          'duration'
+        ]"
+        [rows]="[]"
+      >
+        <!-- Date Column -->
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef>{{ 'DATE' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.beginAt | culturedDate }}</td>
+        </ng-container>
+
+        <!-- User Column -->
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef>{{ 'NAME' | translate }}</th>
+          <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
+        </ng-container>
+
+        <!-- Begin at Column -->
+        <ng-container matColumnDef="beginAt">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ 'BEGIN_TIME' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.beginAt | culturedDate: false: 'HH:mm' }}
+          </td>
+        </ng-container>
+
+        <!-- End at Column -->
+        <ng-container matColumnDef="endAt">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ 'END_TIME' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ (!element.endAt ? '-' : (element.endAt | culturedDate: false: 'HH:mm')) }}
+          </td>
+        </ng-container>
+
+        <!-- Duration at Column -->
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ 'DURATION' | translate }}
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.duration }}
+          </td>
+        </ng-container>
+      </app-grid>
+    </div>
+  </div>
+  <div class="box">
+    <div class="title">
       <h3>{{ 'TIME_OFF' | translate }}</h3>
       &nbsp;
       <button [disabled]="group.archivedAt !== null" mat-stroked-button>

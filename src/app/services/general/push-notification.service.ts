@@ -54,6 +54,16 @@ export class PushNotificationService {
         });
         break;
 
+      case ActivityType.GroupWorkEntry:
+        if (this.identityService.profile.id === notification.data.userId) {
+          if (notification.data.endAt) {
+            this.identityService.profile.workingGroupId = undefined;
+          } else {
+            this.identityService.profile.workingGroupId = notification.data.groupId;
+            this.identityService.profile.workingGroupFrom = notification.data.beginAt;
+          }
+        }
+        break;
       case ActivityType.GroupRestore:
       case ActivityType.GroupAdd:
         this.groupService.groups.push(notification.data);

@@ -728,7 +728,16 @@
   "COMPLEX_GROUP_USAGE": "Complex group usage",
   "SIMPLE_PROJECT_USAGE": "Work package usage",
   "COMPLEX_PROJECT_USAGE": "WBS project usage",
-
   "NEW_LABEL_TITLE": "New label title",
-  "NO_INTERNET_CONNECTION": "If it is taking too long, please consider refreshing the app"
+  "NO_INTERNET_CONNECTION": "If it is taking too long, please consider refreshing the app",
+  "ENTRY_LOGS": "Entry logs",
+  "BEGIN_ENTRY": "Begin to work",
+  "END_ENTRY": "Finish working",
+  "BEGIN_TIME": "Begin time",
+  "END_TIME": "End time",
+  "DURATION": "Duration",
+  "BEGIN_ENTRY_CONFIRM_HEADING": "Are you starting work entry in group {0}?",
+  "BEGIN_ENTRY_CONFIRM": "If you are already working in other group, that work entry will be closed",
+  "END_ENTRY_CONFIRM_HEADING": "Are you finished working in group {0}?",
+  "END_ENTRY_CONFIRM": "Remember you can begin to work again!"
 }

@@ -122,4 +122,8 @@ export class GroupService {
   async restore(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/groups/${id}/restore`);
   }
+
+  async toggleEntry(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/toggle-entry/${id}`);
+  }
 }
