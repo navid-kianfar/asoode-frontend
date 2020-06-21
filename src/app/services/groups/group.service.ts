@@ -115,7 +115,7 @@ export class GroupService {
     );
   }
 
-  async fetch(id: any): Promise<OperationResult<GroupViewModel>> {
+  async fetch(id: string): Promise<OperationResult<GroupViewModel>> {
     return await this.httpService.post<GroupViewModel>(`/groups/${id}/fetch`);
   }
 
@@ -125,5 +125,9 @@ export class GroupService {
 
   async toggleEntry(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/groups/toggle-entry/${id}`);
+  }
+
+  async removeEntry(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/remove-entry/${id}`);
   }
 }

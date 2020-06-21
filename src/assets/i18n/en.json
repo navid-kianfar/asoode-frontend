@@ -739,5 +739,8 @@
   "BEGIN_ENTRY_CONFIRM_HEADING": "Are you starting work entry in group {0}?",
   "BEGIN_ENTRY_CONFIRM": "If you are already working in other group, that work entry will be closed",
   "END_ENTRY_CONFIRM_HEADING": "Are you finished working in group {0}?",
-  "END_ENTRY_CONFIRM": "Remember you can begin to work again!"
+  "END_ENTRY_CONFIRM": "Remember you can begin to work again!",
+  "REMOVE_ENTRY": "Remove entry",
+  "REMOVE_ENTRY_CONFIRM": "from {0} to {1}",
+  "REMOVE_ENTRY_CONFIRM_HEADING": "Are you sure to remove {0} work entry?"
 }

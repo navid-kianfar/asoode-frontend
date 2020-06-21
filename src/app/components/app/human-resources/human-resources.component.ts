@@ -8,6 +8,7 @@ import {StringHelpers} from '../../../helpers/string.helpers';
 import {TranslateService} from '../../../services/core/translate.service';
 import {GroupService} from '../../../services/groups/group.service';
 import {OperationResultStatus} from '../../../library/core/enums';
+import {CulturedDateService} from '../../../services/core/cultured-date.service';
 
 @Component({
   selector: 'app-human-resources',
@@ -18,11 +19,13 @@ export class HumanResourcesComponent implements OnInit {
   @Input() group: GroupViewModel;
   @Input() permission: AccessType;
   entryCommander = new EventEmitter<GridCommand<any>>();
+  AccessType = AccessType;
   constructor(
     readonly identityService: IdentityService,
     private readonly modalService: ModalService,
     private readonly translateService: TranslateService,
     private readonly groupService: GroupService,
+    private readonly culturedDateService: CulturedDateService,
   ) {}
 
   ngOnInit() {}
@@ -49,5 +52,40 @@ export class HumanResourcesComponent implements OnInit {
         },
       })
       .subscribe(confirmed => {});
+  }
+
+  edit(element: any) {
+
+  }
+
+  delete(element: any) {
+    const converter = this.culturedDateService.Converter();
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_ENTRY_CONFIRM_HEADING'),
+      [element.fullName]
+    );
+    const message = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_ENTRY_CONFIRM'),
+      [
+        converter.Format(element.beginAt, 'YYYY/MM/DD HH:mm'),
+        converter.Format(element.endAt || new Date(), 'YYYY/MM/DD HH:mm'),
+      ]
+    );
+    this.modalService
+      .confirm({
+        title: 'REMOVE_ENTRY',
+        message,
+        heading,
+        actionLabel: 'REMOVE_ENTRY',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          const op = await this.groupService.removeEntry(element.id);
+          if (op.status === OperationResultStatus.Success) {
+            this.entryCommander.emit({reload: true});
+          }
+          return op;
+        },
+      })
+      .subscribe(() => {});
   }
 }
