@@ -16,8 +16,13 @@
     background: #ffffff;
     margin-bottom: 10px;
     border-radius: 5px;
-    width: 45%;
-    margin-inline-end: 5%;
+    width: 50%;
+
+
+    &:nth-child(2n) {
+      width: 45%;
+      margin-inline-start: 5%;
+    }
 
     .header {
       display: flex;
@@ -75,6 +80,11 @@
     flex-direction: column;
     .box {
       width: 100%;
+
+      &:nth-child(2n) {
+        width: 100%;
+        margin-inline-start: 0;
+      }
     }
   }
 }

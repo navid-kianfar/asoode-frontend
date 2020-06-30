@@ -41,6 +41,7 @@ export class DropdownComponent implements OnInit, OnChanges {
   @Input() model: any;
   @Input() items: ListViewModel[];
 
+  @Output() picked = new EventEmitter<any>();
   @Output() modelChange = new EventEmitter<any>();
   @Output() itemsChange = new EventEmitter<ListViewModel[]>();
   @ViewChild(MatMenuTrigger, { static: false }) trigger: MatMenuTrigger;
@@ -62,6 +63,7 @@ export class DropdownComponent implements OnInit, OnChanges {
   updateModel(val) {
     this.model = val;
     this.modelChange.emit(val);
+    this.picked.emit(val);
   }
   get text(): string {
     const item = (this.items || []).find(i => i.value === this.model);

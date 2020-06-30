@@ -49,6 +49,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   // popper: PopperContent;
   manualShow: boolean;
   private listener: any;
+  secondInput: boolean;
   constructor(
     private readonly renderer: Renderer2,
     private readonly socket: Socket,
@@ -75,7 +76,12 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    const input = this.ref.nativeElement.querySelectorAll('input')[0];
+    const inputs = this.ref.nativeElement.querySelectorAll('input');
+    this.bindToInput(inputs[0]);
+    this.bindToInput(inputs[1]);
+  }
+
+  bindToInput(input) {
     fromEvent(input, 'input')
       .pipe(
         debounceTime(500),
@@ -135,6 +141,12 @@ export class HeaderComponent implements AfterViewInit, OnInit {
 
   openSearchResult($event: MouseEvent) {
     $event.stopPropagation();
+    this.secondInput = this.pushNotificationService.detector.isMobile() || window.innerWidth <= 550;
+    if (this.secondInput) {
+      this.popperSearch.show();
+      return;
+    }
+
     if (!this.searchTerm) {
       return;
     }

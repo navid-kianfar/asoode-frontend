@@ -50,6 +50,13 @@ export interface IFormElementNumber extends IFormElement {
     model: number;
   };
 }
+export interface IFormElementTimePicker extends IFormElement {
+  validation?: IFormElementTimePickerValidation;
+  params: {
+    disabled?: boolean;
+    model: string;
+  };
+}
 export interface IFormElementCheckbox extends IFormElement {
   params: {
     disabled?: boolean;
@@ -127,6 +134,7 @@ export interface IFormElementDatePicker extends IFormElement {
 }
 export interface IFormElementDropDown extends IFormElement {
   params: {
+    picked: (val) => void;
     model: any;
     items: any[];
     ltr?: boolean;
@@ -165,6 +173,10 @@ export interface IFormElementStringValidation extends IFormElementValidation {
   pattern?: { value: RegExp; message: string };
 }
 export interface IFormElementNumberValidation extends IFormElementValidation {
+  min?: { value: number; message: string };
+  max?: { value: number; message: string };
+}
+export interface IFormElementTimePickerValidation extends IFormElementValidation {
   min?: { value: number; message: string };
   max?: { value: number; message: string };
 }

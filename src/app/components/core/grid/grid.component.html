@@ -63,14 +63,14 @@
       >&nbsp;
       <button
         mat-stroked-button
-        [disabled]="isLoading || currentPage === totalPages"
+        [disabled]="totalPages < 2 || isLoading || currentPage === totalPages"
         (click)="changePage(currentPage + 1)"
       >
         {{ 'PAGINATOR_NEXT' | translate }}</button
       >&nbsp;
       <button
         mat-stroked-button
-        [disabled]="isLoading || currentPage === totalPages"
+        [disabled]="totalPages < 2 || isLoading || currentPage === totalPages"
         (click)="changePage(totalPages)"
       >
         {{ 'PAGINATOR_LAST' | translate }}

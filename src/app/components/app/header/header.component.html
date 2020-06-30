@@ -86,6 +86,10 @@
 
   <popper-content #popperSearch>
     <div class="search-popper" (click)="$event.stopPropagation()">
+      <input [hidden]="!secondInput"
+             type="text"
+             class="second-input"
+             [placeholder]="'SEARCH_ANYWHERE' | translate" />
       <app-search-result
         [loading]="loading"
         [results]="results"

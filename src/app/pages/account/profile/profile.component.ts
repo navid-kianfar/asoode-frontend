@@ -243,6 +243,9 @@ export class ProfileComponent implements OnInit {
         cancelLabel: 'CANCEL',
         action: async () => {
           this.identityService.logout();
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
           return Promise.resolve(true);
         },
       })

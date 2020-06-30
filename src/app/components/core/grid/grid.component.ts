@@ -69,7 +69,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
   ngOnInit() {
     this.currentPage = 1;
-    this.pageSize = 10;
+    this.pageSize = this.pageSize || 10;
     this.totalItems = 0;
     this.totalPages = 0;
     if (this.showFooter !== false) {

@@ -128,6 +128,15 @@
                   ></app-number>
                 </ng-container>
 
+                <!-- TimePicker -->
+                <ng-container *ngIf="element.type === FormElementType.TimePicker">
+                  <app-time-picker
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-time-picker>
+                </ng-container>
+
                 <!-- DropDown -->
                 <ng-container *ngIf="element.type === FormElementType.DropDown">
                   <app-dropdown
@@ -135,6 +144,7 @@
                     [disabled]="checkDisabled(group, element)"
                     [(model)]="element.params.model"
                     [(items)]="element.params.items"
+                    (picked)="element.params.picked($event)"
                     [ltr]="element.params.ltr"
                     [allowClear]="element.params.allowClear"
                     [backend]="element.params.backend"

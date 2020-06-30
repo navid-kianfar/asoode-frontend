@@ -1,32 +1,39 @@
 <div class="project-reports">
-  <div class="no-projects" *ngIf="!projectService.projects.length">
-    <h5>{{ 'NO_PROJECTS_YET' | translate }}</h5>
 
-    <div (click)="openModal()" class="create-holder">
-      <div class="plus">
-        <i class="icon-plus2"></i>
+  <ng-container *ngIf="filter === ProjectFilter.Archived">
+    <app-archived-projects></app-archived-projects>
+  </ng-container>
+
+  <ng-container *ngIf="filter !== ProjectFilter.Archived">
+    <div class="no-projects" *ngIf="!projectService.projects.length">
+      <h5>{{ 'NO_PROJECTS_YET' | translate }}</h5>
+
+      <div (click)="openModal()" class="create-holder">
+        <div class="plus">
+          <i class="icon-plus2"></i>
+        </div>
+        <div class="actions">
+          {{ 'CREATE_SIMPLE_OR_COMPLEX_PROJECT' | translate }}
+        </div>
       </div>
-      <div class="actions">
-        {{ 'CREATE_SIMPLE_OR_COMPLEX_PROJECT' | translate }}
-      </div>
+
+      <app-dashboard-project-templates></app-dashboard-project-templates>
     </div>
-
-    <app-dashboard-project-templates></app-dashboard-project-templates>
-  </div>
-  <div class="projects-container" *ngIf="projectService.projects.length">
-    <ng-container *ngFor="let project of projectService.projects">
-      <app-project-info
-        *ngIf="filter === ProjectFilter.All"
-        [project]="project"
-      ></app-project-info>
-      <app-project-info
-        *ngIf="filter === ProjectFilter.Simple && !project.complex"
-        [project]="project"
-      ></app-project-info>
-      <app-project-info
-        *ngIf="filter === ProjectFilter.Complex && project.complex"
-        [project]="project"
-      ></app-project-info>
-    </ng-container>
-  </div>
+    <div class="projects-container" *ngIf="projectService.projects.length">
+      <ng-container *ngFor="let project of projectService.projects">
+        <app-project-info
+          *ngIf="filter === ProjectFilter.All"
+          [project]="project"
+        ></app-project-info>
+        <app-project-info
+          *ngIf="filter === ProjectFilter.Simple && !project.complex"
+          [project]="project"
+        ></app-project-info>
+        <app-project-info
+          *ngIf="filter === ProjectFilter.Complex && project.complex"
+          [project]="project"
+        ></app-project-info>
+      </ng-container>
+    </div>
+  </ng-container>
 </div>

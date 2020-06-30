@@ -5,7 +5,7 @@
     [label]="'HOURS'"
     [(model)]="hour"
     [disabled]="disabled"
-    (modelChange)="hourChange.emit($event)"
+    (modelChange)="updateHour($event)"
     placeHolder="HH"
   ></app-number>
   <app-number
@@ -14,7 +14,7 @@
     [label]="'MINUTES'"
     [(model)]="minute"
     [disabled]="disabled"
-    (modelChange)="minuteChange.emit($event)"
+    (modelChange)="updateMinute($event)"
     placeHolder="MN"
   ></app-number>
 </div>

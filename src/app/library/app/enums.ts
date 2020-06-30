@@ -98,7 +98,7 @@ export enum ProjectFilter {
   All = 0,
   Simple = 1,
   Complex = 2,
-  Public = 3,
+  Archived = 3,
 }
 export enum WorkPackageTaskVisibility {
   Normal = 1,

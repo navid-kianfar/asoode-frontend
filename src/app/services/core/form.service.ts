@@ -12,7 +12,7 @@ import {
   IFormElementLabel,
   IFormElementDatePicker,
   IFormElementNumber,
-  IFormElementFilePicker,
+  IFormElementFilePicker, IFormElementTimePicker,
   // IFormElementEditor,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
@@ -40,6 +40,11 @@ export class FormService {
   }
   createInput(options: IFormElementInput): IFormElementInput {
     options.type = FormElementType.Input;
+    options.validation = options.validation || { required: { value: false } };
+    return options;
+  }
+  createTimePicker(options: IFormElementTimePicker): IFormElementTimePicker {
+    options.type = FormElementType.TimePicker;
     options.validation = options.validation || { required: { value: false } };
     return options;
   }
@@ -74,8 +79,10 @@ export class FormService {
   createDropDown(options: IFormElementDropDown): IFormElementDropDown {
     options.type = FormElementType.DropDown;
     options.validation = options.validation || { required: { value: false } };
+    options.params.picked = options.params.picked || this.noop;
     return options;
   }
+  noop(p) {  }
   createFilePicker(options: IFormElementFilePicker): IFormElementFilePicker {
     options.type = FormElementType.File;
     options.validation = options.validation || { required: { value: false } };
@@ -263,6 +270,8 @@ export class FormService {
         return this.validateBoolean(element);
       case FormElementType.ColorPicker:
         return this.validateColor(element);
+      case FormElementType.TimePicker:
+        return this.validateTimePicker(element);
       case FormElementType.File:
         return this.validateFile(element);
       case FormElementType.Tag:
@@ -302,6 +311,16 @@ export class FormService {
       element.validation.errors = [element.validation.length.message];
       return false;
     }
+    return true;
+  }
+  private validateTimePicker(element: IFormElement): boolean {
+    if (element.validation.required && element.validation.required.value) {
+      if (!element.params.model || !element.params.model.length || element.params.model.indexOf(':') === -1) {
+        element.validation.errors = [element.validation.required.message];
+        return false;
+      }
+    }
+
     return true;
   }
   private validateString(element: IFormElement, model: any): boolean {

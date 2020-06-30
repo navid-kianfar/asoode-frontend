@@ -21,7 +21,7 @@ export class PushNotificationService {
     private readonly groupService: GroupService,
     private readonly projectService: ProjectService,
     private readonly windowService: WindowService,
-    private readonly detector: DeviceDetectorService,
+    readonly detector: DeviceDetectorService,
   ) {}
 
   handleSocket(notification: any) {

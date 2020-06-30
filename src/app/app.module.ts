@@ -187,6 +187,7 @@ import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-
 import { LabelsModalComponent } from './modals/labels-modal/labels-modal.component';
 import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-fields-modal.component';
 import { OfflineComponent } from './modals/offline/offline.component';
+import { RequestTimeOffComponent } from './modals/request-time-off/request-time-off.component';
 
 @NgModule({
   declarations: [
@@ -331,8 +332,10 @@ import { OfflineComponent } from './modals/offline/offline.component';
     LabelsModalComponent,
     CustomFieldsModalComponent,
     OfflineComponent,
+    RequestTimeOffComponent,
   ],
   entryComponents: [
+    RequestTimeOffComponent,
     OfflineComponent,
     CustomFieldsModalComponent,
     LabelsModalComponent,

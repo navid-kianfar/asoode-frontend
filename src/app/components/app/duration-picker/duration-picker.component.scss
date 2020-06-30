@@ -1,6 +1,8 @@
 .duration-filter {
   flex-grow: 1;
   display: flex;
+  flex-wrap: wrap;
+  min-width: 300px;
 
   .date {
     font-weight: 500;

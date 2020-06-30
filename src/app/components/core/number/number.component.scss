@@ -1,5 +1,6 @@
 .af-numbox {
   margin: 0;
+  max-width: 95px;
   .input-container {
     border: 1px solid #e5e5e5;
     box-shadow: none;
@@ -20,6 +21,8 @@
       border-radius: 0;
       box-shadow: none;
       max-width: 70px;
+      font-size: 0.9rem;
+      padding: 5px;
     }
     .spinbox-buttons {
       align-self: stretch;
@@ -45,9 +48,9 @@
           display: block;
         }
 
-        &:active {
-          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-        }
+        //&:active {
+        //  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+        //}
 
         &:hover {
         }
@@ -68,11 +71,11 @@
         }
       }
     }
-    &:hover,
-    &.focus {
-      border-color: #f5f5f5;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 2px 3px rgba(0, 0, 0, 0.05);
-    }
+    //&:hover,
+    //&.focus {
+    //  border-color: #f5f5f5;
+    //  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 2px 3px rgba(0, 0, 0, 0.05);
+    //}
   }
 
   .input-container {
