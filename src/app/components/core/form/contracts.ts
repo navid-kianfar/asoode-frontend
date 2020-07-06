@@ -134,7 +134,7 @@ export interface IFormElementDatePicker extends IFormElement {
 }
 export interface IFormElementDropDown extends IFormElement {
   params: {
-    picked: (val) => void;
+    picked?: (val) => void;
     model: any;
     items: any[];
     ltr?: boolean;
