@@ -328,6 +328,25 @@ export class HumanResourcesComponent implements OnInit {
   }
 
   deleteShift(element: any) {
-
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('REMOVE_SHIFT_CONFIRM_HEADING'),
+      [element.title]
+    );
+    this.modalService
+      .confirm({
+        title: 'REMOVE_SHIFT',
+        message: 'REMOVE_SHIFT_CONFIRM',
+        heading,
+        actionLabel: 'REMOVE_SHIFT',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          const op = await this.groupService.removeShift(element.id);
+          if (op.status === OperationResultStatus.Success) {
+            this.shiftsCommander.emit({reload: true});
+          }
+          return op;
+        },
+      })
+      .subscribe(() => {});
   }
 }

@@ -139,7 +139,7 @@ export class GroupService {
     return await this.httpService.post<boolean>(`/groups/shifts/${id}/edit`, model);
   }
 
-  async removeShift(id: string, model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/groups/shifts/${id}/remove`, model);
+  async removeShift(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(`/groups/shifts/${id}/remove`);
   }
 }
