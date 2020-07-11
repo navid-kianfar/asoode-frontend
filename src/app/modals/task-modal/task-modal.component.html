@@ -509,6 +509,12 @@
                         [readOnly]="savingSub"
                         [(ngModel)]="subTaskTitle"
                       ></textarea>
+
+                      <div *ngIf="project.template === ProjectTemplate.Animation" class="counter-holder">
+                        <span>{{ 'NEW_PLAN_COUNTER' | translate}}</span>
+                        <app-number [disabled]="savingSub" [min]="1" [max]="200" [(model)]="subTaskCounter"></app-number>
+                      </div>
+
                       <div class="btns">
                         <button
                           [disabled]="savingSub"
@@ -659,9 +665,7 @@
                           </h5>
                           <h5>
                             <span>{{ 'UPLOADED_BY' | translate }}&nbsp;</span>
-                            {{
-                              usersService.findUser(attachment.userId)?.fullName
-                            }}
+                            {{ attachment.userId | fullName | async}}
                           </h5>
                         </div>
                         <div class="actions">

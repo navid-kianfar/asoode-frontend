@@ -17,6 +17,7 @@ import {
   AccessType,
   ActivityType,
   WorkPackageTaskState,
+  ProjectTemplate,
 } from '../../library/app/enums';
 import { IdentityService } from '../../services/auth/identity.service';
 import { Socket } from 'ngx-socket-io';
@@ -51,6 +52,11 @@ export class TaskModalComponent
   extends SimpleModalComponent<TaskModalParameters, void>
   implements OnInit, OnDestroy {
   ViewMode = ViewMode;
+  AccessType = AccessType;
+  DateMode = DateMode;
+  NumberHelpers = NumberHelpers;
+  ProjectTemplate = ProjectTemplate;
+
   id: string;
   mode: ViewMode;
   model: WorkPackageTaskViewModel;
@@ -65,8 +71,6 @@ export class TaskModalComponent
   newDescription: string;
   allStates: number[];
   permission: AccessType;
-  AccessType = AccessType;
-  DateMode = DateMode;
   changingState: boolean;
   project: ProjectViewModel;
   workPackage: WorkPackageViewModel;
@@ -82,9 +86,9 @@ export class TaskModalComponent
   voting: boolean;
   addingSub: boolean;
   subTaskTitle: string;
+  subTaskCounter: number;
   bg: string;
   savingSub: boolean;
-  NumberHelpers = NumberHelpers;
   tempEstimatedTime: number;
   savingEstimated: boolean;
   recording: boolean;
@@ -113,7 +117,6 @@ export class TaskModalComponent
     private readonly projectService: ProjectService,
     private readonly groupService: GroupService,
     readonly translateService: TranslateService,
-    readonly usersService: UsersService,
     readonly modalService: ModalService,
     readonly filesService: FilesService,
     readonly identityService: IdentityService,
@@ -830,6 +833,7 @@ export class TaskModalComponent
 
   prepareSubTask() {
     this.subTaskTitle = '';
+    this.subTaskCounter = 1;
     this.addingSub = true;
   }
 

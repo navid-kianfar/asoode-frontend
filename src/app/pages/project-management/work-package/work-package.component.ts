@@ -10,7 +10,6 @@ import { ProjectService } from '../../../services/projects/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkPackageService } from '../../../services/projects/work-package.service';
 import { OperationResultStatus } from '../../../library/core/enums';
-import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
 import { ModalService } from '../../../services/core/modal.service';
 import { CultureService } from '../../../services/core/culture.service';
@@ -276,6 +275,7 @@ export class WorkPackageComponent implements OnInit {
 
             const task = this.findTask(notification.data.id);
             if (task) {
+              const oldState = task.state;
               task.beginReminder = notification.data.beginReminder;
               task.endReminder = notification.data.endReminder;
               task.voteNecessity = notification.data.voteNecessity;
@@ -295,13 +295,45 @@ export class WorkPackageComponent implements OnInit {
               task.title = notification.data.title;
               task.description = notification.data.description;
               task.geoLocation = notification.data.geoLocation;
-              task.hasDescription =
-                task.description && task.description.length > 0;
+              task.hasDescription = task.description && task.description.length > 0;
+
+              if (oldState !== notification.data.state) {
+                switch (oldState) {
+                  case WorkPackageTaskState.Done:
+                    this.workPackage.progress.done--;
+                    break;
+                  case WorkPackageTaskState.Cancelled:
+                  case WorkPackageTaskState.Duplicate:
+                    this.workPackage.progress.canceledOrDuplicate--;
+                    break;
+                }
+
+                switch (notification.data.state) {
+                  case WorkPackageTaskState.Done:
+                    this.workPackage.progress.done++;
+                    break;
+                  case WorkPackageTaskState.Cancelled:
+                  case WorkPackageTaskState.Duplicate:
+                    this.workPackage.progress.canceledOrDuplicate++;
+                    break;
+                }
+
+                if (this.workPackage.progress.total === 0) {
+                  this.workPackage.progress.percent = 0;
+                } else {
+                  this.workPackage.progress.percent =
+                    (
+                      this.workPackage.progress.done +
+                      this.workPackage.progress.canceledOrDuplicate
+                    ) * 100 / this.workPackage.progress.total;
+                }
+              }
             }
           }
           break;
         case ActivityType.WorkPackageTaskAdd:
           if (this.workPackage.id === notification.data.packageId) {
+            this.workPackage.progress.total++;
             if (notification.data.parentId) {
               find1 = this.findTask(notification.data.parentId);
               if (find1) {
@@ -336,6 +368,8 @@ export class WorkPackageComponent implements OnInit {
                 }
               }
             });
+
+            this.workPackage.progress.total += notification.data.length;
           }
           break;
         case ActivityType.WorkPackageTaskComment:
@@ -431,6 +465,7 @@ export class WorkPackageComponent implements OnInit {
             if (task) {
               task.archivedAt = notification.data.archivedAt;
             }
+            // this.workPackage.progress.total--;
           }
           break;
         case ActivityType.WorkPackageTaskAttachmentAdd:

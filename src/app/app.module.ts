@@ -188,6 +188,7 @@ import { LabelsModalComponent } from './modals/labels-modal/labels-modal.compone
 import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-fields-modal.component';
 import { OfflineComponent } from './modals/offline/offline.component';
 import { RequestTimeOffComponent } from './modals/request-time-off/request-time-off.component';
+import { FullNamePipe } from './pipes/app/full-name.pipe';
 
 @NgModule({
   declarations: [
@@ -333,6 +334,7 @@ import { RequestTimeOffComponent } from './modals/request-time-off/request-time-
     CustomFieldsModalComponent,
     OfflineComponent,
     RequestTimeOffComponent,
+    FullNamePipe,
   ],
   entryComponents: [
     RequestTimeOffComponent,

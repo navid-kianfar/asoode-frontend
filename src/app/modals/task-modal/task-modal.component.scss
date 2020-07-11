@@ -662,10 +662,12 @@
     }
 
     .add-sub {
+      display: flex;
+      flex-direction: column;
       margin-inline-start: 10px;
       textarea {
         display: block;
-        width: 225px;
+        width: 100%;
         border: 1px solid #eee;
         resize: none;
         margin-bottom: 10px;
@@ -677,6 +679,17 @@
       .btns {
         display: flex;
         align-items: center;
+      }
+
+      .counter-holder {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 5px 0;
+
+        span {
+          font-size: 0.8rem;
+        }
       }
     }
   }
@@ -845,7 +858,7 @@
           }
           .date-info {
             margin: 0 10px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             display: flex;
             .week {
               width: 50px;
