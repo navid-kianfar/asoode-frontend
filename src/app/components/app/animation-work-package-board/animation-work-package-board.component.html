@@ -78,11 +78,15 @@
         <div *ngIf="list.expanded" class="new-task">
           <div class="wrapper">
             <textarea
-              [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
+              [placeholder]="'NEW_PLAN_PLACEHOLDER' | translate"
               [readOnly]="creatingNewTask"
               [(ngModel)]="newTaskTitle"
-              rows="2"
+              rows="3"
             ></textarea>
+            <div class="counter-holder">
+              <span>{{ 'NEW_PLAN_COUNTER' | translate}}</span>
+              <app-number [disabled]="creatingNewTask" [min]="1" [max]="200" [(model)]="newTaskCounter"></app-number>
+            </div>
             <div class="buttons">
               <button
                 [disabled]="creatingNewTask"
@@ -129,7 +133,7 @@
         >
           <span class="cnt">
             <i class="icon-task"></i>
-            <span>{{ 'NEW_TASK' | translate }}</span>
+            <span>{{ 'NEW_PLAN' | translate }}</span>
           </span>
         </button>
         <button
@@ -193,7 +197,7 @@
         >
           <span class="cnt">
             <i class="icon-archive x2"></i>
-            <span>{{ 'ARCHIVE_TASKS' | translate }}</span>
+            <span>{{ 'ARCHIVE_PLANS' | translate }}</span>
           </span>
         </button>
         <button

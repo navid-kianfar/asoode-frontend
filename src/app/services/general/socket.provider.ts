@@ -18,22 +18,24 @@ export class PanelSocketProvider extends Socket {
         },
       },
     });
-
-    this.on('connect', () => {
-      this.networkService.socketConnected();
-    });
-    this.on('connect_error', (error) => {
-      if (error.message === 'xhr poll error') {
-        this.networkService.socketDisconnected();
-      } else {
+    if (!environment.socket_disabled) {
+      this.on('connect', () => {
+        this.networkService.socketConnected();
+      });
+      this.on('connect_error', (error) => {
+        if (error.message === 'xhr poll error') {
+          this.networkService.socketDisconnected();
+        } else {
+          this.networkService.socketError(error);
+        }
+      });
+      this.on('connect_timeout', (error) => {
         this.networkService.socketError(error);
-      }
-    });
-    this.on('connect_timeout', (error) => {
-      this.networkService.socketError(error);
-    });
-    this.on('error', (error) => {
-      this.networkService.socketError(error);
-    });
+      });
+      this.on('error', (error) => {
+        this.networkService.socketError(error);
+      });
+    }
+
   }
 }

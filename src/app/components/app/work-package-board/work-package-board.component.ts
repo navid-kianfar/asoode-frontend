@@ -46,6 +46,7 @@ export class WorkPackageBoardComponent implements OnInit {
   creatingNewTask: boolean;
   newListName: string;
   newTaskTitle: string;
+  newTaskCounter: number;
   noDrag: boolean;
   constructor(
     private readonly workPackageService: WorkPackageService,
@@ -79,6 +80,7 @@ export class WorkPackageBoardComponent implements OnInit {
     this.model.lists.forEach(l => (l.expanded = false));
     list.expanded = true;
     this.newTaskTitle = '';
+    this.newTaskCounter = 1;
   }
   cancelNewTask(list: WorkPackageListViewModel) {
     list.expanded = false;
@@ -144,6 +146,7 @@ export class WorkPackageBoardComponent implements OnInit {
     const op = await this.taskService.create(this.model.id, {
       listId: list.id,
       title: name,
+      count: this.newTaskCounter,
       parentId: undefined,
     });
     this.creatingNewTask = false;

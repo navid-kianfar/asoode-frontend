@@ -77,6 +77,17 @@
             //  max-width: 70px;
             //}
           }
+
+          .counter-holder {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 5px 0;
+
+            span {
+              font-size: 0.8rem;
+            }
+          }
         }
       }
 

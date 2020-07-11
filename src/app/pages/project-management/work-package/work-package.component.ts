@@ -318,6 +318,26 @@ export class WorkPackageComponent implements OnInit {
             }
           }
           break;
+        case ActivityType.WorkPackageTaskBulkAdd:
+          if (notification.data.length && this.workPackage.id === notification.data[0].packageId) {
+            notification.data.forEach(d => {
+              if (d.parentId) {
+                find1 = this.findTask(d.parentId);
+                if (find1) {
+                  find1.subTasksCount++;
+                }
+              } else {
+                find1 = this.workPackage.lists.find(
+                  l => l.id === d.listId,
+                );
+                if (find1) {
+                  find1.tasks = find1.tasks || [];
+                  find1.tasks.unshift(d);
+                }
+              }
+            });
+          }
+          break;
         case ActivityType.WorkPackageTaskComment:
           if (this.workPackage.id === notification.data.packageId) {
             const task = this.findTask(notification.data.taskId);

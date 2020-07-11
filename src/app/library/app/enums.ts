@@ -128,6 +128,9 @@ export enum ActivityType {
   GroupMemberPermission = 208,
   GroupArchive = 209,
   GroupRestore = 210,
+  // GroupShiftAdd = 211,
+  // GroupShiftEdit = 212,
+  // GroupShiftRemove = 213,
 
   ProjectAdd = 300,
   ProjectEdit = 301,
@@ -200,13 +203,14 @@ export enum ActivityType {
   WorkPackageTaskVoteReset = 621,
   WorkPackageTaskUnBlock = 622,
   WorkPackageTaskBlocked = 623,
+  WorkPackageTaskBulkAdd = 624,
 
   WorkPackageObjectiveAdd = 700,
   WorkPackageObjectiveEdit = 701,
   WorkPackageObjectiveRemove = 702,
 
   ChannelMessage = 800,
-  ChannelUpload = 801,
+  ChannelUpload = 801
 }
 export enum PlanType {
   Free = 1,
