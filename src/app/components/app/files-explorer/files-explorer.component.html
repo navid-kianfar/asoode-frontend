@@ -17,39 +17,39 @@
             <span class="sub-title">{{ 'DELETE' | translate }}</span>
           </span>
         </button>
-        <button
-          disabled
-          (click)="actionCut()"
-          *ngIf="atLeastOneSelected && private"
-          mat-mini-fab
-        >
-          <span class="btn-inner">
-            <i class="icon-cut"></i>
-            <span class="sub-title">{{ 'CUT' | translate }}</span>
-          </span>
-        </button>
-        <button
-          disabled
-          (click)="actionCopy()"
-          *ngIf="atLeastOneSelected && private"
-          mat-mini-fab
-        >
-          <span class="btn-inner">
-            <i class="icon-copy3"></i>
-            <span class="sub-title">{{ 'COPY' | translate }}</span>
-          </span>
-        </button>
-        <button
-          disabled
-          (click)="actionPaste()"
-          *ngIf="inClipboard && private"
-          mat-mini-fab
-        >
-          <span class="btn-inner">
-            <i class="icon-paste"></i>
-            <span class="sub-title">{{ 'PASTE' | translate }}</span>
-          </span>
-        </button>
+<!--        <button-->
+<!--          disabled-->
+<!--          (click)="actionCut()"-->
+<!--          *ngIf="atLeastOneSelected && private"-->
+<!--          mat-mini-fab-->
+<!--        >-->
+<!--          <span class="btn-inner">-->
+<!--            <i class="icon-cut"></i>-->
+<!--            <span class="sub-title">{{ 'CUT' | translate }}</span>-->
+<!--          </span>-->
+<!--        </button>-->
+<!--        <button-->
+<!--          disabled-->
+<!--          (click)="actionCopy()"-->
+<!--          *ngIf="atLeastOneSelected && private"-->
+<!--          mat-mini-fab-->
+<!--        >-->
+<!--          <span class="btn-inner">-->
+<!--            <i class="icon-copy3"></i>-->
+<!--            <span class="sub-title">{{ 'COPY' | translate }}</span>-->
+<!--          </span>-->
+<!--        </button>-->
+<!--        <button-->
+<!--          disabled-->
+<!--          (click)="actionPaste()"-->
+<!--          *ngIf="inClipboard && private"-->
+<!--          mat-mini-fab-->
+<!--        >-->
+<!--          <span class="btn-inner">-->
+<!--            <i class="icon-paste"></i>-->
+<!--            <span class="sub-title">{{ 'PASTE' | translate }}</span>-->
+<!--          </span>-->
+<!--        </button>-->
         <button
           (click)="actionRename()"
           *ngIf="onlyOneSelected && private"

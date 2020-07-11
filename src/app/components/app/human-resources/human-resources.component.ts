@@ -62,10 +62,157 @@ export class HumanResourcesComponent implements OnInit {
       .subscribe(confirmed => {});
   }
 
-  edit(element: any) {
-
+  createEntryForm(beginAt: Date, endAt: Date): FormViewModel[] {
+    return [
+      {
+        size: 6,
+        elements: [
+          this.formService.createDatePicker({
+            config: {
+              field: 'beginAt',
+              label: 'BEGIN_AT'
+            },
+            params: {
+              model: beginAt,
+              pickButton: true
+            }
+          })
+        ]
+      },
+      {
+        size: 6,
+        elements: [
+          this.formService.createTimePicker({
+            config: {
+              field: 'startAt',
+              label: ''
+            },
+            params: {
+              model: `${beginAt.getHours()}:${beginAt.getMinutes()}`
+            }
+          })
+        ]
+      },
+      {
+        size: 6,
+        elements: [
+          this.formService.createDatePicker({
+            config: {
+              field: 'endAt',
+              label: 'END_AT'
+            },
+            params: {
+              model: endAt
+            }
+          })
+        ]
+      },
+      {
+        size: 6,
+        elements: [
+          this.formService.createTimePicker({
+            config: {
+              field: 'finishAt',
+              label: ''
+            },
+            params: {
+              model: `${endAt.getHours()}:${endAt.getMinutes()}`
+            }
+          })
+        ]
+      },
+    ];
   }
 
+  edit(element: any) {
+    element.beginAt = new Date(element.beginAt);
+    element.endAt = element.endAt ? new Date(element.endAt) : new Date();
+    const form = this.createEntryForm(element.beginAt, element.endAt);
+    this.modalService
+      .show(PromptComponent, {
+        form,
+        actionLabel: 'EDIT_ENTRY',
+        action: async (model, frm) => {
+          const beginParts = model.startAt.split(':');
+          const endParts = model.finishAt.split(':');
+          model.beginAt.setHours(+beginParts[0]);
+          model.beginAt.setMinutes(+beginParts[1]);
+          model.endAt.setHours(+endParts[0]);
+          model.endAt.setMinutes(+endParts[1]);
+          const op = await this.groupService.editEntry(element.id, {
+            begin: model.beginAt,
+            end: model.endAt
+          });
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          this.entryCommander.emit({reload: true});
+          return op;
+        },
+        actionColor: 'primary',
+        title: 'EDIT_ENTRY',
+      })
+      .subscribe(() => {});
+  }
+
+  createManualEntry() {
+    const now = new Date();
+    const later = new Date();
+    now.setHours(8);
+    now.setMinutes(0);
+    later.setHours(17);
+    later.setMinutes(0);
+    const form = this.createEntryForm(now, later);
+    const users = this.group.members.map(m => {
+      return {
+        text: m.member.fullName,
+        value: m.userId
+      };
+    });
+    form.unshift({
+      size: 12,
+      elements: [
+        this.formService.createDropDown({
+          config: {
+            label: 'MANUAL_ENTRY_FOR',
+            field: 'userId'
+          },
+          params: {
+            model: this.identityService.profile.id,
+            items: users
+          }
+        })
+      ]
+    });
+    this.modalService
+      .show(PromptComponent, {
+        form,
+        actionLabel: 'MANUAL_ENTRY',
+        action: async (model, frm) => {
+          const beginParts = model.startAt.split(':');
+          const endParts = model.finishAt.split(':');
+          model.beginAt.setHours(+beginParts[0]);
+          model.beginAt.setMinutes(+beginParts[1]);
+          model.endAt.setHours(+endParts[0]);
+          model.endAt.setMinutes(+endParts[1]);
+          const op = await this.groupService.manualEntry(this.group.id, {
+            begin: model.beginAt,
+            end: model.endAt,
+            userId: model.userId
+          });
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          this.entryCommander.emit({reload: true});
+          return op;
+        },
+        actionColor: 'primary',
+        title: 'MANUAL_ENTRY',
+      })
+      .subscribe(() => {});
+  }
   delete(element: any) {
     const converter = this.culturedDateService.Converter();
     const heading = StringHelpers.format(
@@ -349,4 +496,5 @@ export class HumanResourcesComponent implements OnInit {
       })
       .subscribe(() => {});
   }
+
 }

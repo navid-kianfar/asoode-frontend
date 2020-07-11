@@ -127,9 +127,23 @@ export interface IFormElementDatePicker extends IFormElement {
   params: {
     min?: Date;
     max?: Date;
-    model: Date;
     culture?: string;
     disabled?: boolean;
+    model: Date;
+    cssClass?: string;
+    allowNull?: boolean;
+    pickButton?: boolean;
+    plateOpen?: boolean;
+    from?: Date;
+    to?: Date;
+    minDays?: number;
+    minMonths?: number;
+    minYears?: number;
+    maxDays?: number;
+    maxMonths?: number;
+    maxYears?: number;
+    fromToday?: boolean;
+    tillToday?: boolean;
   };
 }
 export interface IFormElementDropDown extends IFormElement {

@@ -3,11 +3,19 @@
   <div class="box">
     <div class="title">
       <h3>{{ 'ENTRY_LOGS' | translate }}</h3>
-      &nbsp;
-      <button (click)="createEntry()" [disabled]="group.archivedAt !== null" mat-stroked-button>
-        +&nbsp;
-        {{ (identityService.profile.workingGroupId === group.id ? 'END_ENTRY' : 'BEGIN_ENTRY') | translate }}
-      </button>
+      <div>
+        &nbsp;
+        <button (click)="createEntry()" [disabled]="group.archivedAt !== null" mat-stroked-button>
+          +&nbsp;
+          {{ (identityService.profile.workingGroupId === group.id ? 'END_ENTRY' : 'BEGIN_ENTRY') | translate }}
+        </button>
+        &nbsp;
+        <button *ngIf="permission === AccessType.Admin || permission === AccessType.Owner"
+                (click)="createManualEntry()" [disabled]="group.archivedAt !== null" mat-stroked-button>
+          +&nbsp;
+          {{ 'MANUAL_ENTRY' | translate }}
+        </button>
+      </div>
     </div>
     <div class="content">
       <app-grid
@@ -72,10 +80,10 @@
           <td class="operations" style="width: 100px" mat-cell *matCellDef="let element">
             <ng-container *ngIf="permission === AccessType.Owner || permission === AccessType.Admin">
               <button (click)="edit(element)">
-                <i class="icon-pencil"></i>
+                <i class="ikon-pen5"></i>
               </button>
               <button (click)="delete(element)">
-                <i class="icon-delete"></i>
+                <i class="ikon-bin"></i>
               </button>
             </ng-container>
           </td>
@@ -138,11 +146,18 @@
         <!-- Action Column -->
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-          <td mat-cell *matCellDef="let element">
-            &nbsp;
-            <i class="icon-checkmark3"></i>&nbsp;
-            <i class="icon-stop"></i>&nbsp;
-            <i class="icon-delete"></i>
+          <td class="operations" style="width: 150px" mat-cell *matCellDef="let element">
+            <ng-container *ngIf="permission === AccessType.Owner || permission === AccessType.Admin">
+              <button (click)="editTimeOff(element)">
+                <i class="ikon-pen5"></i>
+              </button>
+              <button (click)="respondTimeOff(element)">
+                <i class="ikon-search5"></i>
+              </button>
+              <button (click)="deleteTimeOff(element)">
+                <i class="ikon-bin"></i>
+              </button>
+            </ng-container>
           </td>
         </ng-container>
       </app-grid>
@@ -237,13 +252,13 @@
           <td class="operations" style="width: 150px" mat-cell *matCellDef="let element">
             <ng-container *ngIf="permission === AccessType.Owner || permission === AccessType.Admin">
               <button (click)="editShift(element)">
-                <i class="icon-pencil"></i>
+                <i class="ikon-pen5"></i>
               </button>
               <button (click)="shiftMembers(element)">
-                <i class="icon-team"></i>
+                <i class="ikon-users"></i>
               </button>
               <button (click)="deleteShift(element)">
-                <i class="icon-delete"></i>
+                <i class="ikon-bin"></i>
               </button>
             </ng-container>
           </td>

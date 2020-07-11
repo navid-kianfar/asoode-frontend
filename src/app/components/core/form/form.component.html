@@ -137,6 +137,29 @@
                   ></app-time-picker>
                 </ng-container>
 
+                <!-- DatePicker -->
+                <ng-container *ngIf="element.type === FormElementType.DatePicker">
+                  <app-date-picker
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                    [allowNull]="element.params.allowNull"
+                    [culture]="element.params.culture"
+                    [from]="element.params.from"
+                    [fromToday]="element.params.fromToday"
+                    [maxDays]="element.params.maxDays"
+                    [maxMonths]="element.params.maxMonths"
+                    [maxYears]="element.params.maxYears"
+                    [minDays]="element.params.minDays"
+                    [minMonths]="element.params.minMonths"
+                    [minYears]="element.params.minYears"
+                    [pickButton]="element.params.pickButton"
+                    [plateOpen]="element.params.plateOpen"
+                    [tillToday]="element.params.tillToday"
+                    [to]="element.params.to"
+                  ></app-date-picker>
+                </ng-container>
+
                 <!-- DropDown -->
                 <ng-container *ngIf="element.type === FormElementType.DropDown">
                   <app-dropdown

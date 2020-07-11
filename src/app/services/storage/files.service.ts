@@ -169,6 +169,7 @@ export class FilesService {
               u.progress = 100;
               u.success = true;
               u.uploading = false;
+              resolve();
             },
             err => {
               reject(err);

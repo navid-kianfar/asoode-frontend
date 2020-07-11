@@ -766,5 +766,8 @@
   "NEW_PLAN_PLACEHOLDER": "عنوان پلان ...\r\nبرای مکان شمارنده می توانید از علامت $ استفاده کنید.",
   "NEW_PLAN": "پلان جدید",
   "ARCHIVE_PLANS": "آرشیو پلان ها",
-  "NEW_PLAN_COUNTER": "تعداد پلان مورد نیاز"
+  "NEW_PLAN_COUNTER": "تعداد پلان مورد نیاز",
+  "MANUAL_ENTRY": "ثبت زمان دستی",
+  "EDIT_ENTRY": "ویرایش ساعات کاری",
+  "MANUAL_ENTRY_FOR": "عضو"
 }
