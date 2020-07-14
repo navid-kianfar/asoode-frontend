@@ -56,12 +56,6 @@
     ></app-checkbox>
   </div>
   <div class="modal-footer">
-    <!--    <button (click)="share()" class="btn btn-light mr-auto">-->
-    <!--      {{ 'SHARE' | translate }}-->
-    <!--    </button> -->
-    <button mat-flat-button class="btn btn-light" (click)="close()">
-      {{ 'CANCEL' | translate }}
-    </button>
     <button
       mat-flat-button
       color="primary"
@@ -71,6 +65,9 @@
     >
       <i class="icon-spin icon-spinner2" *ngIf="waiting"></i>
       {{ 'SAVE_CHANGES' | translate }}</button
-    >&nbsp;
+    >&nbsp;&nbsp;
+    <button mat-flat-button class="btn btn-light" (click)="close()">
+      {{ 'CANCEL' | translate }}
+    </button>
   </div>
 </div>

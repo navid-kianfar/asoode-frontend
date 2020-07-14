@@ -22,7 +22,7 @@ export class PremiumPlansComponent implements OnInit {
   calculateDiskSpace() {
     return (
       (this.identityService.profile.plan.usedSpace * 100) /
-      this.identityService.profile.plan.totalSpace
+      this.identityService.profile.plan.space
     );
   }
 

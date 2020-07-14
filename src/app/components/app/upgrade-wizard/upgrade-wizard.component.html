@@ -304,12 +304,12 @@
               <div class="current">
                 {{
                   NumberHelpers.humanFileSize(
-                    identityService.profile.plan.totalSpace
+                    identityService.profile.plan.space
                   )
                 }}
               </div>
               <mat-slider
-                [min]="identityService.profile.plan.totalSpace"
+                [min]="identityService.profile.plan.space"
                 [(value)]="order.diskSpace"
                 (valueChange)="calculateSpaceCost()"
                 [displayWith]="formatSpaceLabel"
@@ -331,10 +331,10 @@
             </div>
             <div class="slider">
               <div class="current">
-                {{ identityService.profile.plan.totalUsers }}
+                {{ identityService.profile.plan.users }}
               </div>
               <mat-slider
-                [min]="identityService.profile.plan.totalUsers"
+                [min]="identityService.profile.plan.users"
                 [(value)]="order.users"
                 (valueChange)="calculateUserCost()"
                 color="primary"
@@ -355,10 +355,10 @@
             </div>
             <div class="slider">
               <div class="current">
-                {{ identityService.profile.plan.totalSimpleGroups }}
+                {{ identityService.profile.plan.simpleGroup }}
               </div>
               <mat-slider
-                [min]="identityService.profile.plan.totalSimpleGroups"
+                [min]="identityService.profile.plan.simpleGroup"
                 [(value)]="order.simpleGroup"
                 (valueChange)="calculateSimpleGroupCost()"
                 color="primary"
@@ -379,10 +379,10 @@
             </div>
             <div class="slider">
               <div class="current">
-                {{ identityService.profile.plan.totalComplexGroups }}
+                {{ identityService.profile.plan.complexGroup }}
               </div>
               <mat-slider
-                [min]="identityService.profile.plan.totalComplexGroups"
+                [min]="identityService.profile.plan.complexGroup"
                 [(value)]="order.complexGroup"
                 (valueChange)="calculateComplexGroupCost()"
                 color="primary"
@@ -403,10 +403,10 @@
             </div>
             <div class="slider">
               <div class="current">
-                {{ identityService.profile.plan.totalWorkPackages }}
+                {{ identityService.profile.plan.workPackage }}
               </div>
               <mat-slider
-                [min]="identityService.profile.plan.totalWorkPackages"
+                [min]="identityService.profile.plan.workPackage"
                 [(value)]="order.workPackage"
                 (valueChange)="calculatePackageCost()"
                 color="primary"
@@ -427,10 +427,10 @@
             </div>
             <div class="slider">
               <div class="current">
-                {{ identityService.profile.plan.totalComplexProjects }}
+                {{ identityService.profile.plan.project }}
               </div>
               <mat-slider
-                [min]="identityService.profile.plan.totalComplexProjects"
+                [min]="identityService.profile.plan.project"
                 [(value)]="order.project"
                 (valueChange)="calculateProjectCost()"
                 color="primary"

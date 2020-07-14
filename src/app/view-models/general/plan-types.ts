@@ -28,12 +28,6 @@ export interface UserPlanInfoViewModel extends BaseViewModel {
   project: number;
   simpleGroup: number;
   complexGroup: number;
-  additionalUser: number;
-  additionalSpace: number;
-  additionalProject: number;
-  additionalSimpleGroup: number;
-  additionalComplexGroup: number;
-  additionalWorkPackage: number;
   additionalWorkPackageCost: number;
   additionalUserCost: number;
   additionalSpaceCost: number;
@@ -68,16 +62,6 @@ export interface UserPlanInfoViewModel extends BaseViewModel {
   featureRelated: boolean;
   featureComplexGroup: boolean;
   featureGroupTimeSpent: boolean;
-  totalGroups: number;
-  totalSimpleGroups: number;
-  totalComplexGroups: number;
-  totalUsedGroups: number;
-  totalProjects: number;
-  totalWorkPackages: number;
-  totalComplexProjects: number;
-  totalUsedProjects: number;
-  totalSpace: number;
-  totalUsers: number;
 }
 export interface PlanViewModel extends BaseViewModel {
   canUse?: boolean;
@@ -99,12 +83,6 @@ export interface PlanViewModel extends BaseViewModel {
   project: number;
   simpleGroup: number;
   complexGroup: number;
-  additionalUser: number;
-  additionalSpace: number;
-  additionalProject: number;
-  additionalSimpleGroup: number;
-  additionalComplexGroup: number;
-  additionalWorkPackage: number;
   additionalWorkPackageCost: number;
   additionalUserCost: number;
   additionalSpaceCost: number;

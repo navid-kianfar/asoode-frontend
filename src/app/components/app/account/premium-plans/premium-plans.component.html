@@ -43,7 +43,7 @@
                     identityService.profile.plan.usedSpace
                   )
                 : NumberHelpers.humanFileSize(
-                    identityService.profile.plan.totalSpace
+                    identityService.profile.plan.space
                   )
           }}
         </h5>
@@ -56,7 +56,7 @@
                     identityService.profile.plan.usedSpace
                   )
                 : NumberHelpers.humanFileSize(
-                    identityService.profile.plan.totalSpace
+                  identityService.profile.plan.space
                   )
           }}
         </h5>
@@ -114,7 +114,7 @@
         <mat-progress-bar
           [value]="
             (identityService.profile.plan.usedSimpleGroup * 100) /
-            identityService.profile.plan.totalSimpleGroups
+            identityService.profile.plan.simpleGroup
           "
         ></mat-progress-bar>
         <h5>
@@ -123,7 +123,7 @@
               | translate
               | stringFormat
                 : identityService.profile.plan.usedSimpleGroup
-                : identityService.profile.plan.totalSimpleGroups
+                : identityService.profile.plan.simpleGroup
           }}
         </h5>
       </div>
@@ -147,7 +147,7 @@
         <mat-progress-bar
           [value]="
             (identityService.profile.plan.usedComplexGroup * 100) /
-            identityService.profile.plan.totalComplexGroups
+            identityService.profile.plan.complexGroup
           "
         ></mat-progress-bar>
         <h5>
@@ -156,7 +156,7 @@
               | translate
               | stringFormat
                 : identityService.profile.plan.usedComplexGroup
-                : identityService.profile.plan.totalComplexGroups
+                : identityService.profile.plan.complexGroup
           }}
         </h5>
       </div>
@@ -180,7 +180,7 @@
         <mat-progress-bar
           [value]="
             (identityService.profile.plan.usedWorkPackage * 100) /
-            identityService.profile.plan.totalWorkPackages
+            identityService.profile.plan.workPackage
           "
         ></mat-progress-bar>
         <h5>
@@ -189,7 +189,7 @@
               | translate
               | stringFormat
                 : identityService.profile.plan.usedWorkPackage
-                : identityService.profile.plan.totalWorkPackages
+                : identityService.profile.plan.workPackage
           }}
         </h5>
       </div>
@@ -213,7 +213,7 @@
         <mat-progress-bar
           [value]="
             (identityService.profile.plan.usedProject * 100) /
-            identityService.profile.plan.totalComplexProjects
+            identityService.profile.plan.project
           "
         ></mat-progress-bar>
         <h5>
@@ -222,7 +222,7 @@
               | translate
               | stringFormat
                 : identityService.profile.plan.usedProject
-                : identityService.profile.plan.totalComplexProjects
+                : identityService.profile.plan.project
           }}
         </h5>
       </div>

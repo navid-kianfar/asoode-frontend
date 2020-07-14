@@ -635,4 +635,15 @@ export class HumanResourcesComponent implements OnInit {
       .subscribe(() => {});
   }
 
+  editTimeOff(element: any) {
+
+  }
+
+  respondTimeOff(element: any) {
+
+  }
+
+  deleteTimeOff(element: any) {
+
+  }
 }

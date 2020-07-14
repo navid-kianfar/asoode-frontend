@@ -3,10 +3,11 @@ $color2: #3b3b3b;
 $color3: #59a8ef;
 $color4: #999999;
 $color5: #ffffff;
+$color6: #b3b3b3;
 
 body.dark-mode {
-  background: $color1;
-  color: $color4;
+  background: $color1 !important;
+  color: $color4 !important;
 
   hr,
   .mat-radio-button.border {
@@ -286,7 +287,100 @@ body.dark-mode {
   .search-popper {
     background: $color2 !important;
   }
+  .search-result {
+    .box {
+      .title {
+        color: $color6 !important;
+      }
+      .member {
+        background: $color1 !important;
+        &:hover {
+          background: $color1 !important;
+        }
+      }
+      .folder {
+        &:hover {
+          background: $color1 !important;
+        }
+        i {
+          color: $color4 !important;
+        }
+        .info {
+          .name {
+            color: $color4 !important;
+          }
+          .date {
+            color: #808080 !important;
+          }
+        }
+      }
+      .file {
+        &:hover {
+          background: $color1 !important;
+        }
+        i {
+          color: $color4 !important;
+        }
+        .info {
+          .name {
+            color: $color4 !important;
+          }
+          .date {
+            color: #808080 !important;
+          }
+        }
+      }
 
+      ::ng-deep .group-info {
+        &:hover {
+          background: $color1 !important;
+        }
+        border: none;
+      }
+
+      ::ng-deep .project-info-mini {
+        &:hover {
+          background: $color1 !important;
+        }
+        i {
+          color: #999999 !important;
+        }
+        .name {
+          color: #333333 !important;
+        }
+        .description {
+          color: #808080 !important;
+        }
+      }
+    }
+
+    .tasks {
+      .task {
+        border: 2px solid $color1 !important;
+        .info {
+          .title {
+            color: $color4 !important;
+          }
+          .description {
+            color: $color4 !important;
+          }
+        }
+
+        .more {
+          border-top: 2px solid $color1 !important;
+        }
+
+        &:hover {
+          border: 2px solid $color2 !important;
+          background: $color1 !important;
+
+          .more {
+            border-top: 2px solid $color2 !important;
+          }
+        }
+      }
+    }
+  }
   .account-profile,
   .group-page {
     .header {
@@ -444,11 +538,12 @@ body.dark-mode {
 
   .account-profile-transactions {
     background: $color1 !important;
-
+  }
+  .human-resources, .account-profile-transactions {
     .mat-table th.mat-header-cell {
       background: $color1 !important;
     }
-    .mat-table td {
+    .mat-table td.mat-cell {
       background: $color1 !important;
       color: $color4 !important;
     }
@@ -640,8 +735,17 @@ body.dark-mode {
       color: $color4 !important;
     }
   }
-  .af-auto-complete {
-    background: $color1 !important;
+  .mat-autocomplete-panel {
+    .mat-option {
+      background: $color1 !important;
+      &:hover {
+        background: $color2 !important;
+
+        .member-info {
+          background: $color2 !important;
+        }
+      }
+    }
   }
 
   .activities-report .no-activity {
@@ -1245,7 +1349,7 @@ body.dark-mode {
         .wrapper {
           textarea {
             border: 1px dashed #cccccc;
-            color: #b3b3b3;
+            color: $color6;
           }
         }
       }
