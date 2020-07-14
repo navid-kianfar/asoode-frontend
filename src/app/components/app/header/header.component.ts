@@ -125,8 +125,10 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   prepareCreate() {
     const plan = this.identityService.profile.plan;
     if (
-      plan.totalUsedProjects >= plan.totalProjects &&
-      plan.totalUsedGroups >= plan.totalGroups
+      ((plan.workPackage <= plan.usedWorkPackage) &&
+        (plan.project <= plan.usedProject)) &&
+      ((plan.simpleGroup <= plan.usedSimpleGroup) &&
+        (plan.complexGroup <= plan.usedComplexGroup))
     ) {
       this.modalService
         .show(UpgradeComponent, {} as CreateModalParameters)
