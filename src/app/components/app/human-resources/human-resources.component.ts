@@ -133,12 +133,28 @@ export class HumanResourcesComponent implements OnInit {
         form,
         actionLabel: 'EDIT_ENTRY',
         action: async (model, frm) => {
+          const converter = this.culturedDateService.Converter();
           const beginParts = model.startAt.split(':');
           const endParts = model.finishAt.split(':');
-          model.beginAt.setHours(+beginParts[0]);
-          model.beginAt.setMinutes(+beginParts[1]);
-          model.endAt.setHours(+endParts[0]);
-          model.endAt.setMinutes(+endParts[1]);
+
+          let parsed = converter.FromDateTime(model.beginAt);
+          model.beginAt = converter.ToDateTime({
+            Year: parsed.Year,
+            Month: parsed.Month,
+            Day: parsed.Day,
+            Hours: +beginParts[0],
+            Minutes: +beginParts[1]
+          });
+
+          parsed = converter.FromDateTime(model.endAt);
+          model.endAt = converter.ToDateTime({
+            Year: parsed.Year,
+            Month: parsed.Month,
+            Day: parsed.Day,
+            Hours: +endParts[0],
+            Minutes: +endParts[1]
+          });
+
           const op = await this.groupService.editEntry(element.id, {
             begin: model.beginAt,
             end: model.endAt
@@ -190,12 +206,28 @@ export class HumanResourcesComponent implements OnInit {
         form,
         actionLabel: 'MANUAL_ENTRY',
         action: async (model, frm) => {
+          const converter = this.culturedDateService.Converter();
           const beginParts = model.startAt.split(':');
           const endParts = model.finishAt.split(':');
-          model.beginAt.setHours(+beginParts[0]);
-          model.beginAt.setMinutes(+beginParts[1]);
-          model.endAt.setHours(+endParts[0]);
-          model.endAt.setMinutes(+endParts[1]);
+
+          let parsed = converter.FromDateTime(model.beginAt);
+          model.beginAt = converter.ToDateTime({
+            Year: parsed.Year,
+            Month: parsed.Month,
+            Day: parsed.Day,
+            Hours: +beginParts[0],
+            Minutes: +beginParts[1]
+          });
+
+          parsed = converter.FromDateTime(model.endAt);
+          model.endAt = converter.ToDateTime({
+            Year: parsed.Year,
+            Month: parsed.Month,
+            Day: parsed.Day,
+            Hours: +endParts[0],
+            Minutes: +endParts[1]
+          });
+
           const op = await this.groupService.manualEntry(this.group.id, {
             begin: model.beginAt,
             end: model.endAt,
@@ -213,6 +245,7 @@ export class HumanResourcesComponent implements OnInit {
       })
       .subscribe(() => {});
   }
+
   delete(element: any) {
     const converter = this.culturedDateService.Converter();
     const heading = StringHelpers.format(
@@ -391,6 +424,111 @@ export class HumanResourcesComponent implements OnInit {
         ]
       },
       {
+        size: 3,
+        elements: [
+          this.formService.createCheckbox({
+            config: {
+              field: 'saturday',
+              label: ''
+            },
+            params: {
+              model: true,
+              label: 'ENUMS_WEEKDAY_SATURDAY'
+            }
+          }),
+        ]
+      },
+      {
+        size: 3,
+        elements: [
+          this.formService.createCheckbox({
+            config: {
+              field: 'sunday',
+              label: ''
+            },
+            params: {
+              model: true,
+              label: 'ENUMS_WEEKDAY_SUNDAY'
+            }
+          }),
+        ]
+      },
+      {
+        size: 3,
+        elements: [
+          this.formService.createCheckbox({
+            config: {
+              field: 'monday',
+              label: ''
+            },
+            params: {
+              model: true,
+              label: 'ENUMS_WEEKDAY_MONDAY'
+            }
+          }),
+        ]
+      },
+      {
+        size: 3,
+        elements: [
+          this.formService.createCheckbox({
+            config: {
+              field: 'tuesday',
+              label: ''
+            },
+            params: {
+              model: true,
+              label: 'ENUMS_WEEKDAY_TUESDAY'
+            }
+          }),
+        ]
+      },
+      {
+        size: 3,
+        elements: [
+          this.formService.createCheckbox({
+            config: {
+              field: 'wednesday',
+              label: ''
+            },
+            params: {
+              model: true,
+              label: 'ENUMS_WEEKDAY_WEDNESDAY'
+            }
+          }),
+        ]
+      },
+      {
+        size: 3,
+        elements: [
+          this.formService.createCheckbox({
+            config: {
+              field: 'thursday',
+              label: ''
+            },
+            params: {
+              model: true,
+              label: 'ENUMS_WEEKDAY_THURSDAY'
+            }
+          }),
+        ]
+      },
+      {
+        size: 3,
+        elements: [
+          this.formService.createCheckbox({
+            config: {
+              field: 'friday',
+              label: ''
+            },
+            params: {
+              model: true,
+              label: 'ENUMS_WEEKDAY_FRIDAY'
+            }
+          }),
+        ]
+      },
+      {
         size: 12,
         elements: [
           this.formService.createInput({
@@ -401,7 +539,7 @@ export class HumanResourcesComponent implements OnInit {
             },
           })
         ]
-      },
+      }
     ] as FormViewModel[];
     return result;
   }
