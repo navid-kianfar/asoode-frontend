@@ -35,11 +35,12 @@ export class CreateWizardComponent
 
   ngOnInit() {
     const plan = this.identityService.profile.plan;
-    this.canCreateGroup = (plan.simpleGroup < plan.usedSimpleGroup) ||
-      (plan.complexGroup < plan.usedComplexGroup);
-    this.canCreateWorkPackage = plan.usedWorkPackage < plan.workPackage;
-    this.canCreateProject = plan.usedProject < plan.usedProject;
+    this.canCreateGroup = (plan.simpleGroup > plan.usedSimpleGroup) ||
+      (plan.complexGroup > plan.usedComplexGroup);
+    this.canCreateWorkPackage = plan.workPackage > plan.usedProject;
+    this.canCreateProject = plan.project > plan.usedProject;
 
+    debugger;
     this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
 
