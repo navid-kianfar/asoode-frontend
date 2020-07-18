@@ -4,6 +4,18 @@ export class DateHelpers {
     date.setDate(date.getDate() + input);
     return date;
   }
+  static sort(a: object, b: object, key: string): number {
+    const dateA = new Date(a[key]);
+    const dateB = new Date(b[key]);
+
+    if (dateA < dateB ) {
+      return -1;
+    }
+    if (dateA > dateB ) {
+      return 1;
+    }
+    return 0;
+  }
   // static addHours(source: Date, input: number): Date {
   //   const date = this.copy(source);
   //   date.setHours(date.getHours() + input);

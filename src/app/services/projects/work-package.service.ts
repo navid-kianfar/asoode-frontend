@@ -236,6 +236,12 @@ export class WorkPackageService {
       model,
     );
   }
+  async editSortOrders(id: string, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/${id}/sort-orders`,
+      model,
+    );
+  }
 
   getPermission(projectId, packageId: string): AccessType {
     const project = this.projectService.projects.find(g => g.id === projectId);
@@ -261,4 +267,5 @@ export class WorkPackageService {
     }
     return multiple.sort()[0];
   }
+
 }

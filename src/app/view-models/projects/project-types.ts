@@ -4,7 +4,7 @@ import {
   ActivityType,
   BoardTemplate,
   ProjectTemplate,
-  ReceiveNotificationType,
+  ReceiveNotificationType, SortType,
   WorkPackageCommentPermission,
   WorkPackageObjectiveType,
   WorkPackageTaskAttachmentType,
@@ -119,6 +119,10 @@ export interface WorkPackageUserSetting extends BaseViewModel {
   projectId: string;
 }
 export interface WorkPackageViewModel extends BaseViewModel {
+  listsSort: SortType;
+  tasksSort: SortType;
+  subTasksSort: SortType;
+  attachmentsSort: SortType;
   permissionComment: boolean;
   permissionEditAttachment: boolean;
   permissionCreateAttachment: boolean;

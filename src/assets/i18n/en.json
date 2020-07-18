@@ -245,10 +245,11 @@
   "ENUMS_ORDER_STATUS_SUCCESS": "Paid",
   "ENUMS_PROJECT_TEMPLATE_ANIMATION": "Animation",
   "ENUMS_PROJECT_TEMPLATE_NONE": "No template",
-  "ENUMS_SORT_TYPE_DATE_ASC": "History - The Newest",
-  "ENUMS_SORT_TYPE_DATE_DESC": "History - the oldest",
+  "ENUMS_SORT_TYPE_DATE_ASC": "Date - The Newest",
+  "ENUMS_SORT_TYPE_DATE_DESC": "Date - the oldest",
   "ENUMS_SORT_TYPE_NAME_ASC": "Name - Alphabetical Order(A-Z)",
   "ENUMS_SORT_TYPE_NAME_DESC": "Name - Alphabetical Order(Z-A)",
+  "ENUMS_SORT_TYPE_MANUAL": "Default",
   "ENUMS_TASK_VISIBILITY_MEMBERS_ONLY": "Tasks are visible just to task members.",
   "ENUMS_TASK_VISIBILITY_NORMAL": "Tasks are visible to all of the work package members.",
   "ENUMS_WEEKDAY_FRIDAY": "Friday",
@@ -768,5 +769,10 @@
   "MANUAL_ENTRY": "Manual entry",
   "EDIT_ENTRY": "Edit entry",
   "MANUAL_ENTRY_FOR": "User",
-  "TASK_SUB_PLAN": "Plans"
+  "TASK_SUB_PLAN": "Plans",
+  "SORT_ORDERS": "Sort orders",
+  "SUB_TASKS_ORDER": "Sub tasks order",
+  "TASKS_ORDER": "Tasks order",
+  "ATTACHMENTS_ORDER": "Attachments order",
+  "LISTS_ORDER": "Lists order"
 }

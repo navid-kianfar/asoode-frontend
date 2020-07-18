@@ -249,6 +249,7 @@
   "ENUMS_SORT_TYPE_DATE_DESC": "تاریخ - قدیمی ترین",
   "ENUMS_SORT_TYPE_NAME_ASC": "نام - ترتیب الفبا",
   "ENUMS_SORT_TYPE_NAME_DESC": "نام - عکس الفبا",
+  "ENUMS_SORT_TYPE_MANUAL": "پیشفرض",
   "ENUMS_TASK_VISIBILITY_MEMBERS_ONLY": "فقط اعضای کارت میتوانند کارت‌ها را ببینند",
   "ENUMS_TASK_VISIBILITY_NORMAL": "همه اعضای بسته کاری میتواند کارت‌ها را ببینند",
   "ENUMS_WEEKDAY_FRIDAY": "جمعه",
@@ -768,5 +769,10 @@
   "MANUAL_ENTRY": "ثبت زمان دستی",
   "EDIT_ENTRY": "ویرایش ساعات کاری",
   "MANUAL_ENTRY_FOR": "عضو",
-  "TASK_SUB_PLAN": "پلان ها"
+  "TASK_SUB_PLAN": "پلان ها",
+  "SORT_ORDERS": "اولویت نمایش",
+  "SUB_TASKS_ORDER": "ترتیب زیر کار ها",
+  "TASKS_ORDER": "ترتیب کارت ها",
+  "ATTACHMENTS_ORDER": "ترتیب پیوست ها",
+  "LISTS_ORDER": "ترتیب لیست ها"
 }
