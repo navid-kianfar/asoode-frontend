@@ -743,8 +743,6 @@
   "REMOVE_ENTRY": "حذف ثبت",
   "REMOVE_ENTRY_CONFIRM": "از تاریخ {0} تا {1}",
   "REMOVE_ENTRY_CONFIRM_HEADING": "آیا از حذف ساعت کاری {0} اطمینان دارید؟",
-
-
   "SHIFTS_WORKING_HOURS": "ساعات کاری",
   "SHIFTS_WORKING_HOURS_REQUIRED": "تعداد ساعت کاری الزامی است",
   "SHIFTS_REST_HOURS": "ساعات استراحت",
@@ -769,5 +767,6 @@
   "NEW_PLAN_COUNTER": "تعداد پلان مورد نیاز",
   "MANUAL_ENTRY": "ثبت زمان دستی",
   "EDIT_ENTRY": "ویرایش ساعات کاری",
-  "MANUAL_ENTRY_FOR": "عضو"
+  "MANUAL_ENTRY_FOR": "عضو",
+  "TASK_SUB_PLAN": "پلان ها"
 }

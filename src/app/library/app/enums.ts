@@ -51,6 +51,7 @@ export enum ChannelNotificationReceive {
   None = 3,
 }
 export enum SortType {
+  Manual = 0,
   DateAsc = 1,
   DateDesc = 2,
   NameAsc = 3,

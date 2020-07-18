@@ -268,7 +268,7 @@
                         mat-menu-item
                       >
                         <i class="icon-tree7"></i>
-                        {{ 'TASK_SUB_TASK' | translate }}
+                        {{ (project.template === ProjectTemplate.Animation ? 'TASK_SUB_PLAN' : 'TASK_SUB_TASK') | translate }}
                       </button>
                       <button
                         *ngIf="permission !== AccessType.Visitor"
@@ -474,10 +474,10 @@
                     }}</a>
                   </div>
                 </div>
-                <div class="box" *ngIf="showSubTasks || model.subTasks.length">
+                <div class="box" *ngIf="showSubTasks || model.subTasks.length || project.template === ProjectTemplate.Animation">
                   <div class="box-header">
                     <i class="icon-tree7"></i>
-                    <span>{{ 'TASK_SUB_TASK' | translate }}</span>
+                    <span>{{ (project.template === ProjectTemplate.Animation ? 'TASK_SUB_PLAN' : 'TASK_SUB_TASK') | translate }}</span>
                     <i
                       *ngIf="!addingSub"
                       (click)="prepareSubTask()"
