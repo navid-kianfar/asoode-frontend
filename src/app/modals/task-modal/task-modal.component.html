@@ -474,7 +474,7 @@
                     }}</a>
                   </div>
                 </div>
-                <div class="box" *ngIf="showSubTasks || model.subTasks.length || project.template === ProjectTemplate.Animation">
+                <div class="box" *ngIf="!model.parentId && (showSubTasks || model.subTasks.length || project.template === ProjectTemplate.Animation)">
                   <div class="box-header">
                     <i class="icon-tree7"></i>
                     <span>{{ (project.template === ProjectTemplate.Animation ? 'TASK_SUB_PLAN' : 'TASK_SUB_TASK') | translate }}</span>
@@ -544,7 +544,7 @@
                       [cdkDragStartDelay]="dragDelay"
                       [cdkDragData]="sub"
                       class="sub-task-handle"
-                      [cdkDragDisabled]="noDrag || dragging || addingSub"
+                      [cdkDragDisabled]="workPackage.subTasksSort !== SortType.Manual ||noDrag || dragging || addingSub"
                       cdkDrag
                     >
                       <div class="sub-task no-select color-{{ sub.state }}">

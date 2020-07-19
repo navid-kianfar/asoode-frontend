@@ -14,6 +14,7 @@ import { WorkPackageService } from '../../../services/projects/work-package.serv
 import {
   AccessType,
   WorkPackageTaskVoteNecessity,
+  SortType,
 } from '../../../library/app/enums';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { TaskService } from '../../../services/projects/task.service';
@@ -39,6 +40,7 @@ export class WorkPackageBoardComponent implements OnInit {
   @Input() permission: AccessType;
   @Input() embed: boolean;
   AccessType = AccessType;
+  SortType = SortType;
   WorkPackageTaskVoteNecessity = WorkPackageTaskVoteNecessity;
   expanded: boolean;
   dragDelay: number;

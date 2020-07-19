@@ -11,6 +11,7 @@
     [cdkDragStartDelay]="dragDelay"
     [cdkDragData]="list"
     [cdkDragDisabled]="
+      model.listsSort !== SortType.Manual ||
       noDrag ||
       embed ||
       list.editing ||
@@ -48,6 +49,7 @@
         [cdkDragStartDelay]="dragDelay"
         [cdkDragData]="task"
         [cdkDragDisabled]="
+          model.tasksSort !== SortType.Manual ||
           noDrag || embed || !isAdminOrHasPermission(model.permissionEditTask)
         "
         *ngFor="let task of list.tasks"

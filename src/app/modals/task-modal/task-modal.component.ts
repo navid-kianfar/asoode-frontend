@@ -45,6 +45,7 @@ export class TaskModalComponent
   implements OnInit, OnDestroy {
   ViewMode = ViewMode;
   AccessType = AccessType;
+  SortType = SortType;
   DateMode = DateMode;
   NumberHelpers = NumberHelpers;
   ProjectTemplate = ProjectTemplate;
