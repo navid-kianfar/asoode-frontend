@@ -3,6 +3,7 @@ import {
   ExplorerFileViewModel,
   ExplorerFolderViewModel,
 } from '../../../view-models/storage/files-types';
+import {FilesService} from '../../../services/storage/files.service';
 
 @Component({
   selector: 'app-file-folder-preview',
@@ -15,7 +16,7 @@ export class FileFolderPreviewComponent implements OnInit {
   @Input() file: ExplorerFileViewModel;
   @Output() selectedChange = new EventEmitter<boolean>();
   @Input() up: boolean;
-  constructor() {}
+  constructor(readonly filesService: FilesService) {}
 
   ngOnInit() {
     if (!this.file && !this.folder) {
@@ -27,33 +28,5 @@ export class FileFolderPreviewComponent implements OnInit {
         path: '/',
       };
     }
-  }
-
-  getIcon(file: ExplorerFileViewModel) {
-    if (file.isImage) {
-      return 'image icon-image2';
-    }
-    if (file.isArchive) {
-      return 'archive icon-file-zip';
-    }
-    if (file.isPdf) {
-      return 'pdf icon-file-pdf';
-    }
-    if (file.isDocument) {
-      return 'document icon-file-word';
-    }
-    if (file.isSpreadsheet) {
-      return 'spreadsheet icon-file-excel';
-    }
-    if (file.isPresentation) {
-      return 'presentation icon-file-presentation';
-    }
-    if (file.isCode) {
-      return 'code icon-file-xml';
-    }
-    if (file.isExecutable) {
-      return 'executable icon-file-exe';
-    }
-    return 'other icon-files-empty';
   }
 }

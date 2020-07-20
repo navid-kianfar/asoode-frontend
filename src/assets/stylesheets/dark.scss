@@ -188,9 +188,19 @@ body.dark-mode {
       }
     }
 
+    &.file-item {
+      border-color: $color2 !important;
+    }
+
+    .preview {
+      background: $color2 !important;
+    }
     &.selected {
       background: $color2 !important;
 
+      .preview {
+        background: $color1 !important;
+      }
       .selected {
         background: $color3 !important;
       }

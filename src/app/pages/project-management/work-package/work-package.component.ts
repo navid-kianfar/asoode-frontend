@@ -655,6 +655,11 @@ export class WorkPackageComponent implements OnInit {
         if (task.id === id) {
           return task;
         }
+        for (const sub of task.subTasks) {
+          if (task.id === id) {
+            return task;
+          }
+        }
       }
     }
   }
