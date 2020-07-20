@@ -67,6 +67,12 @@ export class PushNotificationService {
       case ActivityType.GroupRestore:
       case ActivityType.GroupAdd:
         this.groupService.groups.push(notification.data);
+        if (
+          this.identityService.identity.userId === notification.data.userId &&
+          this.windowService.active
+        ) {
+          this.router.navigateByUrl(url);
+        }
         break;
       case ActivityType.GroupEdit:
         find1 = this.groupService.groups.find(

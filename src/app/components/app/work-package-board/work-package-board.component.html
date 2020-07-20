@@ -25,7 +25,7 @@
         <span>
           {{ list.title | truncate: 30 }}
           <ng-container *ngIf="model.userSetting.showTotalCards">
-            &nbsp;({{ list.tasks.length }})
+            &nbsp;({{ list.tasks?.length || 0 }})
           </ng-container> </span
         >&nbsp;
         <i
