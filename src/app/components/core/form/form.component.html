@@ -129,7 +129,9 @@
                 </ng-container>
 
                 <!-- TimePicker -->
-                <ng-container *ngIf="element.type === FormElementType.TimePicker">
+                <ng-container
+                  *ngIf="element.type === FormElementType.TimePicker"
+                >
                   <app-time-picker
                     [cssClass]="element.config.cssClass"
                     [disabled]="checkDisabled(group, element)"
@@ -138,7 +140,9 @@
                 </ng-container>
 
                 <!-- DatePicker -->
-                <ng-container *ngIf="element.type === FormElementType.DatePicker">
+                <ng-container
+                  *ngIf="element.type === FormElementType.DatePicker"
+                >
                   <app-date-picker
                     [cssClass]="element.config.cssClass"
                     [disabled]="checkDisabled(group, element)"

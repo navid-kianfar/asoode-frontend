@@ -1,7 +1,7 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { fromEvent, merge, Observable, Observer } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {ModalService} from './modal.service';
+import { ModalService } from './modal.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class NetworkService {
   connectionChanged = new EventEmitter<boolean>();
 
   constructor() {
-    this.internetListener().subscribe((value) => {
+    this.internetListener().subscribe(value => {
       console.log(value ? 'online' : 'offline');
       this.networkChanged.emit(value);
     });

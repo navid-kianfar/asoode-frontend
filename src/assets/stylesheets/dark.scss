@@ -539,7 +539,8 @@ body.dark-mode {
   .account-profile-transactions {
     background: $color1 !important;
   }
-  .human-resources, .account-profile-transactions {
+  .human-resources,
+  .account-profile-transactions {
     .mat-table th.mat-header-cell {
       background: $color1 !important;
     }

@@ -125,10 +125,10 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   prepareCreate() {
     const plan = this.identityService.profile.plan;
     if (
-      ((plan.workPackage <= plan.usedWorkPackage) &&
-        (plan.project <= plan.usedProject)) &&
-      ((plan.simpleGroup <= plan.usedSimpleGroup) &&
-        (plan.complexGroup <= plan.usedComplexGroup))
+      plan.workPackage <= plan.usedWorkPackage &&
+      plan.project <= plan.usedProject &&
+      plan.simpleGroup <= plan.usedSimpleGroup &&
+        plan.complexGroup <= plan.usedComplexGroup
     ) {
       this.modalService
         .show(UpgradeComponent, {} as CreateModalParameters)
@@ -143,7 +143,9 @@ export class HeaderComponent implements AfterViewInit, OnInit {
 
   openSearchResult($event: MouseEvent) {
     $event.stopPropagation();
-    this.secondInput = this.pushNotificationService.detector.isMobile() || window.innerWidth <= 550;
+    this.secondInput =
+      this.pushNotificationService.detector.isMobile() ||
+      window.innerWidth <= 550;
     if (this.secondInput) {
       this.popperSearch.show();
       return;

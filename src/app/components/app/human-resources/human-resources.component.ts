@@ -1,18 +1,22 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
-import {GroupViewModel} from '../../../view-models/groups/group-types';
-import {AccessType, ShiftType, WorkPackageObjectiveType} from '../../../library/app/enums';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {GridCommand} from '../../../view-models/core/grid-types';
-import {ModalService} from '../../../services/core/modal.service';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {GroupService} from '../../../services/groups/group.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {CulturedDateService} from '../../../services/core/cultured-date.service';
-import {RequestTimeOffComponent} from '../../../modals/request-time-off/request-time-off.component';
-import {PromptComponent} from '../../../modals/prompt/prompt.component';
-import {FormViewModel} from '../../core/form/contracts';
-import {FormService} from '../../../services/core/form.service';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import {
+  AccessType,
+  ShiftType,
+  WorkPackageObjectiveType,
+} from '../../../library/app/enums';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { GridCommand } from '../../../view-models/core/grid-types';
+import { ModalService } from '../../../services/core/modal.service';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { GroupService } from '../../../services/groups/group.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { RequestTimeOffComponent } from '../../../modals/request-time-off/request-time-off.component';
+import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { FormViewModel } from '../../core/form/contracts';
+import { FormService } from '../../../services/core/form.service';
 
 @Component({
   selector: 'app-human-resources',
@@ -39,11 +43,16 @@ export class HumanResourcesComponent implements OnInit {
   ngOnInit() {}
 
   createEntry() {
-    const canStart = this.identityService.profile.workingGroupId !== this.group.id;
-    const str1 = canStart ? 'BEGIN_ENTRY_CONFIRM_HEADING' : 'END_ENTRY_CONFIRM_HEADING';
+    const canStart =
+      this.identityService.profile.workingGroupId !== this.group.id;
+    const str1 = canStart
+      ? 'BEGIN_ENTRY_CONFIRM_HEADING'
+      : 'END_ENTRY_CONFIRM_HEADING';
     const str2 = canStart ? 'BEGIN_ENTRY' : 'END_ENTRY';
     const str3 = canStart ? 'BEGIN_ENTRY_CONFIRM' : 'END_ENTRY_CONFIRM';
-    const heading = StringHelpers.format(this.translateService.fromKey(str1), [this.group.title]);
+    const heading = StringHelpers.format(this.translateService.fromKey(str1), [
+      this.group.title,
+    ]);
     this.modalService
       .confirm({
         heading,
@@ -54,7 +63,7 @@ export class HumanResourcesComponent implements OnInit {
         action: async () => {
           const op = await this.groupService.toggleEntry(this.group.id);
           if (op.status === OperationResultStatus.Success) {
-            this.entryCommander.emit({reload: true});
+            this.entryCommander.emit({ reload: true });
           }
           return op;
         },
@@ -70,14 +79,14 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createDatePicker({
             config: {
               field: 'beginAt',
-              label: 'BEGIN_AT'
+              label: 'BEGIN_AT',
             },
             params: {
               model: beginAt,
-              pickButton: true
-            }
-          })
-        ]
+              pickButton: true,
+            },
+          }),
+        ],
       },
       {
         size: 6,
@@ -85,13 +94,13 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createTimePicker({
             config: {
               field: 'startAt',
-              label: ''
+              label: '',
             },
             params: {
-              model: `${beginAt.getHours()}:${beginAt.getMinutes()}`
-            }
-          })
-        ]
+              model: `${beginAt.getHours()}:${beginAt.getMinutes()}`,
+            },
+          }),
+        ],
       },
       {
         size: 6,
@@ -99,13 +108,13 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createDatePicker({
             config: {
               field: 'endAt',
-              label: 'END_AT'
+              label: 'END_AT',
             },
             params: {
-              model: endAt
-            }
-          })
-        ]
+              model: endAt,
+            },
+          }),
+        ],
       },
       {
         size: 6,
@@ -113,13 +122,13 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createTimePicker({
             config: {
               field: 'finishAt',
-              label: ''
+              label: '',
             },
             params: {
-              model: `${endAt.getHours()}:${endAt.getMinutes()}`
-            }
-          })
-        ]
+              model: `${endAt.getHours()}:${endAt.getMinutes()}`,
+            },
+          }),
+        ],
       },
     ];
   }
@@ -143,7 +152,7 @@ export class HumanResourcesComponent implements OnInit {
             Month: parsed.Month,
             Day: parsed.Day,
             Hours: +beginParts[0],
-            Minutes: +beginParts[1]
+            Minutes: +beginParts[1],
           });
 
           parsed = converter.FromDateTime(model.endAt);
@@ -152,18 +161,18 @@ export class HumanResourcesComponent implements OnInit {
             Month: parsed.Month,
             Day: parsed.Day,
             Hours: +endParts[0],
-            Minutes: +endParts[1]
+            Minutes: +endParts[1],
           });
 
           const op = await this.groupService.editEntry(element.id, {
             begin: model.beginAt,
-            end: model.endAt
+            end: model.endAt,
           });
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;
           }
-          this.entryCommander.emit({reload: true});
+          this.entryCommander.emit({ reload: true });
           return op;
         },
         actionColor: 'primary',
@@ -183,7 +192,7 @@ export class HumanResourcesComponent implements OnInit {
     const users = this.group.members.map(m => {
       return {
         text: m.member.fullName,
-        value: m.userId
+        value: m.userId,
       };
     });
     form.unshift({
@@ -192,14 +201,14 @@ export class HumanResourcesComponent implements OnInit {
         this.formService.createDropDown({
           config: {
             label: 'MANUAL_ENTRY_FOR',
-            field: 'userId'
+            field: 'userId',
           },
           params: {
             model: this.identityService.profile.id,
-            items: users
-          }
-        })
-      ]
+            items: users,
+          },
+        }),
+      ],
     });
     this.modalService
       .show(PromptComponent, {
@@ -216,7 +225,7 @@ export class HumanResourcesComponent implements OnInit {
             Month: parsed.Month,
             Day: parsed.Day,
             Hours: +beginParts[0],
-            Minutes: +beginParts[1]
+            Minutes: +beginParts[1],
           });
 
           parsed = converter.FromDateTime(model.endAt);
@@ -225,19 +234,19 @@ export class HumanResourcesComponent implements OnInit {
             Month: parsed.Month,
             Day: parsed.Day,
             Hours: +endParts[0],
-            Minutes: +endParts[1]
+            Minutes: +endParts[1],
           });
 
           const op = await this.groupService.manualEntry(this.group.id, {
             begin: model.beginAt,
             end: model.endAt,
-            userId: model.userId
+            userId: model.userId,
           });
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
             return;
           }
-          this.entryCommander.emit({reload: true});
+          this.entryCommander.emit({ reload: true });
           return op;
         },
         actionColor: 'primary',
@@ -250,14 +259,14 @@ export class HumanResourcesComponent implements OnInit {
     const converter = this.culturedDateService.Converter();
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_ENTRY_CONFIRM_HEADING'),
-      [element.fullName]
+      [element.fullName],
     );
     const message = StringHelpers.format(
       this.translateService.fromKey('REMOVE_ENTRY_CONFIRM'),
       [
         converter.Format(element.beginAt, 'YYYY/MM/DD HH:mm'),
         converter.Format(element.endAt || new Date(), 'YYYY/MM/DD HH:mm'),
-      ]
+      ],
     );
     this.modalService
       .confirm({
@@ -269,7 +278,7 @@ export class HumanResourcesComponent implements OnInit {
         action: async () => {
           const op = await this.groupService.removeEntry(element.id);
           if (op.status === OperationResultStatus.Success) {
-            this.entryCommander.emit({reload: true});
+            this.entryCommander.emit({ reload: true });
           }
           return op;
         },
@@ -291,8 +300,8 @@ export class HumanResourcesComponent implements OnInit {
             validation: {
               required: { value: true, message: 'TITLE_REQUIRED' },
             },
-          })
-        ]
+          }),
+        ],
       },
       {
         size: 3,
@@ -300,15 +309,18 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createNumber({
             config: { field: 'workingHours', label: 'SHIFTS_WORKING_HOURS' },
             params: {
-              model: 8
+              model: 8,
             },
             validation: {
-              required: { value: true, message: 'SHIFTS_WORKING_HOURS_REQUIRED' },
+              required: {
+                value: true,
+                message: 'SHIFTS_WORKING_HOURS_REQUIRED',
+              },
               max: { value: 12, message: 'SHIFTS_WORKING_HOURS_MAX' },
               min: { value: 1, message: 'SHIFTS_WORKING_HOURS_MIN' },
             },
-          })
-        ]
+          }),
+        ],
       },
       {
         size: 3,
@@ -316,15 +328,15 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createNumber({
             config: { field: 'restHours', label: 'SHIFTS_REST_HOURS' },
             params: {
-              model: 1
+              model: 1,
             },
             validation: {
               required: { value: true, message: 'SHIFTS_REST_HOURS_REQUIRED' },
               max: { value: 5, message: 'SHIFTS_REST_HOURS_MAX' },
               min: { value: 1, message: 'SHIFTS_REST_HOURS_MIN' },
             },
-          })
-        ]
+          }),
+        ],
       },
       {
         size: 3,
@@ -332,15 +344,18 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createNumber({
             config: { field: 'penaltyRate', label: 'SHIFTS_PENALTY_RATE' },
             params: {
-              model: 2
+              model: 2,
             },
             validation: {
-              required: { value: true, message: 'SHIFTS_PENALTY_RATE_REQUIRED' },
+              required: {
+                value: true,
+                message: 'SHIFTS_PENALTY_RATE_REQUIRED',
+              },
               max: { value: 10, message: 'SHIFTS_PENALTY_RATE_MAX' },
               min: { value: 1, message: 'SHIFTS_PENALTY_RATE_MIN' },
             },
-          })
-        ]
+          }),
+        ],
       },
       {
         size: 3,
@@ -348,15 +363,15 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createNumber({
             config: { field: 'rewardRate', label: 'SHIFTS_REWARD_RATE' },
             params: {
-              model: 1.4
+              model: 1.4,
             },
             validation: {
               required: { value: true, message: 'SHIFTS_REWARD_RATE_REQUIRED' },
               max: { value: 10, message: 'SHIFTS_REWARD_RATE_MAX' },
               min: { value: 1, message: 'SHIFTS_REWARD_RATE_MIN' },
             },
-          })
-        ]
+          }),
+        ],
       },
       {
         size: 12,
@@ -367,7 +382,7 @@ export class HumanResourcesComponent implements OnInit {
               enum: 'ShiftType',
               items: [],
               model: ShiftType.Fixed,
-              picked: (val) => {
+              picked: val => {
                 result[6].elements[0].config.visible = false;
                 result[7].elements[0].config.visible = false;
                 result[8].elements[0].config.visible = false;
@@ -385,10 +400,10 @@ export class HumanResourcesComponent implements OnInit {
                   case ShiftType.Open:
                     break;
                 }
-              }
-            }
-          })
-        ]
+              },
+            },
+          }),
+        ],
       },
       {
         size: 4,
@@ -396,10 +411,10 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createTimePicker({
             config: { field: 'start', label: 'SHIFT_START' },
             params: {
-              model: '08:30'
-            }
-          })
-        ]
+              model: '08:30',
+            },
+          }),
+        ],
       },
       {
         size: 4,
@@ -407,10 +422,10 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createTimePicker({
             config: { field: 'end', label: 'SHIFT_END' },
             params: {
-              model: '17:30'
-            }
-          })
-        ]
+              model: '17:30',
+            },
+          }),
+        ],
       },
       {
         size: 4,
@@ -418,10 +433,10 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createTimePicker({
             config: { field: 'float', label: 'SHIFT_FLOAT', visible: false },
             params: {
-              model: '00:45'
-            }
-          })
-        ]
+              model: '00:45',
+            },
+          }),
+        ],
       },
       {
         size: 3,
@@ -429,14 +444,14 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createCheckbox({
             config: {
               field: 'saturday',
-              label: ''
+              label: '',
             },
             params: {
               model: true,
-              label: 'ENUMS_WEEKDAY_SATURDAY'
-            }
+              label: 'ENUMS_WEEKDAY_SATURDAY',
+            },
           }),
-        ]
+        ],
       },
       {
         size: 3,
@@ -444,14 +459,14 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createCheckbox({
             config: {
               field: 'sunday',
-              label: ''
+              label: '',
             },
             params: {
               model: true,
-              label: 'ENUMS_WEEKDAY_SUNDAY'
-            }
+              label: 'ENUMS_WEEKDAY_SUNDAY',
+            },
           }),
-        ]
+        ],
       },
       {
         size: 3,
@@ -459,14 +474,14 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createCheckbox({
             config: {
               field: 'monday',
-              label: ''
+              label: '',
             },
             params: {
               model: true,
-              label: 'ENUMS_WEEKDAY_MONDAY'
-            }
+              label: 'ENUMS_WEEKDAY_MONDAY',
+            },
           }),
-        ]
+        ],
       },
       {
         size: 3,
@@ -474,14 +489,14 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createCheckbox({
             config: {
               field: 'tuesday',
-              label: ''
+              label: '',
             },
             params: {
               model: true,
-              label: 'ENUMS_WEEKDAY_TUESDAY'
-            }
+              label: 'ENUMS_WEEKDAY_TUESDAY',
+            },
           }),
-        ]
+        ],
       },
       {
         size: 3,
@@ -489,14 +504,14 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createCheckbox({
             config: {
               field: 'wednesday',
-              label: ''
+              label: '',
             },
             params: {
               model: true,
-              label: 'ENUMS_WEEKDAY_WEDNESDAY'
-            }
+              label: 'ENUMS_WEEKDAY_WEDNESDAY',
+            },
           }),
-        ]
+        ],
       },
       {
         size: 3,
@@ -504,14 +519,14 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createCheckbox({
             config: {
               field: 'thursday',
-              label: ''
+              label: '',
             },
             params: {
               model: true,
-              label: 'ENUMS_WEEKDAY_THURSDAY'
-            }
+              label: 'ENUMS_WEEKDAY_THURSDAY',
+            },
           }),
-        ]
+        ],
       },
       {
         size: 3,
@@ -519,14 +534,14 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createCheckbox({
             config: {
               field: 'friday',
-              label: ''
+              label: '',
             },
             params: {
               model: true,
-              label: 'ENUMS_WEEKDAY_FRIDAY'
-            }
+              label: 'ENUMS_WEEKDAY_FRIDAY',
+            },
           }),
-        ]
+        ],
       },
       {
         size: 12,
@@ -537,9 +552,9 @@ export class HumanResourcesComponent implements OnInit {
               model: '',
               placeHolder: 'DESCRIPTION',
             },
-          })
-        ]
-      }
+          }),
+        ],
+      },
     ] as FormViewModel[];
     return result;
   }
@@ -555,7 +570,7 @@ export class HumanResourcesComponent implements OnInit {
             // TODO: handle error
             return;
           }
-          this.shiftsCommander.emit({reload: true});
+          this.shiftsCommander.emit({ reload: true });
           return op;
         },
         actionColor: 'primary',
@@ -565,13 +580,15 @@ export class HumanResourcesComponent implements OnInit {
   }
 
   createTimeOff() {
-    this.modalService.show(RequestTimeOffComponent, {
-      groupId: this.group.id
-    }).subscribe((reload) => {
-      if (reload) {
-        this.timeOffCommander.emit({reload: true});
-      }
-    });
+    this.modalService
+      .show(RequestTimeOffComponent, {
+        groupId: this.group.id,
+      })
+      .subscribe(reload => {
+        if (reload) {
+          this.timeOffCommander.emit({ reload: true });
+        }
+      });
   }
 
   editShift(element: any) {
@@ -599,7 +616,7 @@ export class HumanResourcesComponent implements OnInit {
             // TODO: handle error
             return;
           }
-          this.shiftsCommander.emit({reload: true});
+          this.shiftsCommander.emit({ reload: true });
           return op;
         },
         actionColor: 'primary',
@@ -608,14 +625,12 @@ export class HumanResourcesComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  shiftMembers(element: any) {
-
-  }
+  shiftMembers(element: any) {}
 
   deleteShift(element: any) {
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_SHIFT_CONFIRM_HEADING'),
-      [element.title]
+      [element.title],
     );
     this.modalService
       .confirm({
@@ -627,7 +642,7 @@ export class HumanResourcesComponent implements OnInit {
         action: async () => {
           const op = await this.groupService.removeShift(element.id);
           if (op.status === OperationResultStatus.Success) {
-            this.shiftsCommander.emit({reload: true});
+            this.shiftsCommander.emit({ reload: true });
           }
           return op;
         },
@@ -635,15 +650,9 @@ export class HumanResourcesComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  editTimeOff(element: any) {
+  editTimeOff(element: any) {}
 
-  }
+  respondTimeOff(element: any) {}
 
-  respondTimeOff(element: any) {
-
-  }
-
-  deleteTimeOff(element: any) {
-
-  }
+  deleteTimeOff(element: any) {}
 }

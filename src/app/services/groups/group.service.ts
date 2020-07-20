@@ -132,11 +132,17 @@ export class GroupService {
   }
 
   async createShift(id: string, model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/groups/shifts/${id}/create`, model);
+    return await this.httpService.post<boolean>(
+      `/groups/shifts/${id}/create`,
+      model,
+    );
   }
 
   async editShift(id: string, model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/groups/shifts/${id}/edit`, model);
+    return await this.httpService.post<boolean>(
+      `/groups/shifts/${id}/edit`,
+      model,
+    );
   }
 
   async removeShift(id: string): Promise<OperationResult<boolean>> {
@@ -144,10 +150,16 @@ export class GroupService {
   }
 
   async editEntry(id: any, model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/groups/edit-entry/${id}`, model);
+    return await this.httpService.post<boolean>(
+      `/groups/edit-entry/${id}`,
+      model,
+    );
   }
 
   async manualEntry(id: string, model: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/groups/manual-entry/${id}`, model);
+    return await this.httpService.post<boolean>(
+      `/groups/manual-entry/${id}`,
+      model,
+    );
   }
 }

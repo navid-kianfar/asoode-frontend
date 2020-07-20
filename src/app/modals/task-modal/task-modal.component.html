@@ -268,7 +268,12 @@
                         mat-menu-item
                       >
                         <i class="icon-tree7"></i>
-                        {{ (project.template === ProjectTemplate.Animation ? 'TASK_SUB_PLAN' : 'TASK_SUB_TASK') | translate }}
+                        {{
+                          (project.template === ProjectTemplate.Animation
+                            ? 'TASK_SUB_PLAN'
+                            : 'TASK_SUB_TASK'
+                          ) | translate
+                        }}
                       </button>
                       <button
                         *ngIf="permission !== AccessType.Visitor"
@@ -337,19 +342,28 @@
                             class="label"
                             [class.selected]="isLabelSelected(label)"
                           >
-                            <div class="title" (click)="handleClick($event, label)">
-                              <span [(colorPicker)]="label.tempColor"
-                                    [cpDisabled]="!label.editting"
-                                    [style.background]="label.tempColor || label.color">
-
-                                <ng-container *ngIf="!label.editting && label.title">
-                                  {{label.title}}
+                            <div
+                              class="title"
+                              (click)="handleClick($event, label)"
+                            >
+                              <span
+                                [(colorPicker)]="label.tempColor"
+                                [cpDisabled]="!label.editting"
+                                [style.background]="
+                                  label.tempColor || label.color
+                                "
+                              >
+                                <ng-container
+                                  *ngIf="!label.editting && label.title"
+                                >
+                                  {{ label.title }}
                                 </ng-container>
-                                <ng-container *ngIf="label.editting || !label.title">
+                                <ng-container
+                                  *ngIf="label.editting || !label.title"
+                                >
                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                </ng-container>
-
-                              </span>&nbsp;
+                                </ng-container> </span
+                              >&nbsp;
                               <ng-container *ngIf="label.editting">
                                 <input
                                   [disabled]="label.waiting"
@@ -474,10 +488,23 @@
                     }}</a>
                   </div>
                 </div>
-                <div class="box" *ngIf="!model.parentId && (showSubTasks || model.subTasks.length || project.template === ProjectTemplate.Animation)">
+                <div
+                  class="box"
+                  *ngIf="
+                    !model.parentId &&
+                    (showSubTasks ||
+                      model.subTasks.length ||
+                      project.template === ProjectTemplate.Animation)
+                  "
+                >
                   <div class="box-header">
                     <i class="icon-tree7"></i>
-                    <span>{{ (project.template === ProjectTemplate.Animation ? 'TASK_SUB_PLAN' : 'TASK_SUB_TASK') | translate }}</span>
+                    <span>{{
+                      (project.template === ProjectTemplate.Animation
+                        ? 'TASK_SUB_PLAN'
+                        : 'TASK_SUB_TASK'
+                      ) | translate
+                    }}</span>
                     <i
                       *ngIf="!addingSub"
                       (click)="prepareSubTask()"
@@ -510,9 +537,17 @@
                         [(ngModel)]="subTaskTitle"
                       ></textarea>
 
-                      <div *ngIf="project.template === ProjectTemplate.Animation" class="counter-holder">
-                        <span>{{ 'NEW_PLAN_COUNTER' | translate}}</span>
-                        <app-number [disabled]="savingSub" [min]="1" [max]="200" [(model)]="subTaskCounter"></app-number>
+                      <div
+                        *ngIf="project.template === ProjectTemplate.Animation"
+                        class="counter-holder"
+                      >
+                        <span>{{ 'NEW_PLAN_COUNTER' | translate }}</span>
+                        <app-number
+                          [disabled]="savingSub"
+                          [min]="1"
+                          [max]="200"
+                          [(model)]="subTaskCounter"
+                        ></app-number>
                       </div>
 
                       <div class="btns">
@@ -544,7 +579,12 @@
                       [cdkDragStartDelay]="dragDelay"
                       [cdkDragData]="sub"
                       class="sub-task-handle"
-                      [cdkDragDisabled]="workPackage.subTasksSort !== SortType.Manual ||noDrag || dragging || addingSub"
+                      [cdkDragDisabled]="
+                        workPackage.subTasksSort !== SortType.Manual ||
+                        noDrag ||
+                        dragging ||
+                        addingSub
+                      "
                       cdkDrag
                     >
                       <div class="sub-task no-select color-{{ sub.state }}">
@@ -665,7 +705,7 @@
                           </h5>
                           <h5>
                             <span>{{ 'UPLOADED_BY' | translate }}&nbsp;</span>
-                            {{ attachment.userId | fullName | async}}
+                            {{ attachment.userId | fullName | async }}
                           </h5>
                         </div>
                         <div class="actions">

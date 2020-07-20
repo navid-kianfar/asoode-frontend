@@ -5,13 +5,28 @@
       <h3>{{ 'ENTRY_LOGS' | translate }}</h3>
       <div>
         &nbsp;
-        <button (click)="createEntry()" [disabled]="group.archivedAt !== null" mat-stroked-button>
+        <button
+          (click)="createEntry()"
+          [disabled]="group.archivedAt !== null"
+          mat-stroked-button
+        >
           +&nbsp;
-          {{ (identityService.profile.workingGroupId === group.id ? 'END_ENTRY' : 'BEGIN_ENTRY') | translate }}
+          {{
+            (identityService.profile.workingGroupId === group.id
+              ? 'END_ENTRY'
+              : 'BEGIN_ENTRY'
+            ) | translate
+          }}
         </button>
         &nbsp;
-        <button *ngIf="permission === AccessType.Admin || permission === AccessType.Owner"
-                (click)="createManualEntry()" [disabled]="group.archivedAt !== null" mat-stroked-button>
+        <button
+          *ngIf="
+            permission === AccessType.Admin || permission === AccessType.Owner
+          "
+          (click)="createManualEntry()"
+          [disabled]="group.archivedAt !== null"
+          mat-stroked-button
+        >
           +&nbsp;
           {{ 'MANUAL_ENTRY' | translate }}
         </button>
@@ -35,7 +50,9 @@
         <!-- Date Column -->
         <ng-container matColumnDef="date">
           <th mat-header-cell *matHeaderCellDef>{{ 'DATE' | translate }}</th>
-          <td mat-cell *matCellDef="let element">{{ element.beginAt | culturedDate }}</td>
+          <td mat-cell *matCellDef="let element">
+            {{ element.beginAt | culturedDate }}
+          </td>
         </ng-container>
 
         <!-- User Column -->
@@ -50,7 +67,7 @@
             {{ 'BEGIN_TIME' | translate }}
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.beginAt | culturedDate: false: 'HH:mm' }}
+            {{ element.beginAt | culturedDate: false:'HH:mm' }}
           </td>
         </ng-container>
 
@@ -60,7 +77,11 @@
             {{ 'END_TIME' | translate }}
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ (!element.endAt ? '-' : (element.endAt | culturedDate: false: 'HH:mm')) }}
+            {{
+              !element.endAt
+                ? '-'
+                : (element.endAt | culturedDate: false:'HH:mm')
+            }}
           </td>
         </ng-container>
 
@@ -77,8 +98,18 @@
         <!-- Operations -->
         <ng-container matColumnDef="operations">
           <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-          <td class="operations" style="width: 100px" mat-cell *matCellDef="let element">
-            <ng-container *ngIf="permission === AccessType.Owner || permission === AccessType.Admin">
+          <td
+            class="operations"
+            style="width: 100px"
+            mat-cell
+            *matCellDef="let element"
+          >
+            <ng-container
+              *ngIf="
+                permission === AccessType.Owner ||
+                permission === AccessType.Admin
+              "
+            >
               <button (click)="edit(element)">
                 <i class="ikon-pen5"></i>
               </button>
@@ -95,7 +126,11 @@
     <div class="title">
       <h3>{{ 'TIME_OFF' | translate }}</h3>
       &nbsp;
-      <button (click)="createTimeOff()" [disabled]="group.archivedAt !== null" mat-stroked-button>
+      <button
+        (click)="createTimeOff()"
+        [disabled]="group.archivedAt !== null"
+        mat-stroked-button
+      >
         +&nbsp;
         {{ 'REQUEST_TIME_OFF' | translate }}
       </button>
@@ -146,8 +181,18 @@
         <!-- Action Column -->
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-          <td class="operations" style="width: 150px" mat-cell *matCellDef="let element">
-            <ng-container *ngIf="permission === AccessType.Owner || permission === AccessType.Admin">
+          <td
+            class="operations"
+            style="width: 150px"
+            mat-cell
+            *matCellDef="let element"
+          >
+            <ng-container
+              *ngIf="
+                permission === AccessType.Owner ||
+                permission === AccessType.Admin
+              "
+            >
               <button (click)="editTimeOff(element)">
                 <i class="ikon-pen5"></i>
               </button>
@@ -167,7 +212,11 @@
     <div class="title">
       <h3>{{ 'SHIFTS' | translate }}</h3>
       &nbsp;
-      <button (click)="createShift()" [disabled]="group.archivedAt !== null" mat-stroked-button>
+      <button
+        (click)="createShift()"
+        [disabled]="group.archivedAt !== null"
+        mat-stroked-button
+      >
         +&nbsp;
         {{ 'CREATE_SHIFT' | translate }}
       </button>
@@ -201,7 +250,7 @@
           </th>
           <td mat-cell *matCellDef="let element">
             <ng-container *ngIf="element.type !== ShiftType.Open">
-              {{element.start}} - {{element.end}}
+              {{ element.start }} - {{ element.end }}
             </ng-container>
           </td>
         </ng-container>
@@ -249,8 +298,18 @@
         <!-- Operations Column -->
         <ng-container matColumnDef="operations">
           <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-          <td class="operations" style="width: 150px" mat-cell *matCellDef="let element">
-            <ng-container *ngIf="permission === AccessType.Owner || permission === AccessType.Admin">
+          <td
+            class="operations"
+            style="width: 150px"
+            mat-cell
+            *matCellDef="let element"
+          >
+            <ng-container
+              *ngIf="
+                permission === AccessType.Owner ||
+                permission === AccessType.Admin
+              "
+            >
               <button (click)="editShift(element)">
                 <i class="ikon-pen5"></i>
               </button>

@@ -8,10 +8,10 @@ export class DateHelpers {
     const dateA = new Date(a[key]);
     const dateB = new Date(b[key]);
 
-    if (dateA < dateB ) {
+    if (dateA < dateB) {
       return -1;
     }
-    if (dateA > dateB ) {
+    if (dateA > dateB) {
       return 1;
     }
     return 0;

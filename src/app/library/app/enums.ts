@@ -211,7 +211,7 @@ export enum ActivityType {
   WorkPackageObjectiveRemove = 702,
 
   ChannelMessage = 800,
-  ChannelUpload = 801
+  ChannelUpload = 801,
 }
 export enum PlanType {
   Free = 1,

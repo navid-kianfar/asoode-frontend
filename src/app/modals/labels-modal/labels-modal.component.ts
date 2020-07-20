@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { SimpleModalComponent } from 'ngx-simple-modal';
-import {WorkPackageLabelViewModel, WorkPackageViewModel} from '../../view-models/projects/project-types';
+import {
+  WorkPackageLabelViewModel,
+  WorkPackageViewModel,
+} from '../../view-models/projects/project-types';
 import { WorkPackageService } from '../../services/projects/work-package.service';
-import {StringHelpers} from '../../helpers/string.helpers';
-import {OperationResultStatus} from '../../library/core/enums';
-import {TranslateService} from '../../services/core/translate.service';
-import {ModalService} from '../../services/core/modal.service';
+import { StringHelpers } from '../../helpers/string.helpers';
+import { OperationResultStatus } from '../../library/core/enums';
+import { TranslateService } from '../../services/core/translate.service';
+import { ModalService } from '../../services/core/modal.service';
 
 @Component({
   selector: 'app-labels-modal',
@@ -40,7 +43,7 @@ export class LabelsModalComponent
       updatedAt: undefined,
       darkColor: false,
       editting: false,
-      tempName: ''
+      tempName: '',
     };
   }
 
@@ -91,7 +94,10 @@ export class LabelsModalComponent
       return;
     }
     label.waiting = true;
-    const op = await this.workPackageService.renameLabel(label.id, {title, color});
+    const op = await this.workPackageService.renameLabel(label.id, {
+      title,
+      color,
+    });
     label.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -115,7 +121,10 @@ export class LabelsModalComponent
     const title = label.title.trim();
     const color = label.color.trim();
     label.waiting = true;
-    const op = await this.workPackageService.createLabel(this.workPackage.id, {title, color});
+    const op = await this.workPackageService.createLabel(this.workPackage.id, {
+      title,
+      color,
+    });
     label.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error

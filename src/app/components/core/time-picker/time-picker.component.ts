@@ -36,7 +36,8 @@ export class TimePickerComponent implements OnInit {
   }
 
   update() {
-    const model = NumberHelpers.pad(this.hour, 2) + ':' + NumberHelpers.pad(this.minute, 2);
+    const model =
+      NumberHelpers.pad(this.hour, 2) + ':' + NumberHelpers.pad(this.minute, 2);
     this.modelChange.emit(model);
   }
 

@@ -294,8 +294,7 @@ export class UpgradeWizardComponent implements OnInit {
     this.calculateTotalCost(true);
   }
   calculateUserCost() {
-    const total =
-      this.order.users - this.identityService.profile.plan.users;
+    const total = this.order.users - this.identityService.profile.plan.users;
     this.order.usersCost = total * this.basedOn.additionalUserCost;
     this.order.usersCost = this.calculatePlanPrice(this.order.usersCost);
     if (this.order.type === OrderType.Patch) {
@@ -307,8 +306,7 @@ export class UpgradeWizardComponent implements OnInit {
   }
   calculateProjectCost() {
     const total =
-      this.order.project -
-      this.identityService.profile.plan.project;
+      this.order.project - this.identityService.profile.plan.project;
     this.order.projectCost = total * this.basedOn.additionalProjectCost;
     this.order.projectCost = this.calculatePlanPrice(this.order.projectCost);
     if (this.order.type === OrderType.Patch) {
@@ -320,8 +318,7 @@ export class UpgradeWizardComponent implements OnInit {
   }
   calculatePackageCost() {
     const total =
-      this.order.workPackage -
-      this.identityService.profile.plan.workPackage;
+      this.order.workPackage - this.identityService.profile.plan.workPackage;
     this.order.workPackageCost = total * this.basedOn.additionalWorkPackageCost;
     this.order.workPackageCost = this.calculatePlanPrice(
       this.order.workPackageCost,
@@ -335,8 +332,7 @@ export class UpgradeWizardComponent implements OnInit {
   }
   calculateSimpleGroupCost() {
     const total =
-      this.order.simpleGroup -
-      this.identityService.profile.plan.simpleGroup;
+      this.order.simpleGroup - this.identityService.profile.plan.simpleGroup;
     this.order.simpleGroupCost = total * this.basedOn.additionalSimpleGroupCost;
     this.order.simpleGroupCost = this.calculatePlanPrice(
       this.order.simpleGroupCost,
@@ -350,8 +346,7 @@ export class UpgradeWizardComponent implements OnInit {
   }
   calculateComplexGroupCost() {
     const total =
-      this.order.complexGroup -
-      this.identityService.profile.plan.complexGroup;
+      this.order.complexGroup - this.identityService.profile.plan.complexGroup;
     this.order.complexGroupCost =
       total * this.basedOn.additionalComplexGroupCost;
     this.order.complexGroupCost = this.calculatePlanPrice(

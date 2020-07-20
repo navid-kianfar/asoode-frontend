@@ -138,7 +138,8 @@ export class WorkPackageService {
 
   async createLabel(id: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/work-packages/labels/${id}/create`, model
+      `/work-packages/labels/${id}/create`,
+      model,
     );
   }
   async updateUserSetting(
@@ -236,7 +237,10 @@ export class WorkPackageService {
       model,
     );
   }
-  async editSortOrders(id: string, model: any): Promise<OperationResult<boolean>> {
+  async editSortOrders(
+    id: string,
+    model: any,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/work-packages/${id}/sort-orders`,
       model,
@@ -267,5 +271,4 @@ export class WorkPackageService {
     }
     return multiple.sort()[0];
   }
-
 }

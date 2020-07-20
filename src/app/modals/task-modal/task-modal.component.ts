@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {TaskModalParameters} from '../../view-models/core/modal-types';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { TaskModalParameters } from '../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
   ProjectViewModel,
@@ -10,30 +10,39 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
-import {TaskService} from '../../services/projects/task.service';
-import {OperationResultStatus} from '../../library/core/enums';
-import {ProjectService} from '../../services/projects/project.service';
-import {AccessType, ActivityType, ProjectTemplate, SortType, WorkPackageTaskState } from '../../library/app/enums';
-import {IdentityService} from '../../services/auth/identity.service';
-import {Socket} from 'ngx-socket-io';
-import {UploadViewModel} from '../../view-models/storage/files-types';
-import {FilesService} from '../../services/storage/files.service';
-import {ModalService} from '../../services/core/modal.service';
-import {StringHelpers} from '../../helpers/string.helpers';
-import {TranslateService} from '../../services/core/translate.service';
-import {WorkPackageService} from '../../services/projects/work-package.service';
-import {MapModalComponent} from '../map-modal/map-modal.component';
-import {OperationResult} from '../../library/core/operation-result';
-import {MapMarker, MapModalParameters } from '../../view-models/general/map-types';
-import {NumberHelpers} from 'src/app/helpers/number.helpers';
-import {TimeViewModel} from '../../view-models/core/general-types';
-import {CulturedDateService} from '../../services/core/cultured-date.service';
-import {MatMenu} from '@angular/material';
-import {GroupService} from '../../services/groups/group.service';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {DeviceDetectorService} from 'ngx-device-detector';
-import {UploadExceedModalComponent} from '../upload-exceed-modal/upload-exceed-modal.component';
-import {DateHelpers} from '../../helpers/date.helpers';
+import { TaskService } from '../../services/projects/task.service';
+import { OperationResultStatus } from '../../library/core/enums';
+import { ProjectService } from '../../services/projects/project.service';
+import {
+  AccessType,
+  ActivityType,
+  ProjectTemplate,
+  SortType,
+  WorkPackageTaskState,
+} from '../../library/app/enums';
+import { IdentityService } from '../../services/auth/identity.service';
+import { Socket } from 'ngx-socket-io';
+import { UploadViewModel } from '../../view-models/storage/files-types';
+import { FilesService } from '../../services/storage/files.service';
+import { ModalService } from '../../services/core/modal.service';
+import { StringHelpers } from '../../helpers/string.helpers';
+import { TranslateService } from '../../services/core/translate.service';
+import { WorkPackageService } from '../../services/projects/work-package.service';
+import { MapModalComponent } from '../map-modal/map-modal.component';
+import { OperationResult } from '../../library/core/operation-result';
+import {
+  MapMarker,
+  MapModalParameters,
+} from '../../view-models/general/map-types';
+import { NumberHelpers } from 'src/app/helpers/number.helpers';
+import { TimeViewModel } from '../../view-models/core/general-types';
+import { CulturedDateService } from '../../services/core/cultured-date.service';
+import { MatMenu } from '@angular/material';
+import { GroupService } from '../../services/groups/group.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { UploadExceedModalComponent } from '../upload-exceed-modal/upload-exceed-modal.component';
+import { DateHelpers } from '../../helpers/date.helpers';
 
 @Component({
   selector: 'app-task-modal',
@@ -388,7 +397,10 @@ export class TaskModalComponent
             }
             break;
           case ActivityType.WorkPackageTaskBulkAdd:
-            if (notification.data.length && this.model.id === notification.data[0].parentId) {
+            if (
+              notification.data.length &&
+              this.model.id === notification.data[0].parentId
+            ) {
               notification.data.forEach(d => {
                 this.model.subTasks.unshift(d);
               });
@@ -409,17 +421,21 @@ export class TaskModalComponent
         });
         break;
       case SortType.DateDesc:
-        this.model.subTasks = this.model.subTasks.sort((a, b) => {
-          return DateHelpers.sort(a, b, 'createdAt');
-        }).reverse();
+        this.model.subTasks = this.model.subTasks
+          .sort((a, b) => {
+            return DateHelpers.sort(a, b, 'createdAt');
+          })
+          .reverse();
         break;
       case SortType.NameAsc:
-        this.model.subTasks = this.model.subTasks
-          .sort((a, b) => a.title.localeCompare(b.title));
+        this.model.subTasks = this.model.subTasks.sort((a, b) =>
+          a.title.localeCompare(b.title),
+        );
         break;
       case SortType.NameDesc:
         this.model.subTasks = this.model.subTasks
-          .sort((a, b) => a.title.localeCompare(b.title)).reverse();
+          .sort((a, b) => a.title.localeCompare(b.title))
+          .reverse();
         break;
       default:
         break;
@@ -434,13 +450,16 @@ export class TaskModalComponent
         });
         break;
       case SortType.DateDesc:
-        this.model.attachments = this.model.attachments.sort((a, b) => {
-          return DateHelpers.sort(a, b, 'createdAt');
-        }).reverse();
+        this.model.attachments = this.model.attachments
+          .sort((a, b) => {
+            return DateHelpers.sort(a, b, 'createdAt');
+          })
+          .reverse();
         break;
       case SortType.NameAsc:
-        this.model.attachments = this.model.attachments
-          .sort((a, b) => a.title.localeCompare(b.title));
+        this.model.attachments = this.model.attachments.sort((a, b) =>
+          a.title.localeCompare(b.title),
+        );
         break;
       case SortType.NameDesc:
         this.model.subTasks = this.model.subTasks
@@ -879,7 +898,10 @@ export class TaskModalComponent
       return;
     }
     label.waiting = true;
-    const op = await this.workPackageService.renameLabel(label.id, {title, color});
+    const op = await this.workPackageService.renameLabel(label.id, {
+      title,
+      color,
+    });
     label.waiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -970,7 +992,7 @@ export class TaskModalComponent
       listId: this.model.listId,
       title,
       parentId: this.model.id,
-      count: this.subTaskCounter
+      count: this.subTaskCounter,
     });
     this.savingSub = false;
     if (op.status !== OperationResultStatus.Success) {

@@ -50,7 +50,9 @@
         [cdkDragData]="task"
         [cdkDragDisabled]="
           model.tasksSort !== SortType.Manual ||
-          noDrag || embed || !isAdminOrHasPermission(model.permissionEditTask)
+          noDrag ||
+          embed ||
+          !isAdminOrHasPermission(model.permissionEditTask)
         "
         *ngFor="let task of list.tasks"
       >

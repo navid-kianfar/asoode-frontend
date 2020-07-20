@@ -479,13 +479,15 @@
                 color="accent"
               >
                 <i *ngIf="leaving" class="icon-spin icon-spinner2"></i>
-                {{ 'LEAVE_WORK_PACKAGE' | translate }}</button>&nbsp;
+                {{ 'LEAVE_WORK_PACKAGE' | translate }}</button
+              >&nbsp;
               <button
                 [disabled]="leaving || deleting || archiving || waiting"
                 (click)="archive()"
                 *ngIf="
                   (permission === AccessType.Admin ||
-                  permission === AccessType.Owner) && !workPackage.archivedAt
+                    permission === AccessType.Owner) &&
+                  !workPackage.archivedAt
                 "
                 mat-flat-button
                 color="warn"

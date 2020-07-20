@@ -12,7 +12,8 @@ import {
   IFormElementLabel,
   IFormElementDatePicker,
   IFormElementNumber,
-  IFormElementFilePicker, IFormElementTimePicker,
+  IFormElementFilePicker,
+  IFormElementTimePicker,
   // IFormElementEditor,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
@@ -82,7 +83,7 @@ export class FormService {
     options.params.picked = options.params.picked || this.noop;
     return options;
   }
-  noop(p) {  }
+  noop(p) {}
   createFilePicker(options: IFormElementFilePicker): IFormElementFilePicker {
     options.type = FormElementType.File;
     options.validation = options.validation || { required: { value: false } };
@@ -315,7 +316,11 @@ export class FormService {
   }
   private validateTimePicker(element: IFormElement): boolean {
     if (element.validation.required && element.validation.required.value) {
-      if (!element.params.model || !element.params.model.length || element.params.model.indexOf(':') === -1) {
+      if (
+        !element.params.model ||
+        !element.params.model.length ||
+        element.params.model.indexOf(':') === -1
+      ) {
         element.validation.errors = [element.validation.required.message];
         return false;
       }

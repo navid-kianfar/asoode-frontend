@@ -190,7 +190,8 @@ export interface IFormElementNumberValidation extends IFormElementValidation {
   min?: { value: number; message: string };
   max?: { value: number; message: string };
 }
-export interface IFormElementTimePickerValidation extends IFormElementValidation {
+export interface IFormElementTimePickerValidation
+  extends IFormElementValidation {
   min?: { value: number; message: string };
   max?: { value: number; message: string };
 }

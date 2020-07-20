@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageMemberViewModel,
@@ -6,13 +6,13 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../view-models/projects/project-types';
-import {ProjectService} from '../../../services/projects/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {WorkPackageService} from '../../../services/projects/work-package.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {InviteModalComponent} from '../../../modals/invite-modal/invite-modal.component';
-import {ModalService} from '../../../services/core/modal.service';
-import {CultureService} from '../../../services/core/culture.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { WorkPackageService } from '../../../services/projects/work-package.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
+import { ModalService } from '../../../services/core/modal.service';
+import { CultureService } from '../../../services/core/culture.service';
 import {
   AccessType,
   ActivityType,
@@ -23,24 +23,24 @@ import {
   WorkPackageTaskState,
   WorkPackageTaskVisibility,
 } from '../../../library/app/enums';
-import {PromptComponent} from 'src/app/modals/prompt/prompt.component';
-import {FormService} from 'src/app/services/core/form.service';
-import {StringHelpers} from '../../../helpers/string.helpers';
-import {TranslateService} from '../../../services/core/translate.service';
-import {OperationResult} from '../../../library/core/operation-result';
-import {GroupService} from '../../../services/groups/group.service';
-import {PendingInvitationViewModel} from '../../../view-models/groups/group-types';
-import {Socket} from 'ngx-socket-io';
-import {moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {PromptModalParameters} from '../../../view-models/core/modal-types';
-import {NotificationService} from '../../../services/core/notification.service';
-import {UpgradeWorkPackageComponent} from '../../../modals/upgrade-work-package/upgrade-work-package.component';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {WorkPackagePermissionComponent} from '../../../modals/work-package-permission/work-package-permission.component';
-import {UsersService} from '../../../services/general/users.service';
-import {CustomFieldsModalComponent} from '../../../modals/custom-fields-modal/custom-fields-modal.component';
-import {LabelsModalComponent} from '../../../modals/labels-modal/labels-modal.component';
-import {DateHelpers} from '../../../helpers/date.helpers';
+import { PromptComponent } from 'src/app/modals/prompt/prompt.component';
+import { FormService } from 'src/app/services/core/form.service';
+import { StringHelpers } from '../../../helpers/string.helpers';
+import { TranslateService } from '../../../services/core/translate.service';
+import { OperationResult } from '../../../library/core/operation-result';
+import { GroupService } from '../../../services/groups/group.service';
+import { PendingInvitationViewModel } from '../../../view-models/groups/group-types';
+import { Socket } from 'ngx-socket-io';
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { NotificationService } from '../../../services/core/notification.service';
+import { UpgradeWorkPackageComponent } from '../../../modals/upgrade-work-package/upgrade-work-package.component';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { WorkPackagePermissionComponent } from '../../../modals/work-package-permission/work-package-permission.component';
+import { UsersService } from '../../../services/general/users.service';
+import { CustomFieldsModalComponent } from '../../../modals/custom-fields-modal/custom-fields-modal.component';
+import { LabelsModalComponent } from '../../../modals/labels-modal/labels-modal.component';
+import { DateHelpers } from '../../../helpers/date.helpers';
 
 @Component({
   selector: 'app-work-package',
@@ -295,7 +295,8 @@ export class WorkPackageComponent implements OnInit {
               task.title = notification.data.title;
               task.description = notification.data.description;
               task.geoLocation = notification.data.geoLocation;
-              task.hasDescription = task.description && task.description.length > 0;
+              task.hasDescription =
+                task.description && task.description.length > 0;
 
               if (oldState !== notification.data.state) {
                 switch (oldState) {
@@ -322,10 +323,10 @@ export class WorkPackageComponent implements OnInit {
                   this.workPackage.progress.percent = 0;
                 } else {
                   this.workPackage.progress.percent =
-                    (
-                      this.workPackage.progress.done +
-                      this.workPackage.progress.canceledOrDuplicate
-                    ) * 100 / this.workPackage.progress.total;
+                    ((this.workPackage.progress.done +
+                      this.workPackage.progress.canceledOrDuplicate) *
+                      100) /
+                    this.workPackage.progress.total;
                 }
               }
             }
@@ -352,7 +353,10 @@ export class WorkPackageComponent implements OnInit {
           }
           break;
         case ActivityType.WorkPackageTaskBulkAdd:
-          if (notification.data.length && this.workPackage.id === notification.data[0].packageId) {
+          if (
+            notification.data.length &&
+            this.workPackage.id === notification.data[0].packageId
+          ) {
             notification.data.forEach(d => {
               if (d.parentId) {
                 find1 = this.findTask(d.parentId);
@@ -360,9 +364,7 @@ export class WorkPackageComponent implements OnInit {
                   find1.subTasksCount++;
                 }
               } else {
-                find1 = this.workPackage.lists.find(
-                  l => l.id === d.listId,
-                );
+                find1 = this.workPackage.lists.find(l => l.id === d.listId);
                 if (find1) {
                   find1.tasks = find1.tasks || [];
                   find1.tasks.unshift(d);
@@ -569,7 +571,8 @@ export class WorkPackageComponent implements OnInit {
               notification.data.permissionCreateList;
 
             this.workPackage.listsSort = notification.data.listsSort;
-            this.workPackage.attachmentsSort = notification.data.attachmentsSort;
+            this.workPackage.attachmentsSort =
+              notification.data.attachmentsSort;
             this.workPackage.tasksSort = notification.data.tasksSort;
             this.workPackage.subTasksSort = notification.data.subTasksSort;
 
@@ -1155,7 +1158,11 @@ export class WorkPackageComponent implements OnInit {
             elements: [
               this.formService.createDropDown({
                 config: { field: 'listsSort', label: 'LISTS_ORDER' },
-                params: { model: this.workPackage.listsSort, items: [], enum: 'SortType' },
+                params: {
+                  model: this.workPackage.listsSort,
+                  items: [],
+                  enum: 'SortType',
+                },
               }),
             ],
           },
@@ -1163,8 +1170,15 @@ export class WorkPackageComponent implements OnInit {
             size: 6,
             elements: [
               this.formService.createDropDown({
-                config: { field: 'attachmentsSort', label: 'ATTACHMENTS_ORDER' },
-                params: { model: this.workPackage.attachmentsSort, items: [], enum: 'SortType' },
+                config: {
+                  field: 'attachmentsSort',
+                  label: 'ATTACHMENTS_ORDER',
+                },
+                params: {
+                  model: this.workPackage.attachmentsSort,
+                  items: [],
+                  enum: 'SortType',
+                },
               }),
             ],
           },
@@ -1173,7 +1187,11 @@ export class WorkPackageComponent implements OnInit {
             elements: [
               this.formService.createDropDown({
                 config: { field: 'tasksSort', label: 'TASKS_ORDER' },
-                params: { model: this.workPackage.tasksSort, items: [], enum: 'SortType' },
+                params: {
+                  model: this.workPackage.tasksSort,
+                  items: [],
+                  enum: 'SortType',
+                },
               }),
             ],
           },
@@ -1182,7 +1200,11 @@ export class WorkPackageComponent implements OnInit {
             elements: [
               this.formService.createDropDown({
                 config: { field: 'subTasksSort', label: 'SUB_TASKS_ORDER' },
-                params: { model: this.workPackage.subTasksSort, items: [], enum: 'SortType' },
+                params: {
+                  model: this.workPackage.subTasksSort,
+                  items: [],
+                  enum: 'SortType',
+                },
               }),
             ],
           },
@@ -1212,17 +1234,21 @@ export class WorkPackageComponent implements OnInit {
         });
         break;
       case SortType.DateDesc:
-        this.workPackage.lists = this.workPackage.lists.sort((a, b) => {
-          return DateHelpers.sort(a, b, 'createdAt');
-        }).reverse();
+        this.workPackage.lists = this.workPackage.lists
+          .sort((a, b) => {
+            return DateHelpers.sort(a, b, 'createdAt');
+          })
+          .reverse();
         break;
       case SortType.NameAsc:
-        this.workPackage.lists = this.workPackage.lists
-          .sort((a, b) => a.title.localeCompare(b.title));
+        this.workPackage.lists = this.workPackage.lists.sort((a, b) =>
+          a.title.localeCompare(b.title),
+        );
         break;
       case SortType.NameDesc:
         this.workPackage.lists = this.workPackage.lists
-          .sort((a, b) => a.title.localeCompare(b.title)).reverse();
+          .sort((a, b) => a.title.localeCompare(b.title))
+          .reverse();
         break;
       default:
         break;
@@ -1238,17 +1264,21 @@ export class WorkPackageComponent implements OnInit {
           });
           break;
         case SortType.DateDesc:
-          list.tasks = list.tasks.sort((a, b) => {
-            return DateHelpers.sort(a, b, 'createdAt');
-          }).reverse();
+          list.tasks = list.tasks
+            .sort((a, b) => {
+              return DateHelpers.sort(a, b, 'createdAt');
+            })
+            .reverse();
           break;
         case SortType.NameAsc:
-          list.tasks = list.tasks
-            .sort((a, b) => a.title.localeCompare(b.title));
+          list.tasks = list.tasks.sort((a, b) =>
+            a.title.localeCompare(b.title),
+          );
           break;
         case SortType.NameDesc:
           list.tasks = list.tasks
-            .sort((a, b) => a.title.localeCompare(b.title)).reverse();
+            .sort((a, b) => a.title.localeCompare(b.title))
+            .reverse();
           break;
         default:
           break;

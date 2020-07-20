@@ -59,8 +59,10 @@ export class PushNotificationService {
           if (notification.data.endAt) {
             this.identityService.profile.workingGroupId = undefined;
           } else {
-            this.identityService.profile.workingGroupId = notification.data.groupId;
-            this.identityService.profile.workingGroupFrom = notification.data.beginAt;
+            this.identityService.profile.workingGroupId =
+              notification.data.groupId;
+            this.identityService.profile.workingGroupFrom =
+              notification.data.beginAt;
           }
         }
         break;

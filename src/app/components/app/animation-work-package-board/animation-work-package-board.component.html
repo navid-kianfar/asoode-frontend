@@ -85,8 +85,13 @@
               rows="3"
             ></textarea>
             <div class="counter-holder">
-              <span>{{ 'NEW_PLAN_COUNTER' | translate}}</span>
-              <app-number [disabled]="creatingNewTask" [min]="1" [max]="200" [(model)]="newTaskCounter"></app-number>
+              <span>{{ 'NEW_PLAN_COUNTER' | translate }}</span>
+              <app-number
+                [disabled]="creatingNewTask"
+                [min]="1"
+                [max]="200"
+                [(model)]="newTaskCounter"
+              ></app-number>
             </div>
             <div class="buttons">
               <button

@@ -11,18 +11,18 @@
         <li *ngFor="let label of workPackage.labels">
           <div class="label">
             <div class="title" (click)="handleClick($event, label)">
-              <span [(colorPicker)]="label.tempColor"
-                    [cpDisabled]="!label.editting"
-                    [style.background]="label.tempColor || label.color">
-
+              <span
+                [(colorPicker)]="label.tempColor"
+                [cpDisabled]="!label.editting"
+                [style.background]="label.tempColor || label.color"
+              >
                 <ng-container *ngIf="!label.editting && label.title">
-                  {{label.title}}
+                  {{ label.title }}
                 </ng-container>
                 <ng-container *ngIf="label.editting || !label.title">
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </ng-container>
-
-              </span>&nbsp;
+                </ng-container> </span
+              >&nbsp;
               <ng-container *ngIf="label.editting">
                 <input
                   [disabled]="label.waiting"
@@ -52,11 +52,14 @@
         <li>
           <div class="label">
             <div class="title">
-              <span [(colorPicker)]="temp.color" [style.background]="temp.color">
+              <span
+                [(colorPicker)]="temp.color"
+                [style.background]="temp.color"
+              >
                 <ng-container>
                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                </ng-container>
-              </span>&nbsp;
+                </ng-container> </span
+              >&nbsp;
               <input
                 [disabled]="temp.waiting"
                 type="text"

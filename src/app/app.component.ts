@@ -4,9 +4,9 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Socket } from 'ngx-socket-io';
 import { SwUpdate } from '@angular/service-worker';
 import { NetworkService } from './services/core/network.service';
-import {ModalService} from './services/core/modal.service';
-import {Subscription} from 'rxjs';
-import {OfflineComponent} from './modals/offline/offline.component';
+import { ModalService } from './services/core/modal.service';
+import { Subscription } from 'rxjs';
+import { OfflineComponent } from './modals/offline/offline.component';
 
 @Component({
   selector: 'app-root',

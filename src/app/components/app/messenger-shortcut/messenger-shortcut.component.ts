@@ -45,9 +45,11 @@ export class MessengerShortcutComponent implements OnInit {
 
   ngOnInit() {
     if (this.workPackage) {
-      const project = this.project || this.projectService.projects.find(
-        p => p.id === this.workPackage.projectId,
-      );
+      const project =
+        this.project ||
+        this.projectService.projects.find(
+          p => p.id === this.workPackage.projectId,
+        );
       this.current = {
         id: this.workPackage.id,
         members: project.members
