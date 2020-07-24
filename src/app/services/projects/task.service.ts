@@ -121,6 +121,17 @@ export class TaskService {
     );
   }
 
+  async advancedPlayerEditComment(id: string, model): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/tasks/attachment/advanced/${id}/edit-comment`, model
+    );
+  }
+  async advancedPlayerDeleteComment(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/tasks/attachment/advanced/${id}/remove-comment`
+    );
+  }
+
   async coverAttachment(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/tasks/attachment/${id}/cover`,

@@ -8,6 +8,9 @@ import {
 import {TaskService} from '../../services/projects/task.service';
 import {OperationResultStatus} from '../../library/core/enums';
 import {MatVideoComponent} from 'mat-video/lib/video.component';
+import {StringHelpers} from '../../helpers/string.helpers';
+import {TranslateService} from '../../services/core/translate.service';
+import {ModalService} from '../../services/core/modal.service';
 
 @Component({
   selector: 'app-advanced-player',
@@ -30,7 +33,9 @@ export class AdvancedPlayerComponent
   @ViewChild('player', {static: true}) matVideo: MatVideoComponent;
 
   constructor(
-    private readonly taskService: TaskService
+    private readonly taskService: TaskService,
+    private readonly translateService: TranslateService,
+    private readonly modalService: ModalService,
   ) { super(); }
 
   ngOnInit() {
@@ -76,9 +81,23 @@ export class AdvancedPlayerComponent
     const message = this.tempComment.message.trim();
     if (!message) { return; }
     this.commentWaiting = true;
+    if (this.tempComment.id) {
+      const opEdit = await this.taskService.advancedPlayerEditComment(this.tempComment.id, {
+        title: message
+      });
+      this.commentWaiting = false;
+      if (opEdit.status !== OperationResultStatus.Success) {
+        // TODO: handle error
+        return;
+      }
+      const comment = this.data.comments.find(c => c.id === this.tempComment.id);
+      comment.message = message;
+      this.tempComment = null;
+      return;
+    }
     const op = await this.taskService.advancedPlayerComment(this.attachment.id, {
       message,
-      startFrame: Math.round(this.video.currentTime)
+      startFrame: this.video.currentTime
     });
     this.commentWaiting = false;
     if (op.status !== OperationResultStatus.Success) {
@@ -133,5 +152,24 @@ export class AdvancedPlayerComponent
   editComment(comment: AdvancedPlayerCommentViewModel) {
     this.tempComment = {} as any;
     Object.assign(this.tempComment, comment);
+  }
+
+  deleteComment(comment: AdvancedPlayerCommentViewModel) {
+    this.modalService
+      .confirm({
+        title: 'REMOVE_ADVANCED_COMMENT',
+        message: StringHelpers.truncate(comment.message, 50, false),
+        heading: 'REMOVE_ADVANCED_COMMENT_CONFIRM_HEADING',
+        actionLabel: 'REMOVE_ADVANCED_COMMENT',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          const op = await this.taskService.advancedPlayerDeleteComment(comment.id);
+          if (op.status === OperationResultStatus.Success) {
+            this.data.comments = this.data.comments.filter(c => c.id !== comment.id);
+          }
+          return op;
+        },
+      })
+      .subscribe(confirmed => {});
   }
 }

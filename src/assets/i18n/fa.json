@@ -776,5 +776,7 @@
   "ATTACHMENTS_ORDER": "ترتیب پیوست ها",
   "LISTS_ORDER": "ترتیب لیست ها",
   "ADVANCED_PLAYER": "نمایشگر پیشرفته",
-  "NEW_COMMENT": "ایجاد کامنت جدید"
+  "NEW_COMMENT": "ایجاد کامنت جدید",
+  "REMOVE_ADVANCED_COMMENT_CONFIRM_HEADING": "آیا از حذف کامنت اطمینان دارد؟",
+  "REMOVE_ADVANCED_COMMENT": "حذف کامنت"
 }
