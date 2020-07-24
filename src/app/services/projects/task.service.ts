@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { OperationResult } from '../../library/core/operation-result';
 import { HttpService } from '../core/http.service';
 import {
-  ActivityLogViewModel,
+  ActivityLogViewModel, AdvancedPlayerCommentViewModel, AdvancedPlayerViewModel,
   KartablViewModel,
   TimeSpentViewModel,
   WorkPackageTaskTimeViewModel,
@@ -106,6 +106,18 @@ export class TaskService {
   async removeAttachment(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/tasks/attachment/${id}/remove`,
+    );
+  }
+
+  async advancedPlayer(id: string): Promise<OperationResult<AdvancedPlayerViewModel>> {
+    return await this.httpService.post<AdvancedPlayerViewModel>(
+      `/tasks/attachment/${id}/advanced`,
+    );
+  }
+
+  async advancedPlayerComment(id: string, model): Promise<OperationResult<AdvancedPlayerCommentViewModel>> {
+    return await this.httpService.post<AdvancedPlayerCommentViewModel>(
+      `/tasks/attachment/${id}/advanced/comment`, model
     );
   }
 

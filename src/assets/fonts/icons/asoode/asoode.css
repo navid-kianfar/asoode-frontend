@@ -1,7 +1,7 @@
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'ASOODE' !important;
-  speak: none;
+  speak: never;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -13,6 +13,36 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-eraser2:before {
+  content: "\e983";
+}
+.icon-marker:before {
+  content: "\e984";
+}
+.icon-image4:before {
+  content: "\e985";
+}
+.icon-clapboard-play:before {
+  content: "\e986";
+}
+.icon-hand:before {
+  content: "\ed39";
+}
+.icon-grab:before {
+  content: "\ed3a";
+}
+.icon-arrow-up-right3:before {
+  content: "\eddd";
+}
+.icon-checkbox-unchecked:before {
+  content: "\ee67";
+}
+.icon-circle:before {
+  content: "\ee77";
+}
+.icon-highlight:before {
+  content: "\eeab";
+}
 .icon-import:before {
   content: "\e976";
 }
@@ -79,14 +109,11 @@
 .icon-spinner2:before {
   content: "\e966";
 }
-.icon-cost .path1:before {
+.icon-star:before {
   content: "\e981";
-  color: rgb(68, 68, 68);
 }
-.icon-cost .path2:before {
+.icon-coins:before {
   content: "\e982";
-  margin-left: -1em;
-  color: rgb(0, 0, 0);
 }
 .icon-map2:before {
   content: "\e97e";

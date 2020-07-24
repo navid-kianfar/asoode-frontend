@@ -774,5 +774,7 @@
   "SUB_TASKS_ORDER": "ترتیب زیر کار ها",
   "TASKS_ORDER": "ترتیب کارت ها",
   "ATTACHMENTS_ORDER": "ترتیب پیوست ها",
-  "LISTS_ORDER": "ترتیب لیست ها"
+  "LISTS_ORDER": "ترتیب لیست ها",
+  "ADVANCED_PLAYER": "نمایشگر پیشرفته",
+  "NEW_COMMENT": "ایجاد کامنت جدید"
 }

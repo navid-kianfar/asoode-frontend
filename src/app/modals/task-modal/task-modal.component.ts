@@ -43,6 +43,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { UploadExceedModalComponent } from '../upload-exceed-modal/upload-exceed-modal.component';
 import { DateHelpers } from '../../helpers/date.helpers';
+import {AdvancedPlayerComponent} from '../advanced-player/advanced-player.component';
 
 @Component({
   selector: 'app-task-modal',
@@ -1117,6 +1118,11 @@ export class TaskModalComponent
       $event.preventDefault();
       return;
     }
+  }
+
+  advancedVideoPlayer(attachment: WorkPackageTaskAttachmentViewModel) {
+    this.modalService.show(AdvancedPlayerComponent, { attachment })
+      .subscribe(() => {});
   }
 }
 export enum DateMode {

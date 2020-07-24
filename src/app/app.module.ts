@@ -189,6 +189,7 @@ import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-
 import { OfflineComponent } from './modals/offline/offline.component';
 import { RequestTimeOffComponent } from './modals/request-time-off/request-time-off.component';
 import { FullNamePipe } from './pipes/app/full-name.pipe';
+import { AdvancedPlayerComponent } from './modals/advanced-player/advanced-player.component';
 
 @NgModule({
   declarations: [
@@ -335,8 +336,10 @@ import { FullNamePipe } from './pipes/app/full-name.pipe';
     OfflineComponent,
     RequestTimeOffComponent,
     FullNamePipe,
+    AdvancedPlayerComponent,
   ],
   entryComponents: [
+    AdvancedPlayerComponent,
     RequestTimeOffComponent,
     OfflineComponent,
     CustomFieldsModalComponent,

@@ -744,8 +744,7 @@
                             "
                             class="cover"
                           >
-                            <a
-                              (click)="coverToggle(attachment)"
+                            <a (click)="coverToggle(attachment)"
                               href="javascript:void(0)"
                             >
                               <ng-container *ngIf="attachment.covering">
@@ -757,6 +756,21 @@
                                   : 'MAKE_COVER'
                                 ) | translate
                               }}
+                            </a>
+                          </div>
+                          <div
+                            *ngIf="
+                              filesService.isVideo(attachment.path) &&
+                              permission !== AccessType.Visitor &&
+                              project.template === ProjectTemplate.Animation
+                            "
+                            class="cover"
+                          >
+                            <a (click)="advancedVideoPlayer(attachment)"
+                              href="javascript:void(0)"
+                            >
+                              <i class="icon-clapboard-play"></i>&nbsp;
+                              {{ 'ADVANCED_PLAYER' | translate}}
                             </a>
                           </div>
                         </div>

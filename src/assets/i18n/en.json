@@ -774,5 +774,7 @@
   "SUB_TASKS_ORDER": "Sub tasks order",
   "TASKS_ORDER": "Tasks order",
   "ATTACHMENTS_ORDER": "Attachments order",
-  "LISTS_ORDER": "Lists order"
+  "LISTS_ORDER": "Lists order",
+  "ADVANCED_PLAYER": "Advanced Player",
+  "NEW_COMMENT": "New Comment"
 }

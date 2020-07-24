@@ -313,6 +313,23 @@ export interface WorkPackageTaskLabelViewModel extends BaseViewModel {
   title: string;
   dark: boolean;
 }
+export interface AdvancedPlayerShapeViewModel extends BaseViewModel {
+  attachmentId: string;
+  startFrame: number;
+  endFrame: number;
+  payload?: string;
+}
+export interface AdvancedPlayerCommentViewModel extends BaseViewModel  {
+  attachmentId: string;
+  startFrame: number;
+  endFrame: number;
+  message: string;
+  payload?: string;
+}
+export interface AdvancedPlayerViewModel {
+  comments: AdvancedPlayerCommentViewModel[];
+  shapes: AdvancedPlayerShapeViewModel[];
+}
 export interface WorkPackageTaskAttachmentViewModel extends BaseViewModel {
   covering?: boolean;
   tempName?: string;
