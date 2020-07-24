@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderStatus } from 'src/app/library/app/enums';
 import { OrderService } from '../../../../services/general/order.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-transactions',
@@ -25,6 +26,6 @@ export class TransactionsComponent implements OnInit {
   }
 
   download(element: any) {
-    window.open('https://api.asoode.com/v2/orders/pdf/' + element.id, '_blank');
+    window.open(environment.direct_endpoint + '/orders/pdf/' + element.id, '_blank');
   }
 }

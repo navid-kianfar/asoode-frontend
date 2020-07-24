@@ -11,6 +11,8 @@ import {MatVideoComponent} from 'mat-video/lib/video.component';
 import {StringHelpers} from '../../helpers/string.helpers';
 import {TranslateService} from '../../services/core/translate.service';
 import {ModalService} from '../../services/core/modal.service';
+import {environment} from '../../../environments/environment';
+import {FilesService} from '../../services/storage/files.service';
 
 @Component({
   selector: 'app-advanced-player',
@@ -36,6 +38,7 @@ export class AdvancedPlayerComponent
     private readonly taskService: TaskService,
     private readonly translateService: TranslateService,
     private readonly modalService: ModalService,
+    private readonly filesService: FilesService,
   ) { super(); }
 
   ngOnInit() {
@@ -118,7 +121,7 @@ export class AdvancedPlayerComponent
   }
 
   exportPdf() {
-
+    this.filesService.download(environment.direct_endpoint + '/tasks/attachment/advanced/' + this.attachment.id + '/pdf', null);
   }
 
   drawPicture() {
