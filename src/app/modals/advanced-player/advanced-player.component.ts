@@ -58,6 +58,7 @@ export class AdvancedPlayerComponent
   }
 
   newComment() {
+    this.video.pause();
     this.addingComment = true;
     this.tempComment = {
       id: undefined,
