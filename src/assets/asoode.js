@@ -1,9 +1,11 @@
 (function(window, document){
   const baseUrl = '/';
-  const default_lang = 'lang=en';
+  const default_lang = 'lang=fa';
   const url = window.location.href.toLowerCase();
-  const allowed = /lang=fa|lang=en|lang=ar/;
-  const lang = (url.match(allowed) || document.cookie.match(allowed) || [default_lang])[0].match(/fa|en|ar/)[0];
+  // const allowed = /lang=fa|lang=en|lang=ar/;
+  // const lang = (url.match(allowed) || document.cookie.match(allowed) || [default_lang])[0].match(/fa|en|ar/)[0];
+  const allowed = /lang=fa/;
+  const lang = (url.match(allowed) || document.cookie.match(allowed) || [default_lang])[0].match(/fa/)[0];
   const rtl = (lang === 'fa' || lang === 'ar');
   const dir = rtl ? 'rtl' : 'ltr';
   const html = document.getElementsByTagName('html')[0];
