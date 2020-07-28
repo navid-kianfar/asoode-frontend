@@ -863,8 +863,8 @@ export class TaskModalComponent
       }
     });
     label.editting = true;
-    label.tempName = label.title;
-    label.tempColor = label.color;
+    label.tempName = label.title || '';
+    label.tempColor = label.color || '';
   }
 
   deleteLabel(label: WorkPackageLabelViewModel, $event: MouseEvent) {
@@ -894,7 +894,7 @@ export class TaskModalComponent
     $event.preventDefault();
     const title = label.tempName.trim();
     const color = label.tempColor.trim();
-    if (title === label.title && color === label.color) {
+    if (title === (label.title || '') && color === label.color) {
       label.editting = false;
       return;
     }

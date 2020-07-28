@@ -56,6 +56,7 @@
       [popperHideOnClickOutside]="true"
       [popperHideOnScroll]="true"
       [popperPlacement]="'bottom-start'"
+
       (click)="openSearchResult($event)"
     >
       <input type="text" [placeholder]="'SEARCH_ANYWHERE' | translate" />
@@ -84,7 +85,7 @@
     </div>
   </popper-content>
 
-  <popper-content #popperSearch>
+  <popper-content #popperSearch class="popper-search-content">
     <div class="search-popper" (click)="$event.stopPropagation()">
       <input
         [hidden]="!secondInput"

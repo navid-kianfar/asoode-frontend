@@ -3,7 +3,7 @@
     <div (click)="expanded = !expanded" class="collapse">
       <i
         *ngIf="!expanded && (subProjects.length || workPackages.length)"
-        class="icon-arrow-left2"
+        [class]="cultureService.rtl ? 'icon-arrow-left2' : 'icon-arrow-right2'"
       ></i>
       <i
         *ngIf="expanded && (subProjects.length || workPackages.length)"

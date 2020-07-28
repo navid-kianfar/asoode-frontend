@@ -71,6 +71,40 @@ body {
   &.dir-ltr {
     direction: ltr;
     text-align: left;
+
+
+    .shortcut-messenger-container {
+      left: unset;
+      right: 0;
+    }
+
+    .messenger-shortcut {
+      left: unset;
+      right: 20px;
+    }
+
+    .af-auto-complete {
+      input {
+        border-radius: 5px 0 0 5px !important;
+      }
+    }
+
+    .invite-member {
+      .af-dropdown button.dropdown-toggle {
+        border-radius: 0 5px 5px 0 !important;
+      }
+    }
+
+    .work-package {
+      .setting-container {
+        left: unset !important;
+        right: 0 !important;
+      }
+    }
+
+    .popper-search-content .ngxp__container{
+      left: -30px;
+    }
   }
 }
 

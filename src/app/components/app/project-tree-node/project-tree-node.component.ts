@@ -21,6 +21,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { AccessType } from 'src/app/library/app/enums';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ArrayHelpers } from '../../../helpers/array.helpers';
+import {CultureService} from '../../../services/core/culture.service';
 
 @Component({
   selector: 'app-project-tree-node',
@@ -58,6 +59,7 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   constructor(
     private readonly router: Router,
     private readonly deviceDetectorService: DeviceDetectorService,
+    readonly cultureService: CultureService,
   ) {}
 
   ngOnInit() {
