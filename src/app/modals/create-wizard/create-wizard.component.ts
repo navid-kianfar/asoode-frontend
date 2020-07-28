@@ -41,7 +41,6 @@ export class CreateWizardComponent
     this.canCreateWorkPackage = plan.workPackage > plan.usedProject;
     this.canCreateProject = plan.project > plan.usedProject;
 
-    debugger;
     this.mode = WizardMode.Choose;
     this.continueAs = WizardMode.SimpleProject;
 

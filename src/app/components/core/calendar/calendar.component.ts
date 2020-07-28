@@ -306,6 +306,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     const nextYear = nextMonthIndex === 0 ? this.temp.year + 1 : this.temp.year;
     const prevYear =
       prevMonthIndex === 11 ? this.temp.year - 1 : this.temp.year;
+
     const dayIndex = this.converter
       .ToDateTime({
         Year: this.temp.year,

@@ -32,7 +32,7 @@ export default class GeorgianDateConverter implements IDateConverter {
       .replace(/WW/g, converted.WeekName);
   }
   private innerParse(date: IDateTimeProperties): PersianDate {
-    const temp = new Date(date.Year, date.Month, date.Day);
+    const temp = new Date(date.Year, date.Month - 1, date.Day);
     const gregorian = new PersianDate(temp)
       .toCalendar('gregorian')
       .toLocale('en');
