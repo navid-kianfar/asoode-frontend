@@ -1148,9 +1148,11 @@ export class TaskModalComponent
       this.bulkUploadProgress = progress;
     }).then((op) => {
       console.log(op);
+      this.bulkUploadInput.nativeElement.value = undefined;
       this.bulkUploading = false;
       this.bulkUploadProgress = 0;
     }, () => {
+      this.bulkUploadInput.nativeElement.value = undefined;
       this.bulkUploading = false;
       this.bulkUploadProgress = 0;
     });
