@@ -205,6 +205,7 @@ export enum ActivityType {
   WorkPackageTaskUnBlock = 622,
   WorkPackageTaskBlocked = 623,
   WorkPackageTaskBulkAdd = 624,
+  WorkPackageTaskAttachmentBulkAdd = 625,
 
   WorkPackageObjectiveAdd = 700,
   WorkPackageObjectiveEdit = 701,

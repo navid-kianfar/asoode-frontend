@@ -81,6 +81,7 @@ export class TaskModalComponent
 
   @ViewChild('labelMenu', { static: false }) labelMenu;
   @ViewChild('filePicker', { static: false }) filePicker;
+  @ViewChild('bulkUploadInput', { static: false }) bulkUploadInput;
   togglingWatch: boolean;
   togglingArchive: boolean;
   showSubTasks: boolean;
@@ -110,6 +111,8 @@ export class TaskModalComponent
 
   groupMembers: ProjectMemberViewModel[];
   individualMembers: ProjectMemberViewModel[];
+  bulkUploadProgress: number;
+  bulkUploading: boolean;
   noDrag: boolean;
   dragging: boolean;
   dragDelay: number;
@@ -409,6 +412,11 @@ export class TaskModalComponent
               this.sortSubTasks();
             }
             break;
+          case ActivityType.WorkPackageTaskAttachmentBulkAdd:
+            if (this.model.id === notification.data[0].id) {
+              this.fetch();
+            }
+            break;
         }
       });
     });
@@ -551,7 +559,9 @@ export class TaskModalComponent
     );
     this.postProcess();
     this.calculateAll();
-    this.intervalInstance = setInterval(() => this.calculateAll(), 10000);
+    if (!this.intervalInstance) {
+      this.intervalInstance = setInterval(() => this.calculateAll(), 10000);
+    }
   }
 
   calculateAll() {
@@ -1124,6 +1134,27 @@ export class TaskModalComponent
     this.modalService.show(AdvancedPlayerComponent, { attachment })
       .subscribe(() => {});
   }
+
+  bulkUpload() {
+    if (this.bulkUploading) { return; }
+    this.bulkUploadInput.nativeElement.click();
+  }
+
+  onBulkChange(target) {
+    if (!target.files.length) { return; }
+    this.bulkUploading = true;
+    this.bulkUploadProgress = 0;
+    this.taskService.bulkUpload(this.model.id, { file: target.files[0] }, (progress) => {
+      this.bulkUploadProgress = progress;
+    }).then((op) => {
+      console.log(op);
+      this.bulkUploading = false;
+      this.bulkUploadProgress = 0;
+    }, () => {
+      this.bulkUploading = false;
+      this.bulkUploadProgress = 0;
+    });
+  }
 }
 export enum DateMode {
   Due = 1,
@@ -1135,4 +1166,5 @@ export enum ViewMode {
   Related = 3,
   CustomField = 4,
   Activity = 5,
+  SubTask = 6
 }

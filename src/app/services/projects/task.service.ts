@@ -213,4 +213,8 @@ export class TaskService {
       model,
     );
   }
+
+  async bulkUpload(id: string, model, trigger: (progress) => void): Promise<OperationResult<boolean>> {
+    return await this.httpService.formUpload(`/tasks/${id}/bulk-attach`, model, (p) => trigger(p));
+  }
 }

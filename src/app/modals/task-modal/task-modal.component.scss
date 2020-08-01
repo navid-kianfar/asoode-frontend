@@ -389,6 +389,11 @@
         ::ng-deep .mat-progress-bar-buffer {
           background: #e6e6e6;
         }
+
+        &.bulk-upload {
+          justify-content: center;
+          margin: 10px 0;
+        }
       }
       .box-content {
         //min-height: 50px;

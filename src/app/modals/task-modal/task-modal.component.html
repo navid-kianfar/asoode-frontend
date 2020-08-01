@@ -215,13 +215,20 @@
               {{ 'TASK_DETAILS' | translate }}
             </li>
             <li
+              *ngIf="project.template === ProjectTemplate.Animation"
+              [class.active]="mode === ViewMode.SubTask"
+              (click)="switchMode(ViewMode.SubTask)"
+            >
+              {{ 'TASK_SUB_PLAN' | translate }}
+            </li>
+            <li
               [class.active]="mode === ViewMode.TimeSpent"
               (click)="switchMode(ViewMode.TimeSpent)"
             >
               {{ 'TASK_TIME_MANAGEMENT' | translate }}
             </li>
             <li
-              *ngIf="!model.parentId"
+              *ngIf="!model.parentId && project.template !== ProjectTemplate.Animation"
               [class.active]="mode === ViewMode.Related"
               (click)="switchMode(ViewMode.Related)"
             >
@@ -256,7 +263,7 @@
                     </button>
                     <mat-menu #addDetailMenu="matMenu">
                       <button
-                        *ngIf="!model.parentId"
+                        *ngIf="!model.parentId && project.template !== ProjectTemplate.Animation"
                         [disabled]="
                           showSubTasks ||
                           model.subTasks?.length > 0 ||
@@ -269,10 +276,7 @@
                       >
                         <i class="icon-tree7"></i>
                         {{
-                          (project.template === ProjectTemplate.Animation
-                            ? 'TASK_SUB_PLAN'
-                            : 'TASK_SUB_TASK'
-                          ) | translate
+                          'TASK_SUB_TASK' | translate
                         }}
                       </button>
                       <button
@@ -491,137 +495,11 @@
                 <div
                   class="box"
                   *ngIf="
-                    !model.parentId &&
-                    (showSubTasks ||
-                      model.subTasks.length ||
-                      project.template === ProjectTemplate.Animation)
+                    !model.parentId && project.template !== ProjectTemplate.Animation &&
+                    (showSubTasks || model.subTasks.length)
                   "
                 >
-                  <div class="box-header">
-                    <i class="icon-tree7"></i>
-                    <span>{{
-                      (project.template === ProjectTemplate.Animation
-                        ? 'TASK_SUB_PLAN'
-                        : 'TASK_SUB_TASK'
-                      ) | translate
-                    }}</span>
-                    <i
-                      *ngIf="!addingSub"
-                      (click)="prepareSubTask()"
-                      class="add icon-plus2"
-                    ></i>
-
-                    <mat-progress-bar
-                      [value]="
-                        (model.subTasksDone * 100) / model.subTasks.length
-                      "
-                    ></mat-progress-bar>
-                    <span
-                      >{{ model.subTasksDone }}/{{
-                        model.subTasks.length
-                      }}</span
-                    >
-                  </div>
-                  <div
-                    class="box-content sub-tasks-wrapper"
-                    cdkDropList
-                    cdkDropListOrientation="vertical"
-                    [cdkDropListData]="model.subTasks"
-                    (cdkDropListDropped)="drop($event)"
-                  >
-                    <div *ngIf="addingSub" class="sub-task add-sub">
-                      <textarea
-                        rows="3"
-                        [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
-                        [readOnly]="savingSub"
-                        [(ngModel)]="subTaskTitle"
-                      ></textarea>
-
-                      <div
-                        *ngIf="project.template === ProjectTemplate.Animation"
-                        class="counter-holder"
-                      >
-                        <span>{{ 'NEW_PLAN_COUNTER' | translate }}</span>
-                        <app-number
-                          [disabled]="savingSub"
-                          [min]="1"
-                          [max]="200"
-                          [(model)]="subTaskCounter"
-                        ></app-number>
-                      </div>
-
-                      <div class="btns">
-                        <button
-                          [disabled]="savingSub"
-                          (click)="addingSub = false"
-                          mat-flat-button
-                        >
-                          {{ 'CANCEL' | translate }}</button
-                        >&nbsp;
-                        <button
-                          (click)="createSub()"
-                          color="primary"
-                          [disabled]="savingSub"
-                          mat-flat-button
-                        >
-                          <i
-                            *ngIf="savingSub"
-                            class="icon-spin icon-spinner2"
-                          ></i>
-                          {{ 'CREATE' | translate }}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div
-                      *ngFor="let sub of model.subTasks"
-                      (click)="openSubTask(sub, $event)"
-                      [cdkDragStartDelay]="dragDelay"
-                      [cdkDragData]="sub"
-                      class="sub-task-handle"
-                      [cdkDragDisabled]="
-                        workPackage.subTasksSort !== SortType.Manual ||
-                        noDrag ||
-                        dragging ||
-                        addingSub
-                      "
-                      cdkDrag
-                    >
-                      <div class="sub-task no-select color-{{ sub.state }}">
-                        <div class="text">
-                          <div class="title">{{ sub.title }}</div>
-                          <div class="description">{{ sub.description }}</div>
-                        </div>
-                        <div class="details ltr">
-                          <div class="date">
-                            <ng-container
-                              *ngIf="sub.dueAt || sub.endAt || sub.beginAt"
-                            >
-                              <i class="icon-calendar"></i>&nbsp;
-                              <span>{{
-                                sub.dueAt || sub.endAt || sub.beginAt
-                                  | culturedDate
-                              }}</span>
-                            </ng-container>
-                          </div>
-                          <div class="members">
-                            <ng-container *ngFor="let member of sub.members">
-                              <app-member-info
-                                [id]="member.recordId"
-                                [small]="true"
-                                *ngIf="!member.isGroup"
-                              ></app-member-info>
-                              <app-group-info
-                                [id]="member.recordId"
-                                [small]="true"
-                                *ngIf="member.isGroup"
-                              ></app-group-info>
-                            </ng-container>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <ng-container [ngTemplateOutlet]="subTaskTemplate" [ngTemplateOutletContext]="{upload: false}"></ng-container>
                 </div>
                 <div class="box">
                   <div class="box-header">
@@ -874,6 +752,13 @@
                       </ul>
                     </div>
                   </mat-menu>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="ViewMode.SubTask">
+              <div class="box-container sub-task-container">
+                <div class="box">
+                  <ng-container [ngTemplateOutlet]="subTaskTemplate" [ngTemplateOutletContext]="{upload: true}"></ng-container>
                 </div>
               </div>
             </ng-container>
@@ -1293,3 +1178,142 @@
     </ul>
   </div>
 </mat-menu>
+<ng-template #subTaskTemplate let-upload="upload">
+  <div class="box-header">
+    <i class="icon-tree7"></i>
+    <span>{{
+      (project.template === ProjectTemplate.Animation ? 'TASK_SUB_PLAN' : 'TASK_SUB_TASK') | translate
+      }}</span>
+    <i
+      *ngIf="!addingSub"
+      (click)="prepareSubTask()"
+      class="add icon-plus2"
+    ></i>
+
+    <mat-progress-bar
+      [value]="
+                        (model.subTasksDone * 100) / model.subTasks.length
+                      "
+    ></mat-progress-bar>
+    <span
+    >{{ model.subTasksDone }}/{{
+      model.subTasks.length
+      }}</span
+    >&nbsp;
+    <i
+      *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
+      (click)="bulkUpload()"
+      class="add icon-upload41"
+    ></i>
+    <input type="file"
+           hidden
+           accept=".zip"
+           #bulkUploadInput
+           (change)="onBulkChange($event.target)">
+  </div>
+  <div class="box-header bulk-upload">
+    <ng-container *ngIf="bulkUploading">
+      <mat-progress-bar [value]="bulkUploadProgress"></mat-progress-bar>
+    </ng-container>
+  </div>
+  <div
+    class="box-content sub-tasks-wrapper"
+    cdkDropList
+    cdkDropListOrientation="vertical"
+    [cdkDropListData]="model.subTasks"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <div *ngIf="addingSub" class="sub-task add-sub">
+                      <textarea
+                        rows="3"
+                        [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
+                        [readOnly]="savingSub"
+                        [(ngModel)]="subTaskTitle"
+                      ></textarea>
+
+      <div
+        *ngIf="project.template === ProjectTemplate.Animation"
+        class="counter-holder"
+      >
+        <span>{{ 'NEW_PLAN_COUNTER' | translate }}</span>
+        <app-number
+          [disabled]="savingSub"
+          [min]="1"
+          [max]="200"
+          [(model)]="subTaskCounter"
+        ></app-number>
+      </div>
+
+      <div class="btns">
+        <button
+          [disabled]="savingSub"
+          (click)="addingSub = false"
+          mat-flat-button
+        >
+          {{ 'CANCEL' | translate }}</button
+        >&nbsp;
+        <button
+          (click)="createSub()"
+          color="primary"
+          [disabled]="savingSub"
+          mat-flat-button
+        >
+          <i
+            *ngIf="savingSub"
+            class="icon-spin icon-spinner2"
+          ></i>
+          {{ 'CREATE' | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngFor="let sub of model.subTasks"
+      (click)="openSubTask(sub, $event)"
+      [cdkDragStartDelay]="dragDelay"
+      [cdkDragData]="sub"
+      class="sub-task-handle"
+      [cdkDragDisabled]="
+                        workPackage.subTasksSort !== SortType.Manual ||
+                        noDrag ||
+                        dragging ||
+                        addingSub
+                      "
+      cdkDrag
+    >
+      <div class="sub-task no-select color-{{ sub.state }}">
+        <div class="text">
+          <div class="title">{{ sub.title }}</div>
+          <div class="description">{{ sub.description }}</div>
+        </div>
+        <div class="details ltr">
+          <div class="date">
+            <ng-container
+              *ngIf="sub.dueAt || sub.endAt || sub.beginAt"
+            >
+              <i class="icon-calendar"></i>&nbsp;
+              <span>{{
+                sub.dueAt || sub.endAt || sub.beginAt
+                  | culturedDate
+                }}</span>
+            </ng-container>
+          </div>
+          <div class="members">
+            <ng-container *ngFor="let member of sub.members">
+              <app-member-info
+                [id]="member.recordId"
+                [small]="true"
+                *ngIf="!member.isGroup"
+              ></app-member-info>
+              <app-group-info
+                [id]="member.recordId"
+                [small]="true"
+                *ngIf="member.isGroup"
+              ></app-group-info>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
