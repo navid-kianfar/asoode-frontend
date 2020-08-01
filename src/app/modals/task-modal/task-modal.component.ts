@@ -481,6 +481,7 @@ export class TaskModalComponent
   }
 
   async fetch() {
+    if (this.waiting) { return; }
     this.waiting = true;
 
     const op = await this.taskService.fetch(this.id);
@@ -1147,12 +1148,12 @@ export class TaskModalComponent
     this.taskService.bulkUpload(this.model.id, { file: target.files[0] }, (progress) => {
       this.bulkUploadProgress = progress;
     }).then((op) => {
-      console.log(op);
-      this.bulkUploadInput.nativeElement.value = undefined;
+      this.fetch();
+      this.bulkUploadInput.nativeElement.value = '';
       this.bulkUploading = false;
       this.bulkUploadProgress = 0;
     }, () => {
-      this.bulkUploadInput.nativeElement.value = undefined;
+      this.bulkUploadInput.nativeElement.value = '';
       this.bulkUploading = false;
       this.bulkUploadProgress = 0;
     });
