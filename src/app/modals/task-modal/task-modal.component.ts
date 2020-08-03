@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
-import { TaskModalParameters } from '../../view-models/core/modal-types';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {SimpleModalComponent} from 'ngx-simple-modal';
+import {TaskModalParameters} from '../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
   ProjectViewModel,
@@ -10,39 +10,30 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
-import { TaskService } from '../../services/projects/task.service';
-import { OperationResultStatus } from '../../library/core/enums';
-import { ProjectService } from '../../services/projects/project.service';
-import {
-  AccessType,
-  ActivityType,
-  ProjectTemplate,
-  SortType,
-  WorkPackageTaskState,
-} from '../../library/app/enums';
-import { IdentityService } from '../../services/auth/identity.service';
-import { Socket } from 'ngx-socket-io';
-import { UploadViewModel } from '../../view-models/storage/files-types';
-import { FilesService } from '../../services/storage/files.service';
-import { ModalService } from '../../services/core/modal.service';
-import { StringHelpers } from '../../helpers/string.helpers';
-import { TranslateService } from '../../services/core/translate.service';
-import { WorkPackageService } from '../../services/projects/work-package.service';
-import { MapModalComponent } from '../map-modal/map-modal.component';
-import { OperationResult } from '../../library/core/operation-result';
-import {
-  MapMarker,
-  MapModalParameters,
-} from '../../view-models/general/map-types';
-import { NumberHelpers } from 'src/app/helpers/number.helpers';
-import { TimeViewModel } from '../../view-models/core/general-types';
-import { CulturedDateService } from '../../services/core/cultured-date.service';
-import { MatMenu } from '@angular/material';
-import { GroupService } from '../../services/groups/group.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { DeviceDetectorService } from 'ngx-device-detector';
-import { UploadExceedModalComponent } from '../upload-exceed-modal/upload-exceed-modal.component';
-import { DateHelpers } from '../../helpers/date.helpers';
+import {TaskService} from '../../services/projects/task.service';
+import {OperationResultStatus} from '../../library/core/enums';
+import {ProjectService} from '../../services/projects/project.service';
+import {AccessType, ActivityType, ProjectTemplate, SortType, WorkPackageTaskState,} from '../../library/app/enums';
+import {IdentityService} from '../../services/auth/identity.service';
+import {Socket} from 'ngx-socket-io';
+import {UploadViewModel} from '../../view-models/storage/files-types';
+import {FilesService} from '../../services/storage/files.service';
+import {ModalService} from '../../services/core/modal.service';
+import {StringHelpers} from '../../helpers/string.helpers';
+import {TranslateService} from '../../services/core/translate.service';
+import {WorkPackageService} from '../../services/projects/work-package.service';
+import {MapModalComponent} from '../map-modal/map-modal.component';
+import {OperationResult} from '../../library/core/operation-result';
+import {MapMarker, MapModalParameters,} from '../../view-models/general/map-types';
+import {NumberHelpers} from 'src/app/helpers/number.helpers';
+import {TimeViewModel} from '../../view-models/core/general-types';
+import {CulturedDateService} from '../../services/core/cultured-date.service';
+import {MatMenu} from '@angular/material';
+import {GroupService} from '../../services/groups/group.service';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {DeviceDetectorService} from 'ngx-device-detector';
+import {UploadExceedModalComponent} from '../upload-exceed-modal/upload-exceed-modal.component';
+import {DateHelpers} from '../../helpers/date.helpers';
 import {AdvancedPlayerComponent} from '../advanced-player/advanced-player.component';
 
 @Component({
@@ -413,7 +404,7 @@ export class TaskModalComponent
             }
             break;
           case ActivityType.WorkPackageTaskAttachmentBulkAdd:
-            if (this.model.id === notification.data[0].id) {
+            if (this.model.id === notification.data.id) {
               this.fetch();
             }
             break;
@@ -1141,22 +1132,19 @@ export class TaskModalComponent
     this.bulkUploadInput.nativeElement.click();
   }
 
-  onBulkChange(target) {
+  async onBulkChange(target) {
     if (!target.files.length) { return; }
     this.bulkUploading = true;
     this.bulkUploadProgress = 0;
-    this.taskService.bulkUpload(this.model.id, { file: target.files[0] }, (progress) => {
+    const op = await this.taskService.bulkUpload(this.model.id, { file: target.files[0] }, (progress) => {
       this.bulkUploadProgress = progress;
-    }).then((op) => {
-      this.fetch();
-      this.bulkUploadInput.nativeElement.value = '';
-      this.bulkUploading = false;
-      this.bulkUploadProgress = 0;
-    }, () => {
-      this.bulkUploadInput.nativeElement.value = '';
-      this.bulkUploading = false;
-      this.bulkUploadProgress = 0;
     });
+    this.bulkUploadInput.nativeElement.value = '';
+    this.bulkUploading = false;
+    this.bulkUploadProgress = 0;
+    if (op.data && (op.data as any).status === OperationResultStatus.Success) {
+      await this.fetch();
+    }
   }
 }
 export enum DateMode {
