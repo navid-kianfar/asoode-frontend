@@ -1,3 +1,5 @@
+import {WorkPackageTaskState} from '../../app/enums';
+
 export interface IDateProperties {
   Day: number;
   Month: number;
@@ -30,4 +32,5 @@ export interface IDateEvent {
   recordId: string;
   color?: string;
   cssClass?: string;
+  state?: WorkPackageTaskState;
 }

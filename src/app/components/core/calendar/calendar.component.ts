@@ -72,6 +72,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.initialized = true;
   }
   ngOnChanges(changes: SimpleChanges) {
+    this.dateField = this.dateField || 'date';
     if (changes.model && !changes.model.firstChange) {
       this.ngOnInit(false);
       return;
@@ -260,6 +261,21 @@ export class CalendarComponent implements OnInit, OnChanges {
     ) {
       css += 'active ';
     }
+
+    if (day.events.length) {
+      if (this.today.day > day.day) {
+        css += 'evt-passed';
+      } else if (this.today.day === day.day) {
+        css += 'evt-today';
+      } else {
+       if ((day.day - this.today.day) > 7) {
+         css += 'evt-on-time';
+       } else {
+         css += 'evt-next';
+       }
+      }
+    }
+
     return css;
   }
   calculateDisabled(year: number, month: number, day: number): boolean {
@@ -393,7 +409,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     this.update(day.year, day.month, day.day);
   }
   truncateTime(date: Date): string {
-    return DateHelpers.toIsoDateWithTimeZone(date).split('T')[0] + 'T12:00:00';
+    return this.converter.Format(date, 'YYYY/MM/DD');
   }
   groupCards() {
     const result = {};
@@ -402,6 +418,7 @@ export class CalendarComponent implements OnInit, OnChanges {
       const str = this.truncateTime(c[this.dateField]);
       result[str] = result[str] || [];
       result[str].push(c);
+      c.color = 'red';
     });
     return result;
   }

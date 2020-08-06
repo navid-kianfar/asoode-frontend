@@ -192,6 +192,71 @@
   .prev {
     visibility: visible;
   }
+
+  &.dashboard-events-only {
+    table {
+      tbody {
+        tr {
+          td {
+            border-radius: 30px;
+            &:hover {
+              background: initial;
+              color: initial;
+              box-shadow: none;
+            }
+            &.active {
+              background: #2a70b6 !important;
+              color: #ffffff !important;
+              box-shadow: none;
+            }
+            .label {
+              &.color-1 {
+                background: #cccccc;
+              }
+              &.color-2 {
+                background: #59a8ef;
+              }
+              &.color-3 {
+                background: #5eb258;
+              }
+              &.color-4 {
+                background: #666666;
+              }
+              &.color-5 {
+                background: #b33634;
+              }
+              &.color-6 {
+                background: #666666;
+              }
+              &.color-7 {
+                background: #808080;
+              }
+              &.color-8 {
+                background: #b3b3b3;
+              }
+              &.color-9 {
+                background: #eb973e;
+              }
+            }
+
+            &.evt-next {
+              background: #fef386 !important;
+              color: #444 !important;
+            }
+            &.evt-passed {
+              background: #ee6285 !important;
+              color: #ffffff !important;
+            }
+            &.evt-on-time {
+              background: #74d68c !important;
+              color: #ffffff !important;
+            }
+            &.evt-today {}
+          }
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 480px) {

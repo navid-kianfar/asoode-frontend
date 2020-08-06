@@ -133,17 +133,12 @@
             <div class="square-wrapper">
               <div class="square-inner">
                 <span>{{ !day.old || !monthView ? day.day : '' }}</span>
-                <!--              <span *ngIf="day.events.length" class="labels">-->
-                <!--                  <span-->
-                <!--                    *ngFor="let evt of day.events"-->
-                <!--                    class="label"-->
-                <!--                    [style.backgroundColor]="-->
-                <!--                      evt.labels && evt.labels.length-->
-                <!--                        ? evt.labels[0].value-->
-                <!--                        : '#344563'-->
-                <!--                    "-->
-                <!--                  ></span>-->
-                <!--                </span>-->
+                <span *ngIf="day.events.length" class="labels">
+                  <span
+                    *ngFor="let evt of day.events"
+                    class="label color-{{evt.state}}"
+                  ></span>
+                </span>
               </div>
             </div>
           </td>

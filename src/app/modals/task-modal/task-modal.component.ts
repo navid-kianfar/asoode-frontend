@@ -894,9 +894,9 @@ export class TaskModalComponent
   async saveLabelName(label: WorkPackageLabelViewModel, $event) {
     $event.stopPropagation();
     $event.preventDefault();
-    const title = label.tempName.trim();
+    const title = (label.tempName || '').trim();
     const color = label.tempColor.trim();
-    if (title === (label.title || '') && color === label.color) {
+    if (((!title && !label.title) || title === label.title) && color === label.color) {
       label.editting = false;
       return;
     }
