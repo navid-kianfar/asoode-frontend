@@ -25,6 +25,7 @@ export class CreateWizardComponent
   canCreateGroup: boolean;
   canCreateWorkPackage: boolean;
   canCreateProject: boolean;
+  parentId?: string;
 
   constructor(
     readonly cultureService: CultureService,
@@ -51,6 +52,10 @@ export class CreateWizardComponent
     if (this.simpleProject) {
       this.mode = WizardMode.SimpleProject;
       this.continueAs = WizardMode.SimpleProject;
+    }
+    if (this.simpleGroup) {
+      this.mode = WizardMode.Group;
+      this.continueAs = WizardMode.Group;
     }
   }
   async onCancel($event: MouseEvent) {

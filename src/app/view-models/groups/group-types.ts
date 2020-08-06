@@ -10,6 +10,7 @@ export interface GroupViewModel extends BaseViewModel {
   userId: string;
   title: string;
   premium: boolean;
+  complex: boolean;
   avatar?: string;
   subTitle?: string;
   brandTitle?: string;

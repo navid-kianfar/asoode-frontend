@@ -5,6 +5,8 @@
         [level]="1"
         [groups]="groupService.groups"
         [group]="group"
+        [canAdd]="permission === AccessType.Admin || permission === AccessType.Owner"
+        [permission]="permission"
       ></app-org-chart-node>
     </ol>
   </div>

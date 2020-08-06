@@ -162,4 +162,10 @@ export class GroupService {
       model,
     );
   }
+
+  async upgrade(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/groups/${id}/upgrade`
+    );
+  }
 }

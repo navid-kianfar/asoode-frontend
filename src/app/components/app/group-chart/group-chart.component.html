@@ -4,9 +4,9 @@
   </div>
   <div class="box">
     <div class="premium">
-      <app-org-chart [group]="group"></app-org-chart>
+      <app-org-chart [group]="group" [permission]="permission"></app-org-chart>
     </div>
-    <div *ngIf="!group.premium" class="free">
+    <div *ngIf="!group.complex && !group.parentId" class="free">
       <app-org-chart-node
         [groups]="groupService.groups"
         [canAdd]="true"
@@ -20,7 +20,8 @@
       >
         <i class="icon-trophy4"></i>
         <h3>{{ 'GO_PREMIUM_DESCRIPTION' | translate }}</h3>
-        <button mat-stroked-button>
+        <button [disabled]="waiting" (click)="goPremium()" mat-stroked-button>
+          <i *ngIf="waiting" class="icon-spin icon-spinner2"></i>
           {{ 'GO_PREMIUM' | translate }}
         </button>
       </div>

@@ -1,7 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { GroupViewModel } from '../../../view-models/groups/group-types';
-import { GroupService } from '../../../services/groups/group.service';
-import { AccessType } from '../../../library/app/enums';
+import {Component, Input, OnInit} from '@angular/core';
+import {GroupViewModel} from '../../../view-models/groups/group-types';
+import {GroupService} from '../../../services/groups/group.service';
+import {AccessType} from '../../../library/app/enums';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
+import {ModalService} from '../../../services/core/modal.service';
 
 @Component({
   selector: 'app-group-chart',
@@ -12,7 +15,25 @@ export class GroupChartComponent implements OnInit {
   @Input() group: GroupViewModel;
   @Input() permission: AccessType;
   AccessType = AccessType;
-  constructor(readonly groupService: GroupService) {}
+  waiting: boolean;
+  constructor(
+    readonly groupService: GroupService,
+    private readonly modalService: ModalService,
+  ) {}
 
   ngOnInit() {}
+
+  async goPremium() {
+    this.waiting = true;
+    const op = await this.groupService.upgrade(this.group.id);
+    this.waiting = false;
+    if (op.status === OperationResultStatus.OverCapacity) {
+      this.modalService.show(UpgradeComponent, {}).subscribe(() => {});
+      return;
+    }
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
+  }
 }

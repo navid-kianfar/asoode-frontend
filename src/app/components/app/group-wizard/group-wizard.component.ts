@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { CultureService } from '../../../services/core/culture.service';
 import { FormService } from '../../../services/core/form.service';
 import { FormViewModel } from '../../core/form/contracts';
@@ -17,6 +17,7 @@ import { IdentityService } from '../../../services/auth/identity.service';
 export class GroupWizardComponent implements OnInit {
   @Output() back = new EventEmitter();
   @Output() exit = new EventEmitter();
+  @Input() parentId: string;
   ViewMode = ViewMode;
   mode: ViewMode;
   groupForm: FormViewModel[];
@@ -108,7 +109,10 @@ export class GroupWizardComponent implements OnInit {
       };
     });
     this.actionWaiting = true;
-    const op = await this.groupService.create(this.model);
+    const op = await this.groupService.create({
+      ...this.model,
+      parentId: this.parentId
+    });
     this.actionWaiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error

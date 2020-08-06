@@ -778,5 +778,6 @@
   "ADVANCED_PLAYER": "Advanced Player",
   "NEW_COMMENT": "New Comment",
   "REMOVE_ADVANCED_COMMENT_CONFIRM_HEADING": "Are you sure to remove comment :",
-  "REMOVE_ADVANCED_COMMENT": "Remove Comment"
+  "REMOVE_ADVANCED_COMMENT": "Remove Comment",
+  "ATTACH_GROUP": "Attach existing group"
 }

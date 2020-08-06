@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { GroupService } from '../../../services/groups/group.service';
+import { AccessType } from 'src/app/library/app/enums';
 
 @Component({
   selector: 'app-org-chart',
@@ -8,9 +9,11 @@ import { GroupService } from '../../../services/groups/group.service';
   styleUrls: ['./org-chart.component.scss'],
 })
 export class OrgChartComponent implements OnInit {
+  AccessType = AccessType;
   @Input() group: GroupViewModel;
+  @Input() permission: AccessType;
 
   constructor(readonly groupService: GroupService) {}
 
-  ngOnInit() {}
+  ngOnInit() {  }
 }

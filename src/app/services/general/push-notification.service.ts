@@ -71,7 +71,7 @@ export class PushNotificationService {
         this.groupService.groups.push(notification.data);
         if (
           this.identityService.identity.userId === notification.data.userId &&
-          this.windowService.active
+          this.windowService.active && !notification.data.parentId
         ) {
           this.router.navigateByUrl(url);
         }

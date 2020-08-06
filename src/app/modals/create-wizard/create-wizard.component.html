@@ -76,6 +76,7 @@
   <ng-container *ngIf="mode === WizardMode.Group">
     <ng-container *ngIf="canCreateGroup">
       <app-group-wizard
+        [parentId]="parentId"
         (click)="$event.stopPropagation()"
         (exit)="close()"
         (back)="mode = WizardMode.Choose"

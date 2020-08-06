@@ -55,7 +55,14 @@
     }
   }
 
-  .add {
-    display: none;
+}
+button.add {
+  border: 1px solid #dddddd;
+  border-radius: 30px;
+  background: none;
+  cursor: pointer;
+
+  i {
+    font-size: 0.7rem;
   }
 }

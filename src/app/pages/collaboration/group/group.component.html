@@ -54,7 +54,7 @@
                   ></app-group-projects>
                 </ng-template>
               </mat-tab>
-              <mat-tab [label]="'HUMAN_RESOURCES' | translate">
+              <mat-tab [disabled]="!group.premium" [label]="'HUMAN_RESOURCES' | translate">
                 <ng-template matTabContent>
                   <app-human-resources
                     [permission]="permission"

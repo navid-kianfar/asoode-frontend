@@ -1,6 +1,6 @@
 <li *ngIf="level <= 5">
   <div class="node level-{{ level }}">
-    <div class="chart-node">
+    <div (click)="openGroup()" class="chart-node">
       <div class="info">
         <div class="name">{{ group.title }}</div>
         <div class="description">{{ group.description }}</div>
@@ -11,11 +11,11 @@
       <div *ngIf="!group.avatar" class="initials-holder">
         <div class="initials">{{ group.title | initials }}</div>
       </div>
-
-      <button *ngIf="canAdd" class="add">
-        <i class="icon-plus2"></i>
-      </button>
     </div>
+
+    <button *ngIf="canAdd && level !== 5" class="add" [matMenuTriggerFor]="menu">
+      <i class="icon-plus2"></i>
+    </button>
   </div>
   <ol *ngIf="filtered.length">
     <li *ngFor="let grp of filtered">
@@ -23,7 +23,20 @@
         [level]="level + 1"
         [groups]="groups"
         [group]="grp"
+        [canAdd]="canAdd"
+        [permission]="permission"
       ></app-org-chart-node>
     </li>
   </ol>
 </li>
+
+<mat-menu #menu="matMenu">
+  <button (click)="newGroup()" mat-menu-item>
+    <i class="icon-users4"></i>
+    {{ 'NEW_GROUP' | translate }}
+  </button>
+  <button [disabled]="permission !== AccessType.Owner" (click)="attachGroup()" mat-menu-item>
+    <i class="icon-link2"></i>
+    {{ 'ATTACH_GROUP' | translate }}
+  </button>
+</mat-menu>
