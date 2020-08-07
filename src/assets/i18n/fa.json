@@ -779,5 +779,7 @@
   "NEW_COMMENT": "ایجاد کامنت جدید",
   "REMOVE_ADVANCED_COMMENT_CONFIRM_HEADING": "آیا از حذف کامنت اطمینان دارد؟",
   "REMOVE_ADVANCED_COMMENT": "حذف کامنت",
-  "ATTACH_GROUP": "اتصال از گروه\u200Cهای موجود"
+  "ATTACH_GROUP": "اتصال از گروه\u200Cهای موجود",
+  "CONNECT_GROUP": "اتصال",
+  "PARENT_REQUIRED": "گروه الزامی است"
 }

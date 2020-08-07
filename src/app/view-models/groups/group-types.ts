@@ -6,7 +6,8 @@ export interface GroupViewModel extends BaseViewModel {
   archivedAt?: Date;
   attachmentSize: number;
   access?: AccessType;
-  parentId: string;
+  parentId?: string;
+  rootId?: string;
   userId: string;
   title: string;
   premium: boolean;

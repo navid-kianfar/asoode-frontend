@@ -779,5 +779,7 @@
   "NEW_COMMENT": "New Comment",
   "REMOVE_ADVANCED_COMMENT_CONFIRM_HEADING": "Are you sure to remove comment :",
   "REMOVE_ADVANCED_COMMENT": "Remove Comment",
-  "ATTACH_GROUP": "Attach existing group"
+  "ATTACH_GROUP": "Attach existing group",
+  "CONNECT_GROUP": "Connect",
+  "PARENT_REQUIRED": "Parent group is required"
 }

@@ -6,7 +6,11 @@ import {ModalService} from '../../../services/core/modal.service';
 import {CreateModalParameters} from '../../../view-models/modals/modals-types';
 import {Socket} from 'ngx-socket-io';
 import {Router} from '@angular/router';
-import { AccessType } from 'src/app/library/app/enums';
+import {AccessType, ActivityType} from 'src/app/library/app/enums';
+import {PromptComponent} from '../../../modals/prompt/prompt.component';
+import {OperationResultStatus} from '../../../library/core/enums';
+import {PromptModalParameters} from '../../../view-models/core/modal-types';
+import {FormService} from '../../../services/core/form.service';
 
 @Component({
   selector: 'app-org-chart-node',
@@ -25,6 +29,7 @@ export class OrgChartNodeComponent implements OnInit, OnDestroy {
   constructor(
     private readonly modalService: ModalService,
     private readonly groupService: GroupService,
+    private readonly formService: FormService,
     private readonly socket: Socket,
     private readonly router: Router,
   ) {}
@@ -39,7 +44,14 @@ export class OrgChartNodeComponent implements OnInit, OnDestroy {
   }
 
   handleSocket = (notification) => {
-    this.filtered = this.groups.filter(g => g.parentId === this.group.id);
+    switch (notification.type) {
+      case ActivityType.GroupAdd:
+      case ActivityType.GroupEdit:
+      case ActivityType.GroupRemove:
+      case ActivityType.GroupArchive:
+        this.filtered = this.groups.filter(g => g.parentId === this.group.id);
+        break;
+    }
   }
 
   newGroup() {
@@ -50,7 +62,37 @@ export class OrgChartNodeComponent implements OnInit, OnDestroy {
   }
 
   attachGroup() {
-
+    this.modalService
+      .show(PromptComponent, {
+        icon: 'icon-link',
+        title: 'ATTACH_GROUP',
+        form: [
+          {
+            elements: [
+              this.formService.createDropDown({
+                config: { field: 'id', label: '' },
+                params: { model: undefined, items: [], backend: `/groups/${this.group.id}/non-attached` },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'PARENT_REQUIRED',
+                  },
+                },
+              }),
+            ],
+          },
+        ],
+        action: async (params, form) => {
+          const op = await this.groupService.connect(this.group.id, params.id);
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+        },
+        actionLabel: 'CONNECT_GROUP',
+        actionColor: 'primary',
+      } as PromptModalParameters)
+      .subscribe(() => {});
   }
 
   openGroup() {

@@ -10,6 +10,7 @@ import {
   TimeSpentViewModel,
 } from '../../view-models/projects/project-types';
 import { DayReportViewModel } from '../../view-models/general/report-types';
+import {ListViewModel} from '../../view-models/core/list-types';
 
 @Injectable({
   providedIn: 'root',
@@ -166,6 +167,18 @@ export class GroupService {
   async upgrade(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/groups/${id}/upgrade`
+    );
+  }
+
+  async notAttached(id: string): Promise<OperationResult<ListViewModel[]>> {
+    return await this.httpService.post<ListViewModel[]>(
+      `/groups/${id}/non-attached`
+    );
+  }
+
+  async connect(parentId: string, id: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/groups/${parentId}/connect`, { id }
     );
   }
 }
