@@ -1127,8 +1127,8 @@ export class WorkPackageComponent implements OnInit {
         action: async () => {
           this.deleting = true;
           const op = await (this.project.complex
-            ? this.projectService.remove(this.project.id)
-            : this.workPackageService.remove(this.workPackage.id));
+            ? this.workPackageService.remove(this.workPackage.id)
+            : this.projectService.remove(this.project.id));
           this.deleting = false;
           if (op.status !== OperationResultStatus.Success) {
             // TODO: handle error
