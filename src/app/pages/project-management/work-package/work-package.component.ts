@@ -165,6 +165,7 @@ export class WorkPackageComponent implements OnInit {
             );
           }
           break;
+        case ActivityType.WorkPackageListTasksDelete:
         case ActivityType.WorkPackageListTasksArchive:
           const found = this.workPackage.lists.find(
             l => l.id === notification.data.id,

@@ -222,6 +222,12 @@ export class WorkPackageService {
     );
   }
 
+  async clearListTasks(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/work-packages/lists/${id}/clear-tasks`,
+    );
+  }
+
   async archiveList(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/work-packages/lists/${id}/archive`,
@@ -271,4 +277,5 @@ export class WorkPackageService {
     }
     return multiple.sort()[0];
   }
+
 }

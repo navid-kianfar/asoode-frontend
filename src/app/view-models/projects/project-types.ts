@@ -136,6 +136,7 @@ export interface WorkPackageViewModel extends BaseViewModel {
   permissionArchiveList: boolean;
   permissionEditList: boolean;
   permissionCreateList: boolean;
+  permissionClearList: boolean;
 
   order: number;
   userSetting: WorkPackageUserSetting;

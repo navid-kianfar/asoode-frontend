@@ -210,6 +210,18 @@
             <span>{{ 'ARCHIVE_LIST' | translate }}</span>
           </span>
         </button>
+        <button
+          *ngIf="isAdminOrHasPermission(model.permissionClearList)"
+          [disabled]="list.waiting"
+          class="action-btn"
+          (click)="clearList(list)"
+          mat-menu-item
+        >
+          <span class="cnt">
+            <i class="icon-delete x2"></i>
+            <span>{{ 'CLEAR_LIST' | translate }}</span>
+          </span>
+        </button>
       </mat-menu>
     </div>
     <div

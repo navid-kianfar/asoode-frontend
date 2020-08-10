@@ -296,6 +296,31 @@ export class WorkPackageBoardComponent implements OnInit {
       .subscribe(() => {});
   }
 
+  clearList(list: WorkPackageListViewModel) {
+    const heading = StringHelpers.format(
+      this.translateService.fromKey('CLEAR_TASKS_CONFIRM_HEADING'),
+      [list.title],
+    );
+    this.modalService
+      .confirm({
+        title: 'CLEAR_TASKS',
+        message: 'CLEAR_TASKS_CONFIRM',
+        heading,
+        actionLabel: 'CLEAR_TASKS',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          list.waiting = true;
+          const op = await this.workPackageService.clearListTasks(list.id);
+          list.waiting = false;
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+        },
+      })
+      .subscribe(() => {});
+  }
+
   isAdminOrHasPermission(permission: boolean) {
     return (
       this.permission === AccessType.Owner ||
