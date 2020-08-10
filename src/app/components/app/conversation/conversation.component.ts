@@ -71,6 +71,7 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
       '.xls,.xlsx,.csv',
       '.zip,.rar,.7z,.tar,.gz',
       '.pdf',
+      '.moho',
       '.ppt,.pptx',
       '.doc,.docx,.rtf,.txt',
     ].join(',');
