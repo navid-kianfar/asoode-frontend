@@ -8,6 +8,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ValidationService } from '../../../services/core/validation.service';
 import { IdentityService } from '../../../services/auth/identity.service';
+import {GroupType} from '../../../library/app/enums';
 
 @Component({
   selector: 'app-group-wizard',
@@ -59,6 +60,10 @@ export class GroupWizardComponent implements OnInit {
                 message: 'GROUP_TITLE_REQUIRED',
               },
             },
+          }),
+          this.formService.createDropDown({
+            config: { field: 'type', visible: this.parentId !== undefined },
+            params: { model: GroupType.Team, enum: 'GroupType', items: [], enumInfo: true }
           }),
           this.formService.createInput({
             config: { field: 'description', label: '', hideLabel: true },

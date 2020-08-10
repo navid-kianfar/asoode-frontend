@@ -508,13 +508,12 @@ export class TaskModalComponent
       console.error('Package not found');
       return this.close();
     }
-
     this.groupMembers = this.project.members
       .filter(i => i.isGroup)
-      .filter(f => {
-        return this.workPackage.members.find(d => d.recordId === f.recordId);
-      });
-    this.individualMembers = this.project.members.filter(i => !i.isGroup);
+      .filter(f => this.workPackage.members.find(d => d.recordId === f.recordId));
+    this.individualMembers = this.project.members
+      .filter(i => !i.isGroup)
+      .filter(f => this.workPackage.members.find(d => d.recordId === f.recordId));
 
     this.groupMembers.forEach(g => {
       const grp = this.groupService.groups.find(i => i.id === g.recordId);

@@ -151,6 +151,7 @@ export interface IFormElementDropDown extends IFormElement {
     picked?: (val) => void;
     model: any;
     items: any[];
+    enumInfo?: boolean;
     ltr?: boolean;
     disabled?: boolean;
     label?: string;

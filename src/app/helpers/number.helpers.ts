@@ -73,6 +73,16 @@ export class NumberHelpers {
     });
   }
 
+  static sort(a: object, b: object, key: string): number {
+    if (a[key] < b[key]) {
+      return -1;
+    }
+    if (a[key] > b[key]) {
+      return 1;
+    }
+    return 0;
+  }
+
   static clearNumbers(input: string): string {
     // @ts-ignore
     return input.replace(/[\u0660-\u0669]/g, c => {

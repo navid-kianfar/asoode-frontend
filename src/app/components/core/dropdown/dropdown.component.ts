@@ -33,6 +33,7 @@ export class DropdownComponent implements OnInit, OnChanges {
   @Input() chooseLabel: string;
   @Input() enum: string;
   @Input() enumExcept: any[];
+  @Input() enumInfo: boolean;
   @Input() waiting: boolean;
   @Input() ltr: boolean;
   @Input() backend: string;
@@ -130,10 +131,11 @@ export class DropdownComponent implements OnInit, OnChanges {
           .replace(/([a-z])([A-Z])/g, '$1-$2')
           .replace(/-/g, '_');
         const text = `ENUMS_${enumChanged}_${changed}`.toUpperCase();
+        const description = this.enumInfo ? text + '_DESC' : undefined;
         if (this.enumExcept.indexOf(enumObj[key]) !== -1) {
           return;
         }
-        items.push({ text, separator: false, value: enumObj[key] });
+        items.push({ text, separator: false, value: enumObj[key], description });
       });
       this.items = items;
     }

@@ -402,6 +402,61 @@
   }
 }
 
+.structure-popper {
+  width: 250px;
+  min-height: 120px;
+  background: #ffffff;
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  font-size: 0.7rem;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      margin: 5px 0 0;
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      border: 2px solid #e6e6e6;
+      border-radius: 5px;
+
+      span {
+        display: flex;
+        font-size: 0.8rem;
+        font-weight: 400;
+
+        i {
+          font-size: 1rem;
+          font-weight: 500;
+        }
+      }
+
+      &.sub {
+        i {
+          color: #b977f7;
+        }
+      }
+
+      &.wp {
+        cursor: pointer;
+        i {
+          color: #666;
+        }
+
+        &:hover, &.selected {
+          background: #efefef;
+        }
+      }
+    }
+  }
+}
+
 .objectives-popper {
   width: 300px;
   min-height: 120px;
