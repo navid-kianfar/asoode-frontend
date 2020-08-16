@@ -892,6 +892,10 @@ body.dark-mode {
         }
       }
     }
+    textarea {
+      background: $color1;
+      border: none !important;
+    }
   }
 
   .work-package {
@@ -1021,6 +1025,15 @@ body.dark-mode {
     }
   }
 
+  .mat-paginator {
+    background: inherit !important;
+    color: $color4 !important;
+
+    .mat-icon-button {
+      color: $color4 !important;
+      cursor: pointer;
+    }
+  }
   .close-out-side {
     .task-wrapper {
       background: $color1 !important;
@@ -1123,6 +1136,10 @@ body.dark-mode {
           }
         }
       }
+
+      .records .record .total {
+        color: $color4 !important;
+      }
     }
   }
   .task-modal-labels-menu ul li .label {
@@ -1149,6 +1166,52 @@ body.dark-mode {
     background: $color1 !important;
     .status-container {
       border-color: $color2 !important;
+    }
+
+    ul {
+      li:hover {
+        background: $color2 !important;
+      }
+    }
+  }
+
+  .objectives-popper {
+    background: $color1;
+    box-shadow: none;
+    color: $color4;
+  }
+  .structure-popper {
+    background: $color1;
+    box-shadow: none;
+    color: $color4;
+
+    ul {
+      li {
+        border-color: $color2 !important;
+
+        &.sub {
+          i {
+            color: #b977f7;
+          }
+        }
+
+        &.wp {
+          cursor: pointer;
+          i {
+            color: #666;
+          }
+
+          &:hover, &.selected {
+            background: $color2 !important;
+          }
+        }
+      }
+    }
+  }
+  .progress-report {
+    background: $color1;
+    .item {
+      border-bottom-color: $color2 !important;
     }
   }
 

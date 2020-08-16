@@ -58,7 +58,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   @Output() totalItemsChange = new EventEmitter<number>();
   @Output() onCreate = new EventEmitter<void>();
 
-  // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatTable, { static: true }) table: MatTable<T>;
   @ContentChildren(MatColumnDef) columnDefs: QueryList<MatColumnDef>;
 
@@ -90,7 +90,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
         this.onCommand(command),
       );
     }
-    setTimeout(() => this.updateDataSource(), 500);
+    setTimeout(() => this.updateDataSource(), 100);
   }
 
   ngOnDestroy() {
@@ -100,7 +100,50 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   }
 
   ngAfterContentInit(): void {
+    this.translatorService.paginator(this.paginator);
     this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
+  }
+
+  async updateDataSource(pageChanged: boolean = false) {
+    if (!this.backend) {
+      return;
+    }
+    this.isLoading = true;
+    this.isLoadingChange.emit(this.isLoading);
+    this.dataSource.data = [];
+    const op = await this.httpService.grid<T>({
+      backend: this.backend,
+      params: {
+        query: this.query,
+        ...(this.backendParams || {}),
+      },
+      page: this.currentPage || 1,
+      pageSize: this.pageSize || 10,
+    });
+    this.isLoading = false;
+    this.isLoadingChange.emit(this.isLoading);
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error;
+      return;
+    }
+
+    this.totalItems = op.data.totalItems;
+    this.totalPages = op.data.totalPages;
+
+    this.dataSource = new MatTableDataSource<T>(op.data.items);
+
+
+    this.dataSource.paginator = this.paginator;
+
+    this.totalItemsChange.emit(this.totalItems);
+    this.rowsChange.emit(op.data.items);
+    this.totalPagesChange.emit(this.totalPages);
+
+    setTimeout(() => {
+      this.paginator.length =  this.totalItems;
+      this.paginator.pageSize = this.pageSize;
+      this.paginator.pageIndex = this.currentPage - 1;
+    }, 200);
   }
 
   async onCommand(command: GridCommand<any>) {
@@ -137,38 +180,6 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     await this.updateDataSource(true);
   }
 
-  async updateDataSource(pageChanged: boolean = false) {
-    if (!this.backend) {
-      return;
-    }
-    this.isLoading = true;
-    this.isLoadingChange.emit(this.isLoading);
-    const op = await this.httpService.grid<T>({
-      backend: this.backend,
-      params: {
-        query: this.query,
-        ...(this.backendParams || {}),
-      },
-      page: this.currentPage || 1,
-      pageSize: this.pageSize || 10,
-    });
-    this.isLoading = false;
-    this.isLoadingChange.emit(this.isLoading);
-    if (op.status !== OperationResultStatus.Success) {
-      // TODO: handle error;
-      return;
-    }
-
-    this.totalItems = op.data.totalItems;
-    this.totalPages = op.data.totalPages;
-
-    this.dataSource.data = op.data.items;
-
-    this.totalItemsChange.emit(this.totalItems);
-    this.rowsChange.emit(op.data.items);
-    this.totalPagesChange.emit(this.totalPages);
-  }
-
   filterResult() {
     this.currentPage = 1;
     this.currentPageChange.emit(1);
@@ -183,5 +194,10 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
       return this.totalItems;
     }
     return (this.currentPage - 1) * this.pageSize + this.pageSize;
+  }
+
+  pageChange($event: PageEvent) {
+    this.currentPage = $event.pageIndex + 1;
+    this.updateDataSource(true);
   }
 }

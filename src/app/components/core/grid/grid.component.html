@@ -34,47 +34,11 @@
     <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
-
-  <div class="paginator">
-    <div class="info">
-      {{
-        'PAGINATOR_OF'
-          | translate
-          | stringFormat
-            : (currentPage - 1) * pageSize + (totalItems ? 1 : 0)
-            : calculateOf()
-            : totalItems
-      }}
-    </div>
-    <div class="actions">
-      <button
-        mat-stroked-button
-        [disabled]="isLoading || currentPage === 1"
-        (click)="changePage(1)"
-      >
-        {{ 'PAGINATOR_FIRST' | translate }}</button
-      >&nbsp;
-      <button
-        mat-stroked-button
-        [disabled]="isLoading || currentPage === 1"
-        (click)="changePage(currentPage - 1)"
-      >
-        {{ 'PAGINATOR_PREV' | translate }}</button
-      >&nbsp;
-      <button
-        mat-stroked-button
-        [disabled]="totalPages < 2 || isLoading || currentPage === totalPages"
-        (click)="changePage(currentPage + 1)"
-      >
-        {{ 'PAGINATOR_NEXT' | translate }}</button
-      >&nbsp;
-      <button
-        mat-stroked-button
-        [disabled]="totalPages < 2 || isLoading || currentPage === totalPages"
-        (click)="changePage(totalPages)"
-      >
-        {{ 'PAGINATOR_LAST' | translate }}
-      </button>
-    </div>
+  <div class="spinner-container" *ngIf="isLoading">
+    <app-waiting></app-waiting>
   </div>
+  <mat-paginator [hidden]="showFooter === false"
+                 [disabled]="isLoading"
+                 (page)="pageChange($event)"
+                 showFirstLastButtons></mat-paginator>
 </div>

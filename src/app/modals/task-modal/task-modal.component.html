@@ -266,7 +266,7 @@
                         *ngIf="!model.parentId && project.template !== ProjectTemplate.Animation"
                         [disabled]="
                           showSubTasks ||
-                          model.subTasks?.length > 0 ||
+                          model?.subTasks?.length > 0 ||
                           !isAdminOrHasPermission(
                             workPackage.permissionCreateTask
                           )
@@ -496,7 +496,7 @@
                   class="box"
                   *ngIf="
                     !model.parentId && project.template !== ProjectTemplate.Animation &&
-                    (showSubTasks || model.subTasks.length)
+                    (showSubTasks || model?.subTasks.length)
                   "
                 >
                   <ng-container [ngTemplateOutlet]="subTaskTemplate" [ngTemplateOutletContext]="{upload: false}"></ng-container>
