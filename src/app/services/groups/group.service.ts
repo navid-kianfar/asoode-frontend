@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
-import { GroupViewModel } from '../../view-models/groups/group-types';
+import { GroupViewModel, TimeOffDetailViewModel } from '../../view-models/groups/group-types';
 import { OperationResultStatus } from '../../library/core/enums';
 import { AccessType } from '../../library/app/enums';
 import { IdentityService } from '../auth/identity.service';
@@ -179,6 +179,36 @@ export class GroupService {
   async connect(parentId: string, id: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
       `/groups/${parentId}/connect`, { id }
+    );
+  }
+
+  async createTimeOff(id: string, model: any): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/groups/time-offs/${id}/request`, model
+    );
+  }
+
+  async deleteTimeOff(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/groups/time-offs/${id}/delete`
+    );
+  }
+
+  async approveTimeOff(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/groups/time-offs/${id}/approve`
+    );
+  }
+
+  async declineTimeOff(id: string): Promise<OperationResult<boolean>> {
+    return await this.httpService.post<boolean>(
+      `/groups/time-offs/${id}/decline`
+    );
+  }
+
+  async detailTimeOff(id: string): Promise<OperationResult<TimeOffDetailViewModel>> {
+    return await this.httpService.post<TimeOffDetailViewModel>(
+      `/groups/time-offs/${id}/detail`
     );
   }
 }

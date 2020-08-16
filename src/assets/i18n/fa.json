@@ -785,5 +785,28 @@
   "CLEAR_LIST": "حذف همه کارت ها",
   "CLEAR_TASKS_CONFIRM_HEADING": "آیا از حذف کارت ها در لیست {0} اطمینان دارید؟",
   "CLEAR_TASKS_CONFIRM": "در صورت تایید تمامی کارت ها در لیست از بین خواهد رفت",
-  "CLEAR_TASKS": "حذف کارت ها در لیست"
+  "CLEAR_TASKS": "حذف کارت ها در لیست",
+
+
+
+  "ENUMS_REQUEST_STATUS_PENDING": "در انتظار تایید",
+  "ENUMS_REQUEST_STATUS_CANCELED": "رد شده",
+  "ENUMS_REQUEST_STATUS_APPROVED": "تایید شده",
+  "CREATE_TIME_OFF": "ثبت درخواست",
+  "TIME_OFF_BEGIN_AT": "تاریخ مرخصی",
+  "TIME_OFF_END_AT_TIME": "زمان پایان",
+  "TIME_OFF_BEGIN_AT_TIME": "زمان شروع",
+  "TIME_OFF_HOURLY": "مرخصی ساعتی",
+  "TIME_OFF_DAILY": "مرخصی روزانه",
+  "TIME_OFF_DELETE": "حذف مرخصی",
+  "TIME_OFF_DECLINE": "رد درخواست مرخصی",
+  "TIME_OFF_DESCRIPTION": "شرح دلیل درخواست",
+  "TIME_OFF_DESCRIPTION_REQUIRED": "شرح دلیل درخواست الزامی است",
+  "TIME_OFF_DELETE_CONFIRM": " ",
+  "TIME_OFF_DELETE_HEADING": "آیا از حذف درخواست مرخصی اطمینان دارید؟",
+  "TIME_OFF_DECLINE_CONFIRM": " ",
+  "TIME_OFF_DECLINE_HEADING": "آیا از رد درخواست مرخصی اطمینان دارید؟",
+  "TIME_OFF_HISTORY": "ثوابق مرخصی",
+  "TIME_OFF_APPROVE": "تایید درخواست",
+  "TIME_OFF_REVIEW": "برسی درخواست مرخصی"
 }

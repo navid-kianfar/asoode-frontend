@@ -1,10 +1,6 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
-import {
-  AccessType,
-  ShiftType,
-  WorkPackageObjectiveType,
-} from '../../../library/app/enums';
+import { AccessType, RequestStatus, ShiftType } from '../../../library/app/enums';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { GridCommand } from '../../../view-models/core/grid-types';
 import { ModalService } from '../../../services/core/modal.service';
@@ -13,10 +9,13 @@ import { TranslateService } from '../../../services/core/translate.service';
 import { GroupService } from '../../../services/groups/group.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
-import { RequestTimeOffComponent } from '../../../modals/request-time-off/request-time-off.component';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { FormViewModel } from '../../core/form/contracts';
 import { FormService } from '../../../services/core/form.service';
+import { ListViewModel } from '../../../view-models/core/list-types';
+import { IDateConverter } from '../../../library/core/date-time/date-contracts';
+import { TimeOffApproveModalComponent } from '../../../modals/time-off-approve-modal/time-off-approve-modal.component';
+import { TimeOffHistoryModalComponent } from '../../../modals/time-off-history-modal/time-off-history-modal.component';
 
 @Component({
   selector: 'app-human-resources',
@@ -29,8 +28,10 @@ export class HumanResourcesComponent implements OnInit {
   entryCommander = new EventEmitter<GridCommand<any>>();
   timeOffCommander = new EventEmitter<GridCommand<boolean>>();
   shiftsCommander = new EventEmitter<GridCommand<boolean>>();
+  RequestStatus = RequestStatus;
   AccessType = AccessType;
   ShiftType = ShiftType;
+  converter: IDateConverter;
   constructor(
     readonly identityService: IdentityService,
     private readonly modalService: ModalService,
@@ -40,7 +41,9 @@ export class HumanResourcesComponent implements OnInit {
     private readonly culturedDateService: CulturedDateService,
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.converter = this.culturedDateService.Converter();
+  }
 
   createEntry() {
     const canStart =
@@ -580,15 +583,119 @@ export class HumanResourcesComponent implements OnInit {
   }
 
   createTimeOff() {
+    const form = [
+      {
+        elements: [
+          this.formService.createDropDown({
+            config: { field: 'isHourly' },
+            params: {
+              model: true,
+              items: [{
+                text: 'TIME_OFF_HOURLY',
+                value: true
+              }, {
+                text: 'TIME_OFF_DAILY',
+                value: false
+              }] as ListViewModel[],
+              picked: (value) => {
+                form[2].elements[0].config.visible = value;
+                form[3].elements[0].config.visible = value;
+              }
+            }
+          })
+        ]
+      },
+      {
+        elements: [
+          this.formService.createDatePicker({
+            config: { field: 'beginAt', label: 'TIME_OFF_BEGIN_AT' },
+            params: {
+              model: new Date()
+            },
+            validation: {
+              required: {
+                message: 'TIME_OFF_BEGIN_AT_REQUIRED',
+                value: true
+              }
+            }
+          })
+        ]
+      },
+      {
+        size: 6,
+        elements: [
+          this.formService.createTimePicker({
+            config: { field: 'beginAt_time', label: 'TIME_OFF_BEGIN_AT_TIME' },
+            params: {
+              model: '10:00'
+            }
+          })
+        ]
+      },
+      {
+        size: 6,
+        elements: [
+          this.formService.createTimePicker({
+            config: { field: 'endAt_time', label: 'TIME_OFF_END_AT_TIME' },
+            params: {
+              model: '13:00'
+            }
+          })
+        ]
+      },
+      {
+        elements: [
+          this.formService.createInput({
+            config: { field: 'description' },
+            params: { model: '', textArea: true, placeHolder: 'TIME_OFF_DESCRIPTION' },
+            validation: {
+              required: {
+                message: 'TIME_OFF_DESCRIPTION_REQUIRED',
+                value: false
+              }
+            }
+          })
+        ]
+      }
+    ] as FormViewModel[];
+
     this.modalService
-      .show(RequestTimeOffComponent, {
-        groupId: this.group.id,
+      .show(PromptComponent, {
+        form,
+        actionLabel: 'CREATE_TIME_OFF',
+        action: async (model, frm) => {
+          const beginAtParsed = this.converter.FromDateTime(model.beginAt);
+          const beginHourParts = (model.isHourly ? model.beginAt_time : '00:00').split(':');
+          const endHourParts = (model.isHourly ? model.endAt_time : '23:59').split(':');
+          const beginAt = this.converter.ToDateTime({
+            Year: beginAtParsed.Year,
+            Month: beginAtParsed.Month,
+            Day: beginAtParsed.Day,
+            Hours: +beginHourParts[0],
+            Minutes: +beginHourParts[1],
+          });
+          const endAt = this.converter.ToDateTime({
+            Year: beginAtParsed.Year,
+            Month: beginAtParsed.Month,
+            Day: beginAtParsed.Day,
+            Hours: +endHourParts[0],
+            Minutes: +endHourParts[1],
+          });
+          const op = await this.groupService.createTimeOff(this.group.id, {
+            beginAt,
+            endAt,
+            isHourly: model.isHourly,
+            description: model.description
+          });
+          if (op.status === OperationResultStatus.Success) {
+            this.timeOffCommander.emit({ reload: true });
+          }
+          return op;
+        },
+        actionColor: 'primary',
+        title: 'REQUEST_TIME_OFF',
       })
-      .subscribe(reload => {
-        if (reload) {
-          this.timeOffCommander.emit({ reload: true });
-        }
-      });
+      .subscribe(() => {});
   }
 
   editShift(element: any) {
@@ -650,9 +757,58 @@ export class HumanResourcesComponent implements OnInit {
       .subscribe(() => {});
   }
 
-  editTimeOff(element: any) {}
+  deleteTimeOff(element: any) {
+    this.modalService
+      .confirm({
+        title: 'TIME_OFF_DELETE',
+        message: 'TIME_OFF_DELETE_CONFIRM',
+        heading: 'TIME_OFF_DELETE_HEADING',
+        actionLabel: 'TIME_OFF_DELETE',
+        cancelLabel: 'CANCEL',
+        action: async () => {
+          const op = await this.groupService.deleteTimeOff(element.id);
+          if (op.status === OperationResultStatus.Success) {
+            this.timeOffCommander.emit({reload: true});
+            return;
+          }
+          // TODO: handle error
+        },
+      })
+      .subscribe(confirmed => {});
+  }
 
-  respondTimeOff(element: any) {}
+  respondTimeOff(timeOff: any, status: boolean) {
+    if (!status) {
+      this.modalService
+        .confirm({
+          title: 'TIME_OFF_DECLINE',
+          message: 'TIME_OFF_DECLINE_CONFIRM',
+          heading: 'TIME_OFF_DECLINE_HEADING',
+          actionLabel: 'TIME_OFF_DECLINE',
+          cancelLabel: 'CANCEL',
+          action: async () => {
+            const op = await this.groupService.declineTimeOff(timeOff.id);
+            if (op.status === OperationResultStatus.Success) {
+              this.timeOffCommander.emit({reload: true});
+              return;
+            }
+            // TODO: handle error
+          },
+        })
+        .subscribe(confirmed => {});
+      return;
+    }
 
-  deleteTimeOff(element: any) {}
+    this.modalService.show(TimeOffApproveModalComponent, {timeOff})
+      .subscribe((refresh) => {
+        if (refresh) {
+          this.timeOffCommander.emit({reload: true});
+        }
+      });
+  }
+
+  historyTimeOff(timeOff: any) {
+    this.modalService.show(TimeOffHistoryModalComponent, {timeOff})
+      .subscribe(() => { });
+  }
 }

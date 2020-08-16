@@ -1,0 +1,39 @@
+<div class="modal-content approve-modal">
+  <div class="modal-header">
+    <h4>{{ 'TIME_OFF_REVIEW' | translate }}</h4>
+    <button (click)="close()" class="close">
+      <i class="icon-cross"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="task-wrapper">
+      <app-work-package-task
+        (click)="openTask(log)"
+        [model]="log"
+        *ngFor="let log of data.tasks"
+      ></app-work-package-task>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="approving || waiting || declining"
+      class="btn btn-primary"
+      (click)="approve()"
+    >
+      <i class="icon-spin icon-spinner2" *ngIf="approving"></i>
+      {{ 'TIME_OFF_APPROVE' | translate }}</button
+    >&nbsp;
+    <button
+      mat-flat-button
+      color="warn"
+      [disabled]="approving || waiting || declining"
+      class="btn btn-danger"
+      (click)="decline()"
+    >
+      <i class="icon-spin icon-spinner2" *ngIf="declining"></i>
+      {{ 'TIME_OFF_DECLINE' | translate }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+.approve-modal {
+  .task-wrapper {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+  }
+  ::ng-deep .task {
+    max-width: 232px;
+    min-width: 232px;
+    margin-inline-end: 20px;
+  }
+}

@@ -187,10 +187,11 @@ import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-
 import { LabelsModalComponent } from './modals/labels-modal/labels-modal.component';
 import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-fields-modal.component';
 import { OfflineComponent } from './modals/offline/offline.component';
-import { RequestTimeOffComponent } from './modals/request-time-off/request-time-off.component';
 import { FullNamePipe } from './pipes/app/full-name.pipe';
 import { AdvancedPlayerComponent } from './modals/advanced-player/advanced-player.component';
 import { MemberFilterPipe } from './pipes/app/member-filter.pipe';
+import { TimeOffApproveModalComponent } from './modals/time-off-approve-modal/time-off-approve-modal.component';
+import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/time-off-history-modal.component';
 
 @NgModule({
   declarations: [
@@ -335,14 +336,16 @@ import { MemberFilterPipe } from './pipes/app/member-filter.pipe';
     LabelsModalComponent,
     CustomFieldsModalComponent,
     OfflineComponent,
-    RequestTimeOffComponent,
     FullNamePipe,
     AdvancedPlayerComponent,
     MemberFilterPipe,
+    TimeOffApproveModalComponent,
+    TimeOffHistoryModalComponent,
   ],
   entryComponents: [
+    TimeOffApproveModalComponent,
+    TimeOffHistoryModalComponent,
     AdvancedPlayerComponent,
-    RequestTimeOffComponent,
     OfflineComponent,
     CustomFieldsModalComponent,
     LabelsModalComponent,

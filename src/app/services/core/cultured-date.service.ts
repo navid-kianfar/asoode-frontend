@@ -46,7 +46,7 @@ export class CulturedDateService {
       return '';
     }
     value = new Date(value);
-    format = format || (time ? 'YYYY/MM/DD HH:mm:ss' : 'YYYY/MM/DD');
+    format = format || (time ? 'YYYY/MM/DD HH:mm' : 'YYYY/MM/DD');
     return this.Converter().Format(value, format);
   }
 }

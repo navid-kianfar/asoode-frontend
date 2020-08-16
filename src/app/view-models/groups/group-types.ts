@@ -1,7 +1,11 @@
 import { BaseViewModel } from '../core/general-types';
 import { AccessType, GroupType } from '../../library/app/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
+import { WorkPackageTaskViewModel } from '../projects/project-types';
 
+export interface TimeOffDetailViewModel {
+  tasks: WorkPackageTaskViewModel[];
+}
 export interface GroupViewModel extends BaseViewModel {
   archivedAt?: Date;
   attachmentSize: number;
