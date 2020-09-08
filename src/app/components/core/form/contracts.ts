@@ -89,6 +89,14 @@ export interface IFormElementInput extends IFormElement {
     rows?: number;
   };
 }
+export interface IFormElementEditor extends IFormElement {
+  params: {
+    model: string;
+    readonly?: boolean;
+    disabled?: boolean;
+    placeHolder?: string;
+  };
+}
 export interface IFormElementVerification extends IFormElement {
   params: {
     cssClass?: string;
