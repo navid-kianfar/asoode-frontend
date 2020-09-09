@@ -406,11 +406,11 @@ export class UpgradeWizardComponent implements OnInit {
         this.order.spaceCost;
     }
     this.order.calculatedPrice = Math.round(this.order.calculatedPrice);
-    this.order.valueAdded = Math.round(
-      ((this.order.calculatedPrice - this.order.appliedDiscount) *
-        this.data.valueAdded) /
-        100,
-    );
+    // this.order.valueAdded = Math.round(
+    //   ((this.order.calculatedPrice - this.order.appliedDiscount) *
+    //     this.data.valueAdded) /
+    //     100,
+    // );
   }
 
   async checkDiscount() {
