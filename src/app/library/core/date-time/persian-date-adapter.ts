@@ -13,7 +13,7 @@ export const PERSIAN_DATE_FORMATS = {
   }
 };
 
-export class MaterialPersianDateAdapter extends DateAdapter<
+export class PersianDateAdapter extends DateAdapter<
   jalaliMoment.Moment
 > {
   constructor() {
