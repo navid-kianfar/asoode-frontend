@@ -104,6 +104,7 @@ export class PersianDateAdapter extends DateAdapter<
     if (date < 1) {
       throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
     }
+    month = month || 1;
     const result = jalaliMoment()
       .jYear(year)
       .jMonth(month)
