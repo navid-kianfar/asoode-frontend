@@ -6,19 +6,17 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { ICulture } from '../../../view-models/core/date-types';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
-import { PopperContent } from 'ngx-popper';
-import { NumberHelpers } from '../../../helpers/number.helpers';
 
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss'],
+  styleUrls: ['./date-picker.component.scss']
 })
-export class DatePickerComponent implements OnInit, OnChanges {
+export class DatePickerComponent implements OnInit {
   formattedDate: string;
   dateView: any;
   calendar: ICulture;
@@ -44,34 +42,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   constructor(readonly culturedDateService: CulturedDateService) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.model && !changes.model.firstChange) {
-      if (!changes.model.currentValue) {
-        this.setFormattedDate('');
-      }
-    }
-  }
-
   ngOnInit() {
-    this.formattedDate = '';
-    if (this.model) {
-      const date = this.culturedDateService
-        .Converter()
-        .FromDateTime(new Date(this.model));
-      this.formattedDate = `${date.Year}/${NumberHelpers.pad(
-        date.Month,
-        2,
-      )}/${NumberHelpers.pad(date.Day, 2)}`;
-    }
-    this.dateView = true;
     this.calculateFromTo();
-  }
-
-  setFormattedDate(formatted) {
-    if (!this.model && formatted) {
-      return;
-    }
-    this.formattedDate = formatted;
   }
 
   calculateFromTo() {
@@ -108,12 +80,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
     }
   }
 
-  update(date: Date, popper: PopperContent) {
-    date = new Date(date || this.model || new Date());
-    this.model = date;
-    this.modelChange.emit(date);
-    if (popper) {
-      popper.hide();
-    }
+  dateChange($event: Event, dateInput: HTMLInputElement, picker: any) {
+    console.log($event, dateInput, picker);
   }
 }

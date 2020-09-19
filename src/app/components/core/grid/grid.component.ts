@@ -8,25 +8,24 @@ import {
   OnInit,
   Output,
   QueryList,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { HttpService } from '../../../services/core/http.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { GridCommand } from '../../../view-models/core/grid-types';
 import { MaterialTranslatorService } from '../../../services/core/material-translator.service';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {
   MatColumnDef,
-  MatPaginator,
   MatTable,
-  MatTableDataSource,
-} from '@angular/material';
-import { PageEvent } from '@angular/material/paginator';
+  MatTableDataSource
+} from '@angular/material/table';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss'],
+  styleUrls: ['./grid.component.scss']
 })
 export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   commandListener: Subscription;
@@ -56,7 +55,6 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   @Output() currentPageChange = new EventEmitter<number>();
   @Output() totalPagesChange = new EventEmitter<number>();
   @Output() totalItemsChange = new EventEmitter<number>();
-  @Output() onCreate = new EventEmitter<void>();
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatTable, { static: true }) table: MatTable<T>;
@@ -64,7 +62,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
   constructor(
     readonly httpService: HttpService,
-    private readonly translatorService: MaterialTranslatorService,
+    private readonly translatorService: MaterialTranslatorService
   ) {}
 
   ngOnInit() {
@@ -87,7 +85,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
     if (this.commander) {
       this.commandListener = this.commander.subscribe(async command =>
-        this.onCommand(command),
+        this.onCommand(command)
       );
     }
     setTimeout(() => this.updateDataSource(), 100);
@@ -115,10 +113,10 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
       backend: this.backend,
       params: {
         query: this.query,
-        ...(this.backendParams || {}),
+        ...(this.backendParams || {})
       },
       page: this.currentPage || 1,
-      pageSize: this.pageSize || 10,
+      pageSize: this.pageSize || 10
     });
     this.isLoading = false;
     this.isLoadingChange.emit(this.isLoading);
@@ -132,7 +130,6 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
     this.dataSource = new MatTableDataSource<T>(op.data.items);
 
-
     this.dataSource.paginator = this.paginator;
 
     this.totalItemsChange.emit(this.totalItems);
@@ -140,7 +137,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     this.totalPagesChange.emit(this.totalPages);
 
     setTimeout(() => {
-      this.paginator.length =  this.totalItems;
+      this.paginator.length = this.totalItems;
       this.paginator.pageSize = this.pageSize;
       this.paginator.pageIndex = this.currentPage - 1;
     }, 200);

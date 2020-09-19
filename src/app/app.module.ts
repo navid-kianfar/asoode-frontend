@@ -17,8 +17,10 @@ import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 import { BarChartModule } from '@swimlane/ngx-charts';
 import {
+  DateAdapter,
+  MAT_DATE_FORMATS, MAT_DATE_LOCALE,
   MatAutocompleteModule,
-  MatCheckboxModule,
+  MatCheckboxModule, MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
   MatProgressBarModule,
@@ -192,6 +194,7 @@ import { AdvancedPlayerComponent } from './modals/advanced-player/advanced-playe
 import { MemberFilterPipe } from './pipes/app/member-filter.pipe';
 import { TimeOffApproveModalComponent } from './modals/time-off-approve-modal/time-off-approve-modal.component';
 import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/time-off-history-modal.component';
+import {MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS} from './library/core/date-time/persian-date-adapter';
 
 @NgModule({
   declarations: [
@@ -383,7 +386,7 @@ import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/ti
     DeviceDetectorModule.forRoot(),
     QuillModule.forRoot(),
     SimpleModalModule.forRoot(
-      { container: 'modal-container' },
+      {container: 'modal-container'},
       {
         ...defaultSimpleModalOptions,
         closeOnEscape: true,
@@ -393,7 +396,7 @@ import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/ti
         bodyClass: 'modal-open',
       },
     ),
-    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    NgxPopperModule.forRoot({placement: 'bottom'}),
     RoundProgressModule,
     BarChartModule,
     MatRadioModule,
@@ -416,12 +419,15 @@ import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/ti
     MatIconModule,
     NgxAudioPlayerModule,
     MatVideoModule,
+    MatDatepickerModule,
   ],
   providers: [
-    // {
-    //   provide: LocationStrategy,
-    //   useClass: HashLocationStrategy,
-    // },
+    {
+      provide: DateAdapter,
+      useClass: MaterialPersianDateAdapter,
+      deps: [MAT_DATE_LOCALE]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS },
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,

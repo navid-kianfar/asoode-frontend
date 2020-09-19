@@ -1,16 +1,5 @@
 <div class="af-grid {{ cssClass }}">
   <div class="extra">
-    <div class="create">
-      <button
-        *ngIf="create"
-        [disabled]="isLoading"
-        mat-flat-button
-        color="primary"
-        (click)="onCreate.emit()"
-      >
-        {{ 'CREATE' | translate }}
-      </button>
-    </div>
     <div class="filter" *ngIf="filter">
       <input
         [disabled]="isLoading"
@@ -25,7 +14,7 @@
         (click)="filterResult()"
       >
         <i *ngIf="isLoading" class="icon-spinner2 icon-spin"></i>
-        {{ 'FILTER' | translate }}
+        {{ "FILTER" | translate }}
       </button>
     </div>
   </div>
@@ -34,11 +23,14 @@
     <tr mat-header-row *matHeaderRowDef="columns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
   </table>
+
   <div class="spinner-container" *ngIf="isLoading">
     <app-waiting></app-waiting>
   </div>
-  <mat-paginator [hidden]="showFooter === false"
-                 [disabled]="isLoading"
-                 (page)="pageChange($event)"
-                 showFirstLastButtons></mat-paginator>
+  <mat-paginator
+    [hidden]="showFooter === false"
+    [disabled]="isLoading"
+    (page)="pageChange($event)"
+    showFirstLastButtons
+  ></mat-paginator>
 </div>

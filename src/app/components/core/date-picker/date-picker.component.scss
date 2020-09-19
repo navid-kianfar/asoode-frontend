@@ -1,12 +1,14 @@
 .af-date-picker {
-  .input-wrapper {
-    input {
-      width: 100px;
-    }
+  input {
+    width: 100px;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 5px;
   }
 
   ::ng-deep .ngxp__container {
     background: #ffffff !important;
+    z-index: 1000;
   }
 }
 .date-picker-plate {
