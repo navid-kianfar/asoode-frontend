@@ -54,7 +54,7 @@
     }
 
     .description {
-      word-break: break-all;
+      //word-break: break-all;
     }
 
     .progress {
@@ -67,6 +67,7 @@
       display: inline-flex;
       flex-direction: row-reverse;
       //padding-inline-end:50px;
+      flex-wrap: wrap;
       padding: 0 20px;
 
       .member-container {
