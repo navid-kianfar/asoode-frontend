@@ -808,5 +808,8 @@
   "TIME_OFF_DECLINE_HEADING": "آیا از رد درخواست مرخصی اطمینان دارید؟",
   "TIME_OFF_HISTORY": "ثوابق مرخصی",
   "TIME_OFF_APPROVE": "تایید درخواست",
-  "TIME_OFF_REVIEW": "برسی درخواست مرخصی"
+  "TIME_OFF_REVIEW": "برسی درخواست مرخصی",
+  "BULK_DOWNLOAD": "دانلود گروهی",
+  "BULK_UPLOAD": "آپلود گروهی",
+  "PICK_ONE": "حد اقل یک مورد انتخاب کنید"
 }

@@ -1200,10 +1200,15 @@
       model.subTasks.length
       }}</span
     >&nbsp;
-    <i
+    <i [title]="'BULK_UPLOAD' | translate"
       *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
       (click)="bulkUpload()"
       class="add icon-upload41"
+    ></i>&nbsp;
+    <i [title]="'BULK_DOWNLOAD' | translate"
+      *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
+      (click)="bulkDownload()"
+      class="add icon-download41"
     ></i>
     <input type="file"
            hidden

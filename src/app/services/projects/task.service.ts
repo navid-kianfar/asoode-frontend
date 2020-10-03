@@ -8,12 +8,16 @@ import {
   WorkPackageTaskTimeViewModel,
   WorkPackageTaskViewModel,
 } from '../../view-models/projects/project-types';
+import {IdentityService} from '../auth/identity.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  constructor(private readonly httpService: HttpService) {}
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly identityService: IdentityService,
+  ) {}
 
   async create(id: string, model): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(`/tasks/${id}/create`, model);
@@ -216,5 +220,10 @@ export class TaskService {
 
   async bulkUpload(id: string, model, trigger: (progress) => void): Promise<OperationResult<boolean>> {
     return await this.httpService.formUpload(`/tasks/${id}/bulk-attach`, model, (p) => trigger(p));
+  }
+
+  bulkDownload(id: string, picked: any[]) {
+    const url = `/tasks/${id}/${this.identityService.identity.userId}/bulk-download`;
+    this.httpService.formDownload(url, picked);
   }
 }

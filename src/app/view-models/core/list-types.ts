@@ -7,4 +7,5 @@ export interface ListViewModel {
   description?: string;
   action?: () => void;
   separator?: boolean;
+  selected?: boolean;
 }

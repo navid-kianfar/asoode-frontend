@@ -374,10 +374,11 @@
         span {
           font-size: 0.8rem;
           font-weight: 500;
+          min-width: 50px;
         }
 
         ::ng-deep .mat-progress-bar {
-          max-width: 250px;
+          max-width: 180px;
           margin-inline-start: 10px;
           margin-inline-end: 10px;
           border-radius: 2px;

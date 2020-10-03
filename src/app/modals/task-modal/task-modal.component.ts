@@ -35,6 +35,7 @@ import {DeviceDetectorService} from 'ngx-device-detector';
 import {UploadExceedModalComponent} from '../upload-exceed-modal/upload-exceed-modal.component';
 import {DateHelpers} from '../../helpers/date.helpers';
 import {AdvancedPlayerComponent} from '../advanced-player/advanced-player.component';
+import {BulkDownloadModalComponent} from '../bulk-download-modal/bulk-download-modal.component';
 
 @Component({
   selector: 'app-task-modal',
@@ -1145,6 +1146,13 @@ export class TaskModalComponent
     if (op.data && (op.data as any).status === OperationResultStatus.Success) {
       await this.fetch();
     }
+  }
+
+  bulkDownload() {
+    this.modalService.show(BulkDownloadModalComponent, {
+      tasks: this.model.subTasks,
+      id: this.model.id
+    }).subscribe(() => {});
   }
 }
 export enum DateMode {
