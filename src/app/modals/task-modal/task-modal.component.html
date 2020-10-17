@@ -1229,13 +1229,12 @@
     (cdkDropListDropped)="drop($event)"
   >
     <div *ngIf="addingSub" class="sub-task add-sub">
-                      <textarea
-                        rows="3"
-                        [placeholder]="'NEW_TASK_PLACEHOLDER' | translate"
-                        [readOnly]="savingSub"
-                        [(ngModel)]="subTaskTitle"
-                      ></textarea>
-
+      <textarea
+        rows="3"
+        [placeholder]="(project.template !== ProjectTemplate.Animation ? 'NEW_TASK_PLACEHOLDER' : 'NEW_PLAN_PLACEHOLDER') | translate"
+        [readOnly]="savingSub"
+        [(ngModel)]="subTaskTitle"
+      ></textarea>
       <div
         *ngIf="project.template === ProjectTemplate.Animation"
         class="counter-holder"
