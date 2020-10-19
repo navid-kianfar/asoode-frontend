@@ -33,7 +33,9 @@ export class HttpInterceptor implements HttpInterceptor {
           catchError((error: any, caught: Observable<HttpEvent<any>>) => {
             if (error.status === 401) {
               this.identityService.logout();
-              this.router.navigateByUrl('/login');
+              this.router.navigateByUrl('/login').then(() => {
+                setTimeout(() => window.location.reload(), 500);
+              });
               // if you've caught / handled the error, you don't
               // want to rethrow it unless you also want
               // downstream consumers to have to handle it as

@@ -8,6 +8,9 @@
     "orientation": "portrait",
     "Scope": "/",
     "start_url": "/?pwa=true",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
     "icons": [
         {
             "src": "/assets/images/favicons/android-chrome-192x192.png",
@@ -20,7 +23,4 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
 }
