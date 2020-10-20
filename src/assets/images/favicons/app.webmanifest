@@ -1,13 +1,16 @@
 {
-    "name": "Asoode",
-    "short_name": "Asoode",
-    "description": "اسوده محیطی یکپارچه و جامع برای برنامه‏ریزی شخصی و کاری مدیران و پرسنل مجموعه‏ها است تا اهداف‏شان را با الویت‏بندی مشخص به صورت تیمی، سازمانی و یا انفرادی پیش ببرند",
+    "name": "آسوده",
+    "short_name": "آسوده",
+    "description": "هر آنچه برای پیشبرد پروژه و همکاری تیمی خود نیاز دارید در یک مکان",
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "display": "standalone",
     "orientation": "portrait",
     "Scope": "/",
     "start_url": "/?pwa=true",
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
     "icons": [
         {
             "src": "/assets/images/favicons/android-chrome-192x192.png",
@@ -20,7 +23,4 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
-    "display": "standalone"
 }

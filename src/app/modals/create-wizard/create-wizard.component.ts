@@ -64,7 +64,6 @@ export class CreateWizardComponent
     this.result = false;
     this.close();
   }
-
   next($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();

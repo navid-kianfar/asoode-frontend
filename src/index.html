@@ -37,9 +37,15 @@
 
     <title>Asoode | AchaSoft</title>
     <link rel="manifest" href="manifest.webmanifest" />
+    <style>
+      link[rel="manifest"] {
+        --pwacompat-splash-font: 24px Verdana;
+      }
+    </style>
   </head>
   <body>
-    <script src="/assets/asoode.js"></script>
+    <script src="/assets/scripts/asoode.js"></script>
+    <script src="/assets/scripts/pwacompat.min.js" defer></script>
     <div id="app-loading-container" class="waiting-container full-screen">
       <span class="waiting-spinner"></span>
     </div>

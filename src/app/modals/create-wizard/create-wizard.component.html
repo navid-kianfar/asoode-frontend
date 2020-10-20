@@ -120,6 +120,7 @@
     </ng-container>
     <ng-container *ngIf="!canCreateProject">
       <app-upgrade-wizard
+        [requireProject]="true"
         [showBack]="true"
         (click)="$event.stopPropagation()"
         (exit)="close()"
