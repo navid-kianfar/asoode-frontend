@@ -32,6 +32,7 @@ export class HumanResourcesComponent implements OnInit {
   AccessType = AccessType;
   ShiftType = ShiftType;
   converter: IDateConverter;
+  waiting: boolean;
   constructor(
     readonly identityService: IdentityService,
     private readonly modalService: ModalService,
@@ -43,6 +44,16 @@ export class HumanResourcesComponent implements OnInit {
 
   ngOnInit() {
     this.converter = this.culturedDateService.Converter();
+  }
+
+  async goPremium() {
+    this.waiting = true;
+    const op = await this.groupService.upgrade(this.group.id);
+    this.waiting = false;
+    if (op.status !== OperationResultStatus.Success) {
+      // TODO: handle error
+      return;
+    }
   }
 
   createEntry() {
