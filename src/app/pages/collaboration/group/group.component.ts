@@ -78,6 +78,11 @@ export class GroupComponent implements OnInit {
             this.router.navigateByUrl('/');
           }
           break;
+        case ActivityType.GroupMemberRemove:
+          if (this.group.id === notification.data.groupId && this.identityService.identity.userId === notification.data.userId) {
+            this.router.navigateByUrl('/');
+          }
+          break;
       }
     });
   }
