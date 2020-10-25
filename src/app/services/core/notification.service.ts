@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import { OperationResultStatus } from '../../library/core/enums';
 import { StringDictionary } from '../../library/core/dictionary';
 import { TranslateService } from './translate.service';
 import { MatSnackBar } from '@angular/material';
+import {ModalService} from './modal.service';
+import {UpgradeComponent} from '../../modals/upgrade/upgrade.component';
 
 const CONFIG = {
   verticalPosition: 'top',
@@ -17,6 +19,7 @@ export class NotificationService {
   constructor(
     private readonly translate: TranslateService,
     private readonly snackBar: MatSnackBar,
+    private readonly injector: Injector,
   ) {}
 
   handleRequest(op: OperationResultStatus) {
@@ -47,6 +50,10 @@ export class NotificationService {
         break;
       case OperationResultStatus.Captcha:
         this.error('GENERAL_CAPTCHA');
+        break;
+      case OperationResultStatus.OverCapacity:
+      case OperationResultStatus.Expire:
+        this.injector.get(ModalService).show(UpgradeComponent, {}).subscribe(() => {});
         break;
     }
   }

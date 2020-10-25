@@ -7,6 +7,9 @@ import { GroupDetailComponent } from '../../../modals/group-detail/group-detail.
 import { AccessType, ActivityType } from '../../../library/app/enums';
 import { Socket } from 'ngx-socket-io';
 import { OperationResultStatus } from '../../../library/core/enums';
+import {IdentityService} from '../../../services/auth/identity.service';
+import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
+import {CreateModalParameters} from '../../../view-models/modals/modals-types';
 
 @Component({
   selector: 'app-group',
@@ -25,6 +28,7 @@ export class GroupComponent implements OnInit {
     private readonly groupService: GroupService,
     private readonly modalService: ModalService,
     private readonly socket: Socket,
+    private readonly identityService: IdentityService,
   ) {}
 
   ngOnInit() {
@@ -45,6 +49,17 @@ export class GroupComponent implements OnInit {
         return;
       }
       this.group = op.data;
+    }
+
+    if (this.group.premium && this.identityService.profile.plan.expireAt) {
+      const expired = new Date(this.identityService.profile.plan.expireAt).getTime() < new Date().getTime();
+      if (expired) {
+        await this.router.navigateByUrl('/dashboard');
+        this.modalService
+          .show(UpgradeComponent, {} as CreateModalParameters)
+          .subscribe(() => {});
+        return;
+      }
     }
     this.permission = this.groupService.getPermission(this.group);
   }

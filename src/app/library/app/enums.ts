@@ -24,9 +24,9 @@ export enum DurationMode {
 export enum AccessType {
   Owner = 1,
   Admin = 2,
-  Editor = 3,
-  HiddenEditor = 4,
-  Visitor = 5,
+  HiddenEditor = 3,
+  Editor = 4,
+  Visitor = 5
 }
 export enum WorkPackageCommentPermission {
   Disabled = 1,

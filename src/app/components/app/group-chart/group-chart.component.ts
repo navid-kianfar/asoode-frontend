@@ -27,10 +27,6 @@ export class GroupChartComponent implements OnInit {
     this.waiting = true;
     const op = await this.groupService.upgrade(this.group.id);
     this.waiting = false;
-    if (op.status === OperationResultStatus.OverCapacity) {
-      this.modalService.show(UpgradeComponent, {}).subscribe(() => {});
-      return;
-    }
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
       return;
