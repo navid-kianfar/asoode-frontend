@@ -84,7 +84,11 @@
 @media (max-width: 500px) {
   .members {
     .member {
-      flex-direction: column;
+      flex-wrap: wrap;
+
+      .info {
+        margin-bottom: 10px;
+      }
     }
   }
   .filter {

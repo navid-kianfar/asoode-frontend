@@ -102,7 +102,7 @@
   <div *ngIf="results.groups.length" class="box">
     <div class="title">{{ 'GROUPS' | translate }}</div>
     <div class="groups">
-      <div class="group" *ngFor="let group of results.groups">
+      <div [routerLink]="['/group', group.id]" class="group" *ngFor="let group of results.groups">
         <app-group-info [model]="group"></app-group-info>
       </div>
     </div>

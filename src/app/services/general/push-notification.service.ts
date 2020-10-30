@@ -537,11 +537,11 @@ export class PushNotificationService {
   }
 
   handlePush(notification: any) {
-    // console.log('push', notification);
+    console.log('push', notification);
   }
 
   handlePushClick(notification: any) {
-    // console.log('click', notification);
+    console.log('click', notification);
   }
 
   private findWorkPackage(id: string): WorkPackageViewModel {

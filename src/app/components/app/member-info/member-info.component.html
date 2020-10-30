@@ -22,7 +22,7 @@
       <div class="name">
         {{ model.fullName || ((email ? 'PENDING' : 'UNKNOWN') | translate) }}
       </div>
-      <div *ngIf="!model.bio" class="email">{{ model.email }}</div>
+      <div *ngIf="!model.bio && model.email.indexOf('@asoode.user') === -1" class="email">{{ model.email }}</div>
       <div *ngIf="model.bio" class="bio">{{ model.bio }}</div>
     </div>
   </ng-container>

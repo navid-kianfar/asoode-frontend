@@ -82,14 +82,9 @@ export class ImportWizardComponent implements OnInit {
                   config: { field: user.id, label: user.username },
                   params: { model: '', ltr: true },
                   validation: {
-                    required: {
-                      value: true,
-                      message: 'EMAIL_REQUIRED',
-                    },
-                    pattern: {
-                      value: ValidationService.emailRegex,
-                      message: 'EMAIL_INVALID',
-                    },
+                    required: { value: true, message: 'EMAIL_OR_PHONE_REQUIRED' },
+                    minLength: { value: 10, message: 'EMAIL_OR_PHONE_MIN_LENGTH' },
+                    maxLength: { value: 50, message: 'EMAIL_OR_PHONE_MAX_LENGTH' },
                   },
                 });
               }),
@@ -105,6 +100,17 @@ export class ImportWizardComponent implements OnInit {
     if (!model) {
       return;
     }
+
+    let failed = false;
+    for (const i of Object.keys(model)) {
+      if (!ValidationService.isEmail(model[i]) && !ValidationService.isMobile(model[i])) {
+        this.formService.setErrors(this.mapForm, i, [ model[i].indexOf('@') !== -1 ? 'EMAIL_INVALID' : 'PHONE_INVALID']);
+        failed = true;
+      }
+    }
+
+    if (failed) { return; }
+
     // this.requireMapMembers = false;
     this.uploading = true;
     const op = await this.httpService.formUpload(
@@ -116,6 +122,7 @@ export class ImportWizardComponent implements OnInit {
     );
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
+      this.uploading = false;
       return;
     }
     this.uploadingProgress = 0;
