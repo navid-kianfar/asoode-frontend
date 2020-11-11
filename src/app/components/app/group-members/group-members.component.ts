@@ -12,6 +12,7 @@ import { GroupService } from '../../../services/groups/group.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { TranslateService } from '../../../services/core/translate.service';
 import { StringHelpers } from '../../../helpers/string.helpers';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-group-members',
@@ -27,6 +28,7 @@ export class GroupMembersComponent implements OnInit {
     private readonly modalService: ModalService,
     private readonly groupService: GroupService,
     private readonly translateService: TranslateService,
+    private readonly identityService: IdentityService,
   ) {}
 
   ngOnInit() {}
@@ -90,6 +92,16 @@ export class GroupMembersComponent implements OnInit {
   transferOwnership(member: GroupMemberViewModel) {}
 
   canRemoveAccess(member: GroupMemberViewModel): boolean {
+    if (member.access === AccessType.Owner) {
+      return false;
+    }
+    return (
+      this.permission === AccessType.Owner ||
+      this.permission === AccessType.Admin ||
+      member.userId === this.identityService.identity.userId
+    );
+  }
+  canChangeAccess(member: GroupMemberViewModel): boolean {
     if (member.access === AccessType.Owner) {
       return false;
     }

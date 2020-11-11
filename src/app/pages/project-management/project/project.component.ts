@@ -15,6 +15,7 @@ import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../services/core/form.service';
 import { NotificationService } from '../../../services/core/notification.service';
 import { Socket } from 'ngx-socket-io';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-project',
@@ -34,6 +35,7 @@ export class ProjectComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
     private readonly projectService: ProjectService,
+    private readonly identityService: IdentityService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
     private readonly socket: Socket,
@@ -72,6 +74,12 @@ export class ProjectComponent implements OnInit {
       switch (notification.type) {
         case ActivityType.ProjectArchive:
           if (this.project.id === notification.data.id) {
+            return this.router.navigateByUrl('/dashboard');
+          }
+          break;
+        case ActivityType.ProjectMemberRemove:
+          if (this.project.id === notification.data.projectId &&
+            this.identityService.identity.userId === notification.data.recordId) {
             return this.router.navigateByUrl('/dashboard');
           }
           break;

@@ -36,7 +36,7 @@
           </div>
           <div class="access">
             <app-access-list
-              [disabled]="member.waiting || !canRemoveAccess(member)"
+              [disabled]="member.waiting || !canChangeAccess(member)"
               [access]="member.access"
               (accessChange)="accessChange(member, $event)"
             ></app-access-list

@@ -122,6 +122,7 @@ export class WorkPackageComponent implements OnInit {
           break;
         case ActivityType.WorkPackageListAdd:
           if (this.workPackage.id === notification.data.packageId) {
+            notification.data.tasks = notification.data.tasks || [];
             this.workPackage.lists.push(notification.data);
           }
           break;

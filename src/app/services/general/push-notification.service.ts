@@ -121,6 +121,17 @@ export class PushNotificationService {
           find1.members = find1.members.filter(
             m => m.id !== notification.data.id,
           );
+          if (this.identityService.identity.userId === notification.data.userId) {
+            this.groupService.groups = this.groupService.groups.filter(
+              g => g.id !== notification.data.groupId,
+            );
+            this.projectService.projects.forEach(p => {
+              p.members = p.members.filter(m => m.recordId !== notification.data.groupId);
+              p.workPackages.forEach(w => {
+                w.members = w.members.filter(a => a.recordId !== notification.data.groupId);
+              });
+            });
+          }
           return;
         }
         find1 = this.groupService.groups.find(

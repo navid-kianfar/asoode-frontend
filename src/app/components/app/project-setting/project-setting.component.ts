@@ -15,6 +15,7 @@ import {
   PendingInvitationViewModel,
 } from '../../../view-models/groups/group-types';
 import { Router } from '@angular/router';
+import {IdentityService} from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-project-setting',
@@ -32,6 +33,7 @@ export class ProjectSettingComponent implements OnInit {
     private readonly projectService: ProjectService,
     private readonly groupService: GroupService,
     private readonly translateService: TranslateService,
+    private readonly identityService: IdentityService,
     private readonly router: Router,
   ) {}
 
@@ -98,6 +100,16 @@ export class ProjectSettingComponent implements OnInit {
   transferOwnership(member: ProjectMemberViewModel) {}
 
   canRemoveAccess(member: ProjectMemberViewModel): boolean {
+    if (member.access === AccessType.Owner) {
+      return false;
+    }
+    return (
+      this.permission === AccessType.Owner ||
+      this.permission === AccessType.Admin ||
+      member.recordId === this.identityService.identity.userId
+    );
+  }
+  canChangeAccess(member: ProjectMemberViewModel): boolean {
     if (member.access === AccessType.Owner) {
       return false;
     }

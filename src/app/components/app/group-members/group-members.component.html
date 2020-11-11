@@ -34,7 +34,7 @@
           <button
             [disabled]="member.waiting"
             (click)="removeAccess(member)"
-            *ngIf="canRemoveAccess(member)"
+            *ngIf="canChangeAccess(member)"
             mat-flat-button
             color="warn"
           >
