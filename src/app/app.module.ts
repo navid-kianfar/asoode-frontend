@@ -30,6 +30,7 @@ import {
 } from '@angular/material';
 import { MomentModule } from 'ngx-moment';
 import { QuillModule } from 'ngx-quill';
+import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptor } from './services/general/http.interceptor';
@@ -423,6 +424,8 @@ import { BulkDownloadModalComponent } from './modals/bulk-download-modal/bulk-do
     NgxAudioPlayerModule,
     MatVideoModule,
     MatDatepickerModule,
+    NgxGoogleAnalyticsModule.forRoot('G-K4SKBN8BK9'),
+    NgxGoogleAnalyticsRouterModule
   ],
   providers: [
     {
