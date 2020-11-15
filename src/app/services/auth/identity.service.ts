@@ -15,6 +15,9 @@ import {
 } from '../../view-models/auth/identity-view-models';
 import { CookieService } from 'ngx-cookie-service';
 
+let MARKETER;
+try { MARKETER = new URLSearchParams(window.location.search).get('marketer') || undefined; } catch (e) {}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,6 +31,10 @@ export class IdentityService {
     private readonly cookieService: CookieService,
   ) {
     this.identityObject = this.getIdentityInfo();
+    if (MARKETER) {
+      this.cookieService.set('MARKETER', MARKETER, new Date(2030, 0, 1), '/');
+    }
+
     // this.cookieService.deleteAll();
   }
 
@@ -85,6 +92,10 @@ export class IdentityService {
   async register(
     model: any,
   ): Promise<OperationResult<RegisterResultViewModel>> {
+
+
+    model.marketer = this.cookieService.get('MARKETER');
+
     return await this.httpService.post<RegisterResultViewModel>(
       '/account/register',
       model,

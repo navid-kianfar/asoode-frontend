@@ -425,7 +425,7 @@ import { BulkDownloadModalComponent } from './modals/bulk-download-modal/bulk-do
     MatVideoModule,
     MatDatepickerModule,
     NgxGoogleAnalyticsModule.forRoot('G-K4SKBN8BK9'),
-    NgxGoogleAnalyticsRouterModule
+    // NgxGoogleAnalyticsRouterModule
   ],
   providers: [
     {
