@@ -1,10 +1,23 @@
 import { IDateConverter, IDateTimeProperties } from './date-contracts';
-import * as PersianDate from 'persian-date';
 import { NumberHelpers } from '../../../helpers/number.helpers';
+import * as moment from 'moment';
 
 export default class GeorgianDateConverter implements IDateConverter {
+  innerConvert(date: IDateTimeProperties): any {
+    return moment()
+      .year(date.Year)
+      .month(date.Month)
+      .date(date.Day)
+      .hours(date.Hours)
+      .minutes(date.Minutes)
+      .seconds(date.Seconds)
+      .milliseconds(date.Milliseconds);
+  }
   IsValid(date: string | IDateTimeProperties): boolean {
-    throw new Error('Method not implemented.');
+    if (typeof date === 'string') {
+      return moment(date).isValid();
+    }
+    return this.innerConvert(date).isValid();
   }
 
   Format(date: Date, format: string): string {
@@ -31,25 +44,9 @@ export default class GeorgianDateConverter implements IDateConverter {
       .replace(/NNN/g, converted.MonthName)
       .replace(/WW/g, converted.WeekName);
   }
-  private innerParse(date: IDateTimeProperties): PersianDate {
-    const temp = new Date(date.Year, date.Month - 1, date.Day);
-    const gregorian = new PersianDate(temp)
-      .toCalendar('gregorian')
-      .toLocale('en');
-    if (date.Hours !== undefined) {
-      gregorian.hour(date.Hours);
-    }
-    if (date.Minutes !== undefined) {
-      gregorian.minutes(date.Minutes);
-    }
-    if (date.Seconds !== undefined) {
-      gregorian.seconds(date.Seconds);
-    }
-    return gregorian;
-  }
 
   Parse(date: IDateTimeProperties): IDateTimeProperties {
-    const gregorian = this.innerParse(date);
+    const gregorian = this.innerConvert(date);
     return {
       Year: gregorian.year(),
       Month: gregorian.month(),
@@ -65,15 +62,13 @@ export default class GeorgianDateConverter implements IDateConverter {
   }
 
   ToDateTime(date: IDateTimeProperties): Date {
-    const gregorian = this.innerParse(date);
+    const gregorian = this.innerConvert(date);
     return gregorian.toDate();
   }
 
   FromDateTime(date: Date): IDateTimeProperties {
     date = new Date(date);
-    const gregorian = new PersianDate(date)
-      .toCalendar('gregorian')
-      .toLocale('en');
+    const gregorian = moment(date);
     return {
       Year: gregorian.year(),
       Month: gregorian.month(),

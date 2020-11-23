@@ -1,61 +1,23 @@
 import { IDateConverter, IDateTimeProperties } from './date-contracts';
-import HijriDate, { toHijri } from 'hijri-date/lib/safe';
 import { NumberHelpers } from '../../../helpers/number.helpers';
+import * as moment from 'moment-hijri';
 
 export default class HijriDateConverter implements IDateConverter {
+  innerConvert(date: IDateTimeProperties): any {
+    return moment()
+      .year(date.Year)
+      .month(date.Month)
+      .date(date.Day)
+      .hours(date.Hours)
+      .minutes(date.Minutes)
+      .seconds(date.Seconds)
+      .milliseconds(date.Milliseconds);
+  }
   IsValid(date: string | IDateTimeProperties): boolean {
-    throw new Error('Method not implemented.');
-  }
-
-  private innerParse(date: IDateTimeProperties): HijriDate {
-    return new HijriDate(
-      date.Year,
-      date.Month,
-      date.Day,
-      date.Hours,
-      date.Minutes,
-    );
-  }
-
-  Parse(date: IDateTimeProperties): IDateTimeProperties {
-    const hijri = this.innerParse(date);
-    return {
-      Year: hijri.year,
-      Month: hijri.month,
-      Day: hijri.date,
-      Hours: hijri.hours,
-      Minutes: hijri.minutes,
-      Seconds: hijri.seconds,
-      Milliseconds: hijri.milliseconds,
-      MonthName: hijri.format('MMMM'),
-      WeekName: hijri.format('ddd'),
-      Date: new Date(hijri.toGregorian()),
-    } as IDateTimeProperties;
-  }
-
-  ToDateTime(date: IDateTimeProperties): Date {
-    const hijri = this.innerParse(date);
-    return new Date(hijri.toGregorian());
-  }
-
-  Now(): IDateTimeProperties {
-    return this.FromDateTime(new Date());
-  }
-  FromDateTime(date: Date): IDateTimeProperties {
-    date = new Date(date);
-    const hijri = toHijri(date);
-    return {
-      Year: hijri.year,
-      Month: hijri.month,
-      Day: hijri.date,
-      Hours: hijri.hours,
-      Minutes: hijri.minutes,
-      Seconds: hijri.seconds,
-      Milliseconds: hijri.milliseconds,
-      MonthName: hijri.format('MMMM'),
-      WeekName: hijri.format('ddd'),
-      Date: date,
-    } as IDateTimeProperties;
+    if (typeof date === 'string') {
+      return moment(date).isValid();
+    }
+    return this.innerConvert(date).isValid();
   }
 
   Format(date: Date, format: string): string {
@@ -81,5 +43,47 @@ export default class HijriDateConverter implements IDateConverter {
       .replace(/AP/g, converted.Hours > 12 ? 'PM' : 'AM')
       .replace(/NNN/g, converted.MonthName)
       .replace(/WW/g, converted.WeekName);
+  }
+
+  Parse(date: IDateTimeProperties): IDateTimeProperties {
+    const gregorian = this.innerConvert(date);
+    return {
+      Year: gregorian.year(),
+      Month: gregorian.month(),
+      Day: gregorian.date(),
+      Hours: gregorian.hour(),
+      Minutes: gregorian.minutes(),
+      Seconds: gregorian.seconds(),
+      Milliseconds: 0,
+      MonthName: gregorian.format('MMMM'),
+      WeekName: gregorian.format('dddd'),
+      Date: gregorian.toDate(),
+    } as IDateTimeProperties;
+  }
+
+  ToDateTime(date: IDateTimeProperties): Date {
+    const gregorian = this.innerConvert(date);
+    return gregorian.toDate();
+  }
+
+  FromDateTime(date: Date): IDateTimeProperties {
+    date = new Date(date);
+    const gregorian = moment(date);
+    return {
+      Year: gregorian.year(),
+      Month: gregorian.month(),
+      Day: gregorian.date(),
+      Hours: gregorian.hour(),
+      Minutes: gregorian.minutes(),
+      Seconds: gregorian.seconds(),
+      Milliseconds: 0,
+      MonthName: gregorian.format('MMMM'),
+      WeekName: gregorian.format('dddd'),
+      Date: date,
+    } as IDateTimeProperties;
+  }
+
+  Now(): IDateTimeProperties {
+    return this.FromDateTime(new Date());
   }
 }

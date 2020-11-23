@@ -1,40 +1,23 @@
 import { IDateConverter, IDateTimeProperties } from './date-contracts';
-import * as PersianDate from 'persian-date';
 import { NumberHelpers } from '../../../helpers/number.helpers';
+import * as moment from 'jalali-moment';
 
 export default class PersianDateConverter implements IDateConverter {
+  innerConvert(date: IDateTimeProperties): any {
+    return moment()
+      .year(date.Year)
+      .month(date.Month)
+      .date(date.Day)
+      .hours(date.Hours)
+      .minutes(date.Minutes)
+      .seconds(date.Seconds)
+      .milliseconds(date.Milliseconds);
+  }
   IsValid(date: string | IDateTimeProperties): boolean {
-    throw new Error('Method not implemented.');
-  }
-
-  private innerParse(date: IDateTimeProperties): PersianDate {
-    const persian = new PersianDate([date.Year, date.Month, date.Day]);
-    if (date.Hours !== undefined) {
-      persian.hour(date.Hours);
+    if (typeof date === 'string') {
+      return moment(date).isValid();
     }
-    if (date.Minutes !== undefined) {
-      persian.minutes(date.Minutes);
-    }
-    if (date.Seconds !== undefined) {
-      persian.seconds(date.Seconds);
-    }
-    return persian;
-  }
-
-  Parse(date: IDateTimeProperties): IDateTimeProperties {
-    const persian = this.innerParse(date);
-    return {
-      Year: persian.year(),
-      Month: persian.month(),
-      Day: persian.date(),
-      Hours: persian.hour(),
-      Minutes: persian.minutes(),
-      Seconds: persian.seconds(),
-      Milliseconds: 0,
-      MonthName: persian.format('MMMM'),
-      WeekName: persian.format('dddd'),
-      Date: persian.toDate(),
-    } as IDateTimeProperties;
+    return this.innerConvert(date).isValid();
   }
 
   Format(date: Date, format: string): string {
@@ -61,23 +44,41 @@ export default class PersianDateConverter implements IDateConverter {
       .replace(/NNN/g, converted.MonthName)
       .replace(/WW/g, converted.WeekName);
   }
+
+  Parse(date: IDateTimeProperties): IDateTimeProperties {
+    const gregorian = this.innerConvert(date);
+    return {
+      Year: gregorian.year(),
+      Month: gregorian.month(),
+      Day: gregorian.date(),
+      Hours: gregorian.hour(),
+      Minutes: gregorian.minutes(),
+      Seconds: gregorian.seconds(),
+      Milliseconds: 0,
+      MonthName: gregorian.format('MMMM'),
+      WeekName: gregorian.format('dddd'),
+      Date: gregorian.toDate(),
+    } as IDateTimeProperties;
+  }
+
   ToDateTime(date: IDateTimeProperties): Date {
-    return this.innerParse(date).toDate();
+    const gregorian = this.innerConvert(date);
+    return gregorian.toDate();
   }
 
   FromDateTime(date: Date): IDateTimeProperties {
     date = new Date(date);
-    const persian = new PersianDate(date);
+    const gregorian = moment(date);
     return {
-      Year: persian.year(),
-      Month: persian.month(),
-      Day: persian.date(),
-      Hours: persian.hour(),
-      Minutes: persian.minutes(),
-      Seconds: persian.seconds(),
+      Year: gregorian.year(),
+      Month: gregorian.month(),
+      Day: gregorian.date(),
+      Hours: gregorian.hour(),
+      Minutes: gregorian.minutes(),
+      Seconds: gregorian.seconds(),
       Milliseconds: 0,
-      MonthName: persian.format('MMMM'),
-      WeekName: persian.format('dddd'),
+      MonthName: gregorian.format('MMMM'),
+      WeekName: gregorian.format('dddd'),
       Date: date,
     } as IDateTimeProperties;
   }
