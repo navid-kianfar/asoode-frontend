@@ -195,8 +195,9 @@ import { AdvancedPlayerComponent } from './modals/advanced-player/advanced-playe
 import { MemberFilterPipe } from './pipes/app/member-filter.pipe';
 import { TimeOffApproveModalComponent } from './modals/time-off-approve-modal/time-off-approve-modal.component';
 import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/time-off-history-modal.component';
-import {PERSIAN_DATE_FORMATS, PersianDateAdapter} from './library/core/date-time/persian-date-adapter';
 import { BulkDownloadModalComponent } from './modals/bulk-download-modal/bulk-download-modal.component';
+import {CulturedDateFactory, CulturedDateFormatsFactory} from './library/core/date-time/material-date-adapter';
+import {CultureService} from './services/core/culture.service';
 
 @NgModule({
   declarations: [
@@ -424,16 +425,18 @@ import { BulkDownloadModalComponent } from './modals/bulk-download-modal/bulk-do
     NgxAudioPlayerModule,
     MatVideoModule,
     MatDatepickerModule,
-    NgxGoogleAnalyticsModule.forRoot('G-K4SKBN8BK9'),
-    // NgxGoogleAnalyticsRouterModule
+    NgxGoogleAnalyticsModule.forRoot(environment.ga),
   ],
   providers: [
     {
       provide: DateAdapter,
-      useClass: PersianDateAdapter,
+      useFactory: CulturedDateFactory,
       deps: [MAT_DATE_LOCALE]
     },
-    { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS },
+    {
+      provide: MAT_DATE_FORMATS,
+      useFactory: CulturedDateFormatsFactory
+    },
 
     CookieService,
     {

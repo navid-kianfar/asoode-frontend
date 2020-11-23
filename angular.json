@@ -69,6 +69,10 @@
             "alrahah": {
               "fileReplacements": [
                 {
+                  "replace": "src/index.html",
+                  "with": "src/index-ar.html"
+                },
+                {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.alrahah.ts"
                 }
@@ -99,6 +103,10 @@
             },
             "ciblsoft": {
               "fileReplacements": [
+                {
+                  "replace": "src/index.html",
+                  "with": "src/index-en.html"
+                },
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.ciblsoft.ts"
