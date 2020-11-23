@@ -1,18 +1,22 @@
-import { IDateConverter, IDateTimeProperties } from './date-contracts';
-import { NumberHelpers } from '../../../helpers/number.helpers';
+import {IDateConverter, IDateTimeProperties} from './date-contracts';
+import {NumberHelpers} from '../../../helpers/number.helpers';
 import * as moment from 'jalali-moment';
 
 export default class PersianDateConverter implements IDateConverter {
   innerConvert(date: IDateTimeProperties): moment.Moment {
-    return moment().locale('fa')
+    const result = moment().locale('fa')
       .jYear(date.Year)
       .jMonth(date.Month)
       .jDate(date.Day);
-      // .hours(date.Hours)
-      // .minutes(date.Minutes)
-      // .seconds(date.Seconds)
-      // .milliseconds(date.Milliseconds);
+
+    result.hours(date.Hours);
+    result.minutes(date.Minutes);
+    result.seconds(date.Seconds);
+    result.milliseconds(date.Milliseconds);
+
+    return result;
   }
+
   IsValid(date: string | IDateTimeProperties): boolean {
     if (typeof date === 'string') {
       return moment(date).isValid();
