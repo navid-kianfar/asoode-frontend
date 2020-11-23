@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
 
     const now = new Date();
     const parsed = this.converter.FromDateTime(now);
+
     this.monthBegin = this.converter.ToDateTime({
       Year: parsed.Year,
       Month: parsed.Month,
@@ -55,6 +56,7 @@ export class DashboardComponent implements OnInit {
       Hours: 0,
       Minutes: 0,
     });
+
     const lastDayInMonth = this.culturedDateService.cultureService.current
       .daysInMonths[parsed.Month - 1];
     this.monthEnd = this.converter.ToDateTime({

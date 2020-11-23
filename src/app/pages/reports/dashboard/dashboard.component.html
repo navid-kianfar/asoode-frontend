@@ -1,7 +1,7 @@
 <ng-container *ngIf="waiting">
   <app-waiting></app-waiting>
 </ng-container>
-<ng-container *ngIf="!waiting">
+<ng-container *ngIf="!waiting && data">
   <div class="dashboard">
     <div class="section report-container">
       <div class="header">

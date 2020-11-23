@@ -3,15 +3,15 @@ import { NumberHelpers } from '../../../helpers/number.helpers';
 import * as moment from 'jalali-moment';
 
 export default class PersianDateConverter implements IDateConverter {
-  innerConvert(date: IDateTimeProperties): any {
-    return moment()
-      .year(date.Year)
-      .month(date.Month)
-      .date(date.Day)
-      .hours(date.Hours)
-      .minutes(date.Minutes)
-      .seconds(date.Seconds)
-      .milliseconds(date.Milliseconds);
+  innerConvert(date: IDateTimeProperties): moment.Moment {
+    return moment().locale('fa')
+      .jYear(date.Year)
+      .jMonth(date.Month)
+      .jDate(date.Day);
+      // .hours(date.Hours)
+      // .minutes(date.Minutes)
+      // .seconds(date.Seconds)
+      // .milliseconds(date.Milliseconds);
   }
   IsValid(date: string | IDateTimeProperties): boolean {
     if (typeof date === 'string') {
@@ -68,11 +68,15 @@ export default class PersianDateConverter implements IDateConverter {
 
   FromDateTime(date: Date): IDateTimeProperties {
     date = new Date(date);
-    const gregorian = moment(date);
+    let gregorian = moment(date.toISOString()).locale('fa');
+    if (!gregorian.isValid()) {
+      date = new Date(2019, 0, 1);
+      gregorian = moment(date.toISOString()).locale('fa');
+    }
     return {
-      Year: gregorian.year(),
-      Month: gregorian.month(),
-      Day: gregorian.date(),
+      Year: gregorian.jYear(),
+      Month: gregorian.jMonth(),
+      Day: gregorian.jDate(),
       Hours: gregorian.hour(),
       Minutes: gregorian.minutes(),
       Seconds: gregorian.seconds(),
