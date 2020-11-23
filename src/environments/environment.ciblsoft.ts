@@ -6,6 +6,6 @@ export const environment = {
   direct_endpoint: 'https://api.ciblsoft.com/v2',
   googleOauth: 'https://api.ciblsoft.com/oauth/google-login',
   vapid: '',
-  ga: '',
+  ga: 'G-K4SKBN8BK9',
   lang: 'en'
 };

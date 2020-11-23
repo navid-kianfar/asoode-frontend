@@ -6,6 +6,6 @@ export const environment = {
   direct_endpoint: 'https://api.al-rahah.com/v2',
   googleOauth: 'https://api.al-rahah.com/oauth/google-login',
   vapid: '',
-  ga: '',
+  ga: 'G-K4SKBN8BK9',
   lang: 'ar'
 };
