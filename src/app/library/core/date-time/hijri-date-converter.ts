@@ -4,14 +4,17 @@ import * as moment from 'moment-hijri';
 
 export default class HijriDateConverter implements IDateConverter {
   innerConvert(date: IDateTimeProperties): any {
-    return moment()
-      .year(date.Year)
-      .month(date.Month)
-      .date(date.Day)
-      .hours(date.Hours)
-      .minutes(date.Minutes)
-      .seconds(date.Seconds)
-      .milliseconds(date.Milliseconds);
+    const result = moment().locale('ar')
+      .iYear(date.Year)
+      .iMonth(date.Month)
+      .iDate(date.Day);
+
+    result.hours(date.Hours);
+    result.minutes(date.Minutes);
+    result.seconds(date.Seconds);
+    result.milliseconds(date.Milliseconds);
+
+    return result;
   }
   IsValid(date: string | IDateTimeProperties): boolean {
     if (typeof date === 'string') {
@@ -68,11 +71,15 @@ export default class HijriDateConverter implements IDateConverter {
 
   FromDateTime(date: Date): IDateTimeProperties {
     date = new Date(date);
-    const gregorian = moment(date);
+    let gregorian = moment(date.toISOString()).locale('ar');
+    if (!gregorian.isValid()) {
+      date = new Date(2019, 0, 1);
+      gregorian = moment(date.toISOString()).locale('ar');
+    }
     return {
-      Year: gregorian.year(),
-      Month: gregorian.month(),
-      Day: gregorian.date(),
+      Year: gregorian.iYear(),
+      Month: gregorian.iMonth(),
+      Day: gregorian.iDate(),
       Hours: gregorian.hour(),
       Minutes: gregorian.minutes(),
       Seconds: gregorian.seconds(),

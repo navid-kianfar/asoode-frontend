@@ -4,14 +4,17 @@ import * as moment from 'moment';
 
 export default class GeorgianDateConverter implements IDateConverter {
   innerConvert(date: IDateTimeProperties): any {
-    return moment()
+    const result = moment().locale('en')
       .year(date.Year)
       .month(date.Month)
-      .date(date.Day)
-      .hours(date.Hours)
-      .minutes(date.Minutes)
-      .seconds(date.Seconds)
-      .milliseconds(date.Milliseconds);
+      .date(date.Day);
+
+    result.hours(date.Hours);
+    result.minutes(date.Minutes);
+    result.seconds(date.Seconds);
+    result.milliseconds(date.Milliseconds);
+
+    return result;
   }
   IsValid(date: string | IDateTimeProperties): boolean {
     if (typeof date === 'string') {
@@ -68,7 +71,11 @@ export default class GeorgianDateConverter implements IDateConverter {
 
   FromDateTime(date: Date): IDateTimeProperties {
     date = new Date(date);
-    const gregorian = moment(date);
+    let gregorian = moment(date.toISOString()).locale('en');
+    if (!gregorian.isValid()) {
+      date = new Date(2019, 0, 1);
+      gregorian = moment(date.toISOString()).locale('en');
+    }
     return {
       Year: gregorian.year(),
       Month: gregorian.month(),

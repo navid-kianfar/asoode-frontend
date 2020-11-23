@@ -2,11 +2,13 @@
   "name": "asoode-panel",
   "version": "1.0.0",
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
+
     "build_asoode": "ng build --prod --aot -c=asoode --outputPath ../deploy-asoode/build/panel",
     "build_alrahah": "ng build --prod --aot -c=alrahah --outputPath ../deploy-alrahah/build/panel",
     "build_ciblsoft": "ng build --prod --aot -c=ciblsoft --outputPath ../deploy-ciblsoft/build/panel",
+
+    "ng": "ng",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
