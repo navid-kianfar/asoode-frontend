@@ -17,6 +17,7 @@ import { NotificationService } from '../../../services/core/notification.service
 import { Socket } from 'ngx-socket-io';
 import {IdentityService} from '../../../services/auth/identity.service';
 import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import {TranslateService} from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-project',
@@ -42,6 +43,7 @@ export class ProjectComponent implements OnInit {
     private readonly socket: Socket,
     private readonly notificationService: NotificationService,
     private readonly gaService: GoogleAnalyticsService,
+    private readonly translateService: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -71,7 +73,7 @@ export class ProjectComponent implements OnInit {
 
     this.gaService.pageView(
       window.location.pathname,
-      this.project.title,
+      this.translateService.fromKey('PROJECT'),
       undefined,
       { user_id: this.identityService.identity.userId },
     );

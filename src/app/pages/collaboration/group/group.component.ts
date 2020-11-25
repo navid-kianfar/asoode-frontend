@@ -11,6 +11,7 @@ import {IdentityService} from '../../../services/auth/identity.service';
 import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
 import {CreateModalParameters} from '../../../view-models/modals/modals-types';
 import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import {TranslateService} from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-group',
@@ -31,6 +32,7 @@ export class GroupComponent implements OnInit {
     private readonly socket: Socket,
     private readonly identityService: IdentityService,
     private readonly gaService: GoogleAnalyticsService,
+    private readonly translateService: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -55,7 +57,7 @@ export class GroupComponent implements OnInit {
 
     this.gaService.pageView(
       window.location.pathname,
-      this.group.title,
+      this.translateService.fromKey('GROUP'),
       undefined,
       { user_id: this.identityService.identity.userId },
     );

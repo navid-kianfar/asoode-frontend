@@ -39,7 +39,7 @@ export class TasksComponent implements OnInit {
   ngOnInit() {
     this.gaService.pageView(
       window.location.pathname,
-      this.translateService.fromKey('FILES'),
+      this.translateService.fromKey('TASKS'),
       undefined,
       { user_id: this.identityService.identity.userId },
     );

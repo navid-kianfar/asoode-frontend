@@ -635,7 +635,7 @@ export class WorkPackageComponent implements OnInit {
 
     this.gaService.pageView(
       window.location.pathname,
-      this.workPackage.title,
+      this.translateService.fromKey('WORKPACKAGE'),
       undefined,
       { user_id: this.identityService.identity.userId },
     );

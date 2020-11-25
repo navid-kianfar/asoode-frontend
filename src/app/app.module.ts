@@ -30,7 +30,7 @@ import {
 } from '@angular/material';
 import { MomentModule } from 'ngx-moment';
 import { QuillModule } from 'ngx-quill';
-import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from 'ngx-google-analytics';
+import {GoogleAnalyticsService, NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-google-analytics';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptor } from './services/general/http.interceptor';
@@ -437,7 +437,7 @@ import {CultureService} from './services/core/culture.service';
       provide: MAT_DATE_FORMATS,
       useFactory: CulturedDateFormatsFactory
     },
-
+    GoogleAnalyticsService,
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,
