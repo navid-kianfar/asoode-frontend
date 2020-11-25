@@ -8,6 +8,7 @@ import { AppInitializerProvider } from '../../../services/general/app.initialize
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '../../../services/core/translate.service';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
     private readonly translateService: TranslateService,
+    private readonly gaService: GoogleAnalyticsService,
     private readonly culturedDateService: CulturedDateService,
   ) {}
 
@@ -72,6 +74,11 @@ export class LoginComponent implements OnInit {
         ],
       },
     ];
+
+    this.gaService.pageView(
+      window.location.pathname,
+      this.translateService.fromKey('LOGIN_TO_YOUR_ACCOUNT')
+    );
   }
 
   async login() {
@@ -84,8 +91,16 @@ export class LoginComponent implements OnInit {
     if (op.status === OperationResultStatus.Success) {
       this.verificationCode = op.data.id;
       if (op.data.token) {
+        this.gaService.pageView(
+          window.location.pathname,
+          this.translateService.fromKey('LOGIN_TO_YOUR_ACCOUNT'),
+          undefined,
+          { user_id: this.identityService.identity.userId },
+        );
         await this.initializerProvider.refresh();
         await this.router.navigateByUrl('/dashboard');
+
+
         return;
       }
       this.waiting = false;

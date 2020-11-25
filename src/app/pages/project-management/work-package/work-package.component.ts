@@ -42,6 +42,7 @@ import { CustomFieldsModalComponent } from '../../../modals/custom-fields-modal/
 import { LabelsModalComponent } from '../../../modals/labels-modal/labels-modal.component';
 import { DateHelpers } from '../../../helpers/date.helpers';
 import {NumberHelpers} from '../../../helpers/number.helpers';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-work-package',
@@ -89,6 +90,7 @@ export class WorkPackageComponent implements OnInit {
     private readonly projectService: ProjectService,
     private readonly workPackageService: WorkPackageService,
     private readonly notificationService: NotificationService,
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
@@ -630,6 +632,13 @@ export class WorkPackageComponent implements OnInit {
     // if (this.workPackage.progress === undefined) {
     //   this.workPackage.progress = 0;
     // }
+
+    this.gaService.pageView(
+      window.location.pathname,
+      this.workPackage.title,
+      undefined,
+      { user_id: this.identityService.identity.userId },
+    );
     this.permission = this.projectService.getWorkPackagePermission(
       this.project,
       this.workPackage,

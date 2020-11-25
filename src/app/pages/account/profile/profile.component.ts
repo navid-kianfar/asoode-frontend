@@ -9,6 +9,8 @@ import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ChangePhoneComponent } from '../../../modals/change-phone/change-phone.component';
 import { ChangeEmailComponent } from '../../../modals/change-email/change-email.component';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import {TranslateService} from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-profile',
@@ -25,6 +27,8 @@ export class ProfileComponent implements OnInit {
     private readonly formService: FormService,
     private readonly router: Router,
     private readonly notificationService: NotificationService,
+    private readonly translateService: TranslateService,
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   async prepareChangePhoneNumber() {
@@ -231,6 +235,15 @@ export class ProfileComponent implements OnInit {
         ],
       },
     ];
+
+
+
+    this.gaService.pageView(
+      window.location.pathname,
+      this.translateService.fromKey('PROFILE'),
+      undefined,
+      { user_id: this.identityService.identity.userId },
+    );
   }
 
   logout() {

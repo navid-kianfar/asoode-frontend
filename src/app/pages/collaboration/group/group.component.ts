@@ -10,6 +10,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import {IdentityService} from '../../../services/auth/identity.service';
 import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
 import {CreateModalParameters} from '../../../view-models/modals/modals-types';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-group',
@@ -29,6 +30,7 @@ export class GroupComponent implements OnInit {
     private readonly modalService: ModalService,
     private readonly socket: Socket,
     private readonly identityService: IdentityService,
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
@@ -50,6 +52,13 @@ export class GroupComponent implements OnInit {
       }
       this.group = op.data;
     }
+
+    this.gaService.pageView(
+      window.location.pathname,
+      this.group.title,
+      undefined,
+      { user_id: this.identityService.identity.userId },
+    );
 
     if (this.group.premium && this.identityService.profile.plan.expireAt) {
       const expired = new Date(this.identityService.profile.plan.expireAt).getTime() < new Date().getTime();

@@ -16,6 +16,7 @@ import { FormService } from '../../../services/core/form.service';
 import { NotificationService } from '../../../services/core/notification.service';
 import { Socket } from 'ngx-socket-io';
 import {IdentityService} from '../../../services/auth/identity.service';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-project',
@@ -40,6 +41,7 @@ export class ProjectComponent implements OnInit {
     private readonly formService: FormService,
     private readonly socket: Socket,
     private readonly notificationService: NotificationService,
+    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
@@ -66,6 +68,13 @@ export class ProjectComponent implements OnInit {
       }
       this.project = op.data;
     }
+
+    this.gaService.pageView(
+      window.location.pathname,
+      this.project.title,
+      undefined,
+      { user_id: this.identityService.identity.userId },
+    );
     this.permission = this.projectService.getPermission(this.project);
   }
 

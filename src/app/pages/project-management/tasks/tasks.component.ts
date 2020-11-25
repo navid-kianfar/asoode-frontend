@@ -11,6 +11,9 @@ import {
   TimeSpentViewModel,
   WorkPackageTaskViewModel,
 } from '../../../view-models/projects/project-types';
+import {TranslateService} from '../../../services/core/translate.service';
+import {IdentityService} from '../../../services/auth/identity.service';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-tasks',
@@ -26,9 +29,21 @@ export class TasksComponent implements OnInit {
   calendarData: WorkPackageTaskViewModel[];
   timeSpentData: TimeSpentViewModel[];
   kartablData: KartablViewModel;
-  constructor(private readonly taskService: TaskService) {}
+  constructor(
+    private readonly taskService: TaskService,
+    private readonly translateService: TranslateService,
+    readonly identityService: IdentityService,
+    private readonly gaService: GoogleAnalyticsService,
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.gaService.pageView(
+      window.location.pathname,
+      this.translateService.fromKey('FILES'),
+      undefined,
+      { user_id: this.identityService.identity.userId },
+    );
+  }
 
   async switchTab(tab: TaskTab) {
     this.waiting = true;

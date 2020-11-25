@@ -13,6 +13,8 @@ import {
 } from '../../../view-models/projects/project-types';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { IdentityService } from '../../../services/auth/identity.service';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import {TranslateService} from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-messenger',
@@ -32,6 +34,8 @@ export class MessengerComponent implements OnInit {
     readonly groupService: GroupService,
     readonly modalService: ModalService,
     readonly identityService: IdentityService,
+    private readonly gaService: GoogleAnalyticsService,
+    private readonly translateService: TranslateService,
   ) {}
 
   ngOnInit() {
@@ -54,6 +58,13 @@ export class MessengerComponent implements OnInit {
     });
     this.allMembers = members;
     this.showFiles = false;
+
+    this.gaService.pageView(
+      window.location.pathname,
+      this.translateService.fromKey('MESSENGER'),
+      undefined,
+      { user_id: this.identityService.identity.userId },
+    );
   }
 
   openGroup(group: GroupViewModel) {
