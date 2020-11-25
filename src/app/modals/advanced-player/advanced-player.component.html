@@ -83,18 +83,12 @@
       <div class="canvas-container">
         <app-waiting *ngIf="waiting"></app-waiting>
         <div class="video-wrapper" [hidden]="waiting">
-          <mat-video
+          <app-video
             #player
             [title]="attachment.title"
-            [autoplay]="false"
-            [preload]="false"
-            [fullscreen]="false"
-            [download]="false"
-            color="primary"
-            spinner="spin"
             [poster]="attachment.thumbnailPath"
             [src]="attachment.path"
-          ></mat-video>
+          ></app-video>
         </div>
       </div>
     </div>

@@ -28,7 +28,6 @@ import {MapMarker, MapModalParameters,} from '../../view-models/general/map-type
 import {NumberHelpers} from 'src/app/helpers/number.helpers';
 import {TimeViewModel} from '../../view-models/core/general-types';
 import {CulturedDateService} from '../../services/core/cultured-date.service';
-import {MatMenu} from '@angular/material';
 import {GroupService} from '../../services/groups/group.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {DeviceDetectorService} from 'ngx-device-detector';
@@ -37,6 +36,7 @@ import {DateHelpers} from '../../helpers/date.helpers';
 import {AdvancedPlayerComponent} from '../advanced-player/advanced-player.component';
 import {BulkDownloadModalComponent} from '../bulk-download-modal/bulk-download-modal.component';
 import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import {MatMenu} from '@angular/material/menu';
 
 @Component({
   selector: 'app-task-modal',
@@ -162,7 +162,7 @@ export class TaskModalComponent
     if (this.intervalInstance) {
       clearInterval(this.intervalInstance);
     }
-    super.ngOnDestroy();
+    // super.ngOnDestroy();
   }
 
   clearInputFile(f) {

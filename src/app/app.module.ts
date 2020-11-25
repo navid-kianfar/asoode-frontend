@@ -16,18 +16,6 @@ import { NgxPopperModule } from 'ngx-popper';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 import { BarChartModule } from '@swimlane/ngx-charts';
-import {
-  DateAdapter,
-  MAT_DATE_FORMATS, MAT_DATE_LOCALE,
-  MatAutocompleteModule,
-  MatCheckboxModule, MatDatepickerModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatProgressBarModule,
-  MatRadioModule,
-  MatRippleModule,
-  MatSliderModule,
-} from '@angular/material';
 import { MomentModule } from 'ngx-moment';
 import { QuillModule } from 'ngx-quill';
 import {GoogleAnalyticsService, NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-google-analytics';
@@ -152,7 +140,6 @@ import { InviteModalComponent } from './modals/invite-modal/invite-modal.compone
 import { GroupNamePipe } from './pipes/app/group-name.pipe';
 import { GroupSettingsComponent } from './components/app/group-settings/group-settings.component';
 import { WorkPackageWizardComponent } from './modals/work-package-wizard/work-package-wizard.component';
-import { DeviceDetectorModule } from 'ngx-device-detector';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { WorkPackageTaskComponent } from './components/app/work-package-task/work-package-task.component';
@@ -178,7 +165,6 @@ import { TimeSpentComponent } from './components/app/time-spent/time-spent.compo
 import { KartablComponent } from './components/app/kartabl/kartabl.component';
 import { DurationPickerComponent } from './components/app/duration-picker/duration-picker.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
-import { MatVideoModule } from 'mat-video';
 import { WorkPackagePermissionComponent } from './modals/work-package-permission/work-package-permission.component';
 import { ProjectTreeAnimationComponent } from './components/app/project-tree-animation/project-tree-animation.component';
 import { ProjectTreeAnimationNodeComponent } from './components/app/project-tree-animation-node/project-tree-animation-node.component';
@@ -197,7 +183,16 @@ import { TimeOffApproveModalComponent } from './modals/time-off-approve-modal/ti
 import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/time-off-history-modal.component';
 import { BulkDownloadModalComponent } from './modals/bulk-download-modal/bulk-download-modal.component';
 import {CulturedDateFactory, CulturedDateFormatsFactory} from './library/core/date-time/material-date-adapter';
-import {CultureService} from './services/core/culture.service';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatRippleModule} from '@angular/material/core';
+import {MatSliderModule} from '@angular/material/slider';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { VideoComponent } from './components/app/video/video.component';
 
 @NgModule({
   declarations: [
@@ -348,6 +343,7 @@ import {CultureService} from './services/core/culture.service';
     TimeOffApproveModalComponent,
     TimeOffHistoryModalComponent,
     BulkDownloadModalComponent,
+    VideoComponent,
   ],
   entryComponents: [
     TimeOffApproveModalComponent,
@@ -374,59 +370,58 @@ import {CultureService} from './services/core/culture.service';
     UpgradeComponent,
     BulkDownloadModalComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatTabsModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatMenuModule,
-    MatSnackBarModule,
-    SocketIoModule,
-    DeviceDetectorModule.forRoot(),
-    QuillModule.forRoot(),
-    SimpleModalModule.forRoot(
-      {container: 'modal-container'},
-      {
-        ...defaultSimpleModalOptions,
-        closeOnEscape: true,
-        closeOnClickOutside: true,
-        wrapperClass: 'in',
-        wrapperDefaultClasses: 'modal fade-anim',
-        bodyClass: 'modal-open',
-      },
-    ),
-    NgxPopperModule.forRoot({placement: 'bottom'}),
-    RoundProgressModule,
-    BarChartModule,
-    MatRadioModule,
-    MatCheckboxModule,
-    MatProgressBarModule,
-    MatAutocompleteModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatRippleModule,
-    MomentModule,
-    ContentLoaderModule,
-    TrendModule,
-    DragDropModule,
-    ColorPickerModule,
-    NgxDocViewerModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: environment.production,
-    }),
-    MatSliderModule,
-    MatIconModule,
-    NgxAudioPlayerModule,
-    MatVideoModule,
-    MatDatepickerModule,
-    NgxGoogleAnalyticsModule.forRoot(environment.ga),
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatTabsModule,
+        MatPaginatorModule,
+        MatTableModule,
+        MatMenuModule,
+        MatSnackBarModule,
+        SocketIoModule,
+        QuillModule.forRoot(),
+        SimpleModalModule.forRoot(
+            {container: 'modal-container'},
+            {
+                ...defaultSimpleModalOptions,
+                closeOnEscape: true,
+                closeOnClickOutside: true,
+                wrapperClass: 'in',
+                wrapperDefaultClasses: 'modal fade-anim',
+                bodyClass: 'modal-open',
+            },
+        ),
+        NgxPopperModule.forRoot({placement: 'bottom'}),
+        RoundProgressModule,
+        BarChartModule,
+        MatRadioModule,
+        MatCheckboxModule,
+        MatProgressBarModule,
+        MatAutocompleteModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatRippleModule,
+        MomentModule,
+        ContentLoaderModule,
+        TrendModule,
+        DragDropModule,
+        ColorPickerModule,
+        NgxDocViewerModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+        }),
+        MatSliderModule,
+        MatIconModule,
+        NgxAudioPlayerModule,
+        // MatVideoModule,
+        MatDatepickerModule,
+        NgxGoogleAnalyticsModule.forRoot(environment.ga)
+    ],
   providers: [
     {
       provide: DateAdapter,

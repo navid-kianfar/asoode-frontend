@@ -50,9 +50,9 @@
         </div>
         <div *ngIf="model.archivedAt" class="archived">
           {{
-            'TASK_ARCHIVED_AT'
-              | translate
-              | stringFormat: (model.archivedAt | culturedDate)
+          'TASK_ARCHIVED_AT'
+            | translate
+            | stringFormat: (model.archivedAt | culturedDate)
           }}
         </div>
       </div>
@@ -80,7 +80,7 @@
                 <i class="icon-calendar"></i>&nbsp;
                 <span>{{
                   model.dueAt || model.endAt || model.beginAt | culturedDate
-                }}</span>
+                  }}</span>
               </ng-container>
             </div>
             <div class="title">
@@ -197,7 +197,7 @@
                       <span class="name">{{ comment.member?.fullName }}</span>
                       <span class="when">{{
                         comment.createdAt | culturedDate
-                      }}</span>
+                        }}</span>
                     </div>
                     <div class="message">{{ comment.message }}</div>
                   </div>
@@ -276,7 +276,7 @@
                       >
                         <i class="icon-tree7"></i>
                         {{
-                          'TASK_SUB_TASK' | translate
+                        'TASK_SUB_TASK' | translate
                         }}
                       </button>
                       <button
@@ -325,7 +325,7 @@
                         <span
                           *ngIf="isLabelSelected(label)"
                           [style.background]="label.color"
-                          >{{ label.title }}</span
+                        >{{ label.title }}</span
                         >
                       </ng-container>
                     </div>
@@ -489,7 +489,7 @@
 
                     <a href="javascript:void(0)">{{
                       'SHOW_DETAILS' | translate
-                    }}</a>
+                      }}</a>
                   </div>
                 </div>
                 <div
@@ -499,7 +499,8 @@
                     (showSubTasks || model?.subTasks.length)
                   "
                 >
-                  <ng-container [ngTemplateOutlet]="subTaskTemplate" [ngTemplateOutletContext]="{upload: false}"></ng-container>
+                  <ng-container [ngTemplateOutlet]="subTaskTemplate"
+                                [ngTemplateOutletContext]="{upload: false}"></ng-container>
                 </div>
                 <div class="box">
                   <div class="box-header">
@@ -623,16 +624,16 @@
                             class="cover"
                           >
                             <a (click)="coverToggle(attachment)"
-                              href="javascript:void(0)"
+                               href="javascript:void(0)"
                             >
                               <ng-container *ngIf="attachment.covering">
                                 <i class="icon-spin icon-spinner2"></i>&nbsp;
                               </ng-container>
                               {{
-                                (attachment.isCover
+                              (attachment.isCover
                                   ? 'REMOVE_COVER'
                                   : 'MAKE_COVER'
-                                ) | translate
+                              ) | translate
                               }}
                             </a>
                           </div>
@@ -645,7 +646,7 @@
                             class="cover"
                           >
                             <a (click)="advancedVideoPlayer(attachment)"
-                              href="javascript:void(0)"
+                               href="javascript:void(0)"
                             >
                               <i class="icon-clapboard-play"></i>&nbsp;
                               {{ 'ADVANCED_PLAYER' | translate}}
@@ -665,24 +666,20 @@
                           [displayTitle]="false"
                           [displayVolumeControls]="true"
                         ></mat-basic-audio-player>
-                        <br />
+                        <br/>
                       </div>
                       <div
                         class="video-container ltr"
                         *ngIf="filesService.isVideo(attachment.path)"
                       >
-                        <mat-video
-                          [title]="attachment.title"
-                          [autoplay]="false"
-                          [preload]="false"
-                          [fullscreen]="false"
-                          [download]="false"
-                          color="primary"
-                          spinner="spin"
+                        <app-video
                           [poster]="attachment.thumbnailPath"
                           [src]="attachment.path"
-                        ></mat-video>
-                        <br />
+                          [title]="attachment.title"
+                          [autoplay]="false"
+                          [preload]="false">
+                        </app-video>
+                        <br/>
                       </div>
                     </ng-container>
                   </div>
@@ -758,7 +755,8 @@
             <ng-container *ngSwitchCase="ViewMode.SubTask">
               <div class="box-container sub-task-container">
                 <div class="box">
-                  <ng-container [ngTemplateOutlet]="subTaskTemplate" [ngTemplateOutletContext]="{upload: true}"></ng-container>
+                  <ng-container [ngTemplateOutlet]="subTaskTemplate"
+                                [ngTemplateOutletContext]="{upload: true}"></ng-container>
                 </div>
               </div>
             </ng-container>
@@ -835,7 +833,7 @@
                                 </div>
                               </div>
                             </div>
-                            <hr />
+                            <hr/>
                             <div class="choice">
                               <mat-radio-button
                                 (change)="rangeSelected()"
@@ -868,7 +866,7 @@
                                 </div>
                               </div>
                             </div>
-                            <br />
+                            <br/>
                             <button
                               [disabled]="savingDate || deletingDate"
                               (click)="saveDate(timeRangeMenu)"
@@ -987,21 +985,21 @@
                         <div class="days item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.day, 2)
-                          }}</span>
+                            }}</span>
                           <span class="label">{{ 'DAYS' | translate }}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="hours item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.hour, 2)
-                          }}</span>
+                            }}</span>
                           <span class="label">{{ 'HOURS' | translate }}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="minutes item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.minute, 2)
-                          }}</span>
+                            }}</span>
                           <span class="label">{{ 'MINUTES' | translate }}</span>
                         </div>
                       </div>
@@ -1092,7 +1090,7 @@
                 <div class="header">
                   <div class="title">{{ 'TASK_RELATED' | translate }}</div>
                 </div>
-                <br />
+                <br/>
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-task"></i>
@@ -1201,14 +1199,14 @@
       }}</span
     >&nbsp;
     <i [title]="'BULK_UPLOAD' | translate"
-      *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
-      (click)="bulkUpload()"
-      class="add icon-upload41"
+       *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
+       (click)="bulkUpload()"
+       class="add icon-upload41"
     ></i>&nbsp;
     <i [title]="'BULK_DOWNLOAD' | translate"
-      *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
-      (click)="bulkDownload()"
-      class="add icon-download41"
+       *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
+       (click)="bulkDownload()"
+       class="add icon-download41"
     ></i>
     <input type="file"
            hidden

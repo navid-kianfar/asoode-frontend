@@ -16,8 +16,8 @@ import { HttpService } from '../../../services/core/http.service';
 import { ListViewModel } from '../../../view-models/core/list-types';
 import { CountryService } from '../../../services/core/country.service';
 import { TimezoneService } from '../../../services/core/timezone.service';
-import { MatMenuTrigger } from '@angular/material';
 import { EnumsService } from '../../../services/core/enums.service';
+import {MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-dropdown',

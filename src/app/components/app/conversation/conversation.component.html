@@ -137,17 +137,13 @@
             class="video-container ltr"
             *ngIf="filesService.isVideo(message.upload.path)"
           >
-            <mat-video
-              [title]="message.upload.name"
-              [autoplay]="false"
-              [preload]="false"
-              [fullscreen]="false"
-              [download]="false"
-              color="primary"
-              spinner="spin"
+            <app-video
               [poster]="message.upload.thumbnailPath"
               [src]="message.upload.path"
-            ></mat-video>
+              [title]="message.upload.name"
+              [autoplay]="false"
+              [preload]="false">
+            </app-video>
             <br />
           </div>
         </ng-container>

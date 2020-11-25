@@ -18,17 +18,15 @@ export class HttpInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    request = request.clone({
-      setHeaders: {
-        Authorization: this.identityService.identity.token || '',
-        // @ts-ignore
-        'ngsw-bypass': true,
-      },
-    });
+
+    const setHeaders = {
+      Authorization: this.identityService.identity.token || '',
+      // 'ngsw-bypass': true
+    } as any;
+    request = request.clone({ setHeaders });
     return (
       next
         .handle(request)
-        // add error handling
         .pipe(
           catchError((error: any, caught: Observable<HttpEvent<any>>) => {
             if (error.status === 401) {
@@ -36,10 +34,6 @@ export class HttpInterceptor implements HttpInterceptor {
               this.router.navigateByUrl('/login').then(() => {
                 setTimeout(() => window.location.reload(), 500);
               });
-              // if you've caught / handled the error, you don't
-              // want to rethrow it unless you also want
-              // downstream consumers to have to handle it as
-              // well.
               return of(error);
             }
             throw error;

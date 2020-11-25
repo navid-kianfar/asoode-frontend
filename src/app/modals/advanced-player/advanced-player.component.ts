@@ -7,12 +7,12 @@ import {
 } from '../../view-models/projects/project-types';
 import {TaskService} from '../../services/projects/task.service';
 import {OperationResultStatus} from '../../library/core/enums';
-import {MatVideoComponent} from 'mat-video/lib/video.component';
 import {StringHelpers} from '../../helpers/string.helpers';
 import {TranslateService} from '../../services/core/translate.service';
 import {ModalService} from '../../services/core/modal.service';
 import {environment} from '../../../environments/environment';
 import {FilesService} from '../../services/storage/files.service';
+import {VideoComponent} from "../../components/app/video/video.component";
 
 @Component({
   selector: 'app-advanced-player',
@@ -32,7 +32,7 @@ export class AdvancedPlayerComponent
   filter: string;
   time: number;
 
-  @ViewChild('player', {static: true}) matVideo: MatVideoComponent;
+  @ViewChild('player', {static: true}) videoPlayer: VideoComponent;
 
   constructor(
     private readonly taskService: TaskService,
@@ -40,6 +40,9 @@ export class AdvancedPlayerComponent
     private readonly modalService: ModalService,
     private readonly filesService: FilesService,
   ) { super(); }
+
+  ngOnDestroy() {
+  }
 
   ngOnInit() {
     this.addingComment = false;
@@ -49,7 +52,7 @@ export class AdvancedPlayerComponent
   }
 
   ngAfterViewInit() {
-    this.video = this.matVideo.getVideoTag();
+    this.video = this.videoPlayer.player;
     this.video.addEventListener('timeupdate', (e) => console.log(this.video.currentTime));
     this.video.addEventListener('onseeked', (e) => console.log(this.video.currentTime));
   }
