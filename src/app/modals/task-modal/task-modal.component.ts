@@ -36,6 +36,7 @@ import {UploadExceedModalComponent} from '../upload-exceed-modal/upload-exceed-m
 import {DateHelpers} from '../../helpers/date.helpers';
 import {AdvancedPlayerComponent} from '../advanced-player/advanced-player.component';
 import {BulkDownloadModalComponent} from '../bulk-download-modal/bulk-download-modal.component';
+import {GoogleAnalyticsService} from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-task-modal',
@@ -121,6 +122,7 @@ export class TaskModalComponent
     private readonly workPackageService: WorkPackageService,
     private readonly culturedDateService: CulturedDateService,
     private readonly deviceDetectorService: DeviceDetectorService,
+    private readonly gaService: GoogleAnalyticsService,
   ) {
     super();
   }
@@ -555,6 +557,13 @@ export class TaskModalComponent
     if (!this.intervalInstance) {
       this.intervalInstance = setInterval(() => this.calculateAll(), 10000);
     }
+
+    this.gaService.pageView(
+      '/task/' + this.model.id,
+      this.translateService.fromKey('TASK'),
+      undefined,
+      { user_id: this.identityService.identity.userId },
+    );
   }
 
   calculateAll() {
