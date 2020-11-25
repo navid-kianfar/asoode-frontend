@@ -277,5 +277,4 @@ export class WorkPackageService {
     }
     return multiple.sort()[0];
   }
-
 }

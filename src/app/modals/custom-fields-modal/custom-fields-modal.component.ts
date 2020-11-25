@@ -24,5 +24,5 @@ export class CustomFieldsModalComponent
 }
 enum ViewMode {
   Init = 0,
-  Create = 1
+  Create = 1,
 }

@@ -1,10 +1,10 @@
-import {Injectable, Injector} from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { OperationResultStatus } from '../../library/core/enums';
 import { StringDictionary } from '../../library/core/dictionary';
 import { TranslateService } from './translate.service';
-import {ModalService} from './modal.service';
-import {UpgradeComponent} from '../../modals/upgrade/upgrade.component';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { ModalService } from './modal.service';
+import { UpgradeComponent } from '../../modals/upgrade/upgrade.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const CONFIG = {
   verticalPosition: 'top',
@@ -53,7 +53,10 @@ export class NotificationService {
         break;
       case OperationResultStatus.OverCapacity:
       case OperationResultStatus.Expire:
-        this.injector.get(ModalService).show(UpgradeComponent, {}).subscribe(() => {});
+        this.injector
+          .get(ModalService)
+          .show(UpgradeComponent, {})
+          .subscribe(() => {});
         break;
     }
   }

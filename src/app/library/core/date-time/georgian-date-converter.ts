@@ -4,7 +4,8 @@ import * as moment from 'moment';
 
 export default class GeorgianDateConverter implements IDateConverter {
   innerConvert(date: IDateTimeProperties): any {
-    const result = moment().locale('en')
+    const result = moment()
+      .locale('en')
       .year(date.Year)
       .month(date.Month)
       .date(date.Day);

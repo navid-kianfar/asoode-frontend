@@ -19,7 +19,10 @@
       </button>
     </div>
     <div class="members">
-      <div *ngFor="let member of group.members | memberFilter:filter" class="member">
+      <div
+        *ngFor="let member of group.members | memberFilter: filter"
+        class="member"
+      >
         <div class="info">
           <app-member-info [model]="member.member"></app-member-info>
         </div>

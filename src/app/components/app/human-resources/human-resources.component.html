@@ -26,17 +26,17 @@
           >
             +&nbsp;
             {{
-            (identityService.profile.workingGroupId === group.id
+              (identityService.profile.workingGroupId === group.id
                 ? 'END_ENTRY'
                 : 'BEGIN_ENTRY'
-            ) | translate
+              ) | translate
             }}
           </button>
           &nbsp;
           <button
             *ngIf="
-            permission === AccessType.Admin || permission === AccessType.Owner
-          "
+              permission === AccessType.Admin || permission === AccessType.Owner
+            "
             (click)="createManualEntry()"
             [disabled]="group.archivedAt !== null"
             mat-stroked-button
@@ -52,13 +52,13 @@
           [commander]="entryCommander"
           [backend]="'/groups/entry-logs/' + group.id"
           [columns]="[
-          'date',
-          'user',
-          'beginAt',
-          'endAt',
-          'duration',
-          'operations'
-        ]"
+            'date',
+            'user',
+            'beginAt',
+            'endAt',
+            'duration',
+            'operations'
+          ]"
           [rows]="[]"
         >
           <!-- Date Column -->
@@ -92,9 +92,9 @@
             </th>
             <td mat-cell *matCellDef="let element">
               {{
-              !element.endAt
-                ? '-'
-                : (element.endAt | culturedDate: false:'HH:mm')
+                !element.endAt
+                  ? '-'
+                  : (element.endAt | culturedDate: false:'HH:mm')
               }}
             </td>
           </ng-container>
@@ -120,9 +120,9 @@
             >
               <ng-container
                 *ngIf="
-                permission === AccessType.Owner ||
-                permission === AccessType.Admin
-              "
+                  permission === AccessType.Owner ||
+                  permission === AccessType.Admin
+                "
               >
                 <button (click)="edit(element)">
                   <i class="ikon-pen5"></i>
@@ -154,13 +154,21 @@
           [commander]="timeOffCommander"
           [pageSize]="5"
           [backend]="'/groups/time-offs/' + group.id"
-          [columns]="['fullName', 'timeOffAt', 'requestedAt', 'status', 'action']"
+          [columns]="[
+            'fullName',
+            'timeOffAt',
+            'requestedAt',
+            'status',
+            'action'
+          ]"
           [rows]="[]"
         >
           <!-- FullName Column -->
           <ng-container matColumnDef="fullName">
             <th mat-header-cell *matHeaderCellDef>{{ 'NAME' | translate }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.userId | fullName | async }}</td>
+            <td mat-cell *matCellDef="let element">
+              {{ element.userId | fullName | async }}
+            </td>
           </ng-container>
 
           <!-- TimeOff at Column -->
@@ -170,8 +178,8 @@
             </th>
             <td mat-cell *matCellDef="let element">
               <ng-container *ngIf="element.isHourly">
-                {{ element.beginAt | culturedDate:true }}&nbsp;-&nbsp;
-                {{ element.endAt | culturedDate:true:'HH:mm' }}
+                {{ element.beginAt | culturedDate: true }}&nbsp;-&nbsp;
+                {{ element.endAt | culturedDate: true:'HH:mm' }}
               </ng-container>
               <ng-container *ngIf="!element.isHourly">
                 {{ element.beginAt | culturedDate }}
@@ -191,7 +199,9 @@
 
           <!-- Status at Column -->
           <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>{{ 'STATUS' | translate }}</th>
+            <th mat-header-cell *matHeaderCellDef>
+              {{ 'STATUS' | translate }}
+            </th>
             <td mat-cell *matCellDef="let element">
               {{ element.status | enum: 'RequestStatus' }}
             </td>
@@ -206,10 +216,13 @@
               mat-cell
               *matCellDef="let element"
             >
-              <ng-container
-                *ngIf="element.status === RequestStatus.Pending"
-              >
-                <ng-container *ngIf="permission === AccessType.Admin || permission === AccessType.Owner">
+              <ng-container *ngIf="element.status === RequestStatus.Pending">
+                <ng-container
+                  *ngIf="
+                    permission === AccessType.Admin ||
+                    permission === AccessType.Owner
+                  "
+                >
                   <button (click)="respondTimeOff(element, true)">
                     <i class="icon-checkmark3"></i>
                   </button>
@@ -249,14 +262,14 @@
           [pageSize]="5"
           [backend]="'/groups/shifts/' + group.id"
           [columns]="[
-          'title',
-          'shiftRange',
-          'shiftType',
-          'floatLimit',
-          'workingHours',
-          'restingHours',
-          'operations'
-        ]"
+            'title',
+            'shiftRange',
+            'shiftType',
+            'floatLimit',
+            'workingHours',
+            'restingHours',
+            'operations'
+          ]"
           [rows]="[]"
         >
           <!-- Title Column -->
@@ -328,9 +341,9 @@
             >
               <ng-container
                 *ngIf="
-                permission === AccessType.Owner ||
-                permission === AccessType.Admin
-              "
+                  permission === AccessType.Owner ||
+                  permission === AccessType.Admin
+                "
               >
                 <button (click)="editShift(element)">
                   <i class="ikon-pen5"></i>

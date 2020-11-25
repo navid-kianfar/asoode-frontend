@@ -8,7 +8,7 @@ import { AppInitializerProvider } from '../../../services/general/app.initialize
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '../../../services/core/translate.service';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-login',
@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
 
     this.gaService.pageView(
       window.location.pathname,
-      this.translateService.fromKey('LOGIN_TO_YOUR_ACCOUNT')
+      this.translateService.fromKey('LOGIN_TO_YOUR_ACCOUNT'),
     );
   }
 
@@ -99,7 +99,6 @@ export class LoginComponent implements OnInit {
         );
         await this.initializerProvider.refresh();
         await this.router.navigateByUrl('/dashboard');
-
 
         return;
       }

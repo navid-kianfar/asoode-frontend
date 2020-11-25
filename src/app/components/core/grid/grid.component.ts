@@ -8,7 +8,7 @@ import {
   OnInit,
   Output,
   QueryList,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { HttpService } from '../../../services/core/http.service';
@@ -19,13 +19,13 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import {
   MatColumnDef,
   MatTable,
-  MatTableDataSource
+  MatTableDataSource,
 } from '@angular/material/table';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss']
+  styleUrls: ['./grid.component.scss'],
 })
 export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
   commandListener: Subscription;
@@ -62,7 +62,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
   constructor(
     readonly httpService: HttpService,
-    private readonly translatorService: MaterialTranslatorService
+    private readonly translatorService: MaterialTranslatorService,
   ) {}
 
   ngOnInit() {
@@ -85,7 +85,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
     if (this.commander) {
       this.commandListener = this.commander.subscribe(async command =>
-        this.onCommand(command)
+        this.onCommand(command),
       );
     }
     setTimeout(() => this.updateDataSource(), 100);
@@ -113,10 +113,10 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
       backend: this.backend,
       params: {
         query: this.query,
-        ...(this.backendParams || {})
+        ...(this.backendParams || {}),
       },
       page: this.currentPage || 1,
-      pageSize: this.pageSize || 10
+      pageSize: this.pageSize || 10,
     });
     this.isLoading = false;
     this.isLoadingChange.emit(this.isLoading);

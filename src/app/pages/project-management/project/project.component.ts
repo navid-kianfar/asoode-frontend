@@ -15,9 +15,9 @@ import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../services/core/form.service';
 import { NotificationService } from '../../../services/core/notification.service';
 import { Socket } from 'ngx-socket-io';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
-import {TranslateService} from '../../../services/core/translate.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-project',
@@ -89,8 +89,10 @@ export class ProjectComponent implements OnInit {
           }
           break;
         case ActivityType.ProjectMemberRemove:
-          if (this.project.id === notification.data.projectId &&
-            this.identityService.identity.userId === notification.data.recordId) {
+          if (
+            this.project.id === notification.data.projectId &&
+            this.identityService.identity.userId === notification.data.recordId
+          ) {
             return this.router.navigateByUrl('/dashboard');
           }
           break;

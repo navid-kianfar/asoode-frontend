@@ -7,5 +7,5 @@ export const environment = {
   googleOauth: 'https://api.ciblsoft.com/oauth/google-login',
   vapid: '',
   ga: 'G-K4SKBN8BK9',
-  lang: 'en'
+  lang: 'en',
 };

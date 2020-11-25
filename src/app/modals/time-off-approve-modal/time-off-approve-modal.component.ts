@@ -10,9 +10,10 @@ import { ModalService } from '../../services/core/modal.service';
 @Component({
   selector: 'app-time-off-approve-modal',
   templateUrl: './time-off-approve-modal.component.html',
-  styleUrls: ['./time-off-approve-modal.component.scss']
+  styleUrls: ['./time-off-approve-modal.component.scss'],
 })
-export class TimeOffApproveModalComponent extends SimpleModalComponent<{timeOff: any}, boolean>
+export class TimeOffApproveModalComponent
+  extends SimpleModalComponent<{ timeOff: any }, boolean>
   implements OnInit {
   timeOff: any;
   approving: boolean;

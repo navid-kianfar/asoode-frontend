@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { OperationResult } from '../../library/core/operation-result';
 import { HttpService } from '../core/http.service';
 import {
-  ActivityLogViewModel, AdvancedPlayerCommentViewModel, AdvancedPlayerViewModel,
+  ActivityLogViewModel,
+  AdvancedPlayerCommentViewModel,
+  AdvancedPlayerViewModel,
   KartablViewModel,
   TimeSpentViewModel,
   WorkPackageTaskTimeViewModel,
   WorkPackageTaskViewModel,
 } from '../../view-models/projects/project-types';
-import {IdentityService} from '../auth/identity.service';
+import { IdentityService } from '../auth/identity.service';
 
 @Injectable({
   providedIn: 'root',
@@ -113,26 +115,38 @@ export class TaskService {
     );
   }
 
-  async advancedPlayer(id: string): Promise<OperationResult<AdvancedPlayerViewModel>> {
+  async advancedPlayer(
+    id: string,
+  ): Promise<OperationResult<AdvancedPlayerViewModel>> {
     return await this.httpService.post<AdvancedPlayerViewModel>(
       `/tasks/attachment/${id}/advanced`,
     );
   }
 
-  async advancedPlayerComment(id: string, model): Promise<OperationResult<AdvancedPlayerCommentViewModel>> {
+  async advancedPlayerComment(
+    id: string,
+    model,
+  ): Promise<OperationResult<AdvancedPlayerCommentViewModel>> {
     return await this.httpService.post<AdvancedPlayerCommentViewModel>(
-      `/tasks/attachment/${id}/advanced/comment`, model
+      `/tasks/attachment/${id}/advanced/comment`,
+      model,
     );
   }
 
-  async advancedPlayerEditComment(id: string, model): Promise<OperationResult<boolean>> {
+  async advancedPlayerEditComment(
+    id: string,
+    model,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/tasks/attachment/advanced/${id}/edit-comment`, model
+      `/tasks/attachment/advanced/${id}/edit-comment`,
+      model,
     );
   }
-  async advancedPlayerDeleteComment(id: string): Promise<OperationResult<boolean>> {
+  async advancedPlayerDeleteComment(
+    id: string,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/tasks/attachment/advanced/${id}/remove-comment`
+      `/tasks/attachment/advanced/${id}/remove-comment`,
     );
   }
 
@@ -218,8 +232,16 @@ export class TaskService {
     );
   }
 
-  async bulkUpload(id: string, model, trigger: (progress) => void): Promise<OperationResult<boolean>> {
-    return await this.httpService.formUpload(`/tasks/${id}/bulk-attach`, model, (p) => trigger(p));
+  async bulkUpload(
+    id: string,
+    model,
+    trigger: (progress) => void,
+  ): Promise<OperationResult<boolean>> {
+    return await this.httpService.formUpload(
+      `/tasks/${id}/bulk-attach`,
+      model,
+      p => trigger(p),
+    );
   }
 
   bulkDownload(id: string, picked: any[]) {

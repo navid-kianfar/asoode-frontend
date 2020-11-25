@@ -50,9 +50,9 @@
         </div>
         <div *ngIf="model.archivedAt" class="archived">
           {{
-          'TASK_ARCHIVED_AT'
-            | translate
-            | stringFormat: (model.archivedAt | culturedDate)
+            'TASK_ARCHIVED_AT'
+              | translate
+              | stringFormat: (model.archivedAt | culturedDate)
           }}
         </div>
       </div>
@@ -80,7 +80,7 @@
                 <i class="icon-calendar"></i>&nbsp;
                 <span>{{
                   model.dueAt || model.endAt || model.beginAt | culturedDate
-                  }}</span>
+                }}</span>
               </ng-container>
             </div>
             <div class="title">
@@ -197,7 +197,7 @@
                       <span class="name">{{ comment.member?.fullName }}</span>
                       <span class="when">{{
                         comment.createdAt | culturedDate
-                        }}</span>
+                      }}</span>
                     </div>
                     <div class="message">{{ comment.message }}</div>
                   </div>
@@ -228,7 +228,10 @@
               {{ 'TASK_TIME_MANAGEMENT' | translate }}
             </li>
             <li
-              *ngIf="!model.parentId && project.template !== ProjectTemplate.Animation"
+              *ngIf="
+                !model.parentId &&
+                project.template !== ProjectTemplate.Animation
+              "
               [class.active]="mode === ViewMode.Related"
               (click)="switchMode(ViewMode.Related)"
             >
@@ -263,7 +266,10 @@
                     </button>
                     <mat-menu #addDetailMenu="matMenu">
                       <button
-                        *ngIf="!model.parentId && project.template !== ProjectTemplate.Animation"
+                        *ngIf="
+                          !model.parentId &&
+                          project.template !== ProjectTemplate.Animation
+                        "
                         [disabled]="
                           showSubTasks ||
                           model?.subTasks?.length > 0 ||
@@ -275,9 +281,7 @@
                         mat-menu-item
                       >
                         <i class="icon-tree7"></i>
-                        {{
-                        'TASK_SUB_TASK' | translate
-                        }}
+                        {{ 'TASK_SUB_TASK' | translate }}
                       </button>
                       <button
                         *ngIf="permission !== AccessType.Visitor"
@@ -325,7 +329,7 @@
                         <span
                           *ngIf="isLabelSelected(label)"
                           [style.background]="label.color"
-                        >{{ label.title }}</span
+                          >{{ label.title }}</span
                         >
                       </ng-container>
                     </div>
@@ -489,18 +493,21 @@
 
                     <a href="javascript:void(0)">{{
                       'SHOW_DETAILS' | translate
-                      }}</a>
+                    }}</a>
                   </div>
                 </div>
                 <div
                   class="box"
                   *ngIf="
-                    !model.parentId && project.template !== ProjectTemplate.Animation &&
+                    !model.parentId &&
+                    project.template !== ProjectTemplate.Animation &&
                     (showSubTasks || model?.subTasks.length)
                   "
                 >
-                  <ng-container [ngTemplateOutlet]="subTaskTemplate"
-                                [ngTemplateOutletContext]="{upload: false}"></ng-container>
+                  <ng-container
+                    [ngTemplateOutlet]="subTaskTemplate"
+                    [ngTemplateOutletContext]="{ upload: false }"
+                  ></ng-container>
                 </div>
                 <div class="box">
                   <div class="box-header">
@@ -623,17 +630,18 @@
                             "
                             class="cover"
                           >
-                            <a (click)="coverToggle(attachment)"
-                               href="javascript:void(0)"
+                            <a
+                              (click)="coverToggle(attachment)"
+                              href="javascript:void(0)"
                             >
                               <ng-container *ngIf="attachment.covering">
                                 <i class="icon-spin icon-spinner2"></i>&nbsp;
                               </ng-container>
                               {{
-                              (attachment.isCover
+                                (attachment.isCover
                                   ? 'REMOVE_COVER'
                                   : 'MAKE_COVER'
-                              ) | translate
+                                ) | translate
                               }}
                             </a>
                           </div>
@@ -645,11 +653,12 @@
                             "
                             class="cover"
                           >
-                            <a (click)="advancedVideoPlayer(attachment)"
-                               href="javascript:void(0)"
+                            <a
+                              (click)="advancedVideoPlayer(attachment)"
+                              href="javascript:void(0)"
                             >
                               <i class="icon-clapboard-play"></i>&nbsp;
-                              {{ 'ADVANCED_PLAYER' | translate}}
+                              {{ 'ADVANCED_PLAYER' | translate }}
                             </a>
                           </div>
                         </div>
@@ -658,15 +667,15 @@
                         class="audio-container"
                         *ngIf="filesService.isAudio(attachment.path)"
                       >
-                        <mat-basic-audio-player
+                        <app-audio
                           [audioUrl]="attachment.path"
                           [title]="attachment.title"
                           (ended)="onAudioEnded($event, attachment)"
                           [autoPlay]="false"
                           [displayTitle]="false"
                           [displayVolumeControls]="true"
-                        ></mat-basic-audio-player>
-                        <br/>
+                        ></app-audio>
+                        <br />
                       </div>
                       <div
                         class="video-container ltr"
@@ -677,9 +686,10 @@
                           [src]="attachment.path"
                           [title]="attachment.title"
                           [autoplay]="false"
-                          [preload]="false">
+                          [preload]="false"
+                        >
                         </app-video>
-                        <br/>
+                        <br />
                       </div>
                     </ng-container>
                   </div>
@@ -755,8 +765,10 @@
             <ng-container *ngSwitchCase="ViewMode.SubTask">
               <div class="box-container sub-task-container">
                 <div class="box">
-                  <ng-container [ngTemplateOutlet]="subTaskTemplate"
-                                [ngTemplateOutletContext]="{upload: true}"></ng-container>
+                  <ng-container
+                    [ngTemplateOutlet]="subTaskTemplate"
+                    [ngTemplateOutletContext]="{ upload: true }"
+                  ></ng-container>
                 </div>
               </div>
             </ng-container>
@@ -833,7 +845,7 @@
                                 </div>
                               </div>
                             </div>
-                            <hr/>
+                            <hr />
                             <div class="choice">
                               <mat-radio-button
                                 (change)="rangeSelected()"
@@ -866,7 +878,7 @@
                                 </div>
                               </div>
                             </div>
-                            <br/>
+                            <br />
                             <button
                               [disabled]="savingDate || deletingDate"
                               (click)="saveDate(timeRangeMenu)"
@@ -985,21 +997,21 @@
                         <div class="days item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.day, 2)
-                            }}</span>
+                          }}</span>
                           <span class="label">{{ 'DAYS' | translate }}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="hours item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.hour, 2)
-                            }}</span>
+                          }}</span>
                           <span class="label">{{ 'HOURS' | translate }}</span>
                         </div>
                         <div class="sep">:</div>
                         <div class="minutes item">
                           <span class="value">{{
                             NumberHelpers.pad(totalTimeSpent.minute, 2)
-                            }}</span>
+                          }}</span>
                           <span class="label">{{ 'MINUTES' | translate }}</span>
                         </div>
                       </div>
@@ -1090,7 +1102,7 @@
                 <div class="header">
                   <div class="title">{{ 'TASK_RELATED' | translate }}</div>
                 </div>
-                <br/>
+                <br />
                 <div class="box">
                   <div class="box-header">
                     <i class="icon-task"></i>
@@ -1180,39 +1192,42 @@
   <div class="box-header">
     <i class="icon-tree7"></i>
     <span>{{
-      (project.template === ProjectTemplate.Animation ? 'TASK_SUB_PLAN' : 'TASK_SUB_TASK') | translate
-      }}</span>
-    <i
-      *ngIf="!addingSub"
-      (click)="prepareSubTask()"
-      class="add icon-plus2"
-    ></i>
+      (project.template === ProjectTemplate.Animation
+        ? 'TASK_SUB_PLAN'
+        : 'TASK_SUB_TASK'
+      ) | translate
+    }}</span>
+    <i *ngIf="!addingSub" (click)="prepareSubTask()" class="add icon-plus2"></i>
 
     <mat-progress-bar
-      [value]="
-                        (model.subTasksDone * 100) / model.subTasks.length
-                      "
+      [value]="(model.subTasksDone * 100) / model.subTasks.length"
     ></mat-progress-bar>
-    <span
-    >{{ model.subTasksDone }}/{{
-      model.subTasks.length
-      }}</span
+    <span>{{ model.subTasksDone }}/{{ model.subTasks.length }}</span
     >&nbsp;
-    <i [title]="'BULK_UPLOAD' | translate"
-       *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
-       (click)="bulkUpload()"
-       class="add icon-upload41"
-    ></i>&nbsp;
-    <i [title]="'BULK_DOWNLOAD' | translate"
-       *ngIf="upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)"
-       (click)="bulkDownload()"
-       class="add icon-download41"
+    <i
+      [title]="'BULK_UPLOAD' | translate"
+      *ngIf="
+        upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)
+      "
+      (click)="bulkUpload()"
+      class="add icon-upload41"
+    ></i
+    >&nbsp;
+    <i
+      [title]="'BULK_DOWNLOAD' | translate"
+      *ngIf="
+        upload && isAdminOrHasPermission(workPackage.permissionCreateAttachment)
+      "
+      (click)="bulkDownload()"
+      class="add icon-download41"
     ></i>
-    <input type="file"
-           hidden
-           accept=".zip"
-           #bulkUploadInput
-           (change)="onBulkChange($event.target)">
+    <input
+      type="file"
+      hidden
+      accept=".zip"
+      #bulkUploadInput
+      (change)="onBulkChange($event.target)"
+    />
   </div>
   <div class="box-header bulk-upload">
     <ng-container *ngIf="bulkUploading">
@@ -1229,7 +1244,12 @@
     <div *ngIf="addingSub" class="sub-task add-sub">
       <textarea
         rows="3"
-        [placeholder]="(project.template !== ProjectTemplate.Animation ? 'NEW_TASK_PLACEHOLDER' : 'NEW_PLAN_PLACEHOLDER') | translate"
+        [placeholder]="
+          (project.template !== ProjectTemplate.Animation
+            ? 'NEW_TASK_PLACEHOLDER'
+            : 'NEW_PLAN_PLACEHOLDER'
+          ) | translate
+        "
         [readOnly]="savingSub"
         [(ngModel)]="subTaskTitle"
       ></textarea>
@@ -1260,10 +1280,7 @@
           [disabled]="savingSub"
           mat-flat-button
         >
-          <i
-            *ngIf="savingSub"
-            class="icon-spin icon-spinner2"
-          ></i>
+          <i *ngIf="savingSub" class="icon-spin icon-spinner2"></i>
           {{ 'CREATE' | translate }}
         </button>
       </div>
@@ -1276,11 +1293,11 @@
       [cdkDragData]="sub"
       class="sub-task-handle"
       [cdkDragDisabled]="
-                        workPackage.subTasksSort !== SortType.Manual ||
-                        noDrag ||
-                        dragging ||
-                        addingSub
-                      "
+        workPackage.subTasksSort !== SortType.Manual ||
+        noDrag ||
+        dragging ||
+        addingSub
+      "
       cdkDrag
     >
       <div class="sub-task no-select color-{{ sub.state }}">
@@ -1290,14 +1307,11 @@
         </div>
         <div class="details ltr">
           <div class="date">
-            <ng-container
-              *ngIf="sub.dueAt || sub.endAt || sub.beginAt"
-            >
+            <ng-container *ngIf="sub.dueAt || sub.endAt || sub.beginAt">
               <i class="icon-calendar"></i>&nbsp;
               <span>{{
-                sub.dueAt || sub.endAt || sub.beginAt
-                  | culturedDate
-                }}</span>
+                sub.dueAt || sub.endAt || sub.beginAt | culturedDate
+              }}</span>
             </ng-container>
           </div>
           <div class="members">

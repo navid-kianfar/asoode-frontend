@@ -14,7 +14,10 @@
     <div class="modal-body">
       <div class="downloads row">
         <div class="download col-md-3" *ngFor="let download of model">
-          <app-checkbox [(model)]="download.selected" [label]="download.text"></app-checkbox>
+          <app-checkbox
+            [(model)]="download.selected"
+            [label]="download.text"
+          ></app-checkbox>
         </div>
       </div>
     </div>

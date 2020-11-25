@@ -15,7 +15,7 @@ import {
   PendingInvitationViewModel,
 } from '../../../view-models/groups/group-types';
 import { Router } from '@angular/router';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-project-setting',

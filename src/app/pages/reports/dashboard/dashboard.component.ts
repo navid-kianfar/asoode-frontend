@@ -6,10 +6,10 @@ import { ReportService } from '../../../services/general/report.service';
 import { DashboardViewModel } from '../../../view-models/general/report-types';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
-import {IDateConverter} from '../../../library/core/date-time/date-contracts';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
-import {TranslateService} from '../../../services/core/translate.service';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { IDateConverter } from '../../../library/core/date-time/date-contracts';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
       begin: this.begin,
       end: this.end,
       monthBegin: this.monthBegin,
-      monthEnd: this.monthEnd
+      monthEnd: this.monthEnd,
     });
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error

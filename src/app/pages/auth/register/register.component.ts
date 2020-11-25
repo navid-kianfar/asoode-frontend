@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { environment } from '../../../../environments/environment';
-import {TranslateService} from '../../../services/core/translate.service';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-register',
@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
 
     this.gaService.pageView(
       window.location.pathname,
-      this.translateService.fromKey('REGISTER')
+      this.translateService.fromKey('REGISTER'),
     );
   }
 

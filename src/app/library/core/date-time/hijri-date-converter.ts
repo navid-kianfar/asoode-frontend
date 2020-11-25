@@ -4,7 +4,8 @@ import * as moment from 'moment-hijri';
 
 export default class HijriDateConverter implements IDateConverter {
   innerConvert(date: IDateTimeProperties): any {
-    const result = moment().locale('ar')
+    const result = moment()
+      .locale('ar')
       .iYear(date.Year)
       .iMonth(date.Month)
       .iDate(date.Day);

@@ -18,27 +18,22 @@ export class HttpInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-
     const setHeaders = {
       Authorization: this.identityService.identity.token || '',
       // 'ngsw-bypass': true
     } as any;
     request = request.clone({ setHeaders });
-    return (
-      next
-        .handle(request)
-        .pipe(
-          catchError((error: any, caught: Observable<HttpEvent<any>>) => {
-            if (error.status === 401) {
-              this.identityService.logout();
-              this.router.navigateByUrl('/login').then(() => {
-                setTimeout(() => window.location.reload(), 500);
-              });
-              return of(error);
-            }
-            throw error;
-          }),
-        )
+    return next.handle(request).pipe(
+      catchError((error: any, caught: Observable<HttpEvent<any>>) => {
+        if (error.status === 401) {
+          this.identityService.logout();
+          this.router.navigateByUrl('/login').then(() => {
+            setTimeout(() => window.location.reload(), 500);
+          });
+          return of(error);
+        }
+        throw error;
+      }),
     );
   }
 }

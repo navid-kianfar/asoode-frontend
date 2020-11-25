@@ -3,7 +3,7 @@ import {
   ExplorerFileViewModel,
   ExplorerFolderViewModel,
 } from '../../../view-models/storage/files-types';
-import {FilesService} from '../../../services/storage/files.service';
+import { FilesService } from '../../../services/storage/files.service';
 
 @Component({
   selector: 'app-file-folder-preview',

@@ -30,53 +30,84 @@
     <div class="advanced-player-container">
       <div class="aside-container">
         <div class="search-container">
-          <input [readOnly]="waiting" [(ngModel)]="filter" type="text" [placeholder]="'SEARCH' | translate">
+          <input
+            [readOnly]="waiting"
+            [(ngModel)]="filter"
+            type="text"
+            [placeholder]="'SEARCH' | translate"
+          />
           <i class="icon-search"></i>
         </div>
         <div *ngIf="!addingComment" class="new-comment-container">
-          <button mat-flat-button color="primary" (click)="newComment()" [disabled]="commentWaiting">
-            {{ 'NEW_COMMENT' | translate}}
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="newComment()"
+            [disabled]="commentWaiting"
+          >
+            {{ 'NEW_COMMENT' | translate }}
           </button>
         </div>
         <div class="comments">
           <div *ngIf="addingComment" class="comment">
-            <textarea rows="4" [readOnly]="commentWaiting" [(ngModel)]="tempComment.message"></textarea>
+            <textarea
+              rows="4"
+              [readOnly]="commentWaiting"
+              [(ngModel)]="tempComment.message"
+            ></textarea>
             <div>
-              <button mat-flat-button color="primary" (click)="saveComment()" [disabled]="commentWaiting">
+              <button
+                mat-flat-button
+                color="primary"
+                (click)="saveComment()"
+                [disabled]="commentWaiting"
+              >
                 <i *ngIf="commentWaiting" class="icon-spin icon-spinner2"></i>
-                {{ 'NEW_COMMENT' | translate}}
+                {{ 'NEW_COMMENT' | translate }}
               </button>
-              <button mat-flat-button (click)="tempComment = null;addingComment = false">
-                {{ 'CANCEL' | translate}}
+              <button
+                mat-flat-button
+                (click)="tempComment = null; addingComment = false"
+              >
+                {{ 'CANCEL' | translate }}
               </button>
             </div>
           </div>
           <div class="comment" *ngFor="let comment of data.comments">
-
             <ng-container *ngIf="comment.id === tempComment?.id">
-
-              <textarea rows="4" [readOnly]="commentWaiting" [(ngModel)]="tempComment.message"></textarea>
+              <textarea
+                rows="4"
+                [readOnly]="commentWaiting"
+                [(ngModel)]="tempComment.message"
+              ></textarea>
               <div>
-                <button mat-flat-button color="primary" (click)="saveComment()" [disabled]="commentWaiting">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  (click)="saveComment()"
+                  [disabled]="commentWaiting"
+                >
                   <i *ngIf="commentWaiting" class="icon-spin icon-spinner2"></i>
-                  {{ 'SAVE_CHANGES' | translate}}
+                  {{ 'SAVE_CHANGES' | translate }}
                 </button>
-                <button mat-flat-button (click)="tempComment = null;addingComment = false">
-                  {{ 'CANCEL' | translate}}
+                <button
+                  mat-flat-button
+                  (click)="tempComment = null; addingComment = false"
+                >
+                  {{ 'CANCEL' | translate }}
                 </button>
               </div>
-
             </ng-container>
 
-            <div (click)="goToComment(comment)" *ngIf="comment.id !== tempComment?.id">
-
+            <div
+              (click)="goToComment(comment)"
+              *ngIf="comment.id !== tempComment?.id"
+            >
               <div [innerHTML]="comment.message"></div>
-              <hr>
+              <hr />
               <i (click)="editComment(comment)" class="icon-pencil"></i>&nbsp;
               <i (click)="deleteComment(comment)" class="icon-delete"></i>&nbsp;
-
             </div>
-
           </div>
         </div>
       </div>

@@ -6,9 +6,7 @@
     </button>
   </div>
   <ng-container *ngIf="mode === ViewMode.Init">
-    <div class="modal-body">
-
-    </div>
+    <div class="modal-body"></div>
     <div class="modal-footer">
       <button
         color="primary"
@@ -19,9 +17,6 @@
         {{ 'CLOSE' | translate }}
       </button>
     </div>
-
   </ng-container>
-  <ng-container *ngIf="mode === ViewMode.Create">
-
-  </ng-container>
+  <ng-container *ngIf="mode === ViewMode.Create"> </ng-container>
 </div>

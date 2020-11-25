@@ -1,65 +1,68 @@
-import {DateAdapter} from '@angular/material/core';
+import { DateAdapter } from '@angular/material/core';
 import * as gregorianMoment from 'moment';
 import * as jalaliMoment from 'jalali-moment';
 import * as hijriMoment from 'moment-hijri';
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 export const PERSIAN_DATE_FORMATS = {
   parse: {
-    dateInput: 'jYYYY/jMM/jDD'
+    dateInput: 'jYYYY/jMM/jDD',
   },
   display: {
     dateInput: 'jYYYY/jMM/jDD',
     monthYearLabel: 'jYYYY jMMMM',
     dateA11yLabel: 'jYYYY/jMM/jDD',
-    monthYearA11yLabel: 'jYYYY jMMMM'
-  }
+    monthYearA11yLabel: 'jYYYY jMMMM',
+  },
 };
 export const HIJRI_DATE_FORMATS = {
   parse: {
-    dateInput: 'iYYYY/iMM/iDD'
+    dateInput: 'iYYYY/iMM/iDD',
   },
   display: {
     dateInput: 'iYYYY/iMM/iDD',
     monthYearLabel: 'iYYYY iMMMM',
     dateA11yLabel: 'iYYYY/iMM/iDD',
-    monthYearA11yLabel: 'iYYYY iMMM'
-  }
+    monthYearA11yLabel: 'iYYYY iMMM',
+  },
 };
 export const GREGORIAN_DATE_FORMATS = {
   parse: {
-    dateInput: 'YYYY/MM/DD'
+    dateInput: 'YYYY/MM/DD',
   },
   display: {
     dateInput: 'YYYY/MM/DD',
     monthYearLabel: 'YYYY MMMM',
     dateA11yLabel: 'YYYY/MM/DD',
-    monthYearA11yLabel: 'YYYY MMMM'
-  }
+    monthYearA11yLabel: 'YYYY MMMM',
+  },
 };
 
 // tslint:disable-next-line:typedef
 export function CulturedDateFactory() {
   switch (environment.lang) {
-    case 'fa': return new PersianDateAdapter();
-    case 'ar': return new HijriDateAdapter();
-    default: return new GregorianDateAdapter();
+    case 'fa':
+      return new PersianDateAdapter();
+    case 'ar':
+      return new HijriDateAdapter();
+    default:
+      return new GregorianDateAdapter();
   }
 }
 
 // tslint:disable-next-line:typedef
 export function CulturedDateFormatsFactory() {
   switch (environment.lang) {
-    case 'fa': return PERSIAN_DATE_FORMATS;
-    case 'ar': return HIJRI_DATE_FORMATS;
-    default: return GREGORIAN_DATE_FORMATS;
+    case 'fa':
+      return PERSIAN_DATE_FORMATS;
+    case 'ar':
+      return HIJRI_DATE_FORMATS;
+    default:
+      return GREGORIAN_DATE_FORMATS;
   }
 }
 
-
-export class PersianDateAdapter extends DateAdapter<
-  jalaliMoment.Moment
-  > {
+export class PersianDateAdapter extends DateAdapter<jalaliMoment.Moment> {
   constructor() {
     super();
     super.setLocale('fa');
@@ -142,7 +145,7 @@ export class PersianDateAdapter extends DateAdapter<
   createDate(year: number, month: number, date: number): jalaliMoment.Moment {
     if (month < 0 || month > 11) {
       throw Error(
-        `Invalid month index "${month}". Month index has to be between 0 and 11.`
+        `Invalid month index "${month}". Month index has to be between 0 and 11.`,
       );
     }
     if (date < 1) {
@@ -177,7 +180,7 @@ export class PersianDateAdapter extends DateAdapter<
 
   parse(
     value: any,
-    parseFormat: string | string[]
+    parseFormat: string | string[],
   ): jalaliMoment.Moment | null {
     if (value && typeof value === 'string') {
       return jalaliMoment(value, parseFormat, 'fa');
@@ -195,21 +198,21 @@ export class PersianDateAdapter extends DateAdapter<
 
   addCalendarYears(
     date: jalaliMoment.Moment,
-    years: number
+    years: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(years, 'jYear');
   }
 
   addCalendarMonths(
     date: jalaliMoment.Moment,
-    months: number
+    months: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(months, 'jmonth');
   }
 
   addCalendarDays(
     date: jalaliMoment.Moment,
-    days: number
+    days: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(days, 'jDay');
   }
@@ -248,9 +251,7 @@ export class PersianDateAdapter extends DateAdapter<
   }
 }
 
-export class HijriDateAdapter extends DateAdapter<
-  hijriMoment.Moment
-  > {
+export class HijriDateAdapter extends DateAdapter<hijriMoment.Moment> {
   constructor() {
     super();
     super.setLocale('ar');
@@ -344,7 +345,9 @@ export class HijriDateAdapter extends DateAdapter<
   }
 
   getNumDaysInMonth(date: hijriMoment.Moment): number {
-    return this.clone(date).endOf('iMonth').iDate();
+    return this.clone(date)
+      .endOf('iMonth')
+      .iDate();
   }
 
   clone(date: hijriMoment.Moment): hijriMoment.Moment {
@@ -354,7 +357,7 @@ export class HijriDateAdapter extends DateAdapter<
   createDate(year: number, month: number, date: number): hijriMoment.Moment {
     if (month < 0 || month > 11) {
       throw Error(
-        `Invalid month index "${month}". Month index has to be between 0 and 11.`
+        `Invalid month index "${month}". Month index has to be between 0 and 11.`,
       );
     }
     if (date < 1) {
@@ -383,10 +386,7 @@ export class HijriDateAdapter extends DateAdapter<
     return hijriMoment().locale('ar');
   }
 
-  parse(
-    value: any,
-    parseFormat: string | string[]
-  ): hijriMoment.Moment | null {
+  parse(value: any, parseFormat: string | string[]): hijriMoment.Moment | null {
     if (value && typeof value === 'string') {
       return hijriMoment(value, parseFormat, 'ar');
     }
@@ -403,22 +403,19 @@ export class HijriDateAdapter extends DateAdapter<
 
   addCalendarYears(
     date: hijriMoment.Moment,
-    years: number
+    years: number,
   ): hijriMoment.Moment {
     return this.clone(date).add(years, 'iYear');
   }
 
   addCalendarMonths(
     date: hijriMoment.Moment,
-    months: number
+    months: number,
   ): hijriMoment.Moment {
     return this.clone(date).add(months, 'iMonth');
   }
 
-  addCalendarDays(
-    date: hijriMoment.Moment,
-    days: number
-  ): hijriMoment.Moment {
+  addCalendarDays(date: hijriMoment.Moment, days: number): hijriMoment.Moment {
     return (this.clone(date) as any).add(days, 'jDay');
   }
 
@@ -456,9 +453,7 @@ export class HijriDateAdapter extends DateAdapter<
   }
 }
 
-export class GregorianDateAdapter extends DateAdapter<
-  gregorianMoment.Moment
-  > {
+export class GregorianDateAdapter extends DateAdapter<gregorianMoment.Moment> {
   constructor() {
     super();
     super.setLocale('en');
@@ -483,13 +478,9 @@ export class GregorianDateAdapter extends DateAdapter<
     switch (style) {
       case 'long':
       case 'short':
-        return gregorianMoment
-          .months()
-          .slice(0);
+        return gregorianMoment.months().slice(0);
       case 'narrow':
-        return gregorianMoment
-          .monthsShort()
-          .slice(0);
+        return gregorianMoment.monthsShort().slice(0);
     }
   }
 
@@ -504,13 +495,9 @@ export class GregorianDateAdapter extends DateAdapter<
   getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
     switch (style) {
       case 'long':
-        return gregorianMoment
-          .weekdays()
-          .slice(0);
+        return gregorianMoment.weekdays().slice(0);
       case 'short':
-        return gregorianMoment
-          .weekdaysShort()
-          .slice(0);
+        return gregorianMoment.weekdaysShort().slice(0);
       case 'narrow':
         return ['Su', 'Mo', 'Th', 'Wed', 'Thr', 'Fr', 'Sa'];
     }
@@ -534,10 +521,14 @@ export class GregorianDateAdapter extends DateAdapter<
     return date.clone().locale('en');
   }
 
-  createDate(year: number, month: number, date: number): gregorianMoment.Moment {
+  createDate(
+    year: number,
+    month: number,
+    date: number,
+  ): gregorianMoment.Moment {
     if (month < 0 || month > 11) {
       throw Error(
-        `Invalid month index "${month}". Month index has to be between 0 and 11.`
+        `Invalid month index "${month}". Month index has to be between 0 and 11.`,
       );
     }
     if (date < 1) {
@@ -572,7 +563,7 @@ export class GregorianDateAdapter extends DateAdapter<
 
   parse(
     value: any,
-    parseFormat: string | string[]
+    parseFormat: string | string[],
   ): gregorianMoment.Moment | null {
     if (value && typeof value === 'string') {
       return gregorianMoment(value, parseFormat, 'en');
@@ -590,21 +581,21 @@ export class GregorianDateAdapter extends DateAdapter<
 
   addCalendarYears(
     date: gregorianMoment.Moment,
-    years: number
+    years: number,
   ): gregorianMoment.Moment {
     return this.clone(date).add(years, 'year');
   }
 
   addCalendarMonths(
     date: gregorianMoment.Moment,
-    months: number
+    months: number,
   ): gregorianMoment.Moment {
     return this.clone(date).add(months, 'month');
   }
 
   addCalendarDays(
     date: gregorianMoment.Moment,
-    days: number
+    days: number,
   ): gregorianMoment.Moment {
     return this.clone(date).add(days, 'day');
   }
@@ -642,5 +633,3 @@ export class GregorianDateAdapter extends DateAdapter<
     return super.deserialize(value);
   }
 }
-
-

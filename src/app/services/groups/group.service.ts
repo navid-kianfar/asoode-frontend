@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
-import { GroupViewModel, TimeOffDetailViewModel } from '../../view-models/groups/group-types';
+import {
+  GroupViewModel,
+  TimeOffDetailViewModel,
+} from '../../view-models/groups/group-types';
 import { OperationResultStatus } from '../../library/core/enums';
 import { AccessType } from '../../library/app/enums';
 import { IdentityService } from '../auth/identity.service';
@@ -10,7 +13,7 @@ import {
   TimeSpentViewModel,
 } from '../../view-models/projects/project-types';
 import { DayReportViewModel } from '../../view-models/general/report-types';
-import {ListViewModel} from '../../view-models/core/list-types';
+import { ListViewModel } from '../../view-models/core/list-types';
 
 @Injectable({
   providedIn: 'root',
@@ -165,50 +168,54 @@ export class GroupService {
   }
 
   async upgrade(id: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      `/groups/${id}/upgrade`
-    );
+    return await this.httpService.post<boolean>(`/groups/${id}/upgrade`);
   }
 
   async notAttached(id: string): Promise<OperationResult<ListViewModel[]>> {
     return await this.httpService.post<ListViewModel[]>(
-      `/groups/${id}/non-attached`
+      `/groups/${id}/non-attached`,
     );
   }
 
   async connect(parentId: string, id: any): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(
-      `/groups/${parentId}/connect`, { id }
-    );
+    return await this.httpService.post<boolean>(`/groups/${parentId}/connect`, {
+      id,
+    });
   }
 
-  async createTimeOff(id: string, model: any): Promise<OperationResult<boolean>> {
+  async createTimeOff(
+    id: string,
+    model: any,
+  ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/groups/time-offs/${id}/request`, model
+      `/groups/time-offs/${id}/request`,
+      model,
     );
   }
 
   async deleteTimeOff(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/groups/time-offs/${id}/delete`
+      `/groups/time-offs/${id}/delete`,
     );
   }
 
   async approveTimeOff(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/groups/time-offs/${id}/approve`
+      `/groups/time-offs/${id}/approve`,
     );
   }
 
   async declineTimeOff(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/groups/time-offs/${id}/decline`
+      `/groups/time-offs/${id}/decline`,
     );
   }
 
-  async detailTimeOff(id: string): Promise<OperationResult<TimeOffDetailViewModel>> {
+  async detailTimeOff(
+    id: string,
+  ): Promise<OperationResult<TimeOffDetailViewModel>> {
     return await this.httpService.post<TimeOffDetailViewModel>(
-      `/groups/time-offs/${id}/detail`
+      `/groups/time-offs/${id}/detail`,
     );
   }
 }

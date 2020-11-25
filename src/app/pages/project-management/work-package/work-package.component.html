@@ -41,9 +41,11 @@
           [popperHideOnClickOutside]="true"
           [popperHideOnScroll]="true"
           [popperPlacement]="'bottom'"
-          class="title">
+          class="title"
+        >
           <i class="icon-workpackage"></i>&nbsp;
-          <span>{{ workPackage.title }}</span>&nbsp;&nbsp;
+          <span>{{ workPackage.title }}</span
+          >&nbsp;&nbsp;
           <!--        <i class="icon-star-empty"></i>-->
           <i
             (click)="prepareRename($event)"
@@ -589,7 +591,10 @@
 </popper-content>
 <popper-content #popperStructure>
   <div *ngIf="workPackage" class="structure-popper">
-    <ng-container [ngTemplateOutlet]="structureTemplate" [ngTemplateOutletContext]="{parent: null}"></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="structureTemplate"
+      [ngTemplateOutletContext]="{ parent: null }"
+    ></ng-container>
   </div>
 </popper-content>
 <mat-menu #allMemberMenu="matMenu" class="popper-all-users">
@@ -660,15 +665,19 @@
 <ng-template #structureTemplate let-parent="parent">
   <ul class="structure-holder no-select">
     <li class="sub" *ngFor="let sub of findSubs(parent)">
-      <span>
-        <i class="icon-tree7"></i>&nbsp;{{ sub.title }}
-      </span>
-      <ng-container [ngTemplateOutlet]="structureTemplate" [ngTemplateOutletContext]="{parent: sub.id}"></ng-container>
+      <span> <i class="icon-tree7"></i>&nbsp;{{ sub.title }} </span>
+      <ng-container
+        [ngTemplateOutlet]="structureTemplate"
+        [ngTemplateOutletContext]="{ parent: sub.id }"
+      ></ng-container>
     </li>
-    <li (click)="openWorkPackage(wp)" class="wp" [class.selected]="wp.id === workPackage.id" *ngFor="let wp of project.workPackages | search:['subProjectId']:parent">
-      <span>
-        <i class="icon-workpackage"></i>&nbsp;{{ wp.title }}
-      </span>
+    <li
+      (click)="openWorkPackage(wp)"
+      class="wp"
+      [class.selected]="wp.id === workPackage.id"
+      *ngFor="let wp of project.workPackages | search: ['subProjectId']:parent"
+    >
+      <span> <i class="icon-workpackage"></i>&nbsp;{{ wp.title }} </span>
     </li>
   </ul>
 </ng-template>

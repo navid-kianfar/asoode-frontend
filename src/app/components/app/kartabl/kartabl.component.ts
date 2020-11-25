@@ -30,7 +30,9 @@ export class KartablComponent implements OnInit {
       );
       const found = project.workPackages.find(w => w.id === t.packageId);
       const pkg = { ...found, list: [] };
-      if (ddItems.findIndex(i => i.value === pkg.id) !== -1) { return; }
+      if (ddItems.findIndex(i => i.value === pkg.id) !== -1) {
+        return;
+      }
       ddItems.push({
         text: `${project.title} - ${pkg.title}`,
         value: pkg.id,

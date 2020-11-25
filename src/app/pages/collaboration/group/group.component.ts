@@ -7,11 +7,11 @@ import { GroupDetailComponent } from '../../../modals/group-detail/group-detail.
 import { AccessType, ActivityType } from '../../../library/app/enums';
 import { Socket } from 'ngx-socket-io';
 import { OperationResultStatus } from '../../../library/core/enums';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {UpgradeComponent} from '../../../modals/upgrade/upgrade.component';
-import {CreateModalParameters} from '../../../view-models/modals/modals-types';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
-import {TranslateService} from '../../../services/core/translate.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
+import { CreateModalParameters } from '../../../view-models/modals/modals-types';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-group',
@@ -63,7 +63,9 @@ export class GroupComponent implements OnInit {
     );
 
     if (this.group.premium && this.identityService.profile.plan.expireAt) {
-      const expired = new Date(this.identityService.profile.plan.expireAt).getTime() < new Date().getTime();
+      const expired =
+        new Date(this.identityService.profile.plan.expireAt).getTime() <
+        new Date().getTime();
       if (expired) {
         await this.router.navigateByUrl('/dashboard');
         this.modalService
@@ -90,7 +92,10 @@ export class GroupComponent implements OnInit {
           }
           break;
         case ActivityType.GroupMemberRemove:
-          if (this.group.id === notification.data.groupId && this.identityService.identity.userId === notification.data.userId) {
+          if (
+            this.group.id === notification.data.groupId &&
+            this.identityService.identity.userId === notification.data.userId
+          ) {
             this.router.navigateByUrl('/');
           }
           break;

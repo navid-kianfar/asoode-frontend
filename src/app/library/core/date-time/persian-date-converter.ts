@@ -1,10 +1,11 @@
-import {IDateConverter, IDateTimeProperties} from './date-contracts';
-import {NumberHelpers} from '../../../helpers/number.helpers';
+import { IDateConverter, IDateTimeProperties } from './date-contracts';
+import { NumberHelpers } from '../../../helpers/number.helpers';
 import * as moment from 'jalali-moment';
 
 export default class PersianDateConverter implements IDateConverter {
   innerConvert(date: IDateTimeProperties): moment.Moment {
-    const result = moment().locale('fa')
+    const result = moment()
+      .locale('fa')
       .jYear(date.Year)
       .jMonth(date.Month)
       .jDate(date.Day);

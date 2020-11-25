@@ -1,4 +1,4 @@
-import {WorkPackageTaskState} from '../../app/enums';
+import { WorkPackageTaskState } from '../../app/enums';
 
 export interface IDateProperties {
   Day: number;

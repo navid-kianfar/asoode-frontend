@@ -12,7 +12,7 @@ import { GroupService } from '../../../services/groups/group.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { TranslateService } from '../../../services/core/translate.service';
 import { StringHelpers } from '../../../helpers/string.helpers';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-group-members',

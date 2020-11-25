@@ -11,9 +11,9 @@ import {
   TimeSpentViewModel,
   WorkPackageTaskViewModel,
 } from '../../../view-models/projects/project-types';
-import {TranslateService} from '../../../services/core/translate.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-tasks',

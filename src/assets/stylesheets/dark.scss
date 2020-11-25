@@ -1201,7 +1201,8 @@ body.dark-mode {
             color: #666;
           }
 
-          &:hover, &.selected {
+          &:hover,
+          &.selected {
             background: $color2 !important;
           }
         }

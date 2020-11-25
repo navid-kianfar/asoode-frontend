@@ -6,7 +6,7 @@ import { ConfigService } from './config.service';
 import { NotificationService } from './notification.service';
 import { GridFilter, GridResult } from '../../view-models/core/grid-types';
 import { NetworkService } from './network.service';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -201,11 +201,7 @@ export class HttpService {
   }
 
   formDownload(section: string, data: any) {
-    this.post_to_url(
-      this.config.backend + section,
-      data || {},
-      'post'
-    );
+    this.post_to_url(this.config.backend + section, data || {}, 'post');
   }
 
   private post_to_url(path, params, method) {
@@ -215,24 +211,24 @@ export class HttpService {
     form.setAttribute('action', path);
     form.setAttribute('target', '_blank');
 
-    const addField = ( k, value ) => {
+    const addField = (k, value) => {
       const hiddenField = document.createElement('input');
       hiddenField.setAttribute('type', 'hidden');
       hiddenField.setAttribute('name', k);
-      hiddenField.setAttribute('value', value );
+      hiddenField.setAttribute('value', value);
 
       form.appendChild(hiddenField);
     };
 
     for (const key in params) {
       if (params.hasOwnProperty(key)) {
-        if ( params[key] instanceof Array ) {
+        if (params[key] instanceof Array) {
           // tslint:disable-next-line:prefer-for-of
           for (let i = 0; i < params[key].length; i++) {
-            addField( key, params[key][i] );
+            addField(key, params[key][i]);
           }
         } else {
-          addField( key, params[key] );
+          addField(key, params[key]);
         }
       }
     }

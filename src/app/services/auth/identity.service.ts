@@ -16,7 +16,10 @@ import {
 import { CookieService } from 'ngx-cookie-service';
 
 let MARKETER;
-try { MARKETER = new URLSearchParams(window.location.search).get('marketer') || undefined; } catch (e) {}
+try {
+  MARKETER =
+    new URLSearchParams(window.location.search).get('marketer') || undefined;
+} catch (e) {}
 
 @Injectable({
   providedIn: 'root',
@@ -92,8 +95,6 @@ export class IdentityService {
   async register(
     model: any,
   ): Promise<OperationResult<RegisterResultViewModel>> {
-
-
     model.marketer = this.cookieService.get('MARKETER');
 
     return await this.httpService.post<RegisterResultViewModel>(

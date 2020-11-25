@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
-import {TaskModalParameters} from '../../view-models/core/modal-types';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
+import { TaskModalParameters } from '../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
   ProjectViewModel,
@@ -10,33 +10,42 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
-import {TaskService} from '../../services/projects/task.service';
-import {OperationResultStatus} from '../../library/core/enums';
-import {ProjectService} from '../../services/projects/project.service';
-import {AccessType, ActivityType, ProjectTemplate, SortType, WorkPackageTaskState,} from '../../library/app/enums';
-import {IdentityService} from '../../services/auth/identity.service';
-import {Socket} from 'ngx-socket-io';
-import {UploadViewModel} from '../../view-models/storage/files-types';
-import {FilesService} from '../../services/storage/files.service';
-import {ModalService} from '../../services/core/modal.service';
-import {StringHelpers} from '../../helpers/string.helpers';
-import {TranslateService} from '../../services/core/translate.service';
-import {WorkPackageService} from '../../services/projects/work-package.service';
-import {MapModalComponent} from '../map-modal/map-modal.component';
-import {OperationResult} from '../../library/core/operation-result';
-import {MapMarker, MapModalParameters,} from '../../view-models/general/map-types';
-import {NumberHelpers} from 'src/app/helpers/number.helpers';
-import {TimeViewModel} from '../../view-models/core/general-types';
-import {CulturedDateService} from '../../services/core/cultured-date.service';
-import {GroupService} from '../../services/groups/group.service';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {DeviceDetectorService} from 'ngx-device-detector';
-import {UploadExceedModalComponent} from '../upload-exceed-modal/upload-exceed-modal.component';
-import {DateHelpers} from '../../helpers/date.helpers';
-import {AdvancedPlayerComponent} from '../advanced-player/advanced-player.component';
-import {BulkDownloadModalComponent} from '../bulk-download-modal/bulk-download-modal.component';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
-import {MatMenu} from '@angular/material/menu';
+import { TaskService } from '../../services/projects/task.service';
+import { OperationResultStatus } from '../../library/core/enums';
+import { ProjectService } from '../../services/projects/project.service';
+import {
+  AccessType,
+  ActivityType,
+  ProjectTemplate,
+  SortType,
+  WorkPackageTaskState,
+} from '../../library/app/enums';
+import { IdentityService } from '../../services/auth/identity.service';
+import { Socket } from 'ngx-socket-io';
+import { UploadViewModel } from '../../view-models/storage/files-types';
+import { FilesService } from '../../services/storage/files.service';
+import { ModalService } from '../../services/core/modal.service';
+import { StringHelpers } from '../../helpers/string.helpers';
+import { TranslateService } from '../../services/core/translate.service';
+import { WorkPackageService } from '../../services/projects/work-package.service';
+import { MapModalComponent } from '../map-modal/map-modal.component';
+import { OperationResult } from '../../library/core/operation-result';
+import {
+  MapMarker,
+  MapModalParameters,
+} from '../../view-models/general/map-types';
+import { NumberHelpers } from 'src/app/helpers/number.helpers';
+import { TimeViewModel } from '../../view-models/core/general-types';
+import { CulturedDateService } from '../../services/core/cultured-date.service';
+import { GroupService } from '../../services/groups/group.service';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { UploadExceedModalComponent } from '../upload-exceed-modal/upload-exceed-modal.component';
+import { DateHelpers } from '../../helpers/date.helpers';
+import { AdvancedPlayerComponent } from '../advanced-player/advanced-player.component';
+import { BulkDownloadModalComponent } from '../bulk-download-modal/bulk-download-modal.component';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { MatMenu } from '@angular/material/menu';
 
 @Component({
   selector: 'app-task-modal',
@@ -476,7 +485,9 @@ export class TaskModalComponent
   }
 
   async fetch() {
-    if (this.waiting) { return; }
+    if (this.waiting) {
+      return;
+    }
     this.waiting = true;
 
     const op = await this.taskService.fetch(this.id);
@@ -514,10 +525,14 @@ export class TaskModalComponent
     }
     this.groupMembers = this.project.members
       .filter(i => i.isGroup)
-      .filter(f => this.workPackage.members.find(d => d.recordId === f.recordId));
+      .filter(f =>
+        this.workPackage.members.find(d => d.recordId === f.recordId),
+      );
     this.individualMembers = this.project.members
       .filter(i => !i.isGroup)
-      .filter(f => this.workPackage.members.find(d => d.recordId === f.recordId));
+      .filter(f =>
+        this.workPackage.members.find(d => d.recordId === f.recordId),
+      );
 
     this.groupMembers.forEach(g => {
       const grp = this.groupService.groups.find(i => i.id === g.recordId);
@@ -906,7 +921,10 @@ export class TaskModalComponent
     $event.preventDefault();
     const title = (label.tempName || '').trim();
     const color = label.tempColor.trim();
-    if (((!title && !label.title) || title === label.title) && color === label.color) {
+    if (
+      ((!title && !label.title) || title === label.title) &&
+      color === label.color
+    ) {
       label.editting = false;
       return;
     }
@@ -1133,22 +1151,31 @@ export class TaskModalComponent
   }
 
   advancedVideoPlayer(attachment: WorkPackageTaskAttachmentViewModel) {
-    this.modalService.show(AdvancedPlayerComponent, { attachment })
+    this.modalService
+      .show(AdvancedPlayerComponent, { attachment })
       .subscribe(() => {});
   }
 
   bulkUpload() {
-    if (this.bulkUploading) { return; }
+    if (this.bulkUploading) {
+      return;
+    }
     this.bulkUploadInput.nativeElement.click();
   }
 
   async onBulkChange(target) {
-    if (!target.files.length) { return; }
+    if (!target.files.length) {
+      return;
+    }
     this.bulkUploading = true;
     this.bulkUploadProgress = 0;
-    const op = await this.taskService.bulkUpload(this.model.id, { file: target.files[0] }, (progress) => {
-      this.bulkUploadProgress = progress;
-    });
+    const op = await this.taskService.bulkUpload(
+      this.model.id,
+      { file: target.files[0] },
+      progress => {
+        this.bulkUploadProgress = progress;
+      },
+    );
     this.bulkUploadInput.nativeElement.value = '';
     this.bulkUploading = false;
     this.bulkUploadProgress = 0;
@@ -1158,10 +1185,12 @@ export class TaskModalComponent
   }
 
   bulkDownload() {
-    this.modalService.show(BulkDownloadModalComponent, {
-      tasks: this.model.subTasks,
-      id: this.model.id
-    }).subscribe(() => {});
+    this.modalService
+      .show(BulkDownloadModalComponent, {
+        tasks: this.model.subTasks,
+        id: this.model.id,
+      })
+      .subscribe(() => {});
   }
 }
 export enum DateMode {
@@ -1174,5 +1203,5 @@ export enum ViewMode {
   Related = 3,
   CustomField = 4,
   Activity = 5,
-  SubTask = 6
+  SubTask = 6,
 }

@@ -13,8 +13,8 @@ import {
 } from '../../../view-models/projects/project-types';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { IdentityService } from '../../../services/auth/identity.service';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
-import {TranslateService} from '../../../services/core/translate.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-messenger',

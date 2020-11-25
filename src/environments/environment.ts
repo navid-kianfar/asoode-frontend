@@ -5,7 +5,8 @@ export const environment = {
   api_endpoint: '/v2',
   direct_endpoint: 'http://localhost:5000/v2',
   googleOauth: 'http://localhost:5000/oauth/google-login',
-  vapid: 'BP6o2qiosTeFgjZ4maMyfgZb33ic3lZFKeCqtFzO1BMfW2e9Qieq0HYbya8z-tr6Olza10cW_nYPiGWO3umvEIY',
+  vapid:
+    'BP6o2qiosTeFgjZ4maMyfgZb33ic3lZFKeCqtFzO1BMfW2e9Qieq0HYbya8z-tr6Olza10cW_nYPiGWO3umvEIY',
   ga: '',
-  lang: 'fa'
+  lang: 'fa',
 };

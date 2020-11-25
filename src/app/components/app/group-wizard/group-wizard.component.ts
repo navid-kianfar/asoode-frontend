@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CultureService } from '../../../services/core/culture.service';
 import { FormService } from '../../../services/core/form.service';
 import { FormViewModel } from '../../core/form/contracts';
@@ -8,7 +8,7 @@ import { OperationResultStatus } from '../../../library/core/enums';
 import { NotificationService } from '../../../services/core/notification.service';
 import { ValidationService } from '../../../services/core/validation.service';
 import { IdentityService } from '../../../services/auth/identity.service';
-import {GroupType} from '../../../library/app/enums';
+import { GroupType } from '../../../library/app/enums';
 
 @Component({
   selector: 'app-group-wizard',
@@ -63,7 +63,12 @@ export class GroupWizardComponent implements OnInit {
           }),
           this.formService.createDropDown({
             config: { field: 'type', visible: this.parentId !== undefined },
-            params: { model: GroupType.Team, enum: 'GroupType', items: [], enumInfo: true }
+            params: {
+              model: GroupType.Team,
+              enum: 'GroupType',
+              items: [],
+              enumInfo: true,
+            },
           }),
           this.formService.createInput({
             config: { field: 'description', label: '', hideLabel: true },
@@ -116,7 +121,7 @@ export class GroupWizardComponent implements OnInit {
     this.actionWaiting = true;
     const op = await this.groupService.create({
       ...this.model,
-      parentId: this.parentId
+      parentId: this.parentId,
     });
     this.actionWaiting = false;
     if (op.status !== OperationResultStatus.Success) {

@@ -1,26 +1,35 @@
-import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {SimpleModalComponent} from 'ngx-simple-modal';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { SimpleModalComponent } from 'ngx-simple-modal';
 import {
   AdvancedPlayerCommentViewModel,
   AdvancedPlayerViewModel,
-  WorkPackageTaskAttachmentViewModel
+  WorkPackageTaskAttachmentViewModel,
 } from '../../view-models/projects/project-types';
-import {TaskService} from '../../services/projects/task.service';
-import {OperationResultStatus} from '../../library/core/enums';
-import {StringHelpers} from '../../helpers/string.helpers';
-import {TranslateService} from '../../services/core/translate.service';
-import {ModalService} from '../../services/core/modal.service';
-import {environment} from '../../../environments/environment';
-import {FilesService} from '../../services/storage/files.service';
-import {VideoComponent} from "../../components/app/video/video.component";
+import { TaskService } from '../../services/projects/task.service';
+import { OperationResultStatus } from '../../library/core/enums';
+import { StringHelpers } from '../../helpers/string.helpers';
+import { TranslateService } from '../../services/core/translate.service';
+import { ModalService } from '../../services/core/modal.service';
+import { environment } from '../../../environments/environment';
+import { FilesService } from '../../services/storage/files.service';
+import { VideoComponent } from '../../components/app/video/video.component';
 
 @Component({
   selector: 'app-advanced-player',
   templateUrl: './advanced-player.component.html',
-  styleUrls: ['./advanced-player.component.scss']
+  styleUrls: ['./advanced-player.component.scss'],
 })
 export class AdvancedPlayerComponent
-  extends SimpleModalComponent<{attachment: WorkPackageTaskAttachmentViewModel}, void>
+  extends SimpleModalComponent<
+    { attachment: WorkPackageTaskAttachmentViewModel },
+    void
+  >
   implements OnInit, OnDestroy, AfterViewInit {
   tempComment: AdvancedPlayerCommentViewModel;
   addingComment: boolean;
@@ -32,29 +41,34 @@ export class AdvancedPlayerComponent
   filter: string;
   time: number;
 
-  @ViewChild('player', {static: true}) videoPlayer: VideoComponent;
+  @ViewChild('player', { static: true }) videoPlayer: VideoComponent;
 
   constructor(
     private readonly taskService: TaskService,
     private readonly translateService: TranslateService,
     private readonly modalService: ModalService,
     private readonly filesService: FilesService,
-  ) { super(); }
-
-  ngOnDestroy() {
+  ) {
+    super();
   }
+
+  ngOnDestroy() {}
 
   ngOnInit() {
     this.addingComment = false;
     this.filter = '';
-    this.data = {comments: [], shapes: []};
+    this.data = { comments: [], shapes: [] };
     this.fetch();
   }
 
   ngAfterViewInit() {
     this.video = this.videoPlayer.player;
-    this.video.addEventListener('timeupdate', (e) => console.log(this.video.currentTime));
-    this.video.addEventListener('onseeked', (e) => console.log(this.video.currentTime));
+    this.video.addEventListener('timeupdate', e =>
+      console.log(this.video.currentTime),
+    );
+    this.video.addEventListener('onseeked', e =>
+      console.log(this.video.currentTime),
+    );
   }
 
   async fetch() {
@@ -79,32 +93,42 @@ export class AdvancedPlayerComponent
       endFrame: 0,
       startFrame: 0,
       payload: null,
-      message: ''
+      message: '',
     };
   }
 
   async saveComment() {
     const message = this.tempComment.message.trim();
-    if (!message) { return; }
+    if (!message) {
+      return;
+    }
     this.commentWaiting = true;
     if (this.tempComment.id) {
-      const opEdit = await this.taskService.advancedPlayerEditComment(this.tempComment.id, {
-        title: message
-      });
+      const opEdit = await this.taskService.advancedPlayerEditComment(
+        this.tempComment.id,
+        {
+          title: message,
+        },
+      );
       this.commentWaiting = false;
       if (opEdit.status !== OperationResultStatus.Success) {
         // TODO: handle error
         return;
       }
-      const comment = this.data.comments.find(c => c.id === this.tempComment.id);
+      const comment = this.data.comments.find(
+        c => c.id === this.tempComment.id,
+      );
       comment.message = message;
       this.tempComment = null;
       return;
     }
-    const op = await this.taskService.advancedPlayerComment(this.attachment.id, {
-      message,
-      startFrame: this.video.currentTime
-    });
+    const op = await this.taskService.advancedPlayerComment(
+      this.attachment.id,
+      {
+        message,
+        startFrame: this.video.currentTime,
+      },
+    );
     this.commentWaiting = false;
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
@@ -117,39 +141,37 @@ export class AdvancedPlayerComponent
 
   sort() {
     this.data.comments = this.data.comments.sort((a, b) => {
-      if (a.startFrame < b.startFrame) { return -1; }
-      if (a.startFrame > b.startFrame) { return 1; }
+      if (a.startFrame < b.startFrame) {
+        return -1;
+      }
+      if (a.startFrame > b.startFrame) {
+        return 1;
+      }
       return 0;
     });
   }
 
   exportPdf() {
-    this.filesService.download(environment.direct_endpoint + '/tasks/attachment/advanced/' + this.attachment.id + '/pdf', null);
+    this.filesService.download(
+      environment.direct_endpoint +
+        '/tasks/attachment/advanced/' +
+        this.attachment.id +
+        '/pdf',
+      null,
+    );
   }
 
-  drawPicture() {
+  drawPicture() {}
 
-  }
+  drawArrow() {}
 
-  drawArrow() {
+  drawCircle() {}
 
-  }
+  drawRectangle() {}
 
-  drawCircle() {
+  useEraser() {}
 
-  }
-
-  drawRectangle() {
-
-  }
-
-  useEraser() {
-
-  }
-
-  useBrush() {
-
-  }
+  useBrush() {}
 
   goToComment(comment: AdvancedPlayerCommentViewModel) {
     this.video.currentTime = comment.startFrame;
@@ -169,9 +191,13 @@ export class AdvancedPlayerComponent
         actionLabel: 'REMOVE_ADVANCED_COMMENT',
         cancelLabel: 'CANCEL',
         action: async () => {
-          const op = await this.taskService.advancedPlayerDeleteComment(comment.id);
+          const op = await this.taskService.advancedPlayerDeleteComment(
+            comment.id,
+          );
           if (op.status === OperationResultStatus.Success) {
-            this.data.comments = this.data.comments.filter(c => c.id !== comment.id);
+            this.data.comments = this.data.comments.filter(
+              c => c.id !== comment.id,
+            );
           }
           return op;
         },

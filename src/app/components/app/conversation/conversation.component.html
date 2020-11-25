@@ -123,14 +123,14 @@
             class="audio-container"
             *ngIf="filesService.isAudio(message.upload.path)"
           >
-            <mat-basic-audio-player
+            <app-audio
               [audioUrl]="message.upload.path"
               [title]="message.upload.name"
               (ended)="onAudioEnded($event, message.upload)"
               [autoPlay]="false"
               [displayTitle]="false"
               [displayVolumeControls]="true"
-            ></mat-basic-audio-player>
+            ></app-audio>
             <br />
           </div>
           <div
@@ -142,7 +142,8 @@
               [src]="message.upload.path"
               [title]="message.upload.name"
               [autoplay]="false"
-              [preload]="false">
+              [preload]="false"
+            >
             </app-video>
             <br />
           </div>

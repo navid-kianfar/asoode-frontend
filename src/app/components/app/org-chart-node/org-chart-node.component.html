@@ -13,7 +13,11 @@
       </div>
     </div>
 
-    <button *ngIf="canAdd && level !== 5" class="add" [matMenuTriggerFor]="menu">
+    <button
+      *ngIf="canAdd && level !== 5"
+      class="add"
+      [matMenuTriggerFor]="menu"
+    >
       <i class="icon-plus2"></i>
     </button>
   </div>
@@ -35,7 +39,11 @@
     <i class="icon-users4"></i>
     {{ 'NEW_GROUP' | translate }}
   </button>
-  <button [disabled]="permission !== AccessType.Owner" (click)="attachGroup()" mat-menu-item>
+  <button
+    [disabled]="permission !== AccessType.Owner"
+    (click)="attachGroup()"
+    mat-menu-item
+  >
     <i class="icon-link2"></i>
     {{ 'ATTACH_GROUP' | translate }}
   </button>

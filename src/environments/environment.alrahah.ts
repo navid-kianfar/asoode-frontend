@@ -7,5 +7,5 @@ export const environment = {
   googleOauth: 'https://api.al-rahah.com/oauth/google-login',
   vapid: '',
   ga: 'G-K4SKBN8BK9',
-  lang: 'ar'
+  lang: 'ar',
 };

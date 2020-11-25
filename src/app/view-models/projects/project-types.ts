@@ -320,7 +320,7 @@ export interface AdvancedPlayerShapeViewModel extends BaseViewModel {
   endFrame: number;
   payload?: string;
 }
-export interface AdvancedPlayerCommentViewModel extends BaseViewModel  {
+export interface AdvancedPlayerCommentViewModel extends BaseViewModel {
   attachmentId: string;
   startFrame: number;
   endFrame: number;

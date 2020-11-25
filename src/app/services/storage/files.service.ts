@@ -103,7 +103,11 @@ export class FilesService {
     reader.readAsDataURL(file);
   }
 
-  download(path: string, params: StringDictionary<any> = null, method: string = 'get') {
+  download(
+    path: string,
+    params: StringDictionary<any> = null,
+    method: string = 'get',
+  ) {
     const form = document.createElement('form');
     form.setAttribute('method', method);
     form.setAttribute('action', path);

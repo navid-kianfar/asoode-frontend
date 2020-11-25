@@ -15,5 +15,5 @@ export class OrgChartComponent implements OnInit {
 
   constructor(readonly groupService: GroupService) {}
 
-  ngOnInit() {  }
+  ngOnInit() {}
 }

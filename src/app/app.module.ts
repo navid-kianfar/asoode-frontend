@@ -18,7 +18,11 @@ import { defaultSimpleModalOptions, SimpleModalModule } from 'ngx-simple-modal';
 import { BarChartModule } from '@swimlane/ngx-charts';
 import { MomentModule } from 'ngx-moment';
 import { QuillModule } from 'ngx-quill';
-import {GoogleAnalyticsService, NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from 'ngx-google-analytics';
+import {
+  GoogleAnalyticsService,
+  NgxGoogleAnalyticsModule,
+  NgxGoogleAnalyticsRouterModule,
+} from 'ngx-google-analytics';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptor } from './services/general/http.interceptor';
@@ -182,17 +186,26 @@ import { MemberFilterPipe } from './pipes/app/member-filter.pipe';
 import { TimeOffApproveModalComponent } from './modals/time-off-approve-modal/time-off-approve-modal.component';
 import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/time-off-history-modal.component';
 import { BulkDownloadModalComponent } from './modals/bulk-download-modal/bulk-download-modal.component';
-import {CulturedDateFactory, CulturedDateFormatsFactory} from './library/core/date-time/material-date-adapter';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatRippleModule} from '@angular/material/core';
-import {MatSliderModule} from '@angular/material/slider';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import {
+  CulturedDateFactory,
+  CulturedDateFormatsFactory,
+} from './library/core/date-time/material-date-adapter';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+  MatRippleModule,
+} from '@angular/material/core';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { VideoComponent } from './components/app/video/video.component';
+import { AudioComponent } from './components/app/audio/audio.component';
 
 @NgModule({
   declarations: [
@@ -344,6 +357,7 @@ import { VideoComponent } from './components/app/video/video.component';
     TimeOffHistoryModalComponent,
     BulkDownloadModalComponent,
     VideoComponent,
+    AudioComponent,
   ],
   entryComponents: [
     TimeOffApproveModalComponent,
@@ -370,67 +384,66 @@ import { VideoComponent } from './components/app/video/video.component';
     UpgradeComponent,
     BulkDownloadModalComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatToolbarModule,
-        MatTabsModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatMenuModule,
-        MatSnackBarModule,
-        SocketIoModule,
-        QuillModule.forRoot(),
-        SimpleModalModule.forRoot(
-            {container: 'modal-container'},
-            {
-                ...defaultSimpleModalOptions,
-                closeOnEscape: true,
-                closeOnClickOutside: true,
-                wrapperClass: 'in',
-                wrapperDefaultClasses: 'modal fade-anim',
-                bodyClass: 'modal-open',
-            },
-        ),
-        NgxPopperModule.forRoot({placement: 'bottom'}),
-        RoundProgressModule,
-        BarChartModule,
-        MatRadioModule,
-        MatCheckboxModule,
-        MatProgressBarModule,
-        MatAutocompleteModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatRippleModule,
-        MomentModule,
-        ContentLoaderModule,
-        TrendModule,
-        DragDropModule,
-        ColorPickerModule,
-        NgxDocViewerModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: environment.production,
-        }),
-        MatSliderModule,
-        MatIconModule,
-        NgxAudioPlayerModule,
-        // MatVideoModule,
-        MatDatepickerModule,
-        NgxGoogleAnalyticsModule.forRoot(environment.ga)
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatMenuModule,
+    MatSnackBarModule,
+    SocketIoModule,
+    QuillModule.forRoot(),
+    SimpleModalModule.forRoot(
+      { container: 'modal-container' },
+      {
+        ...defaultSimpleModalOptions,
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        wrapperClass: 'in',
+        wrapperDefaultClasses: 'modal fade-anim',
+        bodyClass: 'modal-open',
+      },
+    ),
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
+    RoundProgressModule,
+    BarChartModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatProgressBarModule,
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatRippleModule,
+    MomentModule,
+    ContentLoaderModule,
+    TrendModule,
+    DragDropModule,
+    ColorPickerModule,
+    NgxDocViewerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
+    MatSliderModule,
+    MatIconModule,
+    NgxAudioPlayerModule,
+    MatDatepickerModule,
+    NgxGoogleAnalyticsModule.forRoot(environment.ga),
+  ],
   providers: [
     {
       provide: DateAdapter,
       useFactory: CulturedDateFactory,
-      deps: [MAT_DATE_LOCALE]
+      deps: [MAT_DATE_LOCALE],
     },
     {
       provide: MAT_DATE_FORMATS,
-      useFactory: CulturedDateFormatsFactory
+      useFactory: CulturedDateFormatsFactory,
     },
     GoogleAnalyticsService,
     CookieService,

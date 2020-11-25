@@ -268,11 +268,11 @@ export class CalendarComponent implements OnInit, OnChanges {
       } else if (this.today.day === day.day) {
         css += 'evt-today';
       } else {
-       if ((day.day - this.today.day) > 7) {
-         css += 'evt-on-time';
-       } else {
-         css += 'evt-next';
-       }
+        if (day.day - this.today.day > 7) {
+          css += 'evt-on-time';
+        } else {
+          css += 'evt-next';
+        }
       }
     }
 

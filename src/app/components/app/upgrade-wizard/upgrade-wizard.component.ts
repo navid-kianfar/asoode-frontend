@@ -1,16 +1,21 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CultureService} from '../../../services/core/culture.service';
-import {ProjectService} from '../../../services/projects/project.service';
-import {IdentityService} from '../../../services/auth/identity.service';
-import {NotificationService} from '../../../services/core/notification.service';
-import {GroupService} from '../../../services/groups/group.service';
-import {PlansService} from '../../../services/general/plans.service';
-import {OperationResultStatus} from '../../../library/core/enums';
-import {OrderViewModel, PlansFetchViewModel, PlanViewModel, UserPlanInfoViewModel,} from '../../../view-models/general/plan-types';
-import {OrderDuration, OrderType, PlanType} from '../../../library/app/enums';
-import {NumberHelpers} from '../../../helpers/number.helpers';
-import {OrderService} from '../../../services/general/order.service';
-import {OrderDiscountResultViewModel} from '../../../view-models/general/order-types';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CultureService } from '../../../services/core/culture.service';
+import { ProjectService } from '../../../services/projects/project.service';
+import { IdentityService } from '../../../services/auth/identity.service';
+import { NotificationService } from '../../../services/core/notification.service';
+import { GroupService } from '../../../services/groups/group.service';
+import { PlansService } from '../../../services/general/plans.service';
+import { OperationResultStatus } from '../../../library/core/enums';
+import {
+  OrderViewModel,
+  PlansFetchViewModel,
+  PlanViewModel,
+  UserPlanInfoViewModel,
+} from '../../../view-models/general/plan-types';
+import { OrderDuration, OrderType, PlanType } from '../../../library/app/enums';
+import { NumberHelpers } from '../../../helpers/number.helpers';
+import { OrderService } from '../../../services/general/order.service';
+import { OrderDiscountResultViewModel } from '../../../view-models/general/order-types';
 
 @Component({
   selector: 'app-upgrade-wizard',
@@ -149,7 +154,7 @@ export class UpgradeWizardComponent implements OnInit {
           this.data.mine.days === 30
             ? this.data.mine.planCost
             : (this.data.mine.planCost + (this.data.mine.planCost * 10) / 100) /
-            12;
+              12;
         this.order.calculatedPrice = this.calculatePlanPrice(cost);
         break;
       case OrderType.Patch:
@@ -361,7 +366,6 @@ export class UpgradeWizardComponent implements OnInit {
     }
   }
 
-
   next($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
@@ -371,7 +375,11 @@ export class UpgradeWizardComponent implements OnInit {
         this.notificationService.warning('PLEASE_SELECT_A_PLAN');
         return;
       }
-      if (this.requireProject && !this.selectedPlan.project && this.selectedPlan.type !== PlanType.Custom) {
+      if (
+        this.requireProject &&
+        !this.selectedPlan.project &&
+        this.selectedPlan.type !== PlanType.Custom
+      ) {
         this.notificationService.warning('PLEASE_SELECT_A_PLAN_WITH_PROJECT');
         return;
       }

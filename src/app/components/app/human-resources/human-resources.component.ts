@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
-import { AccessType, RequestStatus, ShiftType } from '../../../library/app/enums';
+import {
+  AccessType,
+  RequestStatus,
+  ShiftType,
+} from '../../../library/app/enums';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { GridCommand } from '../../../view-models/core/grid-types';
 import { ModalService } from '../../../services/core/modal.service';
@@ -601,36 +605,39 @@ export class HumanResourcesComponent implements OnInit {
             config: { field: 'isHourly' },
             params: {
               model: true,
-              items: [{
-                text: 'TIME_OFF_HOURLY',
-                value: true
-              }, {
-                text: 'TIME_OFF_DAILY',
-                value: false
-              }] as ListViewModel[],
-              picked: (value) => {
+              items: [
+                {
+                  text: 'TIME_OFF_HOURLY',
+                  value: true,
+                },
+                {
+                  text: 'TIME_OFF_DAILY',
+                  value: false,
+                },
+              ] as ListViewModel[],
+              picked: value => {
                 form[2].elements[0].config.visible = value;
                 form[3].elements[0].config.visible = value;
-              }
-            }
-          })
-        ]
+              },
+            },
+          }),
+        ],
       },
       {
         elements: [
           this.formService.createDatePicker({
             config: { field: 'beginAt', label: 'TIME_OFF_BEGIN_AT' },
             params: {
-              model: new Date()
+              model: new Date(),
             },
             validation: {
               required: {
                 message: 'TIME_OFF_BEGIN_AT_REQUIRED',
-                value: true
-              }
-            }
-          })
-        ]
+                value: true,
+              },
+            },
+          }),
+        ],
       },
       {
         size: 6,
@@ -638,10 +645,10 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createTimePicker({
             config: { field: 'beginAt_time', label: 'TIME_OFF_BEGIN_AT_TIME' },
             params: {
-              model: '10:00'
-            }
-          })
-        ]
+              model: '10:00',
+            },
+          }),
+        ],
       },
       {
         size: 6,
@@ -649,25 +656,29 @@ export class HumanResourcesComponent implements OnInit {
           this.formService.createTimePicker({
             config: { field: 'endAt_time', label: 'TIME_OFF_END_AT_TIME' },
             params: {
-              model: '13:00'
-            }
-          })
-        ]
+              model: '13:00',
+            },
+          }),
+        ],
       },
       {
         elements: [
           this.formService.createInput({
             config: { field: 'description' },
-            params: { model: '', textArea: true, placeHolder: 'TIME_OFF_DESCRIPTION' },
+            params: {
+              model: '',
+              textArea: true,
+              placeHolder: 'TIME_OFF_DESCRIPTION',
+            },
             validation: {
               required: {
                 message: 'TIME_OFF_DESCRIPTION_REQUIRED',
-                value: false
-              }
-            }
-          })
-        ]
-      }
+                value: false,
+              },
+            },
+          }),
+        ],
+      },
     ] as FormViewModel[];
 
     this.modalService
@@ -676,8 +687,14 @@ export class HumanResourcesComponent implements OnInit {
         actionLabel: 'CREATE_TIME_OFF',
         action: async (model, frm) => {
           const beginAtParsed = this.converter.FromDateTime(model.beginAt);
-          const beginHourParts = (model.isHourly ? model.beginAt_time : '00:00').split(':');
-          const endHourParts = (model.isHourly ? model.endAt_time : '23:59').split(':');
+          const beginHourParts = (model.isHourly
+            ? model.beginAt_time
+            : '00:00'
+          ).split(':');
+          const endHourParts = (model.isHourly
+            ? model.endAt_time
+            : '23:59'
+          ).split(':');
           const beginAt = this.converter.ToDateTime({
             Year: beginAtParsed.Year,
             Month: beginAtParsed.Month,
@@ -696,7 +713,7 @@ export class HumanResourcesComponent implements OnInit {
             beginAt,
             endAt,
             isHourly: model.isHourly,
-            description: model.description
+            description: model.description,
           });
           if (op.status === OperationResultStatus.Success) {
             this.timeOffCommander.emit({ reload: true });
@@ -779,7 +796,7 @@ export class HumanResourcesComponent implements OnInit {
         action: async () => {
           const op = await this.groupService.deleteTimeOff(element.id);
           if (op.status === OperationResultStatus.Success) {
-            this.timeOffCommander.emit({reload: true});
+            this.timeOffCommander.emit({ reload: true });
             return;
           }
           // TODO: handle error
@@ -800,7 +817,7 @@ export class HumanResourcesComponent implements OnInit {
           action: async () => {
             const op = await this.groupService.declineTimeOff(timeOff.id);
             if (op.status === OperationResultStatus.Success) {
-              this.timeOffCommander.emit({reload: true});
+              this.timeOffCommander.emit({ reload: true });
               return;
             }
             // TODO: handle error
@@ -810,16 +827,18 @@ export class HumanResourcesComponent implements OnInit {
       return;
     }
 
-    this.modalService.show(TimeOffApproveModalComponent, {timeOff})
-      .subscribe((refresh) => {
+    this.modalService
+      .show(TimeOffApproveModalComponent, { timeOff })
+      .subscribe(refresh => {
         if (refresh) {
-          this.timeOffCommander.emit({reload: true});
+          this.timeOffCommander.emit({ reload: true });
         }
       });
   }
 
   historyTimeOff(timeOff: any) {
-    this.modalService.show(TimeOffHistoryModalComponent, {timeOff})
-      .subscribe(() => { });
+    this.modalService
+      .show(TimeOffHistoryModalComponent, { timeOff })
+      .subscribe(() => {});
   }
 }

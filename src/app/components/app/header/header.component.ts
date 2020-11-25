@@ -128,7 +128,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
       plan.workPackage <= plan.usedWorkPackage &&
       plan.project <= plan.usedProject &&
       plan.simpleGroup <= plan.usedSimpleGroup &&
-        plan.complexGroup <= plan.usedComplexGroup
+      plan.complexGroup <= plan.usedComplexGroup
     ) {
       this.modalService
         .show(UpgradeComponent, {} as CreateModalParameters)

@@ -7,7 +7,7 @@
   </div>
   <div class="modal-body">
     <app-grid
-      [backendParams]="{id: timeOff.userId}"
+      [backendParams]="{ id: timeOff.userId }"
       [pageSize]="5"
       [backend]="'/groups/time-offs/' + timeOff.groupId + '/history'"
       [columns]="['fullName', 'timeOffAt', 'requestedAt', 'status']"
@@ -16,7 +16,9 @@
       <!-- FullName Column -->
       <ng-container matColumnDef="fullName">
         <th mat-header-cell *matHeaderCellDef>{{ 'NAME' | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.userId | fullName | async }}</td>
+        <td mat-cell *matCellDef="let element">
+          {{ element.userId | fullName | async }}
+        </td>
       </ng-container>
 
       <!-- TimeOff at Column -->
@@ -26,8 +28,8 @@
         </th>
         <td mat-cell *matCellDef="let element">
           <ng-container *ngIf="element.isHourly">
-            {{ element.beginAt | culturedDate:true }}&nbsp;-&nbsp;
-            {{ element.endAt | culturedDate:true:'HH:mm' }}
+            {{ element.beginAt | culturedDate: true }}&nbsp;-&nbsp;
+            {{ element.endAt | culturedDate: true:'HH:mm' }}
           </ng-container>
           <ng-container *ngIf="!element.isHourly">
             {{ element.beginAt | culturedDate }}

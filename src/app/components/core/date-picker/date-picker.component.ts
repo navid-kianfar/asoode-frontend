@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { ICulture } from '../../../view-models/core/date-types';
 import { CulturedDateService } from '../../../services/core/cultured-date.service';
@@ -14,7 +14,7 @@ import { CulturedDateService } from '../../../services/core/cultured-date.servic
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: ['./date-picker.component.scss']
+  styleUrls: ['./date-picker.component.scss'],
 })
 export class DatePickerComponent implements OnInit {
   formattedDate: string;

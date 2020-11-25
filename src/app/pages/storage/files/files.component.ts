@@ -3,9 +3,9 @@ import { MessengerService } from '../../../services/communication/messenger.serv
 import { GroupService } from '../../../services/groups/group.service';
 import { ProjectService } from '../../../services/projects/project.service';
 import { FilesService } from '../../../services/storage/files.service';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
-import {TranslateService} from '../../../services/core/translate.service';
-import {IdentityService} from '../../../services/auth/identity.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
+import { IdentityService } from '../../../services/auth/identity.service';
 
 @Component({
   selector: 'app-files',

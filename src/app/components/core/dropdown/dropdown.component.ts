@@ -17,7 +17,7 @@ import { ListViewModel } from '../../../view-models/core/list-types';
 import { CountryService } from '../../../services/core/country.service';
 import { TimezoneService } from '../../../services/core/timezone.service';
 import { EnumsService } from '../../../services/core/enums.service';
-import {MatMenuTrigger} from '@angular/material/menu';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-dropdown',
@@ -135,7 +135,12 @@ export class DropdownComponent implements OnInit, OnChanges {
         if (this.enumExcept.indexOf(enumObj[key]) !== -1) {
           return;
         }
-        items.push({ text, separator: false, value: enumObj[key], description });
+        items.push({
+          text,
+          separator: false,
+          value: enumObj[key],
+          description,
+        });
       });
       this.items = items;
     }

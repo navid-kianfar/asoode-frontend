@@ -6,8 +6,8 @@ import { FormService } from '../../../services/core/form.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { ValidationService } from '../../../services/core/validation.service';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
-import {TranslateService} from '../../../services/core/translate.service';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
+import { TranslateService } from '../../../services/core/translate.service';
 
 @Component({
   selector: 'app-forgot',
@@ -85,7 +85,7 @@ export class ForgotComponent implements OnInit {
 
     this.gaService.pageView(
       window.location.pathname,
-      this.translateService.fromKey('FORGOT_PASSWORD')
+      this.translateService.fromKey('FORGOT_PASSWORD'),
     );
   }
 

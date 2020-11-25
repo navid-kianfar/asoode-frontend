@@ -26,7 +26,7 @@ export enum AccessType {
   Admin = 2,
   HiddenEditor = 3,
   Editor = 4,
-  Visitor = 5
+  Visitor = 5,
 }
 export enum WorkPackageCommentPermission {
   Disabled = 1,

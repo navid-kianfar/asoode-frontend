@@ -41,8 +41,8 @@ import { UsersService } from '../../../services/general/users.service';
 import { CustomFieldsModalComponent } from '../../../modals/custom-fields-modal/custom-fields-modal.component';
 import { LabelsModalComponent } from '../../../modals/labels-modal/labels-modal.component';
 import { DateHelpers } from '../../../helpers/date.helpers';
-import {NumberHelpers} from '../../../helpers/number.helpers';
-import {GoogleAnalyticsService} from 'ngx-google-analytics';
+import { NumberHelpers } from '../../../helpers/number.helpers';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 
 @Component({
   selector: 'app-work-package',
@@ -1306,10 +1306,11 @@ export class WorkPackageComponent implements OnInit {
   }
 
   findSubs(parent: string) {
-    return [...this.project.subProjects.filter(s => s.parentId === parent)]
-      .sort((a, b) => {
-        return NumberHelpers.sort(a, b, 'order');
-      });
+    return [
+      ...this.project.subProjects.filter(s => s.parentId === parent),
+    ].sort((a, b) => {
+      return NumberHelpers.sort(a, b, 'order');
+    });
   }
 
   openWorkPackage(wp: WorkPackageViewModel) {
