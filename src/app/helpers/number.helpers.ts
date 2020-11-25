@@ -84,13 +84,7 @@ export class NumberHelpers {
   }
 
   static clearNumbers(input: string): string {
-    // @ts-ignore
-    return input
-      .replace(/[\u0660-\u0669]/g, c => {
-        return c.charCodeAt(0) - 0x0660;
-      }) // @ts-ignore
-      .replace(/[\u06f0-\u06f9]/g, c => {
-        return c.charCodeAt(0) - 0x06f0;
-      });
+    return (input as any).replace(/[\u0660-\u0669]/g, c => {return c.charCodeAt(0) - 0x0660;})
+      .replace(/[\u06f0-\u06f9]/g, c => {return c.charCodeAt(0) - 0x06f0;});
   }
 }

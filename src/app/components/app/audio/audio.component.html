@@ -1,0 +1,8 @@
+<ngx-audio-player
+  [playlist]="[{ title: title, link: audioUrl }]"
+  [autoPlay]="autoPlay"
+  (trackEnded)="ended.emit($event)"
+  [displayVolumeControls]="displayVolumeControls"
+  [disablePositionSlider]="disablePositionSlider"
+  [expanded]="expanded"
+></ngx-audio-player>
