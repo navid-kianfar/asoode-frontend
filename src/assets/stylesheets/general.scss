@@ -51,6 +51,15 @@ body {
 }
 
 body {
+  &.lang-ar {
+    * {
+      font-family: Almarai;
+      font-weight: 300;
+    }
+    .material-icons {
+      font-family: 'Material Icons' !important;
+    }
+  }
   &.lang-fa {
     * {
       font-family: IRANSansFa;
