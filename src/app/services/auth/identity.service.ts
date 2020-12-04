@@ -104,13 +104,16 @@ export class IdentityService {
   }
 
   async load(): Promise<OperationResult<any>> {
-    const op = await this.httpService.post<any>('/account/profile');
+    const op = await this.httpService.post<any>('/account/profile', {}, false);
     if (op.status === OperationResultStatus.Success) {
       this.profileObject = op.data;
       document.body.classList.remove('dark-mode');
       if (op.data.darkMode) {
         document.body.classList.add('dark-mode');
       }
+    } else {
+      this.logout();
+      setTimeout(() => { window.location.href = '/'; }, 500);
     }
     return op;
   }
