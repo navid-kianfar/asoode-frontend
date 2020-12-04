@@ -25,7 +25,7 @@ try {
   providedIn: 'root',
 })
 export class IdentityService {
-  private readonly STORAGE_KEY = 'ASOODE_IDENTITY';
+  private readonly STORAGE_KEY = 'ASOODE_AUTH';
   private identityObject: IdentityObject;
   private profileObject: ProfileViewModel = {} as ProfileViewModel;
 
