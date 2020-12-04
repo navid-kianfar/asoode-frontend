@@ -18,11 +18,12 @@ export class HttpInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const setHeaders = {
-      Authorization: this.identityService.identity.token || '',
-      // 'ngsw-bypass': true
+    const obj = { setHeaders : {
+        'ngsw-bypass': 'true',
+        Authorization: this.identityService.identity.token || '',
+      }
     } as any;
-    request = request.clone({ setHeaders });
+    request = request.clone(obj);
     return next.handle(request).pipe(
       catchError((error: any, caught: Observable<HttpEvent<any>>) => {
         if (error.status === 401) {
