@@ -1,10 +1,10 @@
 import { IDateConverter, IDateTimeProperties } from './date-contracts';
 import { NumberHelpers } from '../../../helpers/number.helpers';
-import * as moment from 'jalali-moment';
+import * as jalaliMoment from 'jalali-moment';
 
 export default class PersianDateConverter implements IDateConverter {
-  innerConvert(date: IDateTimeProperties): moment.Moment {
-    const result = moment()
+  innerConvert(date: IDateTimeProperties): jalaliMoment.Moment {
+    const result = jalaliMoment()
       .locale('fa')
       .jYear(date.Year)
       .jMonth(date.Month)
@@ -20,7 +20,7 @@ export default class PersianDateConverter implements IDateConverter {
 
   IsValid(date: string | IDateTimeProperties): boolean {
     if (typeof date === 'string') {
-      return moment(date).isValid();
+      return jalaliMoment(date).isValid();
     }
     return this.innerConvert(date).isValid();
   }
@@ -53,9 +53,9 @@ export default class PersianDateConverter implements IDateConverter {
   Parse(date: IDateTimeProperties): IDateTimeProperties {
     const gregorian = this.innerConvert(date);
     return {
-      Year: gregorian.year(),
-      Month: gregorian.month(),
-      Day: gregorian.date(),
+      Year: gregorian.jYear(),
+      Month: gregorian.jMonth() + 1,
+      Day: gregorian.jDate(),
       Hours: gregorian.hour(),
       Minutes: gregorian.minutes(),
       Seconds: gregorian.seconds(),
@@ -73,14 +73,14 @@ export default class PersianDateConverter implements IDateConverter {
 
   FromDateTime(date: Date): IDateTimeProperties {
     date = new Date(date);
-    let gregorian = moment(date.toISOString()).locale('fa');
+    let gregorian = jalaliMoment(date.toISOString()).locale('fa');
     if (!gregorian.isValid()) {
       date = new Date(2019, 0, 1);
-      gregorian = moment(date.toISOString()).locale('fa');
+      gregorian = jalaliMoment(date.toISOString()).locale('fa');
     }
     return {
       Year: gregorian.jYear(),
-      Month: gregorian.jMonth(),
+      Month: gregorian.jMonth() + 1,
       Day: gregorian.jDate(),
       Hours: gregorian.hour(),
       Minutes: gregorian.minutes(),
