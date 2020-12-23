@@ -3,20 +3,6 @@ import { NumberHelpers } from '../../../helpers/number.helpers';
 import * as jalaliMoment from 'jalali-moment';
 
 export default class PersianDateConverter implements IDateConverter {
-  innerConvert(date: IDateTimeProperties): jalaliMoment.Moment {
-    const result = jalaliMoment()
-      .locale('fa')
-      .jYear(date.Year)
-      .jMonth(date.Month)
-      .jDate(date.Day);
-
-    result.hours(date.Hours);
-    result.minutes(date.Minutes);
-    result.seconds(date.Seconds);
-    result.milliseconds(date.Milliseconds);
-
-    return result;
-  }
 
   IsValid(date: string | IDateTimeProperties): boolean {
     if (typeof date === 'string') {
@@ -66,6 +52,20 @@ export default class PersianDateConverter implements IDateConverter {
     } as IDateTimeProperties;
   }
 
+  innerConvert(date: IDateTimeProperties): jalaliMoment.Moment {
+    const result = jalaliMoment()
+      .locale('fa')
+      .jYear(date.Year)
+      .jMonth(date.Month - 1)
+      .jDate(date.Day);
+
+    result.hours(date.Hours);
+    result.minutes(date.Minutes);
+    result.seconds(date.Seconds);
+    result.milliseconds(date.Milliseconds);
+    return result;
+  }
+
   ToDateTime(date: IDateTimeProperties): Date {
     const gregorian = this.innerConvert(date);
     return gregorian.toDate();
@@ -78,6 +78,7 @@ export default class PersianDateConverter implements IDateConverter {
       date = new Date(2019, 0, 1);
       gregorian = jalaliMoment(date.toISOString()).locale('fa');
     }
+
     return {
       Year: gregorian.jYear(),
       Month: gregorian.jMonth() + 1,

@@ -57,11 +57,12 @@ export class CalendarComponent implements OnInit, OnChanges {
   ngOnInit(skip?: boolean) {
     const now = new Date();
     this.calendar = this.culturedDateService.Calendar();
-    this.converter = this.culturedDateService.Converter();
     this.culture = this.calendar.lang;
     this.state.rtl = this.calendar.rtl;
-    this.today = this.parseFormDate(now);
+
     const start = new Date(this.model || this.from || this.to || now);
+    this.converter = this.culturedDateService.Converter();
+    this.today = this.parseFormDate(now);
     this.current = this.parseFormDate(start);
 
     this.temp = { ...this.current };

@@ -14,6 +14,7 @@ import {
   RegisterResultViewModel,
 } from '../../view-models/auth/identity-view-models';
 import { CookieService } from 'ngx-cookie-service';
+import {environment} from '../../../environments/environment';
 
 let MARKETER;
 try {
@@ -111,7 +112,7 @@ export class IdentityService {
       if (op.data.darkMode) {
         document.body.classList.add('dark-mode');
       }
-    } else {
+    } else if (environment.production) {
       this.logout();
       setTimeout(() => { window.location.href = '/'; }, 500);
     }
