@@ -33,7 +33,7 @@ export class AppComponent {
     swUpdate.available.subscribe(event => {
       swUpdate.activateUpdate().then(() => {
         this.injector.get<ModalService>(ModalService).confirm({
-          actionLabel: 'RELOAD',
+          actionLabel: 'UPDATE_AVAILABLE',
           title: 'UPDATE_AVAILABLE',
           heading: 'UPDATE_AVAILABLE_HEADING',
           cancelLabel: 'LATER',
