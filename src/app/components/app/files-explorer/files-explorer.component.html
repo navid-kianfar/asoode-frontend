@@ -51,6 +51,16 @@
         <!--          </span>-->
         <!--        </button>-->
         <button
+          (click)="copyLink()"
+          *ngIf="onlyOneSelected && private"
+          mat-mini-fab
+        >
+          <span class="btn-inner">
+            <i class="icon-link2"></i>
+            <span class="sub-title">{{ 'COPY_LINK' | translate }}</span>
+          </span>
+        </button>
+        <button
           (click)="actionRename()"
           *ngIf="onlyOneSelected && private"
           mat-mini-fab

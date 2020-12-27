@@ -10,12 +10,10 @@ export class DocumentModalComponent
   extends SimpleModalComponent<{ path: string }, void>
   implements OnInit {
   path: string;
-  waiting: boolean;
   constructor() {
     super();
   }
 
   ngOnInit() {
-    this.waiting = true;
   }
 }

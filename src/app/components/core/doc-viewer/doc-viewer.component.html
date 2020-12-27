@@ -1,1 +1,7 @@
-<p>doc-viewer works!</p>
+<div class="app-doc-viewer">
+  <iframe *ngIf="loaded"
+          [src]="safePath"
+          [height]="height - 20"
+          [width]="width - 50"
+          frameborder="0" ></iframe>
+</div>

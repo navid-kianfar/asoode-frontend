@@ -423,4 +423,8 @@ export class FilesExplorerComponent implements OnInit {
     this.path = s.parent || '/';
     await this.fetch(this.path);
   }
+
+  copyLink() {
+
+  }
 }

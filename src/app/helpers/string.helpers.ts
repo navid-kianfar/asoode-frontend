@@ -47,4 +47,7 @@ export class StringHelpers {
     }
     return parts[0];
   }
+  static base64encode(input: string): string {
+    return btoa(unescape(encodeURIComponent( input )));
+  }
 }

@@ -46,6 +46,7 @@ import { AdvancedPlayerComponent } from '../advanced-player/advanced-player.comp
 import { BulkDownloadModalComponent } from '../bulk-download-modal/bulk-download-modal.component';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { MatMenu } from '@angular/material/menu';
+import {DocumentModalComponent} from '../document-modal/document-modal.component';
 
 @Component({
   selector: 'app-task-modal',
@@ -1190,6 +1191,13 @@ export class TaskModalComponent
         tasks: this.model.subTasks,
         id: this.model.id,
       })
+      .subscribe(() => {});
+  }
+
+  previewAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
+    debugger;
+    this.modalService
+      .show(DocumentModalComponent, {path: attachment.path,})
       .subscribe(() => {});
   }
 }

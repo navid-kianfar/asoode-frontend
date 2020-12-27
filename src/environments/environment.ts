@@ -2,6 +2,7 @@ export const environment = {
   production: false,
   socket_disabled: false,
   socket_endpoint: 'https://socket.asoode.com',
+  office_endpoint: 'https://office.asoode.com',
   api_endpoint: '/v2',
   direct_endpoint: 'http://localhost:5000/v2',
   googleOauth: 'http://localhost:5000/oauth/google-login',
