@@ -23,6 +23,7 @@ import {
   NgxGoogleAnalyticsModule,
   NgxGoogleAnalyticsRouterModule,
 } from 'ngx-google-analytics';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpInterceptor } from './services/general/http.interceptor';
@@ -387,6 +388,7 @@ import { ThumbnailUrlPipe } from './pipes/app/thumbnail-url.pipe';
     BulkDownloadModalComponent,
   ],
   imports: [
+    ClipboardModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

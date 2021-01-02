@@ -35,6 +35,7 @@
     "moment-hijri": "^2.1.2",
     "moment-timezone": "^0.5.32",
     "ngx-audio-player": "^8.1.1",
+    "ngx-clipboard": "^14.0.1",
     "ngx-color-picker": "^10.1.0",
     "ngx-cookie-service": "^10.1.1",
     "ngx-device-detector": "^2.0.1",

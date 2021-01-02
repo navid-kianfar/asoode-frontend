@@ -6572,6 +6572,14 @@ ngx-audio-player@^8.1.1:
   dependencies:
     tslib "^1.9.0"
 
+ngx-clipboard@^14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-clipboard/-/ngx-clipboard-14.0.1.tgz#fe977ee115f50f6a589487f6f99fa5eef5203763"
+  integrity sha512-y6fDrvAso1cbM+VvHgB2kJ3dcQ/EBPol33nLaqqKB1jNO/Kd3l17EHdXNW/oKY0wUKCHk7ZCuiinREgUHEYfXg==
+  dependencies:
+    ngx-window-token ">=4.0.0"
+    tslib "^2.0.0"
+
 ngx-color-picker@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/ngx-color-picker/-/ngx-color-picker-10.1.0.tgz#19a6993a74bb3553024623b20ca6ebffd2c50f9c"
@@ -6659,6 +6667,13 @@ ngx-trend@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/ngx-trend/-/ngx-trend-6.0.0.tgz#5d9f49c2762fde5e3666ab0a002fd530e1cad604"
   integrity sha512-pmUK39M9EEebkhHYQincpitgtsq2a/wUD2HY9gykC5x2R6UlbHJq2OIWY+Ei7mHyxL3Up1ftfu7hent+oSfhAw==
+  dependencies:
+    tslib "^2.0.0"
+
+ngx-window-token@>=4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-window-token/-/ngx-window-token-4.0.0.tgz#8d8553d193f0515eb28f04ccf2c598fbe6abaa34"
+  integrity sha512-z6tS3UQoKULdABWHpE57l1xtoxFFzlwLe1n+nu9+xzCZUdSvkGqhb5dSje4NOVhA6mMOqzR4SctSBZARwqPPuQ==
   dependencies:
     tslib "^2.0.0"
 
