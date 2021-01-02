@@ -50,7 +50,7 @@
         <!--            <span class="sub-title">{{ 'PASTE' | translate }}</span>-->
         <!--          </span>-->
         <!--        </button>-->
-        <button ngxClipboard [cbContent]="clipBoard.files[0].url"
+        <button (click)="copyLink()"
           *ngIf="onlyOneSelected"
           mat-mini-fab
         >

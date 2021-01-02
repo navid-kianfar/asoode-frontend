@@ -18,6 +18,7 @@ import { StringHelpers } from '../../../helpers/string.helpers';
 import { TranslateService } from '../../../services/core/translate.service';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { UploadExceedModalComponent } from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
+import {ClipboardService} from 'ngx-clipboard';
 
 @Component({
   selector: 'app-files-explorer',
@@ -50,6 +51,7 @@ export class FilesExplorerComponent implements OnInit {
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
     private readonly translateService: TranslateService,
+    private readonly clipboardService: ClipboardService,
   ) {}
 
   ngOnInit() {
@@ -257,6 +259,11 @@ export class FilesExplorerComponent implements OnInit {
       .subscribe(() => {});
   }
 
+  copyLink() {
+    const file = this.data.files.find(i => i.selected);
+    this.clipboardService.copy(file.url);
+  }
+
   prepareUpload() {
     this.filePicker.nativeElement.click();
   }
@@ -422,9 +429,5 @@ export class FilesExplorerComponent implements OnInit {
     }
     this.path = s.parent || '/';
     await this.fetch(this.path);
-  }
-
-  copyLink() {
-
   }
 }
