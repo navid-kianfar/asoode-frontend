@@ -13,7 +13,7 @@ export class ThumbnailUrlPipe implements PipeTransform {
     if (!value) { return emptyImage; }
 
     const encoded = StringHelpers.base64encode(value);
-    return `${environment.api_endpoint}/files/thumbnail/${encoded}`
+    return `${environment.office_endpoint}/document/thumbnail/${encoded}`
   }
 
 }
