@@ -29,4 +29,10 @@ export class FileFolderPreviewComponent implements OnInit {
       };
     }
   }
+
+  hasThumbnail(file: ExplorerFileViewModel): boolean {
+    return file.isImage;
+    // if (file.thumbnail) { return true; }
+    // return (file.isImage || file.isDocument || file.isPdf || file.isPresentation || file.isSpreadsheet);
+  }
 }

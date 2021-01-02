@@ -5,8 +5,11 @@
 >
   <div class="preview">
     <div class="holder">
-      <i *ngIf="!file.isImage" [class]="filesService.icon(file.url)"></i>
-      <img *ngIf="file.isImage" [src]="file.url" alt="" />
+      <i *ngIf="!hasThumbnail(file) else thumbImage" [class]="filesService.icon(file.url)"></i>
+      <ng-template #thumbImage>
+<!--        <img [src]="file.thumbnail || (file.url | thumbnailUrl)" alt="" />-->
+        <img [src]="file.url" alt="" />
+      </ng-template>
     </div>
   </div>
   <div class="info">

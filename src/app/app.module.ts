@@ -206,6 +206,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { VideoComponent } from './components/app/video/video.component';
 import { AudioComponent } from './components/app/audio/audio.component';
+import { ThumbnailUrlPipe } from './pipes/app/thumbnail-url.pipe';
 
 @NgModule({
   declarations: [
@@ -358,6 +359,7 @@ import { AudioComponent } from './components/app/audio/audio.component';
     BulkDownloadModalComponent,
     VideoComponent,
     AudioComponent,
+    ThumbnailUrlPipe,
   ],
   entryComponents: [
     TimeOffApproveModalComponent,
