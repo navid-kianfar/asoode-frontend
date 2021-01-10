@@ -113,8 +113,9 @@ export class IdentityService {
         document.body.classList.add('dark-mode');
       }
     } else if (environment.production) {
-      this.logout();
-      setTimeout(() => { window.location.href = '/'; }, 500);
+      // this.logout();
+      // setTimeout(() => { window.location.href = '/'; }, 500);
+      setTimeout(() => window.location.reload(), 500);
     }
     return op;
   }
