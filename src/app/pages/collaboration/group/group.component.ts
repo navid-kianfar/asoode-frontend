@@ -68,9 +68,9 @@ export class GroupComponent implements OnInit {
         new Date().getTime();
       if (expired) {
         await this.router.navigateByUrl('/dashboard');
-        this.modalService
-          .show(UpgradeComponent, {} as CreateModalParameters)
-          .subscribe(() => {});
+        // this.modalService
+        //   .show(UpgradeComponent, {} as CreateModalParameters)
+        //   .subscribe(() => {});
         return;
       }
     }

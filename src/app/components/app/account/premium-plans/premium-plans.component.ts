@@ -27,6 +27,6 @@ export class PremiumPlansComponent implements OnInit {
   }
 
   upgrade() {
-    this.modalService.show(UpgradeComponent).subscribe(() => {});
+    // this.modalService.show(UpgradeComponent).subscribe(() => {});
   }
 }

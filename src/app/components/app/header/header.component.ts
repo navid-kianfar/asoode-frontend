@@ -130,9 +130,9 @@ export class HeaderComponent implements AfterViewInit, OnInit {
       plan.simpleGroup <= plan.usedSimpleGroup &&
       plan.complexGroup <= plan.usedComplexGroup
     ) {
-      this.modalService
-        .show(UpgradeComponent, {} as CreateModalParameters)
-        .subscribe(() => {});
+      // this.modalService
+      //   .show(UpgradeComponent, {} as CreateModalParameters)
+      //   .subscribe(() => {});
       return;
     }
 

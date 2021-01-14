@@ -169,9 +169,9 @@ export class ProjectTreeComponent implements OnInit {
   newWorkPackage(parentId?: string) {
     const plan = this.identityService.profile.plan;
     if (plan.usedWorkPackage >= plan.workPackage) {
-      this.modalService
-        .show(UpgradeComponent, {} as CreateModalParameters)
-        .subscribe(() => {});
+      // this.modalService
+      //   .show(UpgradeComponent, {} as CreateModalParameters)
+      //   .subscribe(() => {});
       return;
     }
 

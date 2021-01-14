@@ -53,10 +53,10 @@ export class NotificationService {
         break;
       case OperationResultStatus.OverCapacity:
       case OperationResultStatus.Expire:
-        this.injector
-          .get(ModalService)
-          .show(UpgradeComponent, {})
-          .subscribe(() => {});
+        // this.injector
+        //   .get(ModalService)
+        //   .show(UpgradeComponent, {})
+        //   .subscribe(() => {});
         break;
     }
   }
