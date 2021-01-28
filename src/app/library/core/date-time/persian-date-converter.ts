@@ -1,6 +1,7 @@
 import { IDateConverter, IDateTimeProperties } from './date-contracts';
 import { NumberHelpers } from '../../../helpers/number.helpers';
 import * as jalaliMoment from 'jalali-moment';
+const INVALID_DATE = '0001-01-01T00:00:00Z';
 
 export default class PersianDateConverter implements IDateConverter {
 
@@ -71,11 +72,12 @@ export default class PersianDateConverter implements IDateConverter {
     return gregorian.toDate();
   }
 
-  FromDateTime(date: Date): IDateTimeProperties {
-    date = new Date(date);
+  FromDateTime(date: Date | string): IDateTimeProperties {
+    const defaultDate = new Date(2019, 0, 1);
+    date = date === INVALID_DATE ? new Date(date) : defaultDate;
     let gregorian = jalaliMoment(date.toISOString()).locale('fa');
     if (!gregorian.isValid()) {
-      date = new Date(2019, 0, 1);
+      date = defaultDate;
       gregorian = jalaliMoment(date.toISOString()).locale('fa');
     }
 
