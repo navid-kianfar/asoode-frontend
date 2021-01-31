@@ -79,7 +79,7 @@ export default class GeorgianDateConverter implements IDateConverter {
     }
     return {
       Year: gregorian.year(),
-      Month: gregorian.month(),
+      Month: gregorian.month() + 1,
       Day: gregorian.date(),
       Hours: gregorian.hour(),
       Minutes: gregorian.minutes(),
