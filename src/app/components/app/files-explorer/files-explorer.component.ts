@@ -311,6 +311,7 @@ export class FilesExplorerComponent implements OnInit {
       .subscribe(() => {});
   }
   actionDelete() {
+    debugger;
     const selectedFolders = this.data.folders.filter(i => i.selected);
     const selectedFiles = this.data.files.filter(i => i.selected);
 
