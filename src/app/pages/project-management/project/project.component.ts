@@ -92,6 +92,18 @@ export class ProjectComponent implements OnInit {
     this.permission = this.projectService.getPermission(this.project);
     this.progressWaiting = true;
     const progress = await this.projectService.progress(id);
+
+    if (progress.data.length < 90) {
+      for (let i = 0; i < 90 - progress.data.length; i++) {
+        progress.data.push({
+          blocked: 0,
+          created: 0,
+          date: '',
+          done: 0
+        });
+      }
+    }
+
     this.report.blocked.progress = progress.data.map(d => d.blocked);
     this.report.blocked.total = progress.data.reduce((prev, obj, current) => prev + obj.blocked, 0);
     this.report.done.progress = progress.data.map(d => d.done);
