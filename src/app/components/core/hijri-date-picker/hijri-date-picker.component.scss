@@ -1,0 +1,11 @@
+.af-date-picker {
+  display: flex;
+  input {
+    display: flex;
+    flex-grow: 1;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100% !important;
+  }
+}

@@ -1,15 +1,72 @@
-<div class="af-date-picker {{ cssClass }}">
-  <input
-    #dateInput
-    matInput
-    (click)="picker.open()"
-    [max]="to"
-    [min]="from"
-    [matDatepicker]="picker"
-    [ngModel]="model"
-    (ngModelChange)="model = $event; modelChange.emit($event)"
-    (change)="dateChange($event, dateInput, picker)"
-    placeholder="انتخاب تاریخ"
-  />
-  <mat-datepicker #picker></mat-datepicker>
-</div>
+<ng-container *ngIf="culture === 'fa'">
+  <app-persian-date-picker
+    [placeholder]="placeholder"
+    [cssClass]="cssClass"
+    [culture]="culture"
+    [disabled]="disabled"
+    [allowNull]="allowNull"
+    [pickButton]="pickButton"
+    [plateOpen]="plateOpen"
+    [min]="min"
+    [max]="max"
+    [model]="model"
+    [minDays]="minDays"
+    [minMonths]="minMonths"
+    [minYears]="minYears"
+    [maxDays]="maxDays"
+    [maxMonths]="maxMonths"
+    [maxYears]="maxYears"
+    [fromToday]="fromToday"
+    [tillToday]="tillToday"
+    (modelChange)="update($event)"
+    (cultureChange)="cultureChange($event)"
+  ></app-persian-date-picker>
+</ng-container>
+<ng-container *ngIf="culture === 'en'">
+  <app-native-date-picker
+    [placeholder]="placeholder"
+    [cssClass]="cssClass"
+    [culture]="culture"
+    [disabled]="disabled"
+    [allowNull]="allowNull"
+    [pickButton]="pickButton"
+    [plateOpen]="plateOpen"
+    [min]="min"
+    [max]="max"
+    [model]="model"
+    [minDays]="minDays"
+    [minMonths]="minMonths"
+    [minYears]="minYears"
+    [maxDays]="maxDays"
+    [maxMonths]="maxMonths"
+    [maxYears]="maxYears"
+    [fromToday]="fromToday"
+    [tillToday]="tillToday"
+    (modelChange)="update($event)"
+    (cultureChange)="cultureChange($event)"
+  ></app-native-date-picker>
+</ng-container>
+<ng-container *ngIf="culture === 'ar'">
+  <app-hijri-date-picker
+    [placeholder]="placeholder"
+    [cssClass]="cssClass"
+    [culture]="culture"
+    [disabled]="disabled"
+    [allowNull]="allowNull"
+    [pickButton]="pickButton"
+    [plateOpen]="plateOpen"
+    [min]="min"
+    [max]="max"
+    [model]="model"
+    [minDays]="minDays"
+    [minMonths]="minMonths"
+    [minYears]="minYears"
+    [maxDays]="maxDays"
+    [maxMonths]="maxMonths"
+    [maxYears]="maxYears"
+    [fromToday]="fromToday"
+    [tillToday]="tillToday"
+    (modelChange)="update($event)"
+    (cultureChange)="cultureChange($event)"
+  ></app-hijri-date-picker>
+</ng-container>

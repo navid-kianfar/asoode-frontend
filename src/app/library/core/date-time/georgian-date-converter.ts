@@ -7,7 +7,7 @@ export default class GeorgianDateConverter implements IDateConverter {
     const result = moment()
       .locale('en')
       .year(date.Year)
-      .month(date.Month)
+      .month(date.Month - 1)
       .date(date.Day);
 
     result.hours(date.Hours);
@@ -53,7 +53,7 @@ export default class GeorgianDateConverter implements IDateConverter {
     const gregorian = this.innerConvert(date);
     return {
       Year: gregorian.year(),
-      Month: gregorian.month(),
+      Month: +gregorian.format('MM'),
       Day: gregorian.date(),
       Hours: gregorian.hour(),
       Minutes: gregorian.minutes(),
@@ -77,9 +77,10 @@ export default class GeorgianDateConverter implements IDateConverter {
       date = new Date(2019, 0, 1);
       gregorian = moment(date.toISOString()).locale('en');
     }
+
     return {
       Year: gregorian.year(),
-      Month: gregorian.month() + 1,
+      Month: +gregorian.format('MM'),
       Day: gregorian.date(),
       Hours: gregorian.hour(),
       Minutes: gregorian.minutes(),

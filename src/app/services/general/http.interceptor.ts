@@ -27,10 +27,18 @@ export class HttpInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: any, caught: Observable<HttpEvent<any>>) => {
         if (error.status === 401) {
+          const loader = document.getElementById('app-loading-container');
+          if (loader) {
+            document.body.removeChild(loader);
+          }
           this.identityService.logout();
-          this.router.navigateByUrl('/login').then(() => {
-            setTimeout(() => window.location.reload(), 500);
-          });
+          const url = '/login?un-authorized=' + new Date().getTime();
+          setTimeout(() => (window.location.href = url), 1000);
+          // setTimeout(() => this.router.navigateByUrl(url), 1000);
+          // if you've caught / handled the error, you don't
+          // want to rethrow it unless you also want
+          // downstream consumers to have to handle it as
+          // well.
           return of(error);
         }
         throw error;

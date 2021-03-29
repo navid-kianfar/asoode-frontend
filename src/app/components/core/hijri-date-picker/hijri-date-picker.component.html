@@ -1,0 +1,23 @@
+<div class="af-date-picker {{ cssClass }}">
+  <input
+    matInput
+    (click)="picker.open()"
+    [max]="max"
+    [min]="min"
+    [matDatepicker]="picker"
+    [ngModel]="model"
+    (ngModelChange)="model = $event; modelChange.emit($event)"
+    [placeholder]="placeholder | translate"
+    [disabled]="disabled"
+    (focus)="onFocus($event, picker)"
+  />
+  <mat-datepicker #picker (opened)="onOpen()"></mat-datepicker>
+  <!--  <div style="display: none">-->
+  <!--    <div class="datepicker-switch-culture" #datepickerFooter>-->
+  <!--      <span (click)="forceCulture('en')">{{ "CHANGE_TO_EN" | translate }}</span>-->
+  <!--      <mat-slide-toggle (change)="switchCulture()" [checked]="culture === 'fa'">-->
+  <!--      </mat-slide-toggle>-->
+  <!--      <span (click)="forceCulture('fa')">{{ "CHANGE_TO_FA" | translate }}</span>-->
+  <!--    </div>-->
+  <!--  </div>-->
+</div>

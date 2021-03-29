@@ -1,11 +1,9 @@
 import {Component, Injector} from '@angular/core';
 import { AppInitializerProvider } from './services/general/app.initializer';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { Socket } from 'ngx-socket-io';
 import { SwUpdate } from '@angular/service-worker';
 import { NetworkService } from './services/core/network.service';
 import { ModalService } from './services/core/modal.service';
-import { Subscription } from 'rxjs';
 import { OfflineComponent } from './modals/offline/offline.component';
 
 @Component({

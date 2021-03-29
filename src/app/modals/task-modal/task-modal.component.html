@@ -881,7 +881,7 @@
                                   <h5>{{ 'END_AT' | translate }}</h5>
                                   <app-date-picker
                                     [(model)]="tempEndAt"
-                                    [from]="tempBeginAt"
+                                    [min]="tempBeginAt"
                                     [disabled]="savingDate || deletingDate"
                                   ></app-date-picker>
                                 </div>

@@ -1,15 +1,5 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
-import { ICulture } from '../../../view-models/core/date-types';
-import { CulturedDateService } from '../../../services/core/cultured-date.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-date-picker',
@@ -17,19 +7,16 @@ import { CulturedDateService } from '../../../services/core/cultured-date.servic
   styleUrls: ['./date-picker.component.scss'],
 })
 export class DatePickerComponent implements OnInit {
-  formattedDate: string;
-  dateView: any;
-  calendar: ICulture;
-
+  @Input() placeholder: string;
   @Input() cssClass: string;
   @Input() culture: string;
   @Input() disabled: boolean;
   @Input() allowNull: boolean;
   @Input() pickButton: boolean;
   @Input() plateOpen: boolean;
+  @Input() min: Date | string;
+  @Input() max: Date | string;
   @Input() model: Date;
-  @Input() from: Date;
-  @Input() to: Date;
   @Input() minDays: number;
   @Input() minMonths: number;
   @Input() minYears: number;
@@ -40,47 +27,65 @@ export class DatePickerComponent implements OnInit {
   @Input() tillToday: boolean;
   @Output() modelChange = new EventEmitter<Date>();
 
-  constructor(readonly culturedDateService: CulturedDateService) {}
+  constructor() {}
 
   ngOnInit() {
     this.calculateFromTo();
+    this.culture = this.culture || environment.lang;
   }
 
   calculateFromTo() {
     const now = new Date();
     if (this.tillToday) {
-      this.to = now;
-    }
-    if (this.minDays) {
-      this.to = new Date();
-      this.to.setDate(this.to.getDate() - this.minDays);
-    }
-    if (this.minMonths) {
-      this.to = new Date();
-      this.to.setMonth(this.to.getMonth() - this.minMonths);
-    }
-    if (this.minYears) {
-      this.to = new Date();
-      this.to.setFullYear(this.to.getFullYear() - this.minYears);
+      this.max = now;
     }
     if (this.fromToday) {
-      this.from = now;
+      this.min = now;
+    }
+    if (this.minDays) {
+      this.min = new Date();
+      this.min.setDate(this.min.getDate() + this.minDays);
+    }
+    if (this.minMonths) {
+      this.min = new Date();
+      this.min.setMonth(this.min.getMonth() + this.minMonths);
+    }
+    if (this.minYears) {
+      this.min = new Date();
+      this.min.setFullYear(this.min.getFullYear() + this.minYears);
     }
     if (this.maxDays) {
-      this.from = new Date();
-      this.from.setDate(this.from.getDate() - this.maxDays);
+      this.max = new Date();
+      this.max.setDate(this.max.getDate() + this.maxDays);
     }
     if (this.maxMonths) {
-      this.from = new Date();
-      this.from.setMonth(this.from.getMonth() - this.maxMonths);
+      this.max = new Date();
+      this.max.setMonth(this.max.getMonth() + this.maxMonths);
     }
     if (this.maxYears) {
-      this.from = new Date();
-      this.from.setFullYear(this.from.getFullYear() - this.maxYears);
+      this.max = new Date();
+      this.max.setFullYear(this.max.getFullYear() + this.maxYears);
+    }
+    if (this.min && typeof this.min === 'string') {
+      this.min = new Date(this.min);
+    }
+    if (this.max && typeof this.max === 'string') {
+      this.max = new Date(this.max);
     }
   }
 
-  dateChange($event: Event, dateInput: HTMLInputElement, picker: any) {
-    console.log($event, dateInput, picker);
+  update($event: Date) {
+    const obj = $event as any;
+    if (obj.toDate) {
+      this.model = obj.toDate();
+    } else {
+      this.model = $event;
+    }
+    this.modelChange.emit(this.model);
+  }
+
+  cultureChange($event: string) {
+    this.culture = $event;
+    this.plateOpen = true;
   }
 }

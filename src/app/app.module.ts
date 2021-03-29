@@ -187,19 +187,13 @@ import { MemberFilterPipe } from './pipes/app/member-filter.pipe';
 import { TimeOffApproveModalComponent } from './modals/time-off-approve-modal/time-off-approve-modal.component';
 import { TimeOffHistoryModalComponent } from './modals/time-off-history-modal/time-off-history-modal.component';
 import { BulkDownloadModalComponent } from './modals/bulk-download-modal/bulk-download-modal.component';
-import {
-  CulturedDateFactory,
-  CulturedDateFormatsFactory,
-} from './library/core/date-time/material-date-adapter';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
-  DateAdapter,
-  MAT_DATE_FORMATS,
-  MAT_DATE_LOCALE,
+  MatNativeDateModule,
   MatRippleModule,
 } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
@@ -208,6 +202,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { VideoComponent } from './components/app/video/video.component';
 import { AudioComponent } from './components/app/audio/audio.component';
 import { ThumbnailUrlPipe } from './pipes/app/thumbnail-url.pipe';
+import { PersianDatePickerComponent } from './components/core/persian-date-picker/persian-date-picker.component';
+import { NativeDatePickerComponent } from './components/core/native-date-picker/native-date-picker.component';
+import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hijri-date-picker.component';
 
 @NgModule({
   declarations: [
@@ -361,6 +358,9 @@ import { ThumbnailUrlPipe } from './pipes/app/thumbnail-url.pipe';
     VideoComponent,
     AudioComponent,
     ThumbnailUrlPipe,
+    PersianDatePickerComponent,
+    NativeDatePickerComponent,
+    HijriDatePickerComponent,
   ],
   entryComponents: [
     TimeOffApproveModalComponent,
@@ -388,6 +388,7 @@ import { ThumbnailUrlPipe } from './pipes/app/thumbnail-url.pipe';
     BulkDownloadModalComponent,
   ],
   imports: [
+    MatNativeDateModule,
     ClipboardModule,
     BrowserModule,
     AppRoutingModule,
@@ -440,15 +441,6 @@ import { ThumbnailUrlPipe } from './pipes/app/thumbnail-url.pipe';
     NgxGoogleAnalyticsModule.forRoot(environment.ga),
   ],
   providers: [
-    {
-      provide: DateAdapter,
-      useFactory: CulturedDateFactory,
-      deps: [MAT_DATE_LOCALE],
-    },
-    {
-      provide: MAT_DATE_FORMATS,
-      useFactory: CulturedDateFormatsFactory,
-    },
     GoogleAnalyticsService,
     CookieService,
     {
