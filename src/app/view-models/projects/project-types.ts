@@ -21,7 +21,6 @@ import { IDateTimeProperties } from '../../library/core/date-time/date-contracts
 import { DayReportViewModel } from '../general/report-types';
 
 export interface TreeViewModel {
-  report: DayReportViewModel[];
   tree: { [key: string]: TreeReportViewModel };
 }
 export interface TreeReportViewModel {
@@ -35,6 +34,12 @@ export interface TreeReportViewModel {
   total: number;
   done: number;
   members: WorkPackageMemberViewModel[];
+}
+export interface ProjectProgressViewModel {
+  date: string;
+  created: number;
+  blocked: number;
+  done: number;
 }
 export interface RoadMapViewModel {}
 export interface ProjectObjectiveEstimatedPriceViewModel {

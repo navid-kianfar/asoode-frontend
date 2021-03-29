@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import {
-  ProjectObjectiveEstimatedPriceViewModel,
+  ProjectObjectiveEstimatedPriceViewModel, ProjectProgressViewModel,
   ProjectTemplateViewModel,
   ProjectViewModel,
   RoadMapViewModel,
@@ -237,5 +237,9 @@ export class ProjectService {
     return await this.httpService.post<RoadMapViewModel>(
       `/projects/road-map/${id}`,
     );
+  }
+
+  async progress(id: any): Promise<OperationResult<ProjectProgressViewModel[]>> {
+    return await this.httpService.post<ProjectProgressViewModel[]>(`/projects/progress/${id}`);
   }
 }

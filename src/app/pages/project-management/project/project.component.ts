@@ -6,7 +6,6 @@ import {
   AccessType,
   ActivityType,
   ProjectTemplate,
-  WorkPackageTaskState,
 } from '../../../library/app/enums';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { ModalService } from '../../../services/core/modal.service';
@@ -33,6 +32,7 @@ export class ProjectComponent implements OnInit {
   AccessType = AccessType;
   report: any;
   waiting: boolean;
+  progressWaiting: boolean;
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
@@ -49,9 +49,21 @@ export class ProjectComponent implements OnInit {
   ngOnInit() {
     this.mode = ViewMode.Tree;
     this.report = {
-      percent: 0,
-      progress: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      total: 0,
+      done: {
+        total: 0,
+        percent: 0,
+        progress: [],
+      },
+      created: {
+        total: 0,
+        percent: 0,
+        progress: [],
+      },
+      blocked: {
+        total: 0,
+        percent: 0,
+        progress: [],
+      },
     };
     this.fetch();
     this.bind();
@@ -78,6 +90,16 @@ export class ProjectComponent implements OnInit {
       { user_id: this.identityService.identity.userId },
     );
     this.permission = this.projectService.getPermission(this.project);
+    this.progressWaiting = true;
+    const progress = await this.projectService.progress(id);
+    this.report.blocked.progress = progress.data.map(d => d.blocked);
+    this.report.blocked.total = progress.data.reduce((prev, obj, current) => prev + obj.blocked, 0);
+    this.report.done.progress = progress.data.map(d => d.done);
+    this.report.done.total = progress.data.reduce((prev, obj, current) => prev + obj.done, 0);
+    this.report.created.progress = progress.data.map(d => d.created);
+    this.report.created.total = progress.data.reduce((prev, obj, current) => prev + obj.created, 0);
+    console.log(this.report);
+    this.progressWaiting = false;
   }
 
   bind() {

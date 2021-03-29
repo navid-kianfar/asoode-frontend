@@ -33,15 +33,18 @@
           </ng-container>
         </div>
       </div>
-      <div class="reports">
+      <div class="reports" *ngIf="progressWaiting">
+        <app-waiting></app-waiting>
+      </div>
+      <div class="reports" *ngIf="!progressWaiting">
         <h5>{{ 'PROJECT_PROGRESS' | translate }}</h5>
 
         <div class="report">
           <div class="change">
-            <i class="up icon-arrow-up2"></i>&nbsp;{{ report.percent }}%
+            <i class="up icon-arrow-up2"></i>&nbsp;{{ 'CREATED' | translate }}
           </div>
           <ngx-trend
-            [data]="report.progress"
+            [data]="report.created.progress"
             stroke="#558c97"
             strokeWidth="2"
             width="170"
@@ -50,14 +53,14 @@
             autoDrawDuration="1500"
             autoDrawEasing="ease-in"
           ></ngx-trend>
-          <div class="total">{{ report.total }}</div>
+          <div class="total">{{ report.created.total }}</div>
         </div>
         <div class="report">
           <div class="change">
-            <i class="down icon-arrow-down2"></i>&nbsp;{{ report.percent }}%
+            <i class="down icon-arrow-down2"></i>&nbsp;{{ 'BLOCKED' | translate }}
           </div>
           <ngx-trend
-            [data]="report.progress"
+            [data]="report.blocked.progress"
             stroke="#ee5a60"
             strokeWidth="2"
             width="170"
@@ -66,14 +69,14 @@
             autoDrawDuration="1500"
             autoDrawEasing="ease-in"
           ></ngx-trend>
-          <div class="total">{{ report.total }}</div>
+          <div class="total">{{ report.blocked.total }}</div>
         </div>
         <div class="report">
           <div class="change">
-            <i class="up icon-arrow-up2"></i>&nbsp;{{ report.percent }}%
+            <i class="up icon-arrow-up2"></i>&nbsp;{{ 'DONE' | translate }}
           </div>
           <ngx-trend
-            [data]="report.progress"
+            [data]="report.done.progress"
             stroke="#7f33ef"
             strokeWidth="2"
             width="170"
@@ -82,7 +85,7 @@
             autoDrawDuration="1500"
             autoDrawEasing="ease-in"
           ></ngx-trend>
-          <div class="total">{{ report.total }}</div>
+          <div class="total">{{ report.done.total }}</div>
         </div>
       </div>
     </div>
