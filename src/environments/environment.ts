@@ -1,13 +1,13 @@
 export const environment = {
-  production: false,
+  production: true,
   socket_disabled: false,
-  socket_endpoint: 'https://socket.ciblsoft.com',
-  office_endpoint: 'https://office.ciblsoft.com',
-  api_endpoint: '/v2',
-  direct_endpoint: 'http://localhost:5000/v2',
-  googleOauth: 'http://localhost:5000/oauth/google-login',
+  socket_endpoint: 'https://socket.asoode.com',
+  office_endpoint: 'https://office.asoode.com',
+  api_endpoint: 'https://api.asoode.com/v2',
+  direct_endpoint: 'https://api.asoode.com/v2',
+  googleOauth: 'https://api.asoode.com/oauth/google-login',
   vapid:
     'BP6o2qiosTeFgjZ4maMyfgZb33ic3lZFKeCqtFzO1BMfW2e9Qieq0HYbya8z-tr6Olza10cW_nYPiGWO3umvEIY',
-  ga: '',
-  lang: 'en',
+  ga: 'G-K4SKBN8BK9',
+  lang: 'fa',
 };
