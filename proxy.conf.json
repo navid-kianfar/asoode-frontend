@@ -1,7 +1,9 @@
 {
-    "/v2/*": {
-        "target": "http://localhost:5050",
-        "secure": false,
-        "logLevel": "debug"
-    }
+  "/proxy-api/*": {
+    "target": "http://localhost:5050/v2",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/proxy-api" : ""}
+  }
 }
