@@ -10,7 +10,7 @@
   <div class="summary-container" *ngIf="summary">{{ summary }}</div>
   <input
     #filePicker
-    (change)="onChange($event.target.files)"
+    (change)="onChange($event)"
     [accept]="allowedTypes"
     [multiple]="multiple"
     hidden

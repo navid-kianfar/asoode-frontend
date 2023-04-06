@@ -53,12 +53,12 @@
     <div class="members">
       <ng-container *ngFor="let member of reportViewModel.members">
         <app-member-info
-          small="true"
+          [small]="true"
           *ngIf="!member.isGroup"
           [id]="member.recordId"
         ></app-member-info>
         <app-group-info
-          small="true"
+          [small]="true"
           *ngIf="member.isGroup"
           [id]="member.recordId"
         ></app-group-info>

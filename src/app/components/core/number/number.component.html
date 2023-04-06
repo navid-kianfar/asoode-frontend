@@ -12,7 +12,8 @@
       (blur)="onBlur()"
       [ngModel]="model"
       (keydown)="onKeyDown($event)"
-      [appOnlyNumber]="{ decimals: acceptDecimal }"
+      [appOnlyNumber]="true"
+      [appDecimalNumber]='acceptDecimal'
       (ngModelChange)="updateModel($event)"
       [disabled]="disabled"
       [placeholder]="placeHolder | translate: true"

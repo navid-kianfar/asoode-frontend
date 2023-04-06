@@ -151,7 +151,8 @@ export class FileComponent implements OnInit {
     this.filePicker.nativeElement.dispatchEvent(event);
   }
 
-  async onChange(files: FileList) {
+  async onChange($event: any) {
+    const files = $event.target.files;
     if (files && files.length) {
       this.current = '';
     }

@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   socket_disabled: false,
   socket_endpoint: 'http://localhost:5070',
   office_endpoint: 'http://localhost:5060',

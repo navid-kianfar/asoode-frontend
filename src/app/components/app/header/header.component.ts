@@ -19,7 +19,6 @@ import { PopperContent } from 'ngx-popper';
 import { OperationResult } from '../../../library/core/operation-result';
 import { Socket } from 'ngx-socket-io';
 import { PushNotificationService } from '../../../services/general/push-notification.service';
-import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
 import { SwPush } from '@angular/service-worker';
 import { NumberHelpers } from '../../../helpers/number.helpers';
 

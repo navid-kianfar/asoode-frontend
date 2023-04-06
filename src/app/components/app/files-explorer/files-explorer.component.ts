@@ -17,7 +17,6 @@ import { DocumentModalComponent } from '../../../modals/document-modal/document-
 import { StringHelpers } from '../../../helpers/string.helpers';
 import { TranslateService } from '../../../services/core/translate.service';
 import { IdentityService } from '../../../services/auth/identity.service';
-import { UploadExceedModalComponent } from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
 import {ClipboardService} from 'ngx-clipboard';
 
 @Component({
@@ -41,7 +40,7 @@ export class FilesExplorerComponent implements OnInit {
   allowedTypes: string;
   parent: ExplorerFolderViewModel[];
   sort: SortType;
-  private timer: number;
+  private timer: any;
   private preventSimpleClick: boolean;
 
   @ViewChild('filePicker', { static: false }) filePicker;
@@ -405,15 +404,6 @@ export class FilesExplorerComponent implements OnInit {
           allowed.push(u);
         }
       });
-      if (filtered.length) {
-        this.modalService
-          .show(UploadExceedModalComponent, {
-            uploads: filtered,
-            attachmentSize: this.identityService.profile.plan.attachmentSize,
-          })
-          .subscribe(() => resolve(allowed));
-        return;
-      }
       resolve(allowed);
     });
   }

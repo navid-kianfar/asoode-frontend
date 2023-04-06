@@ -22,8 +22,6 @@ import { Socket } from 'ngx-socket-io';
 import { StringHelpers } from '../../../helpers/string.helpers';
 import { TranslateService } from '../../../services/core/translate.service';
 import { Router } from '@angular/router';
-import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
-import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { WorkPackageService } from '../../../services/projects/work-package.service';

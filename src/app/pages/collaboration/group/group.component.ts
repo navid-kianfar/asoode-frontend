@@ -8,8 +8,6 @@ import { AccessType, ActivityType } from '../../../library/app/enums';
 import { Socket } from 'ngx-socket-io';
 import { OperationResultStatus } from '../../../library/core/enums';
 import { IdentityService } from '../../../services/auth/identity.service';
-import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
-import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { TranslateService } from '../../../services/core/translate.service';
 

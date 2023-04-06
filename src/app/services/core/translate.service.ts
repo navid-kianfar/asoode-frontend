@@ -16,7 +16,7 @@ export class TranslateService {
     this.repository[this.cultureService.lang] = {};
   }
 
-  async load(culture: string): Promise<any> {
+  async load(culture: string): Promise<void> {
     return new Promise((resolve, reject) => {
       const path = `assets/i18n/${culture}.json?rand=${new Date().getTime()}`;
       this.client.get(path).subscribe(

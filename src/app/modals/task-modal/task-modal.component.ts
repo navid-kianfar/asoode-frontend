@@ -40,7 +40,6 @@ import { CulturedDateService } from '../../services/core/cultured-date.service';
 import { GroupService } from '../../services/groups/group.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { UploadExceedModalComponent } from '../upload-exceed-modal/upload-exceed-modal.component';
 import { DateHelpers } from '../../helpers/date.helpers';
 import { AdvancedPlayerComponent } from '../advanced-player/advanced-player.component';
 import { BulkDownloadModalComponent } from '../bulk-download-modal/bulk-download-modal.component';
@@ -99,7 +98,7 @@ export class TaskModalComponent
   tempEstimatedTime: number;
   savingEstimated: boolean;
   recording: boolean;
-  intervalInstance: number;
+  intervalInstance: any;
   totalTimeSpent: TimeViewModel;
   tempDueAt: Date;
   tempBeginAt: Date;
@@ -233,15 +232,6 @@ export class TaskModalComponent
           allowed.push(u);
         }
       });
-      if (filtered.length) {
-        this.modalService
-          .show(UploadExceedModalComponent, {
-            uploads: filtered,
-            attachmentSize: this.project.attachmentSize,
-          })
-          .subscribe(() => resolve(allowed));
-        return;
-      }
       resolve(allowed);
     });
   }

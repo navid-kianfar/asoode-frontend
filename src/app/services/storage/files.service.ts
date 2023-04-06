@@ -8,7 +8,6 @@ import {
 import { OperationResultStatus } from '../../library/core/enums';
 import { StringDictionary } from '../../library/core/dictionary';
 import { ModalService } from '../core/modal.service';
-import { UploadExceedModalComponent } from '../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -168,12 +167,13 @@ export class FilesService {
               if (op.status !== OperationResultStatus.Success) {
                 u.uploading = false;
                 u.failed = true;
+                resolve(OperationResult.Failed());
                 return;
               }
               u.progress = 100;
               u.success = true;
               u.uploading = false;
-              resolve();
+              resolve(OperationResult.Success(true));
             },
             err => {
               reject(err);
@@ -207,11 +207,13 @@ export class FilesService {
               if (op.status !== OperationResultStatus.Success) {
                 u.uploading = false;
                 u.failed = true;
+                resolve(OperationResult.Failed());
                 return;
               }
               u.progress = 100;
               u.success = true;
               u.uploading = false;
+              resolve(OperationResult.Success(true));
             },
             err => {
               reject(err);
@@ -249,11 +251,13 @@ export class FilesService {
               if (op.status !== OperationResultStatus.Success) {
                 u.uploading = false;
                 u.failed = true;
+                resolve(OperationResult.Failed());
                 return;
               }
               u.progress = 100;
               u.success = true;
               u.uploading = false;
+              resolve(OperationResult.Success(true));
             },
             err => {
               reject(err);
