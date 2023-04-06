@@ -4,7 +4,7 @@ asoode is a project management application (was a startup) that got into the sha
 
  - [Asoode Backend](https://github.com/navid-kianfar/asoode-backend)
  - [Asoode Frontend](https://github.com/navid-kianfar/asoode-frontend)
- - Asoode Socket
+- [Asoode Socket](https://github.com/navid-kianfar/asoode-socket)
 
 #### 06/04/2023
 it may take some time to remove the premium restrictions and make every thing available,
