@@ -8,7 +8,7 @@
         [placeHolder]="'EMAIL_OR_PHONE'"
         (pick)="current = $event"
         (startModify)="current = undefined"
-        ltr="true"
+        [ltr]="true"
       ></app-auto-complete>
       <app-access-list [(access)]="currentRole"></app-access-list>
     </div>
@@ -26,9 +26,7 @@
         <app-member-info [model]="member.model"></app-member-info>
       </div>
       <div class="role">
-        <ng-container
-          *ngIf="member.access === AccessType.Owner; else otherRole"
-        >
+        <ng-container *ngIf="member.access === AccessType.Owner; else otherRole">
           {{ 'ENUMS_ACCESS_TYPE_OWNER' | translate }}
         </ng-container>
         <ng-template #otherRole>

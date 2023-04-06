@@ -24,7 +24,7 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
   @Input() end: Date;
   chartData: any;
   view: number[];
-  timer: number;
+  timer: any;
   hidden: any;
   private converter: IDateConverter;
 

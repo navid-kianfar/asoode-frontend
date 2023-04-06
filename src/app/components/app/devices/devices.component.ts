@@ -77,7 +77,7 @@ export class DevicesComponent implements OnInit {
   }
 
   async checkOldSubscription() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       if (this.swPush.isEnabled) {
         let ranAlready = false;
         this.swPush.subscription.subscribe(old => {

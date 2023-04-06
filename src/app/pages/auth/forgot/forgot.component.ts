@@ -78,7 +78,6 @@ export class ForgotComponent implements OnInit {
               maxLength: { value: 50, message: 'EMAIL_OR_PHONE_MAX_LENGTH' },
             },
           }),
-          this.formService.createCaptcha(),
         ],
       },
     ];

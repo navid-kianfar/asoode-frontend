@@ -2,7 +2,7 @@
   <quill-editor
     [disabled]="disabled"
     [placeholder]="placeHolder | translate"
-    [dir]="cultureService.dir"
+    dir="auto"
     [(ngModel)]="model"
     trackChanges="all"
     [customToolbarPosition]="'bottom'"

@@ -94,7 +94,6 @@ export class RegisterComponent implements OnInit {
               },
             },
           }),
-          this.formService.createCaptcha(),
         ],
       },
     ];

@@ -70,7 +70,6 @@ export class LoginComponent implements OnInit {
               maxLength: { value: 50, message: 'PASSWORD_MAX_LENGTH' },
             },
           }),
-          this.formService.createCaptcha(),
         ],
       },
     ];

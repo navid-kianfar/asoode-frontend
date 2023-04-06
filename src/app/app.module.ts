@@ -35,7 +35,6 @@ import {
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { DashboardComponent } from './pages/reports/dashboard/dashboard.component';
-import { CaptchaComponent } from './components/core/captcha/captcha.component';
 import { WaitingComponent } from './components/core/waiting/waiting.component';
 import { InputComponent } from './components/core/input/input.component';
 import { SwitchComponent } from './components/core/switch/switch.component';
@@ -149,8 +148,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { WorkPackageTaskComponent } from './components/app/work-package-task/work-package-task.component';
 import { TaskModalComponent } from './modals/task-modal/task-modal.component';
-import { UpgradeComponent } from './modals/upgrade/upgrade.component';
-import { UpgradeWizardComponent } from './components/app/upgrade-wizard/upgrade-wizard.component';
 import { MapModalComponent } from './modals/map-modal/map-modal.component';
 import { EstimatedTimePipe } from './pipes/app/estimated-time.pipe';
 import { ActivityLogComponent } from './components/app/activity-log/activity-log.component';
@@ -171,13 +168,8 @@ import { KartablComponent } from './components/app/kartabl/kartabl.component';
 import { DurationPickerComponent } from './components/app/duration-picker/duration-picker.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { WorkPackagePermissionComponent } from './modals/work-package-permission/work-package-permission.component';
-import { ProjectTreeAnimationComponent } from './components/app/project-tree-animation/project-tree-animation.component';
-import { ProjectTreeAnimationNodeComponent } from './components/app/project-tree-animation-node/project-tree-animation-node.component';
-import { AnimationWorkPackageBoardComponent } from './components/app/animation-work-package-board/animation-work-package-board.component';
-import { AnimationWorkPackageTaskComponent } from './components/app/animation-work-package-task/animation-work-package-task.component';
 import { ArchivedProjectsComponent } from './components/app/archived-projects/archived-projects.component';
 import { ArchivedGroupsComponent } from './components/app/archived-groups/archived-groups.component';
-import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-exceed-modal.component';
 import { LabelsModalComponent } from './modals/labels-modal/labels-modal.component';
 import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-fields-modal.component';
 import { OfflineComponent } from './modals/offline/offline.component';
@@ -211,7 +203,6 @@ import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hi
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    CaptchaComponent,
     WaitingComponent,
     InputComponent,
     SwitchComponent,
@@ -321,8 +312,6 @@ import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hi
     WorkPackageWizardComponent,
     WorkPackageTaskComponent,
     TaskModalComponent,
-    UpgradeComponent,
-    UpgradeWizardComponent,
     MapModalComponent,
     EstimatedTimePipe,
     ActivityLogComponent,
@@ -339,13 +328,8 @@ import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hi
     KartablComponent,
     DurationPickerComponent,
     WorkPackagePermissionComponent,
-    ProjectTreeAnimationComponent,
-    ProjectTreeAnimationNodeComponent,
-    AnimationWorkPackageBoardComponent,
-    AnimationWorkPackageTaskComponent,
     ArchivedProjectsComponent,
     ArchivedGroupsComponent,
-    UploadExceedModalComponent,
     LabelsModalComponent,
     CustomFieldsModalComponent,
     OfflineComponent,
@@ -369,7 +353,6 @@ import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hi
     OfflineComponent,
     CustomFieldsModalComponent,
     LabelsModalComponent,
-    UploadExceedModalComponent,
     WorkPackagePermissionComponent,
     UpgradeWorkPackageComponent,
     DocumentModalComponent,
@@ -384,7 +367,6 @@ import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hi
     GroupDetailComponent,
     InviteModalComponent,
     TaskModalComponent,
-    UpgradeComponent,
     BulkDownloadModalComponent,
   ],
   imports: [

@@ -197,18 +197,19 @@
           </button>
         </div>
         <div class="members-container">
+
           <ng-container *ngFor="let member of workPackage.members | slice: 0:3">
             <app-member-info
               [matMenuTriggerFor]="currentMemberMenu"
               *ngIf="!member.isGroup"
               [id]="member.recordId"
-              small="true"
+              [small]="true"
             ></app-member-info>
             <app-group-info
               [matMenuTriggerFor]="currentMemberMenu"
               *ngIf="member.isGroup"
               [id]="member.recordId"
-              small="true"
+              [small]="true"
             ></app-group-info>
             <mat-menu #currentMemberMenu="matMenu">
               <div class="member-info-popper">
@@ -301,17 +302,10 @@
         <ng-container *ngIf="!waiting">
           <ng-container *ngIf="mode === ViewMode.Board">
             <app-work-package-board
-              *ngIf="project.template !== ProjectTemplate.Animation"
               [project]="project"
               [permission]="permission"
               [model]="workPackage"
             ></app-work-package-board>
-            <app-animation-work-package-board
-              *ngIf="project.template === ProjectTemplate.Animation"
-              [project]="project"
-              [permission]="permission"
-              [model]="workPackage"
-            ></app-animation-work-package-board>
           </ng-container>
           <ng-container *ngIf="mode === ViewMode.List">
             <app-work-package-list

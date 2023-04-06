@@ -191,10 +191,4 @@
       </div>
     </div>
   </ng-container>
-  <ng-container *ngIf="mode === WizardMode.Plan">
-    <app-upgrade-wizard
-      (click)="$event.stopPropagation()"
-      (exit)="close()"
-    ></app-upgrade-wizard>
-  </ng-container>
 </div>

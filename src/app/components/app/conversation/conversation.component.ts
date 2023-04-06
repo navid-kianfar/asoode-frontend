@@ -28,7 +28,6 @@ import { IdentityService } from '../../../services/auth/identity.service';
 import { UploadViewModel } from '../../../view-models/storage/files-types';
 import { FilesService } from '../../../services/storage/files.service';
 import { UsersService } from '../../../services/general/users.service';
-import { UploadExceedModalComponent } from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Component({
   selector: 'app-conversation',
@@ -220,15 +219,6 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
           allowed.push(u);
         }
       });
-      if (filtered.length) {
-        this.modalService
-          .show(UploadExceedModalComponent, {
-            uploads: filtered,
-            attachmentSize: this.attachmentSize,
-          })
-          .subscribe(() => resolve(allowed));
-        return;
-      }
       resolve(allowed);
     });
   }

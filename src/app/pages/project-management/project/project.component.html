@@ -46,11 +46,11 @@
           <ngx-trend
             [data]="report.created.progress"
             stroke="#558c97"
-            strokeWidth="2"
-            width="170"
-            height="25"
-            autoDraw="true"
-            autoDrawDuration="1500"
+            [strokeWidth]="2"
+            [width]="170"
+            [height]="25"
+            [autoDraw]="true"
+            [autoDrawDuration]="1500"
             autoDrawEasing="ease-in"
           ></ngx-trend>
           <div class="total">{{ report.created.total }}</div>
@@ -62,11 +62,11 @@
           <ngx-trend
             [data]="report.blocked.progress"
             stroke="#ee5a60"
-            strokeWidth="2"
-            width="170"
-            height="25"
-            autoDraw="true"
-            autoDrawDuration="1500"
+            [strokeWidth]="2"
+            [width]="170"
+            [height]="25"
+            [autoDraw]="true"
+            [autoDrawDuration]="1500"
             autoDrawEasing="ease-in"
           ></ngx-trend>
           <div class="total">{{ report.blocked.total }}</div>
@@ -78,11 +78,11 @@
           <ngx-trend
             [data]="report.done.progress"
             stroke="#7f33ef"
-            strokeWidth="2"
-            width="170"
-            height="25"
-            autoDraw="true"
-            autoDrawDuration="1500"
+            [strokeWidth]="2"
+            [width]="170"
+            [height]="25"
+            [autoDraw]="true"
+            [autoDrawDuration]="1500"
             autoDrawEasing="ease-in"
           ></ngx-trend>
           <div class="total">{{ report.done.total }}</div>
@@ -134,28 +134,11 @@
             [model]="project"
           ></app-project-road-map>
         </div>
-        <div
-          *ngIf="
-            mode === ViewMode.Tree && project.template === ProjectTemplate.None
-          "
-          class="tree-container"
-        >
+        <div *ngIf=" mode === ViewMode.Tree" class="tree-container">
           <app-project-tree
             [permission]="permission"
             [model]="project"
           ></app-project-tree>
-        </div>
-        <div
-          *ngIf="
-            mode === ViewMode.Tree &&
-            project.template === ProjectTemplate.Animation
-          "
-          class="tree-container"
-        >
-          <app-project-tree-animation
-            [permission]="permission"
-            [model]="project"
-          ></app-project-tree-animation>
         </div>
         <div *ngIf="mode === ViewMode.Seasons" class="seasons-container">
           <app-project-season

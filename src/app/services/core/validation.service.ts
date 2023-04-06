@@ -44,9 +44,6 @@ export class ValidationService {
     return this.iranianMobileRegex.test(mobile);
   }
 
-  static validateCaptcha(captcha: any): boolean {
-    return captcha && captcha.code && captcha.code.length === 5;
-  }
 
   static validatePassword(password: string): boolean | string {
     if (!password || password.length < 6) {
