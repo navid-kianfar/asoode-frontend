@@ -18,31 +18,37 @@ export class HttpInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const obj = { setHeaders : {
-        'ngsw-bypass': 'true',
-        Authorization: this.identityService.identity.token || '',
-      }
+    const obj = {
+      setHeaders: {
+        'ngsw-bypass': 'true'
+      },
     } as any;
+    if (
+      this.identityService.identity &&
+      this.identityService.identity.token
+    ) {
+      Object.assign(obj.setHeaders, {
+        Authorization: this.identityService.identity.token,
+      });
+    }
+
+    if (request.headers.has('skip')) {
+      request = request.clone({
+        headers: request.headers.delete('skip'),
+      });
+      return next.handle(request);
+    }
+
     request = request.clone(obj);
     return next.handle(request).pipe(
       catchError((error: any, caught: Observable<HttpEvent<any>>) => {
         if (error.status === 401) {
-          const loader = document.getElementById('app-loading-container');
-          if (loader) {
-            document.body.removeChild(loader);
-          }
-          this.identityService.logout();
-          const url = '/login?un-authorized=' + new Date().getTime();
-          setTimeout(() => (window.location.href = url), 1000);
-          // setTimeout(() => this.router.navigateByUrl(url), 1000);
-          // if you've caught / handled the error, you don't
-          // want to rethrow it unless you also want
-          // downstream consumers to have to handle it as
-          // well.
+          setTimeout(() => this.identityService.logout(), 100)
+          // TODO: fix 401
           return of(error);
         }
         throw error;
-      }),
+      })
     );
   }
 }

@@ -12,18 +12,19 @@ export class EnumsService {
     private readonly config: ConfigService,
   ) {}
 
-  async load(): Promise<void> {
-    return new Promise((resolve, reject) => {
+  load(): Promise<void> {
+    return new Promise(async (resolve, reject) => {
       const path = `${this.config.backend}/enums`;
       this.client.get(path).subscribe(
         (response: string) => {
           this.repository = response;
-          resolve();
         },
         (err: Error) => {
           this.repository = {};
+          // console.log(err);
           reject(err);
         },
+        () => resolve()
       );
     });
   }

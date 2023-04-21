@@ -7,7 +7,8 @@
     [cssClass]="'h-100'"
     *ngIf="!appInitializerProvider.loaded"
   ></app-waiting>
-  <ng-container *ngIf="appInitializerProvider.loaded">
+  <app-no-api-found *ngIf="appInitializerProvider.apiNotFound"></app-no-api-found>
+  <ng-container *ngIf="!appInitializerProvider.apiNotFound && appInitializerProvider.loaded">
     <app-header *ngIf="appInitializerProvider.profileLoaded"></app-header>
     <router-outlet></router-outlet>
   </ng-container>

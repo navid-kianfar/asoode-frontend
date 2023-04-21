@@ -197,6 +197,9 @@ import { ThumbnailUrlPipe } from './pipes/app/thumbnail-url.pipe';
 import { PersianDatePickerComponent } from './components/core/persian-date-picker/persian-date-picker.component';
 import { NativeDatePickerComponent } from './components/core/native-date-picker/native-date-picker.component';
 import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hijri-date-picker.component';
+import { NoApiFoundComponent } from './pages/errors/no-api-found/no-api-found.component';
+import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
+import { NotAuthorizedComponent } from './pages/errors/not-authorized/not-authorized.component';
 
 @NgModule({
   declarations: [
@@ -345,6 +348,9 @@ import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hi
     PersianDatePickerComponent,
     NativeDatePickerComponent,
     HijriDatePickerComponent,
+    NoApiFoundComponent,
+    NotFoundComponent,
+    NotAuthorizedComponent,
   ],
   entryComponents: [
     TimeOffApproveModalComponent,
