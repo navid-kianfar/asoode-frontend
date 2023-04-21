@@ -13,6 +13,7 @@ import { OperationResultStatus } from '../../library/core/enums';
 export class AppInitializerProvider {
   loaded: boolean;
   profileLoaded: boolean;
+  apiNotFound: boolean;
 
   constructor(
     private readonly http: HttpClient,
@@ -33,7 +34,11 @@ export class AppInitializerProvider {
     const promise1 = this.refresh();
     const promise2 = this.translateService.load(lang);
     const promise3 = this.enumsService.load();
-    return Promise.all([promise1, promise2, promise3]);
+    return Promise.all([promise1, promise2, promise3]).catch((err) => {
+      if (err.status === 404) {
+        this.apiNotFound = true;
+      }
+    });
   }
 
   async refresh() {
