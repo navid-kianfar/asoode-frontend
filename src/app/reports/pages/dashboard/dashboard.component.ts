@@ -5,8 +5,6 @@ import { ReportService } from '../../services/report.service';
 import { DashboardViewModel } from '../../../view-models/general/report-types';
 import { CulturedDateService } from '../../../shared/services/cultured-date.service';
 import { IDateConverter } from '../../../shared/lib/date-time/date-contracts';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
-import { TranslateService } from '../../../shared/services/translate.service';
 import { IdentityService } from '../../../auth/services/identity.service';
 import { ProjectFilter } from '../../../shared/lib/enums/projects';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
@@ -34,8 +32,6 @@ export class DashboardComponent implements OnInit {
     readonly projectService: ProjectService,
     private readonly reportService: ReportService,
     private readonly culturedDateService: CulturedDateService,
-    private readonly gaService: GoogleAnalyticsService,
-    private readonly translateService: TranslateService,
     readonly identityService: IdentityService,
   ) {}
 
@@ -44,13 +40,6 @@ export class DashboardComponent implements OnInit {
     this.filter = ProjectFilter.All;
     this.converter = this.culturedDateService.Converter();
     this.fetch();
-
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('DASHBOARD'),
-      undefined,
-      { user_id: this.identityService.identity.userId },
-    );
   }
 
   async fetch() {

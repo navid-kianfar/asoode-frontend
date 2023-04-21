@@ -5,7 +5,6 @@ import { AppInitializerProvider } from '../../../shared/services/app.initializer
 import { FormService } from '../../../shared/services/form.service';
 import { IdentityService } from '../../services/identity.service';
 import { ValidationService } from '../../../shared/services/validation.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { TranslateService } from '../../../shared/services/translate.service';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 
@@ -29,7 +28,6 @@ export class ForgotComponent implements OnInit {
     private readonly initializerProvider: AppInitializerProvider,
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService,
     private readonly translateService: TranslateService,
   ) {}
 
@@ -70,22 +68,19 @@ export class ForgotComponent implements OnInit {
       {
         elements: [
           this.formService.createInput({
-            config: { field: 'username', label: 'EMAIL_OR_PHONE' },
+            config: { field: 'username', label: 'EMAIL' },
             params: { model: '', ltr: true },
             validation: {
-              required: { value: true, message: 'EMAIL_OR_PHONE_REQUIRED' },
-              minLength: { value: 10, message: 'EMAIL_OR_PHONE_MIN_LENGTH' },
-              maxLength: { value: 50, message: 'EMAIL_OR_PHONE_MAX_LENGTH' },
+              required: { value: true, message: 'EMAIL_REQUIRED' },
+              pattern: {
+                value: ValidationService.emailRegex,
+                message: 'EMAIL_INVALID'
+              },
             },
           }),
         ],
       },
     ];
-
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('FORGOT_PASSWORD'),
-    );
   }
 
   async forgot() {

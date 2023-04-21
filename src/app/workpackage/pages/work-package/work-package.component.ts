@@ -9,36 +9,26 @@ import {
 import { ProjectService } from '../../../project/services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WorkPackageService } from '../../services/work-package.service';
-import { InviteModalComponent } from '../../../__/modals/invite-modal/invite-modal.component';
 import { ModalService } from '../../../shared/services/modal.service';
 import { CultureService } from '../../../shared/services/culture.service';
 import {
   AccessType,
-  ProjectTemplate,
   ReceiveNotificationType,
   SortType,
-
 } from '../../../shared/lib/enums/enums';
-import { PromptComponent } from 'src/app/shared/modals/prompt/prompt.component';
 import { FormService } from 'src/app/shared/services/form.service';
 import { StringHelpers } from '../../../shared/helpers/string.helpers';
 import { TranslateService } from '../../../shared/services/translate.service';
-import { OperationResult } from '../../../shared/lib/operation-result';
 import { GroupService } from '../../../groups/services/group.service';
 import { PendingInvitationViewModel } from '../../../view-models/groups/group-types';
 import { Socket } from 'ngx-socket-io';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { UpgradeWorkPackageComponent } from '../../../__/modals/upgrade-work-package/upgrade-work-package.component';
 import { IdentityService } from '../../../auth/services/identity.service';
-import { WorkPackagePermissionComponent } from '../../../__/modals/work-package-permission/work-package-permission.component';
 import { UsersService } from '../../../project/services/users.service';
-import { CustomFieldsModalComponent } from '../../../__/modals/custom-fields-modal/custom-fields-modal.component';
-import { LabelsModalComponent } from '../../../__/modals/labels-modal/labels-modal.component';
 import { DateHelpers } from '../../../shared/helpers/date.helpers';
 import { NumberHelpers } from '../../../shared/helpers/number.helpers';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import {
   WorkPackageObjectiveType,
   WorkPackageTaskState,
@@ -46,6 +36,7 @@ import {
 } from '../../../shared/lib/enums/workpackage';
 import { ActivityType } from '../../../shared/lib/enums/activity-type';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { PromptModalComponent } from 'src/app/shared/modals/prompt-modal/prompt-modal.component';
 
 @Component({
   selector: 'app-work-package',
@@ -54,7 +45,6 @@ import { OperationResultStatus } from '../../../shared/lib/enums/operation-resul
 })
 export class WorkPackageComponent implements OnInit {
   ViewMode = ViewMode;
-  ProjectTemplate = ProjectTemplate;
   mode: ViewMode;
   project: ProjectViewModel;
   workPackage: WorkPackageViewModel;
@@ -93,7 +83,6 @@ export class WorkPackageComponent implements OnInit {
     private readonly projectService: ProjectService,
     private readonly workPackageService: WorkPackageService,
     private readonly notificationService: NotificationService,
-    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
@@ -635,13 +624,6 @@ export class WorkPackageComponent implements OnInit {
     // if (this.workPackage.progress === undefined) {
     //   this.workPackage.progress = 0;
     // }
-
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('WORKPACKAGE'),
-      undefined,
-      { user_id: this.identityService.identity.userId },
-    );
     this.permission = this.projectService.getWorkPackagePermission(
       this.project,
       this.workPackage,
@@ -693,24 +675,23 @@ export class WorkPackageComponent implements OnInit {
   //   return access.member;
   // }
 
-  prepareInvite() {
+  async prepareInvite() {
     if (this.waiting) {
       return;
     }
-    this.modalService
-      .show(InviteModalComponent, {
-        projectId: this.project.complex ? this.project.id : undefined,
-        noProject: true,
-        existing: this.workPackage.members,
-        exclude: [...(this.workPackage.pending || []).map(p => p.identifier)],
-        handler: async access => {
-          return this.workPackageService.addWorkPackageAccess(
-            this.workPackage.id,
-            access,
-          );
-        },
-      })
-      .subscribe(() => {});
+    // await this.modalService
+    //   .show(InviteModalComponent, {
+    //     projectId: this.project.complex ? this.project.id : undefined,
+    //     noProject: true,
+    //     existing: this.workPackage.members,
+    //     exclude: [...(this.workPackage.pending || []).map(p => p.identifier)],
+    //     handler: async access => {
+    //       return this.workPackageService.addWorkPackageAccess(
+    //         this.workPackage.id,
+    //         access,
+    //       );
+    //     },
+    //   });
   }
 
   async removeAccess(
@@ -729,33 +710,33 @@ export class WorkPackageComponent implements OnInit {
             : (await this.usersService.findUser(member.recordId)).fullName,
         ],
       );
-      this.modalService
-        .confirm({
-          title: 'REMOVE_ACCESS',
-          message: 'REMOVE_MEMBER_CONFIRM',
-          heading,
-          actionLabel: 'REMOVE_ACCESS',
-          cancelLabel: 'CANCEL',
-          action: async () => OperationResult.Success(true),
-        })
-        .subscribe(async confirmed => {
-          if (!confirmed) {
-            return;
-          }
-          member.waiting = true;
-          const op = await this.workPackageService.removeAccess(member.id);
-          member.waiting = false;
-          if (op.status !== OperationResultStatus.Success) {
-            // TODO: handle error
-            return;
-          }
-        });
+      // this.modalService
+      //   .confirm({
+      //     title: 'REMOVE_ACCESS',
+      //     message: 'REMOVE_MEMBER_CONFIRM',
+      //     heading,
+      //     actionLabel: 'REMOVE_ACCESS',
+      //     cancelLabel: 'CANCEL',
+      //     action: async () => OperationResult.Success(true),
+      //   })
+      //   .subscribe(async confirmed => {
+      //     if (!confirmed) {
+      //       return;
+      //     }
+      //     member.waiting = true;
+      //     const op = await this.workPackageService.removeAccess(member.id);
+      //     member.waiting = false;
+      //     if (op.status !== OperationResultStatus.Success) {
+      //       // TODO: handle error
+      //       return;
+      //     }
+      //   });
     }
   }
 
   addObjective() {
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         form: [
           {
             elements: [
@@ -793,13 +774,12 @@ export class WorkPackageComponent implements OnInit {
           this.workPackageService.createObjective(this.workPackage.id, model),
         actionColor: 'primary',
         title: 'CREATE_OBJECTIVE',
-      })
-      .subscribe(() => {});
+      });
   }
 
   editObjective(obj: WorkPackageObjectiveViewModel) {
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         form: [
           {
             elements: [
@@ -837,8 +817,7 @@ export class WorkPackageComponent implements OnInit {
           this.workPackageService.editObjective(obj.id, model),
         actionColor: 'primary',
         title: 'EDIT_OBJECTIVE',
-      })
-      .subscribe(() => {});
+      });
   }
 
   removeObjective(obj: WorkPackageObjectiveViewModel) {
@@ -847,18 +826,18 @@ export class WorkPackageComponent implements OnInit {
       [obj.title],
     );
 
-    this.modalService
-      .confirm({
-        title: 'REMOVE_OBJECTIVE',
-        message: 'REMOVE_OBJECTIVE_CONFIRM',
-        heading,
-        actionLabel: 'REMOVE_OBJECTIVE',
-        cancelLabel: 'CANCEL',
-        action: async () => {
-          return await this.workPackageService.deleteObjective(obj.id);
-        },
-      })
-      .subscribe(confirmed => {});
+    // this.modalService
+    //   .confirm({
+    //     title: 'REMOVE_OBJECTIVE',
+    //     message: 'REMOVE_OBJECTIVE_CONFIRM',
+    //     heading,
+    //     actionLabel: 'REMOVE_OBJECTIVE',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => {
+    //       return await this.workPackageService.deleteObjective(obj.id);
+    //     },
+    //   })
+    //   .subscribe(confirmed => {});
   }
 
   async changePermission(
@@ -901,27 +880,27 @@ export class WorkPackageComponent implements OnInit {
       this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
       [member.identifier],
     );
-    this.modalService
-      .confirm({
-        title: 'REMOVE_ACCESS',
-        message: 'REMOVE_MEMBER_CONFIRM',
-        heading,
-        actionLabel: 'REMOVE_ACCESS',
-        cancelLabel: 'CANCEL',
-        action: async () => OperationResult.Success(true),
-      })
-      .subscribe(async confirmed => {
-        if (!confirmed) {
-          return;
-        }
-        member.deleting = true;
-        const op = await this.workPackageService.removePendingAccess(member.id);
-        member.deleting = false;
-        if (op.status !== OperationResultStatus.Success) {
-          // TODO: handle error
-          return;
-        }
-      });
+    // this.modalService
+    //   .confirm({
+    //     title: 'REMOVE_ACCESS',
+    //     message: 'REMOVE_MEMBER_CONFIRM',
+    //     heading,
+    //     actionLabel: 'REMOVE_ACCESS',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => OperationResult.Success(true),
+    //   })
+    //   .subscribe(async confirmed => {
+    //     if (!confirmed) {
+    //       return;
+    //     }
+    //     member.deleting = true;
+    //     const op = await this.workPackageService.removePendingAccess(member.id);
+    //     member.deleting = false;
+    //     if (op.status !== OperationResultStatus.Success) {
+    //       // TODO: handle error
+    //       return;
+    //     }
+    //   });
   }
 
   settingMenuToggle() {
@@ -948,27 +927,27 @@ export class WorkPackageComponent implements OnInit {
       [this.workPackage.title],
     );
 
-    this.modalService
-      .confirm({
-        title: this.project.complex ? 'LEAVE_WORK_PACKAGE' : 'LEAVE_PROJECT',
-        message: this.project.complex
-          ? 'LEAVE_WORK_PACKAGE_CONFIRM'
-          : 'LEAVE_PROJECT_CONFIRM',
-        heading,
-        actionLabel: 'LEAVE',
-        cancelLabel: 'CANCEL',
-        action: async () => {
-          this.leaving = true;
-          const op = await this.workPackageService.leave(this.workPackage.id);
-          this.leaving = false;
-          if (op.status !== OperationResultStatus.Success) {
-            // TODO: handle error
-            return;
-          }
-          return await this.router.navigateByUrl('/dashboard');
-        },
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .confirm({
+    //     title: this.project.complex ? 'LEAVE_WORK_PACKAGE' : 'LEAVE_PROJECT',
+    //     message: this.project.complex
+    //       ? 'LEAVE_WORK_PACKAGE_CONFIRM'
+    //       : 'LEAVE_PROJECT_CONFIRM',
+    //     heading,
+    //     actionLabel: 'LEAVE',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => {
+    //       this.leaving = true;
+    //       const op = await this.workPackageService.leave(this.workPackage.id);
+    //       this.leaving = false;
+    //       if (op.status !== OperationResultStatus.Success) {
+    //         // TODO: handle error
+    //         return;
+    //       }
+    //       return await this.router.navigateByUrl('/dashboard');
+    //     },
+    //   })
+    //   .subscribe(() => {});
   }
 
   async archive() {
@@ -981,29 +960,29 @@ export class WorkPackageComponent implements OnInit {
       [this.workPackage.title],
     );
 
-    this.modalService
-      .confirm({
-        title: this.project.complex
-          ? 'ARCHIVE_WORK_PACKAGE'
-          : 'ARCHIVE_PROJECT',
-        message: this.project.complex
-          ? 'ARCHIVE_WORK_PACKAGE_CONFIRM'
-          : 'ARCHIVE_PROJECT_DESCRIPTION',
-        heading,
-        actionLabel: 'ARCHIVE',
-        cancelLabel: 'CANCEL',
-        action: async () => {
-          this.archiving = true;
-          const op = await this.workPackageService.archive(this.workPackage.id);
-          this.archiving = false;
-          if (op.status !== OperationResultStatus.Success) {
-            // TODO: handle error
-            return;
-          }
-          return await this.router.navigateByUrl('/dashboard');
-        },
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .confirm({
+    //     title: this.project.complex
+    //       ? 'ARCHIVE_WORK_PACKAGE'
+    //       : 'ARCHIVE_PROJECT',
+    //     message: this.project.complex
+    //       ? 'ARCHIVE_WORK_PACKAGE_CONFIRM'
+    //       : 'ARCHIVE_PROJECT_DESCRIPTION',
+    //     heading,
+    //     actionLabel: 'ARCHIVE',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => {
+    //       this.archiving = true;
+    //       const op = await this.workPackageService.archive(this.workPackage.id);
+    //       this.archiving = false;
+    //       if (op.status !== OperationResultStatus.Success) {
+    //         // TODO: handle error
+    //         return;
+    //       }
+    //       return await this.router.navigateByUrl('/dashboard');
+    //     },
+    //   })
+    //   .subscribe(() => {});
   }
 
   updateSettingNotification() {
@@ -1064,7 +1043,7 @@ export class WorkPackageComponent implements OnInit {
       return;
     }
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         icon: 'icon-workpackage',
         title: 'EDIT_WORK_PACKAGE',
         form: [
@@ -1104,22 +1083,21 @@ export class WorkPackageComponent implements OnInit {
         },
         actionLabel: 'SAVE_CHANGES',
         actionColor: 'primary',
-      } as PromptModalParameters)
-      .subscribe(() => {});
+      } as PromptModalParameters);
   }
 
   prepareUpgrade() {
-    this.modalService
-      .show(UpgradeWorkPackageComponent, { workPackage: this.workPackage })
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(UpgradeWorkPackageComponent, { workPackage: this.workPackage })
+    //   .subscribe(() => {});
   }
 
   openPermissions() {
-    this.modalService
-      .show(WorkPackagePermissionComponent, {
-        workPackage: { ...this.workPackage },
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(WorkPackagePermissionComponent, {
+    //     workPackage: { ...this.workPackage },
+    //   })
+    //   .subscribe(() => {});
   }
 
   async remove() {
@@ -1132,46 +1110,45 @@ export class WorkPackageComponent implements OnInit {
       [this.workPackage.title],
     );
 
-    this.modalService
-      .confirm({
-        title: this.project.complex ? 'REMOVE_WORK_PACKAGE' : 'REMOVE_PROJECT',
-        message: this.project.complex
-          ? 'REMOVE_WORK_PACKAGE_CONFIRM'
-          : 'REMOVE_PROJECT_DESCRIPTION',
-        heading,
-        actionLabel: 'REMOVE',
-        cancelLabel: 'CANCEL',
-        action: async () => {
-          this.deleting = true;
-          const op = await (this.project.complex
-            ? this.workPackageService.remove(this.workPackage.id)
-            : this.projectService.remove(this.project.id));
-          this.deleting = false;
-          if (op.status !== OperationResultStatus.Success) {
-            // TODO: handle error
-            return;
-          }
-          return await this.router.navigateByUrl('/dashboard');
-        },
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .confirm({
+    //     title: this.project.complex ? 'REMOVE_WORK_PACKAGE' : 'REMOVE_PROJECT',
+    //     message: this.project.complex
+    //       ? 'REMOVE_WORK_PACKAGE_CONFIRM'
+    //       : 'REMOVE_PROJECT_DESCRIPTION',
+    //     heading,
+    //     actionLabel: 'REMOVE',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => {
+    //       this.deleting = true;
+    //       const op = await (this.project.complex
+    //         ? this.workPackageService.remove(this.workPackage.id)
+    //         : this.projectService.remove(this.project.id));
+    //       this.deleting = false;
+    //       if (op.status !== OperationResultStatus.Success) {
+    //         // TODO: handle error
+    //         return;
+    //       }
+    //       return await this.router.navigateByUrl('/dashboard');
+    //     },
+    //   });
   }
 
   openCustomFields() {
-    this.modalService
-      .show(CustomFieldsModalComponent, { workPackage: this.workPackage })
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(CustomFieldsModalComponent, { workPackage: this.workPackage })
+    //   .subscribe(() => {});
   }
 
   openLabels() {
-    this.modalService
-      .show(LabelsModalComponent, { workPackage: this.workPackage })
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(LabelsModalComponent, { workPackage: this.workPackage })
+    //   .subscribe(() => {});
   }
 
   openSortOrder() {
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         icon: 'ikon-sort-alpha-asc',
         title: 'SORT_ORDERS',
         form: [
@@ -1244,8 +1221,7 @@ export class WorkPackageComponent implements OnInit {
         },
         actionLabel: 'SAVE_CHANGES',
         actionColor: 'primary',
-      } as PromptModalParameters)
-      .subscribe(() => {});
+      } as PromptModalParameters);
   }
 
   sortLists() {

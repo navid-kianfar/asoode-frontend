@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import { IdentityService } from '../../../auth/services/identity.service';
 import { ValidationService } from 'src/app/shared/services/validation.service';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';

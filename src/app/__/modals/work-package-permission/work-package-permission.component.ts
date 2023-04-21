@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkPackageViewModel } from '../../../view-models/projects/project-types';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import {
   MapMarker,
   MapModalParameters,

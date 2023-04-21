@@ -40,7 +40,6 @@
     "ngx-cookie-service": "^10.1.1",
     "ngx-device-detector": "^4.0.1",
     "ngx-doc-viewer": "^1.4.0",
-    "ngx-google-analytics": "^9.1.1",
     "ngx-moment": "^5.0.0",
     "ngx-openlayers": "^0.8.22",
     "ngx-popper": "^7.0.0",

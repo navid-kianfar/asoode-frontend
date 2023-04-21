@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import {
   WorkPackageLabelViewModel,
   WorkPackageViewModel,

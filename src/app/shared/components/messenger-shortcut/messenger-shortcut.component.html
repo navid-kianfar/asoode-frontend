@@ -1,0 +1,54 @@
+<div *ngIf="!showMessages" (click)="open()" class="messenger-shortcut">
+  <img
+    src="/assets/images/messenger/asoode-chat-icon{{
+      identityService.profile.darkMode ? '-dark' : ''
+    }}.svg"
+    alt="asoode-chat-icon"
+  />
+  <div *ngIf="unread" class="badge">{{ unread }}</div>
+</div>
+<div *ngIf="showMessages" class="shortcut-messenger-container">
+  <div class="header">
+    <img
+      src="/assets/images/messenger/asoode-chat-icon{{
+        identityService.profile.darkMode ? '-dark' : ''
+      }}.svg"
+      alt="asoode-chat-icon"
+    />&nbsp;
+    <span (click)="goToMessenger()">
+      {{ 'ASOODE_MESSENGER' | translate }}&nbsp;
+      <i class="icon-new-window"></i>
+    </span>
+    <i (click)="setting()" class="setting icon-more2"></i>
+    <i (click)="hide()" class="close icon-cross"></i>
+  </div>
+  <div *ngIf="!dashboard && current" class="category">
+    <div class="name">{{ current.title }}</div>
+    <div class="files">
+      <i class="icon-shared-folder"></i>&nbsp;
+      <span class="title">{{ 'FILES' | translate }}</span>
+    </div>
+    <div class="setting">
+      <i class="icon-cog2"></i>&nbsp;
+      <span class="title">{{ 'SETTING' | translate }}</span>
+    </div>
+  </div>
+
+  <div class="messeges-container">
+    <div *ngIf="dashboard" class="welcome">
+      <h3>{{ 'WELCOME_TO_ASOODE' | translate }}</h3>
+      <img
+        src="/assets/images/messenger/asoode-welcome{{
+          identityService.profile.darkMode ? '-dark' : ''
+        }}.svg"
+        alt="welcome"
+      />
+    </div>
+<!--    <app-conversation-->
+<!--      [popup]="true"-->
+<!--      [attachmentSize]="current.attachmentSize"-->
+<!--      [dashboard]="dashboard"-->
+<!--      [recordId]="current.id"-->
+<!--    ></app-conversation>-->
+  </div>
+</div>

@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { IdentityService } from '../../services/identity.service';
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '../../../shared/services/translate.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { ValidationService } from '../../../shared/services/validation.service';
+import { AppInitializerProvider } from '../../../shared/services/app.initializer';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +28,7 @@ export class RegisterComponent implements OnInit {
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
     private readonly translateService: TranslateService,
-    private readonly gaService: GoogleAnalyticsService,
+    private readonly initializerProvider: AppInitializerProvider,
   ) {}
 
   ngOnInit() {
@@ -66,12 +67,14 @@ export class RegisterComponent implements OnInit {
       {
         elements: [
           this.formService.createInput({
-            config: { field: 'username', label: 'EMAIL_OR_PHONE' },
+            config: { field: 'username', label: 'EMAIL' },
             params: { model: '', ltr: true },
             validation: {
-              required: { value: true, message: 'EMAIL_OR_PHONE_REQUIRED' },
-              minLength: { value: 10, message: 'EMAIL_OR_PHONE_MIN_LENGTH' },
-              maxLength: { value: 50, message: 'EMAIL_OR_PHONE_MAX_LENGTH' },
+              required: { value: true, message: 'EMAIL_REQUIRED' },
+              pattern: {
+                value: ValidationService.emailRegex,
+                message: 'EMAIL_INVALID'
+              },
             },
           }),
           this.formService.createInput({
@@ -97,11 +100,6 @@ export class RegisterComponent implements OnInit {
         ],
       },
     ];
-
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('REGISTER'),
-    );
   }
 
   async register() {
@@ -139,6 +137,11 @@ export class RegisterComponent implements OnInit {
         this.formService.setErrors(this.form, 'username', [
           'ACCOUNT_EMAIL_FAILED',
         ]);
+        return;
+      }
+      if (op.data.token) {
+        await this.initializerProvider.refresh();
+        await this.router.navigateByUrl('/dashboard');
         return;
       }
       this.username = model.username;

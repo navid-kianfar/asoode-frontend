@@ -12,7 +12,7 @@ import {
 } from '../../../view-models/projects/project-types';
 import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
 import { IdentityService } from '../../../auth/services/identity.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
+
 import { TranslateService } from '../../../shared/services/translate.service';
 import { ChannelType } from '../../../shared/lib/enums/channels';
 

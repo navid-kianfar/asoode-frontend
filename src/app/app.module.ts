@@ -14,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
 import { ErrorsModule } from './errors/errors.module';
 import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
+import { ReportsModule } from './reports/reports.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { AppRoutingModule } from './app-routing.module';
     SharedModule,
     ErrorsModule,
     AuthModule,
+    ReportsModule
   ],
   providers: [
     CookieService,

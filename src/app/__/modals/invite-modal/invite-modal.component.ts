@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import { InviteViewModel } from '../../../view-models/auth/identity-types';
 import { GroupService } from '../../../groups/services/group.service';
 import { OperationResult } from '../../../shared/lib/operation-result';

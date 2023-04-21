@@ -67,6 +67,11 @@ import { PromptModalComponent } from './modals/prompt-modal/prompt-modal.compone
 import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MessengerShortcutComponent } from './components/messenger-shortcut/messenger-shortcut.component';
+import { DurationPickerComponent } from './components/duration-picker/duration-picker.component';
+import { CalendarMonthComponent } from './components/calendar-month/calendar-month.component';
+import { TimeSpentComponent } from './components/time-spent/time-spent.component';
+import { AccessListComponent } from './components/access-list/access-list.component';
 
 
 
@@ -101,6 +106,11 @@ import { MatTabsModule } from '@angular/material/tabs';
     GroupInfoComponent,
     ProjectInfoMiniComponent,
     RadioButtonComponent,
+    MessengerShortcutComponent,
+    DurationPickerComponent,
+    CalendarMonthComponent,
+    TimeSpentComponent,
+    AccessListComponent,
 
 
 
@@ -183,6 +193,11 @@ import { MatTabsModule } from '@angular/material/tabs';
     GroupInfoComponent,
     ProjectInfoMiniComponent,
     RadioButtonComponent,
+    MessengerShortcutComponent,
+    DurationPickerComponent,
+    CalendarMonthComponent,
+    TimeSpentComponent,
+    AccessListComponent,
 
 
 

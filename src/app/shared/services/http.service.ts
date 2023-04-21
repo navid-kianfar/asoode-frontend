@@ -49,6 +49,35 @@ export class HttpService {
     });
   }
 
+  async get<T>(
+    section: string,
+    handleNoneSuccess?: boolean,
+  ): Promise<OperationResult<T>> {
+    return new Promise<OperationResult<T>>(resolve => {
+      try {
+        const path = this.config.backend + section;
+        this.client.get(path).subscribe(
+          (op: OperationResult<T>) => {
+            if (
+              op.status !== OperationResultStatus.Success &&
+              handleNoneSuccess !== false
+            ) {
+              this.notificationService.handleRequest(op.status);
+            }
+            resolve(op);
+          },
+          (err: Error) => {
+            this.notificationService.error('GENERAL_FAILED');
+            resolve(OperationResult.Failed<T>(err));
+          },
+        );
+      } catch (e) {
+        this.notificationService.error('GENERAL_FAILED');
+        resolve(OperationResult.Failed<T>(e));
+      }
+    });
+  }
+
   async upload<T>(
     section: string,
     files: File[] | File,

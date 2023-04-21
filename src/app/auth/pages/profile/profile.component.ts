@@ -6,7 +6,6 @@ import { FormViewModel } from '../../../shared/components/form/contracts';
 import { FormService } from '../../../shared/services/form.service';
 import { FileType } from '../../../shared/lib/enums/enums';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { TranslateService } from '../../../shared/services/translate.service';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 import { PromptModalComponent } from '../../../shared/modals/prompt-modal/prompt-modal.component';
@@ -27,7 +26,6 @@ export class ProfileComponent implements OnInit {
     private readonly router: Router,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService,
-    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   async prepareChangePhoneNumber() {
@@ -232,13 +230,6 @@ export class ProfileComponent implements OnInit {
         ],
       },
     ];
-
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('PROFILE'),
-      undefined,
-      { user_id: this.identityService.identity.userId },
-    );
   }
 
   async logout() {

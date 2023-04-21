@@ -46,6 +46,7 @@
             </ng-container>
 
             <app-form
+              [disabled]='true'
               [elements]="resetForm"
               [actionWaiting]="waiting"
               (action)="reset()"

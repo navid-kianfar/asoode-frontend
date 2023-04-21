@@ -3,7 +3,6 @@ import { MessengerService } from '../../../messenger/services/messenger.service'
 import { GroupService } from '../../../groups/services/group.service';
 import { ProjectService } from '../../../project/services/project.service';
 import { FilesService } from '../../services/files.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { TranslateService } from '../../../shared/services/translate.service';
 import { IdentityService } from '../../../auth/services/identity.service';
 

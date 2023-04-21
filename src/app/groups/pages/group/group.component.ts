@@ -7,7 +7,7 @@ import { GroupDetailComponent } from '../../../__/modals/group-detail/group-deta
 import { AccessType } from '../../../shared/lib/enums/enums';
 import { Socket } from 'ngx-socket-io';
 import { IdentityService } from '../../../auth/services/identity.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
+
 import { TranslateService } from '../../../shared/services/translate.service';
 import { ActivityType } from '../../../shared/lib/enums/activity-type';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import { TaskModalParameters } from '../../../view-models/core/modal-types';
 import {
   ProjectMemberViewModel,
@@ -38,7 +38,6 @@ import { GroupService } from '../../../groups/services/group.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { DateHelpers } from '../../../shared/helpers/date.helpers';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { MatMenu } from '@angular/material/menu';
 import {DocumentModalComponent} from '../document-modal/document-modal.component';
 import { WorkPackageTaskState } from '../../../shared/lib/enums/workpackage';

@@ -35,11 +35,6 @@ export class IdentityService {
     private readonly cookieService: CookieService,
   ) {
     this.identityObject = this.getIdentityInfo();
-    if (MARKETER) {
-      this.cookieService.set('MARKETER', MARKETER, new Date(2030, 0, 1), '/');
-    }
-
-    // this.cookieService.deleteAll();
   }
 
   get profile(): ProfileViewModel {
@@ -84,11 +79,13 @@ export class IdentityService {
       model,
     );
     if (op.status === OperationResultStatus.Success) {
-      this.setIdentityInfo({
-        userId: op.data.userId,
-        token: op.data.token,
-        username: op.data.username,
-      });
+      if (op.data.token) {
+        this.setIdentityInfo({
+          userId: op.data.userId,
+          token: op.data.token,
+          username: op.data.username,
+        });
+      }
     }
     return op;
   }
@@ -96,16 +93,25 @@ export class IdentityService {
   async register(
     model: any,
   ): Promise<OperationResult<RegisterResultViewModel>> {
-    model.marketer = this.cookieService.get('MARKETER');
-
-    return await this.httpService.post<RegisterResultViewModel>(
+    const op = await this.httpService.post<RegisterResultViewModel>(
       '/account/register',
       model,
     );
+
+    if (op.status === OperationResultStatus.Success) {
+      if (op.data.token) {
+        this.setIdentityInfo({
+          userId: op.data.userId,
+          token: op.data.token,
+          username: op.data.username,
+        });
+      }
+    }
+    return op;
   }
 
   async load(): Promise<OperationResult<any>> {
-    const op = await this.httpService.post<any>('/account/profile', {}, false);
+    const op = await this.httpService.get<any>('/account/profile', false);
     if (op.status === OperationResultStatus.Success) {
       this.profileObject = op.data;
       document.body.classList.remove('dark-mode');

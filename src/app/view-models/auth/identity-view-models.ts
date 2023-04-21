@@ -14,6 +14,9 @@ export interface LoginResultViewModel {
   id: string;
 }
 export interface RegisterResultViewModel {
+  username: string;
+  userId: string;
+  token: string;
   duplicate: boolean;
   emailFailed: boolean;
   emailNotConfirmed: boolean;

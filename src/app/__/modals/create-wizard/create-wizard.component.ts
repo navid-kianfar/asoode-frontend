@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { CultureService } from '../../../shared/services/culture.service';
 import { IdentityService } from '../../../auth/services/identity.service';

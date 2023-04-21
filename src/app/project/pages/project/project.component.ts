@@ -2,18 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { ProjectService } from '../../services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  AccessType,
-  ProjectTemplate,
-} from '../../../shared/lib/enums/enums';
-import { PromptComponent } from '../../../shared/modals/prompt/prompt.component';
+import { AccessType, } from '../../../shared/lib/enums/enums';
 import { ModalService } from '../../../shared/services/modal.service';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../shared/services/form.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { Socket } from 'ngx-socket-io';
 import { IdentityService } from '../../../auth/services/identity.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
+
 import { TranslateService } from '../../../shared/services/translate.service';
 import { ActivityType } from '../../../shared/lib/enums/activity-type';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
@@ -25,7 +21,6 @@ import { OperationResultStatus } from '../../../shared/lib/enums/operation-resul
 })
 export class ProjectComponent implements OnInit {
   ViewMode = ViewMode;
-  ProjectTemplate = ProjectTemplate;
   mode: ViewMode;
   project: ProjectViewModel;
   permission: AccessType;
@@ -42,7 +37,6 @@ export class ProjectComponent implements OnInit {
     private readonly formService: FormService,
     private readonly socket: Socket,
     private readonly notificationService: NotificationService,
-    private readonly gaService: GoogleAnalyticsService,
     private readonly translateService: TranslateService,
   ) {}
 
@@ -83,12 +77,6 @@ export class ProjectComponent implements OnInit {
       this.project = op.data;
     }
 
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('PROJECT'),
-      undefined,
-      { user_id: this.identityService.identity.userId },
-    );
     this.permission = this.projectService.getPermission(this.project);
     this.progressWaiting = true;
     const progress = await this.projectService.progress(id);
@@ -135,54 +123,54 @@ export class ProjectComponent implements OnInit {
   }
 
   prepareEdit() {
-    this.modalService
-      .show(PromptComponent, {
-        icon: 'icon-tree7',
-        title: 'EDIT_PROJECT',
-        form: [
-          {
-            elements: [
-              this.formService.createInput({
-                config: { field: 'title' },
-                params: { model: this.project.title, placeHolder: 'TITLE' },
-                validation: {
-                  required: {
-                    value: true,
-                    message: 'TITLE_REQUIRED',
-                  },
-                },
-              }),
-              this.formService.createInput({
-                config: { field: 'description' },
-                params: {
-                  model: this.project.description,
-                  textArea: true,
-                  placeHolder: 'DESCRIPTION',
-                },
-              }),
-              this.formService.createDropDown({
-                config: { field: 'template', label: 'TEMPLATE' },
-                params: {
-                  model: this.project.template,
-                  items: [],
-                  enum: 'ProjectTemplate',
-                },
-              }),
-            ],
-          },
-        ],
-        action: async (params, form) => {
-          const op = await this.projectService.edit(this.project.id, params);
-          if (op.status !== OperationResultStatus.Success) {
-            // TODO: handle error
-            return;
-          }
-          this.notificationService.success('PROJECT_EDITED');
-        },
-        actionLabel: 'SAVE_CHANGES',
-        actionColor: 'primary',
-      } as PromptModalParameters)
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(PromptComponent, {
+    //     icon: 'icon-tree7',
+    //     title: 'EDIT_PROJECT',
+    //     form: [
+    //       {
+    //         elements: [
+    //           this.formService.createInput({
+    //             config: { field: 'title' },
+    //             params: { model: this.project.title, placeHolder: 'TITLE' },
+    //             validation: {
+    //               required: {
+    //                 value: true,
+    //                 message: 'TITLE_REQUIRED',
+    //               },
+    //             },
+    //           }),
+    //           this.formService.createInput({
+    //             config: { field: 'description' },
+    //             params: {
+    //               model: this.project.description,
+    //               textArea: true,
+    //               placeHolder: 'DESCRIPTION',
+    //             },
+    //           }),
+    //           this.formService.createDropDown({
+    //             config: { field: 'template', label: 'TEMPLATE' },
+    //             params: {
+    //               model: this.project.template,
+    //               items: [],
+    //               enum: 'ProjectTemplate',
+    //             },
+    //           }),
+    //         ],
+    //       },
+    //     ],
+    //     action: async (params, form) => {
+    //       const op = await this.projectService.edit(this.project.id, params);
+    //       if (op.status !== OperationResultStatus.Success) {
+    //         // TODO: handle error
+    //         return;
+    //       }
+    //       this.notificationService.success('PROJECT_EDITED');
+    //     },
+    //     actionLabel: 'SAVE_CHANGES',
+    //     actionColor: 'primary',
+    //   } as PromptModalParameters)
+    //   .subscribe(() => {});
   }
 }
 export enum ViewMode {

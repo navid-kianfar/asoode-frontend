@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import { IdentityService } from '../../../auth/services/identity.service';
 import { ChannelNotificationReceive } from '../../../shared/lib/enums/channels';
 

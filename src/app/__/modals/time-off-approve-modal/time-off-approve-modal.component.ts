@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import { GroupService } from '../../../groups/services/group.service';
 import { TimeOffDetailViewModel } from '../../../view-models/groups/group-types';
 import { WorkPackageTaskViewModel } from '../../../view-models/projects/project-types';

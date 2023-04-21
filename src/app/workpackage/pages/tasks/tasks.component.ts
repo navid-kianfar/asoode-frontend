@@ -1,9 +1,6 @@
 import {
-  AfterViewInit,
   Component,
-  OnChanges,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { TaskService } from '../../../task/services/task.service';
 import {
@@ -13,7 +10,7 @@ import {
 } from '../../../view-models/projects/project-types';
 import { TranslateService } from '../../../shared/services/translate.service';
 import { IdentityService } from '../../../auth/services/identity.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
+
 
 @Component({
   selector: 'app-tasks',
@@ -33,16 +30,9 @@ export class TasksComponent implements OnInit {
     private readonly taskService: TaskService,
     private readonly translateService: TranslateService,
     readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService,
   ) {}
 
   ngOnInit() {
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('TASKS'),
-      undefined,
-      { user_id: this.identityService.identity.userId },
-    );
   }
 
   async switchTab(tab: TaskTab) {

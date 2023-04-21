@@ -7,8 +7,8 @@ import { AppInitializerProvider } from '../../../shared/services/app.initializer
 import { environment } from '../../../../environments/environment';
 import { TranslateService } from '../../../shared/services/translate.service';
 import { CulturedDateService } from '../../../shared/services/cultured-date.service';
-import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { ValidationService } from '../../../shared/services/validation.service';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     private readonly formService: FormService,
     private readonly identityService: IdentityService,
     private readonly translateService: TranslateService,
-    private readonly gaService: GoogleAnalyticsService,
     private readonly culturedDateService: CulturedDateService,
   ) {}
 
@@ -53,12 +52,14 @@ export class LoginComponent implements OnInit {
       {
         elements: [
           this.formService.createInput({
-            config: { field: 'username', label: 'EMAIL_OR_PHONE' },
+            config: { field: 'username', label: 'EMAIL' },
             params: { model: '', ltr: true },
             validation: {
-              required: { value: true, message: 'EMAIL_OR_PHONE_REQUIRED' },
-              minLength: { value: 10, message: 'EMAIL_OR_PHONE_MIN_LENGTH' },
-              maxLength: { value: 50, message: 'EMAIL_OR_PHONE_MAX_LENGTH' },
+              required: { value: true, message: 'EMAIL_REQUIRED' },
+              pattern: {
+                value: ValidationService.emailRegex,
+                message: 'EMAIL_INVALID'
+              },
             },
           }),
           this.formService.createInput({
@@ -73,11 +74,6 @@ export class LoginComponent implements OnInit {
         ],
       },
     ];
-
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('LOGIN_TO_YOUR_ACCOUNT'),
-    );
   }
 
   async login() {
@@ -90,15 +86,8 @@ export class LoginComponent implements OnInit {
     if (op.status === OperationResultStatus.Success) {
       this.verificationCode = op.data.id;
       if (op.data.token) {
-        this.gaService.pageView(
-          window.location.pathname,
-          this.translateService.fromKey('LOGIN_TO_YOUR_ACCOUNT'),
-          undefined,
-          { user_id: this.identityService.identity.userId },
-        );
         await this.initializerProvider.refresh();
         await this.router.navigateByUrl('/dashboard');
-
         return;
       }
       this.waiting = false;

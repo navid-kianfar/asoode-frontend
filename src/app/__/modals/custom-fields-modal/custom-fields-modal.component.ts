@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import { WorkPackageViewModel } from '../../../view-models/projects/project-types';
 import { WorkPackageService } from '../../../workpackage/services/work-package.service';
 

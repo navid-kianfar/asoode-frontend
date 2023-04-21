@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SimpleModalComponent } from 'ngx-simple-modal';
+
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { FormViewModel } from '../../../shared/components/form/contracts';
 import { FormService } from '../../../shared/services/form.service';
