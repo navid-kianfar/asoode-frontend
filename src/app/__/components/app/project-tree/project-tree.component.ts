@@ -8,7 +8,7 @@ import {
 import {
   AccessType,
   ProjectTemplate,
-} from '../../../../shared/lib/enums/enums-2';
+} from '../../../../shared/lib/enums/enums';
 import { ProjectService } from '../../../../project/services/project.service';
 import { ModalService } from '../../../../shared/services/modal.service';
 import { FormService } from '../../../../shared/services/form.service';

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ProjectViewModel } from '../../../../view-models/projects/project-types';
+import { ProjectViewModel } from '../../../view-models/projects/project-types';
 
 @Component({
   selector: 'app-project-info-mini',

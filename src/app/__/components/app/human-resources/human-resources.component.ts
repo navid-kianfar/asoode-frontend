@@ -4,7 +4,7 @@ import {
   AccessType,
   RequestStatus,
   ShiftType,
-} from '../../../../shared/lib/enums/enums-2';
+} from '../../../../shared/lib/enums/enums';
 import { IdentityService } from '../../../../auth/services/identity.service';
 import { GridCommand } from '../../../../view-models/core/grid-types';
 import { ModalService } from '../../../../shared/services/modal.service';

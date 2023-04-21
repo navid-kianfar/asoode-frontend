@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MemberInfoViewModel } from '../../../../view-models/auth/identity-types';
-import { IdentityService } from '../../../../auth/services/identity.service';
-import { UsersService } from '../../../../project/services/users.service';
+import { MemberInfoViewModel } from '../../../view-models/auth/identity-types';
+import { IdentityService } from '../../../auth/services/identity.service';
+import { UsersService } from '../../../project/services/users.service';
 
 @Component({
   selector: 'app-member-info',

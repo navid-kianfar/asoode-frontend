@@ -11,7 +11,7 @@ import {
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
 import { GroupViewModel } from '../../view-models/groups/group-types';
-import { AccessType } from '../../shared/lib/enums/enums-2';
+import { AccessType } from '../../shared/lib/enums/enums';
 import { GroupService } from '../../groups/services/group.service';
 import { IdentityService } from '../../auth/services/identity.service';
 import { OperationResultStatus } from '../../shared/lib/enums/operation-result-status';

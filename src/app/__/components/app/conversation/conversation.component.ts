@@ -15,7 +15,7 @@ import {
 import {
   AccessType,
   ConversationType,
-} from 'src/app/shared/lib/enums/enums-2';
+} from 'src/app/shared/lib/enums/enums';
 import { MemberInfoViewModel } from '../../../../view-models/auth/identity-types';
 import { MessengerService } from '../../../../messenger/services/messenger.service';
 import { ModalService } from '../../../../shared/services/modal.service';

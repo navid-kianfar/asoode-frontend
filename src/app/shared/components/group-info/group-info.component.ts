@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { GroupService } from '../../../../groups/services/group.service';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { GroupService } from '../../../groups/services/group.service';
 
 @Component({
   selector: 'app-group-info',

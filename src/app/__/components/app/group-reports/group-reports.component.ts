@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { AccessType } from '../../../../shared/lib/enums/enums-2';
+import { AccessType } from '../../../../shared/lib/enums/enums';
 import { IDateConverter } from '../../../../shared/lib/date-time/date-contracts';
 import { CulturedDateService } from '../../../../shared/services/cultured-date.service';
 import { ModalService } from '../../../../shared/services/modal.service';

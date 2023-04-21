@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { InviteViewModel } from '../../../../view-models/auth/identity-types';
-import { AccessType } from '../../../../shared/lib/enums/enums-2';
+import { AccessType } from '../../../../shared/lib/enums/enums';
 import { ProjectService } from '../../../../project/services/project.service';
 
 @Component({

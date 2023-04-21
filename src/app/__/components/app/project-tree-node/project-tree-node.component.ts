@@ -18,7 +18,7 @@ import {
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { AccessType } from 'src/app/shared/lib/enums/enums-2';
+import { AccessType } from 'src/app/shared/lib/enums/enums';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ArrayHelpers } from '../../../../shared/helpers/array.helpers';
 import { CultureService } from '../../../../shared/services/culture.service';

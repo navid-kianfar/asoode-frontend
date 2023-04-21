@@ -5,7 +5,7 @@ import {
   GroupViewModel,
   TimeOffDetailViewModel,
 } from '../../view-models/groups/group-types';
-import { AccessType } from '../../shared/lib/enums/enums-2';
+import { AccessType } from '../../shared/lib/enums/enums';
 import { IdentityService } from '../../auth/services/identity.service';
 import {
   ProjectViewModel,

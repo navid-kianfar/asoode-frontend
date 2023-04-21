@@ -1,5 +1,5 @@
 import { MemberInfoViewModel } from '../auth/identity-types';
-import { ConversationType } from '../../shared/lib/enums/enums-2';
+import { ConversationType } from '../../shared/lib/enums/enums';
 import { BaseViewModel } from '../core/general-types';
 import { ChannelType } from '../../shared/lib/enums/channels';
 

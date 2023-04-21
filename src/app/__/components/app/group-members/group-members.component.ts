@@ -4,7 +4,7 @@ import {
   GroupViewModel,
   PendingInvitationViewModel,
 } from '../../../../view-models/groups/group-types';
-import { AccessType } from 'src/app/shared/lib/enums/enums-2';
+import { AccessType } from 'src/app/shared/lib/enums/enums';
 import { ModalService } from '../../../../shared/services/modal.service';
 import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
 import { OperationResult } from '../../../../shared/lib/operation-result';

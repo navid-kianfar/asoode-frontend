@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../../view-models/projects/project-types';
-import { AccessType } from 'src/app/shared/lib/enums/enums-2';
+import { AccessType } from 'src/app/shared/lib/enums/enums';
 import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
 import { ProjectMemberViewModel } from '../../../../view-models/projects/project-types';
 import { StringHelpers } from '../../../../shared/helpers/string.helpers';

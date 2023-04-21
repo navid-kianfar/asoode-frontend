@@ -6,21 +6,19 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { IdentityService } from '../../../../auth/services/identity.service';
-import { ModalService } from '../../../../shared/services/modal.service';
-import { CreateWizardComponent } from '../../../modals/create-wizard/create-wizard.component';
-import { CreateModalParameters } from '../../../../view-models/modals/modals-types';
-import { SearchResultViewModel } from '../../../../view-models/general/search-types';
+import { IdentityService } from '../../../auth/services/identity.service';
+import { ModalService } from '../../services/modal.service';
+import { SearchResultViewModel } from '../../../view-models/general/search-types';
 import { fromEvent } from 'rxjs';
 import { debounceTime, switchMap, tap } from 'rxjs/operators';
-import { HttpService } from '../../../../shared/services/http.service';
+import { HttpService } from '../../services/http.service';
 import { PopperContent } from 'ngx-popper';
-import { OperationResult } from '../../../../shared/lib/operation-result';
+import { OperationResult } from '../../lib/operation-result';
 import { Socket } from 'ngx-socket-io';
-import { PushNotificationService } from '../../../../shared/services/push-notification.service';
+import { PushNotificationService } from '../../services/push-notification.service';
 import { SwPush } from '@angular/service-worker';
-import { NumberHelpers } from '../../../../shared/helpers/number.helpers';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { NumberHelpers } from '../../helpers/number.helpers';
+import { OperationResultStatus } from '../../lib/enums/operation-result-status';
 
 const EMPTY = {
   members: [],
@@ -122,22 +120,9 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   }
 
   prepareCreate() {
-    const plan = this.identityService.profile.plan;
-    if (
-      plan.workPackage <= plan.usedWorkPackage &&
-      plan.project <= plan.usedProject &&
-      plan.simpleGroup <= plan.usedSimpleGroup &&
-      plan.complexGroup <= plan.usedComplexGroup
-    ) {
-      // this.modalService
-      //   .show(UpgradeComponent, {} as CreateModalParameters)
-      //   .subscribe(() => {});
-      return;
-    }
-
-    this.modalService
-      .show(CreateWizardComponent, {} as CreateModalParameters)
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(CreateWizardComponent, {} as CreateModalParameters)
+    //   .subscribe(() => {});
   }
 
   openSearchResult($event: MouseEvent) {

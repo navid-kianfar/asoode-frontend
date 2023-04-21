@@ -14,7 +14,7 @@ import { WorkPackageService } from '../../../../workpackage/services/work-packag
 import {
   AccessType,
   SortType,
-} from '../../../../shared/lib/enums/enums-2';
+} from '../../../../shared/lib/enums/enums';
 import { TaskService } from '../../../../task/services/task.service';
 import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
 import { ModalService } from '../../../../shared/services/modal.service';

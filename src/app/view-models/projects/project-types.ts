@@ -1,17 +1,15 @@
 import { BaseViewModel } from '../core/general-types';
 import {
   AccessType,
-  ProjectTemplate,
   ReceiveNotificationType,
   SortType,
 
 
 
-} from '../../shared/lib/enums/enums-2';
+} from '../../shared/lib/enums/enums';
 import { MemberInfoViewModel } from '../auth/identity-types';
 import { PendingInvitationViewModel } from '../groups/group-types';
 import { IDateTimeProperties } from '../../shared/lib/date-time/date-contracts';
-import { DayReportViewModel } from '../general/report-types';
 import {
   BoardTemplate,
   WorkPackageCommentPermission,
@@ -70,7 +68,6 @@ export interface ProjectTemplateViewModel extends BaseViewModel {
 
 export interface ProjectViewModel extends BaseViewModel {
   archivedAt?: Date;
-  template: ProjectTemplate;
   userId: string;
   title: string;
   description: string;

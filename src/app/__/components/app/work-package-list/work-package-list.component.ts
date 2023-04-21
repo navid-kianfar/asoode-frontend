@@ -4,7 +4,7 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../../view-models/projects/project-types';
-import { AccessType } from '../../../../shared/lib/enums/enums-2';
+import { AccessType } from '../../../../shared/lib/enums/enums';
 import { WorkPackageBoardComponent } from '../work-package-board/work-package-board.component';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { AccessType } from '../../../../shared/lib/enums/enums-2';
+import { AccessType } from '../../../../shared/lib/enums/enums';
 import { ProjectService } from '../../../../project/services/project.service';
 import { ProjectViewModel } from '../../../../view-models/projects/project-types';
 import { Socket } from 'ngx-socket-io';

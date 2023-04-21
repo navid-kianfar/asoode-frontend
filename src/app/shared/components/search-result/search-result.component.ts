@@ -2,11 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   SearchResultViewModel,
   SearchTaskViewModel,
-} from '../../../../view-models/general/search-types';
-import { ModalService } from '../../../../shared/services/modal.service';
-import { TaskModalComponent } from '../../../modals/task-modal/task-modal.component';
-import { ProjectViewModel } from '../../../../view-models/projects/project-types';
-import { ProjectService } from '../../../../project/services/project.service';
+} from '../../../view-models/general/search-types';
+import { ModalService } from '../../services/modal.service';
+import { ProjectViewModel } from '../../../view-models/projects/project-types';
+import { ProjectService } from '../../../project/services/project.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,13 +28,13 @@ export class SearchResultComponent implements OnInit {
   ngOnInit() {}
 
   openTask(task: SearchTaskViewModel) {
-    this.modalService
-      .show(TaskModalComponent, {
-        id: task.id,
-        projectId: task.projectId,
-        packageId: task.workPackageId,
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(TaskModalComponent, {
+    //     id: task.id,
+    //     projectId: task.projectId,
+    //     packageId: task.workPackageId,
+    //   })
+    //   .subscribe(() => {});
   }
 
   openProject(proj: ProjectViewModel) {

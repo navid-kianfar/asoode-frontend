@@ -11,7 +11,7 @@ import { ModalService } from '../../../../shared/services/modal.service';
 import { PromptComponent } from '../../../modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../../view-models/core/modal-types';
 import { FormService } from '../../../../shared/services/form.service';
-import { SortType } from 'src/app/shared/lib/enums/enums-2';
+import { SortType } from 'src/app/shared/lib/enums/enums';
 import { DocumentModalComponent } from '../../../modals/document-modal/document-modal.component';
 import { StringHelpers } from '../../../../shared/helpers/string.helpers';
 import { TranslateService } from '../../../../shared/services/translate.service';

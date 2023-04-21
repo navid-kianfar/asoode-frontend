@@ -4,7 +4,6 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { SwUpdate } from '@angular/service-worker';
 import { NetworkService } from './shared/services/network.service';
 import { ModalService } from './shared/services/modal.service';
-import { OfflineComponent } from './__/modals/offline/offline.component';
 
 @Component({
   selector: 'app-root',
@@ -42,39 +41,39 @@ export class AppComponent {
       });
     });
 
-    let subscription: any;
-    this.networkService.connectionChanged.subscribe(status => {
-      if (status) {
-        if (subscription) {
-          subscription.unsubscribe();
-          subscription = null;
-        }
-      } else {
-        if (!subscription) {
-          const offlineModal = this.modalService.show(OfflineComponent, {
-            isConnected: this.networkService.isConnected,
-            isOnline: this.networkService.isOnline,
-          });
-          subscription = offlineModal.subscribe(() => {});
-        }
-      }
-    });
-    this.networkService.networkChanged.subscribe(status => {
-      if (status) {
-        if (subscription) {
-          subscription.unsubscribe();
-          subscription = null;
-        }
-      } else {
-        if (!subscription) {
-          const offlineModal = this.modalService.show(OfflineComponent, {
-            isConnected: this.networkService.isConnected,
-            isOnline: this.networkService.isOnline,
-          });
-          subscription = offlineModal.subscribe(() => {});
-        }
-      }
-    });
+    // let subscription: any;
+    // this.networkService.connectionChanged.subscribe(status => {
+    //   if (status) {
+    //     if (subscription) {
+    //       subscription.unsubscribe();
+    //       subscription = null;
+    //     }
+    //   } else {
+    //     if (!subscription) {
+    //       const offlineModal = this.modalService.show(OfflineComponent, {
+    //         isConnected: this.networkService.isConnected,
+    //         isOnline: this.networkService.isOnline,
+    //       });
+    //       subscription = offlineModal.subscribe(() => {});
+    //     }
+    //   }
+    // });
+    // this.networkService.networkChanged.subscribe(status => {
+    //   if (status) {
+    //     if (subscription) {
+    //       subscription.unsubscribe();
+    //       subscription = null;
+    //     }
+    //   } else {
+    //     if (!subscription) {
+    //       const offlineModal = this.modalService.show(OfflineComponent, {
+    //         isConnected: this.networkService.isConnected,
+    //         isOnline: this.networkService.isOnline,
+    //       });
+    //       subscription = offlineModal.subscribe(() => {});
+    //     }
+    //   }
+    // });
 
     const loader = document.getElementById('app-loading-container');
     document.body.removeChild(loader);

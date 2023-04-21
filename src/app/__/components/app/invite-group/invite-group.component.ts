@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AccessType } from 'src/app/shared/lib/enums/enums-2';
+import { AccessType } from 'src/app/shared/lib/enums/enums';
 import { GroupService } from '../../../../groups/services/group.service';
 import { InviteViewModel } from '../../../../view-models/auth/identity-types';
 

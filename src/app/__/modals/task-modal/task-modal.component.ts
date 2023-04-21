@@ -14,10 +14,9 @@ import { TaskService } from '../../../task/services/task.service';
 import { ProjectService } from '../../../project/services/project.service';
 import {
   AccessType,
-  ProjectTemplate,
   SortType,
 
-} from '../../../shared/lib/enums/enums-2';
+} from '../../../shared/lib/enums/enums';
 import { IdentityService } from '../../../auth/services/identity.service';
 import { Socket } from 'ngx-socket-io';
 import { UploadViewModel } from '../../../view-models/storage/files-types';
@@ -39,8 +38,6 @@ import { GroupService } from '../../../groups/services/group.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { DateHelpers } from '../../../shared/helpers/date.helpers';
-import { AdvancedPlayerComponent } from '../advanced-player/advanced-player.component';
-import { BulkDownloadModalComponent } from '../bulk-download-modal/bulk-download-modal.component';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { MatMenu } from '@angular/material/menu';
 import {DocumentModalComponent} from '../document-modal/document-modal.component';
@@ -61,7 +58,6 @@ export class TaskModalComponent
   SortType = SortType;
   DateMode = DateMode;
   NumberHelpers = NumberHelpers;
-  ProjectTemplate = ProjectTemplate;
 
   id: string;
   mode: ViewMode;
@@ -1140,49 +1136,6 @@ export class TaskModalComponent
       $event.preventDefault();
       return;
     }
-  }
-
-  advancedVideoPlayer(attachment: WorkPackageTaskAttachmentViewModel) {
-    this.modalService
-      .show(AdvancedPlayerComponent, { attachment })
-      .subscribe(() => {});
-  }
-
-  bulkUpload() {
-    if (this.bulkUploading) {
-      return;
-    }
-    this.bulkUploadInput.nativeElement.click();
-  }
-
-  async onBulkChange(target) {
-    if (!target.files.length) {
-      return;
-    }
-    this.bulkUploading = true;
-    this.bulkUploadProgress = 0;
-    const op = await this.taskService.bulkUpload(
-      this.model.id,
-      { file: target.files[0] },
-      progress => {
-        this.bulkUploadProgress = progress;
-      },
-    );
-    this.bulkUploadInput.nativeElement.value = '';
-    this.bulkUploading = false;
-    this.bulkUploadProgress = 0;
-    if (op.data && (op.data as any).status === OperationResultStatus.Success) {
-      await this.fetch();
-    }
-  }
-
-  bulkDownload() {
-    this.modalService
-      .show(BulkDownloadModalComponent, {
-        tasks: this.model.subTasks,
-        id: this.model.id,
-      })
-      .subscribe(() => {});
   }
 
   previewAttachment(attachment: WorkPackageTaskAttachmentViewModel) {

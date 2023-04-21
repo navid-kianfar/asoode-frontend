@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GroupService } from '../../services/group.service';
 import { ModalService } from '../../../shared/services/modal.service';
 import { GroupDetailComponent } from '../../../__/modals/group-detail/group-detail.component';
-import { AccessType } from '../../../shared/lib/enums/enums-2';
+import { AccessType } from '../../../shared/lib/enums/enums';
 import { Socket } from 'ngx-socket-io';
 import { IdentityService } from '../../../auth/services/identity.service';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';

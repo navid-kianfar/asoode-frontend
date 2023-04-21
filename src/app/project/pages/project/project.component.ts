@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {
   AccessType,
   ProjectTemplate,
-} from '../../../shared/lib/enums/enums-2';
+} from '../../../shared/lib/enums/enums';
 import { PromptComponent } from '../../../__/modals/prompt/prompt.component';
 import { ModalService } from '../../../shared/services/modal.service';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';

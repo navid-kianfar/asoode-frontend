@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AccessType } from '../../../../shared/lib/enums/enums-2';
+import { AccessType } from '../../../../shared/lib/enums/enums';
 import {
   InviteViewModel,
   MemberInfoViewModel,

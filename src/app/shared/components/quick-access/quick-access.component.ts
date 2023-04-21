@@ -1,8 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ProjectService } from '../../../../project/services/project.service';
-import { GroupService } from '../../../../groups/services/group.service';
-import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { ProjectViewModel } from '../../../../view-models/projects/project-types';
+import { ProjectService } from '../../../project/services/project.service';
+import { GroupService } from '../../../groups/services/group.service';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { Router } from '@angular/router';
 
 @Component({

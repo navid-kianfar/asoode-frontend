@@ -10,9 +10,13 @@ import { HttpInterceptor } from './shared/services/http.interceptor';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { SharedModule } from './shared/shared.module';
+import { RouterOutlet } from '@angular/router';
+import { ErrorsModule } from './errors/errors.module';
 
 @NgModule({
   declarations: [
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +26,9 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
+    RouterOutlet,
+    SharedModule,
+    ErrorsModule
   ],
   providers: [
     CookieService,

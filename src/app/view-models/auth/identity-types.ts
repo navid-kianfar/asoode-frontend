@@ -1,7 +1,5 @@
-import { CalendarType, UserType } from '../../shared/lib/enums/enums';
-import { AccessType } from '../../shared/lib/enums/enums-2';
-import { GroupViewModel } from '../groups/group-types';
-import { UserPlanInfoViewModel } from '../general/plan-types';
+import { CalendarType } from '../../shared/lib/enums/enums';
+import { AccessType } from '../../shared/lib/enums/enums';
 
 export interface IdentityObject {
   token: string;
@@ -34,11 +32,9 @@ export interface ProfileViewModel extends MemberInfoViewModel {
   workingTaskFrom?: Date;
 
   darkMode: boolean;
-  userType: UserType;
   timeZone: string;
   calendar: CalendarType;
   phone: string;
   emailConfirmed: boolean;
   phoneConfirmed: boolean;
-  plan: UserPlanInfoViewModel;
 }

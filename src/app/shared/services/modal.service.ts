@@ -5,8 +5,7 @@ import {
 } from '../../view-models/core/modal-types';
 import { NavigationEnd, Router } from '@angular/router';
 import { SimpleModalService } from 'ngx-simple-modal';
-import { Observable } from 'rxjs';
-import { ConfirmComponent } from '../../__/modals/confirm/confirm.component';
+// import { ConfirmComponent } from '../../__/modals/confirm/confirm.component';
 
 @Injectable({
   providedIn: 'root',
@@ -33,15 +32,16 @@ export class ModalService {
   }
 
   confirm(options: ModalParameters): { subscribe: (result) => {} } {
-    options.title = options.title || '';
-    options.message = options.message || '';
-    options.icon = options.icon || '';
-    options.cssClass = options.cssClass || 'confirm-modal';
-    options.actionLabel = options.actionLabel || 'CONFIRM';
-    options.cancelLabel = options.cancelLabel || 'CANCEL';
-    options.action = options.action || (() => Promise.resolve());
-    options.cancel = options.cancel || (() => Promise.resolve());
-    return this.show(ConfirmComponent, options);
+    return null;
+    // options.title = options.title || '';
+    // options.message = options.message || '';
+    // options.icon = options.icon || '';
+    // options.cssClass = options.cssClass || 'confirm-modal';
+    // options.actionLabel = options.actionLabel || 'CONFIRM';
+    // options.cancelLabel = options.cancelLabel || 'CANCEL';
+    // options.action = options.action || (() => Promise.resolve());
+    // options.cancel = options.cancel || (() => Promise.resolve());
+    // return this.show(ConfirmComponent, options);
   }
 
   closeAll() {

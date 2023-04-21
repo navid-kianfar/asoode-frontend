@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IdentityService } from '../../../../../auth/services/identity.service';
-import { PlanType } from 'src/app/shared/lib/enums/enums-2';
+import { PlanType } from 'src/app/shared/lib/enums/enums';
 import { ModalService } from '../../../../../shared/services/modal.service';
 import { NumberHelpers } from '../../../../../shared/helpers/number.helpers';
 

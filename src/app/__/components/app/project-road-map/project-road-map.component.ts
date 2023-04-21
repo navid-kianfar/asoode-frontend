@@ -3,7 +3,7 @@ import {
   ProjectViewModel,
   SubProjectViewModel,
 } from '../../../../view-models/projects/project-types';
-import { AccessType } from '../../../../shared/lib/enums/enums-2';
+import { AccessType } from '../../../../shared/lib/enums/enums';
 
 @Component({
   selector: 'app-project-road-map',

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GroupViewModel } from '../../../../view-models/groups/group-types';
 import { GroupService } from '../../../../groups/services/group.service';
-import { AccessType } from 'src/app/shared/lib/enums/enums-2';
+import { AccessType } from 'src/app/shared/lib/enums/enums';
 
 @Component({
   selector: 'app-org-chart',

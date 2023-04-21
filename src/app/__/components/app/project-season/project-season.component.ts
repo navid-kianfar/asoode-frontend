@@ -3,7 +3,7 @@ import {
   ProjectSeasonViewModel,
   ProjectViewModel,
 } from '../../../../view-models/projects/project-types';
-import { AccessType } from '../../../../shared/lib/enums/enums-2';
+import { AccessType } from '../../../../shared/lib/enums/enums';
 import { ProjectService } from '../../../../project/services/project.service';
 import { ModalService } from '../../../../shared/services/modal.service';
 import { FormService } from '../../../../shared/services/form.service';

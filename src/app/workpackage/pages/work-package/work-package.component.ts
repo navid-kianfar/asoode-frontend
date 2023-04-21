@@ -18,7 +18,7 @@ import {
   ReceiveNotificationType,
   SortType,
 
-} from '../../../shared/lib/enums/enums-2';
+} from '../../../shared/lib/enums/enums';
 import { PromptComponent } from 'src/app/__/modals/prompt/prompt.component';
 import { FormService } from 'src/app/shared/services/form.service';
 import { StringHelpers } from '../../../shared/helpers/string.helpers';

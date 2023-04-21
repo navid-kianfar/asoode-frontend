@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CulturedDateService } from '../../../../shared/services/cultured-date.service';
 import { IDateConverter } from '../../../../shared/lib/date-time/date-contracts';
-import { DurationMode } from '../../../../shared/lib/enums/enums-2';
+import { DurationMode } from '../../../../shared/lib/enums/enums';
 
 @Component({
   selector: 'app-duration-picker',

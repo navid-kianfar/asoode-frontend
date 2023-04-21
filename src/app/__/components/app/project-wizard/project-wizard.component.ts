@@ -3,7 +3,7 @@ import { CultureService } from '../../../../shared/services/culture.service';
 import { FormService } from '../../../../shared/services/form.service';
 import { FormViewModel } from '../../../../shared/components/form/contracts';
 import { BoardTemplateViewModel } from '../../../../view-models/projects/project-types';
-import { ProjectTemplate } from '../../../../shared/lib/enums/enums-2';
+import { ProjectTemplate } from '../../../../shared/lib/enums/enums';
 import { InviteViewModel } from '../../../../view-models/auth/identity-types';
 import { ProjectService } from '../../../../project/services/project.service';
 import { NotificationService } from '../../../../shared/services/notification.service';

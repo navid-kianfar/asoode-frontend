@@ -4,7 +4,7 @@ import {
   WorkPackageTaskViewModel,
   WorkPackageViewModel,
 } from '../../../../view-models/projects/project-types';
-import { AccessType, DurationMode } from '../../../../shared/lib/enums/enums-2';
+import { AccessType, DurationMode } from '../../../../shared/lib/enums/enums';
 import { CultureService } from '../../../../shared/services/culture.service';
 import { NumberHelpers } from '../../../../shared/helpers/number.helpers';
 import { CulturedDateService } from '../../../../shared/services/cultured-date.service';

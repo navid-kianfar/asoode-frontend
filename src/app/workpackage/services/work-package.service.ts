@@ -5,7 +5,7 @@ import {
   WorkPackageViewModel,
 } from '../../view-models/projects/project-types';
 import { HttpService } from '../../shared/services/http.service';
-import { AccessType, ReceiveNotificationType } from '../../shared/lib/enums/enums-2';
+import { AccessType, ReceiveNotificationType } from '../../shared/lib/enums/enums';
 import { ProjectService } from '../../project/services/project.service';
 import { IdentityService } from '../../auth/services/identity.service';
 import { GroupService } from '../../groups/services/group.service';

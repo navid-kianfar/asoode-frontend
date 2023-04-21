@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderStatus } from 'src/app/shared/lib/enums/enums-2';
+import { OrderStatus } from 'src/app/shared/lib/enums/enums';
 import { OrderService } from '../../../../services/general/order.service';
 import { environment } from '../../../../../../environments/environment';
 
