@@ -60,6 +60,12 @@ import { SearchResultComponent } from './components/search-result/search-result.
 import { RouterLink } from '@angular/router';
 import { GroupInfoComponent } from './components/group-info/group-info.component';
 import { ProjectInfoMiniComponent } from './components/project-info-mini/project-info-mini.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DialogModule } from '@angular/cdk/dialog';
+import { OfflineModalComponent } from './modals/offline-modal/offline-modal.component';
+import { PromptModalComponent } from './modals/prompt-modal/prompt-modal.component';
+import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
+import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 
 
 
@@ -93,6 +99,7 @@ import { ProjectInfoMiniComponent } from './components/project-info-mini/project
     SearchResultComponent,
     GroupInfoComponent,
     ProjectInfoMiniComponent,
+    RadioButtonComponent,
 
 
 
@@ -118,6 +125,12 @@ import { ProjectInfoMiniComponent } from './components/project-info-mini/project
     ThumbnailUrlPipe,
     TranslatePipe,
     TruncatePipe,
+
+
+
+    OfflineModalComponent,
+    PromptModalComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     CommonModule,
@@ -134,7 +147,9 @@ import { ProjectInfoMiniComponent } from './components/project-info-mini/project
     MatPaginatorModule,
     MatTableModule,
     NgxPopperModule,
-    RouterLink
+    RouterLink,
+    MatSnackBarModule,
+    DialogModule,
   ],
   exports: [
     AutoCompleteComponent,
@@ -165,6 +180,7 @@ import { ProjectInfoMiniComponent } from './components/project-info-mini/project
     SearchResultComponent,
     GroupInfoComponent,
     ProjectInfoMiniComponent,
+    RadioButtonComponent,
 
 
 
@@ -189,6 +205,12 @@ import { ProjectInfoMiniComponent } from './components/project-info-mini/project
     ThumbnailUrlPipe,
     TranslatePipe,
     TruncatePipe,
+
+
+
+    OfflineModalComponent,
+    PromptModalComponent,
+    ConfirmModalComponent,
   ],
 })
 export class SharedModule { }

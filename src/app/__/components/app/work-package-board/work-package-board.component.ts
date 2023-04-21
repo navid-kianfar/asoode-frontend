@@ -20,7 +20,7 @@ import { TaskModalComponent } from '../../../modals/task-modal/task-modal.compon
 import { ModalService } from '../../../../shared/services/modal.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CultureService } from '../../../../shared/services/culture.service';
-import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../../view-models/core/modal-types';
 import { FormService } from '../../../../shared/services/form.service';
 import { NotificationService } from '../../../../shared/services/notification.service';

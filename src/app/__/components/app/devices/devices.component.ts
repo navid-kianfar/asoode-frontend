@@ -7,7 +7,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { ModalService } from '../../../../shared/services/modal.service';
 import { StringHelpers } from '../../../../shared/helpers/string.helpers';
 import { TranslateService } from '../../../../shared/services/translate.service';
-import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../../view-models/core/modal-types';
 import { FormService } from '../../../../shared/services/form.service';
 import { NotificationService } from '../../../../shared/services/notification.service';

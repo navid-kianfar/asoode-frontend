@@ -1,0 +1,12 @@
+<div class="app-radio-button">
+  <div class="radio-item" (click)="pick(radio, $event)" *ngFor="let radio of items">
+    <div class="icon-wrapper">
+      <i [class]="model === radio[valueField] ? 'ti ti-circle-check' : 'ti ti-circle'"></i>
+    </div>
+    <div *ngIf="!template && textField" class="content-wrapper">{{radio[textField]}}</div>
+    <div *ngIf="template" class="content-wrapper">
+      <ng-container [ngTemplateOutletContext]="{$implicit: radio}"
+                    [ngTemplateOutlet]="template"></ng-container>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,7 @@ import {
   SortType,
 
 } from '../../../shared/lib/enums/enums';
-import { PromptComponent } from 'src/app/__/modals/prompt/prompt.component';
+import { PromptComponent } from 'src/app/shared/modals/prompt/prompt.component';
 import { FormService } from 'src/app/shared/services/form.service';
 import { StringHelpers } from '../../../shared/helpers/string.helpers';
 import { TranslateService } from '../../../shared/services/translate.service';

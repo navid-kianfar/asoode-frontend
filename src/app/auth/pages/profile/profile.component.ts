@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { FormViewModel } from '../../../shared/components/form/contracts';
 import { FormService } from '../../../shared/services/form.service';
 import { FileType } from '../../../shared/lib/enums/enums';
-import { PromptComponent } from '../../../__/modals/prompt/prompt.component';
+import { PromptComponent } from '../../../shared/modals/prompt/prompt.component';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { ChangePhoneComponent } from '../../../__/modals/change-phone/change-phone.component';
 import { ChangeEmailComponent } from '../../../__/modals/change-email/change-email.component';

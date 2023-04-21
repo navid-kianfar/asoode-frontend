@@ -6448,13 +6448,6 @@ ngx-quill@^13.0.0:
   dependencies:
     tslib "^2.0.0"
 
-ngx-simple-modal@^1.4.14:
-  version "1.4.17"
-  resolved "https://registry.yarnpkg.com/ngx-simple-modal/-/ngx-simple-modal-1.4.17.tgz#fc1a5bfdbce998fc21df28f2f8efe2644d2592a7"
-  integrity sha512-KhaJQ/oXv0XB31X3eXqew9NgVI3aAqd0qa7CTuO6sI8ZHXXnMbdIIXD+MYAafXZsuCGVZ9Z6lVS2NcegYqEo0w==
-  dependencies:
-    tslib "^1.9.0"
-
 ngx-socket-io@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/ngx-socket-io/-/ngx-socket-io-4.4.0.tgz#89a08fd2a4f070b5aa4fe4f1b95cd97225e4109e"

@@ -9,7 +9,7 @@ import { ModalService } from '../../../../shared/services/modal.service';
 import { FormService } from '../../../../shared/services/form.service';
 import { NotificationService } from '../../../../shared/services/notification.service';
 import { TranslateService } from '../../../../shared/services/translate.service';
-import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../../view-models/core/modal-types';
 import { StringHelpers } from '../../../../shared/helpers/string.helpers';
 import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';

@@ -13,7 +13,7 @@ import { CreateModalParameters } from '../../../../view-models/modals/modals-typ
 import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
 import { AccessType } from 'src/app/shared/lib/enums/enums';
-import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../../view-models/core/modal-types';
 import { FormService } from '../../../../shared/services/form.service';
 import { ActivityType } from '../../../../shared/lib/enums/activity-type';

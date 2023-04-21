@@ -6,7 +6,7 @@ import {
   AccessType,
   ProjectTemplate,
 } from '../../../shared/lib/enums/enums';
-import { PromptComponent } from '../../../__/modals/prompt/prompt.component';
+import { PromptComponent } from '../../../shared/modals/prompt/prompt.component';
 import { ModalService } from '../../../shared/services/modal.service';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../shared/services/form.service';

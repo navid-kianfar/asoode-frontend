@@ -12,7 +12,7 @@ import { StringHelpers } from '../../../../shared/helpers/string.helpers';
 import { TranslateService } from '../../../../shared/services/translate.service';
 import { GroupService } from '../../../../groups/services/group.service';
 import { CulturedDateService } from '../../../../shared/services/cultured-date.service';
-import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
 import { FormViewModel } from '../../../../shared/components/form/contracts';
 import { FormService } from '../../../../shared/services/form.service';
 import { ListViewModel } from '../../../../view-models/core/list-types';

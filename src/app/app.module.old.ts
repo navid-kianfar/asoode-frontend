@@ -172,7 +172,7 @@
 // import { ArchivedGroupsComponent } from './__/components/app/archived-groups/archived-groups.component';
 // import { LabelsModalComponent } from './__/modals/labels-modal/labels-modal.component';
 // import { CustomFieldsModalComponent } from './__/modals/custom-fields-modal/custom-fields-modal.component';
-// import { OfflineComponent } from './__/modals/offline/offline.component';
+// import { OfflineComponent } from './__/modals/offline-modal/offline-modal.component';
 // import { FullNamePipe } from './__/pipes/app/full-name.pipe';
 // import { AdvancedPlayerComponent } from './__/modals/advanced-player/advanced-player.component';
 // import { MemberFilterPipe } from './__/pipes/app/member-filter.pipe';

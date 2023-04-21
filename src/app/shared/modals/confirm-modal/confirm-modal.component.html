@@ -1,0 +1,40 @@
+<div class="confirm-modal no-select">
+  <div class="info-box">
+    <div class="icon-wrapper">
+      <i [class]="data.icon"></i>
+    </div>
+    <div class="text-box">
+      <div class="title">{{data.title | translate}}</div>
+      <div class="sub-title">{{data.subTitle | translate}}</div>
+
+      <app-checkbox [(model)]="agreed" *ngIf="data.agreement">{{data.agreement | translate}}</app-checkbox>
+
+      <div class="options" *ngIf="data.options?.length">
+
+        <app-radio-button [(model)]="option"
+                          [items]="data.options!"
+                          [template]="radioTemplate"
+                          textField="title"></app-radio-button>
+      </div>
+
+      <div class="description">{{data.description | translate}}</div>
+    </div>
+  </div>
+  <div class="action-box">
+    <button mat-flat-button color="primary"
+            [disabled]="(!agreed && data.agreementRequired) || (option === undefined && data.options?.length > 0)"
+            (click)="onAgree($event)"
+            class="action-btn">
+      {{ data.confirmLabel | translate }}
+    </button>
+    <button mat-flat-button (click)="onCancel($event)" class="cancel-btn">
+      {{ data.cancelLabel | translate }}
+    </button>
+  </div>
+</div>
+<ng-template #radioTemplate let-radio>
+  <div class="radio-option-wrapper">
+    <div class="option-title">{{radio.title | translate}}</div>
+    <div class="option-sub-title">{{radio.subTitle | translate}}</div>
+  </div>
+</ng-template>

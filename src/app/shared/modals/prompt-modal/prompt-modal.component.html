@@ -1,0 +1,34 @@
+<div class="prompt-modal {{ data.cssClass }}" [style.width.px]="data.width">
+  <div class="header">
+    <h3>{{ data.title | translate }}</h3>
+    <h5>{{ data.heading | translate }}</h5>
+  </div>
+  <div class="form-wrapper">
+    <app-form [elements]="data.form"></app-form>
+  </div>
+  <div class="footer">
+    <ng-container *ngFor="let btn of data.buttons">
+      <button [disabled]="btn.waiting || data.actionWaiting"
+              (click)="btn.action($event, btn)"
+              mat-flat-button
+              [color]="btn.color || data.actionColor"
+      >
+        <i *ngIf="btn.waiting || data.actionWaiting" class="ti ti-loader icon-spin"></i>
+        {{ btn.label | translate: true }}</button
+      >&nbsp;
+    </ng-container>
+    <button
+      [disabled]="data.actionWaiting"
+      (click)="onAction($event)"
+      mat-flat-button
+      [color]="data.actionColor"
+    >
+      <i *ngIf="data.actionWaiting" class="ti ti-loader icon-spin"></i>
+      {{ data.actionLabel | translate: true }}</button
+    >&nbsp;
+    <button [disabled]="data.cancelWaiting" (click)="onCancel($event)" mat-button>
+      <i *ngIf="data.cancelWaiting" class="ti ti-loader icon-spin"></i>
+      {{ data.cancelLabel | translate: true }}
+    </button>
+  </div>
+</div>

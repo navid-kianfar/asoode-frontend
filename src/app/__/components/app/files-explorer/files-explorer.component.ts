@@ -8,7 +8,7 @@ import {
 } from '../../../../view-models/storage/files-types';
 import { OperationResult } from '../../../../shared/lib/operation-result';
 import { ModalService } from '../../../../shared/services/modal.service';
-import { PromptComponent } from '../../../modals/prompt/prompt.component';
+import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
 import { PromptModalParameters } from '../../../../view-models/core/modal-types';
 import { FormService } from '../../../../shared/services/form.service';
 import { SortType } from 'src/app/shared/lib/enums/enums';
