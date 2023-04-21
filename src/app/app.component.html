@@ -3,11 +3,10 @@
   [class.online]="networkService.isOnline"
   [class.connected]="networkService.isConnected"
 >
-  <app-waiting
-    [cssClass]="'h-100'"
-    *ngIf="!appInitializerProvider.loaded"
-  ></app-waiting>
+  <app-waiting [cssClass]="'h-100'" *ngIf="!appInitializerProvider.loaded"></app-waiting>
+
   <app-no-api-found *ngIf="appInitializerProvider.apiNotFound"></app-no-api-found>
+
   <ng-container *ngIf="!appInitializerProvider.apiNotFound && appInitializerProvider.loaded">
     <app-header *ngIf="appInitializerProvider.profileLoaded"></app-header>
     <router-outlet></router-outlet>

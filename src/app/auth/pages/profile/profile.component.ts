@@ -6,8 +6,6 @@ import { FormViewModel } from '../../../shared/components/form/contracts';
 import { FormService } from '../../../shared/services/form.service';
 import { FileType } from '../../../shared/lib/enums/enums';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { ChangePhoneComponent } from '../../../__/modals/change-phone/change-phone.component';
-import { ChangeEmailComponent } from '../../../__/modals/change-email/change-email.component';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { TranslateService } from '../../../shared/services/translate.service';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';

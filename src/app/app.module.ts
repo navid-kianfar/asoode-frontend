@@ -11,9 +11,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule } from './shared/shared.module';
-import { RouterOutlet } from '@angular/router';
 import { ErrorsModule } from './errors/errors.module';
 import { AuthModule } from './auth/auth.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,7 @@ import { AuthModule } from './auth/auth.module';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
-    RouterOutlet,
+    AppRoutingModule,
     SharedModule,
     ErrorsModule,
     AuthModule,

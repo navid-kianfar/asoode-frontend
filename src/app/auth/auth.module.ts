@@ -9,6 +9,7 @@ import { ForgotComponent } from './pages/forgot/forgot.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { ConfirmAccountComponent } from './components/confirm-account/confirm-ac
   ],
   imports: [
     CommonModule,
+    RouterModule,
     AuthRoutingModule,
     SharedModule,
     MatTabsModule
