@@ -1,24 +1,26 @@
 import { BaseViewModel } from '../core/general-types';
 import {
   AccessType,
-  ActivityType,
-  BoardTemplate,
   ProjectTemplate,
   ReceiveNotificationType,
   SortType,
+
+
+
+} from '../../shared/lib/enums/enums-2';
+import { MemberInfoViewModel } from '../auth/identity-types';
+import { PendingInvitationViewModel } from '../groups/group-types';
+import { IDateTimeProperties } from '../../shared/lib/date-time/date-contracts';
+import { DayReportViewModel } from '../general/report-types';
+import {
+  BoardTemplate,
   WorkPackageCommentPermission,
   WorkPackageObjectiveType,
   WorkPackageTaskAttachmentType,
-  WorkPackageTaskObjectiveValue,
-  WorkPackageTaskReminderType,
-  WorkPackageTaskState,
-  WorkPackageTaskVisibility,
+  WorkPackageTaskObjectiveValue, WorkPackageTaskReminderType, WorkPackageTaskState, WorkPackageTaskVisibility,
   WorkPackageTaskVoteNecessity,
-} from '../../library/app/enums';
-import { MemberInfoViewModel } from '../auth/identity-types';
-import { PendingInvitationViewModel } from '../groups/group-types';
-import { IDateTimeProperties } from '../../library/core/date-time/date-contracts';
-import { DayReportViewModel } from '../general/report-types';
+} from '../../shared/lib/enums/workpackage';
+import { ActivityType } from '../../shared/lib/enums/activity-type';
 
 export interface TreeViewModel {
   tree: { [key: string]: TreeReportViewModel };

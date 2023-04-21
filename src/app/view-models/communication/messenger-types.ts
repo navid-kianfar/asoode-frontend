@@ -1,6 +1,7 @@
 import { MemberInfoViewModel } from '../auth/identity-types';
-import { ChannelType, ConversationType } from '../../library/app/enums';
+import { ConversationType } from '../../shared/lib/enums/enums-2';
 import { BaseViewModel } from '../core/general-types';
+import { ChannelType } from '../../shared/lib/enums/channels';
 
 export interface ChannelRepository {
   directs: ChannelViewModel[];

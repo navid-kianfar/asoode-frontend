@@ -1,7 +1,8 @@
 import { BaseViewModel } from '../core/general-types';
-import { AccessType, GroupType } from '../../library/app/enums';
+import { AccessType } from '../../shared/lib/enums/enums-2';
 import { MemberInfoViewModel } from '../auth/identity-types';
 import { WorkPackageTaskViewModel } from '../projects/project-types';
+import { GroupType } from '../../shared/lib/enums/group-type';
 
 export interface TimeOffDetailViewModel {
   tasks: WorkPackageTaskViewModel[];

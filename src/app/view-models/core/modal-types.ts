@@ -1,4 +1,4 @@
-import { FormViewModel } from '../../components/core/form/contracts';
+import { FormViewModel } from '../../shared/components/form/contracts';
 import {
   ProjectViewModel,
   WorkPackageTaskViewModel,

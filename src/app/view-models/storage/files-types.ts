@@ -1,4 +1,4 @@
-import { OperationResult } from '../../library/core/operation-result';
+import { OperationResult } from '../../shared/lib/operation-result';
 
 export interface ExplorerViewModel {
   files: ExplorerFileViewModel[];

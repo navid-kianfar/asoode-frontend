@@ -1,10 +1,10 @@
 import {Component, Injector} from '@angular/core';
-import { AppInitializerProvider } from './services/general/app.initializer';
+import { AppInitializerProvider } from './shared/services/app.initializer';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { SwUpdate } from '@angular/service-worker';
-import { NetworkService } from './services/core/network.service';
-import { ModalService } from './services/core/modal.service';
-import { OfflineComponent } from './modals/offline/offline.component';
+import { NetworkService } from './shared/services/network.service';
+import { ModalService } from './shared/services/modal.service';
+import { OfflineComponent } from './__/modals/offline/offline.component';
 
 @Component({
   selector: 'app-root',

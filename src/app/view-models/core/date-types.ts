@@ -1,4 +1,4 @@
-import { WeekDay } from '../../library/core/enums';
+import { WeekDay } from '../../shared/lib/enums/enums';
 
 export interface ICulture {
   direction: string;

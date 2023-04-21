@@ -1,5 +1,5 @@
-import { CalendarType, UserType } from '../../library/core/enums';
-import { AccessType } from '../../library/app/enums';
+import { CalendarType, UserType } from '../../shared/lib/enums/enums';
+import { AccessType } from '../../shared/lib/enums/enums-2';
 import { GroupViewModel } from '../groups/group-types';
 import { UserPlanInfoViewModel } from '../general/plan-types';
 

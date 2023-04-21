@@ -3,7 +3,7 @@ import {
   OrderDuration,
   OrderType,
   PlanType,
-} from '../../library/app/enums';
+} from '../../shared/lib/enums/enums-2';
 import { BaseViewModel } from '../core/general-types';
 
 export interface UserPlanInfoViewModel extends BaseViewModel {

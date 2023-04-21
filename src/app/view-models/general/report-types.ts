@@ -1,4 +1,4 @@
-import { IDateEvent } from '../../library/core/date-time/date-contracts';
+import { IDateEvent } from '../../shared/lib/date-time/date-contracts';
 
 export interface DashboardViewModel {
   events: IDateEvent[];
