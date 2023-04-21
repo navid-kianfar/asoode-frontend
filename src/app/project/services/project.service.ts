@@ -30,7 +30,7 @@ export class ProjectService {
   ) {}
 
   async load(): Promise<OperationResult<ProjectViewModel[]>> {
-    const op = await this.httpService.post<ProjectViewModel[]>(
+    const op = await this.httpService.get<ProjectViewModel[]>(
       '/projects/list',
     );
     if (op.status === OperationResultStatus.Success) {

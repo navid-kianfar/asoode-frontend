@@ -23,7 +23,7 @@ export class MessengerService {
   }
 
   async load(): Promise<OperationResult<ChannelRepository>> {
-    const op = await this.httpService.post<ChannelRepository>(
+    const op = await this.httpService.get<ChannelRepository>(
       '/messenger/channels',
     );
     if (op.status === OperationResultStatus.Success) {

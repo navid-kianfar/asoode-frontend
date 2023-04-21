@@ -40,7 +40,7 @@ export class GroupService {
   }
 
   async load(): Promise<OperationResult<GroupViewModel[]>> {
-    const op = await this.httpService.post<GroupViewModel[]>('/groups/list');
+    const op = await this.httpService.get<GroupViewModel[]>('/groups/list');
     if (op.status === OperationResultStatus.Success) {
       this.groups = op.data;
     }
