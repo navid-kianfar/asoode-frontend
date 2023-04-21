@@ -157,7 +157,7 @@ import { AccessListComponent } from './components/access-list/access-list.compon
     MatButtonModule,
     MatPaginatorModule,
     MatTableModule,
-    NgxPopperModule,
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
     RouterLink,
     MatSnackBarModule,
     DialogModule,

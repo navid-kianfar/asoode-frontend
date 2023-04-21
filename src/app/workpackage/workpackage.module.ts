@@ -42,7 +42,7 @@ import { MatRadioModule } from '@angular/material/radio';
     FormsModule,
     MatButtonModule,
     MatTabsModule,
-    NgxPopperModule,
+    NgxPopperModule.forRoot({ placement: 'bottom' }),
     RoundProgressModule,
     MatProgressBarModule,
     MatRadioModule

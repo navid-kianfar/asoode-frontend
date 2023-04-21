@@ -8,13 +8,13 @@ import { AppComponent } from './app.component';
 import { PanelSocketProvider } from './shared/services/socket.provider';
 import { HttpInterceptor } from './shared/services/http.interceptor';
 import { CookieService } from 'ngx-cookie-service';
-import { environment } from '../environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule } from './shared/shared.module';
 import { ErrorsModule } from './errors/errors.module';
 import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 import { ReportsModule } from './reports/reports.module';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
