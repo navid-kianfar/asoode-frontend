@@ -66,6 +66,7 @@ import { OfflineModalComponent } from './modals/offline-modal/offline-modal.comp
 import { PromptModalComponent } from './modals/prompt-modal/prompt-modal.component';
 import { ConfirmModalComponent } from './modals/confirm-modal/confirm-modal.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
@@ -150,6 +151,7 @@ import { RadioButtonComponent } from './components/radio-button/radio-button.com
     RouterLink,
     MatSnackBarModule,
     DialogModule,
+    MatTabsModule
   ],
   exports: [
     AutoCompleteComponent,

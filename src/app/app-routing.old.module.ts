@@ -16,21 +16,6 @@
 //
 // const routes: Routes = [
 //   {
-//     path: 'login',
-//     component: LoginComponent,
-//     canActivate: [AnonymousGuard],
-//   },
-//   {
-//     path: 'register',
-//     component: RegisterComponent,
-//     canActivate: [AnonymousGuard],
-//   },
-//   {
-//     path: 'forgot',
-//     component: ForgotComponent,
-//     canActivate: [AnonymousGuard],
-//   },
-//   {
 //     path: 'dashboard',
 //     component: DashboardComponent,
 //     canActivate: [AuthGuard],

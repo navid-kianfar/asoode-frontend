@@ -13,6 +13,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { SharedModule } from './shared/shared.module';
 import { RouterOutlet } from '@angular/router';
 import { ErrorsModule } from './errors/errors.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ErrorsModule } from './errors/errors.module';
     }),
     RouterOutlet,
     SharedModule,
-    ErrorsModule
+    ErrorsModule,
+    AuthModule,
   ],
   providers: [
     CookieService,

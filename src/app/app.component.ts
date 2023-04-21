@@ -28,16 +28,18 @@ export class AppComponent {
       console.log('new version is', event.current);
     });
     swUpdate.available.subscribe(event => {
-      swUpdate.activateUpdate().then(() => {
-        this.injector.get<ModalService>(ModalService).confirm({
-          actionLabel: 'UPDATE_AVAILABLE',
-          title: 'UPDATE_AVAILABLE',
-          heading: 'UPDATE_AVAILABLE_HEADING',
-          cancelLabel: 'LATER',
-          action: async () => {
-            setTimeout(() => document.location.reload(), 1000);
-          }
-        });
+      swUpdate.activateUpdate().then(async () => {
+        const response = await this.injector
+          .get<ModalService>(ModalService)
+          .confirm({
+            confirmLabel: 'UPDATE_AVAILABLE',
+            title: 'UPDATE_AVAILABLE',
+            subTitle: 'UPDATE_AVAILABLE_HEADING',
+            cancelLabel: 'LATER',
+          });
+        if (response.confirmed) {
+          setTimeout(() => document.location.reload(), 1000);
+        }
       });
     });
 

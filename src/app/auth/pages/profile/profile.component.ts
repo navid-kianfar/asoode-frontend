@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { FormViewModel } from '../../../shared/components/form/contracts';
 import { FormService } from '../../../shared/services/form.service';
 import { FileType } from '../../../shared/lib/enums/enums';
-import { PromptComponent } from '../../../shared/modals/prompt/prompt.component';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { ChangePhoneComponent } from '../../../__/modals/change-phone/change-phone.component';
 import { ChangeEmailComponent } from '../../../__/modals/change-email/change-email.component';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { TranslateService } from '../../../shared/services/translate.service';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { PromptModalComponent } from '../../../shared/modals/prompt-modal/prompt-modal.component';
 
 @Component({
   selector: 'app-profile',
@@ -33,20 +33,20 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async prepareChangePhoneNumber() {
-    this.modalService.show(ChangePhoneComponent, {}).subscribe(result => {
-      if (result) {
-        this.identityService.profile.phone = result;
-        this.edit();
-      }
-    });
+    // this.modalService.show(ChangePhoneComponent, {}).subscribe(result => {
+    //   if (result) {
+    //     this.identityService.profile.phone = result;
+    //     this.edit();
+    //   }
+    // });
   }
   async prepareChangeEmail() {
-    this.modalService.show(ChangeEmailComponent, {}).subscribe(result => {
-      if (result) {
-        this.identityService.profile.email = result;
-        this.edit();
-      }
-    });
+    // this.modalService.show(ChangeEmailComponent, {}).subscribe(result => {
+    //   if (result) {
+    //     this.identityService.profile.email = result;
+    //     this.edit();
+    //   }
+    // });
   }
   async changePassword(model: any, form) {
     const op = await this.identityService.changePassword({
@@ -61,67 +61,65 @@ export class ProfileComponent implements OnInit {
     }
   }
   async prepareChangePassword() {
-    this.modalService
-      .show(PromptComponent, {
-        form: [
-          {
-            elements: [
-              this.formService.createInput({
-                config: { field: 'oldPassword' },
-                params: {
-                  model: '',
-                  password: true,
-                  ltr: true,
-                  placeHolder: 'OLD_PASSWORD',
+    await this.modalService.show(PromptModalComponent, {
+      form: [
+        {
+          elements: [
+            this.formService.createInput({
+              config: { field: 'oldPassword' },
+              params: {
+                model: '',
+                password: true,
+                ltr: true,
+                placeHolder: 'OLD_PASSWORD',
+              },
+              validation: {
+                required: { value: true, message: 'OLD_PASSWORD_REQUIRED' },
+                minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
+                maxLength: { value: 50, message: 'PASSWORD_MAX_LENGTH' },
+              },
+            }),
+            this.formService.createInput({
+              config: { field: 'password' },
+              params: {
+                model: '',
+                password: true,
+                ltr: true,
+                placeHolder: 'PASSWORD',
+              },
+              validation: {
+                required: { value: true, message: 'PASSWORD_REQUIRED' },
+                minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
+                maxLength: { value: 50, message: 'PASSWORD_MAX_LENGTH' },
+              },
+            }),
+            this.formService.createInput({
+              config: { field: 'confirmPassword' },
+              params: {
+                model: '',
+                password: true,
+                ltr: true,
+                placeHolder: 'CONFIRM_PASSWORD',
+              },
+              validation: {
+                required: {
+                  value: true,
+                  message: 'CONFIRM_PASSWORD_REQUIRED',
                 },
-                validation: {
-                  required: { value: true, message: 'OLD_PASSWORD_REQUIRED' },
-                  minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
-                  maxLength: { value: 50, message: 'PASSWORD_MAX_LENGTH' },
+                match: {
+                  toField: 'password',
+                  message: 'CONFIRM_PASSWORD_MISS_MATCH',
                 },
-              }),
-              this.formService.createInput({
-                config: { field: 'password' },
-                params: {
-                  model: '',
-                  password: true,
-                  ltr: true,
-                  placeHolder: 'PASSWORD',
-                },
-                validation: {
-                  required: { value: true, message: 'PASSWORD_REQUIRED' },
-                  minLength: { value: 6, message: 'PASSWORD_MIN_LENGTH' },
-                  maxLength: { value: 50, message: 'PASSWORD_MAX_LENGTH' },
-                },
-              }),
-              this.formService.createInput({
-                config: { field: 'confirmPassword' },
-                params: {
-                  model: '',
-                  password: true,
-                  ltr: true,
-                  placeHolder: 'CONFIRM_PASSWORD',
-                },
-                validation: {
-                  required: {
-                    value: true,
-                    message: 'CONFIRM_PASSWORD_REQUIRED',
-                  },
-                  match: {
-                    toField: 'password',
-                    message: 'CONFIRM_PASSWORD_MISS_MATCH',
-                  },
-                },
-              }),
-            ],
-          },
-        ],
-        actionLabel: 'RESET_PASSWORD',
-        action: (model, form) => this.changePassword(model, form),
-        actionColor: 'primary',
-        title: 'RESET_PASSWORD',
-      })
-      .subscribe(() => {});
+              },
+            }),
+          ],
+        },
+      ],
+      actionLabel: 'RESET_PASSWORD',
+      action: (model, form) => this.changePassword(model, form),
+      actionColor: 'primary',
+      title: 'RESET_PASSWORD',
+    });
   }
 
   ngOnInit() {
@@ -245,28 +243,22 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  logout() {
-    this.modalService
+  async logout() {
+    const response = await this.modalService
       .confirm({
         title: 'MODALS_CONFIRM_TITLE',
-        message: 'MODALS_CONFIRM_MESSAGE',
-        heading: 'MODALS_CONFIRM_MESSAGE_HEADING',
-        actionLabel: 'LOGOUT',
+        description: 'MODALS_CONFIRM_MESSAGE',
+        subTitle: 'MODALS_CONFIRM_MESSAGE_HEADING',
+        confirmLabel: 'LOGOUT',
         cancelLabel: 'CANCEL',
-        action: async () => {
-          this.identityService.logout();
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
-          return Promise.resolve(true);
-        },
-      })
-      .subscribe(async result => {
-        if (!result) {
-          return;
-        }
-        await this.router.navigateByUrl('/dashboard');
       });
+    if (response.confirmed) {
+      this.identityService.logout();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+      return Promise.resolve(true);
+    }
   }
 
   edit() {
