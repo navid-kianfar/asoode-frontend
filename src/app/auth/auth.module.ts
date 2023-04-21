@@ -18,7 +18,7 @@ import { RouterModule } from '@angular/router';
     RegisterComponent,
     ForgotComponent,
     ProfileComponent,
-    ConfirmAccountComponent
+    ConfirmAccountComponent,
   ],
   imports: [
     CommonModule,

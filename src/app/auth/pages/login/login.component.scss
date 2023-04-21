@@ -16,7 +16,7 @@
     margin: 0;
     padding: 0;
     height: 100%;
-    background: url('/src/assets/images/pages/auth/authentication-page.svg') left
+    background: url('/assets/images/pages/auth/authentication-page.svg') left
       bottom no-repeat;
     background-size: cover;
     > .row {
@@ -39,7 +39,7 @@
     max-height: 100vh;
   }
   .logo {
-    background: url('/src/assets/images/asoode-logo.svg') center center no-repeat;
+    background: url('/assets/images/asoode-logo.svg') center center no-repeat;
     height: 70px;
   }
   .forgot {
@@ -100,7 +100,7 @@
 }
 @media (max-width: 1250px) {
   .background-column {
-    background: url('/src/assets/images/pages/auth/authentication-page.svg') left
+    background: url('/assets/images/pages/auth/authentication-page.svg') left
       bottom no-repeat;
     background-size: cover;
   }
