@@ -1,23 +1,23 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FilesService } from '../../../../storage/services/files.service';
+import { FilesService } from '../../services/files.service';
 import {
   ExplorerFileViewModel,
   ExplorerFolderViewModel,
   ExplorerViewModel,
   UploadViewModel,
-} from '../../../../view-models/storage/files-types';
-import { OperationResult } from '../../../../shared/lib/operation-result';
-import { ModalService } from '../../../../shared/services/modal.service';
+} from '../../../view-models/storage/files-types';
+import { OperationResult } from '../../../shared/lib/operation-result';
+import { ModalService } from '../../../shared/services/modal.service';
 import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
-import { PromptModalParameters } from '../../../../view-models/core/modal-types';
-import { FormService } from '../../../../shared/services/form.service';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { FormService } from '../../../shared/services/form.service';
 import { SortType } from 'src/app/shared/lib/enums/enums';
-import { DocumentModalComponent } from '../../../modals/document-modal/document-modal.component';
-import { StringHelpers } from '../../../../shared/helpers/string.helpers';
-import { TranslateService } from '../../../../shared/services/translate.service';
-import { IdentityService } from '../../../../auth/services/identity.service';
+import { DocumentModalComponent } from '../../../__/modals/document-modal/document-modal.component';
+import { StringHelpers } from '../../../shared/helpers/string.helpers';
+import { TranslateService } from '../../../shared/services/translate.service';
+import { IdentityService } from '../../../auth/services/identity.service';
 import {ClipboardService} from 'ngx-clipboard';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 
 @Component({
   selector: 'app-files-explorer',

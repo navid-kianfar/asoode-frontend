@@ -1,15 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { CultureService } from '../../../../shared/services/culture.service';
-import { FormService } from '../../../../shared/services/form.service';
-import { FormViewModel } from '../../../../shared/components/form/contracts';
-import { InviteViewModel } from '../../../../view-models/auth/identity-types';
-import { GroupService } from '../../../../groups/services/group.service';
-import { NotificationService } from '../../../../shared/services/notification.service';
-import { ValidationService } from '../../../../shared/services/validation.service';
-import { IdentityService } from '../../../../auth/services/identity.service';
-
-import { GroupType } from '../../../../shared/lib/enums/group-type';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { CultureService } from '../../../shared/services/culture.service';
+import { FormService } from '../../../shared/services/form.service';
+import { FormViewModel } from '../../../shared/components/form/contracts';
+import { InviteViewModel } from '../../../view-models/auth/identity-types';
+import { GroupService } from '../../services/group.service';
+import { NotificationService } from '../../../shared/services/notification.service';
+import { IdentityService } from '../../../auth/services/identity.service';
+import { GroupType } from '../../../shared/lib/enums/group-type';
+import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 
 @Component({
   selector: 'app-group-wizard',

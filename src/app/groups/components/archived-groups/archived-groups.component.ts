@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { GroupService } from '../../../../groups/services/group.service';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { GroupService } from '../../services/group.service';
 import { Router } from '@angular/router';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 
 @Component({
   selector: 'app-archived-groups',

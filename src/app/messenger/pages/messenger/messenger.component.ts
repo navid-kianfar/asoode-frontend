@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MessengerService } from '../../services/messenger.service';
 import { ChannelViewModel } from '../../../view-models/communication/messenger-types';
 import { ModalService } from '../../../shared/services/modal.service';
-import { MessengerSettingComponent } from '../../../__/modals/messenger-setting/messenger-setting.component';
 import { ProjectService } from '../../../project/services/project.service';
 import { GroupService } from '../../../groups/services/group.service';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
@@ -34,7 +33,6 @@ export class MessengerComponent implements OnInit {
     readonly groupService: GroupService,
     readonly modalService: ModalService,
     readonly identityService: IdentityService,
-    private readonly gaService: GoogleAnalyticsService,
     private readonly translateService: TranslateService,
   ) {}
 
@@ -58,13 +56,6 @@ export class MessengerComponent implements OnInit {
     });
     this.allMembers = members;
     this.showFiles = false;
-
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('MESSENGER'),
-      undefined,
-      { user_id: this.identityService.identity.userId },
-    );
   }
 
   openGroup(group: GroupViewModel) {
@@ -119,7 +110,7 @@ export class MessengerComponent implements OnInit {
   }
 
   openSetting() {
-    this.modalService.show(MessengerSettingComponent, {}).subscribe(() => {});
+    // this.modalService.show(MessengerSettingComponent, {}).subscribe(() => {});
   }
 
   openChannels() {

@@ -3,16 +3,14 @@ import {
   GroupMemberViewModel,
   GroupViewModel,
   PendingInvitationViewModel,
-} from '../../../../view-models/groups/group-types';
+} from '../../../view-models/groups/group-types';
 import { AccessType } from 'src/app/shared/lib/enums/enums';
-import { ModalService } from '../../../../shared/services/modal.service';
-import { InviteModalComponent } from '../../../modals/invite-modal/invite-modal.component';
-import { OperationResult } from '../../../../shared/lib/operation-result';
-import { GroupService } from '../../../../groups/services/group.service';
-import { TranslateService } from '../../../../shared/services/translate.service';
-import { StringHelpers } from '../../../../shared/helpers/string.helpers';
-import { IdentityService } from '../../../../auth/services/identity.service';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { ModalService } from '../../../shared/services/modal.service';
+import { GroupService } from '../../services/group.service';
+import { TranslateService } from '../../../shared/services/translate.service';
+import { StringHelpers } from '../../../shared/helpers/string.helpers';
+import { IdentityService } from '../../../auth/services/identity.service';
+import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 
 @Component({
   selector: 'app-group-members',
@@ -34,21 +32,20 @@ export class GroupMembersComponent implements OnInit {
   ngOnInit() {}
 
   invite() {
-    this.modalService
-      .show(InviteModalComponent, {
-        noGroup: true,
-        existing: [],
-        exclude: [
-          this.group.userId,
-          this.group.id,
-          ...this.group.members.map(m => m.userId),
-          ...this.group.pending.map(p => p.identifier),
-        ],
-        handler: async access => {
-          return this.groupService.addAccess(this.group.id, access);
-        },
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(InviteModalComponent, {
+    //     noGroup: true,
+    //     existing: [],
+    //     exclude: [
+    //       this.group.userId,
+    //       this.group.id,
+    //       ...this.group.members.map(m => m.userId),
+    //       ...this.group.pending.map(p => p.identifier),
+    //     ],
+    //     handler: async access => {
+    //       return this.groupService.addAccess(this.group.id, access);
+    //     },
+    //   });
   }
 
   removeAccess(member: GroupMemberViewModel) {
@@ -56,27 +53,27 @@ export class GroupMembersComponent implements OnInit {
       this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
       [member.member.fullName],
     );
-    this.modalService
-      .confirm({
-        title: 'REMOVE_ACCESS',
-        message: 'REMOVE_MEMBER_CONFIRM',
-        heading,
-        actionLabel: 'REMOVE_ACCESS',
-        cancelLabel: 'CANCEL',
-        action: async () => OperationResult.Success(true),
-      })
-      .subscribe(async confirmed => {
-        if (!confirmed) {
-          return;
-        }
-        member.waiting = true;
-        const op = await this.groupService.removeAccess(member.id);
-        member.waiting = false;
-        if (op.status !== OperationResultStatus.Success) {
-          // TODO: handle error
-          return;
-        }
-      });
+    // this.modalService
+    //   .confirm({
+    //     title: 'REMOVE_ACCESS',
+    //     message: 'REMOVE_MEMBER_CONFIRM',
+    //     heading,
+    //     actionLabel: 'REMOVE_ACCESS',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => OperationResult.Success(true),
+    //   })
+    //   .subscribe(async confirmed => {
+    //     if (!confirmed) {
+    //       return;
+    //     }
+    //     member.waiting = true;
+    //     const op = await this.groupService.removeAccess(member.id);
+    //     member.waiting = false;
+    //     if (op.status !== OperationResultStatus.Success) {
+    //       // TODO: handle error
+    //       return;
+    //     }
+    //   });
   }
 
   async accessChange(member: GroupMemberViewModel, access: AccessType) {
@@ -142,27 +139,27 @@ export class GroupMembersComponent implements OnInit {
       this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
       [member.identifier],
     );
-    this.modalService
-      .confirm({
-        title: 'REMOVE_ACCESS',
-        message: 'REMOVE_MEMBER_CONFIRM',
-        heading,
-        actionLabel: 'REMOVE_ACCESS',
-        cancelLabel: 'CANCEL',
-        action: async () => OperationResult.Success(true),
-      })
-      .subscribe(async confirmed => {
-        if (!confirmed) {
-          return;
-        }
-        member.deleting = true;
-        const op = await this.groupService.removePendingAccess(member.id);
-        member.deleting = false;
-        if (op.status !== OperationResultStatus.Success) {
-          // TODO: handle error
-          return;
-        }
-        this.group.pending = this.group.pending.filter(g => g !== member);
-      });
+    // this.modalService
+    //   .confirm({
+    //     title: 'REMOVE_ACCESS',
+    //     message: 'REMOVE_MEMBER_CONFIRM',
+    //     heading,
+    //     actionLabel: 'REMOVE_ACCESS',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => OperationResult.Success(true),
+    //   })
+    //   .subscribe(async confirmed => {
+    //     if (!confirmed) {
+    //       return;
+    //     }
+    //     member.deleting = true;
+    //     const op = await this.groupService.removePendingAccess(member.id);
+    //     member.deleting = false;
+    //     if (op.status !== OperationResultStatus.Success) {
+    //       // TODO: handle error
+    //       return;
+    //     }
+    //     this.group.pending = this.group.pending.filter(g => g !== member);
+    //   });
   }
 }

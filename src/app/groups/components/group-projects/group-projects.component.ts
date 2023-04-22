@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { AccessType } from '../../../../shared/lib/enums/enums';
-import { ProjectService } from '../../../../project/services/project.service';
-import { ProjectViewModel } from '../../../../view-models/projects/project-types';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { AccessType } from '../../../shared/lib/enums/enums';
+import { ProjectService } from '../../../project/services/project.service';
+import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { Socket } from 'ngx-socket-io';
-import { ActivityType } from '../../../../shared/lib/enums/activity-type';
+import { ActivityType } from '../../../shared/lib/enums/activity-type';
 
 @Component({
   selector: 'app-group-projects',

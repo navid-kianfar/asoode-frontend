@@ -20,7 +20,6 @@ export class FilesComponent implements OnInit {
     private readonly groupService: GroupService,
     private readonly projectService: ProjectService,
     readonly filesService: FilesService,
-    private readonly gaService: GoogleAnalyticsService,
     private readonly translateService: TranslateService,
     readonly identityService: IdentityService,
   ) {}
@@ -31,13 +30,6 @@ export class FilesComponent implements OnInit {
       this.projectService.projects.length > 0 ||
       this.groupService.groups.length > 0 ||
       true;
-
-    this.gaService.pageView(
-      window.location.pathname,
-      this.translateService.fromKey('FILES'),
-      undefined,
-      { user_id: this.identityService.identity.userId },
-    );
   }
 
   hide() {

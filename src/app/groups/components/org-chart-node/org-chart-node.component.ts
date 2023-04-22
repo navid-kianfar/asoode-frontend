@@ -5,19 +5,19 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { GroupService } from '../../../../groups/services/group.service';
-import { CreateWizardComponent } from '../../../modals/create-wizard/create-wizard.component';
-import { ModalService } from '../../../../shared/services/modal.service';
-import { CreateModalParameters } from '../../../../view-models/modals/modals-types';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { GroupService } from '../../services/group.service';
+import { CreateWizardComponent } from '../../../__/modals/create-wizard/create-wizard.component';
+import { ModalService } from '../../../shared/services/modal.service';
+import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
 import { AccessType } from 'src/app/shared/lib/enums/enums';
-import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
-import { PromptModalParameters } from '../../../../view-models/core/modal-types';
-import { FormService } from '../../../../shared/services/form.service';
-import { ActivityType } from '../../../../shared/lib/enums/activity-type';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
+import { FormService } from '../../../shared/services/form.service';
+import { ActivityType } from '../../../shared/lib/enums/activity-type';
+import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { PromptModalComponent } from '../../../shared/modals/prompt-modal/prompt-modal.component';
 
 @Component({
   selector: 'app-org-chart-node',
@@ -62,17 +62,17 @@ export class OrgChartNodeComponent implements OnInit, OnDestroy {
   };
 
   newGroup() {
-    this.modalService
-      .show<CreateModalParameters>(CreateWizardComponent, {
-        simpleGroup: true,
-        parentId: this.group.id,
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .show<CreateModalParameters>(CreateWizardComponent, {
+    //     simpleGroup: true,
+    //     parentId: this.group.id,
+    //   })
+    //   .subscribe(() => {});
   }
 
   attachGroup() {
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         icon: 'icon-link',
         title: 'ATTACH_GROUP',
         form: [
@@ -104,8 +104,7 @@ export class OrgChartNodeComponent implements OnInit, OnDestroy {
         },
         actionLabel: 'CONNECT_GROUP',
         actionColor: 'primary',
-      } as PromptModalParameters)
-      .subscribe(() => {});
+      } as PromptModalParameters);
   }
 
   openGroup() {

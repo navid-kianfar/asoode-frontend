@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   ExplorerFileViewModel,
   ExplorerFolderViewModel,
-} from '../../../../view-models/storage/files-types';
-import { FilesService } from '../../../../storage/services/files.service';
+} from '../../../view-models/storage/files-types';
+import { FilesService } from '../../services/files.service';
 
 @Component({
   selector: 'app-file-folder-preview',

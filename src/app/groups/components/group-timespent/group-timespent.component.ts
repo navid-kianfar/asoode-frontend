@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { AccessType } from '../../../../shared/lib/enums/enums';
-import { GroupService } from '../../../../groups/services/group.service';
-import { TimeSpentViewModel } from '../../../../view-models/projects/project-types';
-import { CulturedDateService } from '../../../../shared/services/cultured-date.service';
-import { ModalService } from '../../../../shared/services/modal.service';
-import { IDateConverter } from '../../../../shared/lib/date-time/date-contracts';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { AccessType } from '../../../shared/lib/enums/enums';
+import { GroupService } from '../../services/group.service';
+import { TimeSpentViewModel } from '../../../view-models/projects/project-types';
+import { CulturedDateService } from '../../../shared/services/cultured-date.service';
+import { ModalService } from '../../../shared/services/modal.service';
+import { IDateConverter } from '../../../shared/lib/date-time/date-contracts';
+import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 
 @Component({
   selector: 'app-group-timespent',

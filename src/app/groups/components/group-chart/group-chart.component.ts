@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { GroupViewModel } from '../../../../view-models/groups/group-types';
-import { GroupService } from '../../../../groups/services/group.service';
-import { AccessType } from '../../../../shared/lib/enums/enums';
-import { ModalService } from '../../../../shared/services/modal.service';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
+import { GroupService } from '../../services/group.service';
+import { AccessType } from '../../../shared/lib/enums/enums';
+import { ModalService } from '../../../shared/services/modal.service';
+import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 
 @Component({
   selector: 'app-group-chart',
