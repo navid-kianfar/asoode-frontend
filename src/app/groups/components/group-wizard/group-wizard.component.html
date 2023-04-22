@@ -1,5 +1,5 @@
-<div class="modal-content create-modal">
-  <div class="modal-alt-header">
+<div class="create-modal">
+  <div class="header">
     <div class="btn">
       <button [disabled]="actionWaiting" (click)="onBack($event)">
         <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
@@ -9,7 +9,7 @@
 
     <div class="text">
       <h4 class="modal-title">
-        <i class="icon-team"></i><br />
+        <i class="icon-team"></i>
         <span *ngIf="mode === ViewMode.Form">
           {{ 'CREATE_NEW_GROUP' | translate: true }}
         </span>
@@ -24,15 +24,14 @@
       </button>
     </div>
   </div>
-
   <ng-container *ngIf="mode === ViewMode.Invite">
-    <div class="modal-body create-group">
+    <div class="body create-group">
       <app-invite-new-member
         [exclude]="exclude"
         [(members)]="members"
       ></app-invite-new-member>
     </div>
-    <div class="modal-footer">
+    <div class="footer">
       <button
         [disabled]="actionWaiting"
         (click)="createGroup($event)"
@@ -45,14 +44,14 @@
     </div>
   </ng-container>
   <ng-container *ngIf="mode === ViewMode.Form">
-    <div class="modal-body create-group">
+    <div class="body create-group">
       <app-form
         [standalone]="true"
         [elements]="groupForm"
         [actionWaiting]="actionWaiting"
       ></app-form>
     </div>
-    <div class="modal-footer">
+    <div class="footer">
       <button
         (click)="inviteToGroup($event)"
         mat-flat-button

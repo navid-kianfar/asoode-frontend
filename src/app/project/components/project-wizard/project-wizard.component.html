@@ -1,5 +1,5 @@
-<div class="modal-content create-modal">
-  <div class="modal-alt-header">
+<div class="create-modal">
+  <div class="header">
     <div class="btn">
       <ng-container *ngIf="!projectId || (projectId && mode !== ViewMode.Form)">
         <button [disabled]="actionWaiting" (click)="onBack($event)">
@@ -8,28 +8,27 @@
         </button>
       </ng-container>
     </div>
-
     <div class="text">
       <h4 *ngIf="mode === ViewMode.Form" class="modal-title">
         <ng-container *ngIf="!projectId && complex">
-          <i class="icon-project"></i><br />
+          <i class="icon-project"></i>
           {{ 'CREATE_COMPLEX_PROJECT' | translate }}
         </ng-container>
         <ng-container *ngIf="!projectId && !complex">
-          <i class="icon-workpackage"></i><br />
+          <i class="icon-workpackage"></i>
           {{ 'CREATE_SIMPLE_PROJECT' | translate }}
         </ng-container>
         <ng-container *ngIf="projectId">
-          <i class="icon-workpackage"></i><br />
+          <i class="icon-workpackage"></i>
           {{ 'NEW_WORK_PACKAGE' | translate }}
         </ng-container>
       </h4>
       <h4 *ngIf="mode === ViewMode.Invite" class="modal-title">
-        <i class="icon-users2"></i><br />
+        <i class="icon-users2"></i>
         {{ 'NEW_PROJECT_MEMBERS' | translate: true }}
       </h4>
       <h4 *ngIf="mode === ViewMode.Template" class="modal-title">
-        <i class="icon-tree7"></i><br />
+        <i class="icon-tree7"></i>
         {{
           (projectId ? 'CHOOSE_PACKAGE_TEMPLATE' : 'NEW_PROJECT_TEMPLATE')
             | translate: true
@@ -43,27 +42,26 @@
     </div>
   </div>
   <ng-container *ngIf="mode === ViewMode.Form">
-    <div class="modal-body create-project">
+    <div class="body create-project">
       <app-form [standalone]="true" [elements]="projectForm"></app-form>
     </div>
-    <div class="modal-footer">
+    <div class="footer">
       <button (click)="next($event)" mat-flat-button [color]="'primary'">
         {{ 'CONTINUE' | translate: true }}
       </button>
     </div>
   </ng-container>
-
   <ng-container *ngIf="mode === ViewMode.Invite">
-    <div class="modal-body create-project">
-<!--      <app-invite-people-->
-<!--        [projectId]="projectId"-->
-<!--        [exclude]="exclude"-->
-<!--        [(members)]="members"-->
-<!--        [(newMembers)]="newMembers"-->
-<!--        [(groups)]="groups"-->
-<!--      ></app-invite-people>-->
+    <div class="body create-project">
+      <app-invite-people
+        [projectId]="projectId"
+        [exclude]="exclude"
+        [(members)]="members"
+        [(newMembers)]="newMembers"
+        [(groups)]="groups"
+      ></app-invite-people>
     </div>
-    <div class="modal-footer">
+    <div class="footer">
       <button (click)="next($event)" mat-flat-button [color]="'primary'">
         {{ 'CONTINUE' | translate: true }}
       </button>

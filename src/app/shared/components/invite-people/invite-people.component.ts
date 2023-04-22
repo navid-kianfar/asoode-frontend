@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { InviteViewModel } from '../../../../view-models/auth/identity-types';
-import { AccessType } from '../../../../shared/lib/enums/enums';
-import { ProjectService } from '../../../../project/services/project.service';
+import { InviteViewModel } from '../../../view-models/auth/identity-types';
+import { ProjectService } from '../../../project/services/project.service';
 
 @Component({
   selector: 'app-invite-people',

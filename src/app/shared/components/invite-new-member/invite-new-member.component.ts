@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AccessType } from '../../../../shared/lib/enums/enums';
+import { AccessType } from '../../lib/enums/enums';
 import {
   InviteViewModel,
   MemberInfoViewModel,
-} from '../../../../view-models/auth/identity-types';
-import { ValidationService } from '../../../../shared/services/validation.service';
-import { NotificationService } from '../../../../shared/services/notification.service';
+} from '../../../view-models/auth/identity-types';
+import { ValidationService } from '../../services/validation.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-invite-new-member',

@@ -71,27 +71,27 @@
     ></app-import-wizard>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Group">
-    <!--    <app-group-wizard-->
-    <!--      [parentId]="parentId"-->
-    <!--      (click)="$event.stopPropagation()"-->
-    <!--      (exit)="close()"-->
-    <!--      (back)="mode = WizardMode.Choose"-->
-    <!--    ></app-group-wizard>-->
+    <app-group-wizard
+      [parentId]="parentId"
+      (click)="$event.stopPropagation()"
+      (exit)="onCancel()"
+      (back)="mode = WizardMode.Choose"
+    ></app-group-wizard>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.SimpleProject">
-    <!--    <app-project-wizard-->
-    <!--      (click)="$event.stopPropagation()"-->
-    <!--      (exit)="close()"-->
-    <!--      (back)="mode = WizardMode.Choose"-->
-    <!--      [complex]="false"-->
-    <!--    ></app-project-wizard>-->
+    <app-project-wizard
+      (click)="$event.stopPropagation()"
+      (exit)="onCancel()"
+      (back)="mode = WizardMode.Choose"
+      [complex]="false"
+    ></app-project-wizard>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.ComplexProject">
-    <!--    <app-project-wizard-->
-    <!--      (click)="$event.stopPropagation()"-->
-    <!--      (exit)="close()"-->
-    <!--      (back)="mode = WizardMode.Choose"-->
-    <!--      [complex]="true"-->
-    <!--    ></app-project-wizard>-->
+    <app-project-wizard
+      (click)="$event.stopPropagation()"
+      (exit)="onCancel()"
+      (back)="mode = WizardMode.Choose"
+      [complex]="true"
+    ></app-project-wizard>
   </ng-container>
 </div>

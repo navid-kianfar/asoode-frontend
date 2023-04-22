@@ -4,13 +4,12 @@ import { FormService } from '../../../shared/services/form.service';
 import { FormViewModel } from '../../../shared/components/form/contracts';
 import { BoardTemplateViewModel } from '../../../view-models/projects/project-types';
 import { InviteViewModel } from '../../../view-models/auth/identity-types';
-import { ProjectService } from '../../services/project.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { IdentityService } from '../../../auth/services/identity.service';
 import { OperationResult } from '../../../shared/lib/operation-result';
-import { ListViewModel } from '../../../view-models/core/list-types';
 import { BoardTemplate } from '../../../shared/lib/enums/workpackage';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-project-wizard',
@@ -27,8 +26,6 @@ export class ProjectWizardComponent implements OnInit {
   @Output() exit = new EventEmitter();
   mode: ViewMode;
   projectForm: FormViewModel[];
-  // projectTemplates: ListViewModel[];
-  // projectTemplate: ListViewModel;
   boardTemplates: BoardTemplateViewModel[];
   boardTemplate: BoardTemplate;
   model: any;

@@ -3,33 +3,38 @@
   padding: 20px;
   background: #fff;
   border-radius: 5px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  .text {
+    display: flex;
+    flex-grow: 1;
 
-  .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    .text {
+    h4 { align-items: center }
+
+    i {
+      margin-inline-end: 10px;
+    }
+  }
+  .btn {
+    button {
+      background: transparent;
+      outline: none;
       display: flex;
-      flex-grow: 1;
-    }
-    .btn {
-      button {
-        background: transparent;
-        outline: none;
-        display: flex;
-        width: 50px;
-        height: 50px;
-        align-items: center;
-        justify-content: center;
-        border: none;
-      }
+      width: 50px;
+      height: 50px;
+      align-items: center;
+      justify-content: center;
+      border: none;
     }
   }
-  .footer {
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-  }
+}
+.footer {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
 }
 .choose {
   .items {

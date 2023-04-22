@@ -12,7 +12,6 @@ import { ProjectSeasonComponent } from './components/project-season/project-seas
 import { ProjectSettingComponent } from './components/project-setting/project-setting.component';
 import { ProjectTreeComponent } from './components/project-tree/project-tree.component';
 import { ProjectTreeNodeComponent } from './components/project-tree-node/project-tree-node.component';
-import { ProjectWizardComponent } from './components/project-wizard/project-wizard.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -30,7 +29,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ProjectSettingComponent,
     ProjectTreeComponent,
     ProjectTreeNodeComponent,
-    ProjectWizardComponent,
     ArchivedProjectsComponent
   ],
   imports: [
@@ -51,7 +49,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ProjectSettingComponent,
     ProjectTreeComponent,
     ProjectTreeNodeComponent,
-    ProjectWizardComponent,
     ArchivedProjectsComponent
   ]
 })

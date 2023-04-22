@@ -59,7 +59,7 @@ import { QuickAccessComponent } from './components/quick-access/quick-access.com
 import { SearchResultComponent } from './components/search-result/search-result.component';
 import { RouterLink } from '@angular/router';
 import { GroupInfoComponent } from './components/group-info/group-info.component';
-import { ProjectInfoMiniComponent } from './components/project-info-mini/project-info-mini.component';
+import { ProjectInfoMiniComponent } from '../project/components/project-info-mini/project-info-mini.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogModule } from '@angular/cdk/dialog';
 import { OfflineModalComponent } from './modals/offline-modal/offline-modal.component';
@@ -78,6 +78,12 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { CreateWizardModalComponent } from './modals/create-wizard-modal/create-wizard-modal.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { ImportWizardComponent } from './components/import-wizard/import-wizard.component';
+import { ProjectWizardComponent } from '../project/components/project-wizard/project-wizard.component';
+import { GroupWizardComponent } from '../groups/components/group-wizard/group-wizard.component';
+import { InviteGroupComponent } from '../groups/components/invite-group/invite-group.component';
+import { InviteMemberComponent } from './components/invite-member/invite-member.component';
+import { InviteNewMemberComponent } from './components/invite-new-member/invite-new-member.component';
+import { InvitePeopleComponent } from './components/invite-people/invite-people.component';
 
 
 
@@ -120,6 +126,12 @@ import { ImportWizardComponent } from './components/import-wizard/import-wizard.
     AudioComponent,
     VideoComponent,
     ImportWizardComponent,
+    ProjectWizardComponent,
+    GroupWizardComponent,
+    InviteGroupComponent,
+    InviteMemberComponent,
+    InviteNewMemberComponent,
+    InvitePeopleComponent,
 
 
 
@@ -216,6 +228,12 @@ import { ImportWizardComponent } from './components/import-wizard/import-wizard.
     AudioComponent,
     VideoComponent,
     ImportWizardComponent,
+    ProjectWizardComponent,
+    GroupWizardComponent,
+    InviteGroupComponent,
+    InviteMemberComponent,
+    InviteNewMemberComponent,
+    InvitePeopleComponent,
 
 
 

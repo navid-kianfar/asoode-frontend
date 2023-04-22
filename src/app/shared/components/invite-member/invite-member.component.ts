@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { InviteViewModel } from '../../../../view-models/auth/identity-types';
+import { InviteViewModel } from '../../../view-models/auth/identity-types';
 import { AccessType } from 'src/app/shared/lib/enums/enums';
 
 @Component({
