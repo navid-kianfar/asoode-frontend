@@ -1,5 +1,35 @@
-.modal-body {
+.create-wizard-modal {
+  width: 800px;
   padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    .text {
+      display: flex;
+      flex-grow: 1;
+    }
+    .btn {
+      button {
+        background: transparent;
+        outline: none;
+        display: flex;
+        width: 50px;
+        height: 50px;
+        align-items: center;
+        justify-content: center;
+        border: none;
+      }
+    }
+  }
+  .footer {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
 }
 .choose {
   .items {
@@ -11,6 +41,7 @@
     ::ng-deep mat-radio-button {
       display: flex;
       width: 50%;
+      align-items: center;
 
       &.border {
         border-bottom: 2px solid #efefef;

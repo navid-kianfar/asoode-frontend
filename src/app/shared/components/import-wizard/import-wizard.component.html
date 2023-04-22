@@ -1,5 +1,5 @@
 <div class="modal-content create-modal">
-  <div class="modal-alt-header">
+  <div class="header">
     <div class="btn">
       <button (click)="onBack($event)">
         <i *ngIf="cultureService.rtl" class="icon-arrow-right2"></i>
@@ -8,10 +8,7 @@
     </div>
 
     <div class="text">
-      <h4 class="modal-title">
-        <i class="icon-import"></i><br />
-        {{ 'IMPORT' | translate: true }}&nbsp;...
-      </h4>
+      <h4 class="title">{{ 'IMPORT' | translate: true }}&nbsp;...</h4>
     </div>
     <div class="btn">
       <button (click)="onCancel($event)">
@@ -20,7 +17,7 @@
     </div>
   </div>
   <ng-container *ngIf="!requireMapMembers">
-    <div class="modal-body">
+    <div class="body">
       <mat-progress-bar
         *ngIf="uploading"
         color="primary"
@@ -48,29 +45,6 @@
             >
               <i class="icon-upload4"></i>&nbsp;
               {{ 'IMPORT_JSON_FILE' | translate }}
-            </button>
-          </div>
-        </div>
-        <hr />
-        <div class="taskulu item">
-          <div class="logo">
-            <img src='/assets/images/import/taskulu-logo.png' />
-          </div>
-          <div class="action">
-            <input
-              #taskuluPicker
-              (change)="importFromTaskulu($event.target)"
-              accept=".zip"
-              hidden
-              type="file"
-            />
-            <button
-              (click)="taskuluPicker.click()"
-              [disabled]="actionWaiting"
-              mat-button
-            >
-              <i class="icon-upload4"></i>&nbsp;
-              {{ 'IMPORT_ZIP_FILE' | translate }}
             </button>
           </div>
         </div>
@@ -119,7 +93,7 @@
         [actionWaiting]="actionWaiting"
       ></app-form>
     </div>
-    <div class="modal-footer">
+    <div class="footer">
       <button
         [disabled]="uploading || actionWaiting"
         (click)="importTrelloMapped($event)"

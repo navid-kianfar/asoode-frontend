@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormViewModel } from '../../../../shared/components/form/contracts';
-import { CultureService } from '../../../../shared/services/culture.service';
-import { FormService } from '../../../../shared/services/form.service';
-import { ValidationService } from '../../../../shared/services/validation.service';
-import { NotificationService } from '../../../../shared/services/notification.service';
-import { HttpService } from '../../../../shared/services/http.service';
+import { FormViewModel } from '../form/contracts';
+import { CultureService } from '../../services/culture.service';
+import { FormService } from '../../services/form.service';
+import { ValidationService } from '../../services/validation.service';
+import { NotificationService } from '../../services/notification.service';
+import { HttpService } from '../../services/http.service';
 
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+import { OperationResultStatus } from '../../lib/enums/operation-result-status';
 
 @Component({
   selector: 'app-import-wizard',
@@ -140,26 +140,6 @@ export class ImportWizardComponent implements OnInit {
     if (op.status !== OperationResultStatus.Success) {
       // TODO: handle error
       this.uploading = false;
-      return;
-    }
-    this.uploadingProgress = 0;
-    this.uploading = false;
-    this.exit.emit();
-  }
-  async importFromTaskulu(target: any) {
-    if (!target.files || !target.files.length) {
-      return;
-    }
-    this.uploading = true;
-    const op = await this.httpService.formUpload(
-      '/import/taskulu',
-      { ___FILE: target.files[0] },
-      percent => {
-        this.uploadingProgress = percent;
-      },
-    );
-    if (op.status !== OperationResultStatus.Success) {
-      // TODO: handle error
       return;
     }
     this.uploadingProgress = 0;

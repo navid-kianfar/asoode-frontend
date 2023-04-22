@@ -19,6 +19,8 @@ import { PushNotificationService } from '../../services/push-notification.servic
 import { SwPush } from '@angular/service-worker';
 import { NumberHelpers } from '../../helpers/number.helpers';
 import { OperationResultStatus } from '../../lib/enums/operation-result-status';
+import { CreateWizardModalComponent } from '../../modals/create-wizard-modal/create-wizard-modal.component';
+import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 
 const EMPTY = {
   members: [],
@@ -120,9 +122,8 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   }
 
   prepareCreate() {
-    // this.modalService
-    //   .show(CreateWizardComponent, {} as CreateModalParameters)
-    //   .subscribe(() => {});
+    this.modalService
+      .show(CreateWizardModalComponent, {} as CreateModalParameters);
   }
 
   openSearchResult($event: MouseEvent) {

@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { GroupService } from '../../services/group.service';
-import { CreateWizardComponent } from '../../../__/modals/create-wizard/create-wizard.component';
+import { CreateWizardModalComponent } from '../../../shared/modals/create-wizard-modal/create-wizard-modal.component';
 import { ModalService } from '../../../shared/services/modal.service';
 import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { Socket } from 'ngx-socket-io';

@@ -19,7 +19,7 @@ import {
 import { MemberInfoViewModel } from '../../../../view-models/auth/identity-types';
 import { MessengerService } from '../../../../messenger/services/messenger.service';
 import { ModalService } from '../../../../shared/services/modal.service';
-import { CreateWizardComponent } from '../../../modals/create-wizard/create-wizard.component';
+import { CreateWizardModalComponent } from '../../../../shared/modals/create-wizard-modal/create-wizard-modal.component';
 import { Socket } from 'ngx-socket-io';
 import { CulturedDateService } from '../../../../shared/services/cultured-date.service';
 import { IdentityService } from '../../../../auth/services/identity.service';
@@ -145,12 +145,12 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
     switch (message.path) {
       case 'COMMAND_NEW_GROUP':
         this.modalService
-          .show(CreateWizardComponent, { simpleGroup: true })
+          .show(CreateWizardModalComponent, { simpleGroup: true })
           .subscribe(() => {});
         break;
       case 'COMMAND_NEW_PROJECT':
         this.modalService
-          .show(CreateWizardComponent, { simpleProject: true })
+          .show(CreateWizardModalComponent, { simpleProject: true })
           .subscribe(() => {});
         break;
       default:

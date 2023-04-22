@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
 import { CreateModalParameters } from '../../../view-models/modals/modals-types';
-import { CultureService } from '../../../shared/services/culture.service';
+import { CultureService } from '../../services/culture.service';
 import { IdentityService } from '../../../auth/services/identity.service';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 
 @Component({
-  selector: 'app-create-wizard',
-  templateUrl: './create-wizard.component.html',
-  styleUrls: ['./create-wizard.component.scss'],
+  selector: 'app-create-wizard-modal',
+  templateUrl: './create-wizard-modal.component.html',
+  styleUrls: ['./create-wizard-modal.component.scss'],
 })
-export class CreateWizardComponent
-  extends SimpleModalComponent<CreateModalParameters, boolean>
-  implements OnInit {
+export class CreateWizardModalComponent implements OnInit {
   WizardMode = WizardMode;
   mode: WizardMode;
   continueAs: WizardMode;
@@ -22,17 +21,14 @@ export class CreateWizardComponent
   simpleGroup?: boolean;
   complexProject?: boolean;
   complexGroup?: boolean;
-  canCreateGroup: boolean;
-  canCreateWorkPackage: boolean;
-  canCreateProject: boolean;
   parentId?: string;
 
   constructor(
     readonly cultureService: CultureService,
     readonly identityService: IdentityService,
-  ) {
-    super();
-  }
+    public dialogRef: DialogRef<boolean>,
+    @Inject(DIALOG_DATA) public data: CreateModalParameters
+  ) { }
 
   ngOnInit() {
 
@@ -52,11 +48,10 @@ export class CreateWizardComponent
       this.continueAs = WizardMode.Group;
     }
   }
-  async onCancel($event: MouseEvent) {
-    $event.stopPropagation();
-    $event.preventDefault();
-    this.result = false;
-    this.close();
+  async onCancel($event: MouseEvent = null) {
+    $event?.stopPropagation();
+    $event?.preventDefault();
+    this.dialogRef.close(false);
   }
   next($event: MouseEvent) {
     $event.stopPropagation();

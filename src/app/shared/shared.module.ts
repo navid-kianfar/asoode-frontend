@@ -75,6 +75,9 @@ import { AccessListComponent } from './components/access-list/access-list.compon
 import { AudioComponent } from './components/audio/audio.component';
 import { VideoComponent } from './components/video/video.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { CreateWizardModalComponent } from './modals/create-wizard-modal/create-wizard-modal.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { ImportWizardComponent } from './components/import-wizard/import-wizard.component';
 
 
 
@@ -116,6 +119,11 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     AccessListComponent,
     AudioComponent,
     VideoComponent,
+    ImportWizardComponent,
+
+
+
+    CreateWizardModalComponent,
 
 
 
@@ -167,7 +175,8 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     MatSnackBarModule,
     DialogModule,
     MatTabsModule,
-    NgxAudioPlayerModule
+    NgxAudioPlayerModule,
+    MatRadioModule,
   ],
   exports: [
     AutoCompleteComponent,
@@ -206,6 +215,11 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
     AccessListComponent,
     AudioComponent,
     VideoComponent,
+    ImportWizardComponent,
+
+
+
+    CreateWizardModalComponent,
 
 
 
