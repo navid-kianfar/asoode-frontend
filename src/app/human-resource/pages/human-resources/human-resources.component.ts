@@ -1,25 +1,23 @@
 import { Component, EventEmitter, Input, OnInit } from '@angular/core';
-import { GroupViewModel } from '../../../../view-models/groups/group-types';
+import { GroupViewModel } from '../../../view-models/groups/group-types';
 import {
   AccessType,
   RequestStatus,
   ShiftType,
-} from '../../../../shared/lib/enums/enums';
-import { IdentityService } from '../../../../auth/services/identity.service';
-import { GridCommand } from '../../../../view-models/core/grid-types';
-import { ModalService } from '../../../../shared/services/modal.service';
-import { StringHelpers } from '../../../../shared/helpers/string.helpers';
-import { TranslateService } from '../../../../shared/services/translate.service';
-import { GroupService } from '../../../../groups/services/group.service';
-import { CulturedDateService } from '../../../../shared/services/cultured-date.service';
-import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
-import { FormViewModel } from '../../../../shared/components/form/contracts';
-import { FormService } from '../../../../shared/services/form.service';
-import { ListViewModel } from '../../../../view-models/core/list-types';
-import { IDateConverter } from '../../../../shared/lib/date-time/date-contracts';
-import { TimeOffApproveModalComponent } from '../../../modals/time-off-approve-modal/time-off-approve-modal.component';
-import { TimeOffHistoryModalComponent } from '../../../modals/time-off-history-modal/time-off-history-modal.component';
-import { OperationResultStatus } from '../../../../shared/lib/enums/operation-result-status';
+} from '../../../shared/lib/enums/enums';
+import { IdentityService } from '../../../auth/services/identity.service';
+import { GridCommand } from '../../../view-models/core/grid-types';
+import { ModalService } from '../../../shared/services/modal.service';
+import { StringHelpers } from '../../../shared/helpers/string.helpers';
+import { TranslateService } from '../../../shared/services/translate.service';
+import { GroupService } from '../../../groups/services/group.service';
+import { CulturedDateService } from '../../../shared/services/cultured-date.service';
+import { FormViewModel } from '../../../shared/components/form/contracts';
+import { FormService } from '../../../shared/services/form.service';
+import { ListViewModel } from '../../../view-models/core/list-types';
+import { IDateConverter } from '../../../shared/lib/date-time/date-contracts';
+import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { PromptModalComponent } from '../../../shared/modals/prompt-modal/prompt-modal.component';
 
 @Component({
   selector: 'app-human-resources',
@@ -71,22 +69,22 @@ export class HumanResourcesComponent implements OnInit {
     const heading = StringHelpers.format(this.translateService.fromKey(str1), [
       this.group.title,
     ]);
-    this.modalService
-      .confirm({
-        heading,
-        title: str2,
-        message: str3,
-        actionLabel: str2,
-        cancelLabel: 'CANCEL',
-        action: async () => {
-          const op = await this.groupService.toggleEntry(this.group.id);
-          if (op.status === OperationResultStatus.Success) {
-            this.entryCommander.emit({ reload: true });
-          }
-          return op;
-        },
-      })
-      .subscribe(confirmed => {});
+    // this.modalService
+    //   .confirm({
+    //     heading,
+    //     title: str2,
+    //     message: str3,
+    //     actionLabel: str2,
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => {
+    //       const op = await this.groupService.toggleEntry(this.group.id);
+    //       if (op.status === OperationResultStatus.Success) {
+    //         this.entryCommander.emit({ reload: true });
+    //       }
+    //       return op;
+    //     },
+    //   })
+    //   .subscribe(confirmed => {});
   }
 
   createEntryForm(beginAt: Date, endAt: Date): FormViewModel[] {
@@ -156,7 +154,7 @@ export class HumanResourcesComponent implements OnInit {
     element.endAt = element.endAt ? new Date(element.endAt) : new Date();
     const form = this.createEntryForm(element.beginAt, element.endAt);
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         form,
         actionLabel: 'EDIT_ENTRY',
         action: async (model, frm) => {
@@ -195,8 +193,7 @@ export class HumanResourcesComponent implements OnInit {
         },
         actionColor: 'primary',
         title: 'EDIT_ENTRY',
-      })
-      .subscribe(() => {});
+      });
   }
 
   createManualEntry() {
@@ -229,7 +226,7 @@ export class HumanResourcesComponent implements OnInit {
       ],
     });
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         form,
         actionLabel: 'MANUAL_ENTRY',
         action: async (model, frm) => {
@@ -269,8 +266,7 @@ export class HumanResourcesComponent implements OnInit {
         },
         actionColor: 'primary',
         title: 'MANUAL_ENTRY',
-      })
-      .subscribe(() => {});
+      });
   }
 
   delete(element: any) {
@@ -286,22 +282,21 @@ export class HumanResourcesComponent implements OnInit {
         converter.Format(element.endAt || new Date(), 'YYYY/MM/DD HH:mm'),
       ],
     );
-    this.modalService
-      .confirm({
-        title: 'REMOVE_ENTRY',
-        message,
-        heading,
-        actionLabel: 'REMOVE_ENTRY',
-        cancelLabel: 'CANCEL',
-        action: async () => {
-          const op = await this.groupService.removeEntry(element.id);
-          if (op.status === OperationResultStatus.Success) {
-            this.entryCommander.emit({ reload: true });
-          }
-          return op;
-        },
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .confirm({
+    //     title: 'REMOVE_ENTRY',
+    //     message,
+    //     heading,
+    //     actionLabel: 'REMOVE_ENTRY',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => {
+    //       const op = await this.groupService.removeEntry(element.id);
+    //       if (op.status === OperationResultStatus.Success) {
+    //         this.entryCommander.emit({ reload: true });
+    //       }
+    //       return op;
+    //     },
+    //   });
   }
 
   createShiftForm(create: boolean): FormViewModel[] {
@@ -579,7 +574,7 @@ export class HumanResourcesComponent implements OnInit {
 
   createShift() {
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         form: this.createShiftForm(true),
         actionLabel: 'CREATE_SHIFT',
         action: async (model, form) => {
@@ -593,8 +588,7 @@ export class HumanResourcesComponent implements OnInit {
         },
         actionColor: 'primary',
         title: 'CREATE_SHIFT',
-      })
-      .subscribe(() => {});
+      });
   }
 
   createTimeOff() {
@@ -682,7 +676,7 @@ export class HumanResourcesComponent implements OnInit {
     ] as FormViewModel[];
 
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         form,
         actionLabel: 'CREATE_TIME_OFF',
         action: async (model, frm) => {
@@ -722,8 +716,7 @@ export class HumanResourcesComponent implements OnInit {
         },
         actionColor: 'primary',
         title: 'REQUEST_TIME_OFF',
-      })
-      .subscribe(() => {});
+      });
   }
 
   editShift(element: any) {
@@ -742,7 +735,7 @@ export class HumanResourcesComponent implements OnInit {
     }
 
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         form,
         actionLabel: 'EDIT_SHIFT',
         action: async (model, frm) => {
@@ -756,8 +749,7 @@ export class HumanResourcesComponent implements OnInit {
         },
         actionColor: 'primary',
         title: 'EDIT_SHIFT',
-      })
-      .subscribe(() => {});
+      });
   }
 
   shiftMembers(element: any) {}
@@ -767,78 +759,75 @@ export class HumanResourcesComponent implements OnInit {
       this.translateService.fromKey('REMOVE_SHIFT_CONFIRM_HEADING'),
       [element.title],
     );
-    this.modalService
-      .confirm({
-        title: 'REMOVE_SHIFT',
-        message: 'REMOVE_SHIFT_CONFIRM',
-        heading,
-        actionLabel: 'REMOVE_SHIFT',
-        cancelLabel: 'CANCEL',
-        action: async () => {
-          const op = await this.groupService.removeShift(element.id);
-          if (op.status === OperationResultStatus.Success) {
-            this.shiftsCommander.emit({ reload: true });
-          }
-          return op;
-        },
-      })
-      .subscribe(() => {});
+    // this.modalService
+    //   .confirm({
+    //     title: 'REMOVE_SHIFT',
+    //     message: 'REMOVE_SHIFT_CONFIRM',
+    //     heading,
+    //     actionLabel: 'REMOVE_SHIFT',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => {
+    //       const op = await this.groupService.removeShift(element.id);
+    //       if (op.status === OperationResultStatus.Success) {
+    //         this.shiftsCommander.emit({ reload: true });
+    //       }
+    //       return op;
+    //     },
+    //   });
   }
 
   deleteTimeOff(element: any) {
-    this.modalService
-      .confirm({
-        title: 'TIME_OFF_DELETE',
-        message: 'TIME_OFF_DELETE_CONFIRM',
-        heading: 'TIME_OFF_DELETE_HEADING',
-        actionLabel: 'TIME_OFF_DELETE',
-        cancelLabel: 'CANCEL',
-        action: async () => {
-          const op = await this.groupService.deleteTimeOff(element.id);
-          if (op.status === OperationResultStatus.Success) {
-            this.timeOffCommander.emit({ reload: true });
-            return;
-          }
-          // TODO: handle error
-        },
-      })
-      .subscribe(confirmed => {});
+    // this.modalService
+    //   .confirm({
+    //     title: 'TIME_OFF_DELETE',
+    //     message: 'TIME_OFF_DELETE_CONFIRM',
+    //     heading: 'TIME_OFF_DELETE_HEADING',
+    //     actionLabel: 'TIME_OFF_DELETE',
+    //     cancelLabel: 'CANCEL',
+    //     action: async () => {
+    //       const op = await this.groupService.deleteTimeOff(element.id);
+    //       if (op.status === OperationResultStatus.Success) {
+    //         this.timeOffCommander.emit({ reload: true });
+    //         return;
+    //       }
+    //       // TODO: handle error
+    //     },
+    //   });
   }
 
   respondTimeOff(timeOff: any, status: boolean) {
     if (!status) {
-      this.modalService
-        .confirm({
-          title: 'TIME_OFF_DECLINE',
-          message: 'TIME_OFF_DECLINE_CONFIRM',
-          heading: 'TIME_OFF_DECLINE_HEADING',
-          actionLabel: 'TIME_OFF_DECLINE',
-          cancelLabel: 'CANCEL',
-          action: async () => {
-            const op = await this.groupService.declineTimeOff(timeOff.id);
-            if (op.status === OperationResultStatus.Success) {
-              this.timeOffCommander.emit({ reload: true });
-              return;
-            }
-            // TODO: handle error
-          },
-        })
-        .subscribe(confirmed => {});
+      // this.modalService
+      //   .confirm({
+      //     title: 'TIME_OFF_DECLINE',
+      //     message: 'TIME_OFF_DECLINE_CONFIRM',
+      //     heading: 'TIME_OFF_DECLINE_HEADING',
+      //     actionLabel: 'TIME_OFF_DECLINE',
+      //     cancelLabel: 'CANCEL',
+      //     action: async () => {
+      //       const op = await this.groupService.declineTimeOff(timeOff.id);
+      //       if (op.status === OperationResultStatus.Success) {
+      //         this.timeOffCommander.emit({ reload: true });
+      //         return;
+      //       }
+      //       // TODO: handle error
+      //     },
+      //   });
       return;
     }
 
-    this.modalService
-      .show(TimeOffApproveModalComponent, { timeOff })
-      .subscribe(refresh => {
-        if (refresh) {
-          this.timeOffCommander.emit({ reload: true });
-        }
-      });
+    // this.modalService
+    //   .show(TimeOffApproveModalComponent, { timeOff })
+    //   .subscribe(refresh => {
+    //     if (refresh) {
+    //       this.timeOffCommander.emit({ reload: true });
+    //     }
+    //   });
   }
 
   historyTimeOff(timeOff: any) {
-    this.modalService
-      .show(TimeOffHistoryModalComponent, { timeOff })
-      .subscribe(() => {});
+    // this.modalService
+    //   .show(TimeOffHistoryModalComponent, { timeOff })
+    //   .subscribe(() => {});
   }
 }

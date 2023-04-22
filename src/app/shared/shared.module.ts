@@ -72,6 +72,9 @@ import { DurationPickerComponent } from './components/duration-picker/duration-p
 import { CalendarMonthComponent } from './components/calendar-month/calendar-month.component';
 import { TimeSpentComponent } from './components/time-spent/time-spent.component';
 import { AccessListComponent } from './components/access-list/access-list.component';
+import { AudioComponent } from './components/audio/audio.component';
+import { VideoComponent } from './components/video/video.component';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 
 
@@ -111,6 +114,8 @@ import { AccessListComponent } from './components/access-list/access-list.compon
     CalendarMonthComponent,
     TimeSpentComponent,
     AccessListComponent,
+    AudioComponent,
+    VideoComponent,
 
 
 
@@ -161,7 +166,8 @@ import { AccessListComponent } from './components/access-list/access-list.compon
     RouterLink,
     MatSnackBarModule,
     DialogModule,
-    MatTabsModule
+    MatTabsModule,
+    NgxAudioPlayerModule
   ],
   exports: [
     AutoCompleteComponent,
@@ -198,6 +204,8 @@ import { AccessListComponent } from './components/access-list/access-list.compon
     CalendarMonthComponent,
     TimeSpentComponent,
     AccessListComponent,
+    AudioComponent,
+    VideoComponent,
 
 
 
