@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MessengerComponent } from './pages/messenger/messenger.component';
 import { AuthGuard } from '../auth/guards/auth.guard';
+import { TasksComponent } from '../workpackage/pages/tasks/tasks.component';
 
 const routes: Routes = [
   {
-    path: 'messenger',
-    component: MessengerComponent,
+    path: 'tasks',
+    component: TasksComponent,
     canActivate: [AuthGuard],
   },
 ];
@@ -15,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MessengerRoutingModule { }
+export class TasksRoutingModule { }

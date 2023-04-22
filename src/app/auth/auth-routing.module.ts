@@ -4,6 +4,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { AnonymousGuard } from './guards/anonymous.guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { ForgotComponent } from './pages/forgot/forgot.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -20,6 +22,11 @@ const routes: Routes = [
     path: 'forgot',
     component: ForgotComponent,
     canActivate: [AnonymousGuard],
+  },
+  {
+    path: 'account',
+    component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
 ];
 
