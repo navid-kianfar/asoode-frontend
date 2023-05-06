@@ -1,0 +1,43 @@
+.general-modal {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  outline: none;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .btn {
+      button {
+        background: none;
+        border: none;
+        outline: none;
+      }
+    }
+    .text {
+      display: flex;
+      align-items: center;
+      i {
+        margin-inline-end: 10px;
+      }
+    }
+  }
+  .wrapper {
+    padding-top: 20px;
+  }
+  .footer {
+    border-top: 1px solid #ddd;
+    margin: 20px 0 0 0;
+    padding: 20px 0 0 0;
+    display: flex;
+    flex-direction: row-reverse;
+
+    button {
+      cursor: pointer;
+      margin-inline-start: 10px;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<div class="invite-modal general-modal" (click)="$event.stopPropagation()">
+  <div class="header">
+    <div class="btn"></div>
+    <div class="text">
+      <i class="icon-team"></i><br />
+      <span>{{ 'INVITE_NEW_MEMBER' | translate: true }}</span>
+    </div>
+    <div class="btn">
+      <button [disabled]="actionWaiting" (click)="onCancel($event)">
+        <i class="icon-cross"></i>
+      </button>
+    </div>
+  </div>
+  <div class="wrapper">
+    <app-invite-people
+      [projectId]="data.projectId"
+      [noGroup]="data.noGroup"
+      [exclude]="data.exclude"
+      [(members)]="members"
+      [(newMembers)]="newMembers"
+      [(groups)]="groups"
+    ></app-invite-people>
+  </div>
+  <div class="footer">
+    <button
+      [disabled]="actionWaiting"
+      (click)="invite($event)"
+      mat-flat-button
+      [color]="'primary'"
+    >
+      <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+      {{ 'INVITE_NEW_MEMBER' | translate: true }}
+    </button>
+  </div>
+</div>

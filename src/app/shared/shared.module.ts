@@ -85,6 +85,7 @@ import { InviteMemberComponent } from './components/invite-member/invite-member.
 import { InviteNewMemberComponent } from './components/invite-new-member/invite-new-member.component';
 import { InvitePeopleComponent } from './components/invite-people/invite-people.component';
 import { MatRippleModule } from '@angular/material/core';
+import { InviteModalComponent } from './modals/invite-modal/invite-modal.component';
 
 
 
@@ -168,6 +169,7 @@ import { MatRippleModule } from '@angular/material/core';
     OfflineModalComponent,
     PromptModalComponent,
     ConfirmModalComponent,
+    InviteModalComponent,
   ],
   imports: [
     CommonModule,
@@ -270,6 +272,7 @@ import { MatRippleModule } from '@angular/material/core';
     OfflineModalComponent,
     PromptModalComponent,
     ConfirmModalComponent,
+    InviteModalComponent
   ],
 })
 export class SharedModule { }

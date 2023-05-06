@@ -1,44 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
 import { InviteViewModel } from '../../../view-models/auth/identity-types';
-import { GroupService } from '../../../groups/services/group.service';
-import { OperationResult } from '../../../shared/lib/operation-result';
-
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { InviteModalParameters } from '../../../view-models/modals/modals-types';
 
 @Component({
   selector: 'app-invite-modal',
   templateUrl: './invite-modal.component.html',
   styleUrls: ['./invite-modal.component.scss'],
 })
-export class InviteModalComponent
-  extends SimpleModalComponent<
-    {
-      noGroup: boolean;
-      existing: any[];
-      exclude: string[];
-      projectId: string;
-      handler: (members) => Promise<OperationResult<boolean>>;
-    },
-    void
-  >
-  implements OnInit {
-  constructor(private readonly groupService: GroupService) {
-    super();
+export class InviteModalComponent implements OnInit {
+  constructor(
+    public dialogRef: DialogRef<void>,
+    @Inject(DIALOG_DATA) public data: InviteModalParameters
+  ) {
   }
-
-  noGroup: boolean;
   actionWaiting: boolean;
-  members: InviteViewModel[];
   groups: InviteViewModel[];
-  exclude: string[];
-  existing: any[];
-  projectId: string;
-  handler: (members) => Promise<OperationResult<boolean>>;
+  members: InviteViewModel[];
   newMembers: InviteViewModel[];
 
   ngOnInit() {
-    this.exclude = [...this.exclude, ...this.existing.map(e => e.recordId)];
+    this.data.exclude = [...this.data.exclude, ...this.data.existing.map(e => e.recordId)];
     this.groups = this.groups || [];
     this.members = this.members || [];
     this.newMembers = this.newMembers || [];
@@ -47,7 +31,7 @@ export class InviteModalComponent
   async onCancel($event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.close();
+    this.dialogRef.close();
   }
 
   async invite($event: MouseEvent) {
@@ -87,10 +71,10 @@ export class InviteModalComponent
           };
         }),
       );
-    const op = await this.handler(model);
+    const op = await this.data.handler(model);
     this.actionWaiting = false;
     if (op.status === OperationResultStatus.Success) {
-      this.close();
+      this.dialogRef.close();
       return;
     }
     // TODO: handle error

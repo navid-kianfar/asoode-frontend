@@ -201,29 +201,32 @@ export class FilesExplorerComponent implements OnInit {
   }
 
   prepareNewFolder() {
+
+    const form = [
+      {
+        elements: [
+          this.formService.createInput({
+            config: { field: 'title' },
+            params: { model: '', placeHolder: 'TITLE' },
+            validation: {
+              required: {
+                value: true,
+                message: 'TITLE_REQUIRED',
+              },
+            },
+          }),
+        ],
+      },
+    ];
+
     this.modalService
       .show(PromptModalComponent, {
         title: 'NEW_FOLDER',
-        form: [
-          {
-            elements: [
-              this.formService.createInput({
-                config: { field: 'title' },
-                params: { model: '', placeHolder: 'TITLE' },
-                validation: {
-                  required: {
-                    value: true,
-                    message: 'TITLE_REQUIRED',
-                  },
-                },
-              }),
-            ],
-          },
-        ],
+        form,
         actionLabel: 'CREATE',
         actionColor: 'primary',
         width: 300,
-        action: async (params, form) => {
+        action: async (params, frm) => {
           const op = await this.filesService.newFolder({
             path: this.path,
             name: params.title,
@@ -234,8 +237,7 @@ export class FilesExplorerComponent implements OnInit {
           }
           this.fetch(this.path);
         },
-      } as PromptModalParameters)
-      .subscribe(() => {});
+      } as PromptModalParameters);
   }
 
   actionPaste() {
@@ -254,8 +256,7 @@ export class FilesExplorerComponent implements OnInit {
     this.modalService
       .show(DocumentModalComponent, {
         path: file.url,
-      })
-      .subscribe(() => {});
+      });
   }
 
   copyLink() {
@@ -272,7 +273,7 @@ export class FilesExplorerComponent implements OnInit {
     const folder = this.data.folders.find(i => i.selected);
     const title = file ? file.extensionLessName : folder.name;
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         title: 'RENAME',
         form: [
           {
@@ -306,11 +307,9 @@ export class FilesExplorerComponent implements OnInit {
           }
           this.fetch(this.path);
         },
-      } as PromptModalParameters)
-      .subscribe(() => {});
+      } as PromptModalParameters);
   }
-  actionDelete() {
-    debugger;
+  async actionDelete() {
     const selectedFolders = this.data.folders.filter(i => i.selected);
     const selectedFiles = this.data.files.filter(i => i.selected);
 
@@ -322,27 +321,26 @@ export class FilesExplorerComponent implements OnInit {
       .map(f => f.path)
       .concat(selectedFiles.map(f => f.path));
 
-    const heading = StringHelpers.format(
+    const subTitle = StringHelpers.format(
       this.translateService.fromKey('REMOVE_FILES_FOLDERS_CONFIRM_HEADING'),
       [names.join(', ')],
     );
-    this.modalService
-      .confirm({
+    const response = await this.modalService.confirm({
         title: 'REMOVE_FILES_FOLDERS',
-        message: 'REMOVE_FILES_FOLDERS_CONFIRM',
-        heading,
-        actionLabel: 'REMOVE_FILES_FOLDERS',
+        description: 'REMOVE_FILES_FOLDERS_CONFIRM',
+        subTitle,
+        confirmLabel: 'REMOVE_FILES_FOLDERS',
         cancelLabel: 'CANCEL',
-        action: async () => {
-          const op = await this.filesService.delete({ paths });
-          if (op.status === OperationResultStatus.Success) {
-            await this.fetch(this.path);
-            return;
-          }
-          // TODO: handle error
-        },
-      })
-      .subscribe(confirmed => {});
+      });
+
+    if (response.confirmed) {
+      const op = await this.filesService.delete({ paths });
+      if (op.status === OperationResultStatus.Success) {
+        await this.fetch(this.path);
+        return;
+      }
+      // TODO: handle error
+    }
   }
 
   clearInputFile(f) {
@@ -383,14 +381,12 @@ export class FilesExplorerComponent implements OnInit {
     }
     this.clearInputFile(target);
 
-    this.filterFiles(upload).then(filtered => {
-      this.filesService.upload(filtered, this.path);
-      filtered.forEach(u => u.promise.then(() => this.fetch(this.path)));
-      this.filesService.uploading = [
-        ...this.filesService.uploading,
-        ...filtered,
-      ];
-    });
+    this.filesService.upload(upload, this.path);
+    upload.forEach(u => u.promise.then(() => this.fetch(this.path)));
+    this.filesService.uploading = [
+      ...this.filesService.uploading,
+      ...upload,
+    ];
   }
 
   async goTo(p: ExplorerFolderViewModel) {

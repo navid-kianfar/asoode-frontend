@@ -11,7 +11,7 @@
       />
 
       <button
-        [disabled]="group.archivedAt !== null"
+        [disabled]="!!group.archivedAt"
         (click)="invite()"
         mat-stroked-button
       >
