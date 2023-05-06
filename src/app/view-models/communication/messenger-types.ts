@@ -7,7 +7,6 @@ export interface ChannelRepository {
   directs: ChannelViewModel[];
 }
 export interface ChannelViewModel {
-  attachmentSize: number;
   title: string;
   id: string;
   type: ChannelType;

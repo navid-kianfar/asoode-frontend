@@ -35,7 +35,6 @@ import { OperationResultStatus } from '../../../../shared/lib/enums/operation-re
   styleUrls: ['./conversation.component.scss'],
 })
 export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() attachmentSize: number;
   @Input() recordId: string;
   @Input() popup: boolean;
   @Input() dashboard: boolean;
@@ -199,28 +198,11 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
     this.clearInputFile(target);
-    this.filterFiles(upload).then(filtered => {
-      this.filesService.attachChat(filtered, this.recordId);
-      this.filesService.chatAttaching = [
-        ...this.filesService.chatAttaching,
-        ...filtered,
-      ];
-    });
-  }
-
-  async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
-    return new Promise((resolve, reject) => {
-      const filtered: UploadViewModel[] = [];
-      const allowed: UploadViewModel[] = [];
-      (upload || []).forEach(u => {
-        if (u.file.size > this.attachmentSize) {
-          filtered.push(u);
-        } else {
-          allowed.push(u);
-        }
-      });
-      resolve(allowed);
-    });
+    this.filesService.attachChat(upload, this.recordId);
+    this.filesService.chatAttaching = [
+      ...this.filesService.chatAttaching,
+      ...upload,
+    ];
   }
   clearInputFile(f) {
     if (f.value) {

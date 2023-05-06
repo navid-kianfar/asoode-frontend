@@ -65,7 +65,6 @@ export class MessengerComponent implements OnInit {
       members: [],
       title: group.title,
       type: ChannelType.Group,
-      attachmentSize: group.attachmentSize,
     };
     this.currentMembers = group.members.map(m => m.member);
   }
@@ -76,7 +75,6 @@ export class MessengerComponent implements OnInit {
       members: [],
       title: project.title,
       type: ChannelType.Project,
-      attachmentSize: project.attachmentSize,
     };
     this.currentMembers = project.members
       .filter(p => !p.isGroup)
@@ -93,7 +91,6 @@ export class MessengerComponent implements OnInit {
       members: [],
       title: workPackageViewModel.title,
       type: ChannelType.WorkPackage,
-      attachmentSize: project.attachmentSize,
     };
     this.currentMembers = project.members
       .filter(p => {

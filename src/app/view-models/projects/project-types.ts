@@ -74,11 +74,6 @@ export interface ProjectViewModel extends BaseViewModel {
   premium: boolean;
   complex: boolean;
   tasks: number;
-  attachmentSize: number;
-  membersCapacity: number;
-  membersUsed: number;
-  diskSpaceCapacity: number;
-  diskSpaceUsed: number;
   pending: PendingInvitationViewModel[];
   members: ProjectMemberViewModel[];
   seasons: ProjectSeasonViewModel[];

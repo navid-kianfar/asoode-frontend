@@ -8,8 +8,6 @@ import {
 } from '../../../view-models/storage/files-types';
 import { OperationResult } from '../../../shared/lib/operation-result';
 import { ModalService } from '../../../shared/services/modal.service';
-import { PromptComponent } from '../../../../shared/modals/prompt/prompt.component';
-import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../shared/services/form.service';
 import { SortType } from 'src/app/shared/lib/enums/enums';
 import { DocumentModalComponent } from '../../../__/modals/document-modal/document-modal.component';
@@ -18,6 +16,8 @@ import { TranslateService } from '../../../shared/services/translate.service';
 import { IdentityService } from '../../../auth/services/identity.service';
 import {ClipboardService} from 'ngx-clipboard';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { PromptModalComponent } from '../../../shared/modals/prompt-modal/prompt-modal.component';
+import { PromptModalParameters } from '../../../view-models/core/modal-types';
 
 @Component({
   selector: 'app-files-explorer',
@@ -202,7 +202,7 @@ export class FilesExplorerComponent implements OnInit {
 
   prepareNewFolder() {
     this.modalService
-      .show(PromptComponent, {
+      .show(PromptModalComponent, {
         title: 'NEW_FOLDER',
         form: [
           {
@@ -390,21 +390,6 @@ export class FilesExplorerComponent implements OnInit {
         ...this.filesService.uploading,
         ...filtered,
       ];
-    });
-  }
-
-  async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
-    return new Promise((resolve, reject) => {
-      const filtered: UploadViewModel[] = [];
-      const allowed: UploadViewModel[] = [];
-      (upload || []).forEach(u => {
-        if (u.file.size > this.identityService.profile.plan.attachmentSize) {
-          filtered.push(u);
-        } else {
-          allowed.push(u);
-        }
-      });
-      resolve(allowed);
     });
   }
 

@@ -208,27 +208,16 @@ export class TaskModalComponent
       });
     }
     this.clearInputFile(target);
-    this.filterFiles(upload).then(filtered => {
-      this.filesService.attach(filtered, this.id);
-      this.filesService.attaching = [
-        ...this.filesService.attaching,
-        ...filtered,
-      ];
-    });
+    this.filesService.attach(upload, this.id);
+    this.filesService.attaching = [
+      ...this.filesService.attaching,
+      ...upload,
+    ];
   }
 
   async filterFiles(upload: UploadViewModel[]): Promise<UploadViewModel[]> {
     return new Promise((resolve, reject) => {
-      const filtered: UploadViewModel[] = [];
-      const allowed: UploadViewModel[] = [];
-      (upload || []).forEach(u => {
-        if (u.file.size > this.project.attachmentSize) {
-          filtered.push(u);
-        } else {
-          allowed.push(u);
-        }
-      });
-      resolve(allowed);
+      resolve(upload);
     });
   }
 
