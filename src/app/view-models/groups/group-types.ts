@@ -9,13 +9,11 @@ export interface TimeOffDetailViewModel {
 }
 export interface GroupViewModel extends BaseViewModel {
   archivedAt?: Date;
-  attachmentSize: number;
   access?: AccessType;
   parentId?: string;
   rootId?: string;
   userId: string;
   title: string;
-  premium: boolean;
   complex: boolean;
   avatar?: string;
   subTitle?: string;
@@ -42,10 +40,6 @@ export interface GroupViewModel extends BaseViewModel {
   employees?: number;
   members: GroupMemberViewModel[];
   pending: PendingInvitationViewModel[];
-  membersCapacity: number;
-  membersUsed: number;
-  diskSpaceCapacity: number;
-  diskSpaceUsed: number;
 }
 export interface PendingInvitationViewModel extends BaseViewModel {
   identifier: string;
