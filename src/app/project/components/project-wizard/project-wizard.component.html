@@ -67,4 +67,118 @@
       </button>
     </div>
   </ng-container>
+  <ng-container *ngIf="mode === ViewMode.Template">
+    <div class="body create-project">
+      <h4>{{ 'CHOOSE_TEMPLATE' | translate }}</h4>
+      <ng-container *ngIf="!complex">
+        <div class="templates">
+          <div class="titles">
+            <button
+              *ngFor="let bt of boardTemplates"
+              (click)="boardTemplate = bt.type"
+              [class.selected]="boardTemplate === bt.type"
+            >
+              <i [className]="bt.icon"></i>
+              {{ bt.type | enum: 'BoardTemplate' }}
+            </button>
+          </div>
+        </div>
+        <ng-container *ngFor="let t of boardTemplates">
+          <div *ngIf="boardTemplate === t.type" class="template-image">
+            <div *ngFor="let title of t.lists" class="board-list">
+              <div class="board-list-header">
+                <div class="list-title">
+                  <div class="list-title-holder">
+                    <span *ngIf="title">{{ title | translate }}</span>
+                    <span *ngIf="!title" class="title-holder"></span>
+                  </div>
+                </div>
+                <button class="btn btn-light tr edit-btn">
+                  <i class="icon-plus2"></i>
+                </button>
+                <div class="edit-btn-container">
+                  <button class="btn btn-light tr edit-btn">
+                    <i class="icon-menu"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="board-list-body">
+                <div class="list-card" [class.dir-img]="cultureService.rtl">
+                  <div class="list-card-inner">
+                    <content-loader
+                      [primaryColor]="'#000000'"
+                      [secondaryColor]="'#000'"
+                      [primaryOpacity]="0.15"
+                      [secondaryOpacity]="0.03"
+                      [width]="240"
+                      [height]="40"
+                      [animate]="false"
+                    >
+                      <svg:rect
+                        x="0"
+                        y="0"
+                        rx="3"
+                        ry="3"
+                        width="100"
+                        height="10"
+                      />
+                      <svg:rect
+                        x="0"
+                        y="20"
+                        rx="3"
+                        ry="3"
+                        width="170"
+                        height="10"
+                      />
+                    </content-loader>
+                  </div>
+                </div>
+                <div class="list-card" [class.dir-img]="cultureService.rtl">
+                  <div class="list-card-inner">
+                    <content-loader
+                      [primaryColor]="'#000000'"
+                      [secondaryColor]="'#000'"
+                      [primaryOpacity]="0.15"
+                      [secondaryOpacity]="0.03"
+                      [width]="240"
+                      [height]="40"
+                      [animate]="false"
+                    >
+                      <svg:rect
+                        x="0"
+                        y="0"
+                        rx="3"
+                        ry="3"
+                        width="100"
+                        height="10"
+                      />
+                      <svg:rect
+                        x="0"
+                        y="20"
+                        rx="3"
+                        ry="3"
+                        width="170"
+                        height="10"
+                      />
+                    </content-loader>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="footer">
+      <button
+        [disabled]="actionWaiting"
+        (click)="createProject($event)"
+        mat-flat-button
+        [color]="'primary'"
+      >
+        <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
+        {{ 'CREATE_PROJECT' | translate: true }}
+      </button>
+    </div>
+  </ng-container>
 </div>

@@ -59,9 +59,9 @@ export enum WorkPackageTaskAttachmentType {
 }
 
 export enum BoardTemplate {
-  Blank = 1,
-  WeekDay = 2,
-  TeamMembers = 3,
-  Departments = 4,
-  Kanban = 5,
+  Blank = 0,
+  WeekDay = 1,
+  TeamMembers = 2,
+  Departments = 3,
+  Kanban = 4
 }

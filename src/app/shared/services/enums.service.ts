@@ -31,8 +31,12 @@ export class EnumsService {
 
   translateKey(name: string, value: any): string {
     const enumName = name[0].toLowerCase() + name.substring(1);
-    const enumKey =
-      Object.keys(this.repository[enumName]).find(k => {
+    const enumObj = this.repository[enumName];
+    if (!enumObj) {
+      console.log(`Enum "${enumName}" has not been registered`);
+      return '??????????';
+    }
+    const enumKey = Object.keys(enumObj).find(k => {
         return this.repository[enumName][k] === value;
       }) || '';
     const keyFixed = enumKey

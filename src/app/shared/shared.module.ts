@@ -86,6 +86,7 @@ import { InviteNewMemberComponent } from './components/invite-new-member/invite-
 import { InvitePeopleComponent } from './components/invite-people/invite-people.component';
 import { MatRippleModule } from '@angular/material/core';
 import { InviteModalComponent } from './modals/invite-modal/invite-modal.component';
+import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
 
 
 
@@ -193,6 +194,7 @@ import { InviteModalComponent } from './modals/invite-modal/invite-modal.compone
     NgxAudioPlayerModule,
     MatRadioModule,
     MatRippleModule,
+    ContentLoaderModule,
   ],
   exports: [
     AutoCompleteComponent,

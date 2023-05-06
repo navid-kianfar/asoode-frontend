@@ -159,10 +159,12 @@ export class ProjectWizardComponent implements OnInit {
       this.mode = ViewMode.Invite;
       return;
     }
-    if (this.mode === ViewMode.Invite) {
+    if (this.mode === ViewMode.Invite && !this.complex) {
       this.mode = ViewMode.Template;
       return;
     }
+
+    this.createProject($event);
   }
   async createProject($event: MouseEvent) {
     $event.stopPropagation();
