@@ -217,7 +217,7 @@ export class ProjectService {
   async objectives(
     id: string,
   ): Promise<OperationResult<WorkPackageObjectiveViewModel[]>> {
-    return await this.httpService.post<WorkPackageObjectiveViewModel[]>(
+    return await this.httpService.get<WorkPackageObjectiveViewModel[]>(
       `/projects/${id}/objectives`,
     );
   }

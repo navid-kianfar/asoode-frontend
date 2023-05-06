@@ -17,6 +17,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ArchivedProjectsComponent } from './components/archived-projects/archived-projects.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { WorkPackageWizardComponent } from './components/work-package-wizard/work-package-wizard.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ProjectSettingComponent,
     ProjectTreeComponent,
     ProjectTreeNodeComponent,
-    ArchivedProjectsComponent
+    ArchivedProjectsComponent,
+    WorkPackageWizardComponent
   ],
   imports: [
     CommonModule,
@@ -49,7 +51,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     ProjectSettingComponent,
     ProjectTreeComponent,
     ProjectTreeNodeComponent,
-    ArchivedProjectsComponent
+    ArchivedProjectsComponent,
+    WorkPackageWizardComponent
   ]
 })
 export class ProjectModule { }

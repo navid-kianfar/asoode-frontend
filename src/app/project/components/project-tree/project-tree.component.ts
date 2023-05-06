@@ -22,6 +22,8 @@ import { WorkPackageService } from '../../../workpackage/services/work-package.s
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ActivityType } from '../../../shared/lib/enums/activity-type';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { PromptModalComponent } from '../../../shared/modals/prompt-modal/prompt-modal.component';
+import { WorkPackageWizardComponent } from '../work-package-wizard/work-package-wizard.component';
 
 @Component({
   selector: 'app-project-tree',
@@ -110,123 +112,120 @@ export class ProjectTreeComponent implements OnInit {
   }
 
   newSubProject(parentId?: string) {
-    // this.modalService
-    //   .show(PromptComponent, {
-    //     icon: 'icon-tree7',
-    //     title: 'NEW_SUB_PROJECT',
-    //     form: [
-    //       {
-    //         elements: [
-    //           this.formService.createInput({
-    //             config: { field: 'title' },
-    //             params: { model: '', placeHolder: 'TITLE' },
-    //             validation: {
-    //               required: {
-    //                 value: true,
-    //                 message: 'TITLE_REQUIRED',
-    //               },
-    //             },
-    //           }),
-    //           this.formService.createInput({
-    //             config: { field: 'description' },
-    //             params: {
-    //               model: '',
-    //               textArea: true,
-    //               placeHolder: 'DESCRIPTION',
-    //             },
-    //           }),
-    //         ],
-    //       },
-    //     ],
-    //     action: async (params, form) => {
-    //       if (parentId) {
-    //         params.parentId = parentId;
-    //       }
-    //       const op = await this.projectService.createSubProject(
-    //         this.model.id,
-    //         params,
-    //       );
-    //       if (op.status !== OperationResultStatus.Success) {
-    //         // TODO: handle error
-    //         return;
-    //       }
-    //       this.notificationService.success('SUB_PROJECT_CREATED');
-    //     },
-    //     actionLabel: 'CREATE',
-    //     actionColor: 'primary',
-    //   } as PromptModalParameters)
-    //   .subscribe(() => {});
+    this.modalService
+      .show(PromptModalComponent, {
+        icon: 'icon-tree7',
+        title: 'NEW_SUB_PROJECT',
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'title' },
+                params: { model: '', placeHolder: 'TITLE' },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'TITLE_REQUIRED',
+                  },
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'description' },
+                params: {
+                  model: '',
+                  textArea: true,
+                  placeHolder: 'DESCRIPTION',
+                },
+              }),
+            ],
+          },
+        ],
+        action: async (params, form) => {
+          if (parentId) {
+            params.parentId = parentId;
+          }
+          const op = await this.projectService.createSubProject(
+            this.model.id,
+            params,
+          );
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          this.notificationService.success('SUB_PROJECT_CREATED');
+        },
+        actionLabel: 'CREATE',
+        actionColor: 'primary',
+      });
   }
 
   async newWorkPackage(parentId?: string) {
-    // await this.modalService
-    //   .show(WorkPackageWizardComponent, {
-    //     projectId: this.model.id,
-    //     parentId,
-    //   });
+    await this.modalService
+      .show(WorkPackageWizardComponent, {
+        projectId: this.model.id,
+        parentId,
+      });
   }
 
-  deleteSubProject(id: string) {
+  async deleteSubProject(id: string) {
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_SUB_CONFIRM_HEADING'),
       [this.model.subProjects.find(s => s.id === id).title],
     );
-    // this.modalService
-    //   .confirm({
-    //     title: 'REMOVE_SUB',
-    //     message: 'REMOVE_SUB_CONFIRM',
-    //     heading,
-    //     actionLabel: 'REMOVE_SUB',
-    //     cancelLabel: 'CANCEL',
-    //     action: async () => {
-    //       return await this.projectService.removeSubProject(id);
-    //     },
-    //   })
-    //   .subscribe(confirmed => {});
+    const response = await this.modalService
+      .confirm({
+        title: 'REMOVE_SUB',
+        description: 'REMOVE_SUB_CONFIRM',
+        subTitle:heading,
+        confirmLabel: 'REMOVE_SUB',
+        cancelLabel: 'CANCEL',
+      });
+    if (response.confirmed) {
+      await this.projectService.removeSubProject(id);
+    }
   }
 
   editSubProject(id: string) {
     const sub = this.model.subProjects.find(s => s.id === id);
-    // this.modalService
-    //   .show(PromptComponent, {
-    //     icon: 'icon-tree7',
-    //     title: 'EDIT_SUB_PROJECT',
-    //     form: [
-    //       {
-    //         elements: [
-    //           this.formService.createInput({
-    //             config: { field: 'title' },
-    //             params: { model: sub.title, placeHolder: 'TITLE' },
-    //             validation: {
-    //               required: {
-    //                 value: true,
-    //                 message: 'TITLE_REQUIRED',
-    //               },
-    //             },
-    //           }),
-    //           this.formService.createInput({
-    //             config: { field: 'description' },
-    //             params: {
-    //               model: sub.description,
-    //               textArea: true,
-    //               placeHolder: 'DESCRIPTION',
-    //             },
-    //           }),
-    //         ],
-    //       },
-    //     ],
-    //     action: async (params, form) => {
-    //       const op = await this.projectService.editSubProject(id, params);
-    //       if (op.status !== OperationResultStatus.Success) {
-    //         // TODO: handle error
-    //         return;
-    //       }
-    //       this.notificationService.success('SUB_PROJECT_UPDATED');
-    //     },
-    //     actionLabel: 'SAVE_CHANGES',
-    //     actionColor: 'primary',
-    //   } as PromptModalParameters)
-    //   .subscribe(() => {});
+    this.modalService
+      .show(PromptModalComponent, {
+        icon: 'icon-tree7',
+        title: 'EDIT_SUB_PROJECT',
+        form: [
+          {
+            elements: [
+              this.formService.createInput({
+                config: { field: 'title' },
+                params: { model: sub.title, placeHolder: 'TITLE' },
+                validation: {
+                  required: {
+                    value: true,
+                    message: 'TITLE_REQUIRED',
+                  },
+                },
+              }),
+              this.formService.createInput({
+                config: { field: 'description' },
+                params: {
+                  model: sub.description,
+                  textArea: true,
+                  placeHolder: 'DESCRIPTION',
+                },
+              }),
+            ],
+          },
+        ],
+        action: async (params, form) => {
+          const op = await this.projectService.editSubProject(id, params);
+          if (op.status !== OperationResultStatus.Success) {
+            // TODO: handle error
+            return;
+          }
+          this.notificationService.success('SUB_PROJECT_UPDATED');
+        },
+        actionLabel: 'SAVE_CHANGES',
+        actionColor: 'primary',
+      });
   }
 
   openWorkPackage(workPackage: WorkPackageViewModel) {

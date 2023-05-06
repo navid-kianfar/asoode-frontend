@@ -274,7 +274,7 @@ import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
     OfflineModalComponent,
     PromptModalComponent,
     ConfirmModalComponent,
-    InviteModalComponent
+    InviteModalComponent,
   ],
 })
 export class SharedModule { }

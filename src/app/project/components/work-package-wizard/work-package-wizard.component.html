@@ -1,0 +1,9 @@
+<div class='create-wizard-modal'>
+  <app-project-wizard
+    (click)="$event.stopPropagation()"
+    (exit)="dialogRef.close(false)"
+    [complex]="false"
+    [projectId]="data.projectId"
+    [parentId]="data.parentId"
+  ></app-project-wizard>
+</div>
