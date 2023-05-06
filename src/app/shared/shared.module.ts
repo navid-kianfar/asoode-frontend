@@ -84,6 +84,7 @@ import { InviteGroupComponent } from '../groups/components/invite-group/invite-g
 import { InviteMemberComponent } from './components/invite-member/invite-member.component';
 import { InviteNewMemberComponent } from './components/invite-new-member/invite-new-member.component';
 import { InvitePeopleComponent } from './components/invite-people/invite-people.component';
+import { MatRippleModule } from '@angular/material/core';
 
 
 
@@ -189,6 +190,7 @@ import { InvitePeopleComponent } from './components/invite-people/invite-people.
     MatTabsModule,
     NgxAudioPlayerModule,
     MatRadioModule,
+    MatRippleModule,
   ],
   exports: [
     AutoCompleteComponent,

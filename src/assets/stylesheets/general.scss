@@ -51,27 +51,27 @@ body {
 }
 
 body {
-  &.lang-ar {
-    * {
-      font-family: Almarai;
-      font-weight: 300;
-    }
-    .material-icons {
-      font-family: 'Material Icons' !important;
-    }
-  }
-  &.lang-fa {
-    * {
-      font-family: IRANSansFa;
-      font-weight: 300;
-    }
-    .material-icons {
-      font-family: 'Material Icons' !important;
-    }
-  }
+  //&.lang-ar {
+  //  * {
+  //    font-family: Almarai;
+  //    font-weight: 300;
+  //  }
+  //  .material-icons {
+  //    font-family: 'Material Icons' !important;
+  //  }
+  //}
+  //&.lang-fa {
+  //  * {
+  //    font-family: IRANSansFa;
+  //    font-weight: 300;
+  //  }
+  //  .material-icons {
+  //    font-family: 'Material Icons' !important;
+  //  }
+  //}
   &.lang-en {
     margin: 0;
-    font-family: Roboto, 'Helvetica Neue', sans-serif;
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   &.dir-rtl {
     direction: rtl;

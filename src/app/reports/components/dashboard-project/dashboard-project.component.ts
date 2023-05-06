@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProjectService } from '../../../project/services/project.service';
 import { ModalService } from '../../../shared/services/modal.service';
 import { ProjectFilter } from '../../../shared/lib/enums/projects';
+import { CreateWizardModalComponent } from '../../../shared/modals/create-wizard-modal/create-wizard-modal.component';
+import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 
 @Component({
   selector: 'app-dashboard-project',
@@ -19,6 +21,7 @@ export class DashboardProjectComponent implements OnInit {
   ngOnInit() {}
 
   openModal() {
-    // this.modalService.show(CreateWizardComponent, {}).subscribe(() => {});
+    this.modalService
+      .show(CreateWizardModalComponent, {} as CreateModalParameters);
   }
 }
