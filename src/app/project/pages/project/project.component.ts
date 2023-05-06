@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { ProjectService } from '../../services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AccessType, } from '../../../shared/lib/enums/enums';
+import { AccessType } from '../../../shared/lib/enums/enums';
 import { ModalService } from '../../../shared/services/modal.service';
-import { PromptModalParameters } from '../../../view-models/core/modal-types';
 import { FormService } from '../../../shared/services/form.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import { Socket } from 'ngx-socket-io';
@@ -80,7 +79,10 @@ export class ProjectComponent implements OnInit {
     this.permission = this.projectService.getPermission(this.project);
     this.progressWaiting = true;
     const progress = await this.projectService.progress(id);
-
+    this.progressWaiting = false;
+    if (progress.status !== OperationResultStatus.Success) {
+      return;
+    }
     if (progress.data.length < 90) {
       for (let i = 0; i < 90 - progress.data.length; i++) {
         progress.data.push({
@@ -99,7 +101,6 @@ export class ProjectComponent implements OnInit {
     this.report.created.progress = progress.data.map(d => d.created);
     this.report.created.total = progress.data.reduce((prev, obj, current) => prev + obj.created, 0);
     console.log(this.report);
-    this.progressWaiting = false;
   }
 
   bind() {

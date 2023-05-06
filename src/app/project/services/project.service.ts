@@ -144,19 +144,19 @@ export class ProjectService {
     model,
   ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/projects/change-pending-access/${id}`,
+      `/projects/${id}/change-pending-access`,
       model,
     );
   }
 
   async removePendingAccess(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/projects/remove-pending-access/${id}`,
+      `/projects/${id}/remove-pending-access`,
     );
   }
 
   async removeSubProject(id: string): Promise<OperationResult<boolean>> {
-    return await this.httpService.post<boolean>(`/projects/sub/${id}/remove`);
+    return await this.httpService.post<boolean>(`/projects/${id}/sub/remove`);
   }
 
   async editSubProject(
@@ -164,7 +164,7 @@ export class ProjectService {
     params: any,
   ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/projects/sub/${id}/edit`,
+      `/projects/${id}/sub/edit`,
       params,
     );
   }
@@ -181,7 +181,7 @@ export class ProjectService {
 
   async removeSeason(id: string): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/projects/season/${id}/remove`,
+      `/projects/${id}/season/remove`,
     );
   }
 
@@ -195,7 +195,7 @@ export class ProjectService {
 
   async editSeason(id: string, params: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/projects/season/${id}/edit`,
+      `/projects/${id}/season/edit`,
       params,
     );
   }
@@ -209,7 +209,7 @@ export class ProjectService {
     params: any,
   ): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>(
-      `/projects/sub/${id}/order`,
+      `/projects/${id}/sub/order`,
       params,
     );
   }
@@ -218,28 +218,28 @@ export class ProjectService {
     id: string,
   ): Promise<OperationResult<WorkPackageObjectiveViewModel[]>> {
     return await this.httpService.post<WorkPackageObjectiveViewModel[]>(
-      `/projects/objectives/${id}`,
+      `/projects/${id}/objectives`,
     );
   }
 
   async objectiveDetails(
     id: string,
   ): Promise<OperationResult<ProjectObjectiveEstimatedPriceViewModel[]>> {
-    return await this.httpService.post<
+    return await this.httpService.get<
       ProjectObjectiveEstimatedPriceViewModel[]
-    >(`/projects/objectives/${id}/detail`);
+    >(`/projects/${id}/objectives-detailed`);
   }
 
   async tree(id: string): Promise<OperationResult<TreeViewModel>> {
-    return await this.httpService.post<TreeViewModel>(`/projects/tree/${id}`);
+    return await this.httpService.get<TreeViewModel>(`/projects/${id}/tree`);
   }
   async roadMap(id: string): Promise<OperationResult<RoadMapViewModel>> {
-    return await this.httpService.post<RoadMapViewModel>(
-      `/projects/road-map/${id}`,
+    return await this.httpService.get<RoadMapViewModel>(
+      `/projects/${id}/road-map`,
     );
   }
 
   async progress(id: any): Promise<OperationResult<ProjectProgressViewModel[]>> {
-    return await this.httpService.post<ProjectProgressViewModel[]>(`/projects/progress/${id}`);
+    return await this.httpService.get<ProjectProgressViewModel[]>(`/projects/${id}/progress`);
   }
 }
