@@ -16,6 +16,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { ReportsModule } from './reports/reports.module';
 import { environment } from '../environments/environment';
 import { GroupsModule } from './groups/groups.module';
+import { ProjectModule } from './project/project.module';
+import { WorkpackageModule } from './workpackage/workpackage.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { GroupsModule } from './groups/groups.module';
     ErrorsModule,
     AuthModule,
     ReportsModule,
-    GroupsModule
+    GroupsModule,
+    ProjectModule,
+    WorkpackageModule
   ],
   providers: [
     CookieService,

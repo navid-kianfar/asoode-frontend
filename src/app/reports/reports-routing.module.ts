@@ -5,6 +5,11 @@ import { AuthGuard } from '../auth/guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard]
