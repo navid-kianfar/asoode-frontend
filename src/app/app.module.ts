@@ -31,14 +31,17 @@ import { WorkpackageModule } from './workpackage/workpackage.module';
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
     }),
-    AppRoutingModule,
     SharedModule,
     ErrorsModule,
     AuthModule,
     ReportsModule,
     GroupsModule,
     ProjectModule,
-    WorkpackageModule
+    WorkpackageModule,
+
+
+    // this should be the las route
+    AppRoutingModule,
   ],
   providers: [
     CookieService,
