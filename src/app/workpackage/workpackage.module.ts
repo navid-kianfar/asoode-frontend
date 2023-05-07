@@ -20,6 +20,7 @@ import { NgxPopperModule } from 'ngx-popper';
 import { RoundProgressModule } from 'angular-svg-round-progressbar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatRippleModule } from '@angular/material/core';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MatRadioModule } from '@angular/material/radio';
     NgxPopperModule.forRoot({ placement: 'bottom' }),
     RoundProgressModule,
     MatProgressBarModule,
-    MatRadioModule
+    MatRadioModule,
+    MatRippleModule,
   ],
   exports: [
     WorkPackageBoardComponent,

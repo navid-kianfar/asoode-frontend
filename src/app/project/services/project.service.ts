@@ -51,6 +51,14 @@ export class ProjectService {
     );
   }
 
+  async fetch(projectId: string): Promise<OperationResult<ProjectViewModel>> {
+    const found = this.projects.find(p => p.id === projectId);
+    if (found) {
+      return OperationResult.Success(found);
+    }
+    return await this.fetchArchived(projectId);
+  }
+
   async create(model: any): Promise<OperationResult<boolean>> {
     return await this.httpService.post<boolean>('/projects/create', model);
   }

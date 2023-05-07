@@ -25,7 +25,7 @@ export class WorkPackageService {
     id: string,
     model,
   ): Promise<OperationResult<WorkPackageViewModel>> {
-    return await this.httpService.get<WorkPackageViewModel>(
+    return await this.httpService.post<WorkPackageViewModel>(
       '/work-packages/' + id,
       model,
     );

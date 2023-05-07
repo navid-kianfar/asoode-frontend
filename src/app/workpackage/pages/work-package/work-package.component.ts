@@ -86,17 +86,8 @@ export class WorkPackageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.settingNotificationWaiting = false;
-    this.toggleSetting = false;
-    this.filters = {
-      mine: false,
-      archived: false,
-      active: false,
-      labels: {},
-    };
-    this.mode = ViewMode.Board;
-    this.preFetch();
     this.bind();
+    this.prepare();
   }
 
   bind() {
@@ -588,47 +579,42 @@ export class WorkPackageComponent implements OnInit {
       }
     });
   }
-  async preFetch() {
+
+  async prepare() {
+    this.settingNotificationWaiting = false;
+    this.toggleSetting = false;
+    this.filters = {
+      mine: false,
+      archived: false,
+      active: false,
+      labels: {},
+    };
+    this.mode = ViewMode.Board;
     const id = this.activatedRoute.snapshot.params.id;
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.projectService.projects.length; i++) {
-      this.workPackage = this.projectService.projects[i].workPackages.find(
-        w => w.id === id,
-      );
-      if (this.workPackage) {
-        this.project = this.projectService.projects[i];
-        break;
-      }
-    }
-    if (!this.workPackage) {
-      this.preWaiting = true;
-      const op = await this.workPackageService.fetch(id, this.filters);
-      if (op.status !== OperationResultStatus.Success) {
-        this.router.navigateByUrl('dashboard');
-        return;
-      }
-      this.workPackage = op.data;
-      const projOp = await this.projectService.fetchArchived(op.data.projectId);
-      if (projOp.status !== OperationResultStatus.Success) {
-        this.router.navigateByUrl('dashboard');
-        return;
-      }
-      this.preWaiting = false;
-      this.project = projOp.data;
-      this.permission = this.projectService.getWorkPackagePermission(
-        this.project,
-        this.workPackage,
-      );
+
+    this.preWaiting = true;
+    const op = await this.workPackageService.fetch(id, this.filters);
+    if (op.status !== OperationResultStatus.Success) {
+      this.router.navigateByUrl('dashboard');
       return;
     }
-    // if (this.workPackage.progress === undefined) {
-    //   this.workPackage.progress = 0;
-    // }
+
+    this.workPackage = this.mapData(op.data);
+    this.sortLists();
+    this.sortTasks();
+    this.waiting = false;
+
+    const projOp = await this.projectService.fetch(op.data.projectId);
+    if (projOp.status !== OperationResultStatus.Success) {
+      this.router.navigateByUrl('dashboard');
+      return;
+    }
+    this.preWaiting = false;
+    this.project = projOp.data;
     this.permission = this.projectService.getWorkPackagePermission(
       this.project,
       this.workPackage,
     );
-    this.fetch();
   }
   async fetch() {
     this.waiting = true;

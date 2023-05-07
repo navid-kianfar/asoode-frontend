@@ -19,7 +19,7 @@
                   permission !== AccessType.Owner)
               "
               (click)="prepareUpgrade()"
-              mat-flat-button
+              mat-ripple
             >
               <i class="icon-trophy4"></i>&nbsp;
               <span>{{ 'ADD_STRUCTURE' | translate }}</span>
@@ -514,11 +514,11 @@
     </div>
   </ng-container>
 </div>
-<app-messenger-shortcut
-  *ngIf="workPackage && project"
-  [workPackage]="workPackage"
-  [project]="project"
-></app-messenger-shortcut>
+<!--<app-messenger-shortcut-->
+<!--  *ngIf="workPackage && project"-->
+<!--  [workPackage]="workPackage"-->
+<!--  [project]="project"-->
+<!--&gt;</app-messenger-shortcut>-->
 <popper-content #popperObjectives>
   <div *ngIf="workPackage" class="objectives-popper">
     <div *ngIf="!workPackage.objectives.length">
