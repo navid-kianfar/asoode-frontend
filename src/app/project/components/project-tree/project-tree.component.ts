@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   SubProjectViewModel,
@@ -24,13 +24,15 @@ import { ActivityType } from '../../../shared/lib/enums/activity-type';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 import { PromptModalComponent } from '../../../shared/modals/prompt-modal/prompt-modal.component';
 import { WorkPackageWizardComponent } from '../work-package-wizard/work-package-wizard.component';
+import { SocketListenerService } from '../../../shared/services/socket-listener.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project-tree',
   templateUrl: './project-tree.component.html',
   styleUrls: ['./project-tree.component.scss'],
 })
-export class ProjectTreeComponent implements OnInit {
+export class ProjectTreeComponent implements OnInit , OnDestroy{
   @Input() model: ProjectViewModel;
   @Input() permission: AccessType;
   subProjects: SubProjectViewModel[];
@@ -41,8 +43,9 @@ export class ProjectTreeComponent implements OnInit {
   noDrag: boolean;
   waiting: boolean;
   data: TreeViewModel;
+  private listener: Subscription;
   constructor(
-    readonly socket: Socket,
+    private readonly socket: SocketListenerService,
     private readonly router: Router,
     private readonly identityService: IdentityService,
     private readonly projectService: ProjectService,
@@ -53,6 +56,10 @@ export class ProjectTreeComponent implements OnInit {
     private readonly workPackageService: WorkPackageService,
     private readonly deviceDetectorService: DeviceDetectorService,
   ) {}
+
+  ngOnDestroy(): void {
+        this.listener.unsubscribe();
+    }
 
   ngOnInit() {
     this.dragDelay =
@@ -82,7 +89,7 @@ export class ProjectTreeComponent implements OnInit {
   }
 
   bind() {
-    this.socket.on('push-notification', (notification: any) => {
+    this.listener = this.socket.listener.subscribe((notification: any) => {
       switch (notification.type) {
         case ActivityType.WorkPackageAdd:
         case ActivityType.WorkPackageEdit:

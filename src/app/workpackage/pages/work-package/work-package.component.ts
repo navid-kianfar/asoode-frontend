@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   ProjectViewModel,
   WorkPackageMemberViewModel,
@@ -37,13 +37,15 @@ import {
 import { ActivityType } from '../../../shared/lib/enums/activity-type';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 import { PromptModalComponent } from 'src/app/shared/modals/prompt-modal/prompt-modal.component';
+import { SocketListenerService } from '../../../shared/services/socket-listener.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-work-package',
   templateUrl: './work-package.component.html',
   styleUrls: ['./work-package.component.scss'],
 })
-export class WorkPackageComponent implements OnInit {
+export class WorkPackageComponent implements OnInit, OnDestroy {
   ViewMode = ViewMode;
   mode: ViewMode;
   project: ProjectViewModel;
@@ -68,11 +70,12 @@ export class WorkPackageComponent implements OnInit {
   updating: boolean;
   deleting: boolean;
   preWaiting: boolean;
+  private listener: Subscription;
 
   constructor(
     readonly identityService: IdentityService,
     readonly cultureService: CultureService,
-    private readonly socket: Socket,
+    private readonly socket: SocketListenerService,
     private readonly usersService: UsersService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
@@ -85,13 +88,17 @@ export class WorkPackageComponent implements OnInit {
     private readonly notificationService: NotificationService,
   ) {}
 
+  ngOnDestroy(): void {
+        this.listener.unsubscribe();
+    }
+
   ngOnInit() {
     this.bind();
     this.prepare();
   }
 
   bind() {
-    this.socket.on('push-notification', (notification: any) => {
+    this.listener = this.socket.listener.subscribe((notification: any) => {
       let find1 = null;
       let find2 = null;
       switch (notification.type) {

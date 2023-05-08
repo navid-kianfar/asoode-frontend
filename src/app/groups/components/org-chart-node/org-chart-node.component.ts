@@ -7,10 +7,7 @@ import {
 } from '@angular/core';
 import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { GroupService } from '../../services/group.service';
-import { CreateWizardModalComponent } from '../../../shared/modals/create-wizard-modal/create-wizard-modal.component';
 import { ModalService } from '../../../shared/services/modal.service';
-import { CreateModalParameters } from '../../../view-models/modals/modals-types';
-import { Socket } from 'ngx-socket-io';
 import { Router } from '@angular/router';
 import { AccessType } from 'src/app/shared/lib/enums/enums';
 import { PromptModalParameters } from '../../../view-models/core/modal-types';
@@ -18,6 +15,9 @@ import { FormService } from '../../../shared/services/form.service';
 import { ActivityType } from '../../../shared/lib/enums/activity-type';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
 import { PromptModalComponent } from '../../../shared/modals/prompt-modal/prompt-modal.component';
+import { SocketListenerService } from '../../../shared/services/socket-listener.service';
+import { Subscription } from 'rxjs';
+import { CreateWizardModalComponent } from '../../../shared/modals/create-wizard-modal/create-wizard-modal.component';
 
 @Component({
   selector: 'app-org-chart-node',
@@ -33,41 +33,38 @@ export class OrgChartNodeComponent implements OnInit, OnDestroy {
   @Input() permission: AccessType;
   filtered: GroupViewModel[] = [];
   AccessType = AccessType;
+  private listener: Subscription;
   constructor(
     private readonly modalService: ModalService,
     private readonly groupService: GroupService,
     private readonly formService: FormService,
-    private readonly socket: Socket,
+    private readonly socket: SocketListenerService,
     private readonly router: Router,
   ) {}
 
   ngOnInit() {
     this.filtered = this.groups.filter(g => g.parentId === this.group.id);
-    this.socket.on('push-notification', this.handleSocket);
+    this.listener = this.socket.listener.subscribe((notification) => {
+      switch (notification.type) {
+        case ActivityType.GroupAdd:
+        case ActivityType.GroupEdit:
+        case ActivityType.GroupRemove:
+        case ActivityType.GroupArchive:
+          this.filtered = this.groups.filter(g => g.parentId === this.group.id);
+          break;
+      }
+    });
   }
 
   ngOnDestroy() {
-    this.socket.removeListener('push-notification', this.handleSocket);
+    this.listener.unsubscribe();
   }
 
-  handleSocket = notification => {
-    switch (notification.type) {
-      case ActivityType.GroupAdd:
-      case ActivityType.GroupEdit:
-      case ActivityType.GroupRemove:
-      case ActivityType.GroupArchive:
-        this.filtered = this.groups.filter(g => g.parentId === this.group.id);
-        break;
-    }
-  };
-
   newGroup() {
-    // this.modalService
-    //   .show<CreateModalParameters>(CreateWizardComponent, {
-    //     simpleGroup: true,
-    //     parentId: this.group.id,
-    //   })
-    //   .subscribe(() => {});
+    this.modalService.show(CreateWizardModalComponent, {
+        simpleGroup: true,
+        parentId: this.group.id,
+      });
   }
 
   attachGroup() {

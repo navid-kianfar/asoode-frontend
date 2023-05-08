@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProjectViewModel } from '../../../view-models/projects/project-types';
 import { ProjectService } from '../../services/project.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,13 +12,15 @@ import { IdentityService } from '../../../auth/services/identity.service';
 import { TranslateService } from '../../../shared/services/translate.service';
 import { ActivityType } from '../../../shared/lib/enums/activity-type';
 import { OperationResultStatus } from '../../../shared/lib/enums/operation-result-status';
+import { SocketListenerService } from '../../../shared/services/socket-listener.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss'],
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent implements OnInit, OnDestroy {
   ViewMode = ViewMode;
   mode: ViewMode;
   project: ProjectViewModel;
@@ -27,6 +29,7 @@ export class ProjectComponent implements OnInit {
   report: any;
   waiting: boolean;
   progressWaiting: boolean;
+  private listener: Subscription;
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
@@ -34,10 +37,14 @@ export class ProjectComponent implements OnInit {
     private readonly identityService: IdentityService,
     private readonly modalService: ModalService,
     private readonly formService: FormService,
-    private readonly socket: Socket,
+    private readonly socket: SocketListenerService,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService,
   ) {}
+
+  ngOnDestroy(): void {
+        this.listener.unsubscribe();
+    }
 
   ngOnInit() {
     this.mode = ViewMode.Tree;
@@ -104,7 +111,7 @@ export class ProjectComponent implements OnInit {
   }
 
   bind() {
-    this.socket.on('push-notification', (notification: any) => {
+    this.listener = this.socket.listener.subscribe((notification: any) => {
       switch (notification.type) {
         case ActivityType.ProjectArchive:
           if (this.project.id === notification.data.id) {

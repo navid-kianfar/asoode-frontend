@@ -37,7 +37,7 @@ export class DevicesComponent implements OnInit {
     private readonly formService: FormService,
     private readonly notificationService: NotificationService,
     private readonly pushNotificationService: PushNotificationService,
-    private readonly socket: Socket,
+    // private readonly socket: Socket,
   ) {}
 
   ngOnInit() {

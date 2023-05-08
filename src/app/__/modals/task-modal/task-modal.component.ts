@@ -116,7 +116,7 @@ export class TaskModalComponent
   dragDelay: number;
 
   constructor(
-    private readonly socket: Socket,
+    // private readonly socket: Socket,
     private readonly taskService: TaskService,
     private readonly projectService: ProjectService,
     private readonly groupService: GroupService,

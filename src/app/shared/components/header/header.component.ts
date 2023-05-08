@@ -1,7 +1,7 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
+  ElementRef, OnDestroy,
   OnInit,
   Renderer2,
   ViewChild,
@@ -9,18 +9,18 @@ import {
 import { IdentityService } from '../../../auth/services/identity.service';
 import { ModalService } from '../../services/modal.service';
 import { SearchResultViewModel } from '../../../view-models/general/search-types';
-import { fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 import { debounceTime, switchMap, tap } from 'rxjs/operators';
 import { HttpService } from '../../services/http.service';
 import { PopperContent } from 'ngx-popper';
 import { OperationResult } from '../../lib/operation-result';
-import { Socket } from 'ngx-socket-io';
 import { PushNotificationService } from '../../services/push-notification.service';
 import { SwPush } from '@angular/service-worker';
 import { NumberHelpers } from '../../helpers/number.helpers';
 import { OperationResultStatus } from '../../lib/enums/operation-result-status';
 import { CreateWizardModalComponent } from '../../modals/create-wizard-modal/create-wizard-modal.component';
 import { CreateModalParameters } from '../../../view-models/modals/modals-types';
+import { SocketListenerService } from '../../services/socket-listener.service';
 
 const EMPTY = {
   members: [],
@@ -38,7 +38,7 @@ const EMPTY = {
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements AfterViewInit, OnInit {
+export class HeaderComponent implements AfterViewInit, OnInit, OnDestroy {
   loading: boolean;
   searchTerm: string;
   results: SearchResultViewModel;
@@ -47,11 +47,12 @@ export class HeaderComponent implements AfterViewInit, OnInit {
 
   // popper: PopperContent;
   manualShow: boolean;
-  private listener: any;
+  private clickListener: any;
   secondInput: boolean;
+  private listener: Subscription;
   constructor(
     private readonly renderer: Renderer2,
-    private readonly socket: Socket,
+    private readonly socket: SocketListenerService,
     public readonly identityService: IdentityService,
     private readonly modalService: ModalService,
     private readonly pushNotificationService: PushNotificationService,
@@ -59,11 +60,15 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     private readonly ref: ElementRef,
     private readonly swPush: SwPush,
   ) {}
+
+  ngOnDestroy(): void {
+        this.listener.unsubscribe();
+    }
   ngOnInit(): void {
     this.results = { ...EMPTY };
-    this.socket.on('push-notification', (notification: any) =>
-      this.pushNotificationService.handleSocket(notification),
-    );
+    this.listener = this.socket.listener.subscribe((notification: any) =>{
+      // this.pushNotificationService.handleSocket(notification),
+    });
     if (this.swPush.isEnabled) {
       this.swPush.messages.subscribe(notification => {
         this.pushNotificationService.handlePush(notification);
@@ -89,8 +94,8 @@ export class HeaderComponent implements AfterViewInit, OnInit {
           this.loading = true;
           this.manualShow = true;
           this.popperSearch.show();
-          if (!this.listener) {
-            this.listener = this.renderer.listen('document', 'click', event => {
+          if (!this.clickListener) {
+            this.clickListener = this.renderer.listen('document', 'click', event => {
               this.popperSearch.hide();
             });
           }

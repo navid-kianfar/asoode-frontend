@@ -57,7 +57,7 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
     private readonly culturedDateService: CulturedDateService,
     readonly filesService: FilesService,
     readonly usersService: UsersService,
-    private readonly socket: Socket,
+    // private readonly socket: Socket,
   ) {}
 
   ngOnInit() {
