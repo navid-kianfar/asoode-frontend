@@ -1,8 +1,13 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { v4 as Guid } from 'uuid';
 import { IdentityService } from '../../auth/services/identity.service';
 import { environment } from '../../../environments/environment';
 import { NetworkService } from './network.service';
+
+let deviceId = localStorage.getItem('DEVICE_ID') || Guid();
+localStorage.setItem('DEVICE_ID', deviceId);
+
 
 @Injectable()
 export class PanelSocketProvider extends Socket {
@@ -15,6 +20,8 @@ export class PanelSocketProvider extends Socket {
       options: {
         query: {
           userId: identityService.identity.userId,
+          sessionId: Guid(),
+          deviceId: deviceId,
         },
       },
     });

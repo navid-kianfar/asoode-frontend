@@ -15,13 +15,6 @@ import {
 import { CookieService } from 'ngx-cookie-service';
 import {environment} from '../../../environments/environment';
 import { OperationResultStatus } from '../../shared/lib/enums/operation-result-status';
-
-let MARKETER;
-try {
-  MARKETER =
-    new URLSearchParams(window.location.search).get('marketer') || undefined;
-} catch (e) {}
-
 @Injectable({
   providedIn: 'root',
 })
