@@ -87,7 +87,7 @@
                   class="member"
                   *ngFor="
                     let member of allMembers
-                      | search: ['fullName', 'email', 'phoneNumber']:filter
+                      | search : ['fullName', 'email', 'phoneNumber'] : filter
                   "
                 >
                   <app-member-info [model]="member"></app-member-info>
@@ -134,11 +134,11 @@
           </div>
           <div class="info-container">
             <div class="type">
-              {{ current.type | enum: 'ChannelType' }}
+              {{ current.type | enum : 'ChannelType' }}
             </div>
             <div class="members">
               |&nbsp;&nbsp;{{
-                'N_USERS' | translate | stringFormat: currentMembers.length
+                'N_USERS' | translate | stringFormat : currentMembers.length
               }}&nbsp;&nbsp;|
             </div>
             <a

@@ -65,6 +65,12 @@ export interface IFormElementCheckbox extends IFormElement {
     summary?: string;
   };
 }
+export interface IFormElementCaptcha extends IFormElement {
+  params: {
+    disabled?: boolean;
+    model: IFormElementCaptchaModel;
+  };
+}
 export interface IFormElementInput extends IFormElement {
   params: {
     model: string;
@@ -199,3 +205,8 @@ export interface IFormElementTimePickerValidation
   max?: { value: number; message: string };
 }
 
+export interface IFormElementCaptchaModel {
+  token: string;
+  code: string;
+  expire: string;
+}

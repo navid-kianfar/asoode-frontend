@@ -186,23 +186,23 @@ export class ProjectWizardComponent implements OnInit {
     $event.stopPropagation();
     $event.preventDefault();
     this.model.groups = (this.groups || [])
-      .filter(g => g.selected)
-      .map(g => {
+      .filter((g) => g.selected)
+      .map((g) => {
         return {
           id: g.id,
           access: g.access,
         };
       });
     this.model.members = (this.members || [])
-      .filter(g => g.selected)
-      .map(g => {
+      .filter((g) => g.selected)
+      .map((g) => {
         return {
           id: g.id,
           access: g.access,
         };
       })
       .concat(
-        (this.newMembers || []).map(m => {
+        (this.newMembers || []).map((m) => {
           return {
             id: m.id,
             access: m.access,

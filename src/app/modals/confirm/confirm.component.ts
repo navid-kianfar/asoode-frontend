@@ -9,7 +9,8 @@ import { ModalParameters } from '../../view-models/core/modal-types';
 })
 export class ConfirmComponent
   extends SimpleModalComponent<ModalParameters, boolean>
-  implements OnInit {
+  implements OnInit
+{
   cancel?: () => Promise<any>;
   action?: () => Promise<any>;
   cssClass?: string;

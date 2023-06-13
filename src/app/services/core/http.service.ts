@@ -23,7 +23,7 @@ export class HttpService {
     data?: any,
     handleNoneSuccess?: boolean,
   ): Promise<OperationResult<T>> {
-    return new Promise<OperationResult<T>>(resolve => {
+    return new Promise<OperationResult<T>>((resolve) => {
       try {
         const path = this.config.backend + section;
         data = data || {};
@@ -56,7 +56,7 @@ export class HttpService {
     onProgress: (percent: number) => void,
     handleNoneSuccess?: boolean,
   ): Promise<OperationResult<T>> {
-    return new Promise<OperationResult<T>>(resolve => {
+    return new Promise<OperationResult<T>>((resolve) => {
       try {
         const path = this.config.backend + section;
         data = data || {};
@@ -67,11 +67,11 @@ export class HttpService {
           files = [files];
         }
 
-        files.forEach(file => {
+        files.forEach((file) => {
           formData.append('$FILES_' + file.name, file);
         });
 
-        Object.keys(data).forEach(key => {
+        Object.keys(data).forEach((key) => {
           formData.append(key, data[key]);
         });
 
@@ -79,7 +79,7 @@ export class HttpService {
           reportProgress: true,
         });
 
-        this.client.request(uploadReq).subscribe(event => {
+        this.client.request(uploadReq).subscribe((event) => {
           if (event.type === HttpEventType.UploadProgress) {
             const progress = Math.round((100 * event.loaded) / event.total);
             onProgress(progress);
@@ -152,7 +152,7 @@ export class HttpService {
       try {
         const filesNames = [];
         const files = [];
-        Object.keys(model).forEach(k => {
+        Object.keys(model).forEach((k) => {
           if (model[k] instanceof File) {
             filesNames.push(k);
             files.push(model[k]);
@@ -172,13 +172,13 @@ export class HttpService {
         for (let i = 0; i < filesNames.length; i++) {
           formData.append(filesNames[i], files[i]);
         }
-        Object.keys(data).forEach(key => {
+        Object.keys(data).forEach((key) => {
           formData.append(key, data[key]);
         });
         const uploadReq = new HttpRequest('POST', path, formData, {
           reportProgress: true,
         });
-        this.client.request(uploadReq).subscribe(event => {
+        this.client.request(uploadReq).subscribe((event) => {
           if (event.type === HttpEventType.UploadProgress) {
             const progress = Math.round((100 * event.loaded) / event.total);
             onProgress(progress);

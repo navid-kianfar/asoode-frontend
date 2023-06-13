@@ -40,12 +40,13 @@ import { CulturedDateService } from '../../services/core/cultured-date.service';
 import { GroupService } from '../../services/groups/group.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { UploadExceedModalComponent } from '../upload-exceed-modal/upload-exceed-modal.component';
 import { DateHelpers } from '../../helpers/date.helpers';
 import { AdvancedPlayerComponent } from '../advanced-player/advanced-player.component';
 import { BulkDownloadModalComponent } from '../bulk-download-modal/bulk-download-modal.component';
 import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { MatMenu } from '@angular/material/menu';
-import {DocumentModalComponent} from '../document-modal/document-modal.component';
+import { DocumentModalComponent } from '../document-modal/document-modal.component';
 
 @Component({
   selector: 'app-task-modal',
@@ -54,7 +55,8 @@ import {DocumentModalComponent} from '../document-modal/document-modal.component
 })
 export class TaskModalComponent
   extends SimpleModalComponent<TaskModalParameters, void>
-  implements OnInit, OnDestroy {
+  implements OnInit, OnDestroy
+{
   ViewMode = ViewMode;
   AccessType = AccessType;
   SortType = SortType;
@@ -98,7 +100,7 @@ export class TaskModalComponent
   tempEstimatedTime: number;
   savingEstimated: boolean;
   recording: boolean;
-  intervalInstance: any;
+  intervalInstance: number;
   totalTimeSpent: TimeViewModel;
   tempDueAt: Date;
   tempBeginAt: Date;
@@ -144,7 +146,7 @@ export class TaskModalComponent
         : 0;
     this.noDrag = this.deviceDetectorService.os.toLowerCase() === 'ios';
     this.totalTimeSpent = { day: 0, hour: 0, minute: 0 };
-    this.filesService.attaching = this.filesService.attaching.filter(a => {
+    this.filesService.attaching = this.filesService.attaching.filter((a) => {
       if (a.recordId !== this.id) {
         return true;
       }
@@ -212,7 +214,7 @@ export class TaskModalComponent
       });
     }
     this.clearInputFile(target);
-    this.filterFiles(upload).then(filtered => {
+    this.filterFiles(upload).then((filtered) => {
       this.filesService.attach(filtered, this.id);
       this.filesService.attaching = [
         ...this.filesService.attaching,
@@ -225,20 +227,29 @@ export class TaskModalComponent
     return new Promise((resolve, reject) => {
       const filtered: UploadViewModel[] = [];
       const allowed: UploadViewModel[] = [];
-      (upload || []).forEach(u => {
+      (upload || []).forEach((u) => {
         if (u.file.size > this.project.attachmentSize) {
           filtered.push(u);
         } else {
           allowed.push(u);
         }
       });
+      if (filtered.length) {
+        this.modalService
+          .show(UploadExceedModalComponent, {
+            uploads: filtered,
+            attachmentSize: this.project.attachmentSize,
+          })
+          .subscribe(() => resolve(allowed));
+        return;
+      }
       resolve(allowed);
     });
   }
 
   bind() {
     this.socket.on('push-notification', (notification: any) => {
-      [this.model, ...this.model.subTasks].forEach(travel => {
+      [this.model, ...this.model.subTasks].forEach((travel) => {
         switch (notification.type) {
           case ActivityType.WorkPackageTaskDone:
           case ActivityType.WorkPackageTaskBlocked:
@@ -274,7 +285,7 @@ export class TaskModalComponent
               notification.data.parentId === travel.id
             ) {
               const found = travel.subTasks.find(
-                l => l.id === notification.data.id,
+                (l) => l.id === notification.data.id,
               );
               if (!found) {
                 travel.subTasks.unshift(notification.data);
@@ -290,7 +301,7 @@ export class TaskModalComponent
           case ActivityType.WorkPackageTaskLabelAdd:
             if (travel.id === notification.data.taskId) {
               const already = travel.labels.find(
-                i => i.id === notification.data.labelId,
+                (i) => i.id === notification.data.labelId,
               );
               if (!already) {
                 travel.labels.push(notification.data);
@@ -300,14 +311,14 @@ export class TaskModalComponent
           case ActivityType.WorkPackageTaskLabelRemove:
             if (travel.id === notification.data.taskId) {
               travel.labels = travel.labels.filter(
-                i => i.labelId !== notification.data.labelId,
+                (i) => i.labelId !== notification.data.labelId,
               );
             }
             break;
           case ActivityType.WorkPackageTaskMemberAdd:
             if (travel.id === notification.data.taskId) {
               const already = travel.members.find(
-                i => i.recordId === notification.data.recordId,
+                (i) => i.recordId === notification.data.recordId,
               );
               if (!already) {
                 travel.members.push(notification.data);
@@ -317,7 +328,7 @@ export class TaskModalComponent
           case ActivityType.WorkPackageTaskMemberRemove:
             if (travel.id === notification.data.taskId) {
               travel.members = travel.members.filter(
-                i => i.recordId !== notification.data.recordId,
+                (i) => i.recordId !== notification.data.recordId,
               );
             }
             break;
@@ -330,14 +341,14 @@ export class TaskModalComponent
           case ActivityType.WorkPackageTaskAttachmentRemove:
             if (travel.id === notification.data.taskId) {
               travel.attachments = travel.attachments.filter(
-                a => a.id !== notification.data.id,
+                (a) => a.id !== notification.data.id,
               );
             }
             break;
           case ActivityType.WorkPackageTaskAttachmentRename:
             if (travel.id === notification.data.taskId) {
               const found = travel.attachments.find(
-                a => a.id === notification.data.id,
+                (a) => a.id === notification.data.id,
               );
               if (found) {
                 Object.assign(found, notification.data);
@@ -348,7 +359,7 @@ export class TaskModalComponent
           case ActivityType.WorkPackageTaskAttachmentCover:
             if (travel.id === notification.data.taskId) {
               const found = travel.attachments.find(
-                a => a.id === notification.data.id,
+                (a) => a.id === notification.data.id,
               );
               if (found) {
                 found.isCover = notification.data.isCover;
@@ -367,15 +378,15 @@ export class TaskModalComponent
           case ActivityType.WorkPackageTaskVote:
             if (travel.id === notification.data.taskId) {
               const found = travel.votes.find(
-                i => i.id === notification.data.id,
+                (i) => i.id === notification.data.id,
               );
               if (found) {
                 Object.assign(found, notification.data);
               } else {
                 travel.votes.push(notification.data);
               }
-              travel.upVotes = travel.votes.filter(m => m.vote).length;
-              travel.downVotes = travel.votes.filter(m => !m.vote).length;
+              travel.upVotes = travel.votes.filter((m) => m.vote).length;
+              travel.downVotes = travel.votes.filter((m) => !m.vote).length;
             }
             break;
           case ActivityType.WorkPackageTaskArchive:
@@ -386,7 +397,7 @@ export class TaskModalComponent
           case ActivityType.WorkPackageTaskTime:
             if (travel.id === notification.data.taskId) {
               const found = (travel.timeSpents || []).find(
-                t => t.id === notification.data.id,
+                (t) => t.id === notification.data.id,
               );
               if (!found) {
                 travel.timeSpents.unshift(notification.data);
@@ -400,7 +411,7 @@ export class TaskModalComponent
               notification.data.length &&
               this.model.id === notification.data[0].parentId
             ) {
-              notification.data.forEach(d => {
+              notification.data.forEach((d) => {
                 this.model.subTasks.unshift(d);
               });
 
@@ -489,7 +500,7 @@ export class TaskModalComponent
 
     if (!this.project) {
       this.project = this.projectService.projects.find(
-        p => p.id === op.data.projectId,
+        (p) => p.id === op.data.projectId,
       );
     }
 
@@ -507,7 +518,7 @@ export class TaskModalComponent
 
     if (!this.workPackage) {
       this.workPackage = this.project.workPackages.find(
-        w => w.id === op.data.packageId,
+        (w) => w.id === op.data.packageId,
       );
     }
     if (!this.workPackage) {
@@ -515,22 +526,22 @@ export class TaskModalComponent
       return this.close();
     }
     this.groupMembers = this.project.members
-      .filter(i => i.isGroup)
-      .filter(f =>
-        this.workPackage.members.find(d => d.recordId === f.recordId),
+      .filter((i) => i.isGroup)
+      .filter((f) =>
+        this.workPackage.members.find((d) => d.recordId === f.recordId),
       );
     this.individualMembers = this.project.members
-      .filter(i => !i.isGroup)
-      .filter(f =>
-        this.workPackage.members.find(d => d.recordId === f.recordId),
+      .filter((i) => !i.isGroup)
+      .filter((f) =>
+        this.workPackage.members.find((d) => d.recordId === f.recordId),
       );
 
-    this.groupMembers.forEach(g => {
-      const grp = this.groupService.groups.find(i => i.id === g.recordId);
+    this.groupMembers.forEach((g) => {
+      const grp = this.groupService.groups.find((i) => i.id === g.recordId);
       if (grp) {
-        grp.members.forEach(m => {
+        grp.members.forEach((m) => {
           const found = this.individualMembers.find(
-            d => d.recordId === m.userId,
+            (d) => d.recordId === m.userId,
           );
           if (found) {
             return;
@@ -574,7 +585,7 @@ export class TaskModalComponent
 
   calculateAll() {
     const total = this.model.timeSpents
-      .map(t => {
+      .map((t) => {
         t.diff = this.calcDiff(t);
         return t.diff;
       })
@@ -611,7 +622,7 @@ export class TaskModalComponent
       return '';
     }
     const attachment = this.model.attachments.find(
-      a => a.id === this.model.coverId,
+      (a) => a.id === this.model.coverId,
     );
     if (!attachment) {
       return '';
@@ -624,13 +635,15 @@ export class TaskModalComponent
     //   m => m.recordId === this.identityService.identity.userId,
     // );
     // this.permission = permission ? permission.access : AccessType.Visitor;
-    this.model.comments.forEach(c => {
-      const found = this.project.members.find(m => m.recordId === c.userId);
+    this.model.comments.forEach((c) => {
+      const found = this.project.members.find((m) => m.recordId === c.userId);
       if (found) {
         c.member = found.member;
       }
     });
-    this.model.subTasksDone = this.model.subTasks.filter(i => i.doneAt).length;
+    this.model.subTasksDone = this.model.subTasks.filter(
+      (i) => i.doneAt,
+    ).length;
     this.bg = this.getBackgroundUrl();
     this.tempEstimatedTime = this.model.estimatedTime;
 
@@ -646,8 +659,8 @@ export class TaskModalComponent
       this.tempMinute = this.tempDueAt.getMinutes();
     }
 
-    this.model.upVotes = this.model.votes.filter(m => m.vote).length;
-    this.model.downVotes = this.model.votes.filter(m => !m.vote).length;
+    this.model.upVotes = this.model.votes.filter((m) => m.vote).length;
+    this.model.downVotes = this.model.votes.filter((m) => !m.vote).length;
     this.sortSubTasks();
     this.sortAttachments();
   }
@@ -735,7 +748,7 @@ export class TaskModalComponent
     }
     member.waiting = true;
     if (
-      this.model.members.findIndex(i => i.recordId === member.recordId) === -1
+      this.model.members.findIndex((i) => i.recordId === member.recordId) === -1
     ) {
       await this.taskService.addMember(this.id, {
         isGroup: member.isGroup,
@@ -751,7 +764,7 @@ export class TaskModalComponent
     if (label.waiting || label.editting) {
       return;
     }
-    if (this.model.labels.findIndex(i => i.labelId === label.id) === -1) {
+    if (this.model.labels.findIndex((i) => i.labelId === label.id) === -1) {
       this.taskService.addLabel(this.id, label.id);
     } else {
       this.taskService.removeLabel(this.id, label.id);
@@ -760,12 +773,12 @@ export class TaskModalComponent
 
   isMemberSelected(member: ProjectMemberViewModel): boolean {
     return (
-      this.model.members.findIndex(m => m.recordId === member.recordId) !== -1
+      this.model.members.findIndex((m) => m.recordId === member.recordId) !== -1
     );
   }
 
   isLabelSelected(label: WorkPackageLabelViewModel) {
-    return this.model.labels.findIndex(m => m.labelId === label.id) !== -1;
+    return this.model.labels.findIndex((m) => m.labelId === label.id) !== -1;
   }
 
   prepareUpload() {
@@ -776,7 +789,7 @@ export class TaskModalComponent
 
   getPath(attachment: WorkPackageTaskAttachmentViewModel) {
     if (attachment.path.indexOf('https://') === -1) {
-      return 'https://storage.asoode.com' + attachment.path;
+      return 'https://storage.asoode.work' + attachment.path;
     }
     return attachment.path;
   }
@@ -872,7 +885,7 @@ export class TaskModalComponent
   prepareRenameLabel(label: WorkPackageLabelViewModel, $event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.workPackage.labels.forEach(l => {
+    this.workPackage.labels.forEach((l) => {
       if (l.waiting) {
         return;
       }
@@ -956,7 +969,7 @@ export class TaskModalComponent
       .show<MapModalParameters, MapMarker[]>(MapModalComponent, {
         mapLocation: this.model.geoLocation,
       })
-      .subscribe(async markers => {
+      .subscribe(async (markers) => {
         let op: OperationResult<boolean>;
         if (!markers.length) {
           if (this.model.geoLocation) {
@@ -990,7 +1003,7 @@ export class TaskModalComponent
     if (
       this.voting ||
       this.model.votes.find(
-        v => v.userId === this.identityService.identity.userId,
+        (v) => v.userId === this.identityService.identity.userId,
       )
     ) {
       return;
@@ -1163,7 +1176,7 @@ export class TaskModalComponent
     const op = await this.taskService.bulkUpload(
       this.model.id,
       { file: target.files[0] },
-      progress => {
+      (progress) => {
         this.bulkUploadProgress = progress;
       },
     );
@@ -1187,7 +1200,7 @@ export class TaskModalComponent
   previewAttachment(attachment: WorkPackageTaskAttachmentViewModel) {
     debugger;
     this.modalService
-      .show(DocumentModalComponent, {path: attachment.path,})
+      .show(DocumentModalComponent, { path: attachment.path })
       .subscribe(() => {});
   }
 }

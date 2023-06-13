@@ -2,6 +2,8 @@ import { Injectable, Injector } from '@angular/core';
 import { OperationResultStatus } from '../../library/core/enums';
 import { StringDictionary } from '../../library/core/dictionary';
 import { TranslateService } from './translate.service';
+import { ModalService } from './modal.service';
+import { UpgradeComponent } from '../../modals/upgrade/upgrade.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 const CONFIG = {
@@ -46,6 +48,9 @@ export class NotificationService {
       case OperationResultStatus.Failed:
         this.error('GENERAL_FAILED');
         break;
+      case OperationResultStatus.Captcha:
+        this.error('GENERAL_CAPTCHA');
+        break;
       case OperationResultStatus.OverCapacity:
       case OperationResultStatus.Expire:
         // this.injector
@@ -65,7 +70,7 @@ export class NotificationService {
       input = this.translate.fromKey(input);
     }
     if (replace !== null) {
-      replace.Keys().forEach(k => {
+      replace.Keys().forEach((k) => {
         const value = replace.Item(k);
         k = k.replace('{', '\\{').replace('}', '\\}');
         input = input.replace(new RegExp(k, 'g'), value);

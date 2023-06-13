@@ -19,6 +19,7 @@ import { PopperContent } from 'ngx-popper';
 import { OperationResult } from '../../../library/core/operation-result';
 import { Socket } from 'ngx-socket-io';
 import { PushNotificationService } from '../../../services/general/push-notification.service';
+import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
 import { SwPush } from '@angular/service-worker';
 import { NumberHelpers } from '../../../helpers/number.helpers';
 
@@ -65,10 +66,10 @@ export class HeaderComponent implements AfterViewInit, OnInit {
       this.pushNotificationService.handleSocket(notification),
     );
     if (this.swPush.isEnabled) {
-      this.swPush.messages.subscribe(notification => {
+      this.swPush.messages.subscribe((notification) => {
         this.pushNotificationService.handlePush(notification);
       });
-      this.swPush.notificationClicks.subscribe(notification => {
+      this.swPush.notificationClicks.subscribe((notification) => {
         this.pushNotificationService.handlePushClick(notification);
       });
     }
@@ -90,12 +91,16 @@ export class HeaderComponent implements AfterViewInit, OnInit {
           this.manualShow = true;
           this.popperSearch.show();
           if (!this.listener) {
-            this.listener = this.renderer.listen('document', 'click', event => {
-              this.popperSearch.hide();
-            });
+            this.listener = this.renderer.listen(
+              'document',
+              'click',
+              (event) => {
+                this.popperSearch.hide();
+              },
+            );
           }
         }),
-        switchMap(project => {
+        switchMap((project) => {
           this.searchTerm = NumberHelpers.clearNumbers(
             (input.value || '').trim(),
           );
@@ -108,7 +113,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
           return this.httpService.post('/search', { search: this.searchTerm });
         }),
       )
-      .subscribe(data => {
+      .subscribe((data) => {
         this.searchTerm = NumberHelpers.clearNumbers(
           (input.value || '').trim(),
         );

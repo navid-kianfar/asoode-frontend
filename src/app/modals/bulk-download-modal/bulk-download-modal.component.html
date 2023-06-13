@@ -5,7 +5,7 @@
   >
     <div class="modal-header">
       <h4 class="modal-title">
-        {{ 'BULK_DOWNLOAD' | translate: true }}
+        {{ 'BULK_DOWNLOAD' | translate : true }}
       </h4>
       <button (click)="onCancel($event)">
         <i class="icon-cross"></i>
@@ -29,10 +29,10 @@
         color="primary"
       >
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-        {{ 'BULK_DOWNLOAD' | translate: true }}</button
+        {{ 'BULK_DOWNLOAD' | translate : true }}</button
       >&nbsp;
       <button (click)="onCancel($event)" mat-button>
-        {{ 'CANCEL' | translate: true }}
+        {{ 'CANCEL' | translate : true }}
       </button>
     </div>
   </div>

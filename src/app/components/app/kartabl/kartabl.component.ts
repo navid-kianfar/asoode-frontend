@@ -24,13 +24,13 @@ export class KartablComponent implements OnInit {
 
   ngOnInit() {
     const ddItems: ListViewModel[] = [];
-    this.model.tasks.forEach(t => {
+    this.model.tasks.forEach((t) => {
       const project = this.projectService.projects.find(
-        p => p.id === t.projectId,
+        (p) => p.id === t.projectId,
       );
-      const found = project.workPackages.find(w => w.id === t.packageId);
+      const found = project.workPackages.find((w) => w.id === t.packageId);
       const pkg = { ...found, list: [] };
-      if (ddItems.findIndex(i => i.value === pkg.id) !== -1) {
+      if (ddItems.findIndex((i) => i.value === pkg.id) !== -1) {
         return;
       }
       ddItems.push({
@@ -47,21 +47,21 @@ export class KartablComponent implements OnInit {
 
   switchProject(selected: any) {
     const duplicates = {} as any;
-    const payload = this.projects.find(p => p.value === selected).payload;
+    const payload = this.projects.find((p) => p.value === selected).payload;
     const filteredTasks = this.model.tasks.filter(
-      t => t.packageId === selected,
+      (t) => t.packageId === selected,
     );
     this.project = payload.project;
     this.pkg = { ...payload.pkg, lists: [] };
     this.pkg.lists = filteredTasks
-      .filter(f => {
+      .filter((f) => {
         if (duplicates[f.listId]) {
           return false;
         }
         duplicates[f.listId] = true;
         return true;
       })
-      .map(t => {
+      .map((t) => {
         return {
           id: t.listId,
           tasks: [],
@@ -69,8 +69,8 @@ export class KartablComponent implements OnInit {
           packageId: t.packageId,
         } as WorkPackageListViewModel;
       });
-    this.pkg.lists.forEach(l => {
-      l.tasks = filteredTasks.filter(t => t.listId === l.id);
+    this.pkg.lists.forEach((l) => {
+      l.tasks = filteredTasks.filter((t) => t.listId === l.id);
     });
   }
 }

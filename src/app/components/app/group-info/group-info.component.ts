@@ -18,7 +18,7 @@ export class GroupInfoComponent implements OnInit {
 
   ngOnInit() {
     if (this.id) {
-      this.model = this.groupService.groups.find(g => g.id === this.id);
+      this.model = this.groupService.groups.find((g) => g.id === this.id);
     }
   }
 }

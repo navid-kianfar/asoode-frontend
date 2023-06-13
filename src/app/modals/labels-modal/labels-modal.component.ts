@@ -17,7 +17,8 @@ import { ModalService } from '../../services/core/modal.service';
 })
 export class LabelsModalComponent
   extends SimpleModalComponent<{ workPackage: WorkPackageViewModel }, void>
-  implements OnInit {
+  implements OnInit
+{
   workPackage: WorkPackageViewModel;
   temp: WorkPackageLabelViewModel;
   constructor(
@@ -50,7 +51,7 @@ export class LabelsModalComponent
   prepareRenameLabel(label: WorkPackageLabelViewModel, $event: MouseEvent) {
     $event.stopPropagation();
     $event.preventDefault();
-    this.workPackage.labels.forEach(l => {
+    this.workPackage.labels.forEach((l) => {
       if (l.waiting) {
         return;
       }

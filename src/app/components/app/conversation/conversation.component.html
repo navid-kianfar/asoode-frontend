@@ -24,21 +24,21 @@
                 {{ 'ASOODE_BOT' | translate }}
               </div>
               <div class="hour">
-                {{ message.createdAt | amDateFormat: 'HH:mm' }}
+                {{ message.createdAt | amDateFormat : 'HH:mm' }}
               </div>
             </div>
             <div
               *ngIf="message.type === ConversationType.Text"
               class="text-message"
             >
-              {{ message.message | translate: true }}
+              {{ message.message | translate : true }}
             </div>
             <div
               *ngIf="message.type === ConversationType.Link"
               class="text-message"
             >
               <a href="javascript:void(0)" (click)="openLink(message)">
-                {{ message.message | translate: true }}
+                {{ message.message | translate : true }}
               </a>
             </div>
           </div>
@@ -57,7 +57,7 @@
                 {{ message.member?.fullName }}
               </div>
               <div class="hour">
-                {{ message.createdAt | amDateFormat: 'HH:mm' }}
+                {{ message.createdAt | amDateFormat : 'HH:mm' }}
               </div>
             </div>
             <div
@@ -94,7 +94,7 @@
               <h4>
                 {{ message.upload.name }}
               </h4>
-              <h5>{{ message.upload.createdAt | culturedDate: true }}</h5>
+              <h5>{{ message.upload.createdAt | culturedDate : true }}</h5>
             </div>
             <div class="actions">
               <div class="btns">

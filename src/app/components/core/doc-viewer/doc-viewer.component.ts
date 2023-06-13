@@ -1,7 +1,13 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { StringHelpers } from 'src/app/helpers/string.helpers';
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-doc-viewer',
@@ -17,25 +23,30 @@ export class DocViewerComponent implements OnInit, AfterViewInit {
 
   constructor(
     public sanitizer: DomSanitizer,
-    private readonly ref: ElementRef
-  ) {
-  }
+    private readonly ref: ElementRef,
+  ) {}
 
   ngAfterViewInit() {
     if (this.ref.nativeElement.parentElement.classList.contains('modal-body')) {
-      const rect = this.ref.nativeElement.parentElement.parentElement.getBoundingClientRect();
-      if (!this.width) { this.width = Math.ceil(rect.width) - 60; }
-      if (!this.height) { this.height = Math.ceil(rect.height); }
+      const rect =
+        this.ref.nativeElement.parentElement.parentElement.getBoundingClientRect();
+      if (!this.width) {
+        this.width = Math.ceil(rect.width) - 60;
+      }
+      if (!this.height) {
+        this.height = Math.ceil(rect.height);
+      }
     }
 
-    const scaled = `${this.path}?width=${this.width || 800}&height=${this.height || 600}`;
+    const scaled = `${this.path}?width=${this.width || 800}&height=${
+      this.height || 600
+    }`;
     const encoded = StringHelpers.base64encode(scaled);
     const url = `${environment.office_endpoint}/document/viewer/${encoded}`;
     this.safePath = this.sanitizer.bypassSecurityTrustResourceUrl(url);
 
-    setTimeout(() => this.loaded = true, 500);
+    setTimeout(() => (this.loaded = true), 500);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

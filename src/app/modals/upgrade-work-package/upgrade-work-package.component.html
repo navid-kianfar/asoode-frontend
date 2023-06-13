@@ -5,7 +5,7 @@
         <div class="btn"></div>
         <div class="text">
           <h4 class="modal-title">
-            {{ 'ADD_STRUCTURE' | translate: true }}&nbsp;...
+            {{ 'ADD_STRUCTURE' | translate : true }}&nbsp;...
           </h4>
         </div>
         <div class="btn">
@@ -86,7 +86,7 @@
         </div>
         <div class="text">
           <h4 class="modal-title">
-            {{ 'CONNECT_TO_PROJECT' | translate: true }}
+            {{ 'CONNECT_TO_PROJECT' | translate : true }}
           </h4>
         </div>
         <div class="btn">
@@ -144,7 +144,7 @@
         </div>
         <div class="text">
           <h4 class="modal-title">
-            {{ 'MERGE_TO_PACKAGE' | translate: true }}
+            {{ 'MERGE_TO_PACKAGE' | translate : true }}
           </h4>
         </div>
         <div class="btn">
@@ -190,5 +190,11 @@
         </button>
       </div>
     </div>
+  </ng-container>
+  <ng-container *ngIf="mode === WizardMode.Plan">
+    <app-upgrade-wizard
+      (click)="$event.stopPropagation()"
+      (exit)="close()"
+    ></app-upgrade-wizard>
   </ng-container>
 </div>

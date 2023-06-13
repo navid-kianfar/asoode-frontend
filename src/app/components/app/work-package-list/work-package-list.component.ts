@@ -17,6 +17,6 @@ export class WorkPackageListComponent extends WorkPackageBoardComponent {
     task: WorkPackageTaskViewModel,
     label: WorkPackageLabelViewModel,
   ): boolean {
-    return task.labels.findIndex(i => i.labelId === label.id) !== -1;
+    return task.labels.findIndex((i) => i.labelId === label.id) !== -1;
   }
 }

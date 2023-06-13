@@ -28,9 +28,11 @@ export class GroupService {
 
   getPermission(group: GroupViewModel | string): AccessType {
     const grp =
-      typeof group === 'string' ? this.groups.find(g => g.id === group) : group;
+      typeof group === 'string'
+        ? this.groups.find((g) => g.id === group)
+        : group;
     const access = grp.members.find(
-      m => m.userId === this.identityService.identity.userId,
+      (m) => m.userId === this.identityService.identity.userId,
     );
     if (access) {
       return access.access;

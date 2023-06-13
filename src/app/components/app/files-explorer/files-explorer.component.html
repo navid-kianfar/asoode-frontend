@@ -50,10 +50,7 @@
         <!--            <span class="sub-title">{{ 'PASTE' | translate }}</span>-->
         <!--          </span>-->
         <!--        </button>-->
-        <button (click)="copyLink()"
-          *ngIf="onlyOneSelected"
-          mat-mini-fab
-        >
+        <button (click)="copyLink()" *ngIf="onlyOneSelected" mat-mini-fab>
           <span class="btn-inner">
             <i class="icon-link2"></i>
             <span class="sub-title">{{ 'COPY_LINK' | translate }}</span>
@@ -85,16 +82,16 @@
             <span class="sub-title">{{ 'VIEW' | translate }}</span>
           </span>
         </button>
-<!--        <button-->
-<!--          (click)="actionOpenInNewTab()"-->
-<!--          *ngIf="oneFileSelected"-->
-<!--          mat-mini-fab-->
-<!--        >-->
-<!--          <span class="btn-inner">-->
-<!--            <i class="icon-new-window"></i>-->
-<!--            <span class="sub-title">{{ 'OPEN' | translate }}</span>-->
-<!--          </span>-->
-<!--        </button>-->
+        <!--        <button-->
+        <!--          (click)="actionOpenInNewTab()"-->
+        <!--          *ngIf="oneFileSelected"-->
+        <!--          mat-mini-fab-->
+        <!--        >-->
+        <!--          <span class="btn-inner">-->
+        <!--            <i class="icon-new-window"></i>-->
+        <!--            <span class="sub-title">{{ 'OPEN' | translate }}</span>-->
+        <!--          </span>-->
+        <!--        </button>-->
       </div>
       <div class="views">
         <i

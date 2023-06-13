@@ -34,18 +34,18 @@ export class WorkPackageTaskComponent implements OnInit {
   ngOnInit() {
     if (!this.project) {
       this.project = this.projectService.projects.find(
-        p => p.id === this.model.projectId,
+        (p) => p.id === this.model.projectId,
       );
       if (!this.project) {
         return;
       }
       this.workPackage = this.project.workPackages.find(
-        w => w.id === this.model.packageId,
+        (w) => w.id === this.model.packageId,
       );
     }
   }
 
   isLabelSelected(label: WorkPackageLabelViewModel): boolean {
-    return this.model.labels.findIndex(i => i.labelId === label.id) !== -1;
+    return this.model.labels.findIndex((i) => i.labelId === label.id) !== -1;
   }
 }

@@ -6,7 +6,7 @@
     <app-waiting *ngIf="waiting"></app-waiting>
     <ng-container *ngIf="!waiting">
       <div class="date">
-        {{ beginDate | culturedDate: false:'NNN YYYY' }}
+        {{ beginDate | culturedDate : false : 'NNN YYYY' }}
       </div>
       <br />
       <app-dashboard-progress

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   IFormElement,
   IFormElementButton,
+  IFormElementCaptcha,
   IFormElementCountryPicker,
   IFormElementDropDown,
   IFormElementInput,
@@ -16,8 +17,10 @@ import {
   // IFormElementEditor,
 } from '../../components/core/form/contracts';
 import { DropdownKnownList, FormElementType } from '../../library/core/enums';
+import { CaptchaObject } from '../../view-models/core/captcha-types';
 import { NumberHelpers } from '../../helpers/number.helpers';
 
+const CAPTCHA_LENGTH = 5;
 const VERIFICATION_LENGTH = 6;
 
 @Injectable({
@@ -108,6 +111,17 @@ export class FormService {
     casted.validation = casted.validation || { required: { value: false } };
     return casted;
   }
+  createCaptcha(): IFormElementCaptcha {
+    return {
+      validation: {
+        required: { value: true, message: 'CAPTCHA_REQUIRED' },
+        length: { value: CAPTCHA_LENGTH, message: 'CAPTCHA_LENGTH' },
+      },
+      config: { field: 'captcha', label: 'GENERAL_CAPTCHA' },
+      params: { model: { code: '', expire: '', token: '' } },
+      type: FormElementType.Captcha,
+    } as IFormElementCaptcha;
+  }
   prepare(form: FormViewModel[]): any {
     this.clearErrors(form);
     const model = this.getModel(form);
@@ -122,8 +136,8 @@ export class FormService {
     this.clearErrors(form);
   }
   clearErrors(form: FormViewModel[]) {
-    form.forEach(group => {
-      group.elements.forEach(element => {
+    form.forEach((group) => {
+      group.elements.forEach((element) => {
         if (!element.validation) {
           return;
         }
@@ -132,8 +146,8 @@ export class FormService {
     });
   }
   setErrors(form: FormViewModel[], field: string, errors: string[]) {
-    form.forEach(group => {
-      group.elements.forEach(element => {
+    form.forEach((group) => {
+      group.elements.forEach((element) => {
         if (!element.validation || element.config.field !== field) {
           return;
         }
@@ -143,15 +157,19 @@ export class FormService {
   }
   getModel(form: FormViewModel[]): any {
     const model = {} as any;
-    form.forEach(group => {
-      group.elements.forEach(element => {
+    form.forEach((group) => {
+      group.elements.forEach((element) => {
         if (
           element.type === FormElementType.Button ||
           element.type === FormElementType.Label
         ) {
           return;
         }
-        if (typeof element.params.model === 'string') {
+        if (element.type === FormElementType.Captcha) {
+          element.params.model.code = NumberHelpers.clearNumbers(
+            element.params.model.code,
+          );
+        } else if (typeof element.params.model === 'string') {
           element.params.model = NumberHelpers.clearNumbers(
             element.params.model,
           );
@@ -162,15 +180,15 @@ export class FormService {
     return model;
   }
   setModel(form: FormViewModel[], model: any): void {
-    form.forEach(group => {
-      group.elements.forEach(element => {
+    form.forEach((group) => {
+      group.elements.forEach((element) => {
         element.params.model = model[element.config.field];
       });
     });
   }
   reset(form: FormViewModel[]) {
-    form.forEach(group => {
-      group.elements.forEach(element => {
+    form.forEach((group) => {
+      group.elements.forEach((element) => {
         switch (element.type) {
           case FormElementType.Input:
           case FormElementType.Verification:
@@ -184,6 +202,13 @@ export class FormService {
             break;
           case FormElementType.Number:
             element.params.model = 0;
+            break;
+          case FormElementType.Captcha:
+            element.params.model = {
+              token: '',
+              expire: '',
+              code: '',
+            } as CaptchaObject;
             break;
           case FormElementType.DropDown:
           case FormElementType.DatePicker:
@@ -204,8 +229,8 @@ export class FormService {
   }
   private validateModel(form: FormViewModel[], model: any): boolean {
     let isValid = true;
-    form.forEach(group => {
-      group.elements.forEach(element => {
+    form.forEach((group) => {
+      group.elements.forEach((element) => {
         if (
           element.type === FormElementType.Button ||
           element.type === FormElementType.Label
@@ -230,6 +255,8 @@ export class FormService {
       case FormElementType.Verification:
       case FormElementType.AutoComplete:
         return this.validateString(element, model);
+      case FormElementType.Captcha:
+        return this.validateCaptcha(element);
       case FormElementType.DatePicker:
         return this.validateDate(element);
       case FormElementType.Radio:
@@ -274,6 +301,18 @@ export class FormService {
       element.validation.errors = [element.validation.required.message];
     }
     return isValid;
+  }
+  private validateCaptcha(element: IFormElement): boolean {
+    const code = (element.params.model as any).code;
+    if (!code) {
+      element.validation.errors = [element.validation.required.message];
+      return false;
+    }
+    if (code.length !== CAPTCHA_LENGTH) {
+      element.validation.errors = [element.validation.length.message];
+      return false;
+    }
+    return true;
   }
   private validateTimePicker(element: IFormElement): boolean {
     if (element.validation.required && element.validation.required.value) {

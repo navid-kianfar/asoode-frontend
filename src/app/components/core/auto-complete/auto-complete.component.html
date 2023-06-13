@@ -1,6 +1,6 @@
 <div class="af-auto-complete">
   <input
-    [placeholder]="placeHolder | translate: true"
+    [placeholder]="placeHolder | translate : true"
     #trigger="matAutocompleteTrigger"
     (blur)="hide(trigger)"
     [matAutocomplete]="auto"
@@ -22,7 +22,7 @@
       </ng-container>
 
       <ng-template #normal>
-        <span>{{ item.text | translate: true }}</span>
+        <span>{{ item.text | translate : true }}</span>
       </ng-template>
     </mat-option>
   </mat-autocomplete>

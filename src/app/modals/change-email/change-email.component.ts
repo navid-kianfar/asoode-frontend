@@ -9,8 +9,10 @@ import { ValidationService } from 'src/app/services/core/validation.service';
   templateUrl: './change-email.component.html',
   styleUrls: ['./change-email.component.scss'],
 })
-export class ChangeEmailComponent extends SimpleModalComponent<{}, string>
-  implements OnInit {
+export class ChangeEmailComponent
+  extends SimpleModalComponent<{}, string>
+  implements OnInit
+{
   cancel?: () => Promise<any>;
   action?: () => Promise<any>;
   actionWaiting: boolean;

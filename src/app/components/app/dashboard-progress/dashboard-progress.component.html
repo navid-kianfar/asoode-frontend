@@ -19,19 +19,19 @@
   <!--  </div>-->
 </div>
 <div class="progress-report" *ngIf="!hidden">
-<!--  <ngx-charts-bar-vertical-2d-->
-<!--    [yAxisTickFormatting]="formatY"-->
-<!--    [view]="view"-->
-<!--    [gradient]="false"-->
-<!--    [xAxis]="true"-->
-<!--    [yAxis]="true"-->
-<!--    [legend]="false"-->
-<!--    [showXAxisLabel]="false"-->
-<!--    [showYAxisLabel]="false"-->
-<!--    [xAxisLabel]="''"-->
-<!--    [yAxisLabel]="''"-->
-<!--    [scheme]="{ domain: ['#ee6285', '#74d68c', '#59a8ef'] }"-->
-<!--    [results]="chartData"-->
-<!--    (window:resize)="onResize($event)"-->
-<!--  ></ngx-charts-bar-vertical-2d>-->
+  <ngx-charts-bar-vertical-2d
+    [yAxisTickFormatting]="formatY"
+    [view]="view"
+    [gradient]="false"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="false"
+    [showXAxisLabel]="false"
+    [showYAxisLabel]="false"
+    [xAxisLabel]="''"
+    [yAxisLabel]="''"
+    [scheme]="{ domain: ['#ee6285', '#74d68c', '#59a8ef'] }"
+    [results]="chartData"
+    (window:resize)="onResize($event)"
+  ></ngx-charts-bar-vertical-2d>
 </div>

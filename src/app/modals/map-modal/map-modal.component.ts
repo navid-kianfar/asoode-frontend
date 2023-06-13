@@ -12,7 +12,8 @@ import {
 })
 export class MapModalComponent
   extends SimpleModalComponent<MapModalParameters, MapMarker[]>
-  implements OnInit {
+  implements OnInit
+{
   center: MapMarker;
   markers: MapMarker[];
   mapLocation: string;

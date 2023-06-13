@@ -97,9 +97,7 @@ export class MaterialHijriDateAdapter extends DateAdapter<hijriMoment.Moment> {
   }
 
   getYearName(date: hijriMoment.Moment): string {
-    return this.clone(date)
-      .iYear()
-      .toString();
+    return this.clone(date).iYear().toString();
   }
 
   getFirstDayOfWeek(): number {
@@ -107,9 +105,7 @@ export class MaterialHijriDateAdapter extends DateAdapter<hijriMoment.Moment> {
   }
 
   getNumDaysInMonth(date: hijriMoment.Moment): number {
-    return this.clone(date)
-      .endOf('iMonth')
-      .iDate();
+    return this.clone(date).endOf('iMonth').iDate();
   }
 
   clone(date: hijriMoment.Moment): hijriMoment.Moment {

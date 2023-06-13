@@ -132,7 +132,9 @@
             }}</span>
           </ng-container>
         </div>
-        <div class="state">{{ task.state | enum: 'WorkPackageTaskState' }}</div>
+        <div class="state">
+          {{ task.state | enum : 'WorkPackageTaskState' }}
+        </div>
         <div class="labels">
           <ng-container *ngFor="let label of model?.labels">
             <div

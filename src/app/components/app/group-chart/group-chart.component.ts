@@ -3,6 +3,7 @@ import { GroupViewModel } from '../../../view-models/groups/group-types';
 import { GroupService } from '../../../services/groups/group.service';
 import { AccessType } from '../../../library/app/enums';
 import { OperationResultStatus } from '../../../library/core/enums';
+import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
 import { ModalService } from '../../../services/core/modal.service';
 
 @Component({

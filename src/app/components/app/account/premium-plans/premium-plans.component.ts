@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IdentityService } from '../../../../services/auth/identity.service';
 import { PlanType } from 'src/app/library/app/enums';
+import { UpgradeComponent } from '../../../../modals/upgrade/upgrade.component';
 import { ModalService } from '../../../../services/core/modal.service';
 import { NumberHelpers } from '../../../../helpers/number.helpers';
 
@@ -26,6 +27,6 @@ export class PremiumPlansComponent implements OnInit {
   }
 
   upgrade() {
-    // this.modalService.show(UpgradeComponent).subscribe(() => {});
+    this.modalService.show(UpgradeComponent).subscribe(() => {});
   }
 }

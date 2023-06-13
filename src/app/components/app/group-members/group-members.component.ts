@@ -41,10 +41,10 @@ export class GroupMembersComponent implements OnInit {
         exclude: [
           this.group.userId,
           this.group.id,
-          ...this.group.members.map(m => m.userId),
-          ...this.group.pending.map(p => p.identifier),
+          ...this.group.members.map((m) => m.userId),
+          ...this.group.pending.map((p) => p.identifier),
         ],
-        handler: async access => {
+        handler: async (access) => {
           return this.groupService.addAccess(this.group.id, access);
         },
       })
@@ -65,7 +65,7 @@ export class GroupMembersComponent implements OnInit {
         cancelLabel: 'CANCEL',
         action: async () => OperationResult.Success(true),
       })
-      .subscribe(async confirmed => {
+      .subscribe(async (confirmed) => {
         if (!confirmed) {
           return;
         }
@@ -151,7 +151,7 @@ export class GroupMembersComponent implements OnInit {
         cancelLabel: 'CANCEL',
         action: async () => OperationResult.Success(true),
       })
-      .subscribe(async confirmed => {
+      .subscribe(async (confirmed) => {
         if (!confirmed) {
           return;
         }
@@ -162,7 +162,7 @@ export class GroupMembersComponent implements OnInit {
           // TODO: handle error
           return;
         }
-        this.group.pending = this.group.pending.filter(g => g !== member);
+        this.group.pending = this.group.pending.filter((g) => g !== member);
       });
   }
 }

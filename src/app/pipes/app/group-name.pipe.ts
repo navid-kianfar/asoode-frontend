@@ -8,6 +8,6 @@ export class GroupNamePipe implements PipeTransform {
   constructor(private readonly groupService: GroupService) {}
 
   transform(groupId): string {
-    return this.groupService.groups.find(g => g.id === groupId).title;
+    return this.groupService.groups.find((g) => g.id === groupId).title;
   }
 }

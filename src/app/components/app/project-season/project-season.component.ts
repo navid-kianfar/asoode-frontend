@@ -96,7 +96,7 @@ export class ProjectSeasonComponent implements OnInit {
           return await this.projectService.removeSeason(season.id);
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 
   prepareEdit(season: ProjectSeasonViewModel) {

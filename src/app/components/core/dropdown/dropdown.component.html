@@ -10,7 +10,7 @@
       <i class="{{ prependIcon }}"></i>
     </span>
     <span class="txt" [class.ltr]="ltr && model !== undefined">{{
-      text | translate: true
+      text | translate : true
     }}</span>
     <span class="arrow icon-arrow-down2"></span>
   </button>
@@ -25,9 +25,9 @@
       *ngFor="let item of items"
       (click)="onPick(item, $event, true)"
     >
-      <span class="title">{{ item.text | translate: true }}</span>
+      <span class="title">{{ item.text | translate : true }}</span>
       <span *ngIf="item.description" class="sub-title">
-        {{ item.description | translate: true }}
+        {{ item.description | translate : true }}
       </span>
     </button>
   </mat-menu>

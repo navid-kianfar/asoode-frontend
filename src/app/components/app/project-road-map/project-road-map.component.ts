@@ -17,6 +17,6 @@ export class ProjectRoadMapComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.subProjects = this.model.subProjects.filter(s => !s.parentId);
+    this.subProjects = this.model.subProjects.filter((s) => !s.parentId);
   }
 }

@@ -48,13 +48,13 @@ export class AutoCompleteComponent implements OnInit {
           this.filtered = [];
           this.isLoading = true;
         }),
-        switchMap(project => {
+        switchMap((project) => {
           const search = input.value;
           this.startModify.emit(search);
           return this.httpService.post(this.backend, { search });
         }),
       )
-      .subscribe(data => {
+      .subscribe((data) => {
         const search = input.value;
         this.model = search;
         this.modelChange.emit(search);

@@ -62,7 +62,7 @@ export class DateHelpers {
   static toIsoDateWithTimeZone(source: Date): string {
     const tzo = -source.getTimezoneOffset(),
       dif = tzo >= 0 ? '+' : '-',
-      pad = function(num) {
+      pad = function (num) {
         const norm = Math.floor(Math.abs(num));
         return (norm < 10 ? '0' : '') + norm;
       };

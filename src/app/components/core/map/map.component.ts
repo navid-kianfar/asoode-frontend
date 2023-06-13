@@ -59,7 +59,7 @@ export class MapComponent implements OnInit, OnChanges {
       if (this.internalMarkers.length) {
         this.markerSource.removeFeature(this.internalMarkers[0]);
       }
-      this.internalMarkers = (this.markers || []).map(m => {
+      this.internalMarkers = (this.markers || []).map((m) => {
         const l: [number, number] = [m.location.longitude, m.location.latitude];
         return new ol.Feature({
           geometry: new ol.geom.Point(
@@ -67,7 +67,7 @@ export class MapComponent implements OnInit, OnChanges {
           ),
         });
       });
-      this.internalMarkers.forEach(m => {
+      this.internalMarkers.forEach((m) => {
         this.markerSource.addFeature(m);
       });
       this.goToCenter();
@@ -109,7 +109,7 @@ export class MapComponent implements OnInit, OnChanges {
   }
 
   mapMarkers() {
-    this.internalMarkers = (this.markers || []).map(m => {
+    this.internalMarkers = (this.markers || []).map((m) => {
       const location: [number, number] = [
         m.location.longitude,
         m.location.latitude,
@@ -143,7 +143,7 @@ export class MapComponent implements OnInit, OnChanges {
         zoom: this.zoom,
       }),
     });
-    this.instance.on('singleclick', event => {
+    this.instance.on('singleclick', (event) => {
       if (this.disabled) {
         return;
       }
@@ -169,18 +169,18 @@ export class MapComponent implements OnInit, OnChanges {
         },
       ]);
     });
-    this.instance.on('mousewheel', e => {
+    this.instance.on('mousewheel', (e) => {
       if (this.allowMove === false || this.disabled) {
         e.browserEvent.preventDefault();
       }
     });
     this.instance.once('postrender', () => {
       this.initialized = true;
-      this.internalMarkers.forEach(m => {
+      this.internalMarkers.forEach((m) => {
         this.markerSource.addFeature(m);
       });
     });
-    this.instance.getInteractions().forEach(interaction => {
+    this.instance.getInteractions().forEach((interaction) => {
       if (
         this.disabled ||
         this.allowZoom === false ||

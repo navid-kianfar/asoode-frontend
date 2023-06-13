@@ -72,7 +72,7 @@
     <div class="files">
       <div class="file item" *ngFor="let file of results.storage.files">
         <i *ngIf="file.isImage" class="image icon-image2"></i>
-        <i *ngIf="file.isArchive" class=" archive icon-file-zip"></i>
+        <i *ngIf="file.isArchive" class="archive icon-file-zip"></i>
         <i *ngIf="file.isDocument" class="document icon-file-word"></i>
         <i *ngIf="file.isPdf" class="pdf icon-file-pdf"></i>
         <i *ngIf="file.isSpreadsheet" class="spreadsheet icon-file-excel"></i>
@@ -85,7 +85,7 @@
         ></i>
         <div class="info">
           <div class="name">{{ file.name }}</div>
-          <div class="date">{{ file.createdAt | culturedDate: true }}</div>
+          <div class="date">{{ file.createdAt | culturedDate : true }}</div>
         </div>
       </div>
     </div>
@@ -94,7 +94,7 @@
         <i class="icon-shared-folder"></i>
         <div class="info">
           <div class="name">{{ folder.name }}</div>
-          <div class="date">{{ folder.createdAt | culturedDate: true }}</div>
+          <div class="date">{{ folder.createdAt | culturedDate : true }}</div>
         </div>
       </div>
     </div>

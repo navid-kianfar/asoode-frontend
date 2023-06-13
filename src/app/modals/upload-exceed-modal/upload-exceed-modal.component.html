@@ -1,0 +1,58 @@
+<div class="outer" (click)="close()">
+  <div
+    *ngIf="mode === ViewMode.Init"
+    class="modal-content create-modal"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="modal-alt-header">
+      <div class="btn"></div>
+
+      <div class="text">
+        <h4 class="modal-title">
+          <i class="icon-attachment"></i><br />
+          <span>{{ 'ATTACHMENT_SIZE' | translate : true }}</span>
+        </h4>
+      </div>
+      <div class="btn">
+        <button (click)="close()">
+          <i class="icon-cross"></i>
+        </button>
+      </div>
+    </div>
+    <div class="modal-body create-group">
+      <h4>
+        {{
+          'MAX_ATTACHMENT_EXCEEDED'
+            | translate
+            | stringFormat : NumberHelpers.humanFileSize(attachmentSize)
+        }}
+      </h4>
+      <ul class="files">
+        <li *ngFor="let u of uploads">
+          <div class="ico">
+            <i [class]="filesService.icon(u.name)"></i>
+          </div>
+          <div class="name">{{ u.name }}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button
+        (click)="mode = ViewMode.Upgrade; $event.stopPropagation()"
+        mat-flat-button
+        [color]="'primary'"
+      >
+        {{ 'UPGRADE' | translate : true }}</button
+      >&nbsp;
+      <button (click)="close()" mat-flat-button color="accent">
+        {{ 'UPLOAD_REMAINING' | translate : true }}
+      </button>
+    </div>
+  </div>
+  <app-upgrade-wizard
+    *ngIf="mode !== ViewMode.Init"
+    (click)="$event.stopPropagation()"
+    (exit)="close()"
+    (back)="close()"
+  ></app-upgrade-wizard>
+</div>

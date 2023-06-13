@@ -33,6 +33,7 @@ export enum WeekDay {
 export enum FormElementType {
   Button = 0,
   Input = 1,
+  Captcha = 2,
   AutoComplete = 3,
   Checkbox = 4,
   ColorPicker = 5,

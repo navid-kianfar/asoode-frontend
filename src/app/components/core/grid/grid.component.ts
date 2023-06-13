@@ -84,7 +84,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
     }
 
     if (this.commander) {
-      this.commandListener = this.commander.subscribe(async command =>
+      this.commandListener = this.commander.subscribe(async (command) =>
         this.onCommand(command),
       );
     }
@@ -99,7 +99,7 @@ export class GridComponent<T> implements OnInit, OnDestroy, AfterContentInit {
 
   ngAfterContentInit(): void {
     this.translatorService.paginator(this.paginator);
-    this.columnDefs.forEach(columnDef => this.table.addColumnDef(columnDef));
+    this.columnDefs.forEach((columnDef) => this.table.addColumnDef(columnDef));
   }
 
   async updateDataSource(pageChanged: boolean = false) {

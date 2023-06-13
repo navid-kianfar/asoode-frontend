@@ -24,7 +24,7 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
   @Input() end: Date;
   chartData: any;
   view: number[];
-  timer: any;
+  timer: number;
   hidden: any;
   private converter: IDateConverter;
 
@@ -70,7 +70,7 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
     do {
       const date = this.converter.FromDateTime(begin);
       const key = `${date.Month}/${date.Day}`;
-      const info = this.model.find(i => this.sameDay(i.date, begin)) || {
+      const info = this.model.find((i) => this.sameDay(i.date, begin)) || {
         total: 0,
         done: 0,
         blocked: 0,
@@ -95,7 +95,7 @@ export class DashboardProgressComponent implements OnInit, AfterViewInit {
       condition = this.sameDay(begin, this.end);
     } while (!condition);
 
-    this.chartData = Object.keys(data).map(k => {
+    this.chartData = Object.keys(data).map((k) => {
       return {
         name: k,
         series: data[k],

@@ -5,7 +5,7 @@
     cssClass
   }}"
 >
-  <label *ngIf="label">{{ label | translate: true }}</label>
+  <label *ngIf="label">{{ label | translate : true }}</label>
   <ng-container *ngIf="!textArea">
     <div
       class="input-container {{ prependIcon ? 'prepend-icon' : '' }} {{
@@ -22,7 +22,7 @@
         (ngModelChange)="onModelChange($event)"
         [disabled]="disabled"
         (keydown.enter)="onEnter()"
-        [placeholder]="placeHolder | translate: true"
+        [placeholder]="placeHolder | translate : true"
         [readonly]="readonly"
         [type]="password ? 'password' : 'text'"
         autocomplete="off"
@@ -42,7 +42,7 @@
       (ngModelChange)="onModelChange($event)"
       [rows]="rows || 3"
       [disabled]="disabled"
-      [placeholder]="placeHolder | translate: true"
+      [placeholder]="placeHolder | translate : true"
       [readonly]="readonly"
       autocomplete="off"
       class="form-control input-lg no-resize"

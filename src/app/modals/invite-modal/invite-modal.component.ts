@@ -21,7 +21,8 @@ export class InviteModalComponent
     },
     void
   >
-  implements OnInit {
+  implements OnInit
+{
   constructor(private readonly groupService: GroupService) {
     super();
   }
@@ -37,7 +38,7 @@ export class InviteModalComponent
   newMembers: InviteViewModel[];
 
   ngOnInit() {
-    this.exclude = [...this.exclude, ...this.existing.map(e => e.recordId)];
+    this.exclude = [...this.exclude, ...this.existing.map((e) => e.recordId)];
     this.groups = this.groups || [];
     this.members = this.members || [];
     this.newMembers = this.newMembers || [];
@@ -63,23 +64,23 @@ export class InviteModalComponent
     this.actionWaiting = true;
     const model = {} as any;
     model.groups = (this.groups || [])
-      .filter(g => g.selected)
-      .map(g => {
+      .filter((g) => g.selected)
+      .map((g) => {
         return {
           id: g.id,
           access: g.access,
         };
       });
     model.members = (this.members || [])
-      .filter(g => g.selected)
-      .map(g => {
+      .filter((g) => g.selected)
+      .map((g) => {
         return {
           id: g.id,
           access: g.access,
         };
       })
       .concat(
-        (this.newMembers || []).map(m => {
+        (this.newMembers || []).map((m) => {
           return {
             id: m.id,
             access: m.access,

@@ -42,7 +42,7 @@ export class PhoneVerificationComponent implements OnInit {
       '#verify-' + this.prefix + ' input[maxlength="1"]',
     );
     let model = '';
-    (allElements || []).forEach(e => {
+    (allElements || []).forEach((e) => {
       model += e.value;
     });
     this.model = model;

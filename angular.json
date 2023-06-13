@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "asoode-frontend": {
+    "asoode-panel": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -43,14 +43,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/asoode-frontend",
+            "outputPath": "../asoode-deploy/build/panel",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -65,23 +62,23 @@
             "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
+            "asoode": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
+                  "with": "src/environments/environment.asoode.ts"
+                }
+              ],
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "30kb"
                 }
               ],
               "optimization": true,
@@ -94,11 +91,60 @@
               "serviceWorker": true,
               "ngswConfigPath": "ngsw-config.json"
             },
-            "development": {
+            "alrahah": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
+                  "with": "src/environments/environment.alrahah.ts"
+                }
+              ],
+              "index": {
+                "input": "src/index-ar.html",
+                "output": "index.html"
+              },
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "30kb"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "serviceWorker": true,
+              "ngswConfigPath": "ngsw-config.json"
+            },
+            "work": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.work.ts"
+                }
+              ],
+              "index": {
+                "input": "src/index-en.html",
+                "output": "index.html"
+              },
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "5mb",
+                  "maximumError": "6mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "30kb"
                 }
               ],
               "optimization": true,
@@ -120,30 +166,31 @@
               "sourceMap": true,
               "namedChunks": true
             }
-          },
-          "defaultConfiguration": "me"
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "asoode-frontend:build",
+            "browserTarget": "asoode-panel:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
-            "production": {
-              "browserTarget": "asoode-frontend:build:production"
+            "asoode": {
+              "browserTarget": "asoode-panel:build:asoode"
             },
-            "development": {
-              "browserTarget": "asoode-frontend:build:development"
+            "alrahah": {
+              "browserTarget": "asoode-panel:build:alrahah"
+            },
+            "work": {
+              "browserTarget": "asoode-panel:build:work"
             },
             "me": {
-              "browserTarget": "asoode-frontend:build:me"
+              "browserTarget": "asoode-panel:build:me"
             }
           },
           "defaultConfiguration": "me"
         }
       }
     }
-  },
-  "defaultProject": "asoode-frontend"
+  }
 }

@@ -30,7 +30,7 @@ export class PushNotificationService {
     let find3: any = null;
     console.log(notification);
     const url = (notification.push.url || '').replace(
-      'https://panel.asoode.com',
+      'https://panel.asoode.work',
       '',
     );
     switch (notification.type) {
@@ -38,15 +38,17 @@ export class PushNotificationService {
         if (this.identityService.identity.userId === notification.data.id) {
           Object.assign(this.identityService.profile, notification.data);
         }
-        this.groupService.groups.forEach(g => {
-          const access = g.members.find(m => m.userId === notification.data.id);
+        this.groupService.groups.forEach((g) => {
+          const access = g.members.find(
+            (m) => m.userId === notification.data.id,
+          );
           if (access) {
             Object.assign(access.member, notification.data);
           }
         });
-        this.projectService.projects.forEach(g => {
+        this.projectService.projects.forEach((g) => {
           const access = g.members.find(
-            m => m.recordId === notification.data.id,
+            (m) => m.recordId === notification.data.id,
           );
           if (access) {
             Object.assign(access.member, notification.data);
@@ -79,7 +81,7 @@ export class PushNotificationService {
         break;
       case ActivityType.GroupEdit:
         find1 = this.groupService.groups.find(
-          g => g.id === notification.data.id,
+          (g) => g.id === notification.data.id,
         );
         if (!find1) {
           return;
@@ -91,21 +93,21 @@ export class PushNotificationService {
       case ActivityType.GroupMemberPermission:
         if (notification.data.groupId) {
           find1 = this.groupService.groups.find(
-            g => g.id === notification.data.groupId,
+            (g) => g.id === notification.data.groupId,
           );
           if (!find1) {
             return;
           }
-          find2 = find1.members.find(m => m.id === notification.data.id);
+          find2 = find1.members.find((m) => m.id === notification.data.id);
           if (find2) {
             find2.access = notification.data.access;
             return;
           }
         }
         find1 = this.groupService.groups.find(
-          g => g.id === notification.data.recordId,
+          (g) => g.id === notification.data.recordId,
         );
-        find2 = find1.pending.find(m => m.id === notification.data.id);
+        find2 = find1.pending.find((m) => m.id === notification.data.id);
         if (find2) {
           find2.access = notification.data.access;
           return;
@@ -114,27 +116,27 @@ export class PushNotificationService {
       case ActivityType.GroupMemberRemove:
         if (notification.data.groupId) {
           find1 = this.groupService.groups.find(
-            g => g.id === notification.data.groupId,
+            (g) => g.id === notification.data.groupId,
           );
           if (!find1) {
             return;
           }
           find1.members = find1.members.filter(
-            m => m.id !== notification.data.id,
+            (m) => m.id !== notification.data.id,
           );
           if (
             this.identityService.identity.userId === notification.data.userId
           ) {
             this.groupService.groups = this.groupService.groups.filter(
-              g => g.id !== notification.data.groupId,
+              (g) => g.id !== notification.data.groupId,
             );
-            this.projectService.projects.forEach(p => {
+            this.projectService.projects.forEach((p) => {
               p.members = p.members.filter(
-                m => m.recordId !== notification.data.groupId,
+                (m) => m.recordId !== notification.data.groupId,
               );
-              p.workPackages.forEach(w => {
+              p.workPackages.forEach((w) => {
                 w.members = w.members.filter(
-                  a => a.recordId !== notification.data.groupId,
+                  (a) => a.recordId !== notification.data.groupId,
                 );
               });
             });
@@ -142,18 +144,18 @@ export class PushNotificationService {
           return;
         }
         find1 = this.groupService.groups.find(
-          g => g.id === notification.data.recordId,
+          (g) => g.id === notification.data.recordId,
         );
         if (!find1) {
           return;
         }
         find1.pending = find1.pending.filter(
-          m => m.id !== notification.data.id,
+          (m) => m.id !== notification.data.id,
         );
         break;
       case ActivityType.GroupMemberAdd:
         find1 = this.groupService.groups.find(
-          g => g.id === notification.data.groupId,
+          (g) => g.id === notification.data.groupId,
         );
         if (find1) {
           find1.members = [
@@ -171,12 +173,14 @@ export class PushNotificationService {
       case ActivityType.GroupArchive:
       case ActivityType.GroupRemove:
         this.groupService.groups = this.groupService.groups.filter(
-          g => g.id !== notification.data,
+          (g) => g.id !== notification.data,
         );
-        this.projectService.projects.forEach(p => {
-          p.members = p.members.filter(m => m.recordId !== notification.data);
-          p.workPackages.forEach(w => {
-            w.members = w.members.filter(a => a.recordId !== notification.data);
+        this.projectService.projects.forEach((p) => {
+          p.members = p.members.filter((m) => m.recordId !== notification.data);
+          p.workPackages.forEach((w) => {
+            w.members = w.members.filter(
+              (a) => a.recordId !== notification.data,
+            );
           });
         });
         break;
@@ -192,7 +196,7 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectEdit:
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.id,
+          (p) => p.id === notification.data.id,
         );
         if (find1) {
           find1.template = notification.data.template;
@@ -203,13 +207,13 @@ export class PushNotificationService {
       case ActivityType.ProjectRemove:
       case ActivityType.ProjectArchive:
         this.projectService.projects = this.projectService.projects.filter(
-          f => f.id !== notification.data.id,
+          (f) => f.id !== notification.data.id,
         );
         break;
 
       case ActivityType.ProjectSubAdd:
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.projectId,
+          (p) => p.id === notification.data.projectId,
         );
         if (find1) {
           find1.subProjects.push(notification.data);
@@ -217,13 +221,13 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectSubEdit:
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.projectId,
+          (p) => p.id === notification.data.projectId,
         );
         if (find1) {
-          find2 = find1.subProjects.find(s => s.id === notification.data.id);
+          find2 = find1.subProjects.find((s) => s.id === notification.data.id);
           if (find2) {
             const index = find1.subProjects.findIndex(
-              s => s.id === notification.data.id,
+              (s) => s.id === notification.data.id,
             );
             const oldOrder = find2.order;
             Object.assign(find2, notification.data);
@@ -235,41 +239,41 @@ export class PushNotificationService {
                 a.order > b.order ? 1 : -1,
               );
               let counter = 1;
-              find3.forEach(sp => (sp.order = counter++));
+              find3.forEach((sp) => (sp.order = counter++));
             }
           }
         }
         break;
       case ActivityType.ProjectSubRemove:
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.projectId,
+          (p) => p.id === notification.data.projectId,
         );
         if (find1) {
-          find2 = find1.subProjects.find(s => s.id === notification.data.id);
+          find2 = find1.subProjects.find((s) => s.id === notification.data.id);
           find1.subProjects = find1.subProjects.filter(
-            i => i.id !== notification.data.id,
+            (i) => i.id !== notification.data.id,
           );
           find3 = find1.subProjects.sort((a, b) =>
             a.order > b.order ? 1 : -1,
           );
-          find1.subProjects.forEach(s => {
+          find1.subProjects.forEach((s) => {
             if (s.parentId === find2.id) {
               s.parentId = find2.parentId;
             }
           });
-          find1.workPackages.forEach(s => {
+          find1.workPackages.forEach((s) => {
             if (s.subProjectId === find2.id) {
               s.subProjectId = find2.parentId;
             }
           });
           let counter = 1;
-          find3.forEach(sp => (sp.order = counter++));
+          find3.forEach((sp) => (sp.order = counter++));
         }
         break;
 
       case ActivityType.ProjectSeasonAdd:
         find1 = this.projectService.projects.find(
-          i => i.id === notification.data.projectId,
+          (i) => i.id === notification.data.projectId,
         );
         if (find1) {
           find1.seasons.push(notification.data);
@@ -277,10 +281,10 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectSeasonEdit:
         find1 = this.projectService.projects.find(
-          i => i.id === notification.data.projectId,
+          (i) => i.id === notification.data.projectId,
         );
         if (find1) {
-          find2 = find1.seasons.find(s => s.id === notification.data.id);
+          find2 = find1.seasons.find((s) => s.id === notification.data.id);
           if (find2) {
             Object.assign(find2, notification.data);
           }
@@ -288,18 +292,18 @@ export class PushNotificationService {
         break;
       case ActivityType.ProjectSeasonRemove:
         find1 = this.projectService.projects.find(
-          i => i.id === notification.data.projectId,
+          (i) => i.id === notification.data.projectId,
         );
         if (find1) {
           find1.seasons = find1.seasons.filter(
-            s => s.id !== notification.data.id,
+            (s) => s.id !== notification.data.id,
           );
         }
         break;
 
       case ActivityType.ProjectMemberAdd:
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.project.id,
+          (p) => p.id === notification.data.project.id,
         );
         if (find1) {
           find1.members = find1.members.concat(notification.data.members);
@@ -311,14 +315,14 @@ export class PushNotificationService {
       case ActivityType.ProjectMemberRemove:
         if (notification.data.projectId) {
           find1 = this.projectService.projects.find(
-            p => p.id === notification.data.projectId,
+            (p) => p.id === notification.data.projectId,
           );
 
           if (
             this.identityService.identity.userId === notification.data.recordId
           ) {
             this.projectService.projects = this.projectService.projects.filter(
-              p => p.id !== find1.id,
+              (p) => p.id !== find1.id,
             );
             return;
           }
@@ -327,41 +331,41 @@ export class PushNotificationService {
             return;
           }
           find1.members = find1.members.filter(
-            m => m.id !== notification.data.id,
+            (m) => m.id !== notification.data.id,
           );
           return;
         }
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.recordId,
+          (p) => p.id === notification.data.recordId,
         );
         if (!find1) {
           return;
         }
         find1.pending = find1.pending.filter(
-          m => m.id !== notification.data.id,
+          (m) => m.id !== notification.data.id,
         );
         break;
       case ActivityType.ProjectMemberPermission:
         if (notification.data.projectId) {
           find1 = this.projectService.projects.find(
-            p => p.id === notification.data.projectId,
+            (p) => p.id === notification.data.projectId,
           );
           if (!find1) {
             return;
           }
-          find2 = find1.members.find(m => m.id === notification.data.id);
+          find2 = find1.members.find((m) => m.id === notification.data.id);
           if (find2) {
             find2.access = notification.data.access;
             return;
           }
         }
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.recordId,
+          (p) => p.id === notification.data.recordId,
         );
         if (!find1) {
           return;
         }
-        find2 = find1.pending.find(m => m.id === notification.data.id);
+        find2 = find1.pending.find((m) => m.id === notification.data.id);
         if (find2) {
           find2.access = notification.data.access;
           return;
@@ -370,13 +374,13 @@ export class PushNotificationService {
 
       case ActivityType.WorkPackageMemberAdd:
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.projectId,
+          (p) => p.id === notification.data.projectId,
         );
         if (!find1) {
           this.projectService.load();
           return;
         }
-        find2 = find1.workPackages.find(wp => wp.id === notification.data.id);
+        find2 = find1.workPackages.find((wp) => wp.id === notification.data.id);
         if (!find2) {
           this.projectService.load();
           return;
@@ -391,14 +395,14 @@ export class PushNotificationService {
           if (!find1) {
             return;
           }
-          find2 = find1.members.find(m => m.id === notification.data.id);
+          find2 = find1.members.find((m) => m.id === notification.data.id);
           if (find2) {
             find2.access = notification.data.access;
             return;
           }
         }
         find1 = this.findWorkPackage(notification.data.recordId);
-        find2 = find1.pending.find(m => m.id === notification.data.id);
+        find2 = find1.pending.find((m) => m.id === notification.data.id);
         if (find2) {
           find2.access = notification.data.access;
           return;
@@ -408,14 +412,14 @@ export class PushNotificationService {
         if (notification.data.packageId) {
           find1 = this.findWorkPackage(notification.data.packageId);
           find2 = this.projectService.projects.find(
-            p => p.id === find1.projectId,
+            (p) => p.id === find1.projectId,
           );
 
           if (
             this.identityService.identity.userId === notification.data.recordId
           ) {
             this.projectService.projects = this.projectService.projects.filter(
-              p => p.id !== find2.id,
+              (p) => p.id !== find2.id,
             );
             return;
           }
@@ -424,11 +428,11 @@ export class PushNotificationService {
             return;
           }
           find1.members = find1.members.filter(
-            m => m.id !== notification.data.id,
+            (m) => m.id !== notification.data.id,
           );
           if (find2 && !find2.complex) {
             find2.members = find2.members.filter(
-              m => m.id !== notification.data.id,
+              (m) => m.id !== notification.data.id,
             );
           }
           return;
@@ -438,14 +442,14 @@ export class PushNotificationService {
           return;
         }
         find1.pending = find1.pending.filter(
-          m => m.id !== notification.data.id,
+          (m) => m.id !== notification.data.id,
         );
         find2 = this.projectService.projects.find(
-          p => p.id === find1.projectId,
+          (p) => p.id === find1.projectId,
         );
         if (find2 && !find2.complex) {
           find2.pending = find2.pending.filter(
-            m => m.id !== notification.data.id,
+            (m) => m.id !== notification.data.id,
           );
         }
         break;
@@ -475,15 +479,15 @@ export class PushNotificationService {
         find1 = this.findWorkPackage(notification.data);
         if (find1) {
           find2 = this.projectService.projects.find(
-            p => p.id === find1.projectId,
+            (p) => p.id === find1.projectId,
           );
           if (find2.complex) {
             find2.workPackages = find2.workPackages.filter(
-              p => p.id !== notification.data,
+              (p) => p.id !== notification.data,
             );
           } else {
             this.projectService.projects = this.projectService.projects.filter(
-              p => p.id !== find2.id,
+              (p) => p.id !== find2.id,
             );
           }
         }
@@ -493,7 +497,7 @@ export class PushNotificationService {
         break;
       case ActivityType.WorkPackageAdd:
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.projectId,
+          (p) => p.id === notification.data.projectId,
         );
         if (find1) {
           find1.workPackages.push(notification.data);
@@ -501,14 +505,14 @@ export class PushNotificationService {
         break;
       case ActivityType.WorkPackageEdit:
         find1 = this.projectService.projects.find(
-          p => p.id === notification.data.projectId,
+          (p) => p.id === notification.data.projectId,
         );
         if (find1) {
           if (!find1.complex) {
             find1.title = notification.data.title;
             find1.description = notification.data.description;
           }
-          find2 = find1.workPackages.find(w => w.id === notification.data.id);
+          find2 = find1.workPackages.find((w) => w.id === notification.data.id);
           if (find2) {
             const oldOrder = find2.order;
             find2.title = notification.data.title;
@@ -537,10 +541,12 @@ export class PushNotificationService {
 
             if (oldOrder !== notification.data.order) {
               find3 = find1.workPackages
-                .filter(w => w.subProjectId === notification.data.subProjectId)
+                .filter(
+                  (w) => w.subProjectId === notification.data.subProjectId,
+                )
                 .sort((a, b) => (a.order > b.order ? 1 : -1));
               let counter = 1;
-              find3.forEach(wp => (wp.order = counter++));
+              find3.forEach((wp) => (wp.order = counter++));
             }
           }
         }

@@ -9,7 +9,7 @@
     />
 
     <div class="more">
-      {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat: username }}
+      {{ 'CONFIRM_EMAIL_DESCRIPTION' | translate | stringFormat : username }}
     </div>
   </ng-container>
 
@@ -19,12 +19,12 @@
     <img class="image" src="/assets/images/pages/auth/mobile-send.svg" alt="" />
 
     <div class="more">
-      {{ 'CONFIRM_PHONE_DESCRIPTION' | translate | stringFormat: username }}
+      {{ 'CONFIRM_PHONE_DESCRIPTION' | translate | stringFormat : username }}
     </div>
   </ng-container>
 
   <div class="count-down">
-    {{ remaining * 1000 | date: 'mm:ss':'UTC' }}
+    {{ remaining * 1000 | date : 'mm:ss' : 'UTC' }}
   </div>
 
   <div class="send-again">

@@ -1,7 +1,7 @@
 // import { Injectable } from '@angular/core';
 //
 // const PWA = 'PWA';
-// const WORKER = 'https://panel.asoode.com/assets/service-worker.js';
+// const WORKER = 'https://panel.asoode.work/assets/service-worker.js';
 //
 // @Injectable({
 //   providedIn: 'root'

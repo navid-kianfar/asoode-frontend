@@ -19,7 +19,8 @@ import { GroupService } from '../../services/groups/group.service';
 })
 export class UpgradeWorkPackageComponent
   extends SimpleModalComponent<{ workPackage: WorkPackageViewModel }, any>
-  implements OnInit {
+  implements OnInit
+{
   WizardMode = WizardMode;
   mode: WizardMode;
   continueAs: WizardMode;
@@ -46,10 +47,10 @@ export class UpgradeWorkPackageComponent
     this.hasProject =
       this.identityService.profile.plan.project >
       this.identityService.profile.plan.usedProject;
-    const groupIds = this.groupService.groups.map(g => g.id);
-    this.projects = this.projectService.projects.filter(p => {
+    const groupIds = this.groupService.groups.map((g) => g.id);
+    this.projects = this.projectService.projects.filter((p) => {
       return p.members.find(
-        m =>
+        (m) =>
           p.complex &&
           p.id !== this.workPackage.projectId &&
           (m.access === AccessType.Admin || m.access === AccessType.Owner) &&
@@ -58,8 +59,8 @@ export class UpgradeWorkPackageComponent
       );
     });
     this.packages = this.projectService.projects
-      .filter(p => p.id !== this.workPackage.projectId)
-      .map(p => p.workPackages)
+      .filter((p) => p.id !== this.workPackage.projectId)
+      .map((p) => p.workPackages)
       .reduce((prev, current) => prev.concat(current), []);
   }
 

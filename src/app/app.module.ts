@@ -35,6 +35,7 @@ import {
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { DashboardComponent } from './pages/reports/dashboard/dashboard.component';
+import { CaptchaComponent } from './components/core/captcha/captcha.component';
 import { WaitingComponent } from './components/core/waiting/waiting.component';
 import { InputComponent } from './components/core/input/input.component';
 import { SwitchComponent } from './components/core/switch/switch.component';
@@ -148,6 +149,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { WorkPackageTaskComponent } from './components/app/work-package-task/work-package-task.component';
 import { TaskModalComponent } from './modals/task-modal/task-modal.component';
+import { UpgradeComponent } from './modals/upgrade/upgrade.component';
+import { UpgradeWizardComponent } from './components/app/upgrade-wizard/upgrade-wizard.component';
 import { MapModalComponent } from './modals/map-modal/map-modal.component';
 import { EstimatedTimePipe } from './pipes/app/estimated-time.pipe';
 import { ActivityLogComponent } from './components/app/activity-log/activity-log.component';
@@ -168,8 +171,13 @@ import { KartablComponent } from './components/app/kartabl/kartabl.component';
 import { DurationPickerComponent } from './components/app/duration-picker/duration-picker.component';
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
 import { WorkPackagePermissionComponent } from './modals/work-package-permission/work-package-permission.component';
+import { ProjectTreeAnimationComponent } from './components/app/project-tree-animation/project-tree-animation.component';
+import { ProjectTreeAnimationNodeComponent } from './components/app/project-tree-animation-node/project-tree-animation-node.component';
+import { AnimationWorkPackageBoardComponent } from './components/app/animation-work-package-board/animation-work-package-board.component';
+import { AnimationWorkPackageTaskComponent } from './components/app/animation-work-package-task/animation-work-package-task.component';
 import { ArchivedProjectsComponent } from './components/app/archived-projects/archived-projects.component';
 import { ArchivedGroupsComponent } from './components/app/archived-groups/archived-groups.component';
+import { UploadExceedModalComponent } from './modals/upload-exceed-modal/upload-exceed-modal.component';
 import { LabelsModalComponent } from './modals/labels-modal/labels-modal.component';
 import { CustomFieldsModalComponent } from './modals/custom-fields-modal/custom-fields-modal.component';
 import { OfflineComponent } from './modals/offline/offline.component';
@@ -184,10 +192,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import {
-  MatNativeDateModule,
-  MatRippleModule,
-} from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -197,15 +202,13 @@ import { ThumbnailUrlPipe } from './pipes/app/thumbnail-url.pipe';
 import { PersianDatePickerComponent } from './components/core/persian-date-picker/persian-date-picker.component';
 import { NativeDatePickerComponent } from './components/core/native-date-picker/native-date-picker.component';
 import { HijriDatePickerComponent } from './components/core/hijri-date-picker/hijri-date-picker.component';
-import { NoApiFoundComponent } from './pages/errors/no-api-found/no-api-found.component';
-import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
-import { NotAuthorizedComponent } from './pages/errors/not-authorized/not-authorized.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    CaptchaComponent,
     WaitingComponent,
     InputComponent,
     SwitchComponent,
@@ -315,6 +318,8 @@ import { NotAuthorizedComponent } from './pages/errors/not-authorized/not-author
     WorkPackageWizardComponent,
     WorkPackageTaskComponent,
     TaskModalComponent,
+    UpgradeComponent,
+    UpgradeWizardComponent,
     MapModalComponent,
     EstimatedTimePipe,
     ActivityLogComponent,
@@ -331,8 +336,13 @@ import { NotAuthorizedComponent } from './pages/errors/not-authorized/not-author
     KartablComponent,
     DurationPickerComponent,
     WorkPackagePermissionComponent,
+    ProjectTreeAnimationComponent,
+    ProjectTreeAnimationNodeComponent,
+    AnimationWorkPackageBoardComponent,
+    AnimationWorkPackageTaskComponent,
     ArchivedProjectsComponent,
     ArchivedGroupsComponent,
+    UploadExceedModalComponent,
     LabelsModalComponent,
     CustomFieldsModalComponent,
     OfflineComponent,
@@ -348,32 +358,6 @@ import { NotAuthorizedComponent } from './pages/errors/not-authorized/not-author
     PersianDatePickerComponent,
     NativeDatePickerComponent,
     HijriDatePickerComponent,
-    NoApiFoundComponent,
-    NotFoundComponent,
-    NotAuthorizedComponent,
-  ],
-  entryComponents: [
-    TimeOffApproveModalComponent,
-    TimeOffHistoryModalComponent,
-    AdvancedPlayerComponent,
-    OfflineComponent,
-    CustomFieldsModalComponent,
-    LabelsModalComponent,
-    WorkPackagePermissionComponent,
-    UpgradeWorkPackageComponent,
-    DocumentModalComponent,
-    MapModalComponent,
-    WorkPackageWizardComponent,
-    ConfirmComponent,
-    PromptComponent,
-    ChangePhoneComponent,
-    CreateWizardComponent,
-    MessengerSettingComponent,
-    ChangeEmailComponent,
-    GroupDetailComponent,
-    InviteModalComponent,
-    TaskModalComponent,
-    BulkDownloadModalComponent,
   ],
   imports: [
     MatNativeDateModule,

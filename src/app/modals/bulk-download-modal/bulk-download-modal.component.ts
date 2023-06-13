@@ -16,7 +16,8 @@ export class BulkDownloadModalComponent
     { tasks: WorkPackageTaskViewModel[]; id: string },
     void
   >
-  implements OnInit {
+  implements OnInit
+{
   tasks: WorkPackageTaskViewModel[];
   id: string;
   actionWaiting: any;
@@ -31,7 +32,7 @@ export class BulkDownloadModalComponent
   }
 
   ngOnInit() {
-    this.model = this.tasks.map(t => {
+    this.model = this.tasks.map((t) => {
       return {
         text: t.title,
         value: t.id,
@@ -47,7 +48,7 @@ export class BulkDownloadModalComponent
   }
 
   async onAction($event: MouseEvent) {
-    const picked = this.model.filter(i => i.selected).map(m => m.value);
+    const picked = this.model.filter((i) => i.selected).map((m) => m.value);
     if (!picked.length) {
       this.notificationService.error('PICK_ONE');
       return;

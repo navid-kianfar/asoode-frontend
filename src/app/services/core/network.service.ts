@@ -13,7 +13,7 @@ export class NetworkService {
   connectionChanged = new EventEmitter<boolean>();
 
   constructor() {
-    this.internetListener().subscribe(value => {
+    this.internetListener().subscribe((value) => {
       console.log(value ? 'online' : 'offline');
       this.networkChanged.emit(value);
     });

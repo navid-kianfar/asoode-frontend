@@ -8,7 +8,8 @@ import { SimpleModalComponent } from 'ngx-simple-modal';
 })
 export class TimeOffHistoryModalComponent
   extends SimpleModalComponent<{ timeOff: any }, void>
-  implements OnInit {
+  implements OnInit
+{
   timeOff: any;
   constructor() {
     super();

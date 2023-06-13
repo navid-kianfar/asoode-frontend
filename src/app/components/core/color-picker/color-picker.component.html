@@ -3,7 +3,7 @@
     readonly ? 'readonly' : ''
   }} form-group {{ cssClass }}"
 >
-  <label *ngIf="label">{{ label | translate: true }}</label>
+  <label *ngIf="label">{{ label | translate : true }}</label>
   <div class="input-container {{ focusState }}">
     <input
       [(colorPicker)]="model"
@@ -15,7 +15,7 @@
       (focus)="onFocus()"
       (blur)="onBlur()"
       (keydown.enter)="onEnter.emit()"
-      [placeholder]="placeHolder | translate: true"
+      [placeholder]="placeHolder | translate : true"
       [readonly]="readonly"
       autocomplete="off"
       class="form-control input-lg"

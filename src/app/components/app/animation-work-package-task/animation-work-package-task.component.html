@@ -1,0 +1,189 @@
+<div class="task-animation no-select" [class.archived]="model.archivedAt">
+  <div class="title color-{{ model.state }}">
+    <span>{{ model.title }}</span>
+    <div class="members">
+      <ng-container *ngFor="let member of model.members">
+        <div *ngIf="member.recordId !== model.userId" class="member-container">
+          <div class="member">
+            <app-member-info
+              small="true"
+              *ngIf="!member.isGroup"
+              [id]="member.recordId"
+            ></app-member-info>
+            <app-group-info
+              small="true"
+              *ngIf="member.isGroup"
+              [id]="member.recordId"
+            ></app-group-info>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="inner-container">
+    <div class="total-tasks detail-info">
+      <div class="label">{{ 'TOTAL_PLANS' | translate }}</div>
+      <div class="value">{{ model.subTasksCount | number }}</div>
+      <div class="creator" [class.rtl]="cultureService.lang">
+        <app-member-info small="true" [id]="model.userId"></app-member-info>
+      </div>
+    </div>
+    <div class="total-tasks detail-info">
+      <div class="label">{{ 'TOTAL_DONE' | translate }}</div>
+      <div class="value">{{ model.subTasksDone | number }}</div>
+    </div>
+    <div class="total-tasks detail-info">
+      <div class="label">{{ 'TOTAL_PENDING' | translate }}</div>
+      <div class="value">
+        {{ model.subTasksCount - model.subTasksDone | number }}
+      </div>
+    </div>
+    <div class="time-spent detail-info">
+      <div class="label">{{ 'TIME_SPENT' | translate }}</div>
+      <div class="value">{{ model.timeSpent | msToDuration }}</div>
+    </div>
+    <div class="time-span detail-info">
+      <div class="label">{{ 'TIME_SPAN' | translate }}</div>
+      <div class="value">
+        <ng-container *ngIf="model.dueAt">{{
+          model.dueAt | culturedDate
+        }}</ng-container>
+        <ng-container *ngIf="model.beginAt">{{
+          model.beginAt | culturedDate
+        }}</ng-container>
+        <ng-container *ngIf="model.endAt && model.endAt"
+          >&nbsp;-&nbsp;</ng-container
+        >
+        <ng-container *ngIf="model.endAt">{{
+          model.endAt | culturedDate
+        }}</ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="model.subTasksCount" class="progress">
+      <div class="wrapper">
+        <mat-progress-bar
+          mode="determinate"
+          [value]="(model.subTasksDone * 100) / model.subTasksCount"
+        ></mat-progress-bar>
+      </div>
+      <span>{{ model.subTasksDone }}/{{ model.subTasksCount }}</span>
+    </div>
+  </div>
+
+  <!--  <div class="status">-->
+  <!--    <div class="date">-->
+  <!--      <ng-container *ngIf="model.dueAt || model.endAt || model.beginAt">-->
+  <!--        <i class="icon-calendar"></i>&nbsp;-->
+  <!--        <span>{{-->
+  <!--          model.dueAt || model.endAt || model.beginAt | culturedDate-->
+  <!--          }}</span>-->
+  <!--      </ng-container>-->
+  <!--    </div>-->
+  <!--    <div class="more">-->
+  <!--      <i *ngIf="model.watching" class="icon-eye2"></i>-->
+  <!--    </div>-->
+  <!--    <div class="status-wrapper">-->
+  <!--      <div class="status-container">-->
+  <!--        <div class="circle color-{{ model.state }}"></div>-->
+  <!--        <div class="text">{{ model.state | enum: 'WorkPackageTaskState' }}</div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="labels">-->
+  <!--    <ng-container *ngFor="let label of workPackage?.labels">-->
+  <!--      <div-->
+  <!--        class="label"-->
+  <!--        *ngIf="isLabelSelected(label)"-->
+  <!--        [style.backgroundColor]="label.color"-->
+  <!--      >-->
+  <!--        {{ label.title }}-->
+  <!--      </div>-->
+  <!--    </ng-container>-->
+  <!--  </div>-->
+  <!--  <div class="title">-->
+  <!--    {{ model.title }}-->
+  <!--  </div>-->
+
+  <!--  <div-->
+  <!--    *ngIf="-->
+  <!--      model.targetCounts ||-->
+  <!--      model.targetCounts ||-->
+  <!--      model.voteNecessity !== WorkPackageTaskVoteNecessity.None ||-->
+  <!--      model.upVotes ||-->
+  <!--      model.downVotes-->
+  <!--    "-->
+  <!--    class="interactions"-->
+  <!--  >-->
+  <!--    <div class="box box-1">-->
+  <!--      <div-->
+  <!--        *ngIf="-->
+  <!--          model.voteNecessity !== WorkPackageTaskVoteNecessity.None ||-->
+  <!--          model.upVotes ||-->
+  <!--          model.downVotes-->
+  <!--        "-->
+  <!--        class="vote"-->
+  <!--      >-->
+  <!--        <div class="sep up">-->
+  <!--          <span>{{ model.upVotes || 0 }}</span>-->
+  <!--          <i class="icon-thumbs-up2"></i>-->
+  <!--        </div>-->
+  <!--        <div class="sep down">-->
+  <!--          <i class="icon-thumbs-down2"></i>-->
+  <!--          <span>{{ model.downVotes || 0 }}</span>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <div class="box box-2">-->
+  <!--      <div *ngIf="model.targetCounts" class="target">-->
+  <!--        <i class="icon-target"></i>-->
+  <!--        <span>{{ model.targetCounts }}</span>-->
+  <!--      </div>-->
+  <!--      <div *ngIf="model.timeSpent" class="time">-->
+  <!--        <i class="icon-timer"></i>-->
+  <!--        <span>{{ model.timeSpent | msToDuration }}</span>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="map-wrapper" *ngIf="model.geoLocation">-->
+  <!--    <app-map [disabled]="true" [model]="model.geoLocation"></app-map>-->
+  <!--  </div>-->
+  <!--  <div-->
+  <!--    *ngIf="-->
+  <!--      model.commentCount ||-->
+  <!--      model.hasDescription ||-->
+  <!--      model.attachmentCount ||-->
+  <!--      model.members.length-->
+  <!--    "-->
+  <!--    class="detail"-->
+  <!--  >-->
+  <!--    <div class="box box-1">-->
+  <!--      <div *ngIf="model.hasDescription" class="inf">-->
+  <!--        <i class="icon-paragraph-right3"></i>-->
+  <!--      </div>-->
+  <!--      <div *ngIf="model.commentCount" class="inf">-->
+  <!--        <i class="icon-bubble-dots2"></i>-->
+  <!--        <span>{{ model.commentCount }}</span>-->
+  <!--      </div>-->
+  <!--      <div *ngIf="model.attachmentCount" class="inf">-->
+  <!--        <i class="icon-attachment"></i>-->
+  <!--        <span>{{ model.attachmentCount }}</span>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <div class="box box-2">-->
+  <!--      <ng-container *ngFor="let member of model.members">-->
+  <!--        <app-member-info-->
+  <!--          [id]="member.recordId"-->
+  <!--          [small]="true"-->
+  <!--          *ngIf="!member.isGroup"-->
+  <!--        ></app-member-info>-->
+  <!--        <app-group-info-->
+  <!--          [id]="member.recordId"-->
+  <!--          [small]="true"-->
+  <!--          *ngIf="member.isGroup"-->
+  <!--        ></app-group-info>-->
+  <!--      </ng-container>-->
+  <!--    </div>-->
+  <!--  </div>-->
+</div>

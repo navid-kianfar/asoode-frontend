@@ -7,10 +7,10 @@ export class WindowService {
   active: boolean;
   constructor() {
     this.active = true;
-    window.addEventListener('focus', event => {
+    window.addEventListener('focus', (event) => {
       this.active = true;
     });
-    window.addEventListener('blur', event => {
+    window.addEventListener('blur', (event) => {
       this.active = false;
     });
   }

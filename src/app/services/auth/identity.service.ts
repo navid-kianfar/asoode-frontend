@@ -14,7 +14,7 @@ import {
   RegisterResultViewModel,
 } from '../../view-models/auth/identity-view-models';
 import { CookieService } from 'ngx-cookie-service';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 let MARKETER;
 try {
@@ -115,7 +115,7 @@ export class IdentityService {
     } else if (environment.production) {
       // this.logout();
       // setTimeout(() => { window.location.href = '/'; }, 500);
-      setTimeout(() => window.location.reload(), 500);
+      // setTimeout(() => window.location.reload(), 500);
     }
     return op;
   }

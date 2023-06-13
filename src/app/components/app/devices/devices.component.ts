@@ -52,13 +52,13 @@ export class DevicesComponent implements OnInit {
           this.devices.push(notification.data);
           break;
         case ActivityType.AccountDeviceEdit:
-          find = this.devices.find(d => d.id === notification.data.id);
+          find = this.devices.find((d) => d.id === notification.data.id);
           if (find) {
             Object.assign(find, notification.data);
           }
           break;
         case ActivityType.AccountDeviceRemove:
-          this.devices = this.devices.filter(d => d.id !== notification.data);
+          this.devices = this.devices.filter((d) => d.id !== notification.data);
           break;
       }
     });
@@ -77,10 +77,10 @@ export class DevicesComponent implements OnInit {
   }
 
   async checkOldSubscription() {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       if (this.swPush.isEnabled) {
         let ranAlready = false;
-        this.swPush.subscription.subscribe(old => {
+        this.swPush.subscription.subscribe((old) => {
           if (old) {
             const json = old.toJSON();
             if (
@@ -136,10 +136,10 @@ export class DevicesComponent implements OnInit {
       if (this.registered) {
         return;
       }
-      this.registered = this.swPush.messages.subscribe(notification => {
+      this.registered = this.swPush.messages.subscribe((notification) => {
         this.pushNotificationService.handlePush(notification);
       });
-      this.swPush.notificationClicks.subscribe(notification => {
+      this.swPush.notificationClicks.subscribe((notification) => {
         this.pushNotificationService.handlePushClick(notification);
       });
     } catch (e) {

@@ -39,7 +39,7 @@ export class WorkPackageCalendarComponent implements OnInit {
 
   allTasks(): WorkPackageTaskViewModel[] {
     return this.model.lists
-      .map(l => l.tasks)
+      .map((l) => l.tasks)
       .reduce((prev, curr) => prev.concat(curr), []);
   }
 
@@ -55,8 +55,8 @@ export class WorkPackageCalendarComponent implements OnInit {
   switchMode(mode: ViewMode) {
     const data = {};
     this.calendarData = this.allTasks()
-      .filter(f => f.dueAt)
-      .map(t => {
+      .filter((f) => f.dueAt)
+      .map((t) => {
         t.dueAt = new Date(t.dueAt);
         t.dueAtFormatted = this.converter.Format(t.dueAt, 'YYYY/MM/DD');
         return t;
@@ -68,7 +68,7 @@ export class WorkPackageCalendarComponent implements OnInit {
     do {
       let beginParsed = this.converter.Format(begin, 'YYYY/MM/DD');
 
-      data[beginParsed] = this.calendarData.filter(f => {
+      data[beginParsed] = this.calendarData.filter((f) => {
         return beginParsed === f.dueAtFormatted;
       });
       condition = beginParsed !== endParsed;
@@ -77,7 +77,7 @@ export class WorkPackageCalendarComponent implements OnInit {
       beginParsed = this.converter.Format(begin, 'YYYY/MM/DD');
     } while (condition);
 
-    this.days = Object.keys(data).map(k => {
+    this.days = Object.keys(data).map((k) => {
       return {
         date: k,
         events: data[k],

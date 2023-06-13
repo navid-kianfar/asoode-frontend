@@ -48,17 +48,17 @@ export class MessengerShortcutComponent implements OnInit {
       const project =
         this.project ||
         this.projectService.projects.find(
-          p => p.id === this.workPackage.projectId,
+          (p) => p.id === this.workPackage.projectId,
         );
       this.current = {
         id: this.workPackage.id,
         members: project.members
-          .filter(m => {
+          .filter((m) => {
             return this.workPackage.members.find(
-              wm => wm.recordId === m.recordId,
+              (wm) => wm.recordId === m.recordId,
             );
           })
-          .map(m => m.member),
+          .map((m) => m.member),
         messages: [],
         title: this.workPackage.title,
         type: ChannelType.WorkPackage,
@@ -67,8 +67,8 @@ export class MessengerShortcutComponent implements OnInit {
     } else if (this.packageId) {
       let found: WorkPackageViewModel;
       let project: ProjectViewModel = this.project;
-      this.projectService.projects.forEach(p => {
-        p.workPackages.forEach(w => {
+      this.projectService.projects.forEach((p) => {
+        p.workPackages.forEach((w) => {
           if (w.id === this.packageId) {
             found = w;
             project = p;
@@ -78,10 +78,10 @@ export class MessengerShortcutComponent implements OnInit {
       this.current = {
         id: this.packageId,
         members: project.members
-          .filter(m => {
-            return found.members.find(wm => wm.recordId === m.recordId);
+          .filter((m) => {
+            return found.members.find((wm) => wm.recordId === m.recordId);
           })
-          .map(m => m.member),
+          .map((m) => m.member),
         messages: [],
         title: found.title,
         type: ChannelType.WorkPackage,
@@ -90,7 +90,7 @@ export class MessengerShortcutComponent implements OnInit {
     } else if (this.project) {
       this.current = {
         id: this.project.id,
-        members: this.project.members.map(m => m.member),
+        members: this.project.members.map((m) => m.member),
         messages: [],
         title: this.project.title,
         type: ChannelType.Project,
@@ -98,11 +98,11 @@ export class MessengerShortcutComponent implements OnInit {
       };
     } else if (this.projectId) {
       const project = this.projectService.projects.find(
-        p => p.id === this.projectId,
+        (p) => p.id === this.projectId,
       );
       this.current = {
         id: this.projectId,
-        members: project.members.map(m => m.member),
+        members: project.members.map((m) => m.member),
         messages: [],
         title: project.title,
         type: ChannelType.Project,
@@ -111,17 +111,17 @@ export class MessengerShortcutComponent implements OnInit {
     } else if (this.group) {
       this.current = {
         id: this.group.id,
-        members: this.group.members.map(m => m.member),
+        members: this.group.members.map((m) => m.member),
         messages: [],
         title: this.group.title,
         type: ChannelType.Group,
         attachmentSize: this.group.attachmentSize,
       };
     } else if (this.groupId) {
-      const found = this.groupService.groups.find(g => g.id === this.groupId);
+      const found = this.groupService.groups.find((g) => g.id === this.groupId);
       this.current = {
         id: this.groupId,
-        members: found.members.map(m => m.member),
+        members: found.members.map((m) => m.member),
         messages: [],
         title: found.title,
         type: ChannelType.Group,

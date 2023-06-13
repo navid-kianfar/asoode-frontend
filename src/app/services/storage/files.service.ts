@@ -8,6 +8,7 @@ import {
 import { OperationResultStatus } from '../../library/core/enums';
 import { StringDictionary } from '../../library/core/dictionary';
 import { ModalService } from '../core/modal.service';
+import { UploadExceedModalComponent } from '../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -98,7 +99,7 @@ export class FilesService {
 
   blob(element: HTMLImageElement, file: File) {
     const reader = new FileReader();
-    reader.onload = e => (element.src = reader.result.toString());
+    reader.onload = (e) => (element.src = reader.result.toString());
     reader.readAsDataURL(file);
   }
 
@@ -112,7 +113,7 @@ export class FilesService {
     form.setAttribute('action', path);
     form.setAttribute('target', '_blank');
     if (params) {
-      params.Keys().forEach(key => {
+      params.Keys().forEach((key) => {
         const hiddenField = document.createElement('input');
         hiddenField.setAttribute('name', key);
         hiddenField.setAttribute('value', params[key]);
@@ -156,26 +157,26 @@ export class FilesService {
     if (filtered.length) {
       this.hidePlate = false;
     }
-    filtered.forEach(u => {
+    filtered.forEach((u) => {
       u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
         this.httpService
-          .formUpload('/files/upload', { path, file: u.file }, percent => {
+          .formUpload('/files/upload', { path, file: u.file }, (percent) => {
             u.progress = percent;
           })
           .then(
-            op => {
+            (op) => {
               if (op.status !== OperationResultStatus.Success) {
                 u.uploading = false;
                 u.failed = true;
-                resolve(OperationResult.Failed());
+                resolve(op as any);
                 return;
               }
               u.progress = 100;
               u.success = true;
               u.uploading = false;
-              resolve(OperationResult.Success(true));
+              resolve(op as any);
             },
-            err => {
+            (err) => {
               reject(err);
               u.uploading = false;
               u.failed = true;
@@ -190,7 +191,7 @@ export class FilesService {
     if (filtered.length) {
       this.hidePlate = false;
     }
-    filtered.forEach(u => {
+    filtered.forEach((u) => {
       const removeFromList = () => {
         const index = this.attaching.indexOf(u);
         const removed = this.attaching.splice(index, 1);
@@ -198,24 +199,26 @@ export class FilesService {
       };
       u.promise = new Promise<OperationResult<boolean>>((resolve, reject) => {
         this.httpService
-          .formUpload(`/tasks/${taskId}/attach`, { file: u.file }, percent => {
-            u.progress = percent;
-          })
+          .formUpload(
+            `/tasks/${taskId}/attach`,
+            { file: u.file },
+            (percent) => {
+              u.progress = percent;
+            },
+          )
           .then(
-            op => {
+            (op) => {
               removeFromList();
               if (op.status !== OperationResultStatus.Success) {
                 u.uploading = false;
                 u.failed = true;
-                resolve(OperationResult.Failed());
                 return;
               }
               u.progress = 100;
               u.success = true;
               u.uploading = false;
-              resolve(OperationResult.Success(true));
             },
-            err => {
+            (err) => {
               reject(err);
               u.uploading = false;
               u.failed = true;
@@ -230,7 +233,7 @@ export class FilesService {
     if (filtered.length) {
       this.hidePlate = false;
     }
-    filtered.forEach(u => {
+    filtered.forEach((u) => {
       const removeFromList = () => {
         const index = this.chatAttaching.indexOf(u);
         const removed = this.chatAttaching.splice(index, 1);
@@ -241,25 +244,23 @@ export class FilesService {
           .formUpload(
             `/messenger/channel/${recordId}/attach`,
             { file: u.file },
-            percent => {
+            (percent) => {
               u.progress = percent;
             },
           )
           .then(
-            op => {
+            (op) => {
               removeFromList();
               if (op.status !== OperationResultStatus.Success) {
                 u.uploading = false;
                 u.failed = true;
-                resolve(OperationResult.Failed());
                 return;
               }
               u.progress = 100;
               u.success = true;
               u.uploading = false;
-              resolve(OperationResult.Success(true));
             },
-            err => {
+            (err) => {
               reject(err);
               u.uploading = false;
               u.failed = true;

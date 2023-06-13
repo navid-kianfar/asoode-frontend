@@ -26,11 +26,11 @@ export class InvitePeopleComponent implements OnInit {
     this.newMembers = this.newMembers || [];
     if (this.projectId) {
       const project = this.projectService.projects.find(
-        p => p.id === this.projectId,
+        (p) => p.id === this.projectId,
       );
       this.members = project.members
-        .filter(f => !f.isGroup && this.exclude.indexOf(f.recordId) === -1)
-        .map(m => {
+        .filter((f) => !f.isGroup && this.exclude.indexOf(f.recordId) === -1)
+        .map((m) => {
           return {
             access: m.access,
             id: m.recordId,

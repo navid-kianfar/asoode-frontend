@@ -10,7 +10,8 @@ import { WorkPackageService } from '../../services/projects/work-package.service
 })
 export class CustomFieldsModalComponent
   extends SimpleModalComponent<{ workPackage: WorkPackageViewModel }, void>
-  implements OnInit {
+  implements OnInit
+{
   ViewMode = ViewMode;
   workPackage: WorkPackageViewModel;
   mode: ViewMode;

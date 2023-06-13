@@ -15,7 +15,8 @@ import { OperationResultStatus } from '../../library/core/enums';
 })
 export class WorkPackagePermissionComponent
   extends SimpleModalComponent<{ workPackage: WorkPackageViewModel }, void>
-  implements OnInit {
+  implements OnInit
+{
   workPackage: WorkPackageViewModel;
   waiting: boolean;
   cssClass: string;

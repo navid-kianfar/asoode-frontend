@@ -1,0 +1,73 @@
+.af-captcha {
+  width: 220px;
+  height: 40px;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+
+  input {
+    width: 75px;
+    outline: none;
+    text-align: center;
+    padding: 0 6px;
+    font-size: 1em;
+    box-shadow: none;
+    background-color: transparent;
+    border: none;
+  }
+
+  &.focus {
+    border: 1px solid #80bdff;
+  }
+
+  .loader {
+    height: 100%;
+    width: 80px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      font-size: 1.5rem;
+      font-weight: 300;
+      vertical-align: middle;
+    }
+  }
+  img {
+    margin: 1px 0;
+    left: 3.8rem;
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  button {
+    cursor: pointer;
+    outline: none;
+    transition: border-color ease-in-out 0.15s;
+    background: none;
+    border: none;
+    border-inline-start: 1px solid #e5e5e5;
+    height: 100%;
+    width: 3.8rem;
+    flex-shrink: 0;
+    i {
+      font-size: 1.2rem;
+      font-weight: 300;
+      vertical-align: middle;
+    }
+  }
+}
+:host-context(.dark-theme) .af-captcha,
+.af-captcha.dark-theme {
+  input {
+    color: #ccc;
+  }
+  button {
+    i {
+      color: #ccc;
+    }
+  }
+}

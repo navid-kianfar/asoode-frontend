@@ -27,7 +27,7 @@ export class CtrlClickDirective implements OnInit, OnDestroy {
     this.unsubscribe = this.renderer.listen(
       this.element.nativeElement,
       'click',
-      event => {
+      (event) => {
         if (event.ctrlKey || event.metaKey) {
           event.preventDefault();
           event.stopPropagation();

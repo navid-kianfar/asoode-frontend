@@ -119,7 +119,7 @@ export class WorkPackageComponent implements OnInit {
           break;
         case ActivityType.GroupRemove:
           this.workPackage.members = this.workPackage.members.filter(
-            m => m.recordId !== notification.data,
+            (m) => m.recordId !== notification.data,
           );
           break;
         case ActivityType.WorkPackageListAdd:
@@ -131,7 +131,7 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageListEdit:
           if (this.workPackage.id === notification.data.packageId) {
             find1 = this.workPackage.lists.find(
-              l => l.id === notification.data.id,
+              (l) => l.id === notification.data.id,
             );
             if (find1) {
               Object.assign(find1, notification.data);
@@ -142,7 +142,7 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageListOrder:
           if (this.workPackage.id === notification.data.packageId) {
             find1 = this.workPackage.lists.find(
-              l => l.id === notification.data.id,
+              (l) => l.id === notification.data.id,
             );
             if (!find1 || find1.order === notification.data.order) {
               return;
@@ -165,14 +165,14 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageListArchive:
           if (this.workPackage.id === notification.data.packageId) {
             this.workPackage.lists = this.workPackage.lists.filter(
-              l => l.id !== notification.data.id,
+              (l) => l.id !== notification.data.id,
             );
           }
           break;
         case ActivityType.WorkPackageListTasksDelete:
         case ActivityType.WorkPackageListTasksArchive:
           const found = this.workPackage.lists.find(
-            l => l.id === notification.data.id,
+            (l) => l.id === notification.data.id,
           );
           if (found) {
             found.tasks = [];
@@ -200,7 +200,7 @@ export class WorkPackageComponent implements OnInit {
               return;
             }
             find2 = this.workPackage.members.find(
-              m => m.id === notification.data.id,
+              (m) => m.id === notification.data.id,
             );
             if (find2) {
               find2.access = notification.data.access;
@@ -211,7 +211,7 @@ export class WorkPackageComponent implements OnInit {
             return;
           }
           find2 = this.workPackage.pending.find(
-            m => m.id === notification.data.id,
+            (m) => m.id === notification.data.id,
           );
           if (find2) {
             find2.access = notification.data.access;
@@ -224,7 +224,7 @@ export class WorkPackageComponent implements OnInit {
               return;
             }
             this.workPackage.members = this.workPackage.members.filter(
-              m => m.id !== notification.data.id,
+              (m) => m.id !== notification.data.id,
             );
             return;
           }
@@ -232,7 +232,7 @@ export class WorkPackageComponent implements OnInit {
             return;
           }
           this.workPackage.pending = this.workPackage.pending.filter(
-            m => m.id !== notification.data.id,
+            (m) => m.id !== notification.data.id,
           );
           break;
 
@@ -244,7 +244,7 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageObjectiveEdit:
           if (this.workPackage.id === notification.data.packageId) {
             find1 = this.workPackage.objectives.find(
-              o => o.id === notification.data.id,
+              (o) => o.id === notification.data.id,
             );
             if (find1) {
               Object.assign(find1, notification.data);
@@ -254,7 +254,7 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageObjectiveRemove:
           if (this.workPackage.id === notification.data.packageId) {
             this.workPackage.objectives = this.workPackage.objectives.filter(
-              o => o.id !== notification.data.id,
+              (o) => o.id !== notification.data.id,
             );
           }
           break;
@@ -347,7 +347,7 @@ export class WorkPackageComponent implements OnInit {
               }
             } else {
               find1 = this.workPackage.lists.find(
-                l => l.id === notification.data.listId,
+                (l) => l.id === notification.data.listId,
               );
               if (find1) {
                 find1.tasks = find1.tasks || [];
@@ -362,14 +362,14 @@ export class WorkPackageComponent implements OnInit {
             notification.data.length &&
             this.workPackage.id === notification.data[0].packageId
           ) {
-            notification.data.forEach(d => {
+            notification.data.forEach((d) => {
               if (d.parentId) {
                 find1 = this.findTask(d.parentId);
                 if (find1) {
                   find1.subTasksCount++;
                 }
               } else {
-                find1 = this.workPackage.lists.find(l => l.id === d.listId);
+                find1 = this.workPackage.lists.find((l) => l.id === d.listId);
                 if (find1) {
                   find1.tasks = find1.tasks || [];
                   find1.tasks.unshift(d);
@@ -396,10 +396,10 @@ export class WorkPackageComponent implements OnInit {
               return;
             }
             const list = this.workPackage.lists.find(
-              l => l.id === find1.listId,
+              (l) => l.id === find1.listId,
             );
             const destination = this.workPackage.lists.find(
-              l => l.id === notification.data.listId,
+              (l) => l.id === notification.data.listId,
             );
             transferArrayItem(
               list.tasks,
@@ -416,7 +416,7 @@ export class WorkPackageComponent implements OnInit {
               return;
             }
             const list = this.workPackage.lists.find(
-              l => l.id === find1.listId,
+              (l) => l.id === find1.listId,
             );
             moveItemInArray(
               list.tasks,
@@ -430,7 +430,7 @@ export class WorkPackageComponent implements OnInit {
             const task = this.findTask(notification.data.taskId);
             if (task) {
               find1 = task.labels.find(
-                l => l.labelId === notification.data.labelId,
+                (l) => l.labelId === notification.data.labelId,
               );
               if (!find1) {
                 task.labels.push(notification.data);
@@ -442,7 +442,7 @@ export class WorkPackageComponent implements OnInit {
           find1 = this.findTask(notification.data.taskId);
           if (find1) {
             find1.labels = find1.labels.filter(
-              i => i.labelId !== notification.data.labelId,
+              (i) => i.labelId !== notification.data.labelId,
             );
           }
           break;
@@ -452,7 +452,7 @@ export class WorkPackageComponent implements OnInit {
             return;
           }
           const already = find1.members.find(
-            i => i.recordId === notification.data.recordId,
+            (i) => i.recordId === notification.data.recordId,
           );
           if (!already) {
             find1.members.push(notification.data);
@@ -464,7 +464,7 @@ export class WorkPackageComponent implements OnInit {
             return;
           }
           find1.members = find1.members.filter(
-            i => i.recordId !== notification.data.recordId,
+            (i) => i.recordId !== notification.data.recordId,
           );
           break;
         case ActivityType.WorkPackageTaskRemove:
@@ -529,7 +529,7 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageLabelRename:
           if (this.workPackage.id === notification.data.packageId) {
             find1 = this.workPackage.labels.find(
-              l => l.id === notification.data.id,
+              (l) => l.id === notification.data.id,
             );
             if (find1) {
               find1.title = notification.data.title;
@@ -540,7 +540,7 @@ export class WorkPackageComponent implements OnInit {
         case ActivityType.WorkPackageLabelRemove:
           if (this.workPackage.id === notification.data.packageId) {
             this.workPackage.labels = this.workPackage.labels.filter(
-              l => l.id !== notification.data.id,
+              (l) => l.id !== notification.data.id,
             );
           }
           break;
@@ -601,7 +601,7 @@ export class WorkPackageComponent implements OnInit {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.projectService.projects.length; i++) {
       this.workPackage = this.projectService.projects[i].workPackages.find(
-        w => w.id === id,
+        (w) => w.id === id,
       );
       if (this.workPackage) {
         this.project = this.projectService.projects[i];
@@ -677,9 +677,9 @@ export class WorkPackageComponent implements OnInit {
   }
 
   mapData(model: WorkPackageViewModel): WorkPackageViewModel {
-    model.lists.forEach(list => {
+    model.lists.forEach((list) => {
       list.tasks = model.tasks
-        .filter(t => t.listId === list.id)
+        .filter((t) => t.listId === list.id)
         .sort((a, b) => (a.order > b.order ? 1 : -1));
     });
     return model;
@@ -699,8 +699,8 @@ export class WorkPackageComponent implements OnInit {
         projectId: this.project.complex ? this.project.id : undefined,
         noProject: true,
         existing: this.workPackage.members,
-        exclude: [...(this.workPackage.pending || []).map(p => p.identifier)],
-        handler: async access => {
+        exclude: [...(this.workPackage.pending || []).map((p) => p.identifier)],
+        handler: async (access) => {
           return this.workPackageService.addWorkPackageAccess(
             this.workPackage.id,
             access,
@@ -720,7 +720,8 @@ export class WorkPackageComponent implements OnInit {
         this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
         [
           member.isGroup
-            ? this.groupService.groups.find(g => g.id === member.recordId).title
+            ? this.groupService.groups.find((g) => g.id === member.recordId)
+                .title
             : pending
             ? pending.identifier
             : (await this.usersService.findUser(member.recordId)).fullName,
@@ -735,7 +736,7 @@ export class WorkPackageComponent implements OnInit {
           cancelLabel: 'CANCEL',
           action: async () => OperationResult.Success(true),
         })
-        .subscribe(async confirmed => {
+        .subscribe(async (confirmed) => {
           if (!confirmed) {
             return;
           }
@@ -855,7 +856,7 @@ export class WorkPackageComponent implements OnInit {
           return await this.workPackageService.deleteObjective(obj.id);
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 
   async changePermission(
@@ -907,7 +908,7 @@ export class WorkPackageComponent implements OnInit {
         cancelLabel: 'CANCEL',
         action: async () => OperationResult.Success(true),
       })
-      .subscribe(async confirmed => {
+      .subscribe(async (confirmed) => {
         if (!confirmed) {
           return;
         }
@@ -1275,7 +1276,7 @@ export class WorkPackageComponent implements OnInit {
   }
 
   sortTasks() {
-    this.workPackage.lists.forEach(list => {
+    this.workPackage.lists.forEach((list) => {
       switch (this.workPackage.tasksSort) {
         case SortType.DateAsc:
           list.tasks = list.tasks.sort((a, b) => {
@@ -1307,7 +1308,7 @@ export class WorkPackageComponent implements OnInit {
 
   findSubs(parent: string) {
     return [
-      ...this.project.subProjects.filter(s => s.parentId === parent),
+      ...this.project.subProjects.filter((s) => s.parentId === parent),
     ].sort((a, b) => {
       return NumberHelpers.sort(a, b, 'order');
     });

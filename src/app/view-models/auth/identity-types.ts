@@ -23,7 +23,7 @@ export interface InviteViewModel {
   id: string;
   access: AccessType;
   selected?: boolean;
-  model?: any;
+  model?: MemberInfoViewModel | GroupViewModel;
 }
 export interface ProfileViewModel extends MemberInfoViewModel {
   workingGroupId?: string;

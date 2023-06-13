@@ -26,13 +26,13 @@
       </h4>
       <h4 *ngIf="mode === ViewMode.Invite" class="modal-title">
         <i class="icon-users2"></i><br />
-        {{ 'NEW_PROJECT_MEMBERS' | translate: true }}
+        {{ 'NEW_PROJECT_MEMBERS' | translate : true }}
       </h4>
       <h4 *ngIf="mode === ViewMode.Template" class="modal-title">
         <i class="icon-tree7"></i><br />
         {{
           (projectId ? 'CHOOSE_PACKAGE_TEMPLATE' : 'NEW_PROJECT_TEMPLATE')
-            | translate: true
+            | translate : true
         }}
       </h4>
     </div>
@@ -48,7 +48,7 @@
     </div>
     <div class="modal-footer">
       <button (click)="next($event)" mat-flat-button [color]="'primary'">
-        {{ 'CONTINUE' | translate: true }}
+        {{ 'CONTINUE' | translate : true }}
       </button>
     </div>
   </ng-container>
@@ -65,7 +65,7 @@
     </div>
     <div class="modal-footer">
       <button (click)="next($event)" mat-flat-button [color]="'primary'">
-        {{ 'CONTINUE' | translate: true }}
+        {{ 'CONTINUE' | translate : true }}
       </button>
     </div>
   </ng-container>
@@ -106,7 +106,7 @@
               [class.selected]="boardTemplate === bt.type"
             >
               <i [className]="bt.icon"></i>
-              {{ bt.type | enum: 'BoardTemplate' }}
+              {{ bt.type | enum : 'BoardTemplate' }}
             </button>
           </div>
         </div>
@@ -204,7 +204,7 @@
         [color]="'primary'"
       >
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-        {{ 'CREATE_PROJECT' | translate: true }}
+        {{ 'CREATE_PROJECT' | translate : true }}
       </button>
     </div>
   </ng-container>

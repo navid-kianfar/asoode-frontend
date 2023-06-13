@@ -11,7 +11,8 @@ import { IdentityService } from '../../services/auth/identity.service';
 })
 export class CreateWizardComponent
   extends SimpleModalComponent<CreateModalParameters, boolean>
-  implements OnInit {
+  implements OnInit
+{
   WizardMode = WizardMode;
   mode: WizardMode;
   continueAs: WizardMode;

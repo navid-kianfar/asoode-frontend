@@ -14,7 +14,8 @@ import { ModalService } from '../../services/core/modal.service';
 })
 export class TimeOffApproveModalComponent
   extends SimpleModalComponent<{ timeOff: any }, boolean>
-  implements OnInit {
+  implements OnInit
+{
   timeOff: any;
   approving: boolean;
   waiting: boolean;

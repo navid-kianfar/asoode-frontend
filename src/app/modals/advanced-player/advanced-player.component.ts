@@ -30,7 +30,8 @@ export class AdvancedPlayerComponent
     { attachment: WorkPackageTaskAttachmentViewModel },
     void
   >
-  implements OnInit, OnDestroy, AfterViewInit {
+  implements OnInit, OnDestroy, AfterViewInit
+{
   tempComment: AdvancedPlayerCommentViewModel;
   addingComment: boolean;
   commentWaiting: boolean;
@@ -63,10 +64,10 @@ export class AdvancedPlayerComponent
 
   ngAfterViewInit() {
     this.video = this.videoPlayer.player;
-    this.video.addEventListener('timeupdate', e =>
+    this.video.addEventListener('timeupdate', (e) =>
       console.log(this.video.currentTime),
     );
-    this.video.addEventListener('onseeked', e =>
+    this.video.addEventListener('onseeked', (e) =>
       console.log(this.video.currentTime),
     );
   }
@@ -116,7 +117,7 @@ export class AdvancedPlayerComponent
         return;
       }
       const comment = this.data.comments.find(
-        c => c.id === this.tempComment.id,
+        (c) => c.id === this.tempComment.id,
       );
       comment.message = message;
       this.tempComment = null;
@@ -196,12 +197,12 @@ export class AdvancedPlayerComponent
           );
           if (op.status === OperationResultStatus.Success) {
             this.data.comments = this.data.comments.filter(
-              c => c.id !== comment.id,
+              (c) => c.id !== comment.id,
             );
           }
           return op;
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 }

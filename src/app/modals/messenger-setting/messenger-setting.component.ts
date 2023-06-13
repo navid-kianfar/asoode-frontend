@@ -8,8 +8,10 @@ import { IdentityService } from '../../services/auth/identity.service';
   templateUrl: './messenger-setting.component.html',
   styleUrls: ['./messenger-setting.component.scss'],
 })
-export class MessengerSettingComponent extends SimpleModalComponent<{}, boolean>
-  implements OnInit {
+export class MessengerSettingComponent
+  extends SimpleModalComponent<{}, boolean>
+  implements OnInit
+{
   actionWaiting: boolean;
   receiveMode: ChannelNotificationReceive;
   ChannelNotificationReceive = ChannelNotificationReceive;

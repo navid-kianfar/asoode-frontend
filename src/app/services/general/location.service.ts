@@ -19,7 +19,7 @@ export class LocationService {
         return;
       }
       navigator.geolocation.getCurrentPosition(
-        position => {
+        (position) => {
           this.granted = true;
           this.current = position;
           resolve(position);

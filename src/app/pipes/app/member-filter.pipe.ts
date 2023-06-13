@@ -9,7 +9,7 @@ export class MemberFilterPipe implements PipeTransform {
       return value;
     }
     const exp = new RegExp(term, 'gi');
-    return (value || []).filter(item => {
+    return (value || []).filter((item) => {
       return (
         exp.test(item.member.fullName) ||
         exp.test(item.member.phone) ||

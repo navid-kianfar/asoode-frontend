@@ -63,7 +63,7 @@ export class EditorComponent implements OnInit, OnDestroy {
             editor.insertText(editor.getLength() - 1, '', 'user');
           },
           source: (searchTerm, renderList) => {
-            const values = this.members.map(m => {
+            const values = this.members.map((m) => {
               return { id: m.id, value: m.fullName };
             });
 
@@ -72,7 +72,7 @@ export class EditorComponent implements OnInit, OnDestroy {
             } else {
               const matches = [];
 
-              values.forEach(entry => {
+              values.forEach((entry) => {
                 if (
                   entry.value
                     .toLowerCase()

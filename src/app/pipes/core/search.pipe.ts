@@ -10,17 +10,17 @@ export class SearchPipe implements PipeTransform {
     }
     if (typeof term === 'string') {
       const exp = new RegExp(term, 'gi');
-      return (value || []).filter(item => {
+      return (value || []).filter((item) => {
         return keys.some(
-          key =>
+          (key) =>
             (item.hasOwnProperty(key) && exp.test(item[key])) ||
             (!item.hasOwnProperty(key) && exp.test(item)),
         );
       });
     }
-    return (value || []).filter(item => {
+    return (value || []).filter((item) => {
       return keys.some(
-        key =>
+        (key) =>
           (item.hasOwnProperty(key) && item[key] === term) ||
           (!item.hasOwnProperty(key) && item[key] === term),
       );

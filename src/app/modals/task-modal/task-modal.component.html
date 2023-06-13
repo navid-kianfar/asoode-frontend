@@ -52,7 +52,7 @@
           {{
             'TASK_ARCHIVED_AT'
               | translate
-              | stringFormat: (model.archivedAt | culturedDate)
+              | stringFormat : (model.archivedAt | culturedDate)
           }}
         </div>
       </div>
@@ -70,7 +70,7 @@
               <span class="status-container">
                 <span class="circle color-{{ model.state }}"></span>
                 <span class="text">
-                  {{ model.state | enum: 'WorkPackageTaskState' }}&nbsp;
+                  {{ model.state | enum : 'WorkPackageTaskState' }}&nbsp;
                   <i class="icon-arrow-down2"></i>
                 </span>
               </span>
@@ -556,18 +556,22 @@
                     <ng-container *ngFor="let attachment of model.attachments">
                       <div class="attachment-item">
                         <div class="preview">
-                              <img
-                                [src]="attachment.thumbnailPath || (attachment.path | thumbnailUrl)"
-                                alt="">
-<!--                          <img-->
-<!--                            *ngIf="attachment.thumbnailPath"-->
-<!--                            [src]="attachment.thumbnailPath"-->
-<!--                            alt=""-->
-<!--                          />-->
-<!--                          <i-->
-<!--                            *ngIf="!attachment.thumbnailPath"-->
-<!--                            [class]="filesService.icon(attachment.path)"-->
-<!--                          ></i>-->
+                          <img
+                            [src]="
+                              attachment.thumbnailPath ||
+                              (attachment.path | thumbnailUrl)
+                            "
+                            alt=""
+                          />
+                          <!--                          <img-->
+                          <!--                            *ngIf="attachment.thumbnailPath"-->
+                          <!--                            [src]="attachment.thumbnailPath"-->
+                          <!--                            alt=""-->
+                          <!--                          />-->
+                          <!--                          <i-->
+                          <!--                            *ngIf="!attachment.thumbnailPath"-->
+                          <!--                            [class]="filesService.icon(attachment.path)"-->
+                          <!--                          ></i>-->
                         </div>
                         <div class="info">
                           <h4 *ngIf="!attachment.renaming">
@@ -590,7 +594,7 @@
                             ></i>
                           </div>
                           <h5>
-                            {{ attachment.createdAt | culturedDate: true }}
+                            {{ attachment.createdAt | culturedDate : true }}
                           </h5>
                           <h5>
                             <span>{{ 'UPLOADED_BY' | translate }}&nbsp;</span>
@@ -626,12 +630,12 @@
                               (click)="previewAttachment(attachment)"
                             ></i>
                           </div>
-<!--                          <div class="btns">-->
-<!--                            <i-->
-<!--                              class="icon-new-window"-->
-<!--                              (click)="openAttachment(attachment)"-->
-<!--                            ></i>-->
-<!--                          </div>-->
+                          <!--                          <div class="btns">-->
+                          <!--                            <i-->
+                          <!--                              class="icon-new-window"-->
+                          <!--                              (click)="openAttachment(attachment)"-->
+                          <!--                            ></i>-->
+                          <!--                          </div>-->
                           <div
                             *ngIf="
                               filesService.isImage(attachment.path) &&
@@ -926,7 +930,7 @@
                   >
                     <h4 *ngIf="model.dueAt">
                       {{ 'DUE_AT' | translate }}&nbsp;
-                      {{ model.dueAt | culturedDate: true }}
+                      {{ model.dueAt | culturedDate : true }}
                     </h4>
                     <ng-container *ngIf="model.beginAt || model.endAt">
                       <h4>
@@ -1062,7 +1066,7 @@
                         <div class="member">
                           <app-member-info
                             [(model)]="log.member"
-                            [small]="true"
+                            small="true"
                             [id]="log.userId"
                           ></app-member-info>
                           <h4>{{ log.member?.fullName }}</h4>
@@ -1072,14 +1076,14 @@
                         </div>
                         <div class="time-span">
                           <div class="from">
-                            {{ log.begin | amDateFormat: 'HH:mm' }}
+                            {{ log.begin | amDateFormat : 'HH:mm' }}
                           </div>
                           <div class="dash">-</div>
                           <div *ngIf="!log.end" class="to">
                             {{ 'CURRENTLY_WORKING' | translate }}
                           </div>
                           <div *ngIf="log.end" class="to">
-                            {{ log.end | amDateFormat: 'HH:mm' }}
+                            {{ log.end | amDateFormat : 'HH:mm' }}
                           </div>
                         </div>
                         <div class="date-info">
@@ -1191,7 +1195,7 @@
       >
         <div class="circle color-{{ state }}"></div>
         <div class="text">
-          {{ state | enum: 'WorkPackageTaskState' }}
+          {{ state | enum : 'WorkPackageTaskState' }}
         </div>
       </li>
     </ul>

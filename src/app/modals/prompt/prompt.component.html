@@ -10,7 +10,7 @@
       <div class="text">
         <h4 class="modal-title">
           <i [className]="icon"></i><br />
-          {{ title | translate: true }}
+          {{ title | translate : true }}
         </h4>
       </div>
       <div class="btn">
@@ -36,11 +36,11 @@
         [color]="actionColor"
       >
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-        {{ actionLabel | translate: true }}</button
+        {{ actionLabel | translate : true }}</button
       >&nbsp;
       <button [disabled]="cancelWaiting" (click)="onCancel($event)" mat-button>
         <i *ngIf="cancelWaiting" class="icon-spin icon-spinner2"></i>
-        {{ cancelLabel | translate: true }}
+        {{ cancelLabel | translate : true }}
       </button>
     </div>
   </div>

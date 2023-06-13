@@ -5,10 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class InitialsPipe implements PipeTransform {
   transform(name: string): string {
-    const parts = name
-      .trim()
-      .replace(/  +/g, ' ')
-      .split(' ');
+    const parts = name.trim().replace(/  +/g, ' ').split(' ');
     if (parts.length === 1) {
       return name.substring(0, 2);
     }

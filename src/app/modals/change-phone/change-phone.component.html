@@ -5,7 +5,7 @@
   >
     <div class="modal-header">
       <h4 class="modal-title">
-        {{ 'CHANGE_PHONE' | translate: true }}
+        {{ 'CHANGE_PHONE' | translate : true }}
       </h4>
       <button (click)="onCancel($event)">
         <i class="icon-cross"></i>
@@ -40,7 +40,7 @@
             </button>
 
             <div *ngIf="sent && remaining" class="count-down">
-              {{ remaining * 1000 | date: 'mm:ss':'UTC' }}
+              {{ remaining * 1000 | date : 'mm:ss' : 'UTC' }}
             </div>
 
             <a
@@ -71,10 +71,10 @@
         color="primary"
       >
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-        {{ 'CHANGE_PHONE' | translate: true }}</button
+        {{ 'CHANGE_PHONE' | translate : true }}</button
       >&nbsp;
       <button (click)="onCancel($event)" mat-button>
-        {{ 'CANCEL' | translate: true }}
+        {{ 'CANCEL' | translate : true }}
       </button>
     </div>
   </div>

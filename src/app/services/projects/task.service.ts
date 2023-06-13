@@ -240,7 +240,7 @@ export class TaskService {
     return await this.httpService.formUpload(
       `/tasks/${id}/bulk-attach`,
       model,
-      p => trigger(p),
+      (p) => trigger(p),
     );
   }
 

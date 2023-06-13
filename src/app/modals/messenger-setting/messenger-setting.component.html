@@ -5,7 +5,7 @@
   >
     <div class="modal-header">
       <h4 class="modal-title">
-        {{ 'CHANNEL_SETTING' | translate: true }}
+        {{ 'CHANNEL_SETTING' | translate : true }}
       </h4>
       <button (click)="onCancel($event)">
         <i class="icon-cross"></i>
@@ -77,7 +77,7 @@
     <div class="modal-footer">
       <button (click)="onAction($event)" mat-flat-button [color]="'primary'">
         <i *ngIf="actionWaiting" class="icon-spin icon-spinner2"></i>
-        {{ 'SAVE_CHANGES' | translate: true }}</button
+        {{ 'SAVE_CHANGES' | translate : true }}</button
       >&nbsp;
     </div>
   </div>

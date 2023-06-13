@@ -62,7 +62,7 @@ export class FileComponent implements OnInit {
     if (!this.multiple) {
       return this.selectedFiles[0].name;
     }
-    return this.selectedFiles.map(f => f.name).join(', ');
+    return this.selectedFiles.map((f) => f.name).join(', ');
   }
 
   ngOnInit() {
@@ -111,7 +111,7 @@ export class FileComponent implements OnInit {
     const op = await this.httpService.formUpload<any>(
       this.backend,
       data,
-      percent => {
+      (percent) => {
         this.uploadPercent = percent;
         this.onProgress.emit(percent);
       },
@@ -151,8 +151,7 @@ export class FileComponent implements OnInit {
     this.filePicker.nativeElement.dispatchEvent(event);
   }
 
-  async onChange($event: any) {
-    const files = $event.target.files;
+  async onChange(files: FileList) {
     if (files && files.length) {
       this.current = '';
     }

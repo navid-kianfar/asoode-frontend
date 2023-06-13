@@ -22,6 +22,8 @@ import { Socket } from 'ngx-socket-io';
 import { StringHelpers } from '../../../helpers/string.helpers';
 import { TranslateService } from '../../../services/core/translate.service';
 import { Router } from '@angular/router';
+import { UpgradeComponent } from '../../../modals/upgrade/upgrade.component';
+import { CreateModalParameters } from '../../../view-models/modals/modals-types';
 import { IdentityService } from '../../../services/auth/identity.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { WorkPackageService } from '../../../services/projects/work-package.service';
@@ -108,10 +110,10 @@ export class ProjectTreeComponent implements OnInit {
   createTree(sub: SubProjectViewModel = null) {
     const subId = sub ? sub.id : null;
     this.workPackages = this.model.workPackages
-      .filter(w => w.subProjectId === subId)
+      .filter((w) => w.subProjectId === subId)
       .sort((a, b) => (a.order > b.order ? 1 : -1));
     this.subProjects = this.model.subProjects
-      .filter(s => s.parentId === subId)
+      .filter((s) => s.parentId === subId)
       .sort((a, b) => (a.order > b.order ? 1 : -1));
   }
 
@@ -184,7 +186,7 @@ export class ProjectTreeComponent implements OnInit {
   deleteSubProject(id: string) {
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_SUB_CONFIRM_HEADING'),
-      [this.model.subProjects.find(s => s.id === id).title],
+      [this.model.subProjects.find((s) => s.id === id).title],
     );
     this.modalService
       .confirm({
@@ -197,11 +199,11 @@ export class ProjectTreeComponent implements OnInit {
           return await this.projectService.removeSubProject(id);
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 
   editSubProject(id: string) {
-    const sub = this.model.subProjects.find(s => s.id === id);
+    const sub = this.model.subProjects.find((s) => s.id === id);
     this.modalService
       .show(PromptComponent, {
         icon: 'icon-tree7',

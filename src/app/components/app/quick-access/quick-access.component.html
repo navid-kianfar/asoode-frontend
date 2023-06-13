@@ -12,7 +12,7 @@
       class="project-item"
       *ngFor="
         let proj of projectService.projects
-          | slice: 0:(showMoreProjects ? projectService.projects.length : 5)
+          | slice : 0 : (showMoreProjects ? projectService.projects.length : 5)
       "
     >
       <div class="avatar-container">
@@ -23,7 +23,7 @@
       </div>
       <div class="text-container">
         <div class="title">{{ proj.title }}</div>
-        <div class="description">{{ proj.description | truncate: 100 }}</div>
+        <div class="description">{{ proj.description | truncate : 100 }}</div>
       </div>
     </div>
     <div
@@ -48,7 +48,7 @@
       class="group-item"
       *ngFor="
         let group of groupService.groups
-          | slice: 0:(showMoreGroups ? groupService.groups.length : 5)
+          | slice : 0 : (showMoreGroups ? groupService.groups.length : 5)
       "
     >
       <div class="avatar-container">
@@ -57,7 +57,7 @@
       </div>
       <div class="text-container">
         <div class="title">{{ group.title }}</div>
-        <div class="description">{{ group.description | truncate: 100 }}</div>
+        <div class="description">{{ group.description | truncate : 100 }}</div>
       </div>
     </div>
     <div

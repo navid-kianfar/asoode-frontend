@@ -67,7 +67,7 @@ export class DropdownComponent implements OnInit, OnChanges {
     this.picked.emit(val);
   }
   get text(): string {
-    const item = (this.items || []).find(i => i.value === this.model);
+    const item = (this.items || []).find((i) => i.value === this.model);
     if (item) {
       return item.text;
     }
@@ -97,33 +97,34 @@ export class DropdownComponent implements OnInit, OnChanges {
       switch (this.knownList) {
         case DropdownKnownList.Countries:
           this.countryService.countries
-            .map<ListViewModel>(c => {
+            .map<ListViewModel>((c) => {
               return {
                 value: c.id,
                 text: c.text,
               };
             })
-            .forEach(c => this.items.push(c));
+            .forEach((c) => this.items.push(c));
           break;
         case DropdownKnownList.Zones:
           this.zoneService.timezones
-            .map<ListViewModel>(t => {
+            .map<ListViewModel>((t) => {
               return {
                 value: t.value,
                 text: t.text,
               };
             })
-            .forEach(t => this.items.push(t));
+            .forEach((t) => this.items.push(t));
           break;
       }
     }
     if (this.enum) {
       const items = [];
       this.enumExcept = this.enumExcept || [];
-      const enumObj = this.enumsService.repository[
-        this.enum[0].toLowerCase() + this.enum.substring(1)
-      ];
-      Object.keys(enumObj).forEach(key => {
+      const enumObj =
+        this.enumsService.repository[
+          this.enum[0].toLowerCase() + this.enum.substring(1)
+        ];
+      Object.keys(enumObj).forEach((key) => {
         const changed = key
           .replace(/([a-z])([A-Z])/g, '$1-$2')
           .replace(/-/g, '_');
@@ -145,7 +146,7 @@ export class DropdownComponent implements OnInit, OnChanges {
       this.items = items;
     }
     if (this.model && !this.selectedItem) {
-      const found = this.items.find(i => i.value === this.model);
+      const found = this.items.find((i) => i.value === this.model);
       if (found) {
         this.onPick(found, null);
       }
@@ -218,7 +219,7 @@ export class DropdownComponent implements OnInit, OnChanges {
 
   checkSelectedItem() {
     if (this.model) {
-      const found = this.items.find(i => i.value === this.model);
+      const found = this.items.find((i) => i.value === this.model);
       if (found) {
         this.onPick(found, null);
       }

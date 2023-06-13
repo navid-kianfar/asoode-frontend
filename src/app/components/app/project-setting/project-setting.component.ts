@@ -46,9 +46,9 @@ export class ProjectSettingComponent implements OnInit {
         exclude: [
           this.model.userId,
           this.model.id,
-          ...this.model.pending.map(p => p.identifier),
+          ...this.model.pending.map((p) => p.identifier),
         ],
-        handler: async access => {
+        handler: async (access) => {
           return this.projectService.addAccess(this.model.id, access);
         },
       })
@@ -60,7 +60,7 @@ export class ProjectSettingComponent implements OnInit {
       this.translateService.fromKey('REMOVE_MEMBER_CONFIRM_HEADING'),
       [
         member.isGroup
-          ? this.groupService.groups.find(g => g.id === member.recordId).title
+          ? this.groupService.groups.find((g) => g.id === member.recordId).title
           : member.member.fullName,
       ],
     );
@@ -73,7 +73,7 @@ export class ProjectSettingComponent implements OnInit {
         cancelLabel: 'CANCEL',
         action: async () => OperationResult.Success(true),
       })
-      .subscribe(async confirmed => {
+      .subscribe(async (confirmed) => {
         if (!confirmed) {
           return;
         }
@@ -159,7 +159,7 @@ export class ProjectSettingComponent implements OnInit {
         cancelLabel: 'CANCEL',
         action: async () => OperationResult.Success(true),
       })
-      .subscribe(async confirmed => {
+      .subscribe(async (confirmed) => {
         if (!confirmed) {
           return;
         }
@@ -170,7 +170,7 @@ export class ProjectSettingComponent implements OnInit {
           // TODO: handle error
           return;
         }
-        this.model.pending = this.model.pending.filter(g => g !== member);
+        this.model.pending = this.model.pending.filter((g) => g !== member);
       });
   }
 
@@ -197,7 +197,7 @@ export class ProjectSettingComponent implements OnInit {
           return this.router.navigateByUrl('/dashboard');
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 
   prepareDelete() {
@@ -223,6 +223,6 @@ export class ProjectSettingComponent implements OnInit {
           return this.router.navigateByUrl('/dashboard');
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 }

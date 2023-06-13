@@ -54,10 +54,10 @@ export class ProjectObjectiveComponent implements OnInit {
     this.detailWaiting = false;
     this.estimated = op.data;
     this.estimatedTotalAmount = this.estimated
-      .map(e => e.amount)
+      .map((e) => e.amount)
       .reduce((p, c) => p + c, 0);
     this.estimatedTotalTime = this.estimated
-      .map(e => e.time)
+      .map((e) => e.time)
       .reduce((p, c) => p + c, 0);
   }
 }

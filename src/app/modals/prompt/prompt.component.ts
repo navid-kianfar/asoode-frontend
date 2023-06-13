@@ -14,7 +14,8 @@ import { FormViewModel } from '../../components/core/form/contracts';
 })
 export class PromptComponent
   extends SimpleModalComponent<PromptModalParameters, boolean>
-  implements OnInit {
+  implements OnInit
+{
   progress?: ModalProgress;
   cancel?: (params?: any, form?: FormViewModel[]) => Promise<any>;
   action?: (params: any, form: FormViewModel[]) => Promise<any>;

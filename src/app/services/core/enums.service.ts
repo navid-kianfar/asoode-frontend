@@ -12,19 +12,18 @@ export class EnumsService {
     private readonly config: ConfigService,
   ) {}
 
-  load(): Promise<void> {
-    return new Promise(async (resolve, reject) => {
+  async load(): Promise<void> {
+    return new Promise((resolve, reject) => {
       const path = `${this.config.backend}/enums`;
       this.client.get(path).subscribe(
         (response: string) => {
           this.repository = response;
+          resolve();
         },
         (err: Error) => {
           this.repository = {};
-          // console.log(err);
           reject(err);
         },
-        () => resolve()
       );
     });
   }
@@ -32,7 +31,7 @@ export class EnumsService {
   translateKey(name: string, value: any): string {
     const enumName = name[0].toLowerCase() + name.substring(1);
     const enumKey =
-      Object.keys(this.repository[enumName]).find(k => {
+      Object.keys(this.repository[enumName]).find((k) => {
         return this.repository[enumName][k] === value;
       }) || '';
     const keyFixed = enumKey

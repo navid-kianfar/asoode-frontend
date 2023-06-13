@@ -14,7 +14,9 @@
     <div class="status-wrapper">
       <div class="status-container">
         <div class="circle color-{{ model.state }}"></div>
-        <div class="text">{{ model.state | enum: 'WorkPackageTaskState' }}</div>
+        <div class="text">
+          {{ model.state | enum : 'WorkPackageTaskState' }}
+        </div>
       </div>
     </div>
   </div>

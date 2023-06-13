@@ -15,7 +15,8 @@ export class WorkPackageWizardComponent
     },
     boolean
   >
-  implements OnInit {
+  implements OnInit
+{
   projectId: string;
   parentId: string;
 

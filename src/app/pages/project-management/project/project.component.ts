@@ -71,7 +71,7 @@ export class ProjectComponent implements OnInit {
 
   async fetch() {
     const id = this.activatedRoute.snapshot.params.id;
-    this.project = this.projectService.projects.find(g => g.id === id);
+    this.project = this.projectService.projects.find((g) => g.id === id);
     if (!this.project) {
       this.waiting = true;
       const op = await this.projectService.fetchArchived(id);
@@ -99,17 +99,26 @@ export class ProjectComponent implements OnInit {
           blocked: 0,
           created: 0,
           date: '',
-          done: 0
+          done: 0,
         });
       }
     }
 
-    this.report.blocked.progress = progress.data.map(d => d.blocked);
-    this.report.blocked.total = progress.data.reduce((prev, obj, current) => prev + obj.blocked, 0);
-    this.report.done.progress = progress.data.map(d => d.done);
-    this.report.done.total = progress.data.reduce((prev, obj, current) => prev + obj.done, 0);
-    this.report.created.progress = progress.data.map(d => d.created);
-    this.report.created.total = progress.data.reduce((prev, obj, current) => prev + obj.created, 0);
+    this.report.blocked.progress = progress.data.map((d) => d.blocked);
+    this.report.blocked.total = progress.data.reduce(
+      (prev, obj, current) => prev + obj.blocked,
+      0,
+    );
+    this.report.done.progress = progress.data.map((d) => d.done);
+    this.report.done.total = progress.data.reduce(
+      (prev, obj, current) => prev + obj.done,
+      0,
+    );
+    this.report.created.progress = progress.data.map((d) => d.created);
+    this.report.created.total = progress.data.reduce(
+      (prev, obj, current) => prev + obj.created,
+      0,
+    );
     console.log(this.report);
     this.progressWaiting = false;
   }

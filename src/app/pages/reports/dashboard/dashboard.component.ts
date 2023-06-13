@@ -70,8 +70,10 @@ export class DashboardComponent implements OnInit {
       Minutes: 0,
     });
 
-    const lastDayInMonth = this.culturedDateService.cultureService.current
-      .daysInMonths[parsed.Month - 1];
+    const lastDayInMonth =
+      this.culturedDateService.cultureService.current.daysInMonths[
+        parsed.Month - 1
+      ];
     this.monthEnd = this.converter.ToDateTime({
       Year: parsed.Year,
       Month: parsed.Month,

@@ -9,7 +9,7 @@
         <div class="panel panel-white">
           <div *ngIf="group.title" class="panel-heading">
             <h3 class="panel-title">
-              {{ group.title | translate: true }}&nbsp;
+              {{ group.title | translate : true }}&nbsp;
             </h3>
           </div>
           <div class="row panel-body">
@@ -28,7 +28,7 @@
                 [ngSwitch]="element.type"
               >
                 <label *ngIf="element.config.hideLabel !== true">
-                  {{ element.config.label | translate: true }}
+                  {{ element.config.label | translate : true }}
                 </label>
 
                 <!-- Verification -->
@@ -69,7 +69,7 @@
                 <!-- Label -->
                 <ng-container *ngIf="element.type === FormElementType.Label">
                   <label class="label-value">{{
-                    element.params.label | translate: true
+                    element.params.label | translate : true
                   }}</label>
                 </ng-container>
 
@@ -82,6 +82,15 @@
                     [summary]="element.params.summary"
                     [label]="element.params.label"
                   ></app-checkbox>
+                </ng-container>
+
+                <!-- Captcha -->
+                <ng-container *ngIf="element.type === FormElementType.Captcha">
+                  <app-captcha
+                    [cssClass]="element.config.cssClass"
+                    [disabled]="checkDisabled(group, element)"
+                    [(model)]="element.params.model"
+                  ></app-captcha>
                 </ng-container>
 
                 <!-- Input -->

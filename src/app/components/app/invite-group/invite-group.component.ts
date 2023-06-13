@@ -18,8 +18,8 @@ export class InviteGroupComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.groups = this.groupService.groups
-        .filter(g => (this.exclude || []).indexOf(g.id) === -1)
-        .map(g => {
+        .filter((g) => (this.exclude || []).indexOf(g.id) === -1)
+        .map((g) => {
           return {
             id: g.id,
             model: g,

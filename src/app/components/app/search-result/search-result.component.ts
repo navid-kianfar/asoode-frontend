@@ -39,7 +39,7 @@ export class SearchResultComponent implements OnInit {
   }
 
   openProject(proj: ProjectViewModel) {
-    const project = this.projectService.projects.find(p => p.id === proj.id);
+    const project = this.projectService.projects.find((p) => p.id === proj.id);
     if (!project) {
       return;
     }

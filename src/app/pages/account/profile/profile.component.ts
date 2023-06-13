@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   async prepareChangePhoneNumber() {
-    this.modalService.show(ChangePhoneComponent, {}).subscribe(result => {
+    this.modalService.show(ChangePhoneComponent, {}).subscribe((result) => {
       if (result) {
         this.identityService.profile.phone = result;
         this.edit();
@@ -40,7 +40,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   async prepareChangeEmail() {
-    this.modalService.show(ChangeEmailComponent, {}).subscribe(result => {
+    this.modalService.show(ChangeEmailComponent, {}).subscribe((result) => {
       if (result) {
         this.identityService.profile.email = result;
         this.edit();
@@ -260,7 +260,7 @@ export class ProfileComponent implements OnInit {
           return Promise.resolve(true);
         },
       })
-      .subscribe(async result => {
+      .subscribe(async (result) => {
         if (!result) {
           return;
         }

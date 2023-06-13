@@ -9,8 +9,10 @@ import { OperationResultStatus } from '../../library/core/enums';
   templateUrl: './change-phone.component.html',
   styleUrls: ['./change-phone.component.scss'],
 })
-export class ChangePhoneComponent extends SimpleModalComponent<{}, string>
-  implements OnInit {
+export class ChangePhoneComponent
+  extends SimpleModalComponent<{}, string>
+  implements OnInit
+{
   cancel?: () => Promise<any>;
   action?: () => Promise<any>;
   actionWaiting: boolean;

@@ -40,17 +40,21 @@ export class MessengerComponent implements OnInit {
 
   ngOnInit() {
     const members = [];
-    this.groupService.groups.forEach(g => {
-      g.members.forEach(m => {
-        if (!m.member || members.find(k => k.id === m.member.id)) {
+    this.groupService.groups.forEach((g) => {
+      g.members.forEach((m) => {
+        if (!m.member || members.find((k) => k.id === m.member.id)) {
           return;
         }
         members.push(m.member);
       });
     });
-    this.projectService.projects.forEach(g => {
-      g.members.forEach(m => {
-        if (m.isGroup || !m.member || members.find(k => k.id === m.member.id)) {
+    this.projectService.projects.forEach((g) => {
+      g.members.forEach((m) => {
+        if (
+          m.isGroup ||
+          !m.member ||
+          members.find((k) => k.id === m.member.id)
+        ) {
           return;
         }
         members.push(m.member);
@@ -76,7 +80,7 @@ export class MessengerComponent implements OnInit {
       type: ChannelType.Group,
       attachmentSize: group.attachmentSize,
     };
-    this.currentMembers = group.members.map(m => m.member);
+    this.currentMembers = group.members.map((m) => m.member);
   }
   openProject(project: ProjectViewModel) {
     this.current = {
@@ -88,8 +92,8 @@ export class MessengerComponent implements OnInit {
       attachmentSize: project.attachmentSize,
     };
     this.currentMembers = project.members
-      .filter(p => !p.isGroup)
-      .map(m => m.member);
+      .filter((p) => !p.isGroup)
+      .map((m) => m.member);
   }
 
   openWorkPackage(
@@ -105,13 +109,13 @@ export class MessengerComponent implements OnInit {
       attachmentSize: project.attachmentSize,
     };
     this.currentMembers = project.members
-      .filter(p => {
+      .filter((p) => {
         return (
           !p.isGroup &&
-          workPackageViewModel.members.find(m => m.id === p.recordId)
+          workPackageViewModel.members.find((m) => m.id === p.recordId)
         );
       })
-      .map(m => m.member);
+      .map((m) => m.member);
   }
 
   toggleFiles() {

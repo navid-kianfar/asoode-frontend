@@ -9,7 +9,7 @@ export class ArrayHelpers {
       prevent = true;
     }
     const safe = Array.isArray(itemS) ? itemS : [itemS];
-    safe.forEach(i => {
+    safe.forEach((i) => {
       if (prevent && source.indexOf(i) !== -1) {
         return;
       }
@@ -18,7 +18,7 @@ export class ArrayHelpers {
   }
   static remove<T>(source: T[], itemS: T | T[]) {
     const safe = Array.isArray(itemS) ? itemS : [itemS];
-    safe.forEach(i => {
+    safe.forEach((i) => {
       const idx = source.indexOf(i);
       if (idx === -1) {
         return;

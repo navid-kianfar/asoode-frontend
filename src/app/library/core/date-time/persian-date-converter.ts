@@ -4,7 +4,6 @@ import * as jalaliMoment from 'jalali-moment';
 const INVALID_DATE = '0001-01-01';
 
 export default class PersianDateConverter implements IDateConverter {
-
   IsValid(date: string | IDateTimeProperties): boolean {
     if (typeof date === 'string') {
       return jalaliMoment(date).isValid();

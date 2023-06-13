@@ -31,8 +31,8 @@ export class GroupProjectsComponent implements OnInit {
     });
   }
   find() {
-    this.projects = this.projectService.projects.filter(p => {
-      return p.members.find(m => m.isGroup && m.recordId === this.group.id);
+    this.projects = this.projectService.projects.filter((p) => {
+      return p.members.find((m) => m.isGroup && m.recordId === this.group.id);
     });
   }
 }

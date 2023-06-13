@@ -41,7 +41,7 @@ export class OrgChartNodeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.filtered = this.groups.filter(g => g.parentId === this.group.id);
+    this.filtered = this.groups.filter((g) => g.parentId === this.group.id);
     this.socket.on('push-notification', this.handleSocket);
   }
 
@@ -49,13 +49,13 @@ export class OrgChartNodeComponent implements OnInit, OnDestroy {
     this.socket.removeListener('push-notification', this.handleSocket);
   }
 
-  handleSocket = notification => {
+  handleSocket = (notification) => {
     switch (notification.type) {
       case ActivityType.GroupAdd:
       case ActivityType.GroupEdit:
       case ActivityType.GroupRemove:
       case ActivityType.GroupArchive:
-        this.filtered = this.groups.filter(g => g.parentId === this.group.id);
+        this.filtered = this.groups.filter((g) => g.parentId === this.group.id);
         break;
     }
   };

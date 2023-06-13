@@ -49,7 +49,7 @@ export class InviteNewMemberComponent implements OnInit {
       this.notificationService.error('MEMBER_EXISTS');
       return;
     }
-    const found = this.members.find(m => {
+    const found = this.members.find((m) => {
       return (
         m.model.email.toLowerCase().trim() ===
         this.currentEmail.toLowerCase().trim()
@@ -73,7 +73,7 @@ export class InviteNewMemberComponent implements OnInit {
   }
 
   remove(member: InviteViewModel) {
-    const filtered = this.members.filter(m => m !== member);
+    const filtered = this.members.filter((m) => m !== member);
     this.members = filtered;
     this.membersChange.emit(filtered);
   }

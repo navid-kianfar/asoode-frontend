@@ -79,7 +79,7 @@ export class WorkPackageBoardComponent implements OnInit {
   }
 
   prepareNewTask(list: WorkPackageListViewModel) {
-    this.model.lists.forEach(l => (l.expanded = false));
+    this.model.lists.forEach((l) => (l.expanded = false));
     list.expanded = true;
     this.newTaskTitle = '';
     this.newTaskCounter = 1;
@@ -161,7 +161,7 @@ export class WorkPackageBoardComponent implements OnInit {
   }
 
   getConnectedList() {
-    return this.model.lists.map(l => l.id);
+    return this.model.lists.map((l) => l.id);
   }
 
   dropTask(event: CdkDragDrop<WorkPackageTaskViewModel[], any>, listId) {

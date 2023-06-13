@@ -17,7 +17,8 @@ export class GroupDetailComponent
     { group: GroupViewModel; canEdit: boolean },
     boolean
   >
-  implements OnInit {
+  implements OnInit
+{
   group: GroupViewModel;
   canEdit: boolean;
   editing: boolean;

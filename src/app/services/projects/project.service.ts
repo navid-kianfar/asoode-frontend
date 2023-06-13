@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '../core/http.service';
 import { OperationResult } from '../../library/core/operation-result';
 import {
-  ProjectObjectiveEstimatedPriceViewModel, ProjectProgressViewModel,
+  ProjectObjectiveEstimatedPriceViewModel,
+  ProjectProgressViewModel,
   ProjectTemplateViewModel,
   ProjectViewModel,
   RoadMapViewModel,
@@ -94,18 +95,18 @@ export class ProjectService {
   getPermission(project: ProjectViewModel | string): AccessType {
     const proj =
       typeof project === 'string'
-        ? this.projects.find(g => g.id === project)
+        ? this.projects.find((g) => g.id === project)
         : project;
     const access = proj.members.find(
-      m => m.recordId === this.identityService.identity.userId,
+      (m) => m.recordId === this.identityService.identity.userId,
     );
     const multiple = [];
     if (access) {
       multiple.push(access.access);
     }
 
-    for (const ga of proj.members.filter(m => m.isGroup)) {
-      const found = this.groupService.groups.find(k => k.id === ga.recordId);
+    for (const ga of proj.members.filter((m) => m.isGroup)) {
+      const found = this.groupService.groups.find((k) => k.id === ga.recordId);
       if (found) {
         multiple.push(found.access);
       }
@@ -118,18 +119,18 @@ export class ProjectService {
     workPackage: WorkPackageViewModel,
   ): AccessType {
     const access = workPackage.members.find(
-      m => m.recordId === this.identityService.identity.userId,
+      (m) => m.recordId === this.identityService.identity.userId,
     );
     const multiple = [];
     if (access) {
       multiple.push(access.access);
     }
 
-    for (const ga of workPackage.members.filter(m => m.isGroup)) {
-      const found = this.groupService.groups.find(k => k.id === ga.recordId);
+    for (const ga of workPackage.members.filter((m) => m.isGroup)) {
+      const found = this.groupService.groups.find((k) => k.id === ga.recordId);
       if (found) {
         const aa = found.members.find(
-          m => m.userId === this.identityService.identity.userId,
+          (m) => m.userId === this.identityService.identity.userId,
         );
         if (aa) {
           multiple.push(ga.access);
@@ -239,7 +240,11 @@ export class ProjectService {
     );
   }
 
-  async progress(id: any): Promise<OperationResult<ProjectProgressViewModel[]>> {
-    return await this.httpService.post<ProjectProgressViewModel[]>(`/projects/progress/${id}`);
+  async progress(
+    id: any,
+  ): Promise<OperationResult<ProjectProgressViewModel[]>> {
+    return await this.httpService.post<ProjectProgressViewModel[]>(
+      `/projects/progress/${id}`,
+    );
   }
 }

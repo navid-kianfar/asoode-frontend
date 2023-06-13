@@ -43,8 +43,10 @@ export class GroupReportsComponent implements OnInit {
       Hours: 0,
       Minutes: 0,
     });
-    const lastDayInMonth = this.culturedDateService.cultureService.current
-      .daysInMonths[parsed.Month - 1];
+    const lastDayInMonth =
+      this.culturedDateService.cultureService.current.daysInMonths[
+        parsed.Month - 1
+      ];
     this.endDate = this.converter.ToDateTime({
       Year: parsed.Year,
       Month: parsed.Month,

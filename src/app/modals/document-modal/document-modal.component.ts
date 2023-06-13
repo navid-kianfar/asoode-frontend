@@ -8,12 +8,12 @@ import { SimpleModalComponent } from 'ngx-simple-modal';
 })
 export class DocumentModalComponent
   extends SimpleModalComponent<{ path: string }, void>
-  implements OnInit {
+  implements OnInit
+{
   path: string;
   constructor() {
     super();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

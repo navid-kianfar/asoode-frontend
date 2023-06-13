@@ -14,7 +14,8 @@ export class OfflineComponent
     },
     string
   >
-  implements OnInit {
+  implements OnInit
+{
   isConnected: boolean;
   isOnline: boolean;
 

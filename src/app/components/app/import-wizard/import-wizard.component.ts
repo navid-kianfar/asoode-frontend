@@ -62,7 +62,7 @@ export class ImportWizardComponent implements OnInit {
     reader.onload = (event: any) => {
       const contents = event.target.result;
       const trelloJson = JSON.parse(contents);
-      const membersList = trelloJson.members.map(member => {
+      const membersList = trelloJson.members.map((member) => {
         return {
           id: member.id,
           username: member.username,
@@ -77,7 +77,7 @@ export class ImportWizardComponent implements OnInit {
                 config: { field: '', label: 'IMPORT_USERNAME' },
                 params: { label: 'IMPORT_USER_MAPPED_EMAIL' },
               }),
-              ...membersList.map(user => {
+              ...membersList.map((user) => {
                 return this.formService.createInput({
                   config: { field: user.id, label: user.username },
                   params: { model: '', ltr: true },
@@ -132,7 +132,7 @@ export class ImportWizardComponent implements OnInit {
     const op = await this.httpService.formUpload(
       '/import/trello',
       { mapData: model, ___FILE: this.trelloImportFile },
-      percent => {
+      (percent) => {
         this.uploadingProgress = percent;
       },
     );
@@ -153,7 +153,7 @@ export class ImportWizardComponent implements OnInit {
     const op = await this.httpService.formUpload(
       '/import/taskulu',
       { ___FILE: target.files[0] },
-      percent => {
+      (percent) => {
         this.uploadingProgress = percent;
       },
     );

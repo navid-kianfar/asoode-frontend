@@ -86,7 +86,7 @@ export class HumanResourcesComponent implements OnInit {
           return op;
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 
   createEntryForm(beginAt: Date, endAt: Date): FormViewModel[] {
@@ -207,7 +207,7 @@ export class HumanResourcesComponent implements OnInit {
     later.setHours(17);
     later.setMinutes(0);
     const form = this.createEntryForm(now, later);
-    const users = this.group.members.map(m => {
+    const users = this.group.members.map((m) => {
       return {
         text: m.member.fullName,
         value: m.userId,
@@ -400,7 +400,7 @@ export class HumanResourcesComponent implements OnInit {
               enum: 'ShiftType',
               items: [],
               model: ShiftType.Fixed,
-              picked: val => {
+              picked: (val) => {
                 result[6].elements[0].config.visible = false;
                 result[7].elements[0].config.visible = false;
                 result[8].elements[0].config.visible = false;
@@ -615,7 +615,7 @@ export class HumanResourcesComponent implements OnInit {
                   value: false,
                 },
               ] as ListViewModel[],
-              picked: value => {
+              picked: (value) => {
                 form[2].elements[0].config.visible = value;
                 form[3].elements[0].config.visible = value;
               },
@@ -687,13 +687,11 @@ export class HumanResourcesComponent implements OnInit {
         actionLabel: 'CREATE_TIME_OFF',
         action: async (model, frm) => {
           const beginAtParsed = this.converter.FromDateTime(model.beginAt);
-          const beginHourParts = (model.isHourly
-            ? model.beginAt_time
-            : '00:00'
+          const beginHourParts = (
+            model.isHourly ? model.beginAt_time : '00:00'
           ).split(':');
-          const endHourParts = (model.isHourly
-            ? model.endAt_time
-            : '23:59'
+          const endHourParts = (
+            model.isHourly ? model.endAt_time : '23:59'
           ).split(':');
           const beginAt = this.converter.ToDateTime({
             Year: beginAtParsed.Year,
@@ -802,7 +800,7 @@ export class HumanResourcesComponent implements OnInit {
           // TODO: handle error
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 
   respondTimeOff(timeOff: any, status: boolean) {
@@ -823,13 +821,13 @@ export class HumanResourcesComponent implements OnInit {
             // TODO: handle error
           },
         })
-        .subscribe(confirmed => {});
+        .subscribe((confirmed) => {});
       return;
     }
 
     this.modalService
       .show(TimeOffApproveModalComponent, { timeOff })
-      .subscribe(refresh => {
+      .subscribe((refresh) => {
         if (refresh) {
           this.timeOffCommander.emit({ reload: true });
         }

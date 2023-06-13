@@ -7,15 +7,15 @@
     <div class="holder">
       <i [class]="filesService.icon(file.url)"></i>
       <img [src]="file.thumbnail || (file.url | thumbnailUrl)" alt="" />
-<!--      <i *ngIf="!hasThumbnail(file) else thumbImage" [class]="filesService.icon(file.url)"></i>-->
-<!--      <ng-template #thumbImage>-->
-<!--        <img [src]="file.thumbnail || (file.url | thumbnailUrl)" alt="" />-->
-<!--      </ng-template>-->
+      <!--      <i *ngIf="!hasThumbnail(file) else thumbImage" [class]="filesService.icon(file.url)"></i>-->
+      <!--      <ng-template #thumbImage>-->
+      <!--        <img [src]="file.thumbnail || (file.url | thumbnailUrl)" alt="" />-->
+      <!--      </ng-template>-->
     </div>
   </div>
   <div class="info">
     <div class="title">{{ file.extensionLessName }}</div>
-    <div class="created-at">{{ file.createdAt | culturedDate: true }}</div>
+    <div class="created-at">{{ file.createdAt | culturedDate : true }}</div>
   </div>
   <div class="selected"></div>
 </div>
@@ -31,7 +31,7 @@
   <div class="info">
     <div class="title">{{ folder.name }}</div>
     <div *ngIf="!up" class="created-at">
-      {{ folder.createdAt | culturedDate: true }}
+      {{ folder.createdAt | culturedDate : true }}
     </div>
   </div>
   <div class="selected"></div>

@@ -414,7 +414,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
   groupCards() {
     const result = {};
-    (this.events || []).forEach(c => {
+    (this.events || []).forEach((c) => {
       c[this.dateField] = new Date(c[this.dateField]);
       const str = this.truncateTime(c[this.dateField]);
       result[str] = result[str] || [];

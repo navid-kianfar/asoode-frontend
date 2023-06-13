@@ -111,14 +111,14 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
       }
     } else {
       this.subProjects = this.project.subProjects
-        .filter(s => s.parentId === this.subProject.id)
+        .filter((s) => s.parentId === this.subProject.id)
         .sort((a, b) => (a.order > b.order ? 1 : -1));
       this.workPackages = this.project.workPackages
-        .filter(w => w.subProjectId === this.subProject.id)
+        .filter((w) => w.subProjectId === this.subProject.id)
         .sort((a, b) => (a.order > b.order ? 1 : -1));
       this.reportViewModel.doneWorkPackages = 0;
       this.reportViewModel.workPackages = this.workPackages.length;
-      this.findAllSubs(this.subProject.id).forEach(p => {
+      this.findAllSubs(this.subProject.id).forEach((p) => {
         const report = this.data.tree[p.id];
         if (!report) {
           return;
@@ -159,7 +159,7 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
           (this.reportViewModel.done * 100) / this.reportViewModel.total,
         )
       : 0;
-    this.reportViewModel.members = this.reportViewModel.members.filter(m => {
+    this.reportViewModel.members = this.reportViewModel.members.filter((m) => {
       if (duplicates[m.recordId]) {
         return false;
       }
@@ -169,11 +169,11 @@ export class ProjectTreeNodeComponent implements OnInit, OnDestroy {
   }
 
   private findAllSubs(id: string): WorkPackageViewModel[] {
-    const subs = this.project.subProjects.filter(s => s.parentId === id);
+    const subs = this.project.subProjects.filter((s) => s.parentId === id);
     const packages = this.project.workPackages.filter(
-      w => w.subProjectId === id,
+      (w) => w.subProjectId === id,
     );
-    const include = subs.map(s => this.findAllSubs(s.id));
+    const include = subs.map((s) => this.findAllSubs(s.id));
     return [...packages, ...ArrayHelpers.flat(include)];
   }
 }

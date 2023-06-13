@@ -81,7 +81,7 @@
               {{ 'BEGIN_TIME' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-              {{ element.beginAt | culturedDate: false:'HH:mm' }}
+              {{ element.beginAt | culturedDate : false : 'HH:mm' }}
             </td>
           </ng-container>
 
@@ -94,7 +94,7 @@
               {{
                 !element.endAt
                   ? '-'
-                  : (element.endAt | culturedDate: false:'HH:mm')
+                  : (element.endAt | culturedDate : false : 'HH:mm')
               }}
             </td>
           </ng-container>
@@ -178,8 +178,8 @@
             </th>
             <td mat-cell *matCellDef="let element">
               <ng-container *ngIf="element.isHourly">
-                {{ element.beginAt | culturedDate: true }}&nbsp;-&nbsp;
-                {{ element.endAt | culturedDate: true:'HH:mm' }}
+                {{ element.beginAt | culturedDate : true }}&nbsp;-&nbsp;
+                {{ element.endAt | culturedDate : true : 'HH:mm' }}
               </ng-container>
               <ng-container *ngIf="!element.isHourly">
                 {{ element.beginAt | culturedDate }}
@@ -203,7 +203,7 @@
               {{ 'STATUS' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-              {{ element.status | enum: 'RequestStatus' }}
+              {{ element.status | enum : 'RequestStatus' }}
             </td>
           </ng-container>
 
@@ -296,7 +296,7 @@
               {{ 'SHIFT_TYPE' | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-              {{ element.type | enum: 'ShiftType' }}
+              {{ element.type | enum : 'ShiftType' }}
             </td>
           </ng-container>
 

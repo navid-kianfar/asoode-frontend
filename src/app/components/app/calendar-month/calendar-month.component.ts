@@ -132,7 +132,7 @@ export class CalendarMonthComponent implements OnInit, OnChanges {
     );
 
     for (let i = 0; i < 7; i++) {
-      result[i] = mapped.map(m => m[i]);
+      result[i] = mapped.map((m) => m[i]);
     }
     return result;
   }
@@ -152,7 +152,7 @@ export class CalendarMonthComponent implements OnInit, OnChanges {
   }
   paintDays() {
     let i;
-    this.model.forEach(t => {
+    this.model.forEach((t) => {
       t.dueAtFormatted = this.converter.Format(t.dueAt, 'YYYY/MM/DD');
     });
     const cultured = this.converter.FromDateTime(this.beginDate);
@@ -198,7 +198,7 @@ export class CalendarMonthComponent implements OnInit, OnChanges {
         ),
         date: null,
         week: culturedScoped.WeekName,
-        tasks: this.model.filter(t => t.dueAtFormatted === str),
+        tasks: this.model.filter((t) => t.dueAtFormatted === str),
       });
     }
     for (i = 1; i <= currentMonthDays; i += 1) {
@@ -216,7 +216,7 @@ export class CalendarMonthComponent implements OnInit, OnChanges {
         disabled: this.calculateDisabled(this.temp.year, this.temp.month, i),
         date: null,
         week: culturedScoped.WeekName,
-        tasks: this.model.filter(t => t.dueAtFormatted === str),
+        tasks: this.model.filter((t) => t.dueAtFormatted === str),
       });
     }
     const remaining = 7 - (result.length % 7);
@@ -236,7 +236,7 @@ export class CalendarMonthComponent implements OnInit, OnChanges {
           disabled: this.calculateDisabled(nextYear, nextMonthIndex + 1, i),
           date: null,
           week: culturedScoped.WeekName,
-          tasks: this.model.filter(t => t.dueAtFormatted === str),
+          tasks: this.model.filter((t) => t.dueAtFormatted === str),
         });
       }
     }

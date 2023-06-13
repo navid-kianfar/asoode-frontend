@@ -23,7 +23,7 @@
     >
       <div [hidden]="list.renaming" cdkDragHandle class="header">
         <span>
-          {{ list.title | truncate: 30 }}
+          {{ list.title | truncate : 30 }}
           <ng-container *ngIf="model.userSetting.showTotalCards">
             &nbsp;({{ list.tasks?.length || 0 }})
           </ng-container> </span

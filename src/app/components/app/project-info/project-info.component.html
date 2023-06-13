@@ -9,30 +9,32 @@
     <i *ngIf="!project.complex" class="icon-workpackage"></i>
     &nbsp;<span>{{ project.title }}</span>
   </div>
-  <div class="description">{{ project.description | truncate: 200 }}</div>
+  <div class="description">{{ project.description | truncate : 200 }}</div>
   <div class="details" *ngIf="project.complex">
     <div class="item">
       <i class="icon-flag7"></i>&nbsp;
       <span>{{
-        'N_SEASONS' | translate | stringFormat: project.seasons.length
+        'N_SEASONS' | translate | stringFormat : project.seasons.length
       }}</span>
     </div>
     <div class="item">
       <i class="icon-tree7"></i>&nbsp;
       <span>{{
-        'N_SUB_PROJECT' | translate | stringFormat: project.subProjects.length
+        'N_SUB_PROJECT' | translate | stringFormat : project.subProjects.length
       }}</span>
     </div>
     <div class="item">
       <i class="icon-workpackage"></i>&nbsp;
       <span>{{
-        'N_WORK_PACKAGE' | translate | stringFormat: project.workPackages.length
+        'N_WORK_PACKAGE'
+          | translate
+          | stringFormat : project.workPackages.length
       }}</span>
     </div>
     <div class="item">
       <i class="icon-task"></i>&nbsp;
       <span>{{
-        'N_CARDS' | translate | stringFormat: project.tasks || 0
+        'N_CARDS' | translate | stringFormat : project.tasks || 0
       }}</span>
     </div>
   </div>
@@ -41,7 +43,7 @@
       <i class="icon-users"></i>&nbsp;
       <span
         >{{
-          (project.members | search: ['isGroup']:false).length +
+          (project.members | search : ['isGroup'] : false).length +
             project.pending.length
         }}&nbsp;{{ 'INDIVIDUAL_USERS' | translate }}</span
       >

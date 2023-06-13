@@ -822,7 +822,5 @@
   "COPY_LINK": "Copy link",
   "CREATED": "Created",
   "BLOCKED": "Blocked",
-  "DONE": "Done",
-  "NO_API_FOUND_TITLE": "Could not find endpoint or there was a problem!",
-  "NO_API_FOUND_DESC": "Please make sure that asoode endpoint service is running"
+  "DONE": "Done"
 }

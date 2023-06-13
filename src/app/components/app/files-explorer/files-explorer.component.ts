@@ -17,7 +17,8 @@ import { DocumentModalComponent } from '../../../modals/document-modal/document-
 import { StringHelpers } from '../../../helpers/string.helpers';
 import { TranslateService } from '../../../services/core/translate.service';
 import { IdentityService } from '../../../services/auth/identity.service';
-import {ClipboardService} from 'ngx-clipboard';
+import { UploadExceedModalComponent } from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-files-explorer',
@@ -117,8 +118,8 @@ export class FilesExplorerComponent implements OnInit {
   }
 
   clearSelection() {
-    this.data.folders.forEach(f => (f.selected = false));
-    this.data.files.forEach(f => (f.selected = false));
+    this.data.folders.forEach((f) => (f.selected = false));
+    this.data.files.forEach((f) => (f.selected = false));
     this.atLeastOneSelected = false;
     this.onlyOneSelected = false;
     this.oneFileSelected = false;
@@ -134,8 +135,8 @@ export class FilesExplorerComponent implements OnInit {
 
   holdSelectFolder(folder: ExplorerFolderViewModel) {
     folder.selected = !folder.selected;
-    const selectedFolders = this.data.folders.filter(i => i.selected).length;
-    const selectedFiles = this.data.files.filter(i => i.selected).length;
+    const selectedFolders = this.data.folders.filter((i) => i.selected).length;
+    const selectedFiles = this.data.files.filter((i) => i.selected).length;
     this.atLeastOneSelected = selectedFolders + selectedFiles > 0;
     this.onlyOneSelected = selectedFolders + selectedFiles === 0;
     this.oneFileSelected = this.onlyOneSelected && selectedFiles === 1;
@@ -163,8 +164,8 @@ export class FilesExplorerComponent implements OnInit {
       this.clearSelection();
       file.selected = true;
     }
-    const selectedFolders = this.data.folders.filter(i => i.selected).length;
-    const selectedFiles = this.data.files.filter(i => i.selected);
+    const selectedFolders = this.data.folders.filter((i) => i.selected).length;
+    const selectedFiles = this.data.files.filter((i) => i.selected);
     this.atLeastOneSelected = selectedFolders + selectedFiles.length > 0;
     this.onlyOneSelected = selectedFolders + selectedFiles.length === 1;
     this.oneFileSelected = selectedFiles.length === 1;
@@ -183,20 +184,20 @@ export class FilesExplorerComponent implements OnInit {
 
   actionCut() {
     this.clipBoard = {
-      folders: this.data.folders.filter(f => f.selected),
-      files: this.data.files.filter(f => f.selected),
+      folders: this.data.folders.filter((f) => f.selected),
+      files: this.data.files.filter((f) => f.selected),
     };
   }
 
   actionCopy() {
     this.clipBoard = {
-      folders: this.data.folders.filter(f => f.selected),
-      files: this.data.files.filter(f => f.selected),
+      folders: this.data.folders.filter((f) => f.selected),
+      files: this.data.files.filter((f) => f.selected),
     };
   }
 
   actionOpenInNewTab() {
-    const file = this.data.files.find(f => f.selected);
+    const file = this.data.files.find((f) => f.selected);
     window.open(file.url, '_blank');
   }
 
@@ -245,12 +246,12 @@ export class FilesExplorerComponent implements OnInit {
   }
 
   actionDownload() {
-    const file = this.data.files.find(i => i.selected);
+    const file = this.data.files.find((i) => i.selected);
     this.filesService.download(file.url);
   }
 
   actionOpen() {
-    const file = this.data.files.find(i => i.selected);
+    const file = this.data.files.find((i) => i.selected);
     this.modalService
       .show(DocumentModalComponent, {
         path: file.url,
@@ -259,7 +260,7 @@ export class FilesExplorerComponent implements OnInit {
   }
 
   copyLink() {
-    const file = this.data.files.find(i => i.selected);
+    const file = this.data.files.find((i) => i.selected);
     this.clipboardService.copy(file.url);
   }
 
@@ -268,8 +269,8 @@ export class FilesExplorerComponent implements OnInit {
   }
 
   actionRename() {
-    const file = this.data.files.find(i => i.selected);
-    const folder = this.data.folders.find(i => i.selected);
+    const file = this.data.files.find((i) => i.selected);
+    const folder = this.data.folders.find((i) => i.selected);
     const title = file ? file.extensionLessName : folder.name;
     this.modalService
       .show(PromptComponent, {
@@ -311,16 +312,16 @@ export class FilesExplorerComponent implements OnInit {
   }
   actionDelete() {
     debugger;
-    const selectedFolders = this.data.folders.filter(i => i.selected);
-    const selectedFiles = this.data.files.filter(i => i.selected);
+    const selectedFolders = this.data.folders.filter((i) => i.selected);
+    const selectedFiles = this.data.files.filter((i) => i.selected);
 
     const names = selectedFolders
-      .map(f => f.name)
-      .concat(selectedFiles.map(f => f.name));
+      .map((f) => f.name)
+      .concat(selectedFiles.map((f) => f.name));
 
     const paths = selectedFolders
-      .map(f => f.path)
-      .concat(selectedFiles.map(f => f.path));
+      .map((f) => f.path)
+      .concat(selectedFiles.map((f) => f.path));
 
     const heading = StringHelpers.format(
       this.translateService.fromKey('REMOVE_FILES_FOLDERS_CONFIRM_HEADING'),
@@ -342,7 +343,7 @@ export class FilesExplorerComponent implements OnInit {
           // TODO: handle error
         },
       })
-      .subscribe(confirmed => {});
+      .subscribe((confirmed) => {});
   }
 
   clearInputFile(f) {
@@ -383,9 +384,9 @@ export class FilesExplorerComponent implements OnInit {
     }
     this.clearInputFile(target);
 
-    this.filterFiles(upload).then(filtered => {
+    this.filterFiles(upload).then((filtered) => {
       this.filesService.upload(filtered, this.path);
-      filtered.forEach(u => u.promise.then(() => this.fetch(this.path)));
+      filtered.forEach((u) => u.promise.then(() => this.fetch(this.path)));
       this.filesService.uploading = [
         ...this.filesService.uploading,
         ...filtered,
@@ -397,13 +398,22 @@ export class FilesExplorerComponent implements OnInit {
     return new Promise((resolve, reject) => {
       const filtered: UploadViewModel[] = [];
       const allowed: UploadViewModel[] = [];
-      (upload || []).forEach(u => {
+      (upload || []).forEach((u) => {
         if (u.file.size > this.identityService.profile.plan.attachmentSize) {
           filtered.push(u);
         } else {
           allowed.push(u);
         }
       });
+      if (filtered.length) {
+        this.modalService
+          .show(UploadExceedModalComponent, {
+            uploads: filtered,
+            attachmentSize: this.identityService.profile.plan.attachmentSize,
+          })
+          .subscribe(() => resolve(allowed));
+        return;
+      }
       resolve(allowed);
     });
   }

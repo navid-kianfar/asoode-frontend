@@ -51,7 +51,7 @@ export class TimeSpentComponent implements OnInit {
 
   paint() {
     const data = {} as any;
-    this.model.forEach(m => {
+    this.model.forEach((m) => {
       m.time.begin = new Date(m.time.begin);
       m.time.end = new Date(m.time.end);
       m.style = this.calculateStyle(m.time.begin, m.time.end);
@@ -60,20 +60,20 @@ export class TimeSpentComponent implements OnInit {
       data[key] = data[key] || [];
       data[key].push(m);
     });
-    const mappedByDate = Object.keys(data).map(k => {
+    const mappedByDate = Object.keys(data).map((k) => {
       return {
         date: k,
         data: data[k],
       };
     });
-    this.data = mappedByDate.map(m => {
+    this.data = mappedByDate.map((m) => {
       const grouped = {} as any;
-      m.data.forEach(d => {
+      m.data.forEach((d) => {
         grouped[d.time.userId] = grouped[d.time.userId] || [];
         grouped[d.time.userId].push(d);
       });
       return {
-        members: Object.keys(grouped).map(k => {
+        members: Object.keys(grouped).map((k) => {
           return {
             userId: k,
             times: grouped[k],

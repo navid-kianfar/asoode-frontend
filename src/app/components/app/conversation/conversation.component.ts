@@ -28,6 +28,7 @@ import { IdentityService } from '../../../services/auth/identity.service';
 import { UploadViewModel } from '../../../view-models/storage/files-types';
 import { FilesService } from '../../../services/storage/files.service';
 import { UsersService } from '../../../services/general/users.service';
+import { UploadExceedModalComponent } from '../../../modals/upload-exceed-modal/upload-exceed-modal.component';
 
 @Component({
   selector: 'app-conversation',
@@ -87,7 +88,7 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
     this.messengerService.lock = true;
-    this.socket.on('push-notification', notification => {
+    this.socket.on('push-notification', (notification) => {
       switch (notification.type) {
         case ActivityType.ChannelMessage:
           if (this.recordId === notification.data.channelId) {
@@ -118,22 +119,22 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
     }
     this.waiting = false;
     const dictionary = {};
-    op.data.forEach(m => {
+    op.data.forEach((m) => {
       m.createdAt = new Date(m.createdAt);
     });
-    op.data.forEach(m => {
+    op.data.forEach((m) => {
       const date = this.culturedDateService.toString(m.createdAt);
       dictionary[date] = dictionary[date] || [];
       dictionary[date].push(m);
     });
     // op.data.sort((a, b) => a.createdAt.getTime() > b.createdAt.getTime() ? 1 : -1);
-    this.mappedConversations = Object.keys(dictionary).map(k => {
+    this.mappedConversations = Object.keys(dictionary).map((k) => {
       return { date: k, messages: dictionary[k] };
     });
   }
   private push(data: any) {
     const date = this.culturedDateService.toString(data.createdAt);
-    let section = this.mappedConversations.find(c => c.date === date);
+    let section = this.mappedConversations.find((c) => c.date === date);
     if (!section) {
       section = { date, messages: [] };
       this.mappedConversations.push(section);
@@ -199,7 +200,7 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
     this.clearInputFile(target);
-    this.filterFiles(upload).then(filtered => {
+    this.filterFiles(upload).then((filtered) => {
       this.filesService.attachChat(filtered, this.recordId);
       this.filesService.chatAttaching = [
         ...this.filesService.chatAttaching,
@@ -212,13 +213,22 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
     return new Promise((resolve, reject) => {
       const filtered: UploadViewModel[] = [];
       const allowed: UploadViewModel[] = [];
-      (upload || []).forEach(u => {
+      (upload || []).forEach((u) => {
         if (u.file.size > this.attachmentSize) {
           filtered.push(u);
         } else {
           allowed.push(u);
         }
       });
+      if (filtered.length) {
+        this.modalService
+          .show(UploadExceedModalComponent, {
+            uploads: filtered,
+            attachmentSize: this.attachmentSize,
+          })
+          .subscribe(() => resolve(allowed));
+        return;
+      }
       resolve(allowed);
     });
   }
@@ -241,7 +251,7 @@ export class ConversationComponent implements OnInit, OnChanges, OnDestroy {
   onAudioEnded($event: any, upload: any) {}
   getPath(attachment: any) {
     if (attachment.path.indexOf('https://') === -1) {
-      return 'https://storage.asoode.com' + attachment.path;
+      return 'https://storage.asoode.work' + attachment.path;
     }
     return attachment.path;
   }

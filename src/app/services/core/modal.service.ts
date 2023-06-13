@@ -18,7 +18,7 @@ export class ModalService {
     private readonly simpleModalService: SimpleModalService,
     private readonly router: Router,
   ) {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.closeAll();
       }
@@ -45,7 +45,7 @@ export class ModalService {
   }
 
   closeAll() {
-    this.modals.forEach(m => {
+    this.modals.forEach((m) => {
       try {
         m.unsubscribe();
       } catch (e) {}

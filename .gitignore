@@ -8,6 +8,9 @@
 # Only exists if Bazel was run
 /bazel-out
 
+src/environments/*.ts
+!src/environments/environment.sample.ts
+
 dist
 
 # dependencies

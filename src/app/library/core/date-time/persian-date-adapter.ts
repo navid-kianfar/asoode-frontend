@@ -13,9 +13,7 @@ export const PERSIAN_DATE_FORMATS = {
   },
 };
 
-export class MaterialPersianDateAdapter extends DateAdapter<
-  jalaliMoment.Moment
-> {
+export class MaterialPersianDateAdapter extends DateAdapter<jalaliMoment.Moment> {
   constructor() {
     super();
     super.setLocale('fa');
@@ -84,7 +82,7 @@ export class MaterialPersianDateAdapter extends DateAdapter<
   createDate(year: number, month: number, date: number): jalaliMoment.Moment {
     if (month < 0 || month > 11) {
       throw Error(
-        `Invalid month index "${month}". Month index has to be between 0 and 11.`
+        `Invalid month index "${month}". Month index has to be between 0 and 11.`,
       );
     }
     if (date < 1) {
@@ -119,7 +117,7 @@ export class MaterialPersianDateAdapter extends DateAdapter<
 
   parse(
     value: any,
-    parseFormat: string | string[]
+    parseFormat: string | string[],
   ): jalaliMoment.Moment | null {
     if (value && typeof value === 'string') {
       return jalaliMoment(value, parseFormat, 'fa');
@@ -137,21 +135,21 @@ export class MaterialPersianDateAdapter extends DateAdapter<
 
   addCalendarYears(
     date: jalaliMoment.Moment,
-    years: number
+    years: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(years, 'jYear');
   }
 
   addCalendarMonths(
     date: jalaliMoment.Moment,
-    months: number
+    months: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(months, 'jMonth');
   }
 
   addCalendarDays(
     date: jalaliMoment.Moment,
-    days: number
+    days: number,
   ): jalaliMoment.Moment {
     return this.clone(date).add(days, 'jDay');
   }

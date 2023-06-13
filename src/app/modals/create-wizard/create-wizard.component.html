@@ -4,7 +4,9 @@
       <div class="modal-alt-header">
         <div class="btn"></div>
         <div class="text">
-          <h4 class="modal-title">{{ 'CREATE' | translate: true }}&nbsp;...</h4>
+          <h4 class="modal-title">
+            {{ 'CREATE' | translate : true }}&nbsp;...
+          </h4>
         </div>
         <div class="btn">
           <button class="close" (click)="onCancel($event)">
@@ -74,27 +76,58 @@
     ></app-import-wizard>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.Group">
-    <app-group-wizard
-      [parentId]="parentId"
-      (click)="$event.stopPropagation()"
-      (exit)="close()"
-      (back)="mode = WizardMode.Choose"
-    ></app-group-wizard>
+    <ng-container *ngIf="canCreateGroup">
+      <app-group-wizard
+        [parentId]="parentId"
+        (click)="$event.stopPropagation()"
+        (exit)="close()"
+        (back)="mode = WizardMode.Choose"
+      ></app-group-wizard>
+    </ng-container>
+    <ng-container *ngIf="!canCreateGroup">
+      <app-upgrade-wizard
+        [showBack]="true"
+        (click)="$event.stopPropagation()"
+        (exit)="close()"
+        (back)="mode = WizardMode.Choose"
+      ></app-upgrade-wizard>
+    </ng-container>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.SimpleProject">
-    <app-project-wizard
-      (click)="$event.stopPropagation()"
-      (exit)="close()"
-      (back)="mode = WizardMode.Choose"
-      [complex]="false"
-    ></app-project-wizard>
+    <ng-container *ngIf="canCreateWorkPackage">
+      <app-project-wizard
+        (click)="$event.stopPropagation()"
+        (exit)="close()"
+        (back)="mode = WizardMode.Choose"
+        [complex]="false"
+      ></app-project-wizard>
+    </ng-container>
+    <ng-container *ngIf="!canCreateWorkPackage">
+      <app-upgrade-wizard
+        [showBack]="true"
+        (click)="$event.stopPropagation()"
+        (exit)="close()"
+        (back)="mode = WizardMode.Choose"
+      ></app-upgrade-wizard>
+    </ng-container>
   </ng-container>
   <ng-container *ngIf="mode === WizardMode.ComplexProject">
-    <app-project-wizard
-      (click)="$event.stopPropagation()"
-      (exit)="close()"
-      (back)="mode = WizardMode.Choose"
-      [complex]="true"
-    ></app-project-wizard>
+    <ng-container *ngIf="canCreateProject">
+      <app-project-wizard
+        (click)="$event.stopPropagation()"
+        (exit)="close()"
+        (back)="mode = WizardMode.Choose"
+        [complex]="true"
+      ></app-project-wizard>
+    </ng-container>
+    <ng-container *ngIf="!canCreateProject">
+      <app-upgrade-wizard
+        [requireProject]="true"
+        [showBack]="true"
+        (click)="$event.stopPropagation()"
+        (exit)="close()"
+        (back)="mode = WizardMode.Choose"
+      ></app-upgrade-wizard>
+    </ng-container>
   </ng-container>
 </div>
