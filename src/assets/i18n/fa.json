@@ -783,8 +783,6 @@
   "ATTACH_GROUP": "اتصال از گروه\u200Cهای موجود",
   "CONNECT_GROUP": "اتصال",
   "PARENT_REQUIRED": "گروه الزامی است",
-
-
   "CLEAR_LIST": "حذف همه کارت ها",
   "CLEAR_TASKS_CONFIRM_HEADING": "آیا از حذف کارت ها در لیست {0} اطمینان دارید؟",
   "CLEAR_TASKS_CONFIRM": "در صورت تایید تمامی کارت ها در لیست از بین خواهد رفت",
