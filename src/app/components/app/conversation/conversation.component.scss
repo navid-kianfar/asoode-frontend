@@ -2,12 +2,13 @@
   padding: 5px 10px;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 125px) !important;
-  //overflow-y: auto;
+  height: calc(100vh - 125px);
 
   &.popup {
+    height: calc(100vh - 285px);
+    padding: 5px;
     .conversations {
-      height: calc(100vh - 255px) !important;
+      height: calc(100vh - 375px) !important;
       overflow-y: auto;
     }
   }

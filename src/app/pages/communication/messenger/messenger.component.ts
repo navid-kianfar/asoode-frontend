@@ -22,12 +22,16 @@ import { TranslateService } from '../../../services/core/translate.service';
   styleUrls: ['./messenger.component.scss'],
 })
 export class MessengerComponent implements OnInit {
+  currentTab: number = 1;
   current: ChannelViewModel;
   ChannelType = ChannelType;
   showFiles: boolean;
   filter: string;
   currentMembers: MemberInfoViewModel[];
   allMembers: MemberInfoViewModel[];
+
+  tabs = ['PROJECTS', 'GROUPS', 'MEMBERS'];
+
   constructor(
     private readonly messengerService: MessengerService,
     readonly projectService: ProjectService,

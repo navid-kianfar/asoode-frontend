@@ -10,93 +10,90 @@
       <span>{{ 'ASOODE_MESSENGER' | translate }}</span>
     </div>
     <div class="aside-items">
-      <mat-tab-group animationDuration="0ms">
-        <mat-tab [label]="'PROJECTS' | translate">
-          <ng-template matTabContent>
-            <div class="aside-item">
-              <div *ngIf="!projectService.projects.length" class="no-item">
-                {{ 'NO_PROJECTS' | translate }}
-              </div>
-              <ng-container *ngFor="let project of projectService.projects">
-                <ng-container *ngIf="project.complex">
-                  <div
-                    matRipple
-                    [class.selected]="current?.id === project.id"
-                    (click)="openProject(project)"
-                    class="item"
-                  >
-                    {{ project.title }}
-                  </div>
-                  <div
-                    matRipple
-                    [class.selected]="current?.id === wp.id"
-                    (click)="openWorkPackage(project, wp)"
-                    *ngFor="let wp of project.workPackages"
-                    class="item"
-                  >
-                    {{ wp.title }}
-                  </div>
-                </ng-container>
-                <div
-                  matRipple
-                  [class.selected]="current?.id === project.workPackages[0].id"
-                  (click)="openWorkPackage(project, project.workPackages[0])"
-                  *ngIf="!project.complex"
-                  class="item"
-                >
-                  {{ project.workPackages[0].title }}
-                </div>
-              </ng-container>
-            </div>
-          </ng-template>
-        </mat-tab>
-        <mat-tab [label]="'GROUPS' | translate">
-          <ng-template matTabContent>
-            <div class="aside-item">
-              <div *ngIf="!groupService.groups.length" class="no-item">
-                {{ 'NO_GROUPS' | translate }}
+
+      <ul class='channel-sections'>
+        <li *ngFor='let tab of tabs;let idx = index'
+            [class.current]='currentTab === (idx + 1)'>
+          <button (click)='currentTab = (idx + 1)'>
+            {{ tab | translate }}
+          </button>
+        </li>
+      </ul>
+      <ng-container [ngSwitch]='currentTab'>
+        <div *ngSwitchCase='1' class="aside-item">
+          <div *ngIf="!projectService.projects.length" class="no-item">
+            {{ 'NO_PROJECTS' | translate }}
+          </div>
+          <ng-container *ngFor="let project of projectService.projects">
+            <ng-container *ngIf="project.complex">
+              <div
+                matRipple
+                [class.selected]="current?.id === project.id"
+                (click)="openProject(project)"
+                class="item"
+              >
+                {{ project.title }}
               </div>
               <div
                 matRipple
-                [class.selected]="current?.id === group.id"
-                (click)="openGroup(group)"
-                *ngFor="let group of groupService.groups"
+                [class.selected]="current?.id === wp.id"
+                (click)="openWorkPackage(project, wp)"
+                *ngFor="let wp of project.workPackages"
                 class="item"
               >
-                {{ group.title }}
+                {{ wp.title }}
               </div>
+            </ng-container>
+            <div
+              matRipple
+              [class.selected]="current?.id === project.workPackages[0].id"
+              (click)="openWorkPackage(project, project.workPackages[0])"
+              *ngIf="!project.complex"
+              class="item"
+            >
+              {{ project.workPackages[0].title }}
             </div>
-          </ng-template>
-        </mat-tab>
-        <mat-tab [label]="'MEMBERS' | translate">
-          <ng-template matTabContent>
-            <div class="members-container">
-              <div class="filter">
-                <div class="wrapper">
-                  <input
-                    [(ngModel)]="filter"
-                    type="text"
-                    [placeholder]="'SEARCH' | translate"
-                  />
-                  <i class="icon-search"></i>
-                </div>
-              </div>
+          </ng-container>
+        </div>
+        <div *ngSwitchCase='2' class="aside-item">
+          <div *ngIf="!groupService.groups.length" class="no-item">
+            {{ 'NO_GROUPS' | translate }}
+          </div>
+          <div
+            matRipple
+            [class.selected]="current?.id === group.id"
+            (click)="openGroup(group)"
+            *ngFor="let group of groupService.groups"
+            class="item"
+          >
+            {{ group.title }}
+          </div>
+        </div>
+        <div *ngSwitchCase='3' class="members-container">
+          <div class="filter">
+            <div class="wrapper">
+              <input
+                [(ngModel)]="filter"
+                type="text"
+                [placeholder]="'SEARCH' | translate"
+              />
+              <i class="icon-search"></i>
+            </div>
+          </div>
 
-              <div class="members-inner-container">
-                <div
-                  class="member"
-                  *ngFor="
+          <div class="members-inner-container">
+            <div
+              class="member"
+              *ngFor="
                     let member of allMembers
                       | search : ['fullName', 'email', 'phoneNumber'] : filter
                   "
-                >
-                  <app-member-info [model]="member"></app-member-info>
-                </div>
-              </div>
+            >
+              <app-member-info [model]="member"></app-member-info>
             </div>
-          </ng-template>
-        </mat-tab>
-      </mat-tab-group>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
   <ng-container *ngIf="!current">

@@ -1,6 +1,6 @@
 .messenger-container {
   display: flex;
-  min-height: calc(100vh - 57px);
+  min-height: calc(100vh - 58px);
 
   .aside {
     min-width: 250px;
@@ -26,6 +26,41 @@
 
     .aside-items {
       width: 249px;
+      border-inline-end: 1px solid #e6e6e6;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      .channel-sections {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-bottom: 1px solid #e6e6e6;
+        li {
+          display: flex;
+          flex-grow: 1;
+          button {
+            outline: none;
+            background: none;
+            display: flex;
+            flex-grow: 1;
+            cursor: pointer;
+            border: none;
+            padding: 10px;
+            font-size: 13px;
+            justify-content: center;
+            border-bottom: 2px solid transparent;
+          }
+
+          &.current {
+            button {
+              border-bottom-color: #6b3d8d;
+            }
+          }
+        }
+      }
 
       .no-item {
         background-color: #e6e6e6;
@@ -56,10 +91,10 @@
           }
         }
       }
-      ::ng-deep .mat-tab-group .mat-tab-label {
-        min-width: auto !important;
-        font-size: 0.8rem;
-      }
+      //::ng-deep .mat-tab-group .mat-tab-label {
+      //  min-width: auto !important;
+      //  font-size: 0.8rem;
+      //}
       ::ng-deep .members-container {
         .filter {
           padding: 10px;
